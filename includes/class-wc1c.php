@@ -1006,7 +1006,7 @@ final class Wc1c
 		/**
 		 * External tools loading is enable
 		 */
-		if('yes' == $this->get_settings('external_tools'))
+		if('yes' === $this->get_settings('external_tools'))
 		{
 			$tools = apply_filters('wc1c_tools_loading', $tools);
 		}
@@ -1096,26 +1096,5 @@ final class Wc1c
 	public function set_extensions($extensions)
 	{
 		$this->extensions = $extensions;
-	}
-
-	/**
-	 * Redirect to about page
-	 *
-	 * Redirect the user to the about page after plugin activation or update
-	 *
-	 * @return void
-	 */
-	public function redirect_about()
-	{
-		delete_option('wc1c_about_redirect');
-		wp_redirect
-		(
-			add_query_arg
-			(
-				array('page' => 'wc1c', 'section' => 'about'),
-				admin_url('admin.php')
-			)
-		);
-		exit;
 	}
 }
