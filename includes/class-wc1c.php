@@ -1035,8 +1035,6 @@ final class Wc1c
 	 * Extensions load
 	 *
 	 * @throws Exception
-	 *
-	 * @return array
 	 */
 	public function load_extensions()
 	{
@@ -1054,9 +1052,14 @@ final class Wc1c
 
 		$this->logger()->debug('load_extensions: $extensions', $extensions);
 
-		$this->set_extensions($extensions);
-
-		return $this->get_extensions();
+		try
+		{
+			$this->set_extensions($extensions);
+		}
+		catch(Exception $e)
+		{
+			throw new Exception('load_extensions: ' . $e->getMessage());
+		}
 	}
 
 	/**
@@ -1099,9 +1102,16 @@ final class Wc1c
 
 	/**
 	 * @param array $extensions
+	 *
+	 * @throws Exception
 	 */
 	public function set_extensions($extensions)
 	{
-		$this->extensions = $extensions;
+		if(is_array($extensions))
+		{
+			$this->extensions = $extensions;
+		}
+
+		throw new Exception('set_extensions: $extensions is not valid');
 	}
 }
