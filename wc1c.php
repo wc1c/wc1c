@@ -10,7 +10,7 @@
  * Domain Path: /languages
  * Copyright: WC1C team © 2018-2020
  * Author: WC1C team
- * Author URI: https://mofsy.ru
+ * Author URI: https://wc1c.info
  * License: GNU General Public License v3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  *
