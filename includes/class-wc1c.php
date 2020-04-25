@@ -244,11 +244,15 @@ final class Wc1c
 		do_action('wc1c_before_includes');
 
 		/**
-		 * Core
+		 * Abstract
 		 */
 		include_once WC1C_PLUGIN_PATH . 'includes/abstracts/abstract-class-wc1c-logger.php';
 		include_once WC1C_PLUGIN_PATH . 'includes/abstracts/abstract-class-wc1c-schema.php';
 		include_once WC1C_PLUGIN_PATH . 'includes/abstracts/abstract-class-wc1c-tool.php';
+
+		/**
+		 * Core
+		 */
 		include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-environment.php';
 		include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-logger.php';
 		include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-configuration.php';
