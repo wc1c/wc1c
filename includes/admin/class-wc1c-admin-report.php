@@ -1,0 +1,690 @@
+<?php
+/**
+ * Report class
+ *
+ * @package Wc1c/Admin
+ */
+defined('ABSPATH') || exit;
+
+class Wc1c_Admin_Report
+{
+	/**
+	 * Wc1c
+	 *
+	 * @var array
+	 */
+	private $wc1c_data = array();
+
+	/**
+	 * Server
+	 *
+	 * @var array
+	 */
+	private $server_data = array();
+
+	/**
+	 * Wordpress
+	 *
+	 * @var array
+	 */
+	private $wp_data = array();
+
+	/**
+	 * WooCommerce
+	 *
+	 * @var array
+	 */
+	private $wc_data = array();
+
+	/**
+	 * Wc1c_Admin_Report constructor
+	 *
+	 * @param bool $init
+	 */
+	public function __construct($init = true)
+	{
+		/**
+		 * Auto init
+		 */
+		if($init)
+		{
+			$this->init();
+		}
+	}
+
+	/**
+	 * Initialized
+	 */
+	public function init()
+	{
+		/**
+		 * Print
+		 */
+		add_filter('wc1c_admin_report_data_row_print', array($this, 'filter_data_row_print'), 10, 2);
+
+		/**
+		 * WC1C data output
+		 */
+		add_action('wc1c_admin_report_show', array($this, 'wc1c_data_output'), 10);
+
+		/**
+		 * WC data output
+		 */
+		add_action('wc1c_admin_report_show', array($this, 'wc_data_output'), 10);
+
+		/**
+		 * WP data output
+		 */
+		add_action('wc1c_admin_report_show', array($this, 'wp_data_output'), 10);
+
+		/**
+		 * Server data output
+		 */
+		add_action('wc1c_admin_report_show', array($this, 'server_data_output'), 10);
+	}
+
+	/**
+	 * Normalize data to print
+	 *
+	 * @param $data
+	 *
+	 * @return mixed
+	 */
+	public function filter_data_row_print($data)
+	{
+		/**
+		 * Boolean
+		 */
+		if(is_bool($data))
+		{
+			if($data)
+			{
+				$data = __('yes', 'wc1c');
+			}
+			else
+			{
+				$data = __('not', 'wc1c');
+			}
+		}
+
+		/**
+		 * Array
+		 */
+		if(is_array($data))
+		{
+			$data = implode(', ', $data);
+		}
+
+		return $data;
+	}
+
+	/**
+	 * WordPress data output
+	 *
+	 * @return void
+	 */
+	public function wp_data_output()
+	{
+		/**
+		 * Load data
+		 */
+		$wp_data = $this->load_wp_data();
+
+		/**
+		 * Show data
+		 */
+		echo '<table class="widefat" id="wp_data" style="margin-bottom: 10px;"><thead><tr>
+            <th colspan="2"><h3 style="margin: 0.2em 0;">' . esc_html__('WordPress environment', 'wc1c') . '</h3></th>
+        </tr></thead><tbody>';
+
+		foreach($wp_data as $data_key => $data_value)
+		{
+			echo '<tr>';
+			echo '<td style="width: 40%;">' . esc_html__($data_value['title']) . ':</td>';
+			echo '<td>' . esc_html__(apply_filters('wc1c_admin_report_data_row_print', $data_value['data'], $data_key)) . '</td>';
+            echo '</tr>';
+		}
+
+		echo '</tbody></table>';
+	}
+
+	/**
+	 * WC1C data output
+	 *
+	 * @return void
+	 */
+	public function wc1c_data_output()
+	{
+		/**
+		 * Load data
+		 */
+		$wp_data = $this->load_wc1c_data();
+
+		/**
+		 * Show data
+		 */
+		echo '<table class="widefat" id="wp_data" style="margin-bottom: 10px;"><thead><tr>
+            <th colspan="2"><h3 style="margin: 0.2em 0;">' . esc_html__('WC1C environment', 'wc1c') . '</h3></th>
+        </tr></thead><tbody>';
+
+		foreach($wp_data as $data_key => $data_value)
+		{
+			echo '<tr>';
+			echo '<td style="width: 40%;">' . esc_html__($data_value['title']) . ':</td>';
+			echo '<td>' . esc_html__(apply_filters('wc1c_admin_report_data_row_print', $data_value['data'], $data_key)) . '</td>';
+			echo '</tr>';
+		}
+
+		echo '</tbody></table>';
+	}
+
+	/**
+	 * WooCommerce data output
+	 *
+	 * @return void
+	 */
+	public function wc_data_output()
+	{
+		/**
+		 * Load data
+		 */
+		$wp_data = $this->load_wc_data();
+
+		/**
+		 * Show data
+		 */
+		echo '<table class="widefat" id="wp_data" style="margin-bottom: 10px;"><thead><tr>
+            <th colspan="2"><h3 style="margin: 0.2em 0;">' . esc_html__('WooCommerce environment', 'wc1c') . '</h3></th>
+        </tr></thead><tbody>';
+
+		foreach($wp_data as $data_key => $data_value)
+		{
+			echo '<tr>';
+			echo '<td style="width: 40%;">' . esc_html__($data_value['title']) . ':</td>';
+			echo '<td>' . esc_html__(apply_filters('wc1c_admin_report_data_row_print', $data_value['data'], $data_key)) . '</td>';
+			echo '</tr>';
+		}
+
+		echo '</tbody></table>';
+	}
+
+	/**
+	 * Server data output
+	 *
+	 * @return void
+	 */
+	public function server_data_output()
+	{
+		/**
+		 * Load data
+		 */
+		$server_data = $this->load_server_data();
+
+		/**
+		 * Show data
+		 */
+		echo '<table class="widefat" id="server_data" style="margin-bottom: 10px;"><thead><tr>
+            <th colspan="2"><h3 style="margin: 0.2em 0;">' . esc_html__('Server environment', 'wc1c') . '</h3></th>
+        </tr></thead><tbody>';
+
+		foreach($server_data as $data_key => $data_value)
+		{
+			echo '<tr>';
+			echo '<td style="width: 40%;">' . esc_html__($data_value['title']) . ':</td>';
+			echo '<td>' . esc_html__(apply_filters('wc1c_admin_report_data_row_print', $data_value['data'], $data_key)) . '</td>';
+			echo '</tr>';
+		}
+
+		echo '</tbody></table>';
+	}
+
+	/**
+	 * WordPress data
+	 *
+	 * @return array
+	 */
+	public function load_wp_data()
+	{
+		/**
+		 * Final
+		 *
+		 * title: show title, required
+		 * description: optional
+		 * data: raw data for entity
+		 */
+		$env_array = array();
+
+		/**
+		 * Home URL
+		 */
+		$env_array['wp_home_url'] = array
+		(
+			'title' => __('Home URL', 'wc1c'),
+			'description' => '',
+			'data' => get_option('home')
+		);
+
+		/**
+		 * Site URL
+		 */
+		$env_array['wp_site_url'] = array
+		(
+			'title' => __('Site URL', 'wc1c'),
+			'description' => '',
+			'data' => get_option('siteurl')
+		);
+
+		/**
+		 * Version
+		 */
+		$env_array['wp_version'] = array
+		(
+			'title' => __('WordPress version', 'wc1c'),
+			'description' => '',
+			'data' => get_bloginfo('version')
+		);
+
+		/**
+		 * WordPress multisite
+		 */
+		$env_array['wp_multisite'] = array
+		(
+			'title' => __('WordPress multisite', 'wc1c'),
+			'description' => '',
+			'data' => is_multisite()
+		);
+
+		/**
+		 * WordPress debug
+		 */
+		$env_array['wp_debug_mode'] = array
+		(
+			'title' => __('WordPress debug', 'wc1c'),
+			'description' => '',
+			'data' => (defined( 'WP_DEBUG' ) && WP_DEBUG)
+		);
+
+		/**
+		 * WordPress debug
+		 */
+		$env_array['wp_cron'] = array
+		(
+			'title' => __('WordPress cron', 'wc1c'),
+			'description' => '',
+			'data' => !(defined( 'DISABLE_WP_CRON' ) && DISABLE_WP_CRON)
+		);
+
+		/**
+		 * WordPress language
+		 */
+		$env_array['wp_language'] = array
+		(
+			'title' => __('WordPress language', 'wc1c'),
+			'description' => '',
+			'data' => get_locale()
+		);
+
+		/**
+		 * WordPress memory limit
+		 */
+		$env_array['wp_language'] = array
+		(
+			'title' => __('WordPress memory limit', 'wc1c'),
+			'description' => '',
+			'data' => WP_MEMORY_LIMIT
+		);
+
+		/**
+		 * Set wp data
+		 */
+		$this->set_wp_data($env_array);
+
+		/**
+		 * Return wp data
+		 */
+		return $this->get_wp_data();
+	}
+
+	/**
+	 * Server data
+	 */
+	public function load_server_data()
+	{
+		global $wpdb;
+
+		/**
+		 * Final
+		 *
+		 * title: show title, required
+		 * description: optional
+		 * data: raw data for entity
+		 */
+		$env_array = array();
+
+		/**
+		 * Server info
+		 */
+		$env_array['server_info'] = array
+		(
+			'title' => __('Server info', 'wc1c'),
+			'description' => '',
+			'data' => $_SERVER['SERVER_SOFTWARE']
+		);
+
+		/**
+		 * PHP version
+		 */
+		$env_array['php_version'] = array
+		(
+			'title' => __('PHP version', 'wc1c'),
+			'description' => '',
+			'data' => phpversion()
+		);
+
+		/**
+		 * Database version
+		 */
+		$env_array['db_version'] = array
+		(
+			'title' => __('Database version', 'wc1c'),
+			'description' => '',
+			'data' => (!empty($wpdb->is_mysql) ? $wpdb->db_version() : '')
+		);
+
+		/**
+		 * Suhosin
+		 */
+		$env_array['suhosin_installed'] = array
+		(
+			'title' => __('Suhosin', 'wc1c'),
+			'description' => '',
+			'data' => extension_loaded('suhosin')
+		);
+
+		/**
+		 * Fsockopen or curl enabled
+		 */
+		$env_array['fsockopen_or_curl'] = array
+		(
+			'title' => __('Fsockopen or curl enabled', 'wc1c'),
+			'description' => '',
+			'data' => (function_exists('fsockopen') || function_exists('curl_init'))
+		);
+
+		/**
+		 * CURL
+		 */
+		if(function_exists('curl_version'))
+		{
+			$curl_version = curl_version();
+
+			$env_array['curl_version'] = array
+			(
+				'title' => __('CURL info', 'wc1c'),
+				'description' => '',
+				'data' => $curl_version['version'] . ', ' . $curl_version['ssl_version']
+			);
+		}
+
+		/**
+		 * Default timezone
+		 */
+		$env_array['default_timezone'] = array
+		(
+			'title' => __('Default timezone', 'wc1c'),
+			'description' => '',
+			'data' => date_default_timezone_get()
+		);
+
+		/**
+		 * PHP post max size
+		 */
+		$env_array['php_post_max_size'] = array
+		(
+			'title' => __('PHP post max size', 'wc1c'),
+			'description' => '',
+			'data' => ini_get('post_max_size')
+		);
+
+		/**
+		 * PHP max execution time
+		 */
+		$env_array['php_max_execution_time'] = array
+		(
+			'title' => __('PHP max execution time', 'wc1c'),
+			'description' => '',
+			'data' => ini_get('max_execution_time')
+		);
+
+		/**
+		 * PHP max input vars
+		 */
+		$env_array['php_max_input_vars'] = array
+		(
+			'title' => __('PHP max input vars', 'wc1c'),
+			'description' => '',
+			'data' => ini_get('max_input_vars')
+		);
+
+		/**
+		 * PHP max upload size
+		 */
+		$env_array['php_max_upload_size'] = array
+		(
+			'title' => __('PHP max upload size', 'wc1c'),
+			'description' => '',
+			'data' => wp_max_upload_size()
+		);
+
+		/**
+		 * PHP soapclient enabled
+		 */
+		$env_array['php_soapclient_enabled'] = array
+		(
+			'title' => __('PHP soapclient enabled', 'wc1c'),
+			'description' => '',
+			'data' => class_exists('SoapClient')
+		);
+
+		/**
+		 * PHP domdocument enabled
+		 */
+		$env_array['php_domdocument_enabled'] = array
+		(
+			'title' => __('PHP domdocument enabled', 'wc1c'),
+			'description' => '',
+			'data' => class_exists('DOMDocument')
+		);
+
+		/**
+		 * PHP gzip enabled
+		 */
+		$env_array['php_gzip_enabled'] = array
+		(
+			'title' => __('PHP gzip enabled', 'wc1c'),
+			'description' => '',
+			'data' => is_callable('gzopen')
+		);
+
+		/**
+		 * PHP mbstring enabled
+		 */
+		$env_array['php_mbstring_enabled'] = array
+		(
+			'title' => __('PHP mbstring enabled', 'wc1c'),
+			'description' => '',
+			'data' => extension_loaded('mbstring')
+		);
+
+		/**
+		 * Set server data
+		 */
+		$this->set_server_data($env_array);
+
+		/**
+		 * Return final server data
+		 */
+		return $this->get_server_data();
+	}
+
+	/**
+	 * WC1C data
+	 */
+	public function load_wc1c_data()
+	{
+		/**
+		 * Container
+		 */
+		$env_array = array();
+
+		/**
+		 * WC1C version
+		 */
+		$env_array['wc1c_version'] = array
+		(
+			'title' => __('WC1C version', 'wc1c'),
+			'description' => '',
+			'data' => WC1C_VERSION
+		);
+
+		$this->set_wc1c_data($env_array);
+
+		return $this->get_wc1c_data();
+	}
+
+	/**
+	 * WooCommerce data
+	 */
+	private function load_wc_data()
+	{
+		/**
+		 * Container
+		 */
+		$env_array = array();
+
+		/**
+		 * WooCommerce version
+		 */
+		$env_array['wc_version'] = array
+		(
+			'title' => __('WooCommerce version', 'wc1c'),
+			'description' => '',
+			'data' => WC()->version
+		);
+
+		$term_response = array();
+		$terms = get_terms( 'product_type', array( 'hide_empty' => 0 ) );
+		foreach($terms as $term)
+		{
+			$term_response[$term->slug] = strtolower($term->name);
+		}
+
+		/**
+		 * Product types
+		 */
+		$env_array['wc_product_types'] = array
+		(
+			'title' => __('WooCommerce product types', 'wc1c'),
+			'description' => '',
+			'data' => $term_response
+		);
+
+		/**
+		 * WooCommerce currency
+		 */
+		$env_array['wc_currency'] = array
+		(
+			'title' => __('WooCommerce currency', 'wc1c'),
+			'description' => '',
+			'data' => get_woocommerce_currency()
+		);
+
+		/**
+		 * WooCommerce currency symbol
+		 */
+		$env_array['wc_currency_symbol'] = array
+		(
+			'title' => __('WooCommerce currency symbol', 'wc1c'),
+			'description' => '',
+			'data' => get_woocommerce_currency_symbol()
+		);
+
+		/**
+		 * Final set
+		 */
+		$this->set_wc_data($env_array);
+
+		/**
+		 * Return all data
+		 */
+		return $this->get_wc_data();
+	}
+
+	/**
+	 * Get WooCommerce data
+	 *
+	 * @return array
+	 */
+	public function get_wc_data()
+	{
+		return $this->wc_data;
+	}
+
+	/**
+	 * Set WooCommerce data
+	 *
+	 * @param array $wc_data
+	 */
+	public function set_wc_data($wc_data)
+	{
+		$this->wc_data = $wc_data;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function get_wc1c_data()
+	{
+		return $this->wc1c_data;
+	}
+
+	/**
+	 * @param array $wc1c_data
+	 */
+	public function set_wc1c_data($wc1c_data)
+	{
+		$this->wc1c_data = $wc1c_data;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function get_server_data()
+	{
+		return $this->server_data;
+	}
+
+	/**
+	 * @param array $server_data
+	 */
+	public function set_server_data($server_data)
+	{
+		$this->server_data = $server_data;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function get_wp_data()
+	{
+		return $this->wp_data;
+	}
+
+	/**
+	 * @param array $wp_data
+	 */
+	public function set_wp_data($wp_data)
+	{
+		$this->wp_data = $wp_data;
+	}
+}

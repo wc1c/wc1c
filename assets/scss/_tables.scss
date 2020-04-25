@@ -1,0 +1,91 @@
+.woocommerce_page_wc1c
+{
+  .column-config_name
+  {
+    //width: 200px!important;
+  }
+
+  .config_name
+  {
+    font-size: 16px!important;
+  }
+
+  .check-column
+  {
+    padding: 4px 0 0 0!important;
+    vertical-align: middle!important;
+  }
+
+  .no-items
+  {
+    .colspanchange
+    {
+      padding-top: 170px!important;
+      padding-bottom: 170px!important;
+      text-align: center;
+    }
+  }
+
+  .column-status
+  {
+    max-width: 120px;
+    min-width: 120px;
+    width: 120px;
+
+    span
+    {
+      font-size: 14px;
+      padding: 3px;
+      text-align: center;
+      display: block;
+      border-radius: 3px;
+      line-height: 1.7em;
+
+      &.draft
+      {
+        background-color: purple;
+        color: white;
+      }
+
+      &.active
+      {
+        background-color: #128003;
+        color: white;
+      }
+
+      &.inactive
+      {
+        background-color: #c4161c;
+        color: white;
+      }
+    }
+  }
+
+  .configurations
+  {
+    td
+    {
+      vertical-align: middle!important;
+    }
+  }
+
+  .column-config_id
+  {
+
+  }
+
+  .column-date_create
+  {
+    line-height: 1.3em;
+  }
+
+  .column-date_activity
+  {
+    line-height: 1.3em;
+  }
+
+  .column-schema
+  {
+    border-left: 1px solid #ccd0d4;
+  }
+}
