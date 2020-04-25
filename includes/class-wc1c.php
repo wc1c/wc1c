@@ -137,9 +137,6 @@ final class Wc1c
 		// hook
 		do_action('wc1c_before_init');
 
-		/**
-		 * Load environment
-		 */
 		try
 		{
 			$environ = $this->load_environment();
@@ -154,9 +151,6 @@ final class Wc1c
 			return false;
 		}
 
-		/**
-		 * Easy logging
-		 */
 		try
 		{
 			$this->load_logger();
@@ -166,56 +160,29 @@ final class Wc1c
 			return false;
 		}
 
-		/**
-		 * Load main settings
-		 */
 		try
 		{
 			$this->load_settings();
 		}
 		catch(Exception $e)
 		{
-			$this->logger()->alert('WC1C init: load settings error, ' . $e->getMessage());
+			$this->logger()->alert('init: load settings error, ' . $e->getMessage());
 			return false;
 		}
 
-		/**
-		 * Reload
-		 */
-		$logger_level = $this->get_settings('logger', 400);
-		$directory_name = $this->get_settings('upload_directory_name', 'wc1c');
-		$logger_path = $this->environment()->get('upload_directory') . DIRECTORY_SEPARATOR . $directory_name;
-		$logger_name = 'wc1c.main.log';
-
-		// environment
-		$this->environment()->set('wc1c_upload_directory', $logger_path);
-
-		// logger
-		if($logger_level && $directory_name)
+		try
 		{
-			$this->logger()->set_level($logger_level);
-			$this->logger()->set_path($logger_path);
-			$this->logger()->set_name($logger_name);
+			$this->reload_logger();
 		}
-		else
+		catch(Exception $e)
 		{
-			$this->logger()->alert('init: WC1C logger swap error');
+			$this->logger()->alert('init: ' . $e->getMessage());
 			return false;
 		}
 
-		/**
-		 * Current configuration identifier
-		 */
 		$this->init_config_current_id();
-
-		/**
-		 * Load localization
-		 */
 		$this->load_textdomain();
 
-		/**
-		 * Load extensions
-		 */
 		try
 		{
 			$this->load_extensions();
@@ -226,14 +193,7 @@ final class Wc1c
 			return false;
 		}
 
-		/**
-		 * Load tools
-		 */
 		$this->load_tools();
-
-		/**
-		 * Load available schemas
-		 */
 		$this->load_schemas();
 
 		/**
@@ -246,6 +206,36 @@ final class Wc1c
 
 		// hook
 		do_action('wc1c_after_init');
+	}
+
+	/**
+	 * Reload logger
+	 *
+	 * @return bool
+	 * @throws Exception
+	 */
+	public function reload_logger()
+	{
+		$logger_level = $this->get_settings('logger', 400);
+		$directory_name = $this->get_settings('upload_directory_name', 'wc1c');
+
+		$logger_path = $this->environment()->get('upload_directory') . DIRECTORY_SEPARATOR . $directory_name;
+		$logger_name = 'wc1c.main.log';
+
+		$this->environment()->set('wc1c_upload_directory', $logger_path);
+
+		if($logger_level && $directory_name)
+		{
+			$this->logger()->set_level($logger_level);
+			$this->logger()->set_path($logger_path);
+			$this->logger()->set_name($logger_name);
+		}
+		else
+		{
+			throw new Exception('reload_logger: error');
+		}
+
+		return true;
 	}
 
 	/**
