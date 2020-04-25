@@ -142,7 +142,12 @@ final class Wc1c
 		 */
 		try
 		{
-			$this->load_environment();
+			$environ = $this->load_environment();
+
+			if(false === $environ)
+			{
+				return false;
+			}
 		}
 		catch(Exception $e)
 		{
@@ -170,7 +175,7 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			$this->logger()->alert('WC1C settings error');
+			$this->logger()->alert('WC1C init: load settings error, ' . $e->getMessage());
 			return false;
 		}
 
@@ -194,7 +199,7 @@ final class Wc1c
 		}
 		else
 		{
-			$this->logger()->alert('WC1C logger swap error');
+			$this->logger()->alert('init: WC1C logger swap error');
 			return false;
 		}
 
@@ -211,7 +216,15 @@ final class Wc1c
 		/**
 		 * Load extensions
 		 */
-		$this->load_extensions();
+		try
+		{
+			$this->load_extensions();
+		}
+		catch(Exception $e)
+		{
+			$this->logger()->alert('init: ' . $e->getMessage());
+			return false;
+		}
 
 		/**
 		 * Load tools
@@ -310,11 +323,23 @@ final class Wc1c
 
 	/**
 	 * Loading environment
+	 *
+	 * @return bool
 	 */
 	public function load_environment()
 	{
-		$environment = new Wc1c_Environment();
+		try
+		{
+			$environment = new Wc1c_Environment();
+		}
+		catch(Exception $e)
+		{
+			return false;
+		}
+
 		$this->set_environment($environment);
+
+		return true;
 	}
 
 	/**
@@ -346,7 +371,7 @@ final class Wc1c
 		load_textdomain('wc1c', WP_LANG_DIR . '/plugins/wc1c-' . $locale . '.mo');
 		load_textdomain('wc1c', WC1C_PLUGIN_PATH . 'languages/wc1c-' . $locale . '.mo');
 
-		$this->logger()->info('WC1C load_textdomain success');
+		$this->logger()->info('load_textdomain: success');
 	}
 
 	/**
@@ -408,7 +433,7 @@ final class Wc1c
 		{
 			$this->set_config_current_id($config_id);
 
-			$this->logger()->info('WC1C init_config_current_id: ' . $config_id);
+			$this->logger()->info('init_config_current_id: WC1C init_config_current_id: ' . $config_id);
 		}
 
 		return $this->get_config_current_id();
@@ -427,7 +452,7 @@ final class Wc1c
 		$settings = get_site_option('wc1c', array());
 
 		/**
-		 * Settings loading with external code
+		 * Loading with external code
 		 */
 		$settings = apply_filters('wc1c_settings_loading', $settings);
 
@@ -436,7 +461,7 @@ final class Wc1c
 		 */
 		if(!is_array($settings))
 		{
-			throw new Exception('Is not array');
+			throw new Exception('$settings is not array');
 		}
 
 		/**
@@ -1012,29 +1037,22 @@ final class Wc1c
 	/**
 	 * Extensions load
 	 *
-	 * @param string $extension_id
+	 * @throws Exception
 	 *
 	 * @return array
 	 */
-	public function load_extensions($extension_id = '')
+	public function load_extensions()
 	{
-		$extensions['default'] = array
-		(
-			'name' => __('Default', 'wc1c'),
-			'description' => '',
-			'author_name' => 'Mofsy',
-			'version' => '1.0.0',
-			'wc1c_version_min' => '1.0.0',
-			'wc1c_version_max' => '1.0.0',
-			'version_php_min' => '5.3.0',
-			'version_php_max' => '7.4.0',
-			'class' => 'Wc1c_Extension_Default',
-			'instance' => null
-		);
+		$extensions = array();
 
-		if('yes' == $this->get_settings('enable_extensions'))
+		if('yes' === $this->get_settings('enable_extensions', 'yes'))
 		{
 			$extensions = apply_filters('wc1c_extensions_loading', $extensions);
+		}
+
+		if(!is_array($extensions))
+		{
+			throw new Exception('load_extensions: $extensions is not array');
 		}
 
 		$this->logger()->debug('load_extensions: $extensions', $extensions);
