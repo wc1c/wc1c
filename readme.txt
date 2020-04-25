@@ -15,7 +15,7 @@ We have come a long and difficult way in order to permanently close the need for
 of 1C and sites created on WordPress with the WooCommerce plugin.
 
 = Bug report =
-Send reports in any form to your email address bugs@wc1c.info
+Send reports in any form to special email address bugs@wc1c.info
 The support forum is also monitored for bugs, and there is a ticket system on the official plugin website.
 
 = Plugin updates =
@@ -24,7 +24,7 @@ The updates includes fix bugs, improve the code, add new features and add suppor
 
 = Feature request =
 Requests to add new features are welcome.
-You can send them to your email address support@wc1c.info
+You can send them to support email address support@wc1c.info
 Support forum is monitored requests for new features.
 The speed of implementation depends on popularity and availability of financial opportunities.
 
