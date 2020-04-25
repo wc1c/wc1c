@@ -139,12 +139,7 @@ final class Wc1c
 
 		try
 		{
-			$environ = $this->load_environment();
-
-			if(false === $environ)
-			{
-				return false;
-			}
+			$this->load_environment();
 		}
 		catch(Exception $e)
 		{
@@ -305,16 +300,23 @@ final class Wc1c
 	 * Set environment
 	 *
 	 * @param Wc1c_Environment $environment
+	 *
+	 * @throws Exception
 	 */
 	public function set_environment($environment)
 	{
-		$this->environment = $environment;
+		if($environment instanceof Wc1c_Environment)
+		{
+			$this->environment = $environment;
+		}
+
+		throw new Exception('set_environment: $environment is not Wc1c_Environment');
 	}
 
 	/**
 	 * Loading environment
 	 *
-	 * @return bool
+	 * @throws Exception
 	 */
 	public function load_environment()
 	{
@@ -324,12 +326,17 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			return false;
+			throw new Exception('load_environment: exception - ' . $e->getMessage());
 		}
 
-		$this->set_environment($environment);
-
-		return true;
+		try
+		{
+			$this->set_environment($environment);
+		}
+		catch(Exception $e)
+		{
+			throw new Exception('load_environment: exception - ' . $e->getMessage());
+		}
 	}
 
 	/**
