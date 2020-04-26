@@ -431,7 +431,7 @@ final class Wc1c
 		{
 			$this->set_config_current_id($config_id);
 
-			$this->logger()->info('init_config_current_id: WC1C init_config_current_id: ' . $config_id);
+			$this->logger()->info('init_config_current_id: $config_id - ' . $config_id);
 		}
 
 		return $this->get_config_current_id();
