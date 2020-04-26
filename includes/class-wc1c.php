@@ -725,7 +725,7 @@ final class Wc1c
 		(
 			'name' => __('Default schema', 'wc1c'),
 			'description' => __('Basic schema for exchanging data on products via CommerceML of different versions.', 'wc1c'),
-			'author_name' => 'Mofsy',
+			'author_name' => 'WC1C team',
 			'version' => '1.0.0',
 			'version_min' => '1.0.0',
 			'version_max' => '1.0.0',
@@ -743,7 +743,7 @@ final class Wc1c
 			$schemas = apply_filters('wc1c_schemas_loading', $schemas);
 		}
 
-		$this->logger()->debug('WC1C load_schemas', $schemas);
+		$this->logger()->debug('load_schemas: wc1c_schemas_loading $schemas', $schemas);
 
 		/**
 		 * Final setup
