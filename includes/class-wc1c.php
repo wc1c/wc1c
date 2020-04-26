@@ -1005,8 +1005,8 @@ final class Wc1c
 			'version' => '1.0.0',
 			'wc1c_version_min' => '1.0.0',
 			'wc1c_version_max' => '1.0.0',
-			'version_php_min' => '5.3.0',
-			'version_php_max' => '7.4.0',
+			'php_version_min' => '5.3.0',
+			'php_version_max' => '7.4.0',
 			'class' => 'Wc1c_Tool_Default',
 			'instance' => null
 		);
@@ -1019,7 +1019,7 @@ final class Wc1c
 			$tools = apply_filters('wc1c_tools_loading', $tools);
 		}
 
-		$this->logger()->debug('WC1C load_tools', $tools);
+		$this->logger()->debug('load_tools: $tools', $tools);
 
 		/**
 		 * Final setup
