@@ -188,8 +188,17 @@ final class Wc1c
 			return false;
 		}
 
+		try
+		{
+			$this->load_schemas();
+		}
+		catch(Exception $e)
+		{
+			$this->logger()->alert('init: ' . $e->getMessage());
+			return false;
+		}
+
 		$this->load_tools();
-		$this->load_schemas();
 
 		/**
 		 * API
@@ -718,25 +727,24 @@ final class Wc1c
 	 */
 	public function load_schemas()
 	{
-		/**
-		 * Default schema
-		 */
+		$schemas = array();
+
 		$schemas['default'] = array
 		(
 			'name' => __('Default schema', 'wc1c'),
 			'description' => __('Basic schema for exchanging data on products via CommerceML of different versions.', 'wc1c'),
 			'author_name' => 'WC1C team',
 			'version' => '1.0.0',
-			'version_min' => '1.0.0',
-			'version_max' => '1.0.0',
-			'version_php_min' => '5.3.0',
-			'version_php_max' => '7.4.0',
+			'wc1c_version_min' => '1.0.0',
+			'wc1c_version_max' => '1.0.0',
+			'php_version_min' => '5.3.0',
+			'php_version_max' => '7.4.0',
 			'class' => 'Wc1c_Schema_Default',
 			'instance' => null
 		);
 
 		/**
-		 * External schemas loading
+		 * External schemas
 		 */
 		if('yes' == $this->get_settings('external_schemas'))
 		{
