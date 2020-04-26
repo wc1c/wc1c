@@ -20,7 +20,7 @@ abstract class Wc1c_Abstract_Extension
 	 *
 	 * @var string
 	 */
-	private $type = '';
+	private $type = 'other';
 
 	/**
 	 * Set ext id
