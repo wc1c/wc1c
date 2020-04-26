@@ -1001,7 +1001,7 @@ final class Wc1c
 		(
 			'name' => __('Default tool', 'wc1c'),
 			'description' => '',
-			'author_name' => 'Mofsy',
+			'author_name' => 'WC1C team',
 			'version' => '1.0.0',
 			'wc1c_version_min' => '1.0.0',
 			'wc1c_version_max' => '1.0.0',
