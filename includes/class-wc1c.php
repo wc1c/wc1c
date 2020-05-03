@@ -161,7 +161,7 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			$this->logger()->alert('init: load settings error, ' . $e->getMessage());
+			WC1C()->logger()->alert('init: load settings error, ' . $e->getMessage());
 			return false;
 		}
 
@@ -171,7 +171,7 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			$this->logger()->alert('init: ' . $e->getMessage());
+			WC1C()->logger()->alert('init: ' . $e->getMessage());
 			return false;
 		}
 
@@ -184,7 +184,7 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			$this->logger()->alert('init: ' . $e->getMessage());
+			WC1C()->logger()->alert('init: ' . $e->getMessage());
 			return false;
 		}
 
@@ -194,7 +194,7 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			$this->logger()->alert('init: ' . $e->getMessage());
+			WC1C()->logger()->alert('init: ' . $e->getMessage());
 			return false;
 		}
 
@@ -230,9 +230,9 @@ final class Wc1c
 
 		if($logger_level && $directory_name)
 		{
-			$this->logger()->set_level($logger_level);
-			$this->logger()->set_path($logger_path);
-			$this->logger()->set_name($logger_name);
+			WC1C()->logger()->set_level($logger_level);
+			WC1C()->logger()->set_path($logger_path);
+			WC1C()->logger()->set_name($logger_name);
 		}
 		else
 		{
@@ -378,7 +378,7 @@ final class Wc1c
 		load_textdomain('wc1c', WP_LANG_DIR . '/plugins/wc1c-' . $locale . '.mo');
 		load_textdomain('wc1c', WC1C_PLUGIN_PATH . 'languages/wc1c-' . $locale . '.mo');
 
-		$this->logger()->info('load_textdomain: success');
+		WC1C()->logger()->info('load_textdomain: success');
 	}
 
 	/**
@@ -440,7 +440,7 @@ final class Wc1c
 		{
 			$this->set_config_current_id($config_id);
 
-			$this->logger()->info('init_config_current_id: $config_id - ' . $config_id);
+			WC1C()->logger()->info('init_config_current_id: $config_id - ' . $config_id);
 		}
 
 		return $this->get_config_current_id();
@@ -751,7 +751,7 @@ final class Wc1c
 			$schemas = apply_filters('wc1c_schemas_loading', $schemas);
 		}
 
-		$this->logger()->debug('load_schemas: wc1c_schemas_loading $schemas', $schemas);
+		WC1C()->logger()->debug('load_schemas: wc1c_schemas_loading $schemas', $schemas);
 
 		/**
 		 * Final setup
@@ -1027,7 +1027,7 @@ final class Wc1c
 			$tools = apply_filters('wc1c_tools_loading', $tools);
 		}
 
-		$this->logger()->debug('load_tools: $tools', $tools);
+		WC1C()->logger()->debug('load_tools: $tools', $tools);
 
 		/**
 		 * Final setup
@@ -1059,7 +1059,7 @@ final class Wc1c
 			throw new Exception('load_extensions: $extensions is not array');
 		}
 
-		$this->logger()->debug('load_extensions: $extensions', $extensions);
+		WC1C()->logger()->debug('load_extensions: $extensions', $extensions);
 
 		try
 		{
