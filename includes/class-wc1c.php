@@ -496,9 +496,6 @@ final class Wc1c
 	 */
 	public function get_configurations($type = 'all')
 	{
-		/**
-		 * Not all
-		 */
 		if($type !== 'all')
 		{
 			/**
@@ -517,15 +514,9 @@ final class Wc1c
 				return $this->configurations[$type];
 			}
 
-			/**
-			 * Error
-			 */
 			return false;
 		}
 
-		/**
-		 * All
-		 */
 		return $this->configurations;
 	}
 
