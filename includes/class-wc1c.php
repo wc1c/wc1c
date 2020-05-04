@@ -120,8 +120,6 @@ final class Wc1c
 		// init
 		add_action('init', array($this, 'init'), 0);
 
-		register_activation_hook(__FILE__, 'wc1c_install');
-
 		// admin
 		if(false !== is_admin())
 		{
