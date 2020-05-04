@@ -18,7 +18,7 @@
  **/
 defined('ABSPATH') || exit;
 
-if(!class_exists('Wc1c'))
+if(!defined('WC1C_VERSION'))
 {
 	$plugin_data = get_file_data(__FILE__, array('Version' => 'Version'));
 	define('WC1C_VERSION', $plugin_data['Version']);
@@ -30,7 +30,5 @@ if(!class_exists('Wc1c'))
 	include_once __DIR__ . '/includes/class-wc1c.php';
 	include_once __DIR__ . '/includes/functions-wc1c.php';
 }
-
-register_activation_hook(__FILE__, 'wc1c_install');
 
 add_action('plugins_loaded', 'WC1C', 0);
