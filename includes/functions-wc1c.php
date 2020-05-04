@@ -112,3 +112,31 @@ function is_wc1c_admin_request()
 
 	return false;
 }
+
+
+/**
+ * Localisation loading
+ */
+function wc1c_load_textdomain()
+{
+	/**
+	 * WP 5.x or later
+	 */
+	if(function_exists('determine_locale'))
+	{
+		$locale = determine_locale();
+	}
+	else
+	{
+		$locale = is_admin() && function_exists('get_user_locale') ? get_user_locale() : get_locale();
+	}
+
+	/**
+	 * Change locale from external code
+	 */
+	$locale = apply_filters('plugin_locale', $locale, 'wc1c');
+
+	unload_textdomain('wc1c');
+	load_textdomain('wc1c', WP_LANG_DIR . '/plugins/wc1c-' . $locale . '.mo');
+	load_textdomain('wc1c', WC1C_PLUGIN_PATH . 'languages/wc1c-' . $locale . '.mo');
+}
