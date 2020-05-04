@@ -16,6 +16,13 @@ final class Wc1c
 	protected static $_instance = null;
 
 	/**
+	 * Logger
+	 *
+	 * @var null|Wc1c_Logger
+	 */
+	public $logger = null;
+
+	/**
 	 * Plugin environment
 	 *
 	 * @var null
@@ -34,6 +41,20 @@ final class Wc1c
 	);
 
 	/**
+	 * All configurations
+	 *
+	 * @var array
+	 */
+	public $configurations = array();
+
+	/**
+	 * All extensions
+	 *
+	 * @var array
+	 */
+	private $extensions = array();
+
+	/**
 	 * All schemas
 	 *
 	 * @var array
@@ -46,27 +67,6 @@ final class Wc1c
 	 * @var array
 	 */
 	private $tools = array();
-
-	/**
-	 * All extensions
-	 *
-	 * @var array
-	 */
-	private $extensions = array();
-
-	/**
-	 * All configurations
-	 *
-	 * @var array
-	 */
-	public $configurations = array();
-
-	/**
-	 * Logger
-	 *
-	 * @var null|Wc1c_Logger
-	 */
-	public $logger = null;
 
 	/**
 	 * Plugin api
