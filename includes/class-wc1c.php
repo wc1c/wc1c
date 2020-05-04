@@ -118,7 +118,7 @@ final class Wc1c
 	private function init_hooks()
 	{
 		// init
-		add_action('init', array($this, 'init'), 0);
+		add_action('init', array($this, 'init'), 3);
 
 		// admin
 		if(false !== is_admin())
