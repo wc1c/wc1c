@@ -105,6 +105,7 @@ final class Wc1c
 		// hook
 		do_action('wc1c_before_loading');
 
+		wc1c_load_textdomain();
 		$this->init_includes();
 		$this->init_hooks();
 
@@ -176,7 +177,6 @@ final class Wc1c
 		}
 
 		$this->init_config_current_id();
-		$this->load_textdomain();
 
 		try
 		{
@@ -347,38 +347,6 @@ final class Wc1c
 		{
 			throw new Exception('load_environment: exception - ' . $e->getMessage());
 		}
-	}
-
-	/**
-	 * Localisation loading
-	 */
-	public function load_textdomain()
-	{
-		/**
-		 * WP 5.x or later
-		 */
-		if(function_exists('determine_locale'))
-		{
-			$locale = determine_locale();
-		}
-		else
-		{
-			$locale = is_admin() && function_exists('get_user_locale') ? get_user_locale() : get_locale();
-		}
-
-		/**
-		 * Change locale from external code
-		 */
-		$locale = apply_filters('plugin_locale', $locale, 'wc1c');
-
-		/**
-		 * Unload & load
-		 */
-		unload_textdomain('wc1c');
-		load_textdomain('wc1c', WP_LANG_DIR . '/plugins/wc1c-' . $locale . '.mo');
-		load_textdomain('wc1c', WC1C_PLUGIN_PATH . 'languages/wc1c-' . $locale . '.mo');
-
-		WC1C()->logger()->info('load_textdomain: success');
 	}
 
 	/**
