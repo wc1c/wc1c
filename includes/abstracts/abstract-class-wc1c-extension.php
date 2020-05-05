@@ -23,6 +23,13 @@ abstract class Wc1c_Abstract_Extension
 	private $type = 'other';
 
 	/**
+	 * All support extension types
+	 *
+	 * @var array
+	 */
+	private $types_support = ['schema', 'tool', 'other'];
+
+	/**
 	 * Set ext id
 	 *
 	 * @param $id
@@ -60,5 +67,33 @@ abstract class Wc1c_Abstract_Extension
 	public function set_type($type)
 	{
 		$this->type = $type;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function get_types_support()
+	{
+		return $this->types_support;
+	}
+
+	/**
+	 * @param array $types_support
+	 */
+	public function set_types_support($types_support)
+	{
+		$this->types_support = $types_support;
+	}
+
+	/**
+	 * @param $type
+	 *
+	 * @return bool
+	 */
+	public function is_type_support($type)
+	{
+		$types = $this->get_types_support();
+
+		return isset($types[$type]);
 	}
 }
