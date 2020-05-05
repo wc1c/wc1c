@@ -203,7 +203,7 @@ final class Wc1c
 		{
 			$this->load_tools();
 		}
-		
+
 		if(false !== is_wc1c_api_request())
 		{
 			$this->load_api();
@@ -1007,7 +1007,7 @@ final class Wc1c
 	 */
 	public function load_extensions()
 	{
-		$extensions = array();
+		$extensions = [];
 
 		if('yes' === $this->get_settings('enable_extensions', 'yes'))
 		{
