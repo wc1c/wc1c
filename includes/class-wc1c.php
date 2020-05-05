@@ -1014,11 +1014,6 @@ final class Wc1c
 			$extensions = apply_filters('wc1c_extensions_loading', $extensions);
 		}
 
-		if(!is_array($extensions))
-		{
-			throw new Exception('load_extensions: $extensions is not array');
-		}
-
 		WC1C()->logger()->debug('load_extensions: $extensions', $extensions);
 
 		try
@@ -1027,7 +1022,7 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('load_extensions: ' . $e->getMessage());
+			throw new Exception('load_extensions: set_extensions - ' . $e->getMessage());
 		}
 	}
 
