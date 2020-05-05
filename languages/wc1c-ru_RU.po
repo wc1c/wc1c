@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WC1C: integration of WooCommerce with 1C products "
 "(different configurations)\n"
 "POT-Creation-Date: 2020-05-04 16:55+0300\n"
-"PO-Revision-Date: 2020-05-04 16:55+0300\n"
+"PO-Revision-Date: 2020-05-04 17:10+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
 "Language: ru_RU\n"
@@ -639,10 +639,8 @@ msgstr ""
 "туда данных."
 
 #: includes/admin/class-wc1c-admin-settings.php:312
-#, fuzzy
-#| msgid "Online / Offline"
 msgid "Extensions Online / Offline"
-msgstr "Включено / Отключено"
+msgstr "Расширения Включены / Отключены"
 
 #: includes/admin/class-wc1c-admin-settings.php:314
 msgid "Enable or disable loading extensions."
@@ -759,7 +757,7 @@ msgstr "Отчёт"
 
 #: includes/class-wc1c-admin.php:239
 msgid "Extensions"
-msgstr ""
+msgstr "Расширения"
 
 #: includes/class-wc1c-admin.php:292 includes/class-wc1c-admin.php:293
 #: templates/admin_header.php:4
