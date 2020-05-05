@@ -106,6 +106,7 @@ final class Wc1c
 		do_action('wc1c_before_loading');
 
 		wc1c_load_textdomain();
+		
 		$this->init_includes();
 		$this->init_hooks();
 
