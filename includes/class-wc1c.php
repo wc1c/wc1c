@@ -106,7 +106,7 @@ final class Wc1c
 		do_action('wc1c_before_loading');
 
 		wc1c_load_textdomain();
-		
+
 		$this->init_includes();
 		$this->init_hooks();
 
@@ -199,11 +199,11 @@ final class Wc1c
 			return false;
 		}
 
-		$this->load_tools();
-
-		/**
-		 * API
-		 */
+		if(false !== is_wc1c_api_request() || false !== is_wc1c_admin_request())
+		{
+			$this->load_tools();
+		}
+		
 		if(false !== is_wc1c_api_request())
 		{
 			$this->load_api();
