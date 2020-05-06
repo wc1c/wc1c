@@ -5,7 +5,7 @@
         <h4 class="m-0 p-0"><?php _e($args['title']); ?></h4>
     </div>
     <div class="card-body p-0">
-        <table class="table table-striped m-0 table-borderless">
+        <table class="table  m-0 table-bordered">
             <tbody>
             <?php
             foreach($args['data'] as $data_key => $data_value)
