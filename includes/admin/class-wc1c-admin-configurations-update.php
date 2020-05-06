@@ -58,7 +58,14 @@ class Wc1c_Admin_Configurations_Update extends Wc1c_Admin_Abstract_Form
 		/**
 		 * Initialize schema by id
 		 */
-		WC1C()->init_schemas($configuration_data['instance']->get_schema());
+		try
+		{
+			WC1C()->init_schemas($configuration_data['instance']->get_schema());
+		}
+		catch(Exception $e)
+		{
+			die('Exception: ' . $e->getMessage());
+		}
 
 		/**
 		 * Init fields
