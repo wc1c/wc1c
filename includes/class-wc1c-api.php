@@ -103,7 +103,7 @@ class Wc1c_Api
 			{
 				die('Exception: ' . $e->getMessage());
 			}
-			
+
 			/**
 			 * Action flag
 			 */

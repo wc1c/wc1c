@@ -30,9 +30,9 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	public $current_data = array();
 
 	/**
-	 * Wc1c_Schema_Default constructor
+	 * Initialize
 	 */
-	public function __construct()
+	public function init()
 	{
 		/**
 		 * Set schema directory
@@ -42,13 +42,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			'wc1c_current_schema_upload_directory',
 			WC1C()->environment()->get('wc1c_upload_directory') . DIRECTORY_SEPARATOR . 'default_' . WC1C()->get_config_current_id()
 		);
-	}
 
-	/**
-	 * Initialize
-	 */
-	public function init()
-	{
 		/**
 		 * Logger
 		 */
