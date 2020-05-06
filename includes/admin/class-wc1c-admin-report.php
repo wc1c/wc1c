@@ -125,27 +125,11 @@ class Wc1c_Admin_Report
 	 */
 	public function wp_data_output()
 	{
-		/**
-		 * Load data
-		 */
 		$wp_data = $this->load_wp_data();
 
-		/**
-		 * Show data
-		 */
-		echo '<table class="widefat" id="wp_data" style="margin-bottom: 10px;"><thead><tr>
-            <th colspan="2"><h3 style="margin: 0.2em 0;">' . esc_html__('WordPress environment', 'wc1c') . '</h3></th>
-        </tr></thead><tbody>';
+		$args = ['title' => __('WordPress environment', 'wc1c'), 'data' => $wp_data];
 
-		foreach($wp_data as $data_key => $data_value)
-		{
-			echo '<tr>';
-			echo '<td style="width: 40%;">' . esc_html__($data_value['title']) . ':</td>';
-			echo '<td>' . esc_html__(apply_filters('wc1c_admin_report_data_row_print', $data_value['data'], $data_key)) . '</td>';
-            echo '</tr>';
-		}
-
-		echo '</tbody></table>';
+		wc1c_get_template('report_item.php', $args);
 	}
 
 	/**
@@ -155,27 +139,11 @@ class Wc1c_Admin_Report
 	 */
 	public function wc1c_data_output()
 	{
-		/**
-		 * Load data
-		 */
-		$wp_data = $this->load_wc1c_data();
+		$wc1c_data = $this->load_wc1c_data();
 
-		/**
-		 * Show data
-		 */
-		echo '<table class="widefat" id="wp_data" style="margin-bottom: 10px;"><thead><tr>
-            <th colspan="2"><h3 style="margin: 0.2em 0;">' . esc_html__('WC1C environment', 'wc1c') . '</h3></th>
-        </tr></thead><tbody>';
+		$args = ['title' => __('WC1C environment', 'wc1c'), 'data' => $wc1c_data];
 
-		foreach($wp_data as $data_key => $data_value)
-		{
-			echo '<tr>';
-			echo '<td style="width: 40%;">' . esc_html__($data_value['title']) . ':</td>';
-			echo '<td>' . esc_html__(apply_filters('wc1c_admin_report_data_row_print', $data_value['data'], $data_key)) . '</td>';
-			echo '</tr>';
-		}
-
-		echo '</tbody></table>';
+		wc1c_get_template('report_item.php', $args);
 	}
 
 	/**
@@ -185,27 +153,11 @@ class Wc1c_Admin_Report
 	 */
 	public function wc_data_output()
 	{
-		/**
-		 * Load data
-		 */
 		$wp_data = $this->load_wc_data();
 
-		/**
-		 * Show data
-		 */
-		echo '<table class="widefat" id="wp_data" style="margin-bottom: 10px;"><thead><tr>
-            <th colspan="2"><h3 style="margin: 0.2em 0;">' . esc_html__('WooCommerce environment', 'wc1c') . '</h3></th>
-        </tr></thead><tbody>';
+		$args = ['title' => __('WooCommerce environment', 'wc1c'), 'data' => $wp_data];
 
-		foreach($wp_data as $data_key => $data_value)
-		{
-			echo '<tr>';
-			echo '<td style="width: 40%;">' . esc_html__($data_value['title']) . ':</td>';
-			echo '<td>' . esc_html__(apply_filters('wc1c_admin_report_data_row_print', $data_value['data'], $data_key)) . '</td>';
-			echo '</tr>';
-		}
-
-		echo '</tbody></table>';
+		wc1c_get_template('report_item.php', $args);
 	}
 
 	/**
@@ -215,27 +167,11 @@ class Wc1c_Admin_Report
 	 */
 	public function server_data_output()
 	{
-		/**
-		 * Load data
-		 */
 		$server_data = $this->load_server_data();
 
-		/**
-		 * Show data
-		 */
-		echo '<table class="widefat" id="server_data" style="margin-bottom: 10px;"><thead><tr>
-            <th colspan="2"><h3 style="margin: 0.2em 0;">' . esc_html__('Server environment', 'wc1c') . '</h3></th>
-        </tr></thead><tbody>';
+		$args = ['title' => __('Server environment', 'wc1c'), 'data' => $server_data];
 
-		foreach($server_data as $data_key => $data_value)
-		{
-			echo '<tr>';
-			echo '<td style="width: 40%;">' . esc_html__($data_value['title']) . ':</td>';
-			echo '<td>' . esc_html__(apply_filters('wc1c_admin_report_data_row_print', $data_value['data'], $data_key)) . '</td>';
-			echo '</tr>';
-		}
-
-		echo '</tbody></table>';
+		wc1c_get_template('report_item.php', $args);
 	}
 
 	/**
