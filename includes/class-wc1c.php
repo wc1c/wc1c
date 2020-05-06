@@ -455,15 +455,18 @@ final class Wc1c
 		{
 			throw new Exception('$settings is not array');
 		}
-
-		$this->set_settings
+		$settings = array_merge
 		(
-			array_merge
-			(
-				$this->get_settings(),
-				$settings
-			)
+			$this->get_settings(),
+			$settings
 		);
+
+		try
+		{
+			$this->set_settings($settings);
+		}
+		catch(Exception $e)
+		{}
 	}
 
 	/**
@@ -925,7 +928,12 @@ final class Wc1c
 		/**
 		 * Reload buffer
 		 */
-		$this->set_settings($settings);
+		try
+		{
+			$this->set_settings($settings);
+		}
+		catch(Exception $e)
+		{}
 
 		/**
 		 * Update in DB
@@ -967,10 +975,20 @@ final class Wc1c
 	 * Set plugin settings
 	 *
 	 * @param $settings
+	 * @throws Exception
+	 *
+	 * @return bool
 	 */
 	public function set_settings($settings)
 	{
-		$this->settings = $settings;
+		if(is_array($settings))
+		{
+			$this->settings = $settings;
+
+			return true;
+		}
+
+		throw new Exception('set_settings: $settings is not valid');
 	}
 
 	/**
@@ -1129,7 +1147,8 @@ final class Wc1c
 	 * @param string $tool_id
 	 *
 	 * @throws Exception
-	 * @return array
+	 *
+	 * @return bool
 	 */
 	public function load_tools($tool_id = '')
 	{
@@ -1150,6 +1169,25 @@ final class Wc1c
 			'instance' => null
 		);
 
+		$tools = [];
+
+		try
+		{
+			$schema_default = new Wc1c_Schema_Default();
+
+			$schema_default->set_id('default');
+			$schema_default->set_version(WC1C_VERSION);
+			$schema_default->set_name(__('Default schema', 'wc1c'));
+			$schema_default->set_description(__('Стандартный обмен данными по стандатному алгоритму обмена от 1С через CommerceML. В обмене только данные по товарам.', 'wc1c'));
+			$schema_default->set_schema_prefix('wc1c_schema_' . $schema_default->get_id());
+
+			$schemas['default'] = $schema_default;
+		}
+		catch(Exception $e)
+		{
+			//todo: exception
+		}
+
 		/**
 		 * External tools loading is enable
 		 */
@@ -1160,15 +1198,16 @@ final class Wc1c
 
 		WC1C()->logger()->debug('load_tools: $tools', $tools);
 
-		/**
-		 * Final setup
-		 */
-		$this->set_tools($tools);
+		try
+		{
+			$this->set_tools($tools);
+		}
+		catch(Exception $e)
+		{
 
-		/**
-		 * Return loaded tools
-		 */
-		return $this->get_tools();
+		}
+
+		return true;
 	}
 
 	/**
@@ -1221,10 +1260,20 @@ final class Wc1c
 	 * Set tools
 	 *
 	 * @param array $tools
+	 *
+	 * @throws Exception
+	 * @return bool
 	 */
 	public function set_tools($tools)
 	{
-		$this->tools = $tools;
+		if(is_array($tools))
+		{
+			$this->tools = $tools;
+
+			return true;
+		}
+
+		throw new Exception('set_tools: $tools is not valid');
 	}
 
 	/**
