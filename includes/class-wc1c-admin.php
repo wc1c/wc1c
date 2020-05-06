@@ -318,7 +318,7 @@ final class Wc1c_Admin
 		}
 		else
 		{
-			include_once WC1C_PLUGIN_PATH . 'templates/page_404.php';
+			wc1c_get_template('page_404.php');
 		}
 	}
 
@@ -327,7 +327,7 @@ final class Wc1c_Admin
 	 */
 	public function page_header()
 	{
-		include_once WC1C_PLUGIN_PATH . 'templates/admin_header.php';
+		wc1c_get_template('admin_header.php');
 	}
 
 	/**
@@ -335,7 +335,7 @@ final class Wc1c_Admin
 	 */
 	public function init_styles()
 	{
-		if(isset($_GET['page']) && $_GET['page'] == 'wc1c')
+		if(is_wc1c_admin_request())
 		{
 			wp_enqueue_style('wc1c-admin-styles', WC1C_PLUGIN_URL . 'assets/css/main.css');
 		}
@@ -360,7 +360,7 @@ final class Wc1c_Admin
 	 */
 	public function page_configurations()
 	{
-		include_once WC1C_PLUGIN_PATH . 'templates/page_configurations.php';
+		wc1c_get_template('page_configurations.php');
 	}
 
 	/**
@@ -370,7 +370,7 @@ final class Wc1c_Admin
 	 */
 	public function page_schemas()
 	{
-		include_once WC1C_PLUGIN_PATH . 'templates/page_schemas.php';
+		wc1c_get_template('page_schemas.php');
 	}
 
 	/**
@@ -380,7 +380,7 @@ final class Wc1c_Admin
 	 */
 	public function page_report()
 	{
-		include_once WC1C_PLUGIN_PATH . 'templates/page_report.php';
+		wc1c_get_template('page_report.php');
 	}
 
 	/**
@@ -390,7 +390,7 @@ final class Wc1c_Admin
 	 */
 	public function page_tools()
 	{
-		include_once WC1C_PLUGIN_PATH . 'templates/page_tools.php';
+		wc1c_get_template('page_tools.php');
 	}
 
 	/**
@@ -400,7 +400,7 @@ final class Wc1c_Admin
 	 */
 	public function page_extensions()
 	{
-		include_once WC1C_PLUGIN_PATH . 'templates/page_extensions.php';
+		wc1c_get_template('page_extensions.php');
 	}
 
 	/**
@@ -410,7 +410,7 @@ final class Wc1c_Admin
 	 */
 	public function page_settings()
 	{
-		include_once WC1C_PLUGIN_PATH . 'templates/page_settings.php';
+		wc1c_get_template('page_settings.php');
 	}
 
 	/**
@@ -453,6 +453,11 @@ final class Wc1c_Admin
 		 * Abstract classes
 		 */
 		include_once WC1C_PLUGIN_PATH . 'includes/abstracts/abstract-class-wc1c-admin-form.php';
+
+		/**
+		 * Other
+		 */
+		include_once WC1C_PLUGIN_PATH . 'includes/functions-wc1c-admin.php';
 
 		/**
 		 * Configurations section
