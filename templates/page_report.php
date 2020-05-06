@@ -2,7 +2,9 @@
 
 <div class="wrap">
 
-	<?php do_action('wc1c_admin_report_before_show'); ?>
+    <?php wc1c_get_template('report_header.php'); ?>
+    
+    <?php do_action('wc1c_admin_report_before_show'); ?>
 
 	<?php do_action('wc1c_admin_report_show'); ?>
 
