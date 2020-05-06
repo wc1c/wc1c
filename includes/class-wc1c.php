@@ -633,20 +633,20 @@ final class Wc1c
 			}
 
 			/**
-			 * Init method not found
-			 */
-			if(!method_exists($extensions[$extension_id], 'init'))
-			{
-				throw new Exception('init_extensions: method init not found');
-			}
-
-			/**
 			 * Valid areas
 			 */
 			$areas = $extensions[$extension_id]->get_areas();
 			if(false === $this->validate_areas($areas))
 			{
 				return true;
+			}
+
+			/**
+			 * Init method not found
+			 */
+			if(!method_exists($extensions[$extension_id], 'init'))
+			{
+				throw new Exception('init_extensions: method init not found');
 			}
 
 			/**
@@ -745,6 +745,7 @@ final class Wc1c
 	 *
 	 * @param string $schema_id
 	 *
+	 * @throws Exception
 	 * @return boolean
 	 */
 	public function init_schemas($schema_id = '')
@@ -759,7 +760,7 @@ final class Wc1c
 		 */
 		if(!is_array($schemas))
 		{
-			return false;
+			throw new Exception('init_schemas: $schemas is not array');
 		}
 
 		/**
@@ -772,85 +773,72 @@ final class Wc1c
 			 */
 			if(!array_key_exists($schema_id, $schemas))
 			{
-				return false;
+				throw new Exception('init_schemas: extension not found by id');
 			}
+
+			/**
+			 * Schema validate
+			 */
+			if(!is_object($schemas[$schema_id]))
+			{
+				throw new Exception('init_schemas: $extensions[$extension_id] is not object');
+			}
+
+			$init_schema = $schemas[$schema_id];
 
 			/**
 			 * Schema initialized
 			 */
-			if(is_object($schemas[$schema_id]['instance']))
+			if($init_schema->is_initialized())
 			{
-				return true;
+				throw new Exception('init_schemas: old initialized');
 			}
 
 			/**
-			 * Schema valid
+			 * Init method not found
 			 */
-			if(array_key_exists('class', $schemas[$schema_id]) && class_exists($schemas[$schema_id]['class']))
+			if(!method_exists($init_schema, 'init'))
 			{
-				/**
-				 * Create schema object & save to buffer
-				 */
-				$schemas[$schema_id]['instance'] = new $schemas[$schema_id]['class'](); // todo: exceptions
-				$schemas[$schema_id]['instance']->set_schema_prefix('wc1c_schema_' . $schema_id);
-				$schemas[$schema_id]['instance']->set_id($schema_id);
+				throw new Exception('init_schemas: method init not found');
+			}
 
-				/**
-				 * Set options
-				 */
+			try
+			{
 				if($this->get_config_current_id())
 				{
 					$options = $this->get_configurations('current');
 
-					$schemas[$schema_id]['instance']->set_options($options['instance']->get_options());
-					$schemas[$schema_id]['instance']->set_configuration_prefix('wc1c_configuration_' . $this->get_config_current_id());
+					$init_schema->set_options($options['instance']->get_options());
+					$init_schema->set_configuration_prefix('wc1c_configuration_' . $this->get_config_current_id());
+					$init_schema->set_prefix('wc1c_prefix_' . $schema_id . '_' . $this->get_config_current_id());
 				}
 
-				/**
-				 * Init
-				 */
-				if(method_exists($schemas[$schema_id]['instance'], 'init'))
-				{
-					if($schemas[$schema_id]['instance']->get_schema_prefix() !== '' && $schemas[$schema_id]['instance']->get_configuration_prefix() !== '')
-					{
-						$schemas[$schema_id]['instance']->set_prefix
-						(
-							'wc1c_prefix_' . $schema_id . '_' . $this->get_config_current_id()
-						);
-					}
-					$schemas[$schema_id]['instance']->init();
-				}
-
-				/**
-				 * Reload buffer
-				 */
-				$this->set_schemas($schemas);
-
-				/**
-				 * Success
-				 */
-				return true;
+				$init_schema->init();
+			}
+			catch(Exception $e)
+			{
+				throw new Exception('init_schemas: exception by schema - ' . $e->getMessage());
 			}
 
-			/**
-			 * Error
-			 */
-			return false;
+			return true;
 		}
 
 		/**
 		 * Init all schemas
 		 */
-		$return = true;
 		foreach($schemas as $schema_id => $schema_data)
 		{
-			$result = $this->init_schemas($schema_id);
-			if($result === false)
+			try
 			{
-				$return = false;
+				$this->init_schemas($schema_id);
+			}
+			catch(Exception $e)
+			{
+				continue;
 			}
 		}
-		return $return;
+
+		return true;
 	}
 
 	/**
@@ -870,6 +858,7 @@ final class Wc1c
 			$schema_default->set_version(WC1C_VERSION);
 			$schema_default->set_name(__('Default schema', 'wc1c'));
 			$schema_default->set_description(__('Стандартный обмен данными по стандатному алгоритму обмена от 1С через CommerceML. В обмене только данные по товарам.', 'wc1c'));
+			$schema_default->set_schema_prefix('wc1c_schema_' . $schema_default->get_id());
 
 			$schemas['default'] = $schema_default;
 		}
