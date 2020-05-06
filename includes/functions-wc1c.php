@@ -140,3 +140,151 @@ function wc1c_load_textdomain()
 	load_textdomain('wc1c', WP_LANG_DIR . '/plugins/wc1c-' . $locale . '.mo');
 	load_textdomain('wc1c', WC1C_PLUGIN_PATH . 'languages/wc1c-' . $locale . '.mo');
 }
+
+/**
+ * Get data if set, otherwise return a default value or null
+ * Prevents notices when data is not set
+ *
+ * @param mixed $var variable
+ * @param string $default default value
+ *
+ * @return mixed
+ */
+function wc1c_get_var(&$var, $default = null)
+{
+	return isset($var) ? $var : $default;
+}
+
+/**
+ * Get other templates
+ *
+ * @param string $template_name template name
+ * @param array $args arguments (default: array)
+ * @param string $template_path template path (default: '')
+ * @param string $default_path default path (default: '')
+ */
+function wc1c_get_template($template_name, $args = array(), $template_path = '', $default_path = '')
+{
+	if(!empty($args) && is_array($args))
+	{
+		extract($args);
+	}
+
+	$located = wc1c_locate_template($template_name, $template_path, $default_path);
+
+	if(!file_exists($located))
+	{
+		return;
+	}
+
+	// Allow 3rd party plugin filter template file from their plugin.
+	$located = apply_filters('wc1c_get_template', $located, $template_name, $args, $template_path, $default_path);
+
+	do_action('wc1c_before_template_part', $template_name, $template_path, $located, $args);
+
+	include $located;
+
+	do_action('wc1c_after_template_part', $template_name, $template_path, $located, $args);
+}
+
+/**
+ * Get template part
+ *
+ * @param mixed $slug Template slug
+ * @param string $name Template name (default: '')
+ */
+function wc1c_get_template_part($slug, $name = '')
+{
+	$template = '';
+
+	// Look in yourtheme/slug-name.php and yourtheme/wc1c/slug-name.php
+	if($name)
+	{
+		$template = locate_template(array("{$slug}-{$name}.php", 'wc1c/' . "{$slug}-{$name}.php"));
+	}
+
+	// Get default slug-name.php
+	if(!$template && $name && file_exists(WC1C_PLUGIN_PATH . "templates/{$slug}-{$name}.php"))
+	{
+		$template = WC1C_PLUGIN_PATH . "templates/{$slug}-{$name}.php";
+	}
+
+	// If template file doesn't exist, look in yourtheme/slug.php and yourtheme/wc1c/slug.php
+	if(!$template)
+	{
+		$template = locate_template(array("{$slug}.php", 'wc1c/' . "{$slug}.php"));
+	}
+
+	// Allow 3rd party plugins to filter template file from their plugin
+	$template = apply_filters('wc1c_get_template_part', $template, $slug, $name);
+
+	if($template)
+	{
+		load_template($template, false);
+	}
+}
+
+/**
+ * Like wc1c_get_template, but returns the HTML instead of outputting
+ *
+ * @param string $template_name template name
+ * @param array $args arguments (default: array)
+ * @param string $template_path template path (default: '')
+ * @param string $default_path default path (default: '')
+ *
+ * @return string
+ * @see wc1c_get_template
+ */
+function wc1c_get_template_html($template_name, $args = array(), $template_path = '', $default_path = '')
+{
+	ob_start();
+	wc1c_get_template($template_name, $args, $template_path, $default_path);
+
+	return ob_get_clean();
+}
+
+/**
+ * Locate a template and return the path for inclusion
+ *
+ * This is the load order:
+ *
+ * yourtheme/$template_path/$template_name
+ * yourtheme/$template_name
+ * $default_path/$template_name
+ *
+ * @param string $template_name template name
+ * @param string $template_path template path (default: '')
+ * @param string $default_path default path (default: '')
+ * @return string
+ */
+function wc1c_locate_template($template_name, $template_path = '', $default_path = '')
+{
+	if(!$template_path)
+	{
+		$template_path = 'wc1c/';
+	}
+
+	if(!$default_path)
+	{
+		$default_path = WC1C_PLUGIN_PATH . 'templates/';
+	}
+
+	// Look within passed path within the theme - this is priority
+	$template = locate_template
+	(
+		array
+		(
+			trailingslashit($template_path) . $template_name,
+			$template_name,
+		)
+	);
+
+	// Get default template/
+	if(!$template)
+	{
+		$template = $default_path . $template_name;
+	}
+
+	// Return what we found
+	return apply_filters('wc1c_locate_template', $template, $template_name, $template_path);
+}

@@ -1,0 +1,8 @@
+@mixin area($background, $border_color, $border)
+{
+  background-color: $background;
+  border-color: $border_color;
+  border-bottom: $border $border_color;
+  border-radius: 0 0 7px 7px;
+  //box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
+}

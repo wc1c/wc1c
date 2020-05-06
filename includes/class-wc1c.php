@@ -313,12 +313,16 @@ final class Wc1c
 	 * @param Wc1c_Environment $environment
 	 *
 	 * @throws Exception
+	 *
+	 * @return true
 	 */
 	public function set_environment($environment)
 	{
 		if($environment instanceof Wc1c_Environment)
 		{
 			$this->environment = $environment;
+
+			return true;
 		}
 
 		throw new Exception('set_environment: $environment is not Wc1c_Environment');
@@ -1015,7 +1019,7 @@ final class Wc1c
 		}
 
 		WC1C()->logger()->debug('load_extensions: $extensions', $extensions);
-
+//var_dump($extensions);die;
 		try
 		{
 			$this->set_extensions($extensions);
