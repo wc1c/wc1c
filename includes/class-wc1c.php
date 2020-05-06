@@ -862,53 +862,62 @@ final class Wc1c
 	{
 		$schemas = [];
 
-		$schemas['default'] = array
-		(
-			'name' => __('Default schema', 'wc1c'),
-			'description' => __('Basic schema for exchanging data on products via CommerceML of different versions.', 'wc1c'),
-			'author_name' => 'WC1C team',
-			'version' => '1.0.0',
-			'wc1c_version_min' => '1.0.0',
-			'wc1c_version_max' => '1.0.0',
-			'php_version_min' => '5.3.0',
-			'php_version_max' => '7.4.0',
-			'class' => 'Wc1c_Schema_Default',
-			'instance' => null
-		);
+		try
+		{
+			$schema_default = new Wc1c_Schema_Default();
+
+			$schema_default->set_id('default');
+			$schema_default->set_version(WC1C_VERSION);
+			$schema_default->set_name(__('Default schema', 'wc1c'));
+			$schema_default->set_description(__('Стандартный обмен данными по стандатному алгоритму обмена от 1С через CommerceML. В обмене только данные по товарам.', 'wc1c'));
+
+			$schemas['default'] = $schema_default;
+		}
+		catch(Exception $e)
+		{
+			//todo: exception
+		}
 
 		/**
 		 * External schemas
 		 */
-		if('yes' == $this->get_settings('external_schemas'))
+		if('yes' === $this->get_settings('external_schemas'))
 		{
 			$schemas = apply_filters('wc1c_schemas_loading', $schemas);
 		}
 
 		WC1C()->logger()->debug('load_schemas: wc1c_schemas_loading $schemas', $schemas);
 
-		/**
-		 * Final setup
-		 */
-		$this->set_schemas($schemas);
+		try
+		{
+			$this->set_schemas($schemas);
+		}
+		catch(Exception $e)
+		{
+			//todo: exception
+		}
 
-		/**
-		 * Return loaded schemas
-		 */
 		return $this->get_schemas();
 	}
 
 	/**
 	 * Set schemas
 	 *
-	 * @param $schemas
+	 * @param array $schemas
 	 *
-	 * @return $this
+	 * @throws Exception
+	 * @return bool
 	 */
 	public function set_schemas($schemas)
 	{
-		$this->schemas = $schemas;
+		if(is_array($schemas))
+		{
+			$this->schemas = $schemas;
 
-		return $this;
+			return true;
+		}
+
+		throw new Exception('set_schemas: $schemas is not valid');
 	}
 
 	/**

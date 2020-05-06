@@ -44,6 +44,11 @@ abstract class Wc1c_Abstract_Extension
 	private $description = '';
 
 	/**
+	 * @var string
+	 */
+	private $author = 'WC1C team';
+
+	/**
 	 * Extension type
 	 *
 	 * @var string
@@ -147,6 +152,22 @@ abstract class Wc1c_Abstract_Extension
 	public function set_version($version)
 	{
 		$this->version = $version;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_author()
+	{
+		return $this->author;
+	}
+
+	/**
+	 * @param string $author
+	 */
+	public function set_author($author)
+	{
+		$this->author = $author;
 	}
 
 	/**
