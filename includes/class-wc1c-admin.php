@@ -230,7 +230,7 @@ final class Wc1c_Admin
 		{
 			new Wc1c_Admin_Schemas();
 		}
-		
+
 		/**
 		 * Extensions
 		 */
