@@ -627,7 +627,7 @@ final class Wc1c
 			/**
 			 * Extension initialized
 			 */
-			if($extensions[$extension_id]->is_initalized())
+			if($extensions[$extension_id]->is_initialized())
 			{
 				throw new Exception('init_extensions: old initialized');
 			}
@@ -640,6 +640,18 @@ final class Wc1c
 				throw new Exception('init_extensions: method init not found');
 			}
 
+			/**
+			 * Valid areas
+			 */
+			$areas = $extensions[$extension_id]->get_areas();
+			if(false === $this->validate_areas($areas))
+			{
+				return true;
+			}
+
+			/**
+			 * Init
+			 */
 			try
 			{
 				$extensions[$extension_id]->init();
@@ -669,6 +681,61 @@ final class Wc1c
 		}
 
 		return true;
+	}
+
+	/**
+	 * @param array $areas
+	 *
+	 * @return bool
+	 */
+	public function validate_areas($areas = ['any'])
+	{
+		if(!is_array($areas))
+		{
+			return false;
+		}
+
+		/**
+		 * Any
+		 */
+		if(in_array('any', $areas))
+		{
+			return true;
+		}
+
+		/**
+		 * Admin
+		 */
+		if(in_array('admin', $areas) && is_admin())
+		{
+			return true;
+		}
+
+		/**
+		 * Site
+		 */
+		if(in_array('site', $areas) && !is_admin())
+		{
+			return true;
+		}
+
+		/**
+		 * Wc1c admin
+		 */
+		if(in_array('wc1c_admin', $areas) && is_wc1c_admin_request())
+		{
+			return true;
+		}
+
+		/**
+		 * Wc1c api
+		 */
+		if(in_array('wc1c_api', $areas) && is_wc1c_api_request())
+		{
+			return true;
+		}
+
+		return false;
 	}
 
 	/**
@@ -1174,12 +1241,16 @@ final class Wc1c
 	 * @param array $extensions
 	 *
 	 * @throws Exception
+	 *
+	 * @return bool
 	 */
 	public function set_extensions($extensions)
 	{
 		if(is_array($extensions))
 		{
 			$this->extensions = $extensions;
+
+			return true;
 		}
 
 		throw new Exception('set_extensions: $extensions is not valid');
