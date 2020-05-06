@@ -113,9 +113,6 @@ class Wc1c_Admin_Schemas
 	 */
 	public function output()
 	{
-		/**
-		 * Load all schemas
-		 */
 		$data = $this->load_schemas();
 
 		/**
