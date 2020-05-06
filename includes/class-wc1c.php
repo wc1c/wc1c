@@ -45,28 +45,28 @@ final class Wc1c
 	 *
 	 * @var array
 	 */
-	public $configurations = array();
+	public $configurations = [];
 
 	/**
 	 * All extensions
 	 *
 	 * @var array
 	 */
-	private $extensions = array();
+	private $extensions = [];
 
 	/**
 	 * All schemas
 	 *
 	 * @var array
 	 */
-	private $schemas = array();
+	private $schemas = [];
 
 	/**
 	 * All tools
 	 *
 	 * @var array
 	 */
-	private $tools = array();
+	private $tools = [];
 
 	/**
 	 * Plugin api
@@ -211,7 +211,15 @@ final class Wc1c
 
 		if(false !== is_wc1c_api_request() || false !== is_wc1c_admin_request())
 		{
-			$this->load_tools();
+			try
+			{
+				$this->load_tools();
+			}
+			catch(Exception $e)
+			{
+				WC1C()->logger()->alert('init: ' . $e->getMessage());
+				return false;
+			}
 		}
 
 		if(false !== is_wc1c_api_request())
@@ -436,27 +444,18 @@ final class Wc1c
 	 */
 	public function load_settings()
 	{
-		/**
-		 * Get settings from DB
-		 */
-		$settings = get_site_option('wc1c', array());
+		$settings = get_site_option('wc1c', []);
 
 		/**
 		 * Loading with external code
 		 */
 		$settings = apply_filters('wc1c_settings_loading', $settings);
 
-		/**
-		 * Exception
-		 */
 		if(!is_array($settings))
 		{
 			throw new Exception('$settings is not array');
 		}
 
-		/**
-		 * Final set
-		 */
 		$this->set_settings
 		(
 			array_merge
@@ -484,7 +483,7 @@ final class Wc1c
 			/**
 			 * Current
 			 */
-			if($type == 'current' && $this->get_config_current_id() !== false && array_key_exists($this->get_config_current_id(), $this->configurations))
+			if($type === 'current' && $this->get_config_current_id() !== false && array_key_exists($this->get_config_current_id(), $this->configurations))
 			{
 				return $this->configurations[$this->get_config_current_id()];
 			}
@@ -1129,6 +1128,7 @@ final class Wc1c
 	 *
 	 * @param string $tool_id
 	 *
+	 * @throws Exception
 	 * @return array
 	 */
 	public function load_tools($tool_id = '')
