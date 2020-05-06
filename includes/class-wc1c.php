@@ -1019,7 +1019,7 @@ final class Wc1c
 		}
 
 		WC1C()->logger()->debug('load_extensions: $extensions', $extensions);
-//var_dump($extensions);die;
+
 		try
 		{
 			$this->set_extensions($extensions);
