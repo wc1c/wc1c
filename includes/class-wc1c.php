@@ -1152,23 +1152,6 @@ final class Wc1c
 	 */
 	public function load_tools($tool_id = '')
 	{
-		/**
-		 * Default tool
-		 */
-		$tools['default'] = array
-		(
-			'name' => __('Default tool', 'wc1c'),
-			'description' => '',
-			'author_name' => 'WC1C team',
-			'version' => '1.0.0',
-			'wc1c_version_min' => '1.0.0',
-			'wc1c_version_max' => '1.0.0',
-			'php_version_min' => '5.3.0',
-			'php_version_max' => '7.4.0',
-			'class' => 'Wc1c_Tool_Default',
-			'instance' => null
-		);
-
 		$tools = [];
 
 		try
@@ -1179,9 +1162,8 @@ final class Wc1c
 			$schema_default->set_version(WC1C_VERSION);
 			$schema_default->set_name(__('Default schema', 'wc1c'));
 			$schema_default->set_description(__('Стандартный обмен данными по стандатному алгоритму обмена от 1С через CommerceML. В обмене только данные по товарам.', 'wc1c'));
-			$schema_default->set_schema_prefix('wc1c_schema_' . $schema_default->get_id());
 
-			$schemas['default'] = $schema_default;
+			$tools['default'] = $schema_default;
 		}
 		catch(Exception $e)
 		{
@@ -1204,7 +1186,7 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-
+			//todo: exception
 		}
 
 		return true;
