@@ -9,6 +9,13 @@ defined('ABSPATH') || exit;
 abstract class Wc1c_Abstract_Schema
 {
 	/**
+	 * Extension initialized flag
+	 *
+	 * @var bool
+	 */
+	private $initialized = false;
+
+	/**
 	 * Unique schema id
 	 *
 	 * @var string
@@ -50,6 +57,60 @@ abstract class Wc1c_Abstract_Schema
 	private $schema_prefix = '';
 
 	/**
+	 * Current version
+	 *
+	 * @var string
+	 */
+	private $version = '';
+
+	/**
+	 * Name
+	 *
+	 * @var string
+	 */
+	private $name = '';
+
+	/**
+	 * Description
+	 *
+	 * @var string
+	 */
+	private $description = '';
+
+	/**
+	 * @var string
+	 */
+	private $author = 'WC1C team';
+
+	/**
+	 * Wc1c_Abstract_Schema constructor
+	 */
+	public function __construct(){}
+
+	/**
+	 * @throws Exception
+	 *
+	 * @return mixed
+	 */
+	abstract function init();
+
+	/**
+	 * @return bool
+	 */
+	public function is_initialized()
+	{
+		return $this->initialized;
+	}
+
+	/**
+	 * @param bool $initialized
+	 */
+	public function set_initialized($initialized)
+	{
+		$this->initialized = $initialized;
+	}
+
+	/**
 	 * Set schema id
 	 *
 	 * @param $id
@@ -71,6 +132,54 @@ abstract class Wc1c_Abstract_Schema
 	public function get_id()
 	{
 		return $this->id;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_name()
+	{
+		return $this->name;
+	}
+
+	/**
+	 * @param string $name
+	 */
+	public function set_name($name)
+	{
+		$this->name = $name;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_description()
+	{
+		return $this->description;
+	}
+
+	/**
+	 * @param string $description
+	 */
+	public function set_description($description)
+	{
+		$this->description = $description;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_author()
+	{
+		return $this->author;
+	}
+
+	/**
+	 * @param string $author
+	 */
+	public function set_author($author)
+	{
+		$this->author = $author;
 	}
 
 	/**
@@ -113,6 +222,22 @@ abstract class Wc1c_Abstract_Schema
 		}
 
 		return $this->options;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_version()
+	{
+		return $this->version;
+	}
+
+	/**
+	 * @param string $version
+	 */
+	public function set_version($version)
+	{
+		$this->version = $version;
 	}
 
 	/**
