@@ -860,7 +860,7 @@ final class Wc1c
 	 */
 	public function load_schemas()
 	{
-		$schemas = array();
+		$schemas = [];
 
 		$schemas['default'] = array
 		(
