@@ -206,19 +206,6 @@ final class Wc1c_Admin
 		}
 
 		/**
-		 * Schemas
-		 */
-		$default_sections['schemas'] = array
-		(
-			'title' => __('Schemas', 'wc1c'),
-			'callback' => array($this, 'page_schemas')
-		);
-		if('schemas' === $this->get_current_section())
-		{
-			new Wc1c_Admin_Schemas();
-		}
-
-		/**
 		 * Report
 		 */
 		$default_sections['report'] = array
@@ -231,6 +218,19 @@ final class Wc1c_Admin
 			new Wc1c_Admin_Report();
 		}
 
+		/**
+		 * Schemas
+		 */
+		$default_sections['schemas'] = array
+		(
+			'title' => __('Schemas', 'wc1c'),
+			'callback' => array($this, 'page_schemas')
+		);
+		if('schemas' === $this->get_current_section())
+		{
+			new Wc1c_Admin_Schemas();
+		}
+		
 		/**
 		 * Extensions
 		 */
