@@ -191,6 +191,16 @@ final class Wc1c
 
 		try
 		{
+			$this->init_extensions();
+		}
+		catch(Exception $e)
+		{
+			WC1C()->logger()->alert('init: ' . $e->getMessage());
+			return false;
+		}
+
+		try
+		{
 			$this->load_schemas();
 		}
 		catch(Exception $e)
@@ -567,6 +577,98 @@ final class Wc1c
 			}
 		}
 		return $return;
+	}
+
+	/**
+	 * Initializing extensions
+	 * If a extension ID is specified, only the specified extension is loaded
+	 *
+	 * @param string $extension_id
+	 *
+	 * @return boolean
+	 * @throws Exception
+	 */
+	public function init_extensions($extension_id = '')
+	{
+		/**
+		 * Get all loaded extensions
+		 */
+		$extensions = $this->get_extensions();
+
+		/**
+		 * Invalid extensions
+		 */
+		if(!is_array($extensions))
+		{
+			throw new Exception('init_extensions: $extensions is not array');
+		}
+
+		/**
+		 * Init specified extension
+		 */
+		if($extension_id !== '')
+		{
+			/**
+			 * Extension not exists
+			 */
+			if(!array_key_exists($extension_id, $extensions))
+			{
+				throw new Exception('init_extensions: extension not found by id');
+			}
+
+			/**
+			 * Extension validate
+			 */
+			if(!is_object($extensions[$extension_id]))
+			{
+				throw new Exception('init_extensions: $extensions[$extension_id] is not object');
+			}
+
+			/**
+			 * Extension initialized
+			 */
+			if($extensions[$extension_id]->is_initalized())
+			{
+				throw new Exception('init_extensions: old initialized');
+			}
+
+			/**
+			 * Init method not found
+			 */
+			if(!method_exists($extensions[$extension_id], 'init'))
+			{
+				throw new Exception('init_extensions: method init not found');
+			}
+
+			try
+			{
+				$extensions[$extension_id]->init();
+			}
+			catch(Exception $e)
+			{
+				throw new Exception('init_extensions: exception by extension - ' . $e->getMessage());
+			}
+
+			return true;
+		}
+
+		/**
+		 * Init all extensions
+		 */
+		foreach($extensions as $extension_id => $extension_object)
+		{
+			try
+			{
+				$this->init_extensions($extension_id);
+			}
+			catch(Exception $exception)
+			{
+				//todo: log
+				continue;
+			}
+		}
+
+		return true;
 	}
 
 	/**

@@ -9,6 +9,13 @@ defined('ABSPATH') || exit;
 abstract class Wc1c_Abstract_Extension
 {
 	/**
+	 * Extension initialized flag
+	 *
+	 * @var bool
+	 */
+	private $initialized = false;
+
+	/**
 	 * Unique id
 	 *
 	 * @var string
@@ -78,6 +85,29 @@ abstract class Wc1c_Abstract_Extension
 	 * Wc1c_Abstract_Extension constructor
 	 */
 	public function __construct(){}
+
+	/**
+	 * @throws Exception
+	 *
+	 * @return mixed
+	 */
+	abstract function init();
+
+	/**
+	 * @return bool
+	 */
+	public function is_initialized()
+	{
+		return $this->initialized;
+	}
+
+	/**
+	 * @param bool $initialized
+	 */
+	public function set_initialized($initialized)
+	{
+		$this->initialized = $initialized;
+	}
 
 	/**
 	 * Set ext id
