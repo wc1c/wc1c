@@ -618,10 +618,12 @@ final class Wc1c
 				throw new Exception('init_extensions: extension not found by id');
 			}
 
+			$init_extension = $extensions[$extension_id];
+
 			/**
 			 * Extension validate
 			 */
-			if(!is_object($extensions[$extension_id]))
+			if(!is_object($init_extension))
 			{
 				throw new Exception('init_extensions: $extensions[$extension_id] is not object');
 			}
@@ -629,7 +631,7 @@ final class Wc1c
 			/**
 			 * Extension initialized
 			 */
-			if($extensions[$extension_id]->is_initialized())
+			if($init_extension->is_initialized())
 			{
 				throw new Exception('init_extensions: old initialized');
 			}
@@ -637,7 +639,7 @@ final class Wc1c
 			/**
 			 * Valid areas
 			 */
-			$areas = $extensions[$extension_id]->get_areas();
+			$areas = $init_extension->get_areas();
 			if(false === $this->validate_areas($areas))
 			{
 				return true;
@@ -646,7 +648,7 @@ final class Wc1c
 			/**
 			 * Init method not found
 			 */
-			if(!method_exists($extensions[$extension_id], 'init'))
+			if(!method_exists($init_extension, 'init'))
 			{
 				throw new Exception('init_extensions: method init not found');
 			}
@@ -656,12 +658,14 @@ final class Wc1c
 			 */
 			try
 			{
-				$extensions[$extension_id]->init();
+				$init_extension->init();
 			}
 			catch(Exception $e)
 			{
 				throw new Exception('init_extensions: exception by extension - ' . $e->getMessage());
 			}
+
+			$init_extension->set_initialized(true);
 
 			return true;
 		}
@@ -821,6 +825,8 @@ final class Wc1c
 			{
 				throw new Exception('init_schemas: exception by schema - ' . $e->getMessage());
 			}
+
+			$init_schema->set_initialized(true);
 
 			return true;
 		}
