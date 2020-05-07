@@ -20,12 +20,14 @@ defined('ABSPATH') || exit;
 
 if(!defined('WC1C_VERSION'))
 {
-	$plugin_data = get_file_data(__FILE__, array('Version' => 'Version'));
+	define('WC1C_PLUGIN_FILE', __FILE__);
+
+	$plugin_data = get_file_data(WC1C_PLUGIN_FILE, array('Version' => 'Version'));
 	define('WC1C_VERSION', $plugin_data['Version']);
 
-	define('WC1C_PLUGIN_URL', plugin_dir_url(__FILE__));
-	define('WC1C_PLUGIN_NAME', plugin_basename(__FILE__));
-	define('WC1C_PLUGIN_PATH', plugin_dir_path(__FILE__));
+	define('WC1C_PLUGIN_URL', plugin_dir_url(WC1C_PLUGIN_FILE));
+	define('WC1C_PLUGIN_NAME', plugin_basename(WC1C_PLUGIN_FILE));
+	define('WC1C_PLUGIN_PATH', plugin_dir_path(WC1C_PLUGIN_FILE));
 
 	include_once __DIR__ . '/includes/class-wc1c.php';
 	include_once __DIR__ . '/includes/functions-wc1c.php';
