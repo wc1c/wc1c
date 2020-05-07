@@ -50,17 +50,32 @@ class Wc1c_Admin_Tools
 			return;
 		}
 
+		$tool_id = wc1c_get_var($_GET['tool_id'], '');
+
 		wc1c_get_template('tools_header.php');
 
-		foreach($tools as $tool_id => $tool_object)
+		if($tool_id !== '' && is_wc1c_admin_tools_request())
 		{
 			$args =
 				[
 					'id' => $tool_id,
-					'object' => $tool_object
+					'object' => $tools[$tool_id]
 				];
 
 			wc1c_get_template('tools_item.php', $args);
+		}
+		else
+		{
+			foreach($tools as $tool_id => $tool_object)
+			{
+				$args =
+					[
+						'id' => $tool_id,
+						'object' => $tool_object
+					];
+
+				wc1c_get_template('tools_item.php', $args);
+			}
 		}
 	}
 }
