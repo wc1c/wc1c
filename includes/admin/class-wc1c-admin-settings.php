@@ -309,7 +309,7 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 
 		$fields['enable_extensions'] = array
 		(
-			'title' => __('Extensions Online / Offline', 'wc1c'),
+			'title' => __('Extensions', 'wc1c'),
 			'type' => 'checkbox',
 			'label' => __('Enable or disable loading extensions.', 'wc1c'),
 			'description' => __('Regulates the loading of extensions. By default, loading extensions is enabled.', 'wc1c'),
