@@ -105,6 +105,8 @@ final class Wc1c
 		// hook
 		do_action('wc1c_before_loading');
 
+		$this->define_constants();
+
 		wc1c_load_textdomain();
 
 		$this->init_includes();
@@ -175,6 +177,7 @@ final class Wc1c
 	{
 		// init
 		add_action('init', array($this, 'init'), 3);
+		register_activation_hook(WC1C_PLUGIN_FILE, 'wc1c_install');
 
 		// admin
 		if(false !== is_admin())
@@ -915,6 +918,19 @@ final class Wc1c
 		}
 
 		throw new Exception('set_schemas: $schemas is not valid');
+	}
+
+	/**
+	 * Define constants
+	 */
+	private function define_constants()
+	{
+		$plugin_data = get_file_data(WC1C_PLUGIN_FILE, array('Version' => 'Version'));
+		wc1c_define('WC1C_VERSION', $plugin_data['Version']);
+
+		wc1c_define('WC1C_PLUGIN_URL', plugin_dir_url(WC1C_PLUGIN_FILE));
+		wc1c_define('WC1C_PLUGIN_NAME', plugin_basename(WC1C_PLUGIN_FILE));
+		wc1c_define('WC1C_PLUGIN_PATH', plugin_dir_path(WC1C_PLUGIN_FILE));
 	}
 
 	/**

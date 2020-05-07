@@ -156,6 +156,20 @@ function wc1c_get_var(&$var, $default = null)
 }
 
 /**
+ * Define constant if not already set
+ *
+ * @param string $name constant name
+ * @param string|bool $value constant value
+ */
+function wc1c_define($name, $value)
+{
+	if(!defined($name))
+	{
+		define($name, $value);
+	}
+}
+
+/**
  * Get other templates
  *
  * @param string $template_name template name
