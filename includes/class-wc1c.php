@@ -115,6 +115,60 @@ final class Wc1c
 	}
 
 	/**
+	 * Include of files
+	 */
+	private function init_includes()
+	{
+		// hook
+		do_action('wc1c_before_includes');
+
+		/**
+		 * Abstract
+		 */
+		include_once WC1C_PLUGIN_PATH . 'includes/abstracts/abstract-class-wc1c-logger.php';
+		include_once WC1C_PLUGIN_PATH . 'includes/abstracts/abstract-class-wc1c-extension.php';
+		include_once WC1C_PLUGIN_PATH . 'includes/abstracts/abstract-class-wc1c-schema.php';
+		include_once WC1C_PLUGIN_PATH . 'includes/abstracts/abstract-class-wc1c-tool.php';
+
+		/**
+		 * Core
+		 */
+		include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-environment.php';
+		include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-logger.php';
+		include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-configuration.php';
+
+		/**
+		 * Schemas
+		 */
+		include_once WC1C_PLUGIN_PATH . 'includes/schemas/class-wc1c-schema-logger.php';
+		include_once WC1C_PLUGIN_PATH . 'includes/schemas/default/class-wc1c-schema-default.php';
+
+		/**
+		 * Standard tools
+		 */
+		include_once WC1C_PLUGIN_PATH . 'includes/tools/example/class-wc1c-tool-example.php';
+
+		/**
+		 * Api
+		 */
+		if(false !== is_wc1c_api_request())
+		{
+			include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-api.php';
+		}
+
+		/**
+		 * Admin
+		 */
+		if(false !== is_admin())
+		{
+			include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-admin.php';
+		}
+
+		// hook
+		do_action('wc1c_after_includes');
+	}
+
+	/**
 	 * Initializing actions and filters
 	 */
 	private function init_hooks()
@@ -259,60 +313,6 @@ final class Wc1c
 		}
 
 		return true;
-	}
-
-	/**
-	 * Include of files
-	 */
-	public function init_includes()
-	{
-		// hook
-		do_action('wc1c_before_includes');
-
-		/**
-		 * Abstract
-		 */
-		include_once WC1C_PLUGIN_PATH . 'includes/abstracts/abstract-class-wc1c-logger.php';
-		include_once WC1C_PLUGIN_PATH . 'includes/abstracts/abstract-class-wc1c-extension.php';
-		include_once WC1C_PLUGIN_PATH . 'includes/abstracts/abstract-class-wc1c-schema.php';
-		include_once WC1C_PLUGIN_PATH . 'includes/abstracts/abstract-class-wc1c-tool.php';
-
-		/**
-		 * Core
-		 */
-		include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-environment.php';
-		include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-logger.php';
-		include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-configuration.php';
-
-		/**
-		 * Schemas
-		 */
-		include_once WC1C_PLUGIN_PATH . 'includes/schemas/class-wc1c-schema-logger.php';
-		include_once WC1C_PLUGIN_PATH . 'includes/schemas/default/class-wc1c-schema-default.php';
-
-		/**
-		 * Standard tools
-		 */
-		include_once WC1C_PLUGIN_PATH . 'includes/tools/example/class-wc1c-tool-example.php';
-
-		/**
-		 * Api
-		 */
-		if(false !== is_wc1c_api_request())
-		{
-			include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-api.php';
-		}
-
-		/**
-		 * Admin
-		 */
-		if(false !== is_admin())
-		{
-			include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-admin.php';
-		}
-
-		// hook
-		do_action('wc1c_after_includes');
 	}
 
 	/**
