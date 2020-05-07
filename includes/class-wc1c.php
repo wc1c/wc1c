@@ -293,7 +293,7 @@ final class Wc1c
 		/**
 		 * Standard tools
 		 */
-		include_once WC1C_PLUGIN_PATH . 'includes/tools/class-wc1c-tool-example.php';
+		include_once WC1C_PLUGIN_PATH . 'includes/tools/example/class-wc1c-tool-example.php';
 
 		/**
 		 * Api
