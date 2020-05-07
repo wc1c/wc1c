@@ -50,8 +50,6 @@ class Wc1c_Admin_Extensions
 			return;
 		}
 
-		wc1c_get_template('extensions_header.php');
-
 		foreach($extensions as $extension_id => $extension_object)
 		{
 			$args =
