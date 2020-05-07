@@ -33,6 +33,6 @@ if(!defined('WC1C_VERSION'))
 	include_once __DIR__ . '/includes/functions-wc1c.php';
 }
 
-register_activation_hook(__FILE__, 'wc1c_install');
+register_activation_hook(WC1C_PLUGIN_FILE, 'wc1c_install');
 
 add_action('plugins_loaded', 'WC1C', 0);
