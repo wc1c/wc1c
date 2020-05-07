@@ -32,3 +32,22 @@ function is_wc1c_admin_tools_request($tool_id = '')
 
 	return false;
 }
+
+/**
+ * @param string $tool_id
+ *
+ * @return string
+ */
+function get_wc1c_admin_tools_url($tool_id = '')
+{
+	$path = 'admin.php?page=wc1c&section=tools';
+
+	if('' === $tool_id)
+	{
+		return admin_url($path);
+	}
+
+	$path = 'admin.php?page=wc1c&section=tools&tool_id=' . $tool_id;
+	
+	return admin_url($path);
+}
