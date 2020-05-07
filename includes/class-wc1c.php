@@ -1247,20 +1247,46 @@ final class Wc1c
 	/**
 	 * Get schemas
 	 *
-	 * @return array
+	 * @param string $schema_id
+	 *
+	 * @return array|mixed
+	 * @throws Exception
 	 */
-	public function get_schemas()
+	public function get_schemas($schema_id = '')
 	{
+		if('' !== $schema_id)
+		{
+			if(array_key_exists($schema_id, $this->schemas))
+			{
+				return $this->schemas[$schema_id];
+			}
+
+			throw new Exception('get_schemas: $schema_id is unavailable');
+		}
+
 		return $this->schemas;
 	}
 
 	/**
 	 * Get tools
 	 *
-	 * @return array
+	 * @param string $tool_id
+	 *
+	 * @return array|mixed
+	 * @throws Exception
 	 */
-	public function get_tools()
+	public function get_tools($tool_id = '')
 	{
+		if('' !== $tool_id)
+		{
+			if(array_key_exists($tool_id, $this->tools))
+			{
+				return $this->tools[$tool_id];
+			}
+
+			throw new Exception('get_tools: $schema_id is unavailable');
+		}
+
 		return $this->tools;
 	}
 
