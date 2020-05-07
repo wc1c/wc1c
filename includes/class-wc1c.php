@@ -291,9 +291,9 @@ final class Wc1c
 		include_once WC1C_PLUGIN_PATH . 'includes/schemas/default/class-wc1c-schema-default.php';
 
 		/**
-		 * Default tools
+		 * Standard tools
 		 */
-		include_once WC1C_PLUGIN_PATH . 'includes/tools/class-wc1c-tool-default.php';
+		include_once WC1C_PLUGIN_PATH . 'includes/tools/class-wc1c-tool-example.php';
 
 		/**
 		 * Api
@@ -1156,14 +1156,14 @@ final class Wc1c
 
 		try
 		{
-			$schema_default = new Wc1c_Schema_Default();
+			$tool_example = new Wc1c_Tool_Example();
 
-			$schema_default->set_id('default');
-			$schema_default->set_version(WC1C_VERSION);
-			$schema_default->set_name(__('Default schema', 'wc1c'));
-			$schema_default->set_description(__('Стандартный обмен данными по стандатному алгоритму обмена от 1С через CommerceML. В обмене только данные по товарам.', 'wc1c'));
+			$tool_example->set_id('example');
+			$tool_example->set_version(WC1C_VERSION);
+			$tool_example->set_name(__('Example tool', 'wc1c'));
+			$tool_example->set_description(__('Демонстрационный инструмент, не несущий никакой функциональной нагрузки.', 'wc1c'));
 
-			$tools['default'] = $schema_default;
+			$tools[$tool_example->get_id()] = $tool_example;
 		}
 		catch(Exception $e)
 		{

@@ -6,10 +6,10 @@
  */
 defined('ABSPATH') || exit;
 
-class Wc1c_Tool_Default extends Wc1c_Abstract_Tool
+class Wc1c_Tool_Example extends Wc1c_Abstract_Tool
 {
 	/**
-	 * Wc1c_Tool_Default constructor
+	 * Wc1c_Tool_Example constructor
 	 */
 	public function __construct()
 	{
@@ -24,6 +24,5 @@ class Wc1c_Tool_Default extends Wc1c_Abstract_Tool
 	 */
 	public function init()
 	{
-
 	}
 }
