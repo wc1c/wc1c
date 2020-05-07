@@ -1290,12 +1290,18 @@ final class Wc1c
 	 * @param string $extension_id
 	 *
 	 * @return array|object
+	 * @throws Exception
 	 */
 	public function get_extensions($extension_id = '')
 	{
-		if('' !== $extension_id && array_key_exists($extension_id, $this->extensions))
+		if('' !== $extension_id)
 		{
-			return $this->extensions[$extension_id];
+			if(array_key_exists($extension_id, $this->extensions))
+			{
+				return $this->extensions[$extension_id];
+			}
+
+			throw new Exception('get_extensions: $extension_id is unavailable');
 		}
 
 		return $this->extensions;
