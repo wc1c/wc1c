@@ -1,3 +1,3 @@
 <?php defined('ABSPATH') || exit; ?>
 
-<p><?php _e('Information about schemas installed in the system. Configurations are created based on established schemas.', 'wc1c') ?></p>
+<p><?php _e('Information about tools installed in the system.', 'wc1c') ?></p>
