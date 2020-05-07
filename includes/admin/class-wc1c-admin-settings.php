@@ -371,6 +371,15 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 			'default' => 'no'
 		);
 
+		$fields['uninstall_remove_tables'] = array
+		(
+			'title' => __('Remove tables', 'wc1c'),
+			'type' => 'checkbox',
+			'label' => __('Deleting all the main plugin tables. If the checkbox is not checked, then the plugin tables will remain in the site database.', 'wc1c'),
+			'description' => __('Deletion is disabled by default. Cleaning all the basic tables when finally deleting the plugin.', 'wc1c'),
+			'default' => 'no'
+		);
+
 		return $fields;
 	}
 }
