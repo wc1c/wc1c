@@ -69,7 +69,7 @@ final class Wc1c_Admin
 		/**
 		 * Include files
 		 */
-		$this->includes();
+		$this->init_includes();
 
 		/**
 		 * Actions & filters
@@ -444,7 +444,7 @@ final class Wc1c_Admin
 	 *
 	 * @return void
 	 */
-	private function includes()
+	private function init_includes()
 	{
 		// hook
 		do_action('wc1c_admin_before_includes');
