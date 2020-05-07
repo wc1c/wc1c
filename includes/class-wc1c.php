@@ -1063,12 +1063,22 @@ final class Wc1c
 
 	/**
 	 * Set configurations
+	 * 
+	 * @param $configurations
 	 *
-	 * @param array $configurations
+	 * @return bool
+	 * @throws Exception
 	 */
 	public function set_configurations($configurations)
 	{
-		$this->configurations = $configurations;
+		if(is_array($configurations))
+		{
+			$this->configurations = $configurations;
+
+			return true;
+		}
+
+		throw new Exception('set_configurations: $configurations is not valid');
 	}
 
 	/**
