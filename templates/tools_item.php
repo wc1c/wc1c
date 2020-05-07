@@ -5,7 +5,7 @@
         <h5 class="card-title mt-0"><?php echo $args['object']->get_name(); ?></h5>
         <p class="card-text"><?php echo $args['object']->get_description(); ?></p>
     </div>
-    <div class="card-footer">
-        Author: <?php echo $args['object']->get_author(); ?>
+    <div class="card-footer p-3">
+       <a class="btn text-white btn-success" href="<?php echo get_wc1c_admin_tools_url($args['object']->get_id())?>">Open</a>
     </div>
 </div>
