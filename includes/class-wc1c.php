@@ -20,7 +20,7 @@ final class Wc1c
 	 *
 	 * @var null|Wc1c_Logger
 	 */
-	public $logger = null;
+	private $logger = null;
 
 	/**
 	 * Plugin environment
@@ -34,7 +34,7 @@ final class Wc1c
 	 *
 	 * @var array
 	 */
-	public $settings = array
+	private $settings = array
 	(
 		'status' => 'off',
 		'logger' => 'on',
@@ -45,7 +45,7 @@ final class Wc1c
 	 *
 	 * @var array
 	 */
-	public $configurations = [];
+	private $configurations = [];
 
 	/**
 	 * All extensions
