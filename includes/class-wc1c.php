@@ -1259,10 +1259,19 @@ final class Wc1c
 	}
 
 	/**
-	 * @return array
+	 * Get initialized extensions
+	 *
+	 * @param string $extension_id
+	 *
+	 * @return array|object
 	 */
-	public function get_extensions()
+	public function get_extensions($extension_id = '')
 	{
+		if('' !== $extension_id && array_key_exists($extension_id, $this->extensions))
+		{
+			return $this->extensions[$extension_id];
+		}
+
 		return $this->extensions;
 	}
 
