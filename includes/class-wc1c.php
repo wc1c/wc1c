@@ -177,6 +177,10 @@ final class Wc1c
 	{
 		// init
 		add_action('init', array($this, 'init'), 3);
+
+		/*
+		 * activation\deactivation
+		 */
 		register_activation_hook(WC1C_PLUGIN_FILE, 'wc1c_install');
 
 		// admin
