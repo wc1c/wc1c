@@ -28,7 +28,7 @@ abstract class Wc1c_Admin_Abstract_Table
 	 *
 	 * @var array
 	 */
-	protected $_pagination_args = array();
+	protected $_pagination_args = [];
 
 	/**
 	 * The current screen
@@ -264,7 +264,7 @@ abstract class Wc1c_Admin_Abstract_Table
 	 */
 	protected function get_views()
     {
-		return array();
+		return [];
 	}
 
 	/**
@@ -308,7 +308,7 @@ abstract class Wc1c_Admin_Abstract_Table
 	 */
 	protected function get_bulk_actions()
     {
-		return array();
+		return [];
 	}
 
 	/**
@@ -536,7 +536,7 @@ abstract class Wc1c_Admin_Abstract_Table
 
 		$current_url = remove_query_arg($removable_query_args, $current_url);
 
-		$page_links = array();
+		$page_links = [];
 
 		$total_pages_before = '<span class="paging-input">';
 		$total_pages_after  = '</span></span>';
@@ -684,7 +684,7 @@ abstract class Wc1c_Admin_Abstract_Table
 	 */
 	protected function get_sortable_columns()
     {
-		return array();
+		return [];
 	}
 
 	/**
@@ -764,7 +764,7 @@ abstract class Wc1c_Admin_Abstract_Table
 		{
 			// Back-compat for list tables that have been manually setting $_column_headers for horse reasons.
 			// In 4.3, we added a fourth argument for primary column.
-			$column_headers = array(array(), array(), array(), $this->get_primary_column_name());
+			$column_headers = array([], [], [], $this->get_primary_column_name());
 			foreach($this->_column_headers as $key => $value)
 			{
 				$column_headers[$key] = $value;
@@ -788,7 +788,7 @@ abstract class Wc1c_Admin_Abstract_Table
 		 */
 		$_sortable = apply_filters("manage_{$this->screen->id}_sortable_columns", $sortable_columns);
 
-		$sortable = array();
+		$sortable = [];
 		foreach($_sortable as $id => $data)
 		{
 			if(empty($data))

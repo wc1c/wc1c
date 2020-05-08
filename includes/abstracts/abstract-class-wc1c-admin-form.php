@@ -20,28 +20,28 @@ abstract class Wc1c_Admin_Abstract_Form
 	 *
 	 * @var array of strings
 	 */
-	protected $messages = array();
+	protected $messages = [];
 
 	/**
 	 * Form fields
 	 *
 	 * @var array
 	 */
-	protected $fields = array();
+	protected $fields = [];
 
 	/**
 	 * The posted data
 	 *
 	 * @var array
 	 */
-	protected $posted_data = array();
+	protected $posted_data = [];
 
 	/**
 	 * Saved form data
 	 *
 	 * @var array
 	 */
-	protected $saved_data = array();
+	protected $saved_data = [];
 
 	/**
 	 * Get form id
@@ -204,7 +204,7 @@ abstract class Wc1c_Admin_Abstract_Form
 	 *
 	 * @return string|void the html for the form
 	 */
-	public function generate_html($form_fields = array(), $echo = true)
+	public function generate_html($form_fields = [], $echo = true)
 	{
 		if(empty($form_fields))
 		{
@@ -293,15 +293,15 @@ abstract class Wc1c_Admin_Abstract_Form
 	{
 		return htmlspecialchars(wp_kses(html_entity_decode($var), array
 		(
-			'br' => array(),
-			'em' => array(),
-			'strong' => array(),
-			'small' => array(),
-			'span' => array(),
-			'ul' => array(),
-			'li' => array(),
-			'ol' => array(),
-			'p' => array(),
+			'br' => [],
+			'em' => [],
+			'strong' => [],
+			'small' => [],
+			'span' => [],
+			'ul' => [],
+			'li' => [],
+			'ol' => [],
+			'p' => [],
 		)));
 	}
 
@@ -343,7 +343,7 @@ abstract class Wc1c_Admin_Abstract_Form
 	 */
 	public function get_custom_attribute_html($data)
 	{
-		$custom_attributes = array();
+		$custom_attributes = [];
 
 		if(!empty($data['custom_attributes']) && is_array($data['custom_attributes']))
 		{
@@ -378,7 +378,7 @@ abstract class Wc1c_Admin_Abstract_Form
 			'type' => 'text',
 			'desc_tip' => false,
 			'description' => '',
-			'custom_attributes' => array(),
+			'custom_attributes' => [],
 		);
 
 		$data = wp_parse_args($data, $defaults);
@@ -438,7 +438,7 @@ abstract class Wc1c_Admin_Abstract_Form
 			'type' => 'text',
 			'desc_tip' => false,
 			'description' => '',
-			'custom_attributes' => array(),
+			'custom_attributes' => [],
 		);
 
 		$data = wp_parse_args( $data, $defaults );
@@ -535,8 +535,8 @@ abstract class Wc1c_Admin_Abstract_Form
 			'type' => 'text',
 			'desc_tip' => false,
 			'description' => '',
-			'custom_attributes' => array(),
-			'options' => array(),
+			'custom_attributes' => [],
+			'options' => [],
 		);
 
 		$data = wp_parse_args( $data, $defaults );
@@ -586,13 +586,13 @@ abstract class Wc1c_Admin_Abstract_Form
 			'type' => 'text',
 			'desc_tip' => false,
 			'description' => '',
-			'custom_attributes' => array(),
+			'custom_attributes' => [],
 			'select_buttons' => false,
-			'options' => array(),
+			'options' => [],
 		);
 
 		$data = wp_parse_args($data, $defaults);
-		$value = (array) $this->get_field_data($key, array());
+		$value = (array) $this->get_field_data($key, []);
 
 		ob_start();
 		?>

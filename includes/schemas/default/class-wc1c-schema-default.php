@@ -27,7 +27,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 *
 	 * @var array
 	 */
-	public $current_data = array();
+	public $current_data = [];
 
 	/**
 	 * Initialize
@@ -354,7 +354,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 		if((isset($_GET['get_param']) && $_GET['get_param'] != '') || (isset($_GET['get_param?type']) && $_GET['get_param?type'] != ''))
 		{
-			$output = array();
+			$output = [];
 			if(isset($_GET['get_param']))
 			{
 				$get_param = ltrim($_GET['get_param'], '?');
