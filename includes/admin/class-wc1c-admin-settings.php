@@ -161,7 +161,7 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 	 *
 	 * @param array $saved_data
 	 */
-	public function load_saved_data($saved_data = array())
+	public function load_saved_data($saved_data = [])
 	{
 		$saved_data = WC1C()->get_settings();
 
