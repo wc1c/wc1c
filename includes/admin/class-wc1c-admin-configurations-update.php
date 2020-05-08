@@ -34,26 +34,27 @@ class Wc1c_Admin_Configurations_Update extends Wc1c_Admin_Abstract_Form
 	 */
 	public function init()
 	{
-		// security
-		if(WC1C()->get_config_current_id() === false)
+		if(WC1C()->environment()->get('current_configuration_id', false) === false)
 		{
 			return;
 		}
 
+		$configuration_id = WC1C()->environment()->get('current_configuration_id', 0);
+
 		/**
 		 * Load configuration
 		 */
-		WC1C()->load_configurations(WC1C()->get_config_current_id());
+		WC1C()->load_configurations($configuration_id);
 
 		/**
 		 * Init
 		 */
-		WC1C()->init_configurations(WC1C()->get_config_current_id());
+		WC1C()->init_configurations($configuration_id);
 
 		/**
 		 * Get current configuration
 		 */
-		$configuration_data = WC1C()->get_configurations(WC1C()->get_config_current_id());
+		$configuration_data = WC1C()->get_configurations($configuration_id);
 
 		/**
 		 * Initialize schema by id
@@ -168,10 +169,13 @@ class Wc1c_Admin_Configurations_Update extends Wc1c_Admin_Abstract_Form
 				WC1C_Admin()->add_message('error', $e->getMessage());
 			}
 		}
+
+		$configuration_id = WC1C()->environment()->get('current_configuration_id', 0);
+
 		/**
 		 * Get current configuration
 		 */
-		$configuration_data = WC1C()->get_configurations(WC1C()->get_config_current_id());
+		$configuration_data = WC1C()->get_configurations($configuration_id);
 
 		/**
 		 * Data to save

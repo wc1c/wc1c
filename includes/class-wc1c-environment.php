@@ -26,6 +26,11 @@ class Wc1c_Environment
 		$this->init_wc1c_version();
 
 		/**
+		 * Current configuration
+		 */
+		$this->init_current_configuration_id();
+
+		/**
 		 * Upload directory
 		 */
 		$this->init_upload_directory();
@@ -40,6 +45,28 @@ class Wc1c_Environment
 		 */
 		$this->init_php_post_max_size();
 		$this->init_php_max_execution_time();
+	}
+
+	/**
+	 * Configuration current identifier initializing
+	 *
+	 * @return bool
+	 */
+	public function init_current_configuration_id()
+	{
+		$config_id = wc1c_get_var($_GET['config_id'], 0);
+
+		if(0 < $config_id && 99999999 > $config_id)
+		{
+			if(is_wc1c_api_request() || is_wc1c_admin_request())
+			{
+				$this->set('current_configuration_id', $config_id);
+
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**
