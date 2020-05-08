@@ -22,8 +22,15 @@ function is_wc1c_admin_tools_request($tool_id = '')
 			return false;
 		}
 
-		$available_tools = WC1C()->get_tools();
-
+		try
+		{
+			$available_tools = WC1C()->get_tools();
+		}
+		catch(Exception $e)
+		{
+			return false;
+		}
+		
 		if(array_key_exists($tool_id, $available_tools))
 		{
 			return true;
