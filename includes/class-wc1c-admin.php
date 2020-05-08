@@ -1,7 +1,7 @@
 <?php
 /**
  * Final Admin class
- * Configurations, settings, schemas, tools, report
+ * Configurations, settings, schemas, tools, report and more
  *
  * @package Wc1c/Admin
  */
