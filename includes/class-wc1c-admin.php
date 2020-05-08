@@ -21,14 +21,14 @@ final class Wc1c_Admin
 	 *
 	 * @var array
 	 */
-	private $sections = array();
+	private $sections = [];
 
 	/**
 	 * Admin messages
 	 *
 	 * @var array
 	 */
-	private $messages = array();
+	private $messages = [];
 
 	/**
 	 * Current admin section
@@ -61,19 +61,8 @@ final class Wc1c_Admin
 		// hook
 		do_action('wc1c_admin_before_loading');
 
-		/**
-		 * Current admin section
-		 */
 		$this->load_current_section();
-
-		/**
-		 * Include files
-		 */
 		$this->init_includes();
-
-		/**
-		 * Actions & filters
-		 */
 		$this->init_hooks();
 
 		// hook
