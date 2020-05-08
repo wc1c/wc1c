@@ -177,7 +177,7 @@ function wc1c_define($name, $value)
  * @param string $template_path template path (default: '')
  * @param string $default_path default path (default: '')
  */
-function wc1c_get_template($template_name, $args = array(), $template_path = '', $default_path = '')
+function wc1c_get_template($template_name, $args = [], $template_path = '', $default_path = '')
 {
 	if(!empty($args) && is_array($args))
 	{
@@ -249,7 +249,7 @@ function wc1c_get_template_part($slug, $name = '')
  * @return string
  * @see wc1c_get_template
  */
-function wc1c_get_template_html($template_name, $args = array(), $template_path = '', $default_path = '')
+function wc1c_get_template_html($template_name, $args = [], $template_path = '', $default_path = '')
 {
 	ob_start();
 	wc1c_get_template($template_name, $args, $template_path, $default_path);

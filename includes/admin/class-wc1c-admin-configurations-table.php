@@ -137,7 +137,7 @@ class Wc1c_Admin_Configurations_Table extends Wc1c_Admin_Abstract_Table
 	 */
 	public function get_columns()
 	{
-		$columns = array();
+		$columns = [];
 		$columns['cb'] = '<input type="checkbox" />';
 		$columns['config_id'] = __('ID', 'wc1c');
 		$columns['config_name'] = __('Name', 'wc1c');
@@ -189,7 +189,7 @@ class Wc1c_Admin_Configurations_Table extends Wc1c_Admin_Abstract_Table
 		 */
 		if('remove' == $this->current_action())
 		{
-		    $configs = array();
+		    $configs = [];
 
 		    if(isset($_REQUEST['config_id']))
             {
@@ -234,7 +234,7 @@ class Wc1c_Admin_Configurations_Table extends Wc1c_Admin_Abstract_Table
 		 * used to build the value for our _column_headers property.
 		 */
 		$columns = $this->get_columns();
-		$hidden = array();
+		$hidden = [];
 		$sortable = $this->get_sortable_columns();
 
 		/**

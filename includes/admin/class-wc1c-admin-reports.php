@@ -13,28 +13,28 @@ class Wc1c_Admin_Reports
 	 *
 	 * @var array
 	 */
-	private $wc1c_data = array();
+	private $wc1c_data = [];
 
 	/**
 	 * Server
 	 *
 	 * @var array
 	 */
-	private $server_data = array();
+	private $server_data = [];
 
 	/**
 	 * Wordpress
 	 *
 	 * @var array
 	 */
-	private $wp_data = array();
+	private $wp_data = [];
 
 	/**
 	 * WooCommerce
 	 *
 	 * @var array
 	 */
-	private $wc_data = array();
+	private $wc_data = [];
 
 	/**
 	 * Wc1c_Admin_Report constructor
@@ -188,7 +188,7 @@ class Wc1c_Admin_Reports
 		 * description: optional
 		 * data: raw data for entity
 		 */
-		$env_array = array();
+		$env_array = [];
 
 		/**
 		 * Home URL
@@ -295,7 +295,7 @@ class Wc1c_Admin_Reports
 		 * description: optional
 		 * data: raw data for entity
 		 */
-		$env_array = array();
+		$env_array = [];
 
 		/**
 		 * Server info
@@ -471,7 +471,7 @@ class Wc1c_Admin_Reports
 		/**
 		 * Container
 		 */
-		$env_array = array();
+		$env_array = [];
 
 		/**
 		 * WC1C version
@@ -496,7 +496,7 @@ class Wc1c_Admin_Reports
 		/**
 		 * Container
 		 */
-		$env_array = array();
+		$env_array = [];
 
 		/**
 		 * WooCommerce version
@@ -508,7 +508,7 @@ class Wc1c_Admin_Reports
 			'data' => WC()->version
 		);
 
-		$term_response = array();
+		$term_response = [];
 		$terms = get_terms( 'product_type', array( 'hide_empty' => 0 ) );
 		foreach($terms as $term)
 		{

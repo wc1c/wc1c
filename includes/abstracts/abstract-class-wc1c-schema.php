@@ -27,7 +27,7 @@ abstract class Wc1c_Abstract_Schema
 	 *
 	 * @var array
 	 */
-	private $options = array();
+	private $options = [];
 
 	/**
 	 * Unique prefix

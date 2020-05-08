@@ -961,7 +961,7 @@ final class Wc1c
 	 */
 	public function load_configurations($id = false)
 	{
-		$configurations = array();
+		$configurations = [];
 
 		$config_query = 'SELECT * from ' . WC1C_Db()->base_prefix . 'wc1c';
 		if($id !== false)
