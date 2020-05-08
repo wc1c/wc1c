@@ -1,7 +1,7 @@
 <?php
 /**
  * Final Admin class
- * Configurations, settings, schemas, tools, report and more
+ * Configurations, settings, schemas, tools, reports and more
  *
  * @package Wc1c/Admin
  */
@@ -195,16 +195,16 @@ final class Wc1c_Admin
 		}
 
 		/**
-		 * Report
+		 * Reports
 		 */
-		$default_sections['report'] = array
+		$default_sections['reports'] = array
 		(
-			'title' => __('Report', 'wc1c'),
-			'callback' => array($this, 'page_report')
+			'title' => __('Reports', 'wc1c'),
+			'callback' => array($this, 'page_reports')
 		);
-		if('report' === $this->get_current_section())
+		if('reports' === $this->get_current_section())
 		{
-			new Wc1c_Admin_Report();
+			new Wc1c_Admin_Reports();
 		}
 
 		/**
@@ -360,13 +360,13 @@ final class Wc1c_Admin
 	}
 
 	/**
-	 * Report
+	 * Reports
 	 *
 	 * @return void
 	 */
-	public function page_report()
+	public function page_reports()
 	{
-		wc1c_get_template('page_report.php');
+		wc1c_get_template('page_reports.php');
 	}
 
 	/**
@@ -486,11 +486,11 @@ final class Wc1c_Admin
 		}
 
 		/**
-		 * Report section
+		 * Reports section
 		 */
-		if('report' === $this->get_current_section())
+		if('reports' === $this->get_current_section())
 		{
-			include_once WC1C_PLUGIN_PATH . 'includes/admin/class-wc1c-admin-report.php';
+			include_once WC1C_PLUGIN_PATH . 'includes/admin/class-wc1c-admin-reports.php';
 		}
 
 		// hook
