@@ -34,13 +34,15 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 */
 	public function init()
 	{
+		$configuration_id = WC1C()->environment()->get('current_configuration_id', 0);
+
 		/**
 		 * Set schema directory
 		 */
 		WC1C()->environment()->set
 		(
 			'wc1c_current_schema_upload_directory',
-			WC1C()->environment()->get('wc1c_upload_directory') . DIRECTORY_SEPARATOR . 'default_' . WC1C()->get_config_current_id()
+			WC1C()->environment()->get('wc1c_upload_directory') . DIRECTORY_SEPARATOR . 'default_' . $configuration_id
 		);
 
 		/**

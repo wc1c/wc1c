@@ -76,13 +76,6 @@ final class Wc1c
 	private $api = null;
 
 	/**
-	 * Current configuration identifier
-	 *
-	 * @var bool|integer
-	 */
-	private $config_current_id = false;
-
-	/**
 	 * Main Wc1c instance
 	 *
 	 * @return Wc1c
@@ -238,8 +231,6 @@ final class Wc1c
 			return false;
 		}
 
-		$this->init_config_current_id();
-
 		try
 		{
 			$this->load_extensions();
@@ -380,71 +371,6 @@ final class Wc1c
 	}
 
 	/**
-	 * Get current config id
-	 *
-	 * @return bool|integer
-	 */
-	public function get_config_current_id()
-	{
-		return $this->config_current_id;
-	}
-
-	/**
-	 * Set current config id
-	 *
-	 * @param $id
-	 *
-	 * @return $this
-	 */
-	public function set_config_current_id($id)
-	{
-		$this->config_current_id = $id;
-
-		return $this;
-	}
-
-	/**
-	 * Configuration current identifier initializing
-	 *
-	 * @return bool|integer
-	 */
-	public function init_config_current_id()
-	{
-		/**
-		 * Default id
-		 */
-		$config_id = 0;
-
-		/**
-		 * Api requests
-		 */
-		if(is_wc1c_api_request() && isset($_GET['config_id']))
-		{
-			$config_id = (int)$_GET['config_id'];
-		}
-
-		/**
-		 * Admin pages
-		 */
-		if(is_wc1c_admin_request() && isset($_GET['config_id']))
-		{
-			$config_id = (int)$_GET['config_id'];
-		}
-
-		/**
-		 * Final
-		 */
-		if(0 < $config_id && 99999999 > $config_id)
-		{
-			$this->set_config_current_id($config_id);
-
-			WC1C()->logger()->info('init_config_current_id: $config_id - ' . $config_id);
-		}
-
-		return $this->get_config_current_id();
-	}
-
-	/**
 	 * Plugin settings loading
 	 *
 	 * @throws Exception
@@ -493,9 +419,16 @@ final class Wc1c
 			/**
 			 * Current
 			 */
-			if($type === 'current' && $this->get_config_current_id() !== false && array_key_exists($this->get_config_current_id(), $this->configurations))
+			if($type === 'current')
 			{
-				return $this->configurations[$this->get_config_current_id()];
+				$configuration_id = WC1C()->environment()->get('current_configuration_id', 0);
+
+				if(array_key_exists($configuration_id, $this->configurations))
+				{
+					return $this->configurations[$configuration_id];
+				}
+
+				return false;
 			}
 
 			/**
@@ -815,15 +748,17 @@ final class Wc1c
 				throw new Exception('init_schemas: method init not found');
 			}
 
+			$configuration_id = WC1C()->environment()->get('current_configuration_id', 0);
+
 			try
 			{
-				if($this->get_config_current_id())
+				if($configuration_id !== 0)
 				{
 					$options = $this->get_configurations('current');
 
 					$init_schema->set_options($options['instance']->get_options());
-					$init_schema->set_configuration_prefix('wc1c_configuration_' . $this->get_config_current_id());
-					$init_schema->set_prefix('wc1c_prefix_' . $schema_id . '_' . $this->get_config_current_id());
+					$init_schema->set_configuration_prefix('wc1c_configuration_' . $configuration_id);
+					$init_schema->set_prefix('wc1c_prefix_' . $schema_id . '_' . $configuration_id);
 				}
 
 				$init_schema->init();

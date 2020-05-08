@@ -90,7 +90,7 @@ class Wc1c_Api
 			/**
 			 * Set current id
 			 */
-			WC1C()->set_config_current_id($wc1c_api);
+			WC1C()->environment()->set('current_configuration_id', $wc1c_api);
 
 			/**
 			 * Initialize schema by id
