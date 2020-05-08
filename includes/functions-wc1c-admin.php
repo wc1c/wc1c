@@ -34,6 +34,28 @@ function is_wc1c_admin_tools_request($tool_id = '')
 }
 
 /**
+ * Is WC1C admin section request?
+ *
+ * @param string $section
+ *
+ * @return bool
+ */
+function is_wc1c_admin_section_request($section = '')
+{
+	if('' === $section)
+	{
+		return false;
+	}
+
+	if(is_wc1c_admin_request() && wc1c_get_var($_GET['section'], '') === $section)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+/**
  * @param string $tool_id
  *
  * @return string
