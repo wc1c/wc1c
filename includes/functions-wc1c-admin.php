@@ -30,7 +30,7 @@ function is_wc1c_admin_tools_request($tool_id = '')
 		{
 			return false;
 		}
-		
+
 		if(array_key_exists($tool_id, $available_tools))
 		{
 			return true;
@@ -78,5 +78,24 @@ function get_wc1c_admin_tools_url($tool_id = '')
 
 	$path = 'admin.php?page=wc1c&section=tools&tool_id=' . $tool_id;
 	
+	return admin_url($path);
+}
+
+/**
+ * @param string $configuration_id
+ *
+ * @return string
+ */
+function get_wc1c_admin_configuration_url($configuration_id = '')
+{
+	$path = 'admin.php?page=wc1c&section=configurations';
+
+	if('' === $configuration_id)
+	{
+		return admin_url($path);
+	}
+
+	$path = 'admin.php?page=wc1c&section=configurations&do_action=update&config_id=' . $configuration_id;
+
 	return admin_url($path);
 }
