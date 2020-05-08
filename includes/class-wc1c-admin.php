@@ -404,7 +404,7 @@ final class Wc1c_Admin
 	 *
 	 * @return string
 	 */
-	public function page_tabs()
+	public function page_tabs() //todo: template
 	{
 		$nav = '<nav class="nav-tab-wrapper woo-nav-tab-wrapper">';
 
