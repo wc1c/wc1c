@@ -128,9 +128,12 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 			/**
 			 * Validate
 			 */
-			try {
+			try
+			{
 				$this->saved_data[$key] = $this->get_field_value($key, $field, $post_data);
-			} catch(Exception $e) {
+			}
+			catch(Exception $e)
+			{
 				WC1C_Admin()->add_message('error', $e->getMessage());
 			}
 		}
@@ -138,7 +141,7 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 		/**
 		 * Saving
 		 */
-		$saved = WC1C()->save_settings($this->get_saved_data());
+		$saved = WC1C()->settings()->save($this->get_saved_data()); //todo
 
 		/**
 		 * Show admin messages
@@ -162,7 +165,7 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 	 */
 	public function load_saved_data($saved_data = [])
 	{
-		$saved_data = WC1C()->get_settings();
+		$saved_data = WC1C()->settings()->get_data();
 
 		if(!is_array($saved_data))
 		{
