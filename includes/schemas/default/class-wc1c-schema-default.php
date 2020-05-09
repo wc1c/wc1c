@@ -31,19 +31,15 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 	/**
 	 * Initialize
+	 *
+	 * @throws Exception
 	 */
 	public function init()
 	{
-		$configuration_id = WC1C()->environment()->get('current_configuration_id', 0);
-
 		/**
-		 * Set schema directory
+		 * Init environment
 		 */
-		WC1C()->environment()->set
-		(
-			'wc1c_current_schema_upload_directory',
-			WC1C()->environment()->get('wc1c_upload_directory') . DIRECTORY_SEPARATOR . 'default_' . $configuration_id
-		);
+		$this->init_environment();
 
 		/**
 		 * Logger
@@ -74,6 +70,20 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		$this->logger()->debug('init: end', $this);
 	}
 
+	/**
+	 * Schema environment
+	 */
+	private function init_environment()
+	{
+		$configuration_id = WC1C()->environment()->get('current_configuration_id', 0);
+
+		WC1C()->environment()->set
+		(
+			'wc1c_current_schema_upload_directory',
+			WC1C()->environment()->get('wc1c_upload_directory') . DIRECTORY_SEPARATOR . $this->get_id() . '_' . $configuration_id
+		);
+	}
+	
 	/**
 	 * Load logger
 	 */
