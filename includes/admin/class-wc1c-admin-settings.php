@@ -245,7 +245,7 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 
 		$fields['api'] = array
 		(
-			'title' => __('API Online / Offline', 'wc1c'),
+			'title' => __('API', 'wc1c'),
 			'type' => 'checkbox',
 			'label' => __('Enable', 'wc1c'),
 			'description' => __('This API uses exchange schemas to receive requests from 1C and send data there.', 'wc1c'),
