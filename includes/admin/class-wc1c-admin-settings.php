@@ -37,9 +37,8 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 		/**
 		 * Init fields
 		 */
-		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_main'), 10);
+		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_technical'), 10);
 		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_enabled_data'), 20);
-		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_technical'), 30);
 		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_uninstall'), 40);
 
 		/**
@@ -179,35 +178,6 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 	}
 
 	/**
-	 * Init fields for main settings
-	 *
-	 * @param $fields
-	 *
-	 * @return array
-	 */
-	public function init_fields_main($fields)
-	{
-		$fields['main'] = array
-		(
-			'title' => __('Main', 'wc1c'),
-			'type' => 'title',
-			'description' => __('Basic options. After the options change, must save it.', 'wc1c'),
-		);
-
-		$fields['enable'] = array
-		(
-			'title' => __('Online / Offline', 'wc1c'),
-			'type' => 'checkbox',
-			'label' => __('Enabling and disabling all exchange mechanisms. If the checkbox is not checked, then all mechanisms for changing any data are disabled.', 'wc1c'),
-			'description' => __('This setting is used to ensure that data changes in the site database are disabled.', 'wc1c'),
-			'default' => 'no'
-		);
-
-		return $fields;
-	}
-
-
-	/**
 	 * Add settings for enabled data
 	 *
 	 * @param $fields
@@ -216,7 +186,7 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 	 */
 	public function init_fields_enabled_data($fields)
 	{
-		$fields['change_data_objects'] = array
+		$fields['title_change_data'] = array
 		(
 			'title' => __('Data change by objects', 'wc1с'),
 			'type' => 'title',
@@ -229,7 +199,7 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 			'type' => 'checkbox',
 			'label' => __('Enabling and disabling capabilities of the products. If the checkbox is not checked, it means that all mechanisms for working with products are disabled.', 'wc1c'),
 			'description' => __('This setting is used as a global flag indicating the ability to work with products (delete, change, add).', 'wc1c'),
-			'default' => 'yes'
+			'default' => 'no'
 		);
 
 		$fields['change_data_orders'] = array
@@ -238,7 +208,7 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 			'type' => 'checkbox',
 			'label' => __('Enabling and disabling of features of work with orders. If the checkbox is not checked, it means that all mechanisms for working with orders are disabled.', 'wc1c'),
 			'description' => __('This setting is used as a global flag indicating that you can work with product orders (delete, change, add).', 'wc1c'),
-			'default' => 'yes'
+			'default' => 'no'
 		);
 
 		$fields['change_data_images'] = array
@@ -247,7 +217,7 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 			'type' => 'checkbox',
 			'label' => __('Enabling and disabling image processing capabilities. If the checkbox is not checked, it means that all mechanisms for working with images are disabled.', 'wc1c'),
 			'description' => __('This setting is used as a global flag indicating work with product images (delete, change, add).', 'wc1c'),
-			'default' => 'yes'
+			'default' => 'no'
 		);
 
 		return $fields;
