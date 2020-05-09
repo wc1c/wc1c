@@ -25,20 +25,16 @@ final class Wc1c
 	/**
 	 * Plugin environment
 	 *
-	 * @var null
+	 * @var null|Wc1c_Environment
 	 */
 	private $environment = null;
 
 	/**
 	 * Base settings
 	 *
-	 * @var array
+	 * @var null|Wc1c_Settings
 	 */
-	private $settings = array
-	(
-		'status' => 'off',
-		'logger' => 'on',
-	);
+	private $settings = null;
 
 	/**
 	 * All configurations
@@ -131,6 +127,7 @@ final class Wc1c
 		include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-environment.php';
 		include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-logger.php';
 		include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-configuration.php';
+		include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-settings.php';
 
 		/**
 		 * Schemas
@@ -291,8 +288,8 @@ final class Wc1c
 	 */
 	public function reload_logger()
 	{
-		$logger_level = $this->get_settings('logger', 400);
-		$directory_name = $this->get_settings('upload_directory_name', 'wc1c');
+		$logger_level = $this->settings()->get('logger', 400);
+		$directory_name = $this->settings()->get('upload_directory_name', 'wc1c');
 
 		$logger_path = $this->environment()->get('upload_directory') . DIRECTORY_SEPARATOR . $directory_name;
 		$logger_name = 'wc1c.main.log';
@@ -321,6 +318,16 @@ final class Wc1c
 	public function environment()
 	{
 		return $this->environment;
+	}
+
+	/**
+	 * Get settings
+	 *
+	 * @return null|Wc1c_Settings
+	 */
+	public function settings()
+	{
+		return $this->settings;
 	}
 
 	/**
@@ -377,29 +384,23 @@ final class Wc1c
 	 */
 	public function load_settings()
 	{
-		$settings = get_site_option('wc1c', []);
-
-		/**
-		 * Loading with external code
-		 */
-		$settings = apply_filters('wc1c_settings_loading', $settings);
-
-		if(!is_array($settings))
+		try
 		{
-			throw new Exception('$settings is not array');
+			$settings = new Wc1c_Settings();
 		}
-		$settings = array_merge
-		(
-			$this->get_settings(),
-			$settings
-		);
+		catch(Exception $e)
+		{
+			throw new Exception('load_settings: exception - ' . $e->getMessage());
+		}
 
 		try
 		{
 			$this->set_settings($settings);
 		}
 		catch(Exception $e)
-		{}
+		{
+			throw new Exception('load_settings: exception - ' . $e->getMessage());
+		}
 	}
 
 	/**
@@ -820,7 +821,7 @@ final class Wc1c
 		/**
 		 * External schemas
 		 */
-		if('yes' === $this->get_settings('external_schemas'))
+		if('yes' === $this->settings()->get('external_schemas'))
 		{
 			$schemas = apply_filters('wc1c_schemas_loading', $schemas);
 		}
@@ -873,66 +874,6 @@ final class Wc1c
 	}
 
 	/**
-	 * Save plugin settings
-	 *
-	 * @param $settings array
-	 *
-	 * @return bool
-	 */
-	public function save_settings($settings)
-	{
-		/**
-		 * Apply filters
-		 */
-		$settings = apply_filters('wc1c_settings_save', $settings);
-
-		/**
-		 * Reload buffer
-		 */
-		try
-		{
-			$this->set_settings($settings);
-		}
-		catch(Exception $e)
-		{}
-
-		/**
-		 * Update in DB
-		 *
-		 * Required WP 4.2.0 autoload option
-		 */
-		return update_option('wc1c', $settings, 'no');
-	}
-
-	/**
-	 * Get plugin settings
-	 *
-	 * @param string $key - optional
-	 * @param null $default
-	 *
-	 * @return array|bool|mixed
-	 */
-	public function get_settings($key = '', $default = null)
-	{
-		if($key !== '')
-		{
-			if(is_array($this->settings) && array_key_exists($key, $this->settings))
-			{
-				return $this->settings[$key];
-			}
-
-			if(false === is_null($default))
-			{
-				return $default;
-			}
-
-			return false;
-		}
-
-		return $this->settings;
-	}
-
-	/**
 	 * Set plugin settings
 	 *
 	 * @param $settings
@@ -942,7 +883,7 @@ final class Wc1c
 	 */
 	public function set_settings($settings)
 	{
-		if(is_array($settings))
+		if($settings instanceof Wc1c_Settings)
 		{
 			$this->settings = $settings;
 
@@ -1045,12 +986,18 @@ final class Wc1c
 	 * @param $logger
 	 *
 	 * @return $this
+	 * @throws Exception
 	 */
 	public function set_logger($logger)
 	{
-		$this->logger = $logger;
+		if($logger instanceof Wc1c_Abstract_Logger)
+		{
+			$this->logger = $logger;
 
-		return $this;
+			return $this;
+		}
+
+		throw new Exception('set_logger: $logger is not valid');
 	}
 
 	/**
@@ -1066,9 +1013,9 @@ final class Wc1c
 	/**
 	 * Get API
 	 *
-	 * @return null
+	 * @return null|Wc1c_Api
 	 */
-	public function get_api()
+	public function api()
 	{
 		return $this->api;
 	}
@@ -1076,7 +1023,7 @@ final class Wc1c
 	/**
 	 * Set API
 	 *
-	 * @param null $api
+	 * @param null|Wc1c_Api $api
 	 */
 	public function set_api($api)
 	{
@@ -1144,7 +1091,7 @@ final class Wc1c
 		/**
 		 * External tools loading is enable
 		 */
-		if('yes' === $this->get_settings('external_tools'))
+		if('yes' === $this->settings()->get('external_tools'))
 		{
 			$tools = apply_filters('wc1c_tools_loading', $tools);
 		}
@@ -1172,7 +1119,7 @@ final class Wc1c
 	{
 		$extensions = [];
 
-		if('yes' === $this->get_settings('enable_extensions', 'yes'))
+		if('yes' === $this->settings()->get('enable_extensions', 'yes'))
 		{
 			$extensions = apply_filters('wc1c_extensions_loading', $extensions);
 		}
