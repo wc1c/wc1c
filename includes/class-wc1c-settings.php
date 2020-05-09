@@ -65,14 +65,8 @@ class Wc1c_Settings
 	 */
 	public function save($settings)
 	{
-		/**
-		 * Apply filters
-		 */
 		$settings = apply_filters('wc1c_settings_save', $settings);
 
-		/**
-		 * Reload buffer
-		 */
 		try
 		{
 			$this->set_data($settings);
