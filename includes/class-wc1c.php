@@ -821,7 +821,7 @@ final class Wc1c
 		/**
 		 * External schemas
 		 */
-		if('yes' === $this->settings()->get('external_schemas'))
+		if('yes' === $this->settings()->get('extensions_schemas'))
 		{
 			$schemas = apply_filters('wc1c_schemas_loading', $schemas);
 		}
@@ -1091,7 +1091,7 @@ final class Wc1c
 		/**
 		 * External tools loading is enable
 		 */
-		if('yes' === $this->settings()->get('external_tools'))
+		if('yes' === $this->settings()->get('extensions_tools'))
 		{
 			$tools = apply_filters('wc1c_tools_loading', $tools);
 		}
@@ -1119,7 +1119,7 @@ final class Wc1c
 	{
 		$extensions = [];
 
-		if('yes' === $this->settings()->get('enable_extensions', 'yes'))
+		if('yes' === $this->settings()->get('extensions', 'yes'))
 		{
 			$extensions = apply_filters('wc1c_extensions_loading', $extensions);
 		}
