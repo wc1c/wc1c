@@ -38,6 +38,7 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 		 * Init fields
 		 */
 		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_technical'), 10);
+		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_extensions'), 10);
 		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_enabled_data'), 20);
 		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_uninstall'), 40);
 
@@ -242,6 +243,15 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 			'description' => __('Used by technical specialists. Can leave it at that.', 'wc1c'),
 		);
 
+		$fields['api'] = array
+		(
+			'title' => __('API Online / Offline', 'wc1c'),
+			'type' => 'checkbox',
+			'label' => __('Enable', 'wc1c'),
+			'description' => __('This API uses exchange schemas to receive requests from 1C and send data there.', 'wc1c'),
+			'default' => 'yes'
+		);
+
 		$fields['logger'] = array
 		(
 			'title' => __('Logging level', 'wc1c'),
@@ -271,39 +281,49 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 			'css' => 'min-width: 300px;',
 		);
 
-		$fields['enable_api'] = array
+		return $fields;
+	}
+
+	/**
+	 * Add settings for extensions
+	 *
+	 * @param $fields
+	 *
+	 * @return array
+	 */
+	public function init_fields_extensions($fields)
+	{
+		$fields['title_extensions'] = array
 		(
-			'title' => __('API Online / Offline', 'wc1c'),
+			'title' => __('Extensions', 'wc1с'),
+			'type' => 'title',
+			'description' => __('Used by technical specialists. Can leave it at that.', 'wc1c'),
+		);
+
+		$fields['extensions'] = array
+		(
+			'title' => __('Support extensions', 'wc1c'),
 			'type' => 'checkbox',
-			'label' => __('Enable or disable receiving requests via the API. If the checkbox is not checked, then all mechanisms for receiving requests via the API are disabled.', 'wc1c'),
-			'description' => __('This API uses exchange schemes to receive requests from 1C and send data there.', 'wc1c'),
+			'label' => __('Enable', 'wc1c'),
+			'description' => __('Support for external extensions. If disabled, all third-party extensions will be unavailable.', 'wc1c'),
 			'default' => 'yes'
 		);
 
-		$fields['enable_extensions'] = array
-		(
-			'title' => __('Extensions', 'wc1c'),
-			'type' => 'checkbox',
-			'label' => __('Enable or disable loading extensions.', 'wc1c'),
-			'description' => __('Regulates the loading of extensions. By default, loading extensions is enabled.', 'wc1c'),
-			'default' => 'yes'
-		);
-
-		$fields['external_schemas'] = array
+		$fields['extensions_schemas'] = array
 		(
 			'title' => __('External schemas', 'wc1c'),
 			'type' => 'checkbox',
-			'label' => __('Enabling and disabling schemas from third-party developers. If the checkbox is not checked, then all mechanisms for adding external schemas are disabled.', 'wc1c'),
-			'description' => __('Schemas are added to support different ways of exchanging data. Each scheme has its own processing algorithms and unique features.', 'wc1c'),
+			'label' => __('Enable', 'wc1c'),
+			'description' => __('Support for external schemas. If disabled, all third-party schemas will be unavailable.', 'wc1c'),
 			'default' => 'yes'
 		);
 
-		$fields['external_tools'] = array
+		$fields['extensions_tools'] = array
 		(
 			'title' => __('External tools', 'wc1c'),
 			'type' => 'checkbox',
-			'label' => __('Enabling and disabling third-party tools. If the checkbox is not checked, then all mechanisms for adding external tools are disabled.', 'wc1c'),
-			'description' => __('Tools can be added by exchange schemes, as well as simply go as third-party plugins. Tools are added for ease of working with data.', 'wc1c'),
+			'label' => __('Enable', 'wc1c'),
+			'description' => __('Support for external tools. If disabled, all third-party tools will be unavailable.', 'wc1c'),
 			'default' => 'yes'
 		);
 
