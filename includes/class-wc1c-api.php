@@ -67,12 +67,26 @@ class Wc1c_Api
 			/**
 			 * Load configuration by id
 			 */
-			WC1C()->load_configurations($wc1c_api);
+			try
+			{
+				WC1C()->load_configurations($wc1c_api);
+			}
+			catch(Exception $e)
+			{
+				die('Api unavailable');
+			}
 
 			/**
 			 * Init
 			 */
-			WC1C()->init_configurations($wc1c_api);
+			try
+			{
+				WC1C()->init_configurations($wc1c_api);
+			}
+			catch(Exception $e)
+			{
+				die('Configuration unavailable');
+			}
 
 			/**
 			 * Get current configuration
