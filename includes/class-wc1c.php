@@ -1033,6 +1033,8 @@ final class Wc1c
 
 	/**
 	 * API loading
+	 *
+	 * @throws Exception
 	 */
 	public function load_api()
 	{
@@ -1054,10 +1056,23 @@ final class Wc1c
 			$wc1c_api_class_name = $default_class_name;
 		}
 
-		/**
-		 * Set api (run)
-		 */
-		$this->set_api(new $wc1c_api_class_name());
+		try
+		{
+			$api = new $wc1c_api_class_name();
+		}
+		catch(Exception $e)
+		{
+			throw new Exception('load_api: not loaded');
+		}
+
+		try
+		{
+			$this->set_api($api);
+		}
+		catch(Exception $e)
+		{
+			throw new Exception('load_api: exception - ' . $e->getMessage());
+		}
 	}
 
 	/**
