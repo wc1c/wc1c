@@ -362,7 +362,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 		$this->logger()->debug('api_handler $_SERVER', $_SERVER);
 
-		if((isset($_GET['get_param']) && $_GET['get_param'] != '') || (isset($_GET['get_param?type']) && $_GET['get_param?type'] != ''))
+		if(wc1c_get_var($_GET['get_param'], '') !== '' || (wc1c_get_var($_GET['get_param?type'], '') !== ''))
 		{
 			$output = [];
 			if(isset($_GET['get_param']))
