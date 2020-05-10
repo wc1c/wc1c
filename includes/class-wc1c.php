@@ -214,7 +214,7 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			WC1C()->logger()->alert('init: load settings error, ' . $e->getMessage());
+			WC1C()->logger()->alert('init: exception - ' . $e->getMessage());
 			return false;
 		}
 
@@ -224,7 +224,7 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			WC1C()->logger()->alert('init: ' . $e->getMessage());
+			WC1C()->logger()->alert('init: exception - ' . $e->getMessage());
 			return false;
 		}
 
@@ -234,7 +234,7 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			WC1C()->logger()->alert('init: ' . $e->getMessage());
+			WC1C()->logger()->alert('init: exception - ' . $e->getMessage());
 			return false;
 		}
 
@@ -244,7 +244,7 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			WC1C()->logger()->alert('init: ' . $e->getMessage());
+			WC1C()->logger()->alert('init: exception - ' . $e->getMessage());
 			return false;
 		}
 
@@ -254,7 +254,7 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			WC1C()->logger()->alert('init: ' . $e->getMessage());
+			WC1C()->logger()->alert('init: exception - ' . $e->getMessage());
 			return false;
 		}
 
@@ -266,7 +266,7 @@ final class Wc1c
 			}
 			catch(Exception $e)
 			{
-				WC1C()->logger()->alert('init: ' . $e->getMessage());
+				WC1C()->logger()->alert('init: exception - ' . $e->getMessage());
 				return false;
 			}
 		}
