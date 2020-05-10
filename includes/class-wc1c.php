@@ -750,10 +750,10 @@ final class Wc1c
 				throw new Exception('init_schemas: method init not found');
 			}
 
-			$configuration_id = WC1C()->environment()->get('current_configuration_id', 0);
-
 			try
 			{
+				$configuration_id = WC1C()->environment()->get('current_configuration_id', 0);
+
 				if($configuration_id !== 0)
 				{
 					$options = $this->get_configurations('current');
