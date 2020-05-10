@@ -21,9 +21,6 @@ class Wc1c_Schema_Logger extends Wc1c_Abstract_Logger
 	 */
 	public function add($level, $message, $object = null)
 	{
-		/**
-		 * Check level
-		 */
 		if($this->get_level() > $level)
 		{
 			return false;
@@ -47,6 +44,10 @@ class Wc1c_Schema_Logger extends Wc1c_Abstract_Logger
 		if(is_object($object) || is_array($object))
 		{
 			$content['object'] = print_r($object, true);
+		}
+		elseif(is_bool($object))
+		{
+			$content['object'] = $object ? 'true' : 'false';
 		}
 		else
 		{
