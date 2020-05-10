@@ -454,6 +454,7 @@ final class Wc1c
 	 * @param string $configuration_id
 	 *
 	 * @return boolean
+	 * @throws Exception
 	 */
 	public function init_configurations($configuration_id = '')
 	{
