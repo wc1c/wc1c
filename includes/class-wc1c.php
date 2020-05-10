@@ -900,6 +900,7 @@ final class Wc1c
 	 * @param bool $id
 	 *
 	 * @return bool
+	 * @throws Exception
 	 */
 	public function load_configurations($id = false)
 	{
@@ -933,7 +934,14 @@ final class Wc1c
 
 		$configurations = apply_filters('wc1c_configurations_load', $configurations);
 
-		$this->set_configurations($configurations);
+		try
+		{
+			$this->set_configurations($configurations);
+		}
+		catch(Exception $e)
+		{
+			throw new Exception('load_configurations: exception - ' . $e->getMessage());
+		}
 
 		return true;
 	}
