@@ -982,9 +982,23 @@ final class Wc1c
 			throw new Exception('WordPress upload directory not found');
 		}
 
-		$logger = new Wc1c_Logger($directory,50, 'wc1c.boot.log');
+		try
+		{
+			$logger = new Wc1c_Logger($directory,50, 'wc1c.boot.log');
+		}
+		catch(Exception $e)
+		{
+			throw new Exception('load_logger: exception - ' . $e->getMessage());
+		}
 
-		$this->set_logger($logger);
+		try
+		{
+			$this->set_logger($logger);
+		}
+		catch(Exception $e)
+		{
+			throw new Exception('load_logger: exception - ' . $e->getMessage());
+		}
 
 		return true;
 	}
