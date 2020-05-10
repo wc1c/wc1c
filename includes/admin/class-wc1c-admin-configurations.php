@@ -92,7 +92,7 @@ class Wc1c_Admin_Configurations
 	 */
 	public function init_current_action()
 	{
-		$do_action = !empty($_GET['do_action']) ? sanitize_title($_GET['do_action']) : 'list';
+		$do_action = wc1c_get_var($_GET['do_action'], 'list');
 
 		if(in_array($do_action, $this->get_actions()))
 		{
@@ -164,7 +164,7 @@ class Wc1c_Admin_Configurations
 	 */
 	public function configurations_list()
 	{
-		include_once WC1C_PLUGIN_PATH . 'templates/configurations_list.php';
+		wc1c_get_template('configurations_list.php');
 	}
 
 	/**
@@ -172,7 +172,7 @@ class Wc1c_Admin_Configurations
 	 */
 	public function configurations_create()
 	{
-		include_once WC1C_PLUGIN_PATH . 'templates/configurations_create.php';
+		wc1c_get_template('configurations_create.php');
 	}
 
 	/**
@@ -180,6 +180,6 @@ class Wc1c_Admin_Configurations
 	 */
 	public function configurations_update()
 	{
-		include_once WC1C_PLUGIN_PATH . 'templates/configurations_update.php';
+		wc1c_get_template('configurations_update.php');
 	}
 }
