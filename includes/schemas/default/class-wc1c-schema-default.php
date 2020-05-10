@@ -731,9 +731,6 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	{
 		$this->logger()->info('file_import: start');
 
-		/**
-		 * Тип файла
-		 */
 		$type_file = $this->file_type_detect($file_path);
 
 		$this->logger()->info('file_import: type - ' . $type_file);
