@@ -302,3 +302,42 @@ function wc1c_locate_template($template_name, $template_path = '', $default_path
 	// Return what we found
 	return apply_filters('wc1c_locate_template', $template, $template_name, $template_path);
 }
+
+/**
+ * Переводит значение из килобайт, мегабат и гигабайт в байты
+ *
+ * @param $size
+ *
+ * @return float|int
+ */
+function wc1c_convert_size($size)
+{
+	if(empty($size))
+	{
+		return 0;
+	}
+
+	$type = $size{strlen($size) - 1};
+
+	if(!is_numeric($type))
+	{
+		$size = (int) $size;
+
+		switch($type)
+		{
+			case 'K':
+				$size = $size * 1024;
+				break;
+			case 'M':
+				$size = $size * 1024 * 1024;
+				break;
+			case 'G':
+				$size = $size * 1024 * 1024 * 1024;
+				break;
+		}
+
+		return $size;
+	}
+
+	return (int)$size;
+}
