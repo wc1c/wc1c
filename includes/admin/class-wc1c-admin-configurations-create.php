@@ -197,11 +197,17 @@ class Wc1c_Admin_Configurations_Create extends Wc1c_Admin_Abstract_Form
 			'css' => 'min-width: 350px;',
 		);
 
-		/**
-		 * Schemas
-		 */
+		try
+		{
+			$schemas = WC1C()->get_schemas();
+		}
+		catch(Exception $e)
+		{
+			return $fields;
+		}
+
 		$options = [];
-		foreach(WC1C()->get_schemas() as $schema_id => $schema_object)
+		foreach($schemas as $schema_id => $schema_object)
 		{
 			$options[$schema_id] = $schema_object->get_name();
 		}
