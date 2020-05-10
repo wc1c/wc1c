@@ -64,7 +64,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		 */
 		if(true === is_wc1c_api_request())
 		{
-			add_action('wc1c_api_default', array($this, 'api_handler'), 10);
+			add_action('wc1c_api_' . $this->get_id(), array($this, 'api_handler'), 10);
 		}
 
 		$this->logger()->debug('init: end', $this);
@@ -329,14 +329,16 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 */
 	private function api_check_auth_key()
 	{
-		if(!isset($_COOKIE['wc1c_default']))
+		$cookie_name = 'wc1c_' . $this->get_id();
+
+		if(!isset($_COOKIE[$cookie_name]))
 		{
 			return false;
 		}
 
 		$password = $this->get_options('user_password', '1234567890qwertyuiop');
 
-		if($_COOKIE['wc1c_default'] !== md5($password))
+		if($_COOKIE[$cookie_name] !== md5($password))
 		{
 			return false;
 		}
@@ -490,7 +492,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		}
 
 		echo "success\n";
-		echo "wc1c_default\n";
+		echo "wc1c_" . $this->get_id() . "\n";
 		echo md5($user_password);
 		exit;
 	}
