@@ -15,9 +15,24 @@ class Wc1c_Settings
 
 	/**
 	 * Wc1c_Settings constructor
+	 *
+	 * @param bool $autoload
+	 *
+	 * @throws Exception
 	 */
-	public function __construct()
+	public function __construct($autoload = true)
 	{
+		if($autoload)
+		{
+			try
+			{
+				$this->load();
+			}
+			catch(Exception $e)
+			{
+				throw new Exception('Wc1c_Settings constructor: load exception - ' . $e->getMessage());
+			}
+		}
 	}
 
 	/**
@@ -96,19 +111,6 @@ class Wc1c_Settings
 	public function get($key = '', $default = null)
 	{
 		$data = $this->get_data();
-
-		if(empty($data))
-		{
-			try
-			{
-				$this->load();
-				$data = $this->get_data();
-			}
-			catch(Exception $e)
-			{
-				throw new Exception('get: load exception - ' . $e->getMessage());
-			}
-		}
 
 		if($key !== '')
 		{
