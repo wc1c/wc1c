@@ -59,7 +59,7 @@ class Wc1c_Api
 			/**
 			 * Disable api
 			 */
-			if('yes' !== WC1C()->get_settings('enable_api'))
+			if('yes' !== WC1C()->settings()->get('api', 'yes'))
 			{
 				die('Api offline');
 			}
