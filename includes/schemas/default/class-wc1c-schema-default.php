@@ -56,7 +56,8 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		 */
 		if(true === is_wc1c_admin_request())
 		{
-			add_filter('wc1c_admin_configurations-update_form_load_fields', array($this, 'configuration_fields'), 10, 1);
+			add_filter('wc1c_admin_configurations-update_form_load_fields', array($this, 'configurations_fields_auth'), 10, 1);
+			add_filter('wc1c_admin_configurations-update_form_load_fields', array($this, 'configurations_fields_tech'), 10, 1);
 		}
 
 		/**
@@ -106,73 +107,19 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	}
 
 	/**
-	 * Configuration fields use in admin
+	 * Configuration fields: tech
 	 *
-	 * @param array $fields
+	 * @param $fields
 	 *
 	 * @return array
 	 */
-	public function configuration_fields($fields = [])
+	public function configurations_fields_tech($fields)
 	{
-		$fields['main'] = array
+		$fields['title_tech'] = array
 		(
-			'title' => __('Main', 'wc1c'),
+			'title' => __('Технические тонкости', 'wc1c-extension-schema-one'),
 			'type' => 'title',
-			'description' => __('Basic options. After the options change, must save it.', 'wc1c'),
-		);
-
-		$fields['user_login'] = array
-		(
-			'title' => __('Login', 'wc1c'),
-			'type' => 'text',
-			'description' => __('Enter username for connecting 1C.', 'wc1c'),
-			'default' => '',
-			'css' => 'min-width: 350px;',
-		);
-
-		$fields['user_password'] = array
-		(
-			'title' => __('Password', 'wc1c'),
-			'type' => 'text',
-			'description' => __('Enter password for connecting 1C.', 'wc1c'),
-			'default' => '',
-			'css' => 'min-width: 350px;',
-		);
-
-		$fields['post_file_max_size'] = array
-		(
-			'title' => __('Maximum request size', 'wc1c'),
-			'type' => 'text',
-			'description' => __('Enter the maximum request size.', 'wc1c'),
-			'default' => '',
-			'css' => 'min-width: 250px;',
-		);
-
-		$fields['convert_cp1251'] = array
-		(
-			'title' => __('Конвертировать в Windows-1251', 'wc1c'),
-			'type' => 'checkbox',
-			'label' => __('Если опция включена, плагин будет конвертировать все данные в кодировку Windows-1251. Для совместимости со старыми версиями 1С.', 'wc1c'),
-			'description' => '',
-			'default' => 'no'
-		);
-
-		$fields['file_zip'] = array
-		(
-			'title' => __('Support zip', 'wc1c'),
-			'type' => 'checkbox',
-			'label' => __('Select whether to enable data compression support or not.', 'wc1c'),
-			'description' => __('If something does not work, it is better to disable data compression.', 'wc1c'),
-			'default' => 'no'
-		);
-
-		$fields['delete_zip_files_after_import'] = array
-		(
-			'title' => __('Удаление zip файлов', 'wc1c'),
-			'type' => 'checkbox',
-			'label' => __('Если опция включена, будет происходить удаление принятых ZIP файлов сразу после распаковки, а так же при попытке распаковки.', 'wc1c'),
-			'description' => '',
-			'default' => 'no'
+			'description' => __('Смена поведения обработки данных для совместимости окружения и прочих систем.', 'wc1c-extension-schema-one'),
 		);
 
 		$fields['logger'] = array
@@ -193,6 +140,90 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 				'550' => __('ALERT', 'wc1c'),
 				'600' => __('EMERGENCY', 'wc1c')
 			)
+		);
+
+		$fields['skip_file_processing'] = array
+		(
+			'title' => __('Пропуск обработки файлов', 'wc1c-extension-schema-one'),
+			'type' => 'checkbox',
+			'label' => __('Отметьте чекбокс, если хотите включить данную возможность. По умолчанию выключена.', 'wc1c-extension-schema-one'),
+			'description' => __('Отключение фактической обработки файлов CommerceML. Файлы будут приняты, но вместо их обработки, будет пропуск с успешным завершением обработки.', 'wc1c-extension-schema-one'),
+			'default' => 'no'
+		);
+
+		$fields['convert_cp1251'] = array
+		(
+			'title' => __('Конвертация в Windows-1251', 'wc1c-extension-schema-one'),
+			'type' => 'checkbox',
+			'label' => __('Отметьте чекбокс, если хотите включить данную возможность. По умолчанию выключена.', 'wc1c-extension-schema-one'),
+			'description' => __('При включении настройки, данные из utf-8 будут конвертироваться в кодировку Windows-1251. Используйте для совместимости со старыми версиями 1С.', 'wc1c-extension-schema-one'),
+			'default' => 'no'
+		);
+
+		$fields['post_file_max_size'] = array
+		(
+			'title' => __('Максимальный размер запроса', 'wc1c-extension-schema-one'),
+			'type' => 'text',
+			'description' => __('Введите максимальный размер запроса. Можно лишь уменьшить значение.', 'wc1c-extension-schema-one'),
+			'default' => '',
+			'css' => 'min-width: 100px;',
+		);
+
+		$fields['file_zip'] = array
+		(
+			'title' => __('Поддержка сжатия данных', 'wc1c-extension-schema-one'),
+			'type' => 'checkbox',
+			'label' => __('Отметьте чекбокс, если хотите включить данную возможность. По умолчанию выключена.', 'wc1c-extension-schema-one'),
+			'description' => __('1С может передавать файлы в архивах для уменьшения количества HTTP запросов, сжатия данных.
+								При этом возможно возрастание нагрузки при распаковке архивов, а то и вовсе невозможность распаковки из-за ограничений сервера.', 'wc1c-extension-schema-one'),
+			'default' => 'no'
+		);
+
+		$fields['delete_files_after_import'] = array
+		(
+			'title' => __('Удаление файлов после обработки', 'wc1c-extension-schema-one'),
+			'type' => 'checkbox',
+			'label' => __('Отметьте чекбокс, если хотите включить данную возможность. По умолчанию выключена.', 'wc1c-extension-schema-one'),
+			'description' => __('Если удаление выключено, файлы обмена будут оставатся в директориях до следующего обмена. 
+			Иначе, все обработанные файлы будут удалятся сразу после безошибочной обработки.', 'wc1c-extension-schema-one'),
+			'default' => 'no'
+		);
+
+		return $fields;
+	}
+
+	/**
+	 * Configuration fields: auth
+	 *
+	 * @param $fields
+	 *
+	 * @return array
+	 */
+	public function configurations_fields_auth($fields)
+	{
+		$fields['title_auth'] = array
+		(
+			'title' => __('Авторизация запросов', 'wc1c-extension-schema-one'),
+			'type' => 'title',
+			'description' => __('Данные для авторизации запросов. По этим настройкам будет подключатся 1С.', 'wc1c-extension-schema-one'),
+		);
+
+		$fields['user_login'] = array
+		(
+			'title' => __('Логин для подключения', 'wc1c-extension-schema-one'),
+			'type' => 'text',
+			'description' => __('Введите имя пользователя для подключения из 1С. Должно быть такое же как при настройке в 1С.', 'wc1c-extension-schema-one'),
+			'default' => '',
+			'css' => 'min-width: 350px;',
+		);
+
+		$fields['user_password'] = array
+		(
+			'title' => __('Пароль для подключения', 'wc1c-extension-schema-one'),
+			'type' => 'text',
+			'description' => __('Введите пароль пользователя для подключения из 1С. Должен быть таким же как при настройке в 1С.', 'wc1c-extension-schema-one'),
+			'default' => '',
+			'css' => 'min-width: 350px;',
 		);
 
 		return $fields;
@@ -219,54 +250,15 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	}
 
 	/**
-	 * Переводит значение из килобайт, мегабат и гигабайт в байты
-	 *
-	 * @param $size
-	 *
-	 * @return float|int
-	 */
-	private function convert_size($size)
-	{
-		if(empty($size))
-		{
-			return 0;
-		}
-
-		$type = $size{strlen($size) - 1};
-
-		if(!is_numeric($type))
-		{
-			$size = (int) $size;
-
-			switch($type)
-			{
-				case 'K':
-					$size = $size * 1024;
-					break;
-				case 'M':
-					$size = $size * 1024 * 1024;
-					break;
-				case 'G':
-					$size = $size * 1024 * 1024 * 1024;
-					break;
-			}
-
-			return $size;
-		}
-
-		return (int)$size;
-	}
-
-	/**
 	 * Возвращает максимальный объем файла в байтах для загрузки
 	 *
 	 * @return float|int
 	 */
 	private function get_post_file_size_max()
 	{
-		$size = $this->convert_size(ini_get('post_max_size'));
+		$size = wc1c_convert_size(ini_get('post_max_size'));
 
-		$size_max_manual = $this->convert_size($this->get_options('post_file_max_size'));
+		$size_max_manual = wc1c_convert_size($this->get_options('post_file_max_size'));
 
 		if($size_max_manual)
 		{
@@ -524,7 +516,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			$data[0] = $this->get_options('file_zip') === 'yes' ?  "zip=yes" : "zip=no";
 		}
 
-		$manual_size = $this->convert_size($this->get_options('post_file_max_size'));
+		$manual_size = wc1c_convert_size($this->get_options('post_file_max_size'));
 		$post_max_size = $this->get_post_file_size_max();
 
 		$data[1] = "file_limit=" . $post_max_size;
@@ -547,28 +539,16 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 */
 	public function api_catalog_mode_file()
 	{
-		/**
-		 * Security
-		 */
 		if($this->api_check_auth_key() === false)
 		{
 			$this->logger()->info('api_catalog_mode_file api_check_auth_key: failure');
 			$this->api_response_by_type('failure', 'Авторизация не пройдена');
 		}
 
-		/**
-		 * Каталог для загрузки
-		 */
 		$schema_upload_dir = WC1C()->environment()->get('wc1c_current_schema_upload_directory') . '/catalog/';
 
-		/**
-		 * Директория не существует
-		 */
 		if(!is_dir($schema_upload_dir))
 		{
-			/**
-			 * Пробуем создать
-			 */
 			mkdir($schema_upload_dir, 0777, true);
 
 			if(!is_dir($schema_upload_dir))
@@ -700,9 +680,6 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 */
 	public function api_catalog_mode_import()
 	{
-		/**
-		 * Security
-		 */
 		if($this->api_check_auth_key() === false)
 		{
 			$this->logger()->error('api_catalog_mode_import api_auth_key: error');
