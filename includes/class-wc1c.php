@@ -972,7 +972,7 @@ final class Wc1c
 	 */
 	public function load_logger()
 	{
-		$directory = $this->environment()->get('upload_directory');
+		$directory = $this->environment()->get('upload_directory', false);
 
 		if(false === $directory)
 		{
