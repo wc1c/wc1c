@@ -817,13 +817,13 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			//todo: exception
+			throw new Exception('load_schemas: schema exception - ' . $e->getMessage());
 		}
 
 		/**
 		 * External schemas
 		 */
-		if('yes' === $this->settings()->get('extensions_schemas'))
+		if('yes' === $this->settings()->get('extensions_schemas', 'yes'))
 		{
 			$schemas = apply_filters('wc1c_schemas_loading', $schemas);
 		}
@@ -836,7 +836,7 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			//todo: exception
+			throw new Exception('load_schemas: exception - ' . $e->getMessage());
 		}
 	}
 
@@ -1116,13 +1116,13 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			//todo: exception
+			throw new Exception('load_tools: exception - ' . $e->getMessage());
 		}
 
 		/**
 		 * External tools loading is enable
 		 */
-		if('yes' === $this->settings()->get('extensions_tools'))
+		if('yes' === $this->settings()->get('extensions_tools', 'yes'))
 		{
 			$tools = apply_filters('wc1c_tools_loading', $tools);
 		}
@@ -1135,7 +1135,7 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			//todo: exception
+			throw new Exception('load_tools: exception - ' . $e->getMessage());
 		}
 	}
 
