@@ -273,7 +273,15 @@ final class Wc1c
 
 		if(false !== is_wc1c_api_request())
 		{
-			$this->load_api();
+			try
+			{
+				$this->load_api();
+			}
+			catch(Exception $e)
+			{
+				WC1C()->logger()->alert('init: exception - ' . $e->getMessage());
+				return false;
+			}
 		}
 
 		// hook
