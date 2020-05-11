@@ -1055,19 +1055,10 @@ final class Wc1c
 	 */
 	public function load_api()
 	{
-		/**
-		 * Default API class name
-		 */
 		$default_class_name = 'Wc1c_Api';
 
-		/**
-		 * Change class name with external code
-		 */
 		$wc1c_api_class_name = apply_filters('wc1c_api_loading_class_name', $default_class_name);
 
-		/**
-		 * New class not found? goto default
-		 */
 		if(!class_exists($wc1c_api_class_name))
 		{
 			$wc1c_api_class_name = $default_class_name;
