@@ -106,7 +106,6 @@ class Wc1c_Settings
 	 * @param null $default
 	 *
 	 * @return array|bool|mixed
-	 * @throws Exception
 	 */
 	public function get($key = '', $default = null)
 	{
