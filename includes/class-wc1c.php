@@ -304,16 +304,9 @@ final class Wc1c
 
 		$this->environment()->set('wc1c_upload_directory', $logger_path);
 
-		if($logger_level && $directory_name)
-		{
-			WC1C()->logger()->set_level($logger_level);
-			WC1C()->logger()->set_path($logger_path);
-			WC1C()->logger()->set_name($logger_name);
-		}
-		else
-		{
-			throw new Exception('reload_logger: error');
-		}
+		WC1C()->logger()->set_level($logger_level);
+		WC1C()->logger()->set_path($logger_path);
+		WC1C()->logger()->set_name($logger_name);
 
 		return true;
 	}
