@@ -797,7 +797,7 @@ final class Wc1c
 	/**
 	 * Schemas loading
 	 *
-	 * @return array - loaded schemas
+	 * @throws Exception
 	 */
 	public function load_schemas()
 	{
@@ -838,8 +838,6 @@ final class Wc1c
 		{
 			//todo: exception
 		}
-
-		return $this->get_schemas();
 	}
 
 	/**
@@ -971,8 +969,6 @@ final class Wc1c
 	 * Logger loading
 	 *
 	 * @throws Exception
-	 *
-	 * @return boolean
 	 */
 	public function load_logger()
 	{
@@ -1000,8 +996,6 @@ final class Wc1c
 		{
 			throw new Exception('load_logger: exception - ' . $e->getMessage());
 		}
-
-		return true;
 	}
 
 	/**
@@ -1104,8 +1098,6 @@ final class Wc1c
 	 * @param string $tool_id
 	 *
 	 * @throws Exception
-	 *
-	 * @return bool
 	 */
 	public function load_tools($tool_id = '')
 	{
@@ -1145,8 +1137,6 @@ final class Wc1c
 		{
 			//todo: exception
 		}
-
-		return true;
 	}
 
 	/**
