@@ -39,8 +39,8 @@ abstract class Wc1c_Abstract_Logger
      *
      * @var array
      */
-    public $levels = array
-    (
+    public $levels =
+    [
         100 => 'DEBUG',
         200 => 'INFO',
         250 => 'NOTICE',
@@ -49,7 +49,7 @@ abstract class Wc1c_Abstract_Logger
         500 => 'CRITICAL',
         550 => 'ALERT',
         600 => 'EMERGENCY',
-    );
+    ];
 
 	/**
 	 * Wc1c_Abstract_Logger constructor
