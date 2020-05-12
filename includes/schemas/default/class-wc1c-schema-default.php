@@ -30,6 +30,13 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	public $current_data = [];
 
 	/**
+	 * Main schema directory
+	 *
+	 * @var string
+	 */
+	private $upload_directory = '';
+
+	/**
 	 * Initialize
 	 *
 	 * @throws Exception
@@ -69,6 +76,22 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		}
 
 		$this->logger()->debug('init: end', $this);
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_upload_directory()
+	{
+		return $this->upload_directory;
+	}
+
+	/**
+	 * @param string $upload_directory
+	 */
+	public function set_upload_directory($upload_directory)
+	{
+		$this->upload_directory = $upload_directory;
 	}
 
 	/**
