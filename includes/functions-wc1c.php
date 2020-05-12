@@ -191,7 +191,6 @@ function wc1c_get_template($template_name, $args = [], $template_path = '', $def
 		return;
 	}
 
-	// Allow 3rd party plugin filter template file from their plugin.
 	$located = apply_filters('wc1c_get_template', $located, $template_name, $args, $template_path, $default_path);
 
 	do_action('wc1c_before_template_part', $template_name, $template_path, $located, $args);
