@@ -192,7 +192,7 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 	{
 		$fields['title_change_data'] = array
 		(
-			'title' => __('Data change by objects', 'wc1с'),
+			'title' => __('Data change by objects', 'wc1c'),
 			'type' => 'title',
 			'description' => __('Specifying the ability to work with changing data by object types (data types).', 'wc1c'),
 		);
@@ -238,7 +238,7 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 	{
 		$fields['technical'] = array
 		(
-			'title' => __('Technical parameters', 'wc1с'),
+			'title' => __('Technical parameters', 'wc1c'),
 			'type' => 'title',
 			'description' => __('Used by technical specialists. Can leave it at that.', 'wc1c'),
 		);
@@ -295,7 +295,7 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 	{
 		$fields['title_extensions'] = array
 		(
-			'title' => __('Extensions', 'wc1с'),
+			'title' => __('Extensions', 'wc1c'),
 			'type' => 'title',
 			'description' => __('Used by technical specialists. Can leave it at that.', 'wc1c'),
 		);
@@ -341,7 +341,7 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 	{
 		$fields['uninstall'] = array
 		(
-			'title' => __('Uninstall parameters', 'wc1с'),
+			'title' => __('Uninstall parameters', 'wc1c'),
 			'type' => 'title',
 			'description' => __('Used by technical specialists. Can leave it at that.', 'wc1c'),
 		);
