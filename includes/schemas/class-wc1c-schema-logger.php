@@ -69,7 +69,7 @@ class Wc1c_Schema_Logger extends Wc1c_Abstract_Logger
 		 */
 		if(!file_exists($this->get_path()))
 		{
-			mkdir($this->get_path()); // todo: move to change with settings
+			mkdir($this->get_path());
 		}
 
 		/**
