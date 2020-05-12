@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WC1C: integration of WooCommerce with 1C products "
 "(different configurations)\n"
 "POT-Creation-Date: 2020-05-12 15:27+0300\n"
-"PO-Revision-Date: 2020-05-12 15:33+0300\n"
+"PO-Revision-Date: 2020-05-12 15:35+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
 "Language: ru_RU\n"
@@ -285,7 +285,7 @@ msgstr "Язык WordPress"
 
 #: includes/admin/class-wc1c-admin-reports.php:268
 msgid "WordPress memory limit"
-msgstr ".Лимит памяти WordPress"
+msgstr "Лимит памяти WordPress"
 
 #: includes/admin/class-wc1c-admin-reports.php:303
 msgid "Server info"
