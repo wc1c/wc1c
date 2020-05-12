@@ -141,9 +141,9 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	{
 		$fields['title_tech'] = array
 		(
-			'title' => __('Технические тонкости', 'wc1c-extension-schema-one'),
+			'title' => __('Technical details', 'wc1c'),
 			'type' => 'title',
-			'description' => __('Смена поведения обработки данных для совместимости окружения и прочих систем.', 'wc1c-extension-schema-one'),
+			'description' => __('Changing data processing behavior for compatibility of the environment and other systems.', 'wc1c'),
 		);
 
 		$fields['logger'] = array
@@ -168,48 +168,46 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 		$fields['skip_file_processing'] = array
 		(
-			'title' => __('Пропуск обработки файлов', 'wc1c-extension-schema-one'),
+			'title' => __('Skip processing of files', 'wc1c'),
 			'type' => 'checkbox',
-			'label' => __('Отметьте чекбокс, если хотите включить данную возможность. По умолчанию выключена.', 'wc1c-extension-schema-one'),
-			'description' => __('Отключение фактической обработки файлов CommerceML. Файлы будут приняты, но вместо их обработки, будет пропуск с успешным завершением обработки.', 'wc1c-extension-schema-one'),
+			'label' => __('Check the checkbox if want to enable this feature. Disabled by default.', 'wc1c'),
+			'description' => __('Disabling the actual processing of CommerceML files. Files will be accepted, but instead of processing them, they will be skipped with successful completion of processing.', 'wc1c'),
 			'default' => 'no'
 		);
 
 		$fields['convert_cp1251'] = array
 		(
-			'title' => __('Конвертация в Windows-1251', 'wc1c-extension-schema-one'),
+			'title' => __('Converting to Windows-1251', 'wc1c'),
 			'type' => 'checkbox',
-			'label' => __('Отметьте чекбокс, если хотите включить данную возможность. По умолчанию выключена.', 'wc1c-extension-schema-one'),
-			'description' => __('При включении настройки, данные из utf-8 будут конвертироваться в кодировку Windows-1251. Используйте для совместимости со старыми версиями 1С.', 'wc1c-extension-schema-one'),
+			'label' => __('Check the checkbox if want to enable this feature. Disabled by default.', 'wc1c'),
+			'description' => __('Data from utf-8 will be converted to Windows-1251 encoding. Use this feature for compatibility with older versions of 1C.', 'wc1c'),
 			'default' => 'no'
 		);
 
 		$fields['post_file_max_size'] = array
 		(
-			'title' => __('Максимальный размер запроса', 'wc1c-extension-schema-one'),
+			'title' => __('Maximum request size', 'wc1c'),
 			'type' => 'text',
-			'description' => __('Введите максимальный размер запроса. Можно лишь уменьшить значение.', 'wc1c-extension-schema-one'),
+			'description' => __('Enter the maximum request size. You can only reduce the value.', 'wc1c'),
 			'default' => '',
 			'css' => 'min-width: 100px;',
 		);
 
 		$fields['file_zip'] = array
 		(
-			'title' => __('Поддержка сжатия данных', 'wc1c-extension-schema-one'),
+			'title' => __('Support for data compression', 'wc1c'),
 			'type' => 'checkbox',
-			'label' => __('Отметьте чекбокс, если хотите включить данную возможность. По умолчанию выключена.', 'wc1c-extension-schema-one'),
-			'description' => __('1С может передавать файлы в архивах для уменьшения количества HTTP запросов, сжатия данных.
-								При этом возможно возрастание нагрузки при распаковке архивов, а то и вовсе невозможность распаковки из-за ограничений сервера.', 'wc1c-extension-schema-one'),
+			'label' => __('Check the checkbox if want to enable this feature. Disabled by default.', 'wc1c'),
+			'description' => __('1C can transfer files in archives to reduce the number of HTTP requests and compress data. In this case, the load may increase when unpacking archives, or even it may be impossible to unpack due to server restrictions.', 'wc1c'),
 			'default' => 'no'
 		);
 
 		$fields['delete_files_after_import'] = array
 		(
-			'title' => __('Удаление файлов после обработки', 'wc1c-extension-schema-one'),
+			'title' => __('Deleting files after processing', 'wc1c'),
 			'type' => 'checkbox',
-			'label' => __('Отметьте чекбокс, если хотите включить данную возможность. По умолчанию выключена.', 'wc1c-extension-schema-one'),
-			'description' => __('Если удаление выключено, файлы обмена будут оставатся в директориях до следующего обмена. 
-			Иначе, все обработанные файлы будут удалятся сразу после безошибочной обработки.', 'wc1c-extension-schema-one'),
+			'label' => __('Check the checkbox if want to enable this feature. Disabled by default.', 'wc1c'),
+			'description' => __('If deletion is disabled, the exchange files will remain in the directories until the next exchange. Otherwise, all processed files will be deleted immediately after error-free processing.', 'wc1c'),
 			'default' => 'no'
 		);
 
@@ -227,25 +225,25 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	{
 		$fields['title_auth'] = array
 		(
-			'title' => __('Авторизация запросов', 'wc1c-extension-schema-one'),
+			'title' => __('Requests authorization', 'wc1c'),
 			'type' => 'title',
-			'description' => __('Данные для авторизации запросов. По этим настройкам будет подключатся 1С.', 'wc1c-extension-schema-one'),
+			'description' => __('Data for authorization of requests. These settings will connect 1C.', 'wc1c'),
 		);
 
 		$fields['user_login'] = array
 		(
-			'title' => __('Логин для подключения', 'wc1c-extension-schema-one'),
+			'title' => __('Login to connect', 'wc1c'),
 			'type' => 'text',
-			'description' => __('Введите имя пользователя для подключения из 1С. Должно быть такое же как при настройке в 1С.', 'wc1c-extension-schema-one'),
+			'description' => __('Enter the username to connect from 1C. It should be the same as when setting up in 1C.', 'wc1c'),
 			'default' => '',
 			'css' => 'min-width: 350px;',
 		);
 
 		$fields['user_password'] = array
 		(
-			'title' => __('Пароль для подключения', 'wc1c-extension-schema-one'),
+			'title' => __('Password to connect', 'wc1c'),
 			'type' => 'text',
-			'description' => __('Введите пароль пользователя для подключения из 1С. Должен быть таким же как при настройке в 1С.', 'wc1c-extension-schema-one'),
+			'description' => __('Enter the users password to connect from 1C. It must be the same as when setting up in 1C.', 'wc1c'),
 			'default' => '',
 			'css' => 'min-width: 350px;',
 		);
