@@ -102,14 +102,7 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 		 */
 		if(empty($post_data) || !wp_verify_nonce($post_data['_wc1c-admin-nonce'], 'wc1c-admin-settings-save'))
 		{
-			/**
-			 * Show error in admin header
-			 */
 			WC1C_Admin()->add_message('error', __('Save error. Please retry.', 'wc1c'));
-
-			/**
-			 * Break
-			 */
 			return false;
 		}
 
@@ -138,11 +131,20 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 				WC1C_Admin()->add_message('error', $e->getMessage());
 			}
 		}
+		
+		$saved = false;
 
 		/**
 		 * Saving
 		 */
-		$saved = WC1C()->settings()->save($this->get_saved_data()); //todo
+		try
+		{
+			$saved = WC1C()->settings()->save($this->get_saved_data());
+		}
+		catch(Exception $e)
+		{
+			WC1C_Admin()->add_message('error', $e->getMessage());
+		}
 
 		/**
 		 * Show admin messages
