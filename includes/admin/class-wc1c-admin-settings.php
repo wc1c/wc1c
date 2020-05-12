@@ -39,7 +39,7 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 		 */
 		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_technical'), 10);
 		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_extensions'), 10);
-		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_enabled_data'), 20);
+		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_enable_data'), 20);
 		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_uninstall'), 40);
 
 		/**
@@ -188,39 +188,57 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 	 *
 	 * @return array
 	 */
-	public function init_fields_enabled_data($fields)
+	public function init_fields_enable_data($fields)
 	{
-		$fields['title_change_data'] = array
+		$fields['title_enable_data'] = array
 		(
-			'title' => __('Data change by objects', 'wc1c'),
+			'title' => __('Enable data by objects', 'wc1c'),
 			'type' => 'title',
-			'description' => __('Specifying the ability to work with changing data by object types (data types).', 'wc1c'),
+			'description' => __('Specifying the ability to work with data by object types (data types).', 'wc1c'),
 		);
 
-		$fields['change_data_products'] = array
+		$fields['enable_data_products'] = array
 		(
-			'title' => __('Enable changing products', 'wc1c'),
+			'title' => __('Products', 'wc1c'),
 			'type' => 'checkbox',
-			'label' => __('Enabling and disabling capabilities of the products. If the checkbox is not checked, it means that all mechanisms for working with products are disabled.', 'wc1c'),
-			'description' => __('This setting is used as a global flag indicating the ability to work with products (delete, change, add).', 'wc1c'),
+			'label' => __('Enable', 'wc1c'),
+			'description' => __('Ability to work with products (delete, change, add).', 'wc1c'),
+			'default' => 'yes'
+		);
+
+		$fields['enable_data_category'] = array
+		(
+			'title' => __('Categories', 'wc1c'),
+			'type' => 'checkbox',
+			'label' => __('Enable', 'wc1c'),
+			'description' => __('Ability to work with categories (delete, change, add).', 'wc1c'),
 			'default' => 'no'
 		);
 
-		$fields['change_data_orders'] = array
+		$fields['enable_data_attributes'] = array
 		(
-			'title' => __('Enable changing orders', 'wc1c'),
+			'title' => __('Attributes', 'wc1c'),
 			'type' => 'checkbox',
-			'label' => __('Enabling and disabling of features of work with orders. If the checkbox is not checked, it means that all mechanisms for working with orders are disabled.', 'wc1c'),
-			'description' => __('This setting is used as a global flag indicating that you can work with product orders (delete, change, add).', 'wc1c'),
+			'label' => __('Enable', 'wc1c'),
+			'description' => __('Ability to work with attributes (delete, change, add).', 'wc1c'),
 			'default' => 'no'
 		);
 
-		$fields['change_data_images'] = array
+		$fields['enable_data_orders'] = array
 		(
-			'title' => __('Enable changing images', 'wc1c'),
+			'title' => __('Orders', 'wc1c'),
 			'type' => 'checkbox',
-			'label' => __('Enabling and disabling image processing capabilities. If the checkbox is not checked, it means that all mechanisms for working with images are disabled.', 'wc1c'),
-			'description' => __('This setting is used as a global flag indicating work with product images (delete, change, add).', 'wc1c'),
+			'label' => __('Enable', 'wc1c'),
+			'description' => __('Ability to work with orders (delete, change, add).', 'wc1c'),
+			'default' => 'no'
+		);
+
+		$fields['enable_data_images'] = array
+		(
+			'title' => __('Images', 'wc1c'),
+			'type' => 'checkbox',
+			'label' => __('Enable', 'wc1c'),
+			'description' => __('Ability to work with images (delete, change, add).', 'wc1c'),
 			'default' => 'no'
 		);
 
