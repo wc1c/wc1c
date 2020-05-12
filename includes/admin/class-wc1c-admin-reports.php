@@ -481,6 +481,54 @@ class Wc1c_Admin_Reports
 			'data' => WC1C()->environment()->get('wc1c_version')
 		);
 
+		/**
+		 * Extensions count
+		 */
+		try
+		{
+			$extensions = WC1C()->get_extensions();
+			$env_array['wc1c_extensions_count'] = array
+			(
+				'title' => __('Count extensions', 'wc1c'),
+				'description' => '',
+				'data' => sizeof($extensions)
+			);
+		}
+		catch(Exception $e)
+		{}
+
+		/**
+		 * Schemas count
+		 */
+		try
+		{
+			$schemas = WC1C()->get_schemas();
+			$env_array['wc1c_schemas_count'] = array
+			(
+				'title' => __('Count schemas', 'wc1c'),
+				'description' => '',
+				'data' => sizeof($schemas)
+			);
+		}
+		catch(Exception $e)
+		{}
+
+		/**
+		 * Tools count
+		 */
+		try
+		{
+			$tools = WC1C()->get_tools();
+			$env_array['wc1c_tools_count'] = array
+			(
+				'title' => __('Count tools', 'wc1c'),
+				'description' => '',
+				'data' => sizeof($tools)
+			);
+		}
+		catch(Exception $e)
+		{}
+
 		$this->set_wc1c_data($env_array);
 
 		return $this->get_wc1c_data();
