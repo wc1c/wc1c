@@ -129,7 +129,7 @@ class Wc1c_Admin_Reports
 
 		$args = ['title' => __('WordPress environment', 'wc1c'), 'data' => $wp_data];
 
-		wc1c_get_template('reports_item.php', $args);
+		wc1c_get_template('reports/item.php', $args);
 	}
 
 	/**
@@ -143,7 +143,7 @@ class Wc1c_Admin_Reports
 
 		$args = ['title' => __('WC1C environment', 'wc1c'), 'data' => $wc1c_data];
 
-		wc1c_get_template('reports_item.php', $args);
+		wc1c_get_template('reports/item.php', $args);
 	}
 
 	/**
@@ -157,7 +157,7 @@ class Wc1c_Admin_Reports
 
 		$args = ['title' => __('WooCommerce environment', 'wc1c'), 'data' => $wp_data];
 
-		wc1c_get_template('reports_item.php', $args);
+		wc1c_get_template('reports/item.php', $args);
 	}
 
 	/**
@@ -171,7 +171,7 @@ class Wc1c_Admin_Reports
 
 		$args = ['title' => __('Server environment', 'wc1c'), 'data' => $server_data];
 
-		wc1c_get_template('reports_item.php', $args);
+		wc1c_get_template('reports/item.php', $args);
 	}
 
 	/**

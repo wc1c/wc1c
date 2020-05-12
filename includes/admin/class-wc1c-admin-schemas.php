@@ -46,11 +46,11 @@ class Wc1c_Admin_Schemas
 
 		if(empty($schemas))
 		{
-			wc1c_get_template('schemas_404.php');
+			wc1c_get_template('schemas/404.php');
 			return;
 		}
 
-		wc1c_get_template('schemas_header.php');
+		wc1c_get_template('schemas/header.php');
 
 		foreach($schemas as $schema_id => $schema_object)
 		{
@@ -60,7 +60,7 @@ class Wc1c_Admin_Schemas
 					'object' => $schema_object
 				];
 
-			wc1c_get_template('schemas_item.php', $args);
+			wc1c_get_template('schemas/item.php', $args);
 		}
 	}
 }

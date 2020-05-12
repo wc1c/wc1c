@@ -159,7 +159,7 @@ class Wc1c_Admin_Configurations
 	 */
 	public function configurations_list()
 	{
-		wc1c_get_template('configurations_list.php');
+		wc1c_get_template('configurations/list.php');
 	}
 
 	/**
@@ -167,7 +167,7 @@ class Wc1c_Admin_Configurations
 	 */
 	public function configurations_create()
 	{
-		wc1c_get_template('configurations_create.php');
+		wc1c_get_template('configurations/create.php');
 	}
 
 	/**
@@ -175,6 +175,6 @@ class Wc1c_Admin_Configurations
 	 */
 	public function configurations_update()
 	{
-		wc1c_get_template('configurations_update.php');
+		wc1c_get_template('configurations/update.php');
 	}
 }
