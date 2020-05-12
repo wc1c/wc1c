@@ -17,7 +17,7 @@
             <?php echo $args['object']->get_description(); ?>
         </p>
     </div>
-    <div class="card-footer">
+    <div class="card-footer p-2">
         <?php _e('Author:', 'wc1c'); ?> <?php echo $args['object']->get_author(); ?>
     </div>
 </div>
