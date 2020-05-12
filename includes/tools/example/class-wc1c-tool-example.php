@@ -24,5 +24,14 @@ class Wc1c_Tool_Example extends Wc1c_Abstract_Tool
 	 */
 	public function init()
 	{
+		add_action('wc1c_admin_tools_single_show', [$this, 'show']);
+	}
+
+	/**
+	 * Show on page
+	 */
+	public function show()
+	{
+		echo 'Example content';
 	}
 }
