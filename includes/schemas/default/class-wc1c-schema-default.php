@@ -363,7 +363,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 		$this->logger()->debug('api_handler $_SERVER', $_SERVER);
 
-		if(wc1c_get_var($_GET['get_param'], '') !== '' || (wc1c_get_var($_GET['get_param?type'], '') !== ''))
+		if((isset($_GET['get_param']) && $_GET['get_param'] != '') || (isset($_GET['get_param?type']) && $_GET['get_param?type'] != ''))
 		{
 			$output = [];
 			if(isset($_GET['get_param']))
@@ -399,8 +399,11 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		/**
 		 * Catalog
 		 */
-		if($type == 'catalog' && $mode != '')
+		if($type === 'catalog' && $mode !== '')
 		{
+			$this->logger()->info('api_handler: $type=' . $type);
+			$this->logger()->info('api_handler: $mode=' . $mode);
+
 			switch ($mode)
 			{
 				case 'checkauth':
@@ -472,20 +475,19 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			$user_password = $_SERVER['PHP_AUTH_PW'];
 		}
 
-		if($this->get_options('user_login', '') !== '')
+		if($user_login !== $this->get_options('user_login', ''))
 		{
-			if($this->get_options('user_login', '') !== '' && $user_login != $this->get_options('user_login', ''))
-			{
-				$this->api_response_by_type('failure', __('Not a valid username', 'wc1c'));
-			}
-
-			if($this->get_options('user_password', '') !== '' && $user_password !== $this->get_options('user_password', ''))
-			{
-				$this->api_response_by_type('failure', __('Not a valid user password', 'wc1c'));
-			}
+			$this->logger()->notice(__('Not a valid username', 'wc1c'));
+			$this->api_response_by_type('failure', __('Not a valid username', 'wc1c'));
 		}
 
-		if($user_password == '')
+		if($user_password !== $this->get_options('user_password', ''))
+		{
+			$this->logger()->notice(__('Not a valid user password', 'wc1c'));
+			$this->api_response_by_type('failure', __('Not a valid user password', 'wc1c'));
+		}
+
+		if($user_password === '')
 		{
 			$user_password = '1234567890qwertyuiop';
 		}
@@ -493,6 +495,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		echo "success\n";
 		echo "wc1c_" . $this->get_id() . "\n";
 		echo md5($user_password);
+		exit;
 	}
 
 	/**
