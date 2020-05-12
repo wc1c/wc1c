@@ -303,39 +303,25 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 */
 	private function api_response_by_type($type = 'failure', $description = '')
 	{
-		/**
-		 * Если нужно конвертировать в Windows-1251 для некоторых версий 1С
-		 */
-		if($this->get_options('convert_cp1251') === 'yes' && $description !== '')
+		if($this->get_options('convert_cp1251', 'no') === 'yes' && $description !== '')
 		{
 			$description = mb_convert_encoding($description, 'cp1251', 'utf-8');
 			header('Content-Type: text/html; charset=Windows-1251');
 		}
 
-		/**
-		 * Success
-		 */
 		if($type == 'success')
 		{
 			echo "success\n";
 		}
-		/**
-		 * Failure
-		 */
 		else
 		{
 			echo "failure\n";
 		}
 
-		/**
-		 * Description show
-		 */
 		if($description != '')
 		{
 			echo $description;
 		}
-
-		exit;
 	}
 
 	/**
@@ -806,6 +792,8 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 *
 	 * @param $xml
 	 *
+	 * @throws Exception
+	 *
 	 * @return bool
 	 */
 	private function check_cml($xml)
@@ -815,7 +803,8 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			$this->current_data['xml_version_schema'] = (string)$xml['ВерсияСхемы'];
 			return true;
 		}
-		return false;
+
+		throw new Exception('check_cml: schema is not valid');
 	}
 
 	/**
