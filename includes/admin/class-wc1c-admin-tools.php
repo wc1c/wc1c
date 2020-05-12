@@ -42,9 +42,11 @@ class Wc1c_Admin_Tools
 	 */
 	public function output()
 	{
-		$tools = WC1C()->get_tools();
-
-		if(empty($tools))
+		try
+		{
+			$tools = WC1C()->get_tools();
+		}
+		catch(Exception $e)
 		{
 			wc1c_get_template('tools/404.php');
 			return;
