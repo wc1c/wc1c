@@ -64,7 +64,7 @@ class Wc1c_Admin_Tools
 					'object' => $tools[$tool_id]
 				];
 
-			wc1c_get_template('tools/item.php', $args);
+			wc1c_get_template('tools/single.php', $args);
 		}
 		else
 		{
