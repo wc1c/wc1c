@@ -53,7 +53,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		 */
 		if(false === $this->load_logger())
 		{
-			$this->logger()->critical('init: load_logger');
+			WC1C()->logger()->critical('init: load_logger');
 			return;
 		}
 
