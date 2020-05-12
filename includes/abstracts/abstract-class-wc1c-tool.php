@@ -37,11 +37,6 @@ abstract class Wc1c_Abstract_Tool
 	private $description = '';
 
 	/**
-	 * @var string
-	 */
-	private $author = 'WC1C team';
-
-	/**
 	 * Set tool id
 	 *
 	 * @param $id
@@ -96,22 +91,6 @@ abstract class Wc1c_Abstract_Tool
 	public function set_description($description)
 	{
 		$this->description = $description;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function get_author()
-	{
-		return $this->author;
-	}
-
-	/**
-	 * @param string $author
-	 */
-	public function set_author($author)
-	{
-		$this->author = $author;
 	}
 	
 	/**
