@@ -105,7 +105,7 @@ function is_wc1c_api_request()
  */
 function is_wc1c_admin_request()
 {
-	if(is_admin() !== false && isset($_GET['page']) && $_GET['page'] === 'wc1c')
+	if(is_admin() !== false && wc1c_get_var($_GET['page'], '') === 'wc1c')
 	{
 		return true;
 	}
