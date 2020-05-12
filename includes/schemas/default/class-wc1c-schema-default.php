@@ -461,7 +461,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			else
 			{
 				$this->logger()->notice('Проверьте наличие записи в файле .htaccess в корне файла после RewriteEngine On:\nRewriteCond %{HTTP:Authorization} ^(.*)\nRewriteRule ^(.*) - [E=HTTP_AUTHORIZATION:%1]');
-				$this->api_response_by_type('failure', 'Не указан пользователь. Проверьте настройки сервера.');
+				$this->api_response_by_type('failure', __('Not specified the user. Check the server settings.', 'wc1c'));
 			}
 		}
 		else
