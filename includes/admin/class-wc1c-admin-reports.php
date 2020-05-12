@@ -286,8 +286,6 @@ class Wc1c_Admin_Reports
 	 */
 	public function load_server_data()
 	{
-		global $wpdb;
-
 		/**
 		 * Final
 		 *
@@ -324,7 +322,7 @@ class Wc1c_Admin_Reports
 		(
 			'title' => __('Database version', 'wc1c'),
 			'description' => '',
-			'data' => (!empty($wpdb->is_mysql) ? $wpdb->db_version() : '')
+			'data' => (!empty(WC1C_Db()->is_mysql) ? WC1C_Db()->db_version() : '')
 		);
 
 		/**
@@ -480,7 +478,7 @@ class Wc1c_Admin_Reports
 		(
 			'title' => __('WC1C version', 'wc1c'),
 			'description' => '',
-			'data' => WC1C_VERSION
+			'data' => WC1C()->environment()->get('wc1c_version')
 		);
 
 		$this->set_wc1c_data($env_array);
