@@ -482,6 +482,16 @@ class Wc1c_Admin_Reports
 		);
 
 		/**
+		 * WC1C upload directory
+		 */
+		$env_array['wc1c_upload_directory'] = array
+		(
+			'title' => __('Upload directory', 'wc1c'),
+			'description' => '',
+			'data' => WC1C()->environment()->get('wc1c_upload_directory')
+		);
+
+		/**
 		 * Extensions count
 		 */
 		try
