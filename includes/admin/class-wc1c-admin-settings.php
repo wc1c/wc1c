@@ -178,7 +178,9 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 			);
 		}
 
-		$this->set_saved_data(apply_filters('wc1c_admin_' . $this->get_id() . '_form_load_saved_data', $saved_data));
+		$saved_data = apply_filters('wc1c_admin_' . $this->get_id() . '_form_load_saved_data', $saved_data);
+
+		$this->set_saved_data($saved_data);
 	}
 
 	/**
