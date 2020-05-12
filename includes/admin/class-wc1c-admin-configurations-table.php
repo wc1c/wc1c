@@ -59,19 +59,19 @@ class Wc1c_Admin_Configurations_Table extends Wc1c_Admin_Abstract_Table
 				return $item['schema'];
 			case 'status':
 
-				$status_return = 'Неизвестный';
+				$status_return = __('Error', 'wc1c');
 
 				if($item['status'] == 'draft')
 				{
-					$status_return = '<span class="draft">Черновик</span>';
+					$status_return = '<span class="draft">' . __('Draft', 'wc1c') . '</span>';
 				}
 				if($item['status'] == 'active')
 				{
-					$status_return = '<span class="active">Работает</span>';
+					$status_return = '<span class="active">' . __('Active', 'wc1c') . '</span>';
 				}
 				if($item['status'] == 'inactive')
 				{
-					$status_return = '<span class="inactive">Остановлена</span>';
+					$status_return = '<span class="inactive">' . __('Inactive', 'wc1c') . '</span>';
 				}
 
 				return $status_return;
