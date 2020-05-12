@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WC1C: integration of WooCommerce with 1C products "
 "(different configurations)\n"
-"POT-Creation-Date: 2020-05-12 15:27+0300\n"
-"PO-Revision-Date: 2020-05-12 15:35+0300\n"
+"POT-Creation-Date: 2020-05-12 16:49+0300\n"
+"PO-Revision-Date: 2020-05-12 16:53+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
 "Language: ru_RU\n"
@@ -382,112 +382,93 @@ msgstr ""
 "настройки."
 
 #: includes/admin/class-wc1c-admin-settings.php:195
-msgid "Data change by objects"
-msgstr "Изменение данных по объектам"
+msgid "Enable data by objects"
+msgstr "Работа с данными объектами"
 
 #: includes/admin/class-wc1c-admin-settings.php:197
-msgid ""
-"Specifying the ability to work with changing data by object types (data "
-"types)."
+msgid "Specifying the ability to work with data by object types (data types)."
 msgstr ""
-"Определение способности работать с изменяющимися данными по типам объектов "
-"(типам данных)."
+"Указание возможности работы с данными по типам объектов (типам данных)."
 
 #: includes/admin/class-wc1c-admin-settings.php:202
-msgid "Enable changing products"
-msgstr "Изменения продуктов"
+msgid "Products"
+msgstr "Продукты"
 
 #: includes/admin/class-wc1c-admin-settings.php:204
-msgid ""
-"Enabling and disabling capabilities of the products. If the checkbox is not "
-"checked, it means that all mechanisms for working with products are disabled."
-msgstr ""
-"Включение и отключение изменения продуктов. Если флажок не отмечен, это "
-"означает, что все механизмы работы с продуктами отключены."
-
-#: includes/admin/class-wc1c-admin-settings.php:205
-msgid ""
-"This setting is used as a global flag indicating the ability to work with "
-"products (delete, change, add)."
-msgstr ""
-"Данная настройка используется в качестве глобального флага, указывающего на "
-"возможность работы с продуктами (удалять, изменять, добавлять)."
-
-#: includes/admin/class-wc1c-admin-settings.php:211
-msgid "Enable changing orders"
-msgstr "Изменение заказов"
-
 #: includes/admin/class-wc1c-admin-settings.php:213
-msgid ""
-"Enabling and disabling of features of work with orders. If the checkbox is "
-"not checked, it means that all mechanisms for working with orders are "
-"disabled."
-msgstr ""
-"Включение и отключение функций работы с заказами. Если флажок не установлен, "
-"это означает, что все механизмы работы с ордерами отключены."
-
-#: includes/admin/class-wc1c-admin-settings.php:214
-msgid ""
-"This setting is used as a global flag indicating that you can work with "
-"product orders (delete, change, add)."
-msgstr ""
-"Этот параметр используется в качестве глобального флага, указывающего, что "
-"вы можете работать с заказами на продукцию (удалять, изменять, добавлять)."
-
-#: includes/admin/class-wc1c-admin-settings.php:220
-msgid "Enable changing images"
-msgstr "Изменение изображений"
-
 #: includes/admin/class-wc1c-admin-settings.php:222
-msgid ""
-"Enabling and disabling image processing capabilities. If the checkbox is not "
-"checked, it means that all mechanisms for working with images are disabled."
-msgstr ""
-"Включение и отключение возможностей обработки изображений. Если флажок не "
-"установлен, это означает, что все механизмы работы с изображениями отключены."
-
-#: includes/admin/class-wc1c-admin-settings.php:223
-msgid ""
-"This setting is used as a global flag indicating work with product images "
-"(delete, change, add)."
-msgstr ""
-"Эта настройка используется в качестве глобального флага, указывающего на "
-"работу с изображениями продукта (удалить, изменить, добавить)."
-
-#: includes/admin/class-wc1c-admin-settings.php:241
-msgid "Technical parameters"
-msgstr "Технические параметры"
-
-#: includes/admin/class-wc1c-admin-settings.php:243
-#: includes/admin/class-wc1c-admin-settings.php:300
-#: includes/admin/class-wc1c-admin-settings.php:346
-msgid "Used by technical specialists. Can leave it at that."
-msgstr "Используется техническими специалистами. Можете оставить все как есть."
-
-#: includes/admin/class-wc1c-admin-settings.php:248
-msgid "API"
-msgstr "АПИ"
-
-#: includes/admin/class-wc1c-admin-settings.php:250
-#: includes/admin/class-wc1c-admin-settings.php:307
-#: includes/admin/class-wc1c-admin-settings.php:316
+#: includes/admin/class-wc1c-admin-settings.php:231
+#: includes/admin/class-wc1c-admin-settings.php:240
+#: includes/admin/class-wc1c-admin-settings.php:268
 #: includes/admin/class-wc1c-admin-settings.php:325
+#: includes/admin/class-wc1c-admin-settings.php:334
+#: includes/admin/class-wc1c-admin-settings.php:343
 msgid "Enable"
 msgstr "Включить"
 
-#: includes/admin/class-wc1c-admin-settings.php:251
+#: includes/admin/class-wc1c-admin-settings.php:205
+msgid "Ability to work with products (delete, change, add)."
+msgstr "Возможность работы с продуктами (удаление, изменение, добавление)."
+
+#: includes/admin/class-wc1c-admin-settings.php:211
+msgid "Categories"
+msgstr "Категории"
+
+#: includes/admin/class-wc1c-admin-settings.php:214
+msgid "Ability to work with categories (delete, change, add)."
+msgstr "Возможность работы с категориями (удаление, изменение, добавление)."
+
+#: includes/admin/class-wc1c-admin-settings.php:220
+msgid "Attributes"
+msgstr "Атрибуты"
+
+#: includes/admin/class-wc1c-admin-settings.php:223
+msgid "Ability to work with attributes (delete, change, add)."
+msgstr "Возможность работы с атрибутами (удаление, изменение, добавление)."
+
+#: includes/admin/class-wc1c-admin-settings.php:229
+msgid "Orders"
+msgstr "Заказы"
+
+#: includes/admin/class-wc1c-admin-settings.php:232
+msgid "Ability to work with orders (delete, change, add)."
+msgstr "Возможность работы с заказами  (удаление, изменение, добавление)."
+
+#: includes/admin/class-wc1c-admin-settings.php:238
+msgid "Images"
+msgstr "Изображение"
+
+#: includes/admin/class-wc1c-admin-settings.php:241
+msgid "Ability to work with images (delete, change, add)."
+msgstr "Возможность работы с изображениями (удаление, изменение, добавление)."
+
+#: includes/admin/class-wc1c-admin-settings.php:259
+msgid "Technical parameters"
+msgstr "Технические параметры"
+
+#: includes/admin/class-wc1c-admin-settings.php:261
+#: includes/admin/class-wc1c-admin-settings.php:318
+#: includes/admin/class-wc1c-admin-settings.php:364
+msgid "Used by technical specialists. Can leave it at that."
+msgstr "Используется техническими специалистами. Можете оставить все как есть."
+
+#: includes/admin/class-wc1c-admin-settings.php:266
+msgid "API"
+msgstr "АПИ"
+
+#: includes/admin/class-wc1c-admin-settings.php:269
 msgid ""
 "This API uses exchange schemas to receive requests from 1C and send data "
 "there."
 msgstr ""
 "Этот API использует схемы для приема запросов от 1С и отправки туда данных."
 
-#: includes/admin/class-wc1c-admin-settings.php:257
+#: includes/admin/class-wc1c-admin-settings.php:275
 #: includes/schemas/default/class-wc1c-schema-default.php:127
 msgid "Logging level"
 msgstr "Уровень логирования"
 
-#: includes/admin/class-wc1c-admin-settings.php:259
+#: includes/admin/class-wc1c-admin-settings.php:277
 #: includes/schemas/default/class-wc1c-schema-default.php:129
 msgid ""
 "You can enable logging, specify the level of error that you want to benefit "
@@ -500,71 +481,71 @@ msgstr ""
 "вручную, нажав на кнопку. Все конфиденциальные данные в отчете удаляются. По "
 "умолчанию частота ошибок не должна быть меньше, чем ошибка."
 
-#: includes/admin/class-wc1c-admin-settings.php:263
+#: includes/admin/class-wc1c-admin-settings.php:281
 #: includes/schemas/default/class-wc1c-schema-default.php:133
 msgid "Off"
 msgstr "Выключен"
 
-#: includes/admin/class-wc1c-admin-settings.php:264
+#: includes/admin/class-wc1c-admin-settings.php:282
 #: includes/schemas/default/class-wc1c-schema-default.php:134
 msgid "DEBUG"
 msgstr "Отладка"
 
-#: includes/admin/class-wc1c-admin-settings.php:265
+#: includes/admin/class-wc1c-admin-settings.php:283
 #: includes/schemas/default/class-wc1c-schema-default.php:135
 msgid "INFO"
 msgstr "Информация"
 
-#: includes/admin/class-wc1c-admin-settings.php:266
+#: includes/admin/class-wc1c-admin-settings.php:284
 #: includes/schemas/default/class-wc1c-schema-default.php:136
 msgid "NOTICE"
 msgstr "Уведомления"
 
-#: includes/admin/class-wc1c-admin-settings.php:267
+#: includes/admin/class-wc1c-admin-settings.php:285
 #: includes/schemas/default/class-wc1c-schema-default.php:137
 msgid "WARNING"
 msgstr "Предупреждения"
 
-#: includes/admin/class-wc1c-admin-settings.php:268
+#: includes/admin/class-wc1c-admin-settings.php:286
 #: includes/schemas/default/class-wc1c-schema-default.php:138
 msgid "ERROR"
 msgstr "Ошибки"
 
-#: includes/admin/class-wc1c-admin-settings.php:269
+#: includes/admin/class-wc1c-admin-settings.php:287
 #: includes/schemas/default/class-wc1c-schema-default.php:139
 msgid "CRITICAL"
 msgstr "Критичные ошибки"
 
-#: includes/admin/class-wc1c-admin-settings.php:270
+#: includes/admin/class-wc1c-admin-settings.php:288
 #: includes/schemas/default/class-wc1c-schema-default.php:140
 msgid "ALERT"
 msgstr "Тревога"
 
-#: includes/admin/class-wc1c-admin-settings.php:271
+#: includes/admin/class-wc1c-admin-settings.php:289
 #: includes/schemas/default/class-wc1c-schema-default.php:141
 msgid "EMERGENCY"
 msgstr "Чрезвычайная ситуация"
 
-#: includes/admin/class-wc1c-admin-settings.php:277
+#: includes/admin/class-wc1c-admin-settings.php:295
 msgid "Name of upload directory"
 msgstr "Имя каталога загрузки"
 
-#: includes/admin/class-wc1c-admin-settings.php:279
+#: includes/admin/class-wc1c-admin-settings.php:297
 msgid "You need to change the name of the standard directory for security."
 msgstr ""
 "Вам необходимо изменить имя стандартного каталога для обеспечения "
 "безопасности."
 
-#: includes/admin/class-wc1c-admin-settings.php:298
+#: includes/admin/class-wc1c-admin-settings.php:316
 #: includes/class-wc1c-admin.php:228
 msgid "Extensions"
 msgstr "Расширения"
 
-#: includes/admin/class-wc1c-admin-settings.php:305
+#: includes/admin/class-wc1c-admin-settings.php:323
 msgid "Support extensions"
 msgstr "Поддержка расширений"
 
-#: includes/admin/class-wc1c-admin-settings.php:308
+#: includes/admin/class-wc1c-admin-settings.php:326
 msgid ""
 "Support for external extensions. If disabled, all third-party extensions "
 "will be unavailable."
@@ -572,11 +553,11 @@ msgstr ""
 "Поддержка внешних расширений. Если этот параметр отключен, все сторонние "
 "расширения будут недоступны."
 
-#: includes/admin/class-wc1c-admin-settings.php:314
+#: includes/admin/class-wc1c-admin-settings.php:332
 msgid "External schemas"
 msgstr "Внешние схемы"
 
-#: includes/admin/class-wc1c-admin-settings.php:317
+#: includes/admin/class-wc1c-admin-settings.php:335
 msgid ""
 "Support for external schemas. If disabled, all third-party schemas will be "
 "unavailable."
@@ -584,11 +565,11 @@ msgstr ""
 "Поддержка внешних схем. Если этот параметр отключен, все сторонние схемы "
 "будут недоступны."
 
-#: includes/admin/class-wc1c-admin-settings.php:323
+#: includes/admin/class-wc1c-admin-settings.php:341
 msgid "External tools"
 msgstr "Внешние инструменты"
 
-#: includes/admin/class-wc1c-admin-settings.php:326
+#: includes/admin/class-wc1c-admin-settings.php:344
 msgid ""
 "Support for external tools. If disabled, all third-party tools will be "
 "unavailable."
@@ -596,15 +577,15 @@ msgstr ""
 "Поддержка внешних инструментов. Если этот параметр отключен, все сторонние "
 "инструменты будут недоступны."
 
-#: includes/admin/class-wc1c-admin-settings.php:344
+#: includes/admin/class-wc1c-admin-settings.php:362
 msgid "Uninstall parameters"
 msgstr "Параметры удаления"
 
-#: includes/admin/class-wc1c-admin-settings.php:351
+#: includes/admin/class-wc1c-admin-settings.php:369
 msgid "Remove files"
 msgstr "Удаление файлов"
 
-#: includes/admin/class-wc1c-admin-settings.php:353
+#: includes/admin/class-wc1c-admin-settings.php:371
 msgid ""
 "Deleting all files in their file system. If the checkbox is not checked, "
 "then the files will not be deleted from the /wp-content/uploads directory"
@@ -612,17 +593,17 @@ msgstr ""
 "Удаление всех файлов в их файловой системе. Если флажок не установлен, то "
 "файлы не будут удалены из каталога /wp-content/uploads"
 
-#: includes/admin/class-wc1c-admin-settings.php:354
+#: includes/admin/class-wc1c-admin-settings.php:372
 msgid ""
 "Deleting files is disabled by default. It is best to delete files via FTP"
 msgstr ""
 "Удаление файлов по умолчанию отключено. Лучше всего удалять файлы через FTP"
 
-#: includes/admin/class-wc1c-admin-settings.php:360
+#: includes/admin/class-wc1c-admin-settings.php:378
 msgid "Remove settings"
 msgstr "Удаление настроек"
 
-#: includes/admin/class-wc1c-admin-settings.php:362
+#: includes/admin/class-wc1c-admin-settings.php:380
 msgid ""
 "Deleting all the main plugin settings. If the checkbox is not checked, then "
 "the plugin settings will remain in the site database."
@@ -630,7 +611,7 @@ msgstr ""
 "Удаление всех основных настроек плагина. Если флажок не установлен, то "
 "настройки плагина останутся в базе данных сайта."
 
-#: includes/admin/class-wc1c-admin-settings.php:363
+#: includes/admin/class-wc1c-admin-settings.php:381
 msgid ""
 "Deletion is disabled by default. Cleaning all the basic settings when "
 "finally deleting the plugin."
@@ -638,11 +619,11 @@ msgstr ""
 "Удаление по умолчанию отключено. Очистка всех основных настроек при "
 "окончательном удалении плагина."
 
-#: includes/admin/class-wc1c-admin-settings.php:369
+#: includes/admin/class-wc1c-admin-settings.php:387
 msgid "Remove tables"
 msgstr "Удаление таблиц"
 
-#: includes/admin/class-wc1c-admin-settings.php:371
+#: includes/admin/class-wc1c-admin-settings.php:389
 msgid ""
 "Deleting all the main plugin tables. If the checkbox is not checked, then "
 "the plugin tables will remain in the site database."
@@ -650,7 +631,7 @@ msgstr ""
 "Удаление всех основных таблиц плагина. Если флажок не установлен, то таблицы "
 "плагина останутся в базе данных сайта."
 
-#: includes/admin/class-wc1c-admin-settings.php:372
+#: includes/admin/class-wc1c-admin-settings.php:390
 msgid ""
 "Deletion is disabled by default. Cleaning all the basic tables when finally "
 "deleting the plugin."
@@ -844,6 +825,18 @@ msgstr "Обновить конфигурацию"
 msgid "Extensions not found."
 msgstr "Расширения не найдены."
 
+#: templates/extensions_item.php:6 templates/schemas_item.php:6
+msgid "Version:"
+msgstr "Версия:"
+
+#: templates/extensions_item.php:9
+msgid "Extension ID:"
+msgstr "Идентификатор:"
+
+#: templates/extensions_item.php:21 templates/schemas_item.php:21
+msgid "Author:"
+msgstr "Автор:"
+
 #: templates/page_404.php:4
 msgid "Error. Page not found."
 msgstr "Ошибка. Страница не найдена."
@@ -853,6 +846,14 @@ msgid ""
 "Информация об основных окружениях и состоянии. Важно следить за "
 "совместимостью параметров."
 msgstr ""
+
+#: templates/schemas_item.php:9
+msgid "Schema ID:"
+msgstr "Идентификатор:"
+
+#: templates/tools_item.php:14
+msgid "Open"
+msgstr "Открыть"
 
 #. Plugin Name of the plugin/theme
 msgid ""
@@ -876,14 +877,50 @@ msgstr ""
 msgid "WC1C team"
 msgstr "Команда WC1C"
 
+#~ msgid "Enable changing products"
+#~ msgstr "Изменения продуктов"
+
+#~ msgid ""
+#~ "Enabling and disabling capabilities of the products. If the checkbox is "
+#~ "not checked, it means that all mechanisms for working with products are "
+#~ "disabled."
+#~ msgstr ""
+#~ "Включение и отключение изменения продуктов. Если флажок не отмечен, это "
+#~ "означает, что все механизмы работы с продуктами отключены."
+
+#~ msgid "Enable changing orders"
+#~ msgstr "Изменение заказов"
+
+#~ msgid ""
+#~ "Enabling and disabling of features of work with orders. If the checkbox "
+#~ "is not checked, it means that all mechanisms for working with orders are "
+#~ "disabled."
+#~ msgstr ""
+#~ "Включение и отключение функций работы с заказами. Если флажок не "
+#~ "установлен, это означает, что все механизмы работы с ордерами отключены."
+
+#~ msgid ""
+#~ "This setting is used as a global flag indicating that you can work with "
+#~ "product orders (delete, change, add)."
+#~ msgstr ""
+#~ "Этот параметр используется в качестве глобального флага, указывающего, "
+#~ "что вы можете работать с заказами на продукцию (удалять, изменять, "
+#~ "добавлять)."
+
+#~ msgid "Enable changing images"
+#~ msgstr "Изменение изображений"
+
+#~ msgid ""
+#~ "Enabling and disabling image processing capabilities. If the checkbox is "
+#~ "not checked, it means that all mechanisms for working with images are "
+#~ "disabled."
+#~ msgstr ""
+#~ "Включение и отключение возможностей обработки изображений. Если флажок не "
+#~ "установлен, это означает, что все механизмы работы с изображениями "
+#~ "отключены."
+
 #~ msgid "Identification (ID): "
 #~ msgstr "Идентификатор (ID): "
-
-#~ msgid "Version: "
-#~ msgstr "Версия: "
-
-#~ msgid "Author: "
-#~ msgstr "Автор: "
 
 #~ msgid ""
 #~ "Information about schemas installed in the system. Configurations are "
