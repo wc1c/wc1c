@@ -179,11 +179,6 @@ function wc1c_define($name, $value)
  */
 function wc1c_get_template($template_name, $args = [], $template_path = '', $default_path = '')
 {
-	if(!empty($args) && is_array($args))
-	{
-		extract($args);
-	}
-
 	$located = wc1c_locate_template($template_name, $template_path, $default_path);
 
 	if(!file_exists($located))
