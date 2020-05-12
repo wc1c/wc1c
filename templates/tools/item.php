@@ -10,7 +10,7 @@
         </p>
     </div>
     <div class="card-footer p-3">
-       <a class="btn text-white btn-success" href="<?php echo get_wc1c_admin_tools_url($args['object']->get_id())?>">
+       <a class="text-decoration-none btn text-white btn-success" href="<?php echo get_wc1c_admin_tools_url($args['object']->get_id())?>">
 	       <?php _e('Open', 'wc1c'); ?>
        </a>
     </div>
