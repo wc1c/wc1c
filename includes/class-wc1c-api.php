@@ -33,40 +33,17 @@ class Wc1c_Api
 	 */
 	public function handle_api_requests()
 	{
-		/**
-		 * Api?
-		 */
-		$wc1c_api = false;
+		$wc1c_api = wc1c_get_var($_GET['wc1c-api'], false);
 
-		/**
-		 * Yes, api :)
-		 */
-		if(isset($_GET['wc1c-api']))
-		{
-			$wc1c_api = (int)$_GET['wc1c-api'];
-		}
-
-		/**
-		 * Api valid, execute
-		 */
 		if(false !== $wc1c_api)
 		{
-			/**
-			 * Api request define
-			 */
-			define('WC1C_API_REQUEST', true);
+			wc1c_define('WC1C_API_REQUEST', true);
 
-			/**
-			 * Disable api
-			 */
 			if('yes' !== WC1C()->settings()->get('api', 'yes'))
 			{
 				die('Api offline');
 			}
 
-			/**
-			 * Load configuration by id
-			 */
 			try
 			{
 				WC1C()->load_configurations($wc1c_api);
@@ -76,9 +53,6 @@ class Wc1c_Api
 				die('Api unavailable');
 			}
 
-			/**
-			 * Init
-			 */
 			try
 			{
 				WC1C()->init_configurations($wc1c_api);
@@ -88,27 +62,15 @@ class Wc1c_Api
 				die('Configuration unavailable');
 			}
 
-			/**
-			 * Get current configuration
-			 */
 			$configuration_data = WC1C()->get_configurations($wc1c_api);
 
-			/**
-			 * Not found
-			 */
 			if(false === $configuration_data)
 			{
 				die('Configuration not found!');
 			}
 
-			/**
-			 * Set current id
-			 */
 			WC1C()->environment()->set('current_configuration_id', $wc1c_api);
 
-			/**
-			 * Initialize schema by id
-			 */
 			try
 			{
 				WC1C()->init_schemas($configuration_data['instance']->get_schema());
