@@ -808,7 +808,7 @@ final class Wc1c
 			$schema_default->set_id('default');
 			$schema_default->set_version(WC1C_VERSION);
 			$schema_default->set_name(__('Default schema', 'wc1c'));
-			$schema_default->set_description(__('Стандартный обмен данными по стандатному алгоритму обмена от 1С через CommerceML. В обмене только данные по товарам.', 'wc1c'));
+			$schema_default->set_description(__('Standard data exchange using the standard exchange algorithm from 1C via CommerceML. Exchanges only contains products data.', 'wc1c'));
 			$schema_default->set_schema_prefix('wc1c_schema_' . $schema_default->get_id());
 
 			$schemas['default'] = $schema_default;
