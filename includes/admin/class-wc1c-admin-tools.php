@@ -46,13 +46,13 @@ class Wc1c_Admin_Tools
 
 		if(empty($tools))
 		{
-			wc1c_get_template('tools_404.php');
+			wc1c_get_template('tools/404.php');
 			return;
 		}
 
 		$tool_id = wc1c_get_var($_GET['tool_id'], '');
 
-		wc1c_get_template('tools_header.php');
+		wc1c_get_template('tools/header.php');
 
 		if($tool_id !== '' && is_wc1c_admin_tools_request())
 		{
@@ -62,7 +62,7 @@ class Wc1c_Admin_Tools
 					'object' => $tools[$tool_id]
 				];
 
-			wc1c_get_template('tools_item.php', $args);
+			wc1c_get_template('tools/item.php', $args);
 		}
 		else
 		{
@@ -74,7 +74,7 @@ class Wc1c_Admin_Tools
 						'object' => $tool_object
 					];
 
-				wc1c_get_template('tools_item.php', $args);
+				wc1c_get_template('tools/item.php', $args);
 			}
 		}
 	}

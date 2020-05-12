@@ -46,7 +46,7 @@ class Wc1c_Admin_Extensions
 
 		if(empty($extensions))
 		{
-			wc1c_get_template('extensions_404.php');
+			wc1c_get_template('404.php');
 			return;
 		}
 
@@ -58,7 +58,7 @@ class Wc1c_Admin_Extensions
 				'object' => $extension_object
 			];
 
-			wc1c_get_template('extensions_item.php', $args);
+			wc1c_get_template('item.php', $args);
 		}
 	}
 }
