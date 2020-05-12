@@ -114,7 +114,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 */
 	private function load_logger()
 	{
-		$path = WC1C()->environment()->get('wc1c_current_schema_upload_directory');
+		$path = $this->get_upload_directory();
 		$level = $this->get_options('logger');
 
 		try
