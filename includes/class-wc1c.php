@@ -1099,7 +1099,7 @@ final class Wc1c
 			$tool_example->set_id('example');
 			$tool_example->set_version(WC1C_VERSION);
 			$tool_example->set_name(__('Example tool', 'wc1c'));
-			$tool_example->set_description(__('Демонстрационный инструмент, не несущий никакой функциональной нагрузки.', 'wc1c'));
+			$tool_example->set_description(__('A demo tool that does not carry any functional load.', 'wc1c'));
 
 			$tools[$tool_example->get_id()] = $tool_example;
 		}
