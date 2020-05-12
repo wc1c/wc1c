@@ -333,6 +333,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 		if(!isset($_COOKIE[$cookie_name]))
 		{
+			$this->logger()->warning('api_check_auth_key: $_COOKIE[$cookie_name] empty');
 			return false;
 		}
 
@@ -340,6 +341,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 		if($_COOKIE[$cookie_name] !== md5($password))
 		{
+			$this->logger()->warning('api_check_auth_key: $_COOKIE[$cookie_name] !== md5($password)');
 			return false;
 		}
 
@@ -502,12 +504,8 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 */
 	private function api_mode_init()
 	{
-		/**
-		 * Security
-		 */
 		if($this->api_check_auth_key() === false)
 		{
-			$this->logger()->info('api_mode_init api_check_auth_key: failure');
 			$this->api_response_by_type('failure', 'Авторизация не пройдена');
 		}
 
@@ -545,11 +543,10 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	{
 		if($this->api_check_auth_key() === false)
 		{
-			$this->logger()->info('api_catalog_mode_file api_check_auth_key: failure');
-			$this->api_response_by_type('failure', 'Авторизация не пройдена');
+			$this->api_response_by_type('failure', __('Authorization failed', 'wc1c'));
 		}
 
-		$schema_upload_dir = WC1C()->environment()->get('wc1c_current_schema_upload_directory') . '/catalog/';
+		$schema_upload_dir = $this->get_upload_directory() . '/catalog/';
 
 		if(!is_dir($schema_upload_dir))
 		{
@@ -564,33 +561,32 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		/**
 		 * Empty filename
 		 */
-		if(!isset($_GET['filename']))
+		if(wc1c_get_var($_GET['filename'], '') === '')
 		{
-			$this->logger()->info('Filename: is empty');
-			$this->api_response_by_type('failure', 'Пришел файл без имени.');
+			$this->logger()->warning('Filename: is empty');
+			$this->api_response_by_type('failure', __('Filename is empty.', 'wc1c'));
 		}
+
+		$filename = wc1c_get_var($_GET['filename']);
 
 		/**
 		 * Full file path
 		 */
-		$schema_upload_file_path = $schema_upload_dir . $_GET['filename'];
+		$schema_upload_file_path = $schema_upload_dir . $filename;
 
-		/**
-		 * Logger
-		 */
 		$this->logger()->info('Upload file: ' . $schema_upload_file_path);
 
 		/**
 		 *  Если изображения, готовим каталоги
 		 */
-		if(strpos($_GET['filename'], 'import_files') !== false)
+		if(strpos($filename, 'import_files') !== false)
 		{
 			$this->logger()->info('Upload file: clean_upload_file_tree');
 
 			/**
 			 * Чистим каталоги
 			 */
-			$this->clean_upload_file_tree(dirname($_GET['filename']), $schema_upload_dir);
+			$this->clean_upload_file_tree(dirname($filename), $schema_upload_dir);
 		}
 
 		/**
@@ -636,7 +632,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 				/**
 				 * Если пришел архив, распаковываем
 				 */
-				if(strpos($_GET['filename'], '.zip') !== false)
+				if(strpos($filename, '.zip') !== false)
 				{
 					/**
 					 * Распаковываем файлы
@@ -686,25 +682,23 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	{
 		if($this->api_check_auth_key() === false)
 		{
-			$this->logger()->error('api_catalog_mode_import api_auth_key: error');
-			$this->api_response_by_type('failure', 'Авторизация не пройдена.');
+			$this->api_response_by_type('failure', __('Authorization failed', 'wc1c'));
 		}
 
 		$this->logger()->info('api_catalog_mode_import: start');
 
-		/**
-		 * Если не пришел файл для импорта
-		 */
-		if(!isset($_GET['filename']) || $_GET['filename'] === '')
+		if(wc1c_get_var($_GET['filename'], '') === '')
 		{
-			$this->logger()->info('api_catalog_mode_import: filename is empty');
-			$this->api_response_by_type('failure', 'Не указан файл импорта');
+			$this->logger()->warning('Import filename: is empty');
+			$this->api_response_by_type('failure', __('Import filename is empty.', 'wc1c'));
 		}
+
+		$filename = wc1c_get_var($_GET['filename']);
 
 		/**
 		 * Full file path to import
 		 */
-		$file = WC1C()->environment()->get('wc1c_current_schema_upload_directory') . '/catalog/' . sanitize_file_name($_GET['filename']);
+		$file = $this->get_upload_directory() . '/catalog/' . sanitize_file_name($filename);
 
 		/**
 		 * Импортируем файл
