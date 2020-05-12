@@ -767,6 +767,12 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 				return false;
 			}
 
+			if($this->get_options('skip_file_processing', 'yes') === 'yes')
+			{
+				$this->logger()->info('file_import: skip, end & true');
+				return true;
+			}
+
 			$this->logger()->info('file_import: end & true');
 			return true;
 		}
