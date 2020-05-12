@@ -353,7 +353,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	{
 		if(WC1C()->get_configurations('current')['instance']->get_status() !== 'active')
 		{
-			$this->api_response_by_type('failure', 'Конфигурация не активна.');
+			$this->api_response_by_type('failure', __('Configuration is not active.', 'wc1c'));
 		}
 
 		$mode = '';
