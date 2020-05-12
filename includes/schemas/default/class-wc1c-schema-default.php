@@ -740,35 +740,23 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 		$this->logger()->info('file_import: type - ' . $type_file);
 
-		/**
-		 * Если файл нормальный
-		 */
 		if(is_file($file_path) && $type_file != '')
 		{
-			/**
-			 * Устанавливаем обработку ошибок
-			 */
 			libxml_use_internal_errors(true);
 
-			/**
-			 * Грузим данные из файла
-			 */
 			$xml_data = @simplexml_load_file($file_path);
 
-			/**
-			 * Если данных нет
-			 */
 			if(!$xml_data)
 			{
 				$this->logger()->error('file_import: xml errors', libxml_get_errors());
 				return false;
 			}
 
-			/**
-			 * Проверяем стандарт
-			 */
-			$result = $this->check_cml($xml_data);
-			if($result == false)
+			try
+			{
+				$this->check_cml($xml_data);
+			}
+			catch(Exception $e)
 			{
 				$this->logger()->error('file_import: xml version error');
 				return false;
@@ -1017,7 +1005,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		/**
 		 * Extract to dir
 		 */
-		$import_files_dir = WC1C()->environment()->get('wc1c_current_schema_upload_directory') . '/catalog/import_files/';
+		$import_files_dir = $this->get_upload_directory() . '/catalog/import_files/';
 
 		/**
 		 * Dir
