@@ -831,50 +831,23 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 */
 	public function extract_zip($zip_file_path)
 	{
-		/**
-		 * Открываем архив
-		 */
 		$zip_archive = zip_open($zip_file_path);
 
-		/**
-		 * Немного переменных
-		 */
 		$img_files = 0;
 		$error_files = 0;
 
-		/**
-		 * Если архив, распаковываем
-		 */
 		if(is_resource($zip_archive))
 		{
-			/**
-			 * Logger
-			 */
 			$this->logger()->info('Unpack start: ' . $zip_file_path);
 
-			/**
-			 * Читаем архив
-			 */
 			while($zip_entry = zip_read($zip_archive))
 			{
-				/**
-				 * Текущая позиция
-				 */
 				$name = zip_entry_name($zip_entry);
 
-				/**
-				 * Logger
-				 */
 				$this->logger()->info('Unpack file name: ' . $name);
 
-				/**
-				 * Чек на файл изображения
-				 */
 				$import_files = $this->file_type_detect($name);
 
-				/**
-				 * Images & other
-				 */
 				if($import_files == 'import_files')
 				{
 					$result = $this->extract_zip_image($zip_archive, $zip_entry, substr($name, $import_files));
@@ -886,9 +859,6 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 					$img_files++;
 				}
-				/**
-				 * Xml
-				 */
 				else
 				{
 					$result = $this->extract_zip_xml($zip_archive, $zip_entry, $name);
@@ -900,14 +870,8 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 				}
 			}
 
-			/**
-			 * Logger
-			 */
 			$this->logger()->info('Unpack end: ' . $zip_file_path);
 
-			/**
-			 * Закрываем архив
-			 */
 			zip_close($zip_archive);
 		}
 		else
@@ -916,17 +880,11 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			return false;
 		}
 
-		/**
-		 * Добавляем количество картинок в лог
-		 */
 		if($img_files > 0)
 		{
 			$this->logger()->info('Unpack images count: ' . $img_files);
 		}
-
-		/**
-		 * Если имелись ошибки при распаковке
-		 */
+		
 		if($error_files > 0)
 		{
 			$this->logger()->error('Unpack error files: ' . $img_files);
