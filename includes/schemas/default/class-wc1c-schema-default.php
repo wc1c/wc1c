@@ -102,11 +102,11 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	{
 		$configuration_id = WC1C()->environment()->get('current_configuration_id', 0);
 
-		WC1C()->environment()->set
-		(
-			'wc1c_current_schema_upload_directory',
-			WC1C()->environment()->get('wc1c_upload_directory') . DIRECTORY_SEPARATOR . $this->get_id() . '_' . $configuration_id
-		);
+		$schema_directory = WC1C()->environment()->get('wc1c_upload_directory') . DIRECTORY_SEPARATOR . $this->get_id() . '_' . $configuration_id;
+
+		$this->set_upload_directory($schema_directory);
+
+		WC1C()->environment()->set('wc1c_current_schema_upload_directory', $this->get_upload_directory());
 	}
 	
 	/**
