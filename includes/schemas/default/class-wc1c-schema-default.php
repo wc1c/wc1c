@@ -470,14 +470,14 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			$user_password = $_SERVER['PHP_AUTH_PW'];
 		}
 
-		if($this->get_options('user_login'))
+		if($this->get_options('user_login', '') !== '')
 		{
-			if($this->get_options('user_login') !== '' && $user_login != $this->get_options('user_login'))
+			if($this->get_options('user_login', '') !== '' && $user_login != $this->get_options('user_login', ''))
 			{
 				$this->api_response_by_type('failure', 'Не верный логин');
 			}
 
-			if($this->get_options('user_password') !== '' && $user_password !== $this->get_options('user_password'))
+			if($this->get_options('user_password', '') !== '' && $user_password !== $this->get_options('user_password', ''))
 			{
 				$this->api_response_by_type('failure', 'Не верный пароль');
 			}
