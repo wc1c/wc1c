@@ -909,7 +909,12 @@ final class Wc1c
 			$config_query .= ' WHERE config_id = ' . $id;
 		}
 
-		$config_results = WC1C_Db()->get_results($config_query, ARRAY_A); // todo: cache
+		$config_results = WC1C_Db()->get_results($config_query, ARRAY_A);
+
+		if(false !== $id && empty($config_results))
+		{
+			throw new Exception('load_configurations: $id is not exists');
+		}
 
 		foreach($config_results as $config_key => $config_value)
 		{
