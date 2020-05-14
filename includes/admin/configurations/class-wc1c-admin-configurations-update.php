@@ -112,13 +112,12 @@ class Wc1c_Admin_Configurations_Update extends Wc1c_Admin_Abstract_Form
 	 */
 	public function output_form()
 	{
-		echo '<form method="post" action="">';
-		echo wp_nonce_field('wc1c-admin-configurations-update-save', '_wc1c-admin-nonce');
-		echo '<table class="form-table wc1c-admin-form-table">';
-		$this->generate_html($this->get_fields(), true);
-		echo '</table>';
-		echo '<p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="' . __('Save configuration', 'wc1c') . '"></p>';
-		echo '</form>';
+		$args =
+			[
+				'object' => $this
+			];
+
+		wc1c_get_template('configurations/update_form.php', $args);
 	}
 
 	/**
