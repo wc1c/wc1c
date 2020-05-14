@@ -164,7 +164,7 @@ abstract class Wc1c_Admin_Abstract_Form
 	/**
 	 * Output
 	 */
-	public function output()
+	public function output_form()
 	{
 		echo '<table id="' . $this->get_id() . '" class="form-table">' . $this->generate_html($this->get_fields(), false) . '</table>';
 	}

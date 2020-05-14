@@ -55,7 +55,7 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 		/**
 		 * Form show
 		 */
-		add_action('wc1c_admin_' . $this->get_id() . '_form_show', array($this, 'output'), 10);
+		add_action('wc1c_admin_' . $this->get_id() . '_form_show', array($this, 'output_form'), 10);
 
 		/**
 		 * Form save
@@ -66,7 +66,7 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 	/**
 	 * Form show
 	 */
-	public function output()
+	public function output_form()
 	{
 		echo '<form method="post" action="">';
 		echo wp_nonce_field('wc1c-admin-settings-save', '_wc1c-admin-nonce');
@@ -131,7 +131,7 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 				WC1C_Admin()->add_message('error', $e->getMessage());
 			}
 		}
-		
+
 		$saved = false;
 
 		/**

@@ -52,7 +52,7 @@ class Wc1c_Admin_Configurations_Create extends Wc1c_Admin_Abstract_Form
 		/**
 		 * Form show
 		 */
-		add_action('wc1c_admin_configurations_create_show', array($this, 'output'), 10);
+		add_action('wc1c_admin_configurations_create_show', array($this, 'output_form'), 10);
 
 		/**
 		 * Form save
@@ -63,7 +63,7 @@ class Wc1c_Admin_Configurations_Create extends Wc1c_Admin_Abstract_Form
 	/**
 	 * Form show
 	 */
-	public function output()
+	public function output_form()
 	{
 		echo '<form method="post" action="">';
 		echo wp_nonce_field('wc1c-admin-configurations-create-save', '_wc1c-admin-nonce');

@@ -34,48 +34,47 @@ class Wc1c_Admin_Configurations_Update extends Wc1c_Admin_Abstract_Form
 	 */
 	public function init()
 	{
-		if(WC1C()->environment()->get('current_configuration_id', false) === false)
+		$configuration_id = WC1C()->environment()->get('current_configuration_id', false);
+
+		if($configuration_id === false)
 		{
 			return;
 		}
 
-		$configuration_id = WC1C()->environment()->get('current_configuration_id', 0);
+		try
+		{
+			WC1C()->load_configurations($configuration_id);
+		}
+		catch(Exception $e)
+		{
+			add_action('wc1c_admin_configurations_update_show', array($this, 'output_404'), 10);
+			return;
+		}
 
-		/**
-		 * Load configuration
-		 */
-		WC1C()->load_configurations($configuration_id);
+		try
+		{
+			WC1C()->init_configurations($configuration_id);
+		}
+		catch(Exception $e)
+		{
+			add_action('wc1c_admin_configurations_update_show', array($this, 'output_404'), 10);
+			return;
+		}
 
-		/**
-		 * Init
-		 */
-		WC1C()->init_configurations($configuration_id);
-
-		/**
-		 * Get current configuration
-		 */
 		$configuration_data = WC1C()->get_configurations($configuration_id);
 
-		/**
-		 * Initialize schema by id
-		 */
 		try
 		{
 			WC1C()->init_schemas($configuration_data['instance']->get_schema());
 		}
 		catch(Exception $e)
 		{
-			die('Exception: ' . $e->getMessage());
+			add_action('wc1c_admin_configurations_update_show', array($this, 'output_404'), 10);
+			return;
 		}
 
-		/**
-		 * Init fields
-		 */
 		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_main'), 0);
 
-		/**
-		 * Load form saved data
-		 */
 		if(is_array($configuration_data['instance']->get_options()))
 		{
 			$saved_data = array_merge($configuration_data[0], $configuration_data['instance']->get_options());
@@ -84,10 +83,12 @@ class Wc1c_Admin_Configurations_Update extends Wc1c_Admin_Abstract_Form
 		{
 			$saved_data = $configuration_data[0];
 		}
+
 		if(isset($saved_data['options']))
 		{
 			unset($saved_data['options']);
 		}
+
 		$this->load_saved_data($saved_data);
 
 		/**
@@ -98,7 +99,7 @@ class Wc1c_Admin_Configurations_Update extends Wc1c_Admin_Abstract_Form
 		/**
 		 * Form show
 		 */
-		add_action('wc1c_admin_configurations_update_show', array($this, 'output'), 10);
+		add_action('wc1c_admin_configurations_update_show', array($this, 'output_form'), 10);
 
 		/**
 		 * Form save
@@ -109,7 +110,7 @@ class Wc1c_Admin_Configurations_Update extends Wc1c_Admin_Abstract_Form
 	/**
 	 * Form show
 	 */
-	public function output()
+	public function output_form()
 	{
 		echo '<form method="post" action="">';
 		echo wp_nonce_field('wc1c-admin-configurations-update-save', '_wc1c-admin-nonce');
@@ -118,6 +119,14 @@ class Wc1c_Admin_Configurations_Update extends Wc1c_Admin_Abstract_Form
 		echo '</table>';
 		echo '<p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="' . __('Save configuration', 'wc1c') . '"></p>';
 		echo '</form>';
+	}
+
+	/**
+	 * Error show
+	 */
+	public function output_404()
+	{
+		wc1c_get_template('configurations/404.php');
 	}
 
 	/**
