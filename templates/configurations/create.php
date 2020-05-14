@@ -1,6 +1,6 @@
 <?php defined('ABSPATH') || exit; ?>
 
-<div class="row">
+<div class="row m-0">
     <div class="col-24 col-lg-18 p-0">
 
         <h2 class="pt-0 mt-0"><?php _e('Create new configuration', 'wc1c'); ?></h2>
