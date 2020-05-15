@@ -46,7 +46,7 @@ class Wc1c_Api
 
 			try
 			{
-				WC1C()->load_configurations($wc1c_api);
+				WC1C()->load_configuration($wc1c_api);
 			}
 			catch(Exception $e)
 			{
