@@ -146,22 +146,22 @@ class Wc1c_Admin_Configurations_Update
 		$configuration = $this->get_configuration();
 
 		$body = '<ul class="list-group m-0 list-group-flush">';
-		$body .= '<li class="list-group-item p-2">';
+		$body .= '<li class="list-group-item p-2 m-0">';
 		$body .= __('Configuration ID: ', 'wc1c') . $configuration->get_id();
 		$body .= '</li>';
-		$body .= '<li class="list-group-item p-2">';
+		$body .= '<li class="list-group-item p-2 m-0">';
 		$body .= __('Schema ID: ', 'wc1c') . $configuration->get_schema();
 		$body .= '</li>';
-		$body .= '<li class="list-group-item p-2">';
+		$body .= '<li class="list-group-item p-2 m-0">';
 		$body .= __('Date create: ', 'wc1c') . $configuration->get_date_create();
 		$body .= '</li>';
-		$body .= '<li class="list-group-item p-2">';
+		$body .= '<li class="list-group-item p-2 m-0">';
 		$body .= __('Date modify: ', 'wc1c') . $configuration->get_date_modify();
 		$body .= '</li>';
-		$body .= '<li class="list-group-item p-2">';
+		$body .= '<li class="list-group-item p-2 m-0">';
 		$body .= __('Date active: ', 'wc1c') . $configuration->get_date_activity();
 		$body .= '</li>';
-		$body .= '<li class="list-group-item p-2">';
+		$body .= '<li class="list-group-item p-2 m-0">';
 		$body .= __('Upload directory: ', 'wc1c') . WC1C()->environment()->get('wc1c_current_schema_upload_directory');
 		$body .= '</li>';
 
@@ -181,7 +181,7 @@ class Wc1c_Admin_Configurations_Update
 			];
 
 			$body = '<ul class="list-group m-0 list-group-flush">';
-			$body .= '<li class="list-group-item p-2">';
+			$body .= '<li class="list-group-item p-2 m-0">';
 			$body .= __('Schema name: ', 'wc1c') . $schema->get_name();
 			$body .= '</li>';
 
