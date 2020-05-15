@@ -30,6 +30,11 @@ final class Wc1c
 	private $environment = null;
 
 	/**
+	 * @var null|Wc1c_Database
+	 */
+	private $database = null;
+
+	/**
 	 * Base settings
 	 *
 	 * @var null|Wc1c_Settings
@@ -126,6 +131,7 @@ final class Wc1c
 		 */
 		include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-environment.php';
 		include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-logger.php';
+		include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-database.php';
 		include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-configuration.php';
 		include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-settings.php';
 
@@ -410,11 +416,13 @@ final class Wc1c
 	 *  current - current configuration
 	 *  numeric - configuration identifier
 	 *
-	 * @return array|boolean
+	 * @return array|boolean|Wc1c_Configuration
+	 *
+	 * @throws Exception
 	 */
 	public function get_configurations($type = 'all')
 	{
-		if($type !== 'all')
+		if('all' !== $type)
 		{
 			/**
 			 * Current
@@ -428,7 +436,7 @@ final class Wc1c
 					return $this->configurations[$configuration_id];
 				}
 
-				return false;
+				throw new Exception('get_configurations: current configuration not loaded');
 			}
 
 			/**
@@ -439,87 +447,10 @@ final class Wc1c
 				return $this->configurations[$type];
 			}
 
-			return false;
+			throw new Exception('get_configurations: configuration by id is not loaded');
 		}
 
 		return $this->configurations;
-	}
-
-	/**
-	 * Initializing configurations
-	 *
-	 * If a schema ID is specified, only the specified configuration is loaded
-	 *
-	 * @param string $configuration_id
-	 *
-	 * @return boolean
-	 * @throws Exception
-	 */
-	public function init_configurations($configuration_id = '')
-	{
-		/**
-		 * Get all loaded configurations
-		 */
-		$configurations = $this->get_configurations();
-
-		/**
-		 * Invalid schemas
-		 */
-		if(!is_array($configurations))
-		{
-			return false;
-		}
-
-		/**
-		 * Init specified configuration
-		 */
-		if($configuration_id !== '')
-		{
-			/**
-			 * Configuration not exists
-			 */
-			if(!array_key_exists($configuration_id, $configurations))
-			{
-				return false;
-			}
-
-			/**
-			 * Configuration initialized
-			 */
-			if(is_object($configurations[$configuration_id]['instance']))
-			{
-				return true;
-			}
-
-			/**
-			 * Create object & save to buffer
-			 */
-			$configurations[$configuration_id]['instance'] = new Wc1c_Configuration($configurations[$configuration_id][0]);
-
-			/**
-			 * Reload buffer
-			 */
-			$this->set_configurations($configurations);
-
-			/**
-			 * Success
-			 */
-			return true;
-		}
-
-		/**
-		 * Init all configurations
-		 */
-		$return = true;
-		foreach($configurations as $configuration_id => $schema_data)
-		{
-			$result = $this->init_configurations($configuration_id);
-			if($result === false)
-			{
-				$return = false;
-			}
-		}
-		return $return;
 	}
 
 	/**
@@ -757,7 +688,7 @@ final class Wc1c
 				{
 					$options = $this->get_configurations('current');
 
-					$init_schema->set_options($options['instance']->get_options());
+					$init_schema->set_options($options->get_options());
 					$init_schema->set_configuration_prefix('wc1c_configuration_' . $configuration_id);
 					$init_schema->set_prefix('wc1c_prefix_' . $schema_id . '_' . $configuration_id);
 				}
@@ -892,49 +823,66 @@ final class Wc1c
 	}
 
 	/**
-	 * Configurations loading
+	 * Configuration loading
 	 *
 	 * @param bool $id
+	 * @param bool $reload
 	 *
-	 * @return bool
+	 * @return Wc1c_Configuration
+	 *
 	 * @throws Exception
 	 */
-	public function load_configurations($id = false)
+	public function load_configuration($id = false, $reload = false)
 	{
-		$configurations = [];
-
-		$config_query = 'SELECT * from ' . WC1C_Db()->base_prefix . 'wc1c';
-		if($id !== false)
+		try
 		{
-			$config_query .= ' WHERE config_id = ' . $id;
+			$configurations = $this->get_configurations();
+		}
+		catch(Exception $e)
+		{
+			throw new Exception('load_configuration: exception - ' . $e->getMessage());
 		}
 
-		$config_results = WC1C_Db()->get_results($config_query, ARRAY_A);
-
-		if(false !== $id && empty($config_results))
+		if(false === $id)
 		{
 			throw new Exception('load_configurations: $id is not exists');
 		}
 
-		foreach($config_results as $config_key => $config_value)
+		if(array_key_exists($id, $configurations) && false === $reload)
 		{
-			if(!is_array($config_value) || !array_key_exists('config_id', $config_value))
-			{
-				continue;
-			}
-
-			$config_position = array
-			(
-				'instance' => null
-			);
-			$config_position = array_merge($config_results, $config_position);
-
-			$config_position = apply_filters('wc1c_configurations_load_position', $config_position);
-
-			$configurations[$config_value['config_id']] = $config_position;
+			throw new Exception('load_configurations: $id is exists & $reload false');
 		}
 
-		$configurations = apply_filters('wc1c_configurations_load', $configurations);
+		try
+		{
+			$load_configuration = new Wc1c_Configuration();
+		}
+		catch(Exception $e)
+		{
+			throw new Exception('load_configuration: exception - ' . $e->getMessage());
+		}
+
+		try
+		{
+			$load_configuration->set_id($id);
+		}
+		catch(Exception $e)
+		{
+			throw new Exception('load_configuration: exception - ' . $e->getMessage());
+		}
+
+		try
+		{
+			$load_configuration->load();
+		}
+		catch(Exception $e)
+		{
+			throw new Exception('load_configuration: exception - ' . $e->getMessage());
+		}
+
+		$load_configuration = apply_filters('wc1c_configuration_load', $load_configuration);
+
+		$configurations[$id] = $load_configuration;
 
 		try
 		{
@@ -945,21 +893,28 @@ final class Wc1c
 			throw new Exception('load_configurations: exception - ' . $e->getMessage());
 		}
 
-		return true;
+		return $load_configuration;
 	}
 
 	/**
 	 * Set configurations
 	 * 
 	 * @param $configurations
+	 * @param $append
 	 *
 	 * @return bool
+	 *
 	 * @throws Exception
 	 */
-	public function set_configurations($configurations)
+	public function set_configurations($configurations, $append = false)
 	{
 		if(is_array($configurations))
 		{
+			if(true === $append)
+			{
+				$configurations = array_merge($this->get_configurations('all'), $configurations);
+			}
+
 			$this->configurations = $configurations;
 
 			return true;

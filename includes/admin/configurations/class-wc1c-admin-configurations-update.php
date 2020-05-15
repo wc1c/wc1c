@@ -6,8 +6,20 @@
  */
 defined('ABSPATH') || exit;
 
-class Wc1c_Admin_Configurations_Update extends Wc1c_Admin_Abstract_Form
+class Wc1c_Admin_Configurations_Update
 {
+	/**
+	 * Current configuration
+	 *
+	 * @var Wc1c_Configuration|null
+	 */
+	private $configuration = null;
+
+	/**
+	 * @var null|Wc1c_Admin_Configurations_Update_Form
+	 */
+	private $form = null;
+
 	/**
 	 * Wc1c_Admin_Configurations_Update constructor
 	 *
@@ -15,11 +27,6 @@ class Wc1c_Admin_Configurations_Update extends Wc1c_Admin_Abstract_Form
 	 */
 	public function __construct($init = true)
 	{
-		/**
-		 * Form id
-		 */
-		$this->set_id('configurations-update');
-
 		/**
 		 * Auto init
 		 */
@@ -43,17 +50,19 @@ class Wc1c_Admin_Configurations_Update extends Wc1c_Admin_Abstract_Form
 
 		try
 		{
-			WC1C()->load_configurations($configuration_id);
+			$configuration = WC1C()->load_configuration($configuration_id);
 		}
 		catch(Exception $e)
 		{
 			add_action('wc1c_admin_configurations_update_show', array($this, 'output_404'), 10);
 			return;
 		}
+
+		$this->set_configuration($configuration);
 
 		try
 		{
-			WC1C()->init_configurations($configuration_id);
+			WC1C()->init_schemas($configuration->get_schema());
 		}
 		catch(Exception $e)
 		{
@@ -61,50 +70,52 @@ class Wc1c_Admin_Configurations_Update extends Wc1c_Admin_Abstract_Form
 			return;
 		}
 
-		$configuration_data = WC1C()->get_configurations($configuration_id);
-
-		try
-		{
-			WC1C()->init_schemas($configuration_data['instance']->get_schema());
-		}
-		catch(Exception $e)
-		{
-			add_action('wc1c_admin_configurations_update_show', array($this, 'output_404'), 10);
-			return;
-		}
-
-		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_main'), 0);
-
-		if(is_array($configuration_data['instance']->get_options()))
-		{
-			$saved_data = array_merge($configuration_data[0], $configuration_data['instance']->get_options());
-		}
-		else
-		{
-			$saved_data = $configuration_data[0];
-		}
-
-		if(isset($saved_data['options']))
-		{
-			unset($saved_data['options']);
-		}
-
-		$this->load_saved_data($saved_data);
+		add_action('wc1c_admin_configurations_update_sidebar_show', array($this, 'output_sidebar'), 10);
 
 		/**
-		 * Load form fields
+		 * Form
 		 */
-		$this->load_fields();
+		$form = new Wc1c_Admin_Configurations_Update_Form(false);
 
-		/**
-		 * Form show
-		 */
-		add_action('wc1c_admin_configurations_update_show', array($this, 'output_form'), 10);
+		$form_data = $configuration->get_options();
+		$form_data['config_name'] = $configuration->get_name();
+		$form_data['status'] = $configuration->get_status();
+		$form->load_saved_data($form_data);
+		$form->init();
 
-		/**
-		 * Form save
-		 */
-		$this->save();
+		$this->set_form($form);
+	}
+
+	/**
+	 * @return Wc1c_Admin_Configurations_Update_Form|null
+	 */
+	public function get_form()
+	{
+		return $this->form;
+	}
+
+	/**
+	 * @param Wc1c_Admin_Configurations_Update_Form|null $form
+	 */
+	public function set_form($form)
+	{
+		$this->form = $form;
+	}
+
+	/**
+	 * @return Wc1c_Configuration|null
+	 */
+	public function get_configuration()
+	{
+		return $this->configuration;
+	}
+
+	/**
+	 * @param Wc1c_Configuration $configuration
+	 */
+	public function set_configuration($configuration)
+	{
+		$this->configuration = $configuration;
 	}
 
 	/**
@@ -121,195 +132,72 @@ class Wc1c_Admin_Configurations_Update extends Wc1c_Admin_Abstract_Form
 	}
 
 	/**
+	 * Sidebar show
+	 */
+	public function output_sidebar()
+	{
+		$args = [
+			'header' => '<h5 class="p-0 m-0">' . __('About configuration', 'wc1c') . '</h5>',
+			'object' => $this
+		];
+
+		$configuration = $this->get_configuration();
+
+		$body = '<ul class="list-group m-0 list-group-flush">';
+		$body .= '<li class="list-group-item p-2">';
+		$body .= __('Configuration ID: ', 'wc1c') . $configuration->get_id();
+		$body .= '</li>';
+		$body .= '<li class="list-group-item p-2">';
+		$body .= __('Schema ID: ', 'wc1c') . $configuration->get_schema();
+		$body .= '</li>';
+		$body .= '<li class="list-group-item p-2">';
+		$body .= __('Date create: ', 'wc1c') . $configuration->get_date_create();
+		$body .= '</li>';
+		$body .= '<li class="list-group-item p-2">';
+		$body .= __('Date modify: ', 'wc1c') . $configuration->get_date_modify();
+		$body .= '</li>';
+		$body .= '<li class="list-group-item p-2">';
+		$body .= __('Date active: ', 'wc1c') . $configuration->get_date_activity();
+		$body .= '</li>';
+		$body .= '<li class="list-group-item p-2">';
+		$body .= __('Upload directory: ', 'wc1c') . WC1C()->environment()->get('wc1c_current_schema_upload_directory');
+		$body .= '</li>';
+
+		$body .= '</ul>';
+
+		$args['body'] = $body;
+
+		wc1c_get_template('configurations/update_sidebar_item.php', $args);
+
+		try
+		{
+			$schema = WC1C()->get_schemas($configuration->get_schema());
+
+			$args = [
+				'header' => '<h5 class="p-0 m-0">' . __('About schema', 'wc1c') . '</h5>',
+				'object' => $this
+			];
+
+			$body = '<ul class="list-group m-0 list-group-flush">';
+			$body .= '<li class="list-group-item p-2">';
+			$body .= __('Schema name: ', 'wc1c') . $schema->get_name();
+			$body .= '</li>';
+
+			$body .= '</ul>';
+
+			$args['body'] = $body;
+
+			wc1c_get_template('configurations/update_sidebar_item.php', $args);
+		}
+		catch(Exception $e){}
+
+	}
+
+	/**
 	 * Error show
 	 */
 	public function output_404()
 	{
 		wc1c_get_template('configurations/404.php');
-	}
-
-	/**
-	 * Save form data in DB
-	 *
-	 * @return bool
-	 */
-	public function save()
-	{
-		/**
-		 * Post data
-		 */
-		$post_data = $this->get_posted_data();
-
-		/**
-		 * Xss
-		 */
-		if(!isset($post_data['_wc1c-admin-nonce']))
-		{
-			return false;
-		}
-
-		/**
-		 * Xss
-		 */
-		if(empty($post_data) || !wp_verify_nonce($post_data['_wc1c-admin-nonce'], 'wc1c-admin-configurations-update-save'))
-		{
-			WC1C_Admin()->add_message('error', __('Save error. Please retry.', 'wc1c'));
-
-			return false;
-		}
-
-		/**
-		 * All form fields validate
-		 */
-		foreach($this->get_fields() as $key => $field)
-		{
-			if('title' === $this->get_field_type($field))
-			{
-				continue;
-			}
-
-			try
-			{
-				$this->saved_data[$key] = $this->get_field_value($key, $field, $post_data);
-			}
-			catch(Exception $e)
-			{
-				WC1C_Admin()->add_message('error', $e->getMessage());
-			}
-		}
-
-		$configuration_id = WC1C()->environment()->get('current_configuration_id', 0);
-
-		/**
-		 * Get current configuration
-		 */
-		$configuration_data = WC1C()->get_configurations($configuration_id);
-
-		/**
-		 * Data to save
-		 */
-		$data = $this->get_saved_data();
-
-		/**
-		 * Set configuration status
-		 */
-		$configuration_data['instance']->set_status($data['status']);
-		unset($data['status']);
-
-		/**
-		 * Set configuration name
-		 */
-		$configuration_data['instance']->set_name($data['config_name']);
-		unset($data['config_name']);
-
-		/**
-		 * Update date modify
-		 */
-		$configuration_data['instance']->set_date_modify();
-
-		/**
-		 * Options
-		 */
-		$configuration_data['instance']->set_options($data);
-
-		/**
-		 * Save
-		 */
-		$saved = $configuration_data['instance']->save();
-
-		/**
-		 * Settings saved
-		 */
-		if($saved)
-		{
-			WC1C_Admin()->add_message('update', __('Configuration update success.', 'wc1c'));
-		}
-		else
-		{
-			WC1C_Admin()->add_message('error', __('Configuration update error. Please retry saving or change fields.', 'wc1c'));
-		}
-
-		return true;
-	}
-
-	/**
-	 * Loading saved data
-	 *
-	 * @param array $saved_data
-	 */
-	public function load_saved_data($saved_data = array())
-	{
-		/**
-		 * Form fields
-		 */
-		$form_fields = $this->get_fields();
-
-		/**
-		 * Default value for form fields
-		 */
-		$form_data = array_merge
-		(
-			array_fill_keys(array_keys($form_fields), ''),
-			wp_list_pluck($form_fields, 'default')
-		);
-
-		/**
-		 * Merge saved data & form fields
-		 */
-		if(is_array($saved_data) && count($saved_data) > 0)
-		{
-			$saved_data = array_merge($saved_data, $form_data);
-		}
-
-		/**
-		 * Change saved data from external code
-		 */
-		$saved_data = apply_filters('wc1c_admin_' . $this->get_id() . '_form_load_saved_data', $saved_data);
-
-		/**
-		 * Local buffer
-		 */
-		$this->set_saved_data($saved_data);
-	}
-
-	/**
-	 * Init fields for main settings
-	 *
-	 * @param $fields
-	 *
-	 * @return array
-	 */
-	public function init_fields_main($fields)
-	{
-		$fields['config_name'] = array
-		(
-			'title' => __('Configuration name', 'wc1c'),
-			'type' => 'text',
-			'label' => __('Name of the configuration for easy use. You can enter any data up to 255 characters.', 'wc1c'),
-			'description' => __('Used for convenient distribution of multiple configurations.', 'wc1c'),
-			'default' => '',
-			'css' => 'min-width: 600px;',
-		);
-
-		/**
-		 * Statuses
-		 */
-		$options = array
-		(
-			'active' => 'Active',
-			'draft' => 'Draft',
-			'inactive' => 'Inactive'
-		);
-
-		$fields['status'] = array
-		(
-			'title' => __('Configuration status', 'wc1c'),
-			'type' => 'select',
-			'description' => __('Select the configuration status.', 'wc1c'),
-			'default' => 'draft',
-			'options' => $options
-		);
-
-		return $fields;
 	}
 }

@@ -28,9 +28,12 @@ class Wc1c_Configuration
 	 *
 	 * @param array
 	 */
-	public function __construct($data = array())
+	public function __construct($data = [])
 	{
-		$this->load_data($data);
+		if(!empty($data))
+		{
+			$this->set_data($data);
+		}
 	}
 
 	/**
@@ -38,7 +41,7 @@ class Wc1c_Configuration
 	 *
 	 * @param $data
 	 */
-	public function load_data($data)
+	public function set_data($data)
 	{
 		$this->data = $data;
 	}
@@ -56,6 +59,47 @@ class Wc1c_Configuration
 		}
 
 		return false;
+	}
+
+	/**
+	 * Set configuration id
+	 *
+	 * @param $name
+	 *
+	 * @return $this
+	 */
+	public function set_id($name)
+	{
+		$this->data['config_id'] = $name;
+
+		return $this;
+	}
+
+	/**
+	 * @param bool $id
+	 *
+	 * @throws Exception
+	 *
+	 * @return bool
+	 */
+	public function load($id = false)
+	{
+		if(false === $id)
+		{
+			$id = $this->get_id();
+		}
+
+		$config_query = 'SELECT * from ' . WC1C_Db()->base_prefix . 'wc1c WHERE config_id = ' . $id;
+		$config_results = WC1C_Db()->get_results($config_query, ARRAY_A);
+
+		if(empty($config_results))
+		{
+			throw new Exception('load: configuration not found');
+		}
+
+		$this->set_data($config_results[0]);
+
+		return true;
 	}
 
 	/**
