@@ -628,10 +628,14 @@ final class Wc1c
 	 */
 	public function init_schemas($schema_id = '')
 	{
-		/**
-		 * Get all loaded schemas
-		 */
-		$schemas = $this->get_schemas();
+		try
+		{
+			$schemas = $this->get_schemas();
+		}
+		catch(Exception $e)
+		{
+			throw new Exception('init_schemas: exception - ' . $e->getMessage());
+		}
 
 		/**
 		 * Invalid schemas
@@ -651,7 +655,7 @@ final class Wc1c
 			 */
 			if(!array_key_exists($schema_id, $schemas))
 			{
-				throw new Exception('init_schemas: extension not found by id');
+				throw new Exception('init_schemas: schema not found by id');
 			}
 
 			/**
@@ -659,7 +663,7 @@ final class Wc1c
 			 */
 			if(!is_object($schemas[$schema_id]))
 			{
-				throw new Exception('init_schemas: $extensions[$extension_id] is not object');
+				throw new Exception('init_schemas: $schemas[$schema_id] is not object');
 			}
 
 			$init_schema = $schemas[$schema_id];
@@ -686,18 +690,23 @@ final class Wc1c
 
 				if($configuration_id !== 0)
 				{
-					$options = $this->get_configurations('current');
+					$options = $this->get_configurations($configuration_id);
 
 					$init_schema->set_options($options->get_options());
 					$init_schema->set_configuration_prefix('wc1c_configuration_' . $configuration_id);
 					$init_schema->set_prefix('wc1c_prefix_' . $schema_id . '_' . $configuration_id);
 				}
 
-				$init_schema->init();
+				$init_schema_result = $init_schema->init();
 			}
 			catch(Exception $e)
 			{
 				throw new Exception('init_schemas: exception by schema - ' . $e->getMessage());
+			}
+
+			if($init_schema_result !== true)
+			{
+				throw new Exception('init_schemas: schema is not initialized');
 			}
 
 			$init_schema->set_initialized(true);
