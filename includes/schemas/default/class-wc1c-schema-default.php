@@ -40,6 +40,8 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 * Initialize
 	 *
 	 * @throws Exception
+	 *
+	 * @return bool
 	 */
 	public function init()
 	{
@@ -77,6 +79,8 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		}
 
 		$this->logger()->debug('init: end', $this);
+
+		return true;
 	}
 
 	/**
