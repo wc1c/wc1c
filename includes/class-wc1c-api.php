@@ -46,34 +46,23 @@ class Wc1c_Api
 
 			try
 			{
-				WC1C()->load_configuration($wc1c_api);
+				$configuration = WC1C()->load_configuration($wc1c_api);
 			}
 			catch(Exception $e)
 			{
 				die('Api unavailable');
 			}
 
-			try
-			{
-				WC1C()->init_configurations($wc1c_api);
-			}
-			catch(Exception $e)
-			{
-				die('Configuration unavailable');
-			}
-
-			$configuration_data = WC1C()->get_configurations($wc1c_api);
-
-			if(false === $configuration_data)
-			{
-				die('Configuration not found!');
-			}
-
 			WC1C()->environment()->set('current_configuration_id', $wc1c_api);
 
+			if($configuration->get_status() !== 'active')
+			{
+				die('Configuration offline');
+			}
+
 			try
 			{
-				WC1C()->init_schemas($configuration_data['instance']->get_schema());
+				WC1C()->init_schemas($configuration->get_schema());
 			}
 			catch(Exception $e)
 			{
@@ -114,7 +103,7 @@ class Wc1c_Api
 			 */
 			if($wc1c_api !== '')
 			{
-				$wc1c_api_action .= '_' . $configuration_data['instance']->get_schema();
+				$wc1c_api_action .= '_' . $configuration->get_schema();
 			}
 
 			/**
