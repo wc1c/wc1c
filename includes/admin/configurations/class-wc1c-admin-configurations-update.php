@@ -54,6 +54,7 @@ class Wc1c_Admin_Configurations_Update
 		}
 		catch(Exception $e)
 		{
+			WC1C()->logger()->notice($e->getMessage());
 			add_action('wc1c_admin_configurations_update_show', array($this, 'output_404'), 10);
 			return;
 		}
@@ -66,6 +67,7 @@ class Wc1c_Admin_Configurations_Update
 		}
 		catch(Exception $e)
 		{
+			WC1C()->logger()->notice($e->getMessage());
 			add_action('wc1c_admin_configurations_update_show', array($this, 'output_404'), 10);
 			return;
 		}

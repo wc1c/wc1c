@@ -54,7 +54,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		if(false === $this->load_logger())
 		{
 			WC1C()->logger()->critical('init: load_logger');
-			return;
+			throw new Exception('init: load_logger error');
 		}
 
 		$this->logger()->info('init: start');
@@ -115,7 +115,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	private function load_logger()
 	{
 		$path = $this->get_upload_directory();
-		$level = $this->get_options('logger');
+		$level = $this->get_options('logger', 400);
 
 		try
 		{
