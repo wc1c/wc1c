@@ -336,7 +336,8 @@ abstract class Wc1c_Admin_Abstract_Table
 			 */
 			$this->_actions = apply_filters("bulk_actions-{$this->screen->id}", $this->_actions);
 			$two = '';
-		} else
+		}
+		else
 		{
 			$two = '2';
 		}
