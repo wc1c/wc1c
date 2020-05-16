@@ -219,14 +219,15 @@ class Wc1c_Admin_Configurations_Update_Form extends Wc1c_Admin_Abstract_Form
 			'css' => 'min-width: 200px;width:100%;',
 		);
 
+		$statuses = wc1c_get_configurations_status_print();
+
 		/**
 		 * Statuses
 		 */
 		$options = array
 		(
-			'active' => 'Active',
-			'draft' => 'Draft',
-			'inactive' => 'Inactive'
+			'active' => $statuses['active'],
+			'inactive' => $statuses['inactive']
 		);
 
 		$fields['status'] = array
@@ -234,7 +235,7 @@ class Wc1c_Admin_Configurations_Update_Form extends Wc1c_Admin_Abstract_Form
 			'title' => __('Configuration status', 'wc1c'),
 			'type' => 'select',
 			'description' => __('Select the configuration status.', 'wc1c'),
-			'default' => 'draft',
+			'default' => 'inactive',
 			'options' => $options
 		);
 
