@@ -101,8 +101,8 @@ class Wc1c_Admin_Configurations_Table extends Wc1c_Admin_Abstract_Table
 		//Build row actions
 		$actions = array
 		(
-			'edit'   => '<a href="' . get_wc1c_admin_configuration_url('update', $item['config_id']) . '">' . __('Edit', 'wc1c') . '</a>',
-			'delete' => '<a href="' . get_wc1c_admin_configuration_url('remove', $item['config_id']) . '">' . __('Remove', 'wc1c') . '</a>',
+			'update'   => '<a href="' . get_wc1c_admin_configuration_url('update', $item['config_id']) . '">' . __('Edit', 'wc1c') . '</a>',
+			'remove' => '<a href="' . get_wc1c_admin_configuration_url('remove', $item['config_id']) . '">' . __('Remove', 'wc1c') . '</a>',
 	    );
 
 		//Return the title contents
@@ -192,7 +192,7 @@ class Wc1c_Admin_Configurations_Table extends Wc1c_Admin_Abstract_Table
 		/**
 		 * Remove configuration
 		 */
-		if('remove' == $this->current_action())
+		if('remove' === $this->current_action())
 		{
 		    $configs = [];
 
@@ -212,7 +212,7 @@ class Wc1c_Admin_Configurations_Table extends Wc1c_Admin_Abstract_Table
 		            WC1C_Db()->delete(WC1C_Db()->prefix . "wc1c", array('config_id' => $config_id));
 	            }
 
-	            echo WC1C_Admin()->format_message('update', __('Config deleted', 'wc1c'));
+	            echo WC1C_Admin()->format_message('update', __('Configuration deleted', 'wc1c'));
             }
 		    else
 		    {
