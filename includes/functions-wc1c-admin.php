@@ -93,7 +93,7 @@ function get_wc1c_admin_configuration_url($action = 'list', $configuration_id = 
 
 	if('list' !== $action)
 	{
-		$path .= '&do_action=' . $action;
+		$path .= '&action=' . $action;
 	}
 
 	if('' === $configuration_id)
