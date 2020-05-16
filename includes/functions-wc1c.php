@@ -335,3 +335,34 @@ function wc1c_convert_size($size)
 
 	return (int)$size;
 }
+
+/**
+ * Get normal configuration status
+ *
+ * @param null|string $status
+ *
+ * @return array|string|false
+ */
+function wc1c_get_configurations_status_print($status = null)
+{
+	$statuses =
+	[
+		'draft' => __('Draft', 'wc1c'),
+		'active' => __('Active', 'wc1c'),
+		'inactive' => __('Inactive', 'wc1c'),
+		'error' => __('Error', 'wc1c'),
+		'processing' => __('Processing', 'wc1c'),
+	];
+
+	if(null !== $status)
+	{
+		if(array_key_exists($status, $statuses))
+		{
+			return $statuses[$status];
+		}
+
+		return false;
+	}
+
+	return $statuses;
+}
