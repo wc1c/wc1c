@@ -10,6 +10,14 @@
     font-size: 16px!important;
   }
 
+  .remove
+  {
+    a
+    {
+      color: #c4161c;
+    }
+  }
+
   .check-column
   {
     padding: 4px 0 0 0!important;
@@ -55,7 +63,19 @@
 
       &.inactive
       {
+        background-color: #e008ef;
+        color: white;
+      }
+
+      &.error
+      {
         background-color: #c4161c;
+        color: white;
+      }
+
+      &.processing
+      {
+        background-color: #0625ec;
         color: white;
       }
     }
