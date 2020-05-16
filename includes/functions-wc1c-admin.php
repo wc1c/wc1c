@@ -82,26 +82,26 @@ function get_wc1c_admin_tools_url($tool_id = '')
 }
 
 /**
- * @param string $configuration_id
  * @param string $action
+ * @param string $configuration_id
  *
  * @return string
  */
-function get_wc1c_admin_configuration_url($configuration_id = '', $action = 'list')
+function get_wc1c_admin_configuration_url($action = 'list', $configuration_id = '')
 {
 	$path = 'admin.php?page=wc1c&section=configurations';
+
+	if('list' !== $action)
+	{
+		$path .= '&do_action=' . $action;
+	}
 
 	if('' === $configuration_id)
 	{
 		return admin_url($path);
 	}
 
-	$path = 'admin.php?page=wc1c&section=configurations&do_action=update&config_id=' . $configuration_id;
-
-	if('list' !== $action)
-	{
-		$path .= '&do_action=' . $action;
-	}
+	$path .= '&config_id=' . $configuration_id;
 
 	return admin_url($path);
 }
