@@ -2,7 +2,7 @@
 
 <div class="wrap">
 	<h1 class="wp-heading-inline"><?php _e('Integration with 1C', 'wc1c'); ?></h1>
-    <a href="<?php echo admin_url('admin.php?page=wc1c&section=configurations&do_action=create') ?>" class="page-title-action">
+    <a href="<?php echo get_wc1c_admin_configuration_url('create'); ?>" class="page-title-action">
 	    <?php _e('New configuration', 'wc1c'); ?>
     </a>
     <hr class="wp-header-end">
