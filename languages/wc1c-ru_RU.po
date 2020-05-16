@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WC1C > integration of WooCommerce with 1C products "
 "(different configurations)\n"
 "POT-Creation-Date: 2020-05-16 14:10+0300\n"
-"PO-Revision-Date: 2020-05-16 14:21+0300\n"
+"PO-Revision-Date: 2020-05-16 14:22+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
 "Language: ru_RU\n"
@@ -348,7 +348,7 @@ msgstr "Используется техническими специалиста
 
 #: includes/admin/class-wc1c-admin-settings.php:270
 msgid "API"
-msgstr "АПИ"
+msgstr "API"
 
 #: includes/admin/class-wc1c-admin-settings.php:273
 msgid ""
