@@ -28,7 +28,7 @@ class Wc1c_Admin_Configurations_Table extends Wc1c_Admin_Abstract_Table
 	 */
 	public function no_items()
 	{
-		esc_html_e( 'The configuration was not found. Add a new configuration via the menu.', 'wc1c' );
+		esc_html_e( 'Configurations was not found. Add a new configuration via the menu.', 'wc1c' );
 	}
 
 	/**
