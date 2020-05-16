@@ -101,16 +101,16 @@ class Wc1c_Admin_Configurations_Table extends Wc1c_Admin_Abstract_Table
 		//Build row actions
 		$actions = array
 		(
-			'edit' => sprintf( '<a href="?page=%s&section=configurations&do_action=%s&config_id=%s">' . __( 'Edit', 'wc1c' ) . '</a>', $_REQUEST['page'], 'update', $item['config_id'] ),
-			'delete' => sprintf( '<a href="?page=%s&section=configurations&action=%s&config_id=%s">' . __( 'Remove', 'wc1c' ) . '</a>', $_REQUEST['page'], 'remove', $item['config_id'] ),
-		);
+			'edit'   => '<a href="' . get_wc1c_admin_configuration_url('update', $item['config_id']) . '">' . __('Edit', 'wc1c') . '</a>',
+			'delete' => '<a href="' . get_wc1c_admin_configuration_url('remove', $item['config_id']) . '">' . __('Remove', 'wc1c') . '</a>',
+	    );
 
 		//Return the title contents
 		return sprintf( '%1$s <br/> %2$s',
 			/*$1%s*/
 			$item['config_name'],
 			/*$2%s*/
-			$this->row_actions( $actions, true )
+			$this->row_actions($actions, true)
 		);
 	}
 
