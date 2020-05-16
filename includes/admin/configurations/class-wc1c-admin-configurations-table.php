@@ -59,19 +59,24 @@ class Wc1c_Admin_Configurations_Table extends Wc1c_Admin_Abstract_Table
 				return $item['schema'];
 			case 'status':
 
-				$status_return = __('Error', 'wc1c');
+				$status = wc1c_get_configurations_status_print($item['status']);
+				$status_return = wc1c_get_configurations_status_print('error');
 
-				if($item['status'] == 'draft')
+				if($item['status'] === 'draft')
 				{
-					$status_return = '<span class="draft">' . __('Draft', 'wc1c') . '</span>';
+					$status_return = '<span class="draft">' . $status . '</span>';
 				}
-				if($item['status'] == 'active')
+				if($item['status'] === 'active')
 				{
-					$status_return = '<span class="active">' . __('Active', 'wc1c') . '</span>';
+					$status_return = '<span class="active">' . $status . '</span>';
 				}
-				if($item['status'] == 'inactive')
+				if($item['status'] === 'inactive')
 				{
-					$status_return = '<span class="inactive">' . __('Inactive', 'wc1c') . '</span>';
+					$status_return = '<span class="inactive">' . $status . '</span>';
+				}
+				if($item['status'] === 'processing')
+				{
+					$status_return = '<span class="inactive">' . $status . '</span>';
 				}
 
 				return $status_return;
@@ -79,10 +84,10 @@ class Wc1c_Admin_Configurations_Table extends Wc1c_Admin_Abstract_Table
 			case 'date_create':
 			case 'date_activity':
 			case 'date_modify':
-				return sprintf( __( '%s <br/><span class="wc1c-time">Time: %s</span>', 'wc1c' ), date_i18n( 'Y-m-d', strtotime( $item[ $column_name ] ) ), date_i18n( 'H:i:s', strtotime( $item[ $column_name ] ) ) );
+			return sprintf(__('%s <br/><span class="wc1c-time">Time: %s</span>', 'wc1c'), date_i18n('Y-m-d', strtotime($item[$column_name])), date_i18n('H:i:s', strtotime($item[$column_name])));
 
 			default:
-				return print_r( $item, true );
+				return print_r($item, true);
 		}
 	}
 
