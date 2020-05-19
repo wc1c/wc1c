@@ -146,11 +146,17 @@ final class Wc1c_Admin
 		 */
 		$this->init_sections();
 
-		try
+		/**
+		 * Admin inject
+		 */
+		if(WC1C()->settings()->get('admin_inject', 'yes') === 'yes')
 		{
-			$inject = new Wc1c_Admin_Inject();
+			try
+			{
+				$inject = new Wc1c_Admin_Inject();
+			}
+			catch(Exception $e){}
 		}
-		catch(Exception $e){}
 
 		// hook
 		do_action('wc1c_admin_after_init');

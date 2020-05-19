@@ -274,6 +274,15 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 			'default' => 'yes'
 		);
 
+		$fields['admin_inject'] = array
+		(
+			'title' => __('Admin inject', 'wc1c'),
+			'type' => 'checkbox',
+			'label' => __('Enable', 'wc1c'),
+			'description' => __('Embedding information from the plugin in the admin panel interface.', 'wc1c'),
+			'default' => 'yes'
+		);
+
 		$fields['logger'] = array
 		(
 			'title' => __('Logging level', 'wc1c'),
