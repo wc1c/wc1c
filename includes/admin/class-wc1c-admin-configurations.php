@@ -85,7 +85,7 @@ class Wc1c_Admin_Configurations
 	 */
 	public function init_current_action()
 	{
-		$do_action = wc1c_get_var($_GET['action'], 'list');
+		$do_action = wc1c_get_var($_GET['do_action'], 'list');
 
 		if(in_array($do_action, $this->get_actions()))
 		{
