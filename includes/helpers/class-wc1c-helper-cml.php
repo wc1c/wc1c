@@ -22,7 +22,7 @@ class Wc1c_Helper_Cml
 	 *
 	 * @return string
 	 */
-	private function file_type_detect($file_name)
+	public function file_type_detect($file_name)
 	{
 		$types = array('import', 'offers', 'prices', 'rests', 'import_files');
 		foreach($types as $type)
