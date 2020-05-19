@@ -146,6 +146,12 @@ final class Wc1c_Admin
 		 */
 		$this->init_sections();
 
+		try
+		{
+			$inject = new Wc1c_Admin_Inject();
+		}
+		catch(Exception $e){}
+
 		// hook
 		do_action('wc1c_admin_after_init');
 	}
@@ -444,6 +450,7 @@ final class Wc1c_Admin
 		 * Other
 		 */
 		include_once WC1C_PLUGIN_PATH . 'includes/functions-wc1c-admin.php';
+		include_once WC1C_PLUGIN_PATH . 'includes/admin/class-wc1c-admin-inject.php';
 
 		/**
 		 * Configurations section
