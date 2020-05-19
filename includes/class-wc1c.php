@@ -145,6 +145,10 @@ final class Wc1c
 		/**
 		 * Helpers
 		 */
+		include_once WC1C_PLUGIN_PATH . 'includes/helpers/class-wc1c-helper-attributes.php';
+		include_once WC1C_PLUGIN_PATH . 'includes/helpers/class-wc1c-helper-products.php';
+		include_once WC1C_PLUGIN_PATH . 'includes/helpers/class-wc1c-helper-category.php';
+		include_once WC1C_PLUGIN_PATH . 'includes/helpers/class-wc1c-helper-images.php';
 		include_once WC1C_PLUGIN_PATH . 'includes/helpers/class-wc1c-helper-cml.php';
 
 		/**
