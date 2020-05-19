@@ -690,9 +690,10 @@ final class Wc1c
 
 				if($configuration_id !== 0)
 				{
-					$options = $this->get_configurations($configuration_id);
+					$configuration = $this->get_configurations($configuration_id);
 
-					$init_schema->set_options($options->get_options());
+					$init_schema->set_configuration($configuration);
+					$init_schema->set_options($configuration->get_options());
 					$init_schema->set_configuration_prefix('wc1c_configuration_' . $configuration_id);
 					$init_schema->set_prefix('wc1c_prefix_' . $schema_id . '_' . $configuration_id);
 				}
