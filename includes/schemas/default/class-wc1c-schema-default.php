@@ -828,7 +828,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 *
 	 * @return boolean|int
 	 */
-	public function extract_zip($zip_file_path)
+	private function extract_zip($zip_file_path)
 	{
 		$zip_archive = zip_open($zip_file_path);
 
@@ -900,7 +900,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 *
 	 * @return boolean
 	 */
-	public function extract_zip_xml($zip_arc, $zip_entry, $name)
+	private function extract_zip_xml($zip_arc, $zip_entry, $name)
 	{
 		$uploads_files_dir = WC1C()->environment()->get('wc1c_current_schema_upload_directory'). '/catalog/';
 
@@ -968,7 +968,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 *
 	 * @return boolean
 	 */
-	public function extract_zip_image($zipArc, $zip_entry, $name)
+	private function extract_zip_image($zipArc, $zip_entry, $name)
 	{
 		/**
 		 * Extract to dir
