@@ -268,7 +268,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 *
 	 * @return Wc1c_Schema_Logger|null
 	 */
-	public function logger()
+	protected function logger()
 	{
 		return $this->logger;
 	}
@@ -550,7 +550,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 *
 	 * @return void
 	 */
-	public function api_catalog_mode_file()
+	private function api_catalog_mode_file()
 	{
 		if($this->api_check_auth_key() === false)
 		{
@@ -689,7 +689,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	/**
 	 * Catalog import
 	 */
-	public function api_catalog_mode_import()
+	private function api_catalog_mode_import()
 	{
 		if($this->api_check_auth_key() === false)
 		{
@@ -807,7 +807,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 *
 	 * @return string
 	 */
-	public function file_type_detect($file_name)
+	private function file_type_detect($file_name)
 	{
 		$types = array('import', 'offers', 'prices', 'rests', 'import_files');
 		foreach($types as $type)
