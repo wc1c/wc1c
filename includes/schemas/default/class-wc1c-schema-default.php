@@ -20,14 +20,14 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 *
 	 * @var string
 	 */
-	public $time;
+	private $time;
 
 	/**
 	 * Current import data
 	 *
 	 * @var array
 	 */
-	public $current_data = [];
+	private $current_data = [];
 
 	/**
 	 * Main schema directory
