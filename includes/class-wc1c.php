@@ -1261,7 +1261,11 @@ final class Wc1c
 		}
 
 		$available_helpers = [
-			'cml' => 'Wc1c_Helper_Cml'
+			'cml' => 'Wc1c_Helper_Cml',
+			'products' => 'Wc1c_Helper_Products',
+			'attributes' => 'Wc1c_Helper_Attributes',
+			'category' => 'Wc1c_Helper_Category',
+			'images' => 'Wc1c_Helper_Images'
 		];
 
 		if(!array_key_exists($helper_id, $available_helpers))
