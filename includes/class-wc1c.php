@@ -77,6 +77,13 @@ final class Wc1c
 	private $api = null;
 
 	/**
+	 * Loaded helpers
+	 *
+	 * @var array
+	 */
+	private $helpers = [];
+
+	/**
 	 * Main Wc1c instance
 	 *
 	 * @return Wc1c
@@ -134,6 +141,11 @@ final class Wc1c
 		include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-database.php';
 		include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-configuration.php';
 		include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-settings.php';
+
+		/**
+		 * Helpers
+		 */
+		include_once WC1C_PLUGIN_PATH . 'includes/helpers/class-wc1c-helper-cml.php';
 
 		/**
 		 * Schemas
@@ -1230,5 +1242,92 @@ final class Wc1c
 		}
 
 		throw new Exception('set_extensions: $extensions is not valid');
+	}
+
+	/**
+	 * @param string $helper_id
+	 *
+	 * @throws Exception
+	 */
+	private function load_helpers($helper_id = '')
+	{
+		try
+		{
+			$helpers = $this->get_helpers();
+		}
+		catch(Exception $e)
+		{
+			throw new Exception('load_helpers: exception - ' . $e->getMessage());
+		}
+
+		$available_helpers = [
+			'cml' => 'Wc1c_Helper_Cml'
+		];
+
+		if(!array_key_exists($helper_id, $available_helpers))
+		{
+			throw new Exception('load_helpers: helper is unavailable by id - ' . $helper_id);
+		}
+
+		$helpers[$helper_id] = new $available_helpers[$helper_id]();
+
+		try
+		{
+			$this->set_helpers($helpers);
+		}
+		catch(Exception $e)
+		{
+			throw new Exception('load_helpers: exception - ' . $e->getMessage());
+		}
+	}
+
+	/**
+	 * @param string $helper_id
+	 *
+	 * @return array|mixed
+	 *
+	 * @throws Exception
+	 */
+	public function get_helpers($helper_id = '')
+	{
+		if('' !== $helper_id)
+		{
+			if(array_key_exists($helper_id, $this->helpers))
+			{
+				return $this->helpers[$helper_id];
+			}
+
+			try
+			{
+				$this->load_helpers($helper_id);
+			}
+			catch(Exception $e)
+			{
+				throw new Exception('get_helpers: $helper_id is unavailable');
+			}
+
+			return $this->helpers[$helper_id];
+		}
+
+		return $this->helpers;
+	}
+
+	/**
+	 * @param array $helpers
+	 *
+	 * @throws Exception
+	 *
+	 * @return bool
+	 */
+	public function set_helpers($helpers)
+	{
+		if(is_array($helpers))
+		{
+			$this->helpers = $helpers;
+
+			return true;
+		}
+
+		throw new Exception('set_helpers: $helpers is not valid');
 	}
 }
