@@ -16,6 +16,13 @@ abstract class Wc1c_Abstract_Schema
 	private $initialized = false;
 
 	/**
+	 * Current configuration
+	 *
+	 * @var null|Wc1c_Configuration
+	 */
+	private $configuration = null;
+
+	/**
 	 * Unique schema id
 	 *
 	 * @var string
@@ -286,5 +293,21 @@ abstract class Wc1c_Abstract_Schema
 	public function set_schema_prefix($schema_prefix)
 	{
 		$this->schema_prefix = $schema_prefix;
+	}
+
+	/**
+	 * @return Wc1c_Configuration|null
+	 */
+	public function configuration()
+	{
+		return $this->configuration;
+	}
+
+	/**
+	 * @param Wc1c_Configuration|null $configuration
+	 */
+	public function set_configuration($configuration)
+	{
+		$this->configuration = $configuration;
 	}
 }
