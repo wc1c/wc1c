@@ -41,7 +41,7 @@ class Wc1c_Api
 
 			if('yes' !== WC1C()->settings()->get('api', 'yes'))
 			{
-				die('Api offline');
+				die(__('Api offline', 'wc1c'));
 			}
 
 			try
@@ -50,14 +50,14 @@ class Wc1c_Api
 			}
 			catch(Exception $e)
 			{
-				die('Api unavailable');
+				die(__('Api unavailable', 'wc1c'));
 			}
 
 			WC1C()->environment()->set('current_configuration_id', $wc1c_api);
 
 			if($configuration->get_status() !== 'active')
 			{
-				die('Configuration offline');
+				die(__('Configuration offline', 'wc1c'));
 			}
 
 			try
@@ -125,7 +125,7 @@ class Wc1c_Api
 			 */
 			if(false === $action)
 			{
-				die('Api request is very bad!');
+				die(__('Api request is very bad!', 'wc1c'));
 			}
 			die();
 		}
