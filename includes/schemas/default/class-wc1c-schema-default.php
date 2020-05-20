@@ -780,6 +780,78 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 				return true;
 			}
 
+			/**
+			 * Классификатор
+			 *
+			 * cml:Классификатор
+			 */
+			if($xml_data->Классификатор)
+			{
+				$this->logger()->info('file_import: classifier_processing start');
+
+				try
+				{
+					$this->parse_xml_classifier($xml_data->Классификатор);
+				}
+				catch(Exception $e)
+				{
+					$this->logger()->error('file_import: exception - ' . $e->getMessage());
+					return false;
+				}
+
+				$this->logger()->info('file_import: classifier_processing end');
+			}
+
+			/**
+			 * Каталог
+			 *
+			 * cml:Каталог
+			 */
+			if($xml_data->Каталог)
+			{
+				$this->logger()->info('file_import: catalog_processing start');
+
+				try
+				{
+					$this->parse_xml_catalog($xml_data->Каталог);
+				}
+				catch(Exception $e)
+				{
+					$this->logger()->info('file_import:exception - ' . $e->getMessage());
+					return false;
+				}
+
+				$this->logger()->info('file_import: catalog_processing end, success');
+			}
+
+			/**
+			 * Предложения
+			 *
+			 * cml:ПакетПредложений
+			 */
+			if($xml_data->ПакетПредложений)
+			{
+				$this->logger()->info('file_import: offers_package_processing start');
+
+				try
+				{
+					$this->parse_xml_offers_package($xml_data->ПакетПредложений);
+				}
+				catch(Exception $e)
+				{
+					$this->logger()->info('file_import: exception - ' . $e->getMessage());
+					return false;
+				}
+
+				$this->logger()->info('file_import: offers_package_processing end, success');
+			}
+
+			if($this->get_options('delete_files_after_import', 'no') === 'yes')
+			{
+				$this->logger()->info('file_import: delete file - ' . $file_path);
+				unlink($file_path);
+			}
+
 			$this->logger()->info('file_import: end & true');
 			return true;
 		}
