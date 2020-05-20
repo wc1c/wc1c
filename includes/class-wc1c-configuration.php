@@ -20,7 +20,7 @@ class Wc1c_Configuration
 	 */
 	private $available_statuses = array
 	(
-		'draft', 'active', 'inactive'
+		'draft', 'active', 'inactive', 'error', 'processing'
 	);
 
 	/**
