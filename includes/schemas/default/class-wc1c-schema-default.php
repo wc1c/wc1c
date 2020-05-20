@@ -524,7 +524,11 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			$this->api_response_by_type('failure', 'Авторизация не пройдена');
 		}
 
-		$zip_support = class_exists('ZipArchive') ? true : false;
+		$zip_support = false;
+		if(class_exists('ZipArchive'))
+		{
+			$zip_support = true;
+		}
 
 		$data[0] = "zip=no";
 		if($zip_support)
