@@ -18,10 +18,10 @@ class Wc1c_Configuration
 	/**
 	 * Available configuration statuses
 	 */
-	private $available_statuses = array
-	(
+	private $available_statuses =
+	[
 		'draft', 'active', 'inactive', 'error', 'processing'
-	);
+	];
 
 	/**
 	 * Wc1c_Configuration constructor
