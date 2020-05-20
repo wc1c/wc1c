@@ -744,7 +744,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 		$this->logger()->info('file_import: type_file - ' . $type_file);
 
-		if(is_file($file_path) && $type_file != '')
+		if(is_file($file_path) && $type_file !== '')
 		{
 			libxml_use_internal_errors(true);
 
