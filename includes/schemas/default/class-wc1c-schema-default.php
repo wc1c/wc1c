@@ -16,6 +16,11 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	private $logger = null;
 
 	/**
+	 * @var string
+	 */
+	private $import_full = true;
+
+	/**
 	 * Current time
 	 *
 	 * @var string
