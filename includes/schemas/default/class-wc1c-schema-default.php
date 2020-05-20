@@ -527,23 +527,23 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		$zip_support = false;
 		if(class_exists('ZipArchive'))
 		{
+			$this->logger()->info('api_mode_init: ZipArchive available');
 			$zip_support = true;
 		}
 
-		$data[0] = "zip=no";
-		if($zip_support)
+		$data[0] = 'zip=no';
+		if($zip_support && $this->get_options('file_zip', 'no') === 'yes')
 		{
-			$this->logger()->info('ZipArchive: yes');
-			$data[0] = $this->get_options('file_zip') === 'yes' ?  "zip=yes" : "zip=no";
+			$data[0] = 'zip=yes';
 		}
 
 		$manual_size = wc1c_convert_size($this->get_options('post_file_max_size'));
 		$post_max_size = $this->get_post_file_size_max();
 
-		$data[1] = "file_limit=" . $post_max_size;
+		$data[1] = 'file_limit=' . $post_max_size;
 		if($this->get_options('post_file_max_size') && $manual_size <= $post_max_size)
 		{
-			$data[1] = "file_limit=" . $manual_size;
+			$data[1] = 'file_limit=' . $manual_size;
 		}
 
 		$this->logger()->debug('api_mode_init echo', $data);
