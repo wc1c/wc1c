@@ -414,8 +414,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		 */
 		if($type === 'catalog' && $mode !== '')
 		{
-			$this->logger()->info('api_handler: $type=' . $type);
-			$this->logger()->info('api_handler: $mode=' . $mode);
+			$this->logger()->info('api_handler: $type=' . $type . ' $mode=' . $mode);
 
 			switch ($mode)
 			{
