@@ -521,7 +521,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	{
 		if($this->api_check_auth_key() === false)
 		{
-			$this->api_response_by_type('failure', 'Авторизация не пройдена');
+			$this->api_response_by_type('failure', __('Authorization failed', 'wc1c'));
 		}
 
 		$zip_support = false;
