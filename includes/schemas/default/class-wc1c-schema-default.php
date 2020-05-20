@@ -861,6 +861,87 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	}
 
 	/**
+	 * Загрузка каталога
+	 *
+	 * Каталог товаров содержит перечень товаров. Может составляться разными предприятиями (например, каталог продукции фирмы «1С»).
+	 * У каталога всегда определен владелец, а товары могут описываться по классификатору.
+	 *
+	 * @throws Exception
+	 *
+	 * @param $xml_data
+	 *
+	 * @return bool
+	 */
+	private function parse_xml_catalog($xml_data)
+	{
+		// Глобально уникальный идентификатор каталога (рекомендуется использовать GUID)
+		$data['catalog_guid'] = (string) $xml_data->Ид;
+
+		// Идентификатор классификатора, в соответствии с которым описываются товары
+		$data['classifier_guid'] = (string) $xml_data->ИдКлассификатора;
+
+		// Наименование каталога
+		$data['catalog_name'] = (string) $xml_data->Наименование;
+
+		// Описание каталога
+		$data['catalog_description']= '';
+		if($xml_data->Описание)
+		{
+			$data['catalog_description'] = (string) $xml_data->Описание;
+		}
+
+		$this->logger()->info('parse_xml_catalog: catalog_guid ' . $data['catalog_guid']);
+		$this->logger()->info('parse_xml_catalog: classifier_guid ' . $data['classifier_guid']);
+		$this->logger()->info('parse_xml_catalog: catalog_name ' . $data['catalog_name']);
+
+		/**
+		 * Импорт товаров
+		 */
+		if($xml_data->Товары)
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Разбор пакета предложений
+	 *
+	 * @param $xml_data
+	 *
+	 * @return bool
+	 */
+	private function parse_xml_offers_package($xml_data)
+	{
+		$offers_pack['offers_package_name'] = (string) $xml_data->Наименование;
+		$offers_pack['offers_package_guid'] = (string) $xml_data->Ид;
+		$offers_pack['catalog_guid'] = (string) $xml_data->ИдКаталога;
+		$offers_pack['classifier_guid'] = (string) $xml_data->ИдКлассификатора;
+
+		/*
+		 * Описание пакета педложений
+		 */
+		$data['offers_package_description']= '';
+		if($xml_data->Описание)
+		{
+			$data['offers_package_description'] = (string)$xml_data->Описание;
+		}
+
+		/*
+		 * Загрузка предложений
+		 */
+		if($xml_data->Предложения)
+		{
+			$this->logger()->info('parse_xml_offers_package: $xml_data->Предложения start');
+
+			$this->logger()->info('parse_xml_offers_package: $xml_data->Предложения end');
+		}
+
+		return true;
+	}
+
+	/**
 	 * Проверка файла по стандарту
 	 *
 	 * @param $xml
@@ -899,6 +980,55 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			}
 		}
 		return '';
+	}
+
+	/**
+	 * Обработка классификатора
+	 *
+	 * @throws
+	 *
+	 * @param $xml_data
+	 *
+	 * @return array|bool
+	 */
+	private function parse_xml_classifier($xml_data)
+	{
+		$data['classifier_guid'] = (string)$xml_data->Ид;
+		$data['classifier_name'] = (string)$xml_data->Наименование;
+
+		$this->logger()->info('parse_xml_classifier: classifier_guid ' . $data['classifier_guid']);
+		$this->logger()->info('parse_xml_classifier: classifier_name ' . $data['classifier_name']);
+
+		/**
+		 * Группы
+		 * Определяет иерархическую структуру групп номенклатуры
+		 *
+		 * cml:Группа
+		 */
+		if($xml_data->Группы)
+		{
+			$this->logger()->info('parse_xml_classifier: classifier_processing_groups start');
+
+
+			$this->logger()->info('parse_xml_classifier: classifier_processing_groups end, success');
+		}
+
+		/**
+		 * Свойства
+		 * Содержит коллекцию свойств, значения которых можно или нужно указать ДЛЯ ВСЕХ товаров в
+		 * каталоге, пакете предложений, документах
+		 *
+		 * cml:Свойство
+		 */
+		if($xml_data->Свойства)
+		{
+			$this->logger()->info('parse_xml_classifier: classifier_processing_properties start');
+
+
+			$this->logger()->info('parse_xml_classifier: classifier_processing_properties end, success');
+		}
+
+		return $data;
 	}
 
 	/**
