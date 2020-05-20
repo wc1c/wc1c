@@ -565,7 +565,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 			if(!is_dir($schema_upload_dir))
 			{
-				$this->api_response_by_type('failure', 'Невозможно создать директорию: ' . $schema_upload_dir);
+				$this->api_response_by_type('failure', __('Unable to create a directory: ', 'wc1c') . $schema_upload_dir);
 			}
 		}
 
