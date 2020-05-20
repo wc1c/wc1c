@@ -706,26 +706,23 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 		$filename = wc1c_get_var($_GET['filename']);
 
-		/**
-		 * Full file path to import
-		 */
 		$file = $this->get_upload_directory() . '/catalog/' . sanitize_file_name($filename);
 
-		/**
-		 * Импортируем файл
-		 */
-		$result_import = $this->file_import($file);
-
-		/**
-		 * Result response
-		 */
-		if($result_import !== false)
+		try
 		{
-			$this->logger()->info('api_catalog_mode_import: end');
-			$this->api_response_by_type('success', 'Импорт успешно завершен.');
+			$result_import = $this->file_import($file);
+
+			if($result_import !== false)
+			{
+				$this->logger()->info('api_catalog_mode_import: end');
+				$this->api_response_by_type('success', 'Импорт успешно завершен.');
+			}
+		}
+		catch(Exception $e)
+		{
+			$this->logger()->error('api_catalog_mode_import: end', $e);
 		}
 
-		$this->logger()->error('api_catalog_mode_import: end');
 		$this->api_response_by_type('failure', 'Импорт завершен с ошибкой.');
 	}
 
@@ -733,6 +730,8 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 * Импорт указанного файла
 	 *
 	 * @param $file_path
+	 *
+	 * @throws Exception
 	 *
 	 * @return mixed
 	 */
@@ -746,6 +745,16 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 		if(is_file($file_path) && $type_file !== '')
 		{
+			if(!defined('LIBXML_VERSION'))
+			{
+				throw new Exception('file_import: LIBXML_VERSION not defined, end & false');
+			}
+
+			if(!function_exists('libxml_use_internal_errors'))
+			{
+				throw new Exception('file_import: libxml_use_internal_errors, end & false');
+			}
+
 			libxml_use_internal_errors(true);
 
 			$xml_data = @simplexml_load_file($file_path);
@@ -762,8 +771,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			}
 			catch(Exception $e)
 			{
-				$this->logger()->error('file_import: CML version error');
-				return false;
+				throw new Exception('file_import: exception - ' . $e->getMessage());
 			}
 
 			if($this->get_options('skip_file_processing', 'yes') === 'yes')
