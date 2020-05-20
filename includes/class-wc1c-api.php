@@ -60,6 +60,8 @@ class Wc1c_Api
 				die(__('Configuration offline', 'wc1c'));
 			}
 
+			$configuration->set_date_activity()->save();
+
 			try
 			{
 				WC1C()->init_schemas($configuration->get_schema());
