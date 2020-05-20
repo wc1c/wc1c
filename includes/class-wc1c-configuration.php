@@ -40,10 +40,14 @@ class Wc1c_Configuration
 	 * Load raw data
 	 *
 	 * @param $data
+	 *
+	 * @return $this
 	 */
 	public function set_data($data)
 	{
 		$this->data = $data;
+
+		return $this;
 	}
 
 	/**
@@ -131,10 +135,14 @@ class Wc1c_Configuration
 	 * Set configuration statuses
 	 *
 	 * @param array $available_statuses
+	 *
+	 * @return $this
 	 */
 	public function set_available_statuses($available_statuses)
 	{
 		$this->available_statuses = $available_statuses;
+
+		return $this;
 	}
 
 	/**
@@ -268,6 +276,8 @@ class Wc1c_Configuration
 	 * Set configuration activity date
 	 *
 	 * @param mixed $date_activity
+	 *
+	 * @return $this
 	 */
 	public function set_date_activity($date_activity = null)
 	{
@@ -277,12 +287,16 @@ class Wc1c_Configuration
 		}
 
 		$this->data['date_activity'] = $date_activity;
+
+		return $this;
 	}
 
 	/**
 	 * Set configuration modify date
 	 *
 	 * @param mixed $date_modify
+	 *
+	 * @return $this
 	 */
 	public function set_date_modify($date_modify = null)
 	{
@@ -292,12 +306,16 @@ class Wc1c_Configuration
 		}
 
 		$this->data['date_modify'] = $date_modify;
+
+		return $this;
 	}
 
 	/**
 	 * Set configuration create date
 	 *
 	 * @param mixed $date_create
+	 *
+	 * @return $this
 	 */
 	public function set_date_create($date_create = null)
 	{
@@ -307,6 +325,8 @@ class Wc1c_Configuration
 		}
 
 		$this->data['date_create'] = $date_create;
+
+		return $this;
 	}
 
 	/**
@@ -344,47 +364,37 @@ class Wc1c_Configuration
 	 */
 	public function save()
 	{
-		/**
-		 * Activity
-		 */
-		$this->set_date_activity(current_time('mysql'));
-
-		/**
-		 * Validate data
-		 */
 		if(true !== $this->check())
 		{
 			return false;
 		}
 
-		/**
-		 * New or update
-		 */
 		if(false === $this->get_id())
 		{
 			$this->set_date_create(current_time('mysql'));
+			$this->set_date_modify(current_time('mysql'));
+			$this->set_date_activity(current_time('mysql'));
+
 			$insert_result = WC1C_Db()->insert(WC1C_Db()->base_prefix . 'wc1c', $this->get_data());
 
 			if($insert_result !== false)
 			{
 				return true;
 			}
-		}
-		else
-		{
-			$this->set_date_modify(current_time('mysql'));
-			$update_result = WC1C_Db()->update(WC1C_Db()->base_prefix . 'wc1c', $this->get_data(),
-				array
-				(
-					'config_id' => $this->get_id(),
-					'site_id' => '0'
-				)
-			);
 
-			if($update_result !== false)
-			{
-				return true;
-			}
+			return false;
+		}
+
+		$update_result = WC1C_Db()->update(WC1C_Db()->base_prefix . 'wc1c', $this->get_data(),
+		    [
+				'config_id' => $this->get_id(),
+				'site_id' => '0'
+			]
+		);
+
+		if($update_result !== false)
+		{
+			return true;
 		}
 
 		return false;
