@@ -688,13 +688,13 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 		$this->logger()->info('api_catalog_mode_import: start');
 
-		if(wc1c_get_var($_GET['filename'], '') === '')
+		$filename = wc1c_get_var($_GET['filename']);
+
+		if($filename === '')
 		{
 			$this->logger()->warning('Import filename: is empty');
 			$this->api_response_by_type('failure', __('Import filename is empty.', 'wc1c'));
 		}
-
-		$filename = wc1c_get_var($_GET['filename']);
 
 		$file = $this->get_upload_directory() . '/catalog/' . sanitize_file_name($filename);
 
