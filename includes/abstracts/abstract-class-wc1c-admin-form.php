@@ -222,11 +222,10 @@ abstract class Wc1c_Admin_Abstract_Form
 			if(method_exists($this, 'generate_' . $type . '_html'))
 			{
 				$html .= $this->{'generate_' . $type . '_html'}($k, $v);
+
+				continue;
 			}
-			else
-			{
-				$html .= $this->generate_text_html($k, $v);
-			}
+			$html .= $this->generate_text_html($k, $v);
 		}
 
 		if($echo !== true)
