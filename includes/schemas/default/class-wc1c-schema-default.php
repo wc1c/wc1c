@@ -445,7 +445,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		 */
 		if($type === 'catalog' && $mode !== '')
 		{
-			switch ($mode)
+			switch($mode)
 			{
 				case 'checkauth':
 					$this->api_check_auth();
