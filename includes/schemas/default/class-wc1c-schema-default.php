@@ -577,7 +577,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			$data[1] = 'file_limit=' . $manual_size;
 		}
 
-		$this->logger()->debug('api_mode_init echo', $data);
+		$this->logger()->debug('api_mode_init: $data', $data);
 
 		echo $data[0] . "\n";
 		echo $data[1] . "\n";
