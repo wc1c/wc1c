@@ -619,59 +619,30 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 		$schema_upload_file_path = $schema_upload_dir . $filename;
 
-		$this->logger()->info('Upload file: ' . $schema_upload_file_path);
+		$this->logger()->info('api_catalog_mode_file: Upload file: $schema_upload_file_path - ' . $schema_upload_file_path);
 
-		/**
-		 *  Если изображения, готовим каталоги
-		 */
 		if(strpos($filename, 'import_files') !== false)
 		{
-			$this->logger()->info('Upload file: clean_upload_file_tree');
-
-			/**
-			 * Чистим каталоги
-			 */
+			$this->logger()->info('api_catalog_mode_file: clean_upload_file_tree');
 			$this->clean_upload_file_tree(dirname($filename), $schema_upload_dir);
 		}
 
-		/**
-		 * Разрешена ли запись файлов
-		 */
 		if(!is_writable($schema_upload_dir))
 		{
-			$this->logger()->info('Directory: ' . $schema_upload_dir . " is not writable!");
+			$this->logger()->info('api_catalog_mode_file: directory: ' . $schema_upload_dir . " is not writable!");
 			$this->api_response_by_type('failure', 'Невозможно записать файлы в: ' . $schema_upload_dir);
 		}
 
-		/**
-		 * Получаем данные из потока ввода
-		 */
 		$file_data = file_get_contents('php://input');
 
-		/**
-		 * Если пришли не пустые данные
-		 */
 		if($file_data !== false)
 		{
-			/**
-			 * Записываем в файл
-			 */
 			$file_size = file_put_contents($schema_upload_file_path, $file_data, LOCK_EX);
 
-			/**
-			 * Файл не пустой
-			 */
 			if($file_size)
 			{
-				/**
-				 * Logger
-				 */
-				$this->logger()->info('$file_size: ' . $file_size);
+				$this->logger()->info('api_catalog_mode_file: $file_size: ' . $file_size);
 
-				/**
-				 * Назначаем права на файл
-				 * todo: переписать
-				 */
 				@chmod($schema_upload_file_path , 0777);
 
 				/**
@@ -713,9 +684,6 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			$this->api_response_by_type('failure', 'Не удалось записать файл: ' . $schema_upload_file_path);
 		}
 
-		/**
-		 * Logger
-		 */
 		$this->logger()->info('File empty: ' . $schema_upload_file_path);
 		$this->api_response_by_type('failure', 'Пришли пустые данные. Повторите попытку.');
 	}
