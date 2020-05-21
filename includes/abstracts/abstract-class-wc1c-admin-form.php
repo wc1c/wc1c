@@ -418,6 +418,47 @@ abstract class Wc1c_Admin_Abstract_Form
 	}
 
 	/**
+	 * Generate RAW HTML
+	 *
+	 * @param string $key Field key
+	 * @param array $data Field data
+	 *
+	 * @return string
+	 */
+	public function generate_raw_html($key, $data)
+	{
+		$field_key = $this->get_prefix_field_key($key);
+
+		$defaults = array
+		(
+			'title' => '',
+			'type' => 'raw',
+			'desc_tip' => false,
+			'description' => '',
+		);
+
+		$data = wp_parse_args($data, $defaults);
+
+		ob_start();
+		?>
+        <tr valign="top">
+            <th scope="row" class="titledesc">
+                <label for="<?php echo esc_attr( $field_key ); ?>"><?php echo wp_kses_post( $data['title'] ); ?> <?php echo $this->get_tooltip_html( $data ); // WPCS: XSS ok. ?></label>
+            </th>
+            <td class="forminp">
+                <fieldset>
+                    <legend class="screen-reader-text"><span><?php echo wp_kses_post( $data['title'] ); ?></span></legend>
+                    <?php echo wp_kses_post($data['raw']); ?>
+					<?php echo $this->get_description_html($data); ?>
+                </fieldset>
+            </td>
+        </tr>
+		<?php
+
+		return ob_get_clean();
+	}
+
+	/**
 	 * Generate Textarea HTML
 	 *
 	 * @param string $key Field key
