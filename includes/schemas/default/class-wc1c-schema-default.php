@@ -72,6 +72,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		if(true === is_wc1c_admin_request())
 		{
 			add_filter('wc1c_admin_configurations-update_form_load_fields', array($this, 'configurations_fields_auth'), 10, 1);
+			add_filter('wc1c_admin_configurations-update_form_load_fields', array($this, 'configurations_fields_processing'), 10, 1);
 			add_filter('wc1c_admin_configurations-update_form_load_fields', array($this, 'configurations_fields_tech'), 10, 1);
 		}
 
@@ -148,6 +149,43 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	}
 
 	/**
+	 * Configuration fields: processing
+	 *
+	 * @param $fields
+	 *
+	 * @return array
+	 */
+	public function configurations_fields_processing($fields)
+	{
+		$fields['title_processing'] = array
+		(
+			'title' => __('Processing details', 'wc1c'),
+			'type' => 'title',
+			'description' => __('Changing the behavior of the file processing.', 'wc1c'),
+		);
+
+		$fields['skip_file_processing'] = array
+		(
+			'title' => __('Skip processing of files', 'wc1c'),
+			'type' => 'checkbox',
+			'label' => __('Check the checkbox if want to enable this feature. Disabled by default.', 'wc1c'),
+			'description' => __('Disabling the actual processing of CommerceML files. Files will be accepted, but instead of processing them, they will be skipped with successful completion of processing.', 'wc1c'),
+			'default' => 'no'
+		);
+
+		$fields['delete_files_after_import'] = array
+		(
+			'title' => __('Deleting files after processing', 'wc1c'),
+			'type' => 'checkbox',
+			'label' => __('Check the checkbox if want to enable this feature. Disabled by default.', 'wc1c'),
+			'description' => __('If deletion is disabled, the exchange files will remain in the directories until the next exchange. Otherwise, all processed files will be deleted immediately after error-free processing.', 'wc1c'),
+			'default' => 'no'
+		);
+
+		return $fields;
+	}
+
+	/**
 	 * Configuration fields: tech
 	 *
 	 * @param $fields
@@ -160,7 +198,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		(
 			'title' => __('Technical details', 'wc1c'),
 			'type' => 'title',
-			'description' => __('Changing data processing behavior for compatibility of the environment and other systems.', 'wc1c'),
+			'description' => __('Changing processing behavior for compatibility of the environment and other systems.', 'wc1c'),
 		);
 
 		$fields['logger'] = array
@@ -181,15 +219,6 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 				'550' => __('ALERT', 'wc1c'),
 				'600' => __('EMERGENCY', 'wc1c')
 			)
-		);
-
-		$fields['skip_file_processing'] = array
-		(
-			'title' => __('Skip processing of files', 'wc1c'),
-			'type' => 'checkbox',
-			'label' => __('Check the checkbox if want to enable this feature. Disabled by default.', 'wc1c'),
-			'description' => __('Disabling the actual processing of CommerceML files. Files will be accepted, but instead of processing them, they will be skipped with successful completion of processing.', 'wc1c'),
-			'default' => 'no'
 		);
 
 		$fields['convert_cp1251'] = array
@@ -216,15 +245,6 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			'type' => 'checkbox',
 			'label' => __('Check the checkbox if want to enable this feature. Disabled by default.', 'wc1c'),
 			'description' => __('1C can transfer files in archives to reduce the number of HTTP requests and compress data. In this case, the load may increase when unpacking archives, or even it may be impossible to unpack due to server restrictions.', 'wc1c'),
-			'default' => 'no'
-		);
-
-		$fields['delete_files_after_import'] = array
-		(
-			'title' => __('Deleting files after processing', 'wc1c'),
-			'type' => 'checkbox',
-			'label' => __('Check the checkbox if want to enable this feature. Disabled by default.', 'wc1c'),
-			'description' => __('If deletion is disabled, the exchange files will remain in the directories until the next exchange. Otherwise, all processed files will be deleted immediately after error-free processing.', 'wc1c'),
 			'default' => 'no'
 		);
 
