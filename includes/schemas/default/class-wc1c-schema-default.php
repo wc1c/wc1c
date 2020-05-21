@@ -704,13 +704,13 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 			if($result_import !== false)
 			{
-				$this->logger()->info('api_catalog_mode_import: end');
+				$this->logger()->info('api_catalog_mode_import: success');
 				$this->api_response_by_type('success', 'Импорт успешно завершен.');
 			}
 		}
 		catch(Exception $e)
 		{
-			$this->logger()->error('api_catalog_mode_import: end', $e);
+			$this->logger()->error('api_catalog_mode_import: exception - ' . $e->getMessage(), $e);
 		}
 
 		$this->api_response_by_type('failure', 'Импорт завершен с ошибкой.');
