@@ -119,9 +119,10 @@ abstract class Wc1c_Admin_Abstract_Form
 	 *
 	 * @param array $fields
 	 */
-	public function load_fields($fields = array())
+	public function load_fields($fields = [])
 	{
-		$this->set_fields(apply_filters('wc1c_admin_' . $this->get_id() . '_form_load_fields', $fields));
+	    $fields = apply_filters('wc1c_admin_' . $this->get_id() . '_form_load_fields', $fields);
+		$this->set_fields($fields);
 	}
 
 	/**
