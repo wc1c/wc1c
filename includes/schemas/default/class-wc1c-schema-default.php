@@ -619,7 +619,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 		$schema_upload_file_path = $schema_upload_dir . $filename;
 
-		$this->logger()->info('api_catalog_mode_file: Upload file: $schema_upload_file_path - ' . $schema_upload_file_path);
+		$this->logger()->info('api_catalog_mode_file: $schema_upload_file_path - ' . $schema_upload_file_path);
 
 		if(strpos($filename, 'import_files') !== false)
 		{
@@ -629,7 +629,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 		if(!is_writable($schema_upload_dir))
 		{
-			$this->logger()->info('api_catalog_mode_file: directory: ' . $schema_upload_dir . " is not writable!");
+			$this->logger()->info('api_catalog_mode_file: directory - ' . $schema_upload_dir . " is not writable!");
 			$this->api_response_by_type('failure', 'Невозможно записать файлы в: ' . $schema_upload_dir);
 		}
 
@@ -641,50 +641,38 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 			if($file_size)
 			{
-				$this->logger()->info('api_catalog_mode_file: $file_size: ' . $file_size);
+				$this->logger()->info('api_catalog_mode_file: $file_size - ' . $file_size);
 
 				@chmod($schema_upload_file_path , 0777);
 
-				/**
-				 * Если пришел архив, распаковываем
-				 */
 				if(strpos($filename, '.zip') !== false)
 				{
-					/**
-					 * Распаковываем файлы
-					 */
 					$xml_files_result = $this->extract_zip($schema_upload_file_path);
 
-					/**
-					 * Удаляем зип архивы
-					 */
-					if($this->get_options('delete_zip_files_after_import') === 'yes')
+					if($this->get_options('delete_zip_files_after_import', 'no') === 'yes')
 					{
-						$this->logger()->info('File zip deleted: ' . $schema_upload_file_path);
+						$this->logger()->info('api_catalog_mode_file: file zip deleted - ' . $schema_upload_file_path);
 						unlink($schema_upload_file_path);
 					}
 
-					/**
-					 * File not extracted
-					 */
 					if($xml_files_result === false)
 					{
-						$this->logger()->info('Error extract file: ' . $schema_upload_file_path);
+						$this->logger()->info('api_catalog_mode_file: error extract file - ' . $schema_upload_file_path);
 						$this->api_response_by_type('failure');
 					}
 
 					$this->api_response_by_type('success', 'Архив успешно принят и распакован.');
 				}
 
-				$this->logger()->info('Upload file: ' . $schema_upload_file_path . ' success');
+				$this->logger()->info('api_catalog_mode_file: upload file - ' . $schema_upload_file_path . ' success');
 				$this->api_response_by_type('success', 'Файл успешно принят.');
 			}
 
-			$this->logger()->error('Ошибка записи файла: ' . $schema_upload_file_path);
+			$this->logger()->error('api_catalog_mode_file: ошибка записи файла - ' . $schema_upload_file_path);
 			$this->api_response_by_type('failure', 'Не удалось записать файл: ' . $schema_upload_file_path);
 		}
 
-		$this->logger()->info('File empty: ' . $schema_upload_file_path);
+		$this->logger()->info('api_catalog_mode_file: file empty - ' . $schema_upload_file_path);
 		$this->api_response_by_type('failure', 'Пришли пустые данные. Повторите попытку.');
 	}
 
