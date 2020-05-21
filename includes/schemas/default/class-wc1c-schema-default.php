@@ -438,13 +438,13 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			}
 		}
 
+		$this->logger()->info('api_handler: $type=' . $type . ' $mode=' . $mode);
+
 		/**
 		 * Catalog
 		 */
 		if($type === 'catalog' && $mode !== '')
 		{
-			$this->logger()->info('api_handler: $type=' . $type . ' $mode=' . $mode);
-
 			switch ($mode)
 			{
 				case 'checkauth':
