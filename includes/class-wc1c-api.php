@@ -68,6 +68,7 @@ class Wc1c_Api
 			}
 			catch(Exception $e)
 			{
+				WC1C()->logger()->error($e->getMessage(), $e);
 				die('Exception: ' . $e->getMessage());
 			}
 
