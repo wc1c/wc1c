@@ -611,15 +611,12 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		 */
 		if(wc1c_get_var($_GET['filename'], '') === '')
 		{
-			$this->logger()->warning('Filename: is empty');
+			$this->logger()->warning('api_catalog_mode_file: filename is empty');
 			$this->api_response_by_type('failure', __('Filename is empty.', 'wc1c'));
 		}
 
 		$filename = wc1c_get_var($_GET['filename'], '');
 
-		/**
-		 * Full file path
-		 */
 		$schema_upload_file_path = $schema_upload_dir . $filename;
 
 		$this->logger()->info('Upload file: ' . $schema_upload_file_path);
