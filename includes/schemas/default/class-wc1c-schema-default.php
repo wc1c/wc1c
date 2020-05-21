@@ -1037,13 +1037,13 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 		if(is_resource($zip_archive))
 		{
-			$this->logger()->info('Unpack start: ' . $zip_file_path);
+			$this->logger()->info('extract_zip: unpack start - ' . $zip_file_path);
 
 			while($zip_entry = zip_read($zip_archive))
 			{
 				$name = zip_entry_name($zip_entry);
 
-				$this->logger()->info('Unpack file name: ' . $name);
+				$this->logger()->info('extract_zip: unpack file name - ' . $name);
 
 				$import_files = $this->file_type_detect($name);
 
@@ -1069,24 +1069,24 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 				}
 			}
 
-			$this->logger()->info('Unpack end: ' . $zip_file_path);
+			$this->logger()->info('extract_zip: unpack end - ' . $zip_file_path);
 
 			zip_close($zip_archive);
 		}
 		else
 		{
-			$this->logger()->error('Zip_open error: ' . $zip_file_path);
+			$this->logger()->error('extract_zip: Zip_open error - ' . $zip_file_path);
 			return false;
 		}
 
 		if($img_files > 0)
 		{
-			$this->logger()->info('Unpack images count: ' . $img_files);
+			$this->logger()->info('extract_zip: unpack images count - ' . $img_files);
 		}
 		
 		if($error_files > 0)
 		{
-			$this->logger()->error('Unpack error files: ' . $img_files);
+			$this->logger()->error('extract_zip: unpack error files - ' . $img_files);
 			return false;
 		}
 
