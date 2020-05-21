@@ -267,6 +267,17 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			'description' => __('Data for authorization of requests. These settings will connect 1C.', 'wc1c'),
 		);
 
+		$url_raw = get_site_url(null, '/?wc1c-api=' . $this->configuration()->get_id() . '&get_param');
+		$url_raw = '<p class="input-text p-2 bg-light regular-input wc1c_urls">' . $url_raw . '</p>';
+
+		$fields['url_requests'] = array
+		(
+			'title' => __('Requests URL', 'wc1c'),
+			'type' => 'raw',
+			'raw' => $url_raw,
+			'description' => __('This address is entered in the exchange settings on the 1C side. It will receive requests from 1C.', 'wc1c'),
+		);
+
 		$fields['user_login'] = array
 		(
 			'title' => __('Login to connect', 'wc1c'),
