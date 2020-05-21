@@ -586,7 +586,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			$this->api_response_by_type('failure', __('Filename is empty.', 'wc1c'));
 		}
 
-		$filename = wc1c_get_var($_GET['filename']);
+		$filename = wc1c_get_var($_GET['filename'], '');
 
 		/**
 		 * Full file path
