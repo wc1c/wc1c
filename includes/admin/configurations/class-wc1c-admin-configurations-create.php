@@ -109,7 +109,7 @@ class Wc1c_Admin_Configurations_Create extends Wc1c_Admin_Abstract_Form
 		 */
 		foreach($this->get_fields() as $key => $field)
 		{
-			if('title' === $this->get_field_type($field))
+			if('title' === $this->get_field_type($field) || 'raw' === $this->get_field_type($field))
 			{
 				continue;
 			}
