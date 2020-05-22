@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WC1C > integration of WooCommerce with 1C products "
 "(different configurations)\n"
-"POT-Creation-Date: 2020-05-16 14:10+0300\n"
-"PO-Revision-Date: 2020-05-16 15:24+0300\n"
+"POT-Creation-Date: 2020-05-22 12:19+0300\n"
+"PO-Revision-Date: 2020-05-22 12:24+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
 "Language: ru_RU\n"
@@ -23,11 +23,11 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: includes/abstracts/abstract-class-wc1c-admin-form.php:621
+#: includes/abstracts/abstract-class-wc1c-admin-form.php:663
 msgid "Select all"
 msgstr "Выбрать все"
 
-#: includes/abstracts/abstract-class-wc1c-admin-form.php:621
+#: includes/abstracts/abstract-class-wc1c-admin-form.php:663
 msgid "Select none"
 msgstr "Выбрать ничего"
 
@@ -43,27 +43,27 @@ msgstr ""
 msgid "No items found."
 msgstr "Конфигурации не найдены."
 
-#: includes/abstracts/abstract-class-wc1c-admin-table.php:349
+#: includes/abstracts/abstract-class-wc1c-admin-table.php:350
 msgid "Select bulk action"
 msgstr "Выбрать действие"
 
-#: includes/abstracts/abstract-class-wc1c-admin-table.php:351
+#: includes/abstracts/abstract-class-wc1c-admin-table.php:352
 msgid "Bulk Actions"
 msgstr ""
 
-#: includes/abstracts/abstract-class-wc1c-admin-table.php:362
+#: includes/abstracts/abstract-class-wc1c-admin-table.php:363
 msgid "Apply"
 msgstr "Применить"
 
-#: includes/abstracts/abstract-class-wc1c-admin-table.php:418
-#: includes/abstracts/abstract-class-wc1c-admin-table.php:1128
+#: includes/abstracts/abstract-class-wc1c-admin-table.php:419
+#: includes/abstracts/abstract-class-wc1c-admin-table.php:1129
 msgid "Show more details"
 msgstr "Показать больше деталей"
 
 #. translators: %s: Number of items.
 #. translators: Number of items.
-#: includes/abstracts/abstract-class-wc1c-admin-table.php:528
-#: includes/abstracts/abstract-class-wc1c-admin-table.php:1156
+#: includes/abstracts/abstract-class-wc1c-admin-table.php:529
+#: includes/abstracts/abstract-class-wc1c-admin-table.php:1157
 #, php-format
 msgid "%s item"
 msgid_plural "%s items"
@@ -71,37 +71,55 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: includes/abstracts/abstract-class-wc1c-admin-table.php:576
+#: includes/abstracts/abstract-class-wc1c-admin-table.php:577
 msgid "First page"
 msgstr "Первая страница"
 
-#: includes/abstracts/abstract-class-wc1c-admin-table.php:590
+#: includes/abstracts/abstract-class-wc1c-admin-table.php:591
 msgid "Previous page"
 msgstr "Предыдущая страница"
 
-#: includes/abstracts/abstract-class-wc1c-admin-table.php:598
-#: includes/abstracts/abstract-class-wc1c-admin-table.php:604
+#: includes/abstracts/abstract-class-wc1c-admin-table.php:599
+#: includes/abstracts/abstract-class-wc1c-admin-table.php:605
 msgid "Current Page"
 msgstr "Текущая страница"
 
 #. translators: 1: Current page, 2: Total pages.
-#: includes/abstracts/abstract-class-wc1c-admin-table.php:613
+#: includes/abstracts/abstract-class-wc1c-admin-table.php:614
 #, php-format
 msgctxt "paging"
 msgid "%1$s of %2$s"
 msgstr "%1$s из %2$s"
 
-#: includes/abstracts/abstract-class-wc1c-admin-table.php:627
+#: includes/abstracts/abstract-class-wc1c-admin-table.php:628
 msgid "Next page"
 msgstr "Следующая страница"
 
-#: includes/abstracts/abstract-class-wc1c-admin-table.php:641
+#: includes/abstracts/abstract-class-wc1c-admin-table.php:642
 msgid "Last page"
 msgstr "Последняя страница"
 
-#: includes/abstracts/abstract-class-wc1c-admin-table.php:860
+#: includes/abstracts/abstract-class-wc1c-admin-table.php:861
 msgid "Select All"
 msgstr "Выбрать все"
+
+#: includes/admin/class-wc1c-admin-inject.php:47
+msgid "1C information"
+msgstr "Информация 1С"
+
+#: includes/admin/class-wc1c-admin-inject.php:73
+#: includes/admin/configurations/class-wc1c-admin-configurations-update.php:153
+msgid "Schema ID: "
+msgstr "Схема (ID): "
+
+#: includes/admin/class-wc1c-admin-inject.php:76
+msgid "not found"
+msgstr "не найдена"
+
+#: includes/admin/class-wc1c-admin-inject.php:80
+#: includes/admin/configurations/class-wc1c-admin-configurations-update.php:150
+msgid "Configuration ID: "
+msgstr "Идентификатор: "
 
 #: includes/admin/class-wc1c-admin-reports.php:102
 msgid "yes"
@@ -294,9 +312,10 @@ msgstr "Продукты"
 #: includes/admin/class-wc1c-admin-settings.php:235
 #: includes/admin/class-wc1c-admin-settings.php:244
 #: includes/admin/class-wc1c-admin-settings.php:272
-#: includes/admin/class-wc1c-admin-settings.php:329
+#: includes/admin/class-wc1c-admin-settings.php:281
 #: includes/admin/class-wc1c-admin-settings.php:338
 #: includes/admin/class-wc1c-admin-settings.php:347
+#: includes/admin/class-wc1c-admin-settings.php:356
 msgid "Enable"
 msgstr "Включить"
 
@@ -341,8 +360,8 @@ msgid "Technical parameters"
 msgstr "Технические параметры"
 
 #: includes/admin/class-wc1c-admin-settings.php:265
-#: includes/admin/class-wc1c-admin-settings.php:322
-#: includes/admin/class-wc1c-admin-settings.php:368
+#: includes/admin/class-wc1c-admin-settings.php:331
+#: includes/admin/class-wc1c-admin-settings.php:377
 msgid "Used by technical specialists. Can leave it at that."
 msgstr "Используется техническими специалистами. Можете оставить все как есть."
 
@@ -358,12 +377,20 @@ msgstr ""
 "Этот API использует схемы для приема запросов от 1С и отправки туда данных."
 
 #: includes/admin/class-wc1c-admin-settings.php:279
-#: includes/schemas/default/class-wc1c-schema-default.php:163
+msgid "Admin inject"
+msgstr "Внедрение в панель администратора"
+
+#: includes/admin/class-wc1c-admin-settings.php:282
+msgid "Embedding information from the plugin in the admin panel interface."
+msgstr "Встраивание информации из плагина в интерфейс админки."
+
+#: includes/admin/class-wc1c-admin-settings.php:288
+#: includes/schemas/default/class-wc1c-schema-default.php:206
 msgid "Logging level"
 msgstr "Уровень логирования"
 
-#: includes/admin/class-wc1c-admin-settings.php:281
-#: includes/schemas/default/class-wc1c-schema-default.php:165
+#: includes/admin/class-wc1c-admin-settings.php:290
+#: includes/schemas/default/class-wc1c-schema-default.php:208
 msgid ""
 "You can enable logging, specify the level of error that you want to benefit "
 "from logging. You can send reports to developer manually by pressing the "
@@ -375,71 +402,71 @@ msgstr ""
 "вручную, нажав на кнопку. Все конфиденциальные данные в отчете удаляются. По "
 "умолчанию частота ошибок не должна быть меньше, чем ошибка."
 
-#: includes/admin/class-wc1c-admin-settings.php:285
-#: includes/schemas/default/class-wc1c-schema-default.php:169
+#: includes/admin/class-wc1c-admin-settings.php:294
+#: includes/schemas/default/class-wc1c-schema-default.php:212
 msgid "Off"
 msgstr "Выключен"
 
-#: includes/admin/class-wc1c-admin-settings.php:286
-#: includes/schemas/default/class-wc1c-schema-default.php:170
+#: includes/admin/class-wc1c-admin-settings.php:295
+#: includes/schemas/default/class-wc1c-schema-default.php:213
 msgid "DEBUG"
 msgstr "Отладка"
 
-#: includes/admin/class-wc1c-admin-settings.php:287
-#: includes/schemas/default/class-wc1c-schema-default.php:171
+#: includes/admin/class-wc1c-admin-settings.php:296
+#: includes/schemas/default/class-wc1c-schema-default.php:214
 msgid "INFO"
 msgstr "Информация"
 
-#: includes/admin/class-wc1c-admin-settings.php:288
-#: includes/schemas/default/class-wc1c-schema-default.php:172
+#: includes/admin/class-wc1c-admin-settings.php:297
+#: includes/schemas/default/class-wc1c-schema-default.php:215
 msgid "NOTICE"
 msgstr "Уведомления"
 
-#: includes/admin/class-wc1c-admin-settings.php:289
-#: includes/schemas/default/class-wc1c-schema-default.php:173
+#: includes/admin/class-wc1c-admin-settings.php:298
+#: includes/schemas/default/class-wc1c-schema-default.php:216
 msgid "WARNING"
 msgstr "Предупреждения"
 
-#: includes/admin/class-wc1c-admin-settings.php:290
-#: includes/schemas/default/class-wc1c-schema-default.php:174
+#: includes/admin/class-wc1c-admin-settings.php:299
+#: includes/schemas/default/class-wc1c-schema-default.php:217
 msgid "ERROR"
 msgstr "Ошибки"
 
-#: includes/admin/class-wc1c-admin-settings.php:291
-#: includes/schemas/default/class-wc1c-schema-default.php:175
+#: includes/admin/class-wc1c-admin-settings.php:300
+#: includes/schemas/default/class-wc1c-schema-default.php:218
 msgid "CRITICAL"
 msgstr "Критичные ошибки"
 
-#: includes/admin/class-wc1c-admin-settings.php:292
-#: includes/schemas/default/class-wc1c-schema-default.php:176
+#: includes/admin/class-wc1c-admin-settings.php:301
+#: includes/schemas/default/class-wc1c-schema-default.php:219
 msgid "ALERT"
 msgstr "Тревога"
 
-#: includes/admin/class-wc1c-admin-settings.php:293
-#: includes/schemas/default/class-wc1c-schema-default.php:177
+#: includes/admin/class-wc1c-admin-settings.php:302
+#: includes/schemas/default/class-wc1c-schema-default.php:220
 msgid "EMERGENCY"
 msgstr "Чрезвычайная ситуация"
 
-#: includes/admin/class-wc1c-admin-settings.php:299
+#: includes/admin/class-wc1c-admin-settings.php:308
 msgid "Name of upload directory"
 msgstr "Имя каталога загрузки"
 
-#: includes/admin/class-wc1c-admin-settings.php:301
+#: includes/admin/class-wc1c-admin-settings.php:310
 msgid "You need to change the name of the standard directory for security."
 msgstr ""
 "Вам необходимо изменить имя стандартного каталога для обеспечения "
 "безопасности."
 
-#: includes/admin/class-wc1c-admin-settings.php:320
-#: includes/class-wc1c-admin.php:228
+#: includes/admin/class-wc1c-admin-settings.php:329
+#: includes/class-wc1c-admin.php:240
 msgid "Extensions"
 msgstr "Расширения"
 
-#: includes/admin/class-wc1c-admin-settings.php:327
+#: includes/admin/class-wc1c-admin-settings.php:336
 msgid "Support extensions"
 msgstr "Поддержка расширений"
 
-#: includes/admin/class-wc1c-admin-settings.php:330
+#: includes/admin/class-wc1c-admin-settings.php:339
 msgid ""
 "Support for external extensions. If disabled, all third-party extensions "
 "will be unavailable."
@@ -447,11 +474,11 @@ msgstr ""
 "Поддержка внешних расширений. Если этот параметр отключен, все сторонние "
 "расширения будут недоступны."
 
-#: includes/admin/class-wc1c-admin-settings.php:336
+#: includes/admin/class-wc1c-admin-settings.php:345
 msgid "External schemas"
 msgstr "Внешние схемы"
 
-#: includes/admin/class-wc1c-admin-settings.php:339
+#: includes/admin/class-wc1c-admin-settings.php:348
 msgid ""
 "Support for external schemas. If disabled, all third-party schemas will be "
 "unavailable."
@@ -459,11 +486,11 @@ msgstr ""
 "Поддержка внешних схем. Если этот параметр отключен, все сторонние схемы "
 "будут недоступны."
 
-#: includes/admin/class-wc1c-admin-settings.php:345
+#: includes/admin/class-wc1c-admin-settings.php:354
 msgid "External tools"
 msgstr "Внешние инструменты"
 
-#: includes/admin/class-wc1c-admin-settings.php:348
+#: includes/admin/class-wc1c-admin-settings.php:357
 msgid ""
 "Support for external tools. If disabled, all third-party tools will be "
 "unavailable."
@@ -471,15 +498,15 @@ msgstr ""
 "Поддержка внешних инструментов. Если этот параметр отключен, все сторонние "
 "инструменты будут недоступны."
 
-#: includes/admin/class-wc1c-admin-settings.php:366
+#: includes/admin/class-wc1c-admin-settings.php:375
 msgid "Uninstall parameters"
 msgstr "Параметры удаления"
 
-#: includes/admin/class-wc1c-admin-settings.php:373
+#: includes/admin/class-wc1c-admin-settings.php:382
 msgid "Remove files"
 msgstr "Удаление файлов"
 
-#: includes/admin/class-wc1c-admin-settings.php:375
+#: includes/admin/class-wc1c-admin-settings.php:384
 msgid ""
 "Deleting all files in their file system. If the checkbox is not checked, "
 "then the files will not be deleted from the /wp-content/uploads directory"
@@ -487,17 +514,17 @@ msgstr ""
 "Удаление всех файлов в их файловой системе. Если флажок не установлен, то "
 "файлы не будут удалены из каталога /wp-content/uploads"
 
-#: includes/admin/class-wc1c-admin-settings.php:376
+#: includes/admin/class-wc1c-admin-settings.php:385
 msgid ""
 "Deleting files is disabled by default. It is best to delete files via FTP"
 msgstr ""
 "Удаление файлов по умолчанию отключено. Лучше всего удалять файлы через FTP"
 
-#: includes/admin/class-wc1c-admin-settings.php:382
+#: includes/admin/class-wc1c-admin-settings.php:391
 msgid "Remove settings"
 msgstr "Удаление настроек"
 
-#: includes/admin/class-wc1c-admin-settings.php:384
+#: includes/admin/class-wc1c-admin-settings.php:393
 msgid ""
 "Deleting all the main plugin settings. If the checkbox is not checked, then "
 "the plugin settings will remain in the site database."
@@ -505,7 +532,7 @@ msgstr ""
 "Удаление всех основных настроек плагина. Если флажок не установлен, то "
 "настройки плагина останутся в базе данных сайта."
 
-#: includes/admin/class-wc1c-admin-settings.php:385
+#: includes/admin/class-wc1c-admin-settings.php:394
 msgid ""
 "Deletion is disabled by default. Cleaning all the basic settings when "
 "finally deleting the plugin."
@@ -513,11 +540,11 @@ msgstr ""
 "Удаление по умолчанию отключено. Очистка всех основных настроек при "
 "окончательном удалении плагина."
 
-#: includes/admin/class-wc1c-admin-settings.php:391
+#: includes/admin/class-wc1c-admin-settings.php:400
 msgid "Remove tables"
 msgstr "Удаление таблиц"
 
-#: includes/admin/class-wc1c-admin-settings.php:393
+#: includes/admin/class-wc1c-admin-settings.php:402
 msgid ""
 "Deleting all the main plugin tables. If the checkbox is not checked, then "
 "the plugin tables will remain in the site database."
@@ -525,7 +552,7 @@ msgstr ""
 "Удаление всех основных таблиц плагина. Если флажок не установлен, то таблицы "
 "плагина останутся в базе данных сайта."
 
-#: includes/admin/class-wc1c-admin-settings.php:394
+#: includes/admin/class-wc1c-admin-settings.php:403
 msgid ""
 "Deletion is disabled by default. Cleaning all the basic tables when finally "
 "deleting the plugin."
@@ -579,73 +606,57 @@ msgstr ""
 "схему для ваших задач."
 
 #: includes/admin/configurations/class-wc1c-admin-configurations-table.php:31
-msgid "The configuration was not found. Add a new configuration via the menu."
-msgstr "Конфигурация не была найдена. Добавьте новую конфигурацию через меню."
+msgid "Configurations not found. Add a new configuration via the menu."
+msgstr "Конфигурации не найдены. Добавьте новую конфигурацию через меню."
 
-#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:62
-msgid "Error"
-msgstr "Ошибка"
-
-#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:66
-msgid "Draft"
-msgstr "Черновик"
-
-#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:70
-msgid "Active"
-msgstr "Включена"
-
-#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:74
-msgid "Inactive"
-msgstr "Отключена"
-
-#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:82
+#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:87
 #, php-format
 msgid "%s <br/><span class=\"wc1c-time\">Time: %s</span>"
 msgstr "%s <br/><span class=\"wc1c-time\">Время: %s</span>"
 
-#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:99
+#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:104
 msgid "Edit"
 msgstr "Редактировать"
 
-#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:100
-#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:123
+#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:106
+#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:129
 msgid "Remove"
 msgstr "Удалить"
 
-#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:142
+#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:148
 msgid "ID"
 msgstr "ID"
 
-#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:143
+#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:149
 msgid "Name"
 msgstr "Название"
 
-#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:144
+#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:150
 msgid "Status"
 msgstr "Состояние"
 
-#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:145
+#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:151
 msgid "Schema ID"
 msgstr "Схема (ID)"
 
-#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:146
+#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:152
 msgid "Create date"
 msgstr "Создана"
 
-#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:147
+#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:153
 msgid "Last activity"
 msgstr "Активность"
 
-#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:175
+#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:181
 #, php-format
 msgid "Select %s"
 msgstr "Выбрать  %s"
 
-#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:210
-msgid "Config deleted"
+#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:216
+msgid "Configuration deleted"
 msgstr "Конфигурация удалена"
 
-#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:214
+#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:220
 msgid "Configuration ID not found!"
 msgstr "Конфигурации не найдены!"
 
@@ -659,25 +670,17 @@ msgstr ""
 "Ошибка обновления конфигурации. Повторите попытку сохранения или изменения "
 "полей."
 
-#: includes/admin/configurations/class-wc1c-admin-configurations-update-form.php:234
+#: includes/admin/configurations/class-wc1c-admin-configurations-update-form.php:235
 msgid "Configuration status"
 msgstr "Состояние"
 
-#: includes/admin/configurations/class-wc1c-admin-configurations-update-form.php:236
+#: includes/admin/configurations/class-wc1c-admin-configurations-update-form.php:237
 msgid "Select the configuration status."
 msgstr "Выберите состояние конфигурации."
 
 #: includes/admin/configurations/class-wc1c-admin-configurations-update.php:142
 msgid "About configuration"
 msgstr "О конфигурации"
-
-#: includes/admin/configurations/class-wc1c-admin-configurations-update.php:150
-msgid "Configuration ID: "
-msgstr "Идентификатор: "
-
-#: includes/admin/configurations/class-wc1c-admin-configurations-update.php:153
-msgid "Schema ID: "
-msgstr "Схема (ID): "
 
 #: includes/admin/configurations/class-wc1c-admin-configurations-update.php:156
 msgid "Date create: "
@@ -703,40 +706,56 @@ msgstr "О схеме"
 msgid "Schema name: "
 msgstr "Имя схемы: "
 
-#: includes/class-wc1c-admin.php:163
+#: includes/class-wc1c-admin.php:175
 msgid "Configurations"
 msgstr "Конфигурации"
 
-#: includes/class-wc1c-admin.php:176 includes/class-wc1c-admin.php:339
+#: includes/class-wc1c-admin.php:188 includes/class-wc1c-admin.php:351
 msgid "Settings"
 msgstr "Настройки"
 
-#: includes/class-wc1c-admin.php:189
+#: includes/class-wc1c-admin.php:201
 msgid "Tools"
 msgstr "Инструменты"
 
-#: includes/class-wc1c-admin.php:202
+#: includes/class-wc1c-admin.php:214
 msgid "Reports"
 msgstr "Отчёты"
 
-#: includes/class-wc1c-admin.php:215
+#: includes/class-wc1c-admin.php:227
 msgid "Schemas"
 msgstr "Схемы"
 
-#: includes/class-wc1c-admin.php:278 includes/class-wc1c-admin.php:279
+#: includes/class-wc1c-admin.php:290 includes/class-wc1c-admin.php:291
 #: templates/admin_header.php:4
 msgid "Integration with 1C"
 msgstr "Интеграция с 1С"
 
-#: includes/class-wc1c-admin.php:513 includes/class-wc1c-admin.php:518
+#: includes/class-wc1c-admin.php:526 includes/class-wc1c-admin.php:531
 msgid "Close"
 msgstr "Закрыть"
 
-#: includes/class-wc1c.php:750
+#: includes/class-wc1c-api.php:44
+msgid "Api offline"
+msgstr "API выключен"
+
+#: includes/class-wc1c-api.php:53
+msgid "Api unavailable"
+msgstr "API недоступен"
+
+#: includes/class-wc1c-api.php:60
+msgid "Configuration offline"
+msgstr "Конфигурация выключена"
+
+#: includes/class-wc1c-api.php:131
+msgid "Api request is very bad!"
+msgstr "Запрос Api - это очень плохо!"
+
+#: includes/class-wc1c.php:767
 msgid "Default schema"
 msgstr "Схема по умолчанию"
 
-#: includes/class-wc1c.php:751
+#: includes/class-wc1c.php:768
 msgid ""
 "Standard data exchange using the standard exchange algorithm from 1C via "
 "CommerceML. Exchanges only contains products data."
@@ -744,41 +763,57 @@ msgstr ""
 "Стандартный обмен данными с использованием стандартного алгоритма обмена от "
 "1С через CommerceML. Обмен содержит только данные о продуктах."
 
-#: includes/class-wc1c.php:1070
+#: includes/class-wc1c.php:1087
 msgid "Example tool"
 msgstr "Пример инструмента"
 
-#: includes/class-wc1c.php:1071
+#: includes/class-wc1c.php:1088
 msgid "A demo tool that does not carry any functional load."
 msgstr ""
 "Демонстрационный инструмент, который не несет никакой функциональной "
 "нагрузки."
 
-#: includes/schemas/default/class-wc1c-schema-default.php:156
-msgid "Technical details"
-msgstr "Технические параметры"
+#: includes/functions-wc1c.php:350
+msgid "Draft"
+msgstr "Черновик"
 
-#: includes/schemas/default/class-wc1c-schema-default.php:158
-msgid ""
-"Changing data processing behavior for compatibility of the environment and "
-"other systems."
-msgstr ""
-"Изменение поведения обработки данных для обеспечения совместимости среды и "
-"других систем."
+#: includes/functions-wc1c.php:351
+msgid "Active"
+msgstr "Включена"
 
-#: includes/schemas/default/class-wc1c-schema-default.php:183
+#: includes/functions-wc1c.php:352
+msgid "Inactive"
+msgstr "Отключена"
+
+#: includes/functions-wc1c.php:353
+msgid "Error"
+msgstr "Ошибка"
+
+#: includes/functions-wc1c.php:354
+msgid "Processing"
+msgstr "В процессе"
+
+#: includes/schemas/default/class-wc1c-schema-default.php:162
+msgid "Processing details"
+msgstr "Детали обработки"
+
+#: includes/schemas/default/class-wc1c-schema-default.php:164
+msgid "Changing the behavior of the file processing."
+msgstr "Изменение поведения обработки файлов."
+
+#: includes/schemas/default/class-wc1c-schema-default.php:169
 msgid "Skip processing of files"
 msgstr "Пропуск обработки файлов"
 
-#: includes/schemas/default/class-wc1c-schema-default.php:185
-#: includes/schemas/default/class-wc1c-schema-default.php:194
-#: includes/schemas/default/class-wc1c-schema-default.php:212
-#: includes/schemas/default/class-wc1c-schema-default.php:221
+#: includes/schemas/default/class-wc1c-schema-default.php:171
+#: includes/schemas/default/class-wc1c-schema-default.php:180
+#: includes/schemas/default/class-wc1c-schema-default.php:228
+#: includes/schemas/default/class-wc1c-schema-default.php:246
 msgid "Check the checkbox if want to enable this feature. Disabled by default."
 msgstr ""
 "Установите флажок, если надо включить эту функцию. По умолчанию отключено."
 
-#: includes/schemas/default/class-wc1c-schema-default.php:186
+#: includes/schemas/default/class-wc1c-schema-default.php:172
 msgid ""
 "Disabling the actual processing of CommerceML files. Files will be accepted, "
 "but instead of processing them, they will be skipped with successful "
@@ -788,11 +823,37 @@ msgstr ""
 "вместо того, чтобы обрабатывать их, они будут пропущены при успешном "
 "завершении обработки."
 
-#: includes/schemas/default/class-wc1c-schema-default.php:192
+#: includes/schemas/default/class-wc1c-schema-default.php:178
+msgid "Deleting files after processing"
+msgstr "Удаление файлов после обработки"
+
+#: includes/schemas/default/class-wc1c-schema-default.php:181
+msgid ""
+"If deletion is disabled, the exchange files will remain in the directories "
+"until the next exchange. Otherwise, all processed files will be deleted "
+"immediately after error-free processing."
+msgstr ""
+"Если удаление отключено, файлы обмена останутся в каталогах до следующего "
+"обмена. В противном случае все обработанные файлы будут удалены сразу же "
+"после безошибочной обработки."
+
+#: includes/schemas/default/class-wc1c-schema-default.php:199
+msgid "Technical details"
+msgstr "Технические параметры"
+
+#: includes/schemas/default/class-wc1c-schema-default.php:201
+msgid ""
+"Changing processing behavior for compatibility of the environment and other "
+"systems."
+msgstr ""
+"Изменение поведения обработки для обеспечения совместимости среды и других "
+"систем."
+
+#: includes/schemas/default/class-wc1c-schema-default.php:226
 msgid "Converting to Windows-1251"
 msgstr "Преобразование в Windows-1251"
 
-#: includes/schemas/default/class-wc1c-schema-default.php:195
+#: includes/schemas/default/class-wc1c-schema-default.php:229
 msgid ""
 "Data from utf-8 will be converted to Windows-1251 encoding. Use this feature "
 "for compatibility with older versions of 1C."
@@ -800,19 +861,19 @@ msgstr ""
 "Данные из utf-8 будут преобразованы в кодировку Windows-1251. Используйте "
 "эту функцию для обеспечения совместимости с более старыми версиями 1С."
 
-#: includes/schemas/default/class-wc1c-schema-default.php:201
+#: includes/schemas/default/class-wc1c-schema-default.php:235
 msgid "Maximum request size"
 msgstr "Максимальный размер запроса"
 
-#: includes/schemas/default/class-wc1c-schema-default.php:203
+#: includes/schemas/default/class-wc1c-schema-default.php:237
 msgid "Enter the maximum request size. You can only reduce the value."
 msgstr "Введите максимальный размер запроса. Можно только уменьшить значение."
 
-#: includes/schemas/default/class-wc1c-schema-default.php:210
+#: includes/schemas/default/class-wc1c-schema-default.php:244
 msgid "Support for data compression"
 msgstr "Поддержка сжатия данных"
 
-#: includes/schemas/default/class-wc1c-schema-default.php:213
+#: includes/schemas/default/class-wc1c-schema-default.php:247
 msgid ""
 "1C can transfer files in archives to reduce the number of HTTP requests and "
 "compress data. In this case, the load may increase when unpacking archives, "
@@ -823,33 +884,31 @@ msgstr ""
 "архивов, или даже распаковка может оказаться невозможной из-за ограничений "
 "сервера."
 
-#: includes/schemas/default/class-wc1c-schema-default.php:219
-msgid "Deleting files after processing"
-msgstr "Удаление файлов после обработки"
-
-#: includes/schemas/default/class-wc1c-schema-default.php:222
-msgid ""
-"If deletion is disabled, the exchange files will remain in the directories "
-"until the next exchange. Otherwise, all processed files will be deleted "
-"immediately after error-free processing."
-msgstr ""
-"Если удаление отключено, файлы обмена останутся в каталогах до следующего "
-"обмена. В противном случае все обработанные файлы будут удалены сразу же "
-"после безошибочной обработки."
-
-#: includes/schemas/default/class-wc1c-schema-default.php:240
+#: includes/schemas/default/class-wc1c-schema-default.php:265
 msgid "Requests authorization"
 msgstr "Авторизация запросов"
 
-#: includes/schemas/default/class-wc1c-schema-default.php:242
+#: includes/schemas/default/class-wc1c-schema-default.php:267
 msgid "Data for authorization of requests. These settings will connect 1C."
 msgstr "Данные для авторизации запросов. По этим настройкам подключится 1С."
 
-#: includes/schemas/default/class-wc1c-schema-default.php:247
+#: includes/schemas/default/class-wc1c-schema-default.php:275
+msgid "Requests URL"
+msgstr "Адрес для запросов"
+
+#: includes/schemas/default/class-wc1c-schema-default.php:278
+msgid ""
+"This address is entered in the exchange settings on the 1C side. It will "
+"receive requests from 1C."
+msgstr ""
+"Этот адрес вводится в настройках обмена на стороне 1С. Он будет получать "
+"запросы от 1С."
+
+#: includes/schemas/default/class-wc1c-schema-default.php:283
 msgid "Login to connect"
 msgstr "Имя пользователя"
 
-#: includes/schemas/default/class-wc1c-schema-default.php:249
+#: includes/schemas/default/class-wc1c-schema-default.php:285
 msgid ""
 "Enter the username to connect from 1C. It should be the same as when setting "
 "up in 1C."
@@ -857,11 +916,11 @@ msgstr ""
 "Введите логин для подключения из 1С. Он должен быть таким же, как и при "
 "настройке в 1С."
 
-#: includes/schemas/default/class-wc1c-schema-default.php:256
+#: includes/schemas/default/class-wc1c-schema-default.php:292
 msgid "Password to connect"
 msgstr "Пароль для подключения"
 
-#: includes/schemas/default/class-wc1c-schema-default.php:258
+#: includes/schemas/default/class-wc1c-schema-default.php:294
 msgid ""
 "Enter the users password to connect from 1C. It must be the same as when "
 "setting up in 1C."
@@ -869,30 +928,35 @@ msgstr ""
 "Введите пароль пользователя для подключения из 1С. Он должен быть таким же, "
 "как и при настройке в 1С."
 
-#: includes/schemas/default/class-wc1c-schema-default.php:477
+#: includes/schemas/default/class-wc1c-schema-default.php:510
 msgid "Not specified the user. Check the server settings."
 msgstr "Не указан пользователь. Проверьте настройки сервера."
 
-#: includes/schemas/default/class-wc1c-schema-default.php:488
-#: includes/schemas/default/class-wc1c-schema-default.php:489
+#: includes/schemas/default/class-wc1c-schema-default.php:521
+#: includes/schemas/default/class-wc1c-schema-default.php:522
 msgid "Not a valid username"
 msgstr "Неверное имя пользователя"
 
-#: includes/schemas/default/class-wc1c-schema-default.php:494
-#: includes/schemas/default/class-wc1c-schema-default.php:495
+#: includes/schemas/default/class-wc1c-schema-default.php:527
+#: includes/schemas/default/class-wc1c-schema-default.php:528
 msgid "Not a valid user password"
 msgstr "Неверный пароль пользователя"
 
-#: includes/schemas/default/class-wc1c-schema-default.php:557
-#: includes/schemas/default/class-wc1c-schema-default.php:696
+#: includes/schemas/default/class-wc1c-schema-default.php:553
+#: includes/schemas/default/class-wc1c-schema-default.php:594
+#: includes/schemas/default/class-wc1c-schema-default.php:686
 msgid "Authorization failed"
 msgstr "Не удалось выполнить авторизацию"
 
-#: includes/schemas/default/class-wc1c-schema-default.php:578
+#: includes/schemas/default/class-wc1c-schema-default.php:605
+msgid "Unable to create a directory: "
+msgstr "Невозможно создать каталог: "
+
+#: includes/schemas/default/class-wc1c-schema-default.php:615
 msgid "Filename is empty."
 msgstr "Имя файла пустое."
 
-#: includes/schemas/default/class-wc1c-schema-default.php:704
+#: includes/schemas/default/class-wc1c-schema-default.php:696
 msgid "Import filename is empty."
 msgstr "Имя файла импорта пустое."
 
@@ -1147,9 +1211,6 @@ msgstr "Команда WC1C"
 
 #~ msgid "https://mofsy.ru"
 #~ msgstr "https://mofsy.ru"
-
-#~ msgid "Available tools"
-#~ msgstr "Доступные инструменты"
 
 #~ msgid "Delete"
 #~ msgstr "Удалить"

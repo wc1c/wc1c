@@ -4,7 +4,7 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: WC1C > integration of WooCommerce with 1C products "
 "(different configurations)\n"
-"POT-Creation-Date: 2020-05-16 14:10+0300\n"
+"POT-Creation-Date: 2020-05-22 12:19+0300\n"
 "PO-Revision-Date: 2019-03-19 20:30+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
@@ -22,11 +22,11 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: includes/abstracts/abstract-class-wc1c-admin-form.php:621
+#: includes/abstracts/abstract-class-wc1c-admin-form.php:663
 msgid "Select all"
 msgstr ""
 
-#: includes/abstracts/abstract-class-wc1c-admin-form.php:621
+#: includes/abstracts/abstract-class-wc1c-admin-form.php:663
 msgid "Select none"
 msgstr ""
 
@@ -42,63 +42,81 @@ msgstr ""
 msgid "No items found."
 msgstr ""
 
-#: includes/abstracts/abstract-class-wc1c-admin-table.php:349
+#: includes/abstracts/abstract-class-wc1c-admin-table.php:350
 msgid "Select bulk action"
 msgstr ""
 
-#: includes/abstracts/abstract-class-wc1c-admin-table.php:351
+#: includes/abstracts/abstract-class-wc1c-admin-table.php:352
 msgid "Bulk Actions"
 msgstr ""
 
-#: includes/abstracts/abstract-class-wc1c-admin-table.php:362
+#: includes/abstracts/abstract-class-wc1c-admin-table.php:363
 msgid "Apply"
 msgstr ""
 
-#: includes/abstracts/abstract-class-wc1c-admin-table.php:418
-#: includes/abstracts/abstract-class-wc1c-admin-table.php:1128
+#: includes/abstracts/abstract-class-wc1c-admin-table.php:419
+#: includes/abstracts/abstract-class-wc1c-admin-table.php:1129
 msgid "Show more details"
 msgstr ""
 
 #. translators: %s: Number of items.
 #. translators: Number of items.
-#: includes/abstracts/abstract-class-wc1c-admin-table.php:528
-#: includes/abstracts/abstract-class-wc1c-admin-table.php:1156
+#: includes/abstracts/abstract-class-wc1c-admin-table.php:529
+#: includes/abstracts/abstract-class-wc1c-admin-table.php:1157
 #, php-format
 msgid "%s item"
 msgid_plural "%s items"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/abstracts/abstract-class-wc1c-admin-table.php:576
+#: includes/abstracts/abstract-class-wc1c-admin-table.php:577
 msgid "First page"
 msgstr ""
 
-#: includes/abstracts/abstract-class-wc1c-admin-table.php:590
+#: includes/abstracts/abstract-class-wc1c-admin-table.php:591
 msgid "Previous page"
 msgstr ""
 
-#: includes/abstracts/abstract-class-wc1c-admin-table.php:598
-#: includes/abstracts/abstract-class-wc1c-admin-table.php:604
+#: includes/abstracts/abstract-class-wc1c-admin-table.php:599
+#: includes/abstracts/abstract-class-wc1c-admin-table.php:605
 msgid "Current Page"
 msgstr ""
 
 #. translators: 1: Current page, 2: Total pages.
-#: includes/abstracts/abstract-class-wc1c-admin-table.php:613
+#: includes/abstracts/abstract-class-wc1c-admin-table.php:614
 #, php-format
 msgctxt "paging"
 msgid "%1$s of %2$s"
 msgstr ""
 
-#: includes/abstracts/abstract-class-wc1c-admin-table.php:627
+#: includes/abstracts/abstract-class-wc1c-admin-table.php:628
 msgid "Next page"
 msgstr ""
 
-#: includes/abstracts/abstract-class-wc1c-admin-table.php:641
+#: includes/abstracts/abstract-class-wc1c-admin-table.php:642
 msgid "Last page"
 msgstr ""
 
-#: includes/abstracts/abstract-class-wc1c-admin-table.php:860
+#: includes/abstracts/abstract-class-wc1c-admin-table.php:861
 msgid "Select All"
+msgstr ""
+
+#: includes/admin/class-wc1c-admin-inject.php:47
+msgid "1C information"
+msgstr ""
+
+#: includes/admin/class-wc1c-admin-inject.php:73
+#: includes/admin/configurations/class-wc1c-admin-configurations-update.php:153
+msgid "Schema ID: "
+msgstr ""
+
+#: includes/admin/class-wc1c-admin-inject.php:76
+msgid "not found"
+msgstr ""
+
+#: includes/admin/class-wc1c-admin-inject.php:80
+#: includes/admin/configurations/class-wc1c-admin-configurations-update.php:150
+msgid "Configuration ID: "
 msgstr ""
 
 #: includes/admin/class-wc1c-admin-reports.php:102
@@ -289,9 +307,10 @@ msgstr ""
 #: includes/admin/class-wc1c-admin-settings.php:235
 #: includes/admin/class-wc1c-admin-settings.php:244
 #: includes/admin/class-wc1c-admin-settings.php:272
-#: includes/admin/class-wc1c-admin-settings.php:329
+#: includes/admin/class-wc1c-admin-settings.php:281
 #: includes/admin/class-wc1c-admin-settings.php:338
 #: includes/admin/class-wc1c-admin-settings.php:347
+#: includes/admin/class-wc1c-admin-settings.php:356
 msgid "Enable"
 msgstr ""
 
@@ -336,8 +355,8 @@ msgid "Technical parameters"
 msgstr ""
 
 #: includes/admin/class-wc1c-admin-settings.php:265
-#: includes/admin/class-wc1c-admin-settings.php:322
-#: includes/admin/class-wc1c-admin-settings.php:368
+#: includes/admin/class-wc1c-admin-settings.php:331
+#: includes/admin/class-wc1c-admin-settings.php:377
 msgid "Used by technical specialists. Can leave it at that."
 msgstr ""
 
@@ -352,12 +371,20 @@ msgid ""
 msgstr ""
 
 #: includes/admin/class-wc1c-admin-settings.php:279
-#: includes/schemas/default/class-wc1c-schema-default.php:163
+msgid "Admin inject"
+msgstr ""
+
+#: includes/admin/class-wc1c-admin-settings.php:282
+msgid "Embedding information from the plugin in the admin panel interface."
+msgstr ""
+
+#: includes/admin/class-wc1c-admin-settings.php:288
+#: includes/schemas/default/class-wc1c-schema-default.php:206
 msgid "Logging level"
 msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:281
-#: includes/schemas/default/class-wc1c-schema-default.php:165
+#: includes/admin/class-wc1c-admin-settings.php:290
+#: includes/schemas/default/class-wc1c-schema-default.php:208
 msgid ""
 "You can enable logging, specify the level of error that you want to benefit "
 "from logging. You can send reports to developer manually by pressing the "
@@ -365,140 +392,140 @@ msgid ""
 "rate should not be less than ERROR."
 msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:285
-#: includes/schemas/default/class-wc1c-schema-default.php:169
+#: includes/admin/class-wc1c-admin-settings.php:294
+#: includes/schemas/default/class-wc1c-schema-default.php:212
 msgid "Off"
 msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:286
-#: includes/schemas/default/class-wc1c-schema-default.php:170
+#: includes/admin/class-wc1c-admin-settings.php:295
+#: includes/schemas/default/class-wc1c-schema-default.php:213
 msgid "DEBUG"
 msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:287
-#: includes/schemas/default/class-wc1c-schema-default.php:171
+#: includes/admin/class-wc1c-admin-settings.php:296
+#: includes/schemas/default/class-wc1c-schema-default.php:214
 msgid "INFO"
 msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:288
-#: includes/schemas/default/class-wc1c-schema-default.php:172
+#: includes/admin/class-wc1c-admin-settings.php:297
+#: includes/schemas/default/class-wc1c-schema-default.php:215
 msgid "NOTICE"
 msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:289
-#: includes/schemas/default/class-wc1c-schema-default.php:173
+#: includes/admin/class-wc1c-admin-settings.php:298
+#: includes/schemas/default/class-wc1c-schema-default.php:216
 msgid "WARNING"
 msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:290
-#: includes/schemas/default/class-wc1c-schema-default.php:174
+#: includes/admin/class-wc1c-admin-settings.php:299
+#: includes/schemas/default/class-wc1c-schema-default.php:217
 msgid "ERROR"
 msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:291
-#: includes/schemas/default/class-wc1c-schema-default.php:175
+#: includes/admin/class-wc1c-admin-settings.php:300
+#: includes/schemas/default/class-wc1c-schema-default.php:218
 msgid "CRITICAL"
 msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:292
-#: includes/schemas/default/class-wc1c-schema-default.php:176
+#: includes/admin/class-wc1c-admin-settings.php:301
+#: includes/schemas/default/class-wc1c-schema-default.php:219
 msgid "ALERT"
 msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:293
-#: includes/schemas/default/class-wc1c-schema-default.php:177
+#: includes/admin/class-wc1c-admin-settings.php:302
+#: includes/schemas/default/class-wc1c-schema-default.php:220
 msgid "EMERGENCY"
 msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:299
+#: includes/admin/class-wc1c-admin-settings.php:308
 msgid "Name of upload directory"
 msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:301
+#: includes/admin/class-wc1c-admin-settings.php:310
 msgid "You need to change the name of the standard directory for security."
 msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:320
-#: includes/class-wc1c-admin.php:228
+#: includes/admin/class-wc1c-admin-settings.php:329
+#: includes/class-wc1c-admin.php:240
 msgid "Extensions"
 msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:327
+#: includes/admin/class-wc1c-admin-settings.php:336
 msgid "Support extensions"
 msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:330
+#: includes/admin/class-wc1c-admin-settings.php:339
 msgid ""
 "Support for external extensions. If disabled, all third-party extensions "
 "will be unavailable."
 msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:336
+#: includes/admin/class-wc1c-admin-settings.php:345
 msgid "External schemas"
 msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:339
+#: includes/admin/class-wc1c-admin-settings.php:348
 msgid ""
 "Support for external schemas. If disabled, all third-party schemas will be "
 "unavailable."
 msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:345
+#: includes/admin/class-wc1c-admin-settings.php:354
 msgid "External tools"
 msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:348
+#: includes/admin/class-wc1c-admin-settings.php:357
 msgid ""
 "Support for external tools. If disabled, all third-party tools will be "
 "unavailable."
 msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:366
+#: includes/admin/class-wc1c-admin-settings.php:375
 msgid "Uninstall parameters"
 msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:373
+#: includes/admin/class-wc1c-admin-settings.php:382
 msgid "Remove files"
 msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:375
+#: includes/admin/class-wc1c-admin-settings.php:384
 msgid ""
 "Deleting all files in their file system. If the checkbox is not checked, "
 "then the files will not be deleted from the /wp-content/uploads directory"
 msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:376
+#: includes/admin/class-wc1c-admin-settings.php:385
 msgid ""
 "Deleting files is disabled by default. It is best to delete files via FTP"
 msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:382
+#: includes/admin/class-wc1c-admin-settings.php:391
 msgid "Remove settings"
 msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:384
+#: includes/admin/class-wc1c-admin-settings.php:393
 msgid ""
 "Deleting all the main plugin settings. If the checkbox is not checked, then "
 "the plugin settings will remain in the site database."
 msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:385
+#: includes/admin/class-wc1c-admin-settings.php:394
 msgid ""
 "Deletion is disabled by default. Cleaning all the basic settings when "
 "finally deleting the plugin."
 msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:391
+#: includes/admin/class-wc1c-admin-settings.php:400
 msgid "Remove tables"
 msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:393
+#: includes/admin/class-wc1c-admin-settings.php:402
 msgid ""
 "Deleting all the main plugin tables. If the checkbox is not checked, then "
 "the plugin tables will remain in the site database."
 msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:394
+#: includes/admin/class-wc1c-admin-settings.php:403
 msgid ""
 "Deletion is disabled by default. Cleaning all the basic tables when finally "
 "deleting the plugin."
@@ -544,73 +571,57 @@ msgid ""
 msgstr ""
 
 #: includes/admin/configurations/class-wc1c-admin-configurations-table.php:31
-msgid "The configuration was not found. Add a new configuration via the menu."
+msgid "Configurations not found. Add a new configuration via the menu."
 msgstr ""
 
-#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:62
-msgid "Error"
-msgstr ""
-
-#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:66
-msgid "Draft"
-msgstr ""
-
-#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:70
-msgid "Active"
-msgstr ""
-
-#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:74
-msgid "Inactive"
-msgstr ""
-
-#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:82
+#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:87
 #, php-format
 msgid "%s <br/><span class=\"wc1c-time\">Time: %s</span>"
 msgstr ""
 
-#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:99
+#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:104
 msgid "Edit"
 msgstr ""
 
-#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:100
-#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:123
+#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:106
+#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:129
 msgid "Remove"
 msgstr ""
 
-#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:142
+#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:148
 msgid "ID"
 msgstr ""
 
-#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:143
+#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:149
 msgid "Name"
 msgstr ""
 
-#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:144
+#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:150
 msgid "Status"
 msgstr ""
 
-#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:145
+#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:151
 msgid "Schema ID"
 msgstr ""
 
-#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:146
+#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:152
 msgid "Create date"
 msgstr ""
 
-#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:147
+#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:153
 msgid "Last activity"
 msgstr ""
 
-#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:175
+#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:181
 #, php-format
 msgid "Select %s"
 msgstr ""
 
-#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:210
-msgid "Config deleted"
+#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:216
+msgid "Configuration deleted"
 msgstr ""
 
-#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:214
+#: includes/admin/configurations/class-wc1c-admin-configurations-table.php:220
 msgid "Configuration ID not found!"
 msgstr ""
 
@@ -622,24 +633,16 @@ msgstr ""
 msgid "Configuration update error. Please retry saving or change fields."
 msgstr ""
 
-#: includes/admin/configurations/class-wc1c-admin-configurations-update-form.php:234
+#: includes/admin/configurations/class-wc1c-admin-configurations-update-form.php:235
 msgid "Configuration status"
 msgstr ""
 
-#: includes/admin/configurations/class-wc1c-admin-configurations-update-form.php:236
+#: includes/admin/configurations/class-wc1c-admin-configurations-update-form.php:237
 msgid "Select the configuration status."
 msgstr ""
 
 #: includes/admin/configurations/class-wc1c-admin-configurations-update.php:142
 msgid "About configuration"
-msgstr ""
-
-#: includes/admin/configurations/class-wc1c-admin-configurations-update.php:150
-msgid "Configuration ID: "
-msgstr ""
-
-#: includes/admin/configurations/class-wc1c-admin-configurations-update.php:153
-msgid "Schema ID: "
 msgstr ""
 
 #: includes/admin/configurations/class-wc1c-admin-configurations-update.php:156
@@ -666,174 +669,233 @@ msgstr ""
 msgid "Schema name: "
 msgstr ""
 
-#: includes/class-wc1c-admin.php:163
+#: includes/class-wc1c-admin.php:175
 msgid "Configurations"
 msgstr ""
 
-#: includes/class-wc1c-admin.php:176 includes/class-wc1c-admin.php:339
+#: includes/class-wc1c-admin.php:188 includes/class-wc1c-admin.php:351
 msgid "Settings"
 msgstr ""
 
-#: includes/class-wc1c-admin.php:189
+#: includes/class-wc1c-admin.php:201
 msgid "Tools"
 msgstr ""
 
-#: includes/class-wc1c-admin.php:202
+#: includes/class-wc1c-admin.php:214
 msgid "Reports"
 msgstr ""
 
-#: includes/class-wc1c-admin.php:215
+#: includes/class-wc1c-admin.php:227
 msgid "Schemas"
 msgstr ""
 
-#: includes/class-wc1c-admin.php:278 includes/class-wc1c-admin.php:279
+#: includes/class-wc1c-admin.php:290 includes/class-wc1c-admin.php:291
 #: templates/admin_header.php:4
 msgid "Integration with 1C"
 msgstr ""
 
-#: includes/class-wc1c-admin.php:513 includes/class-wc1c-admin.php:518
+#: includes/class-wc1c-admin.php:526 includes/class-wc1c-admin.php:531
 msgid "Close"
 msgstr ""
 
-#: includes/class-wc1c.php:750
+#: includes/class-wc1c-api.php:44
+msgid "Api offline"
+msgstr ""
+
+#: includes/class-wc1c-api.php:53
+msgid "Api unavailable"
+msgstr ""
+
+#: includes/class-wc1c-api.php:60
+msgid "Configuration offline"
+msgstr ""
+
+#: includes/class-wc1c-api.php:131
+msgid "Api request is very bad!"
+msgstr ""
+
+#: includes/class-wc1c.php:767
 msgid "Default schema"
 msgstr ""
 
-#: includes/class-wc1c.php:751
+#: includes/class-wc1c.php:768
 msgid ""
 "Standard data exchange using the standard exchange algorithm from 1C via "
 "CommerceML. Exchanges only contains products data."
 msgstr ""
 
-#: includes/class-wc1c.php:1070
+#: includes/class-wc1c.php:1087
 msgid "Example tool"
 msgstr ""
 
-#: includes/class-wc1c.php:1071
+#: includes/class-wc1c.php:1088
 msgid "A demo tool that does not carry any functional load."
 msgstr ""
 
-#: includes/schemas/default/class-wc1c-schema-default.php:156
-msgid "Technical details"
+#: includes/functions-wc1c.php:350
+msgid "Draft"
 msgstr ""
 
-#: includes/schemas/default/class-wc1c-schema-default.php:158
-msgid ""
-"Changing data processing behavior for compatibility of the environment and "
-"other systems."
+#: includes/functions-wc1c.php:351
+msgid "Active"
 msgstr ""
 
-#: includes/schemas/default/class-wc1c-schema-default.php:183
+#: includes/functions-wc1c.php:352
+msgid "Inactive"
+msgstr ""
+
+#: includes/functions-wc1c.php:353
+msgid "Error"
+msgstr ""
+
+#: includes/functions-wc1c.php:354
+msgid "Processing"
+msgstr ""
+
+#: includes/schemas/default/class-wc1c-schema-default.php:162
+msgid "Processing details"
+msgstr ""
+
+#: includes/schemas/default/class-wc1c-schema-default.php:164
+msgid "Changing the behavior of the file processing."
+msgstr ""
+
+#: includes/schemas/default/class-wc1c-schema-default.php:169
 msgid "Skip processing of files"
 msgstr ""
 
-#: includes/schemas/default/class-wc1c-schema-default.php:185
-#: includes/schemas/default/class-wc1c-schema-default.php:194
-#: includes/schemas/default/class-wc1c-schema-default.php:212
-#: includes/schemas/default/class-wc1c-schema-default.php:221
+#: includes/schemas/default/class-wc1c-schema-default.php:171
+#: includes/schemas/default/class-wc1c-schema-default.php:180
+#: includes/schemas/default/class-wc1c-schema-default.php:228
+#: includes/schemas/default/class-wc1c-schema-default.php:246
 msgid ""
 "Check the checkbox if want to enable this feature. Disabled by default."
 msgstr ""
 
-#: includes/schemas/default/class-wc1c-schema-default.php:186
+#: includes/schemas/default/class-wc1c-schema-default.php:172
 msgid ""
 "Disabling the actual processing of CommerceML files. Files will be "
 "accepted, but instead of processing them, they will be skipped with "
 "successful completion of processing."
 msgstr ""
 
-#: includes/schemas/default/class-wc1c-schema-default.php:192
-msgid "Converting to Windows-1251"
-msgstr ""
-
-#: includes/schemas/default/class-wc1c-schema-default.php:195
-msgid ""
-"Data from utf-8 will be converted to Windows-1251 encoding. Use this "
-"feature for compatibility with older versions of 1C."
-msgstr ""
-
-#: includes/schemas/default/class-wc1c-schema-default.php:201
-msgid "Maximum request size"
-msgstr ""
-
-#: includes/schemas/default/class-wc1c-schema-default.php:203
-msgid "Enter the maximum request size. You can only reduce the value."
-msgstr ""
-
-#: includes/schemas/default/class-wc1c-schema-default.php:210
-msgid "Support for data compression"
-msgstr ""
-
-#: includes/schemas/default/class-wc1c-schema-default.php:213
-msgid ""
-"1C can transfer files in archives to reduce the number of HTTP requests and "
-"compress data. In this case, the load may increase when unpacking archives, "
-"or even it may be impossible to unpack due to server restrictions."
-msgstr ""
-
-#: includes/schemas/default/class-wc1c-schema-default.php:219
+#: includes/schemas/default/class-wc1c-schema-default.php:178
 msgid "Deleting files after processing"
 msgstr ""
 
-#: includes/schemas/default/class-wc1c-schema-default.php:222
+#: includes/schemas/default/class-wc1c-schema-default.php:181
 msgid ""
 "If deletion is disabled, the exchange files will remain in the directories "
 "until the next exchange. Otherwise, all processed files will be deleted "
 "immediately after error-free processing."
 msgstr ""
 
-#: includes/schemas/default/class-wc1c-schema-default.php:240
-msgid "Requests authorization"
+#: includes/schemas/default/class-wc1c-schema-default.php:199
+msgid "Technical details"
 msgstr ""
 
-#: includes/schemas/default/class-wc1c-schema-default.php:242
-msgid "Data for authorization of requests. These settings will connect 1C."
+#: includes/schemas/default/class-wc1c-schema-default.php:201
+msgid ""
+"Changing processing behavior for compatibility of the environment and other "
+"systems."
+msgstr ""
+
+#: includes/schemas/default/class-wc1c-schema-default.php:226
+msgid "Converting to Windows-1251"
+msgstr ""
+
+#: includes/schemas/default/class-wc1c-schema-default.php:229
+msgid ""
+"Data from utf-8 will be converted to Windows-1251 encoding. Use this "
+"feature for compatibility with older versions of 1C."
+msgstr ""
+
+#: includes/schemas/default/class-wc1c-schema-default.php:235
+msgid "Maximum request size"
+msgstr ""
+
+#: includes/schemas/default/class-wc1c-schema-default.php:237
+msgid "Enter the maximum request size. You can only reduce the value."
+msgstr ""
+
+#: includes/schemas/default/class-wc1c-schema-default.php:244
+msgid "Support for data compression"
 msgstr ""
 
 #: includes/schemas/default/class-wc1c-schema-default.php:247
+msgid ""
+"1C can transfer files in archives to reduce the number of HTTP requests and "
+"compress data. In this case, the load may increase when unpacking archives, "
+"or even it may be impossible to unpack due to server restrictions."
+msgstr ""
+
+#: includes/schemas/default/class-wc1c-schema-default.php:265
+msgid "Requests authorization"
+msgstr ""
+
+#: includes/schemas/default/class-wc1c-schema-default.php:267
+msgid "Data for authorization of requests. These settings will connect 1C."
+msgstr ""
+
+#: includes/schemas/default/class-wc1c-schema-default.php:275
+msgid "Requests URL"
+msgstr ""
+
+#: includes/schemas/default/class-wc1c-schema-default.php:278
+msgid ""
+"This address is entered in the exchange settings on the 1C side. It will "
+"receive requests from 1C."
+msgstr ""
+
+#: includes/schemas/default/class-wc1c-schema-default.php:283
 msgid "Login to connect"
 msgstr ""
 
-#: includes/schemas/default/class-wc1c-schema-default.php:249
+#: includes/schemas/default/class-wc1c-schema-default.php:285
 msgid ""
 "Enter the username to connect from 1C. It should be the same as when "
 "setting up in 1C."
 msgstr ""
 
-#: includes/schemas/default/class-wc1c-schema-default.php:256
+#: includes/schemas/default/class-wc1c-schema-default.php:292
 msgid "Password to connect"
 msgstr ""
 
-#: includes/schemas/default/class-wc1c-schema-default.php:258
+#: includes/schemas/default/class-wc1c-schema-default.php:294
 msgid ""
 "Enter the users password to connect from 1C. It must be the same as when "
 "setting up in 1C."
 msgstr ""
 
-#: includes/schemas/default/class-wc1c-schema-default.php:477
+#: includes/schemas/default/class-wc1c-schema-default.php:510
 msgid "Not specified the user. Check the server settings."
 msgstr ""
 
-#: includes/schemas/default/class-wc1c-schema-default.php:488
-#: includes/schemas/default/class-wc1c-schema-default.php:489
+#: includes/schemas/default/class-wc1c-schema-default.php:521
+#: includes/schemas/default/class-wc1c-schema-default.php:522
 msgid "Not a valid username"
 msgstr ""
 
-#: includes/schemas/default/class-wc1c-schema-default.php:494
-#: includes/schemas/default/class-wc1c-schema-default.php:495
+#: includes/schemas/default/class-wc1c-schema-default.php:527
+#: includes/schemas/default/class-wc1c-schema-default.php:528
 msgid "Not a valid user password"
 msgstr ""
 
-#: includes/schemas/default/class-wc1c-schema-default.php:557
-#: includes/schemas/default/class-wc1c-schema-default.php:696
+#: includes/schemas/default/class-wc1c-schema-default.php:553
+#: includes/schemas/default/class-wc1c-schema-default.php:594
+#: includes/schemas/default/class-wc1c-schema-default.php:686
 msgid "Authorization failed"
 msgstr ""
 
-#: includes/schemas/default/class-wc1c-schema-default.php:578
+#: includes/schemas/default/class-wc1c-schema-default.php:605
+msgid "Unable to create a directory: "
+msgstr ""
+
+#: includes/schemas/default/class-wc1c-schema-default.php:615
 msgid "Filename is empty."
 msgstr ""
 
-#: includes/schemas/default/class-wc1c-schema-default.php:704
+#: includes/schemas/default/class-wc1c-schema-default.php:696
 msgid "Import filename is empty."
 msgstr ""
 
