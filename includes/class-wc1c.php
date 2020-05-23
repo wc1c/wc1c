@@ -818,7 +818,7 @@ final class Wc1c
 	private function define_constants()
 	{
 		$plugin_data = get_file_data(WC1C_PLUGIN_FILE, array('Version' => 'Version'));
-		wc1c_define('WC1C_VERSION', $plugin_data['Version']);
+		wc1c_define('WC1C_PLUGIN_VERSION', $plugin_data['Version']);
 
 		wc1c_define('WC1C_PLUGIN_URL', plugin_dir_url(WC1C_PLUGIN_FILE));
 		wc1c_define('WC1C_PLUGIN_NAME', plugin_basename(WC1C_PLUGIN_FILE));
