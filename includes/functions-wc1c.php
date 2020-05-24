@@ -366,3 +366,22 @@ function wc1c_get_configurations_status_print($status = null)
 
 	return $statuses;
 }
+
+/**
+ * Wrapper for set_time_limit to see if it is enabled
+ *
+ * @param int $limit time limit
+ *
+ * @return bool
+ */
+function wc1c_set_time_limit($limit = 0)
+{
+	if(function_exists('set_time_limit') && !ini_get('safe_mode') && false === strpos(ini_get('disable_functions'), 'set_time_limit'))
+	{
+		@set_time_limit($limit);
+		
+		return true;
+	}
+
+	return false;
+}
