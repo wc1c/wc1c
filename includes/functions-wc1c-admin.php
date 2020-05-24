@@ -105,3 +105,14 @@ function get_wc1c_admin_configuration_url($action = 'list', $configuration_id = 
 
 	return admin_url($path);
 }
+
+/**
+ * Outputs a "back" link so admin screens can easily jump back a page
+ *
+ * @param string $label title of the page to return to.
+ * @param string $url URL of the page to return to.
+ */
+function wc1c_admin_back_link($label, $url)
+{
+	echo '<small class="wc-admin-breadcrumb"><a href="' . esc_url($url) . '" aria-label="' . esc_attr($label) . '">&#x2934;</a></small>';
+}
