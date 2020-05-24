@@ -23,30 +23,9 @@ abstract class Wc1c_Abstract_Extension
 	private $id = '';
 
 	/**
-	 * Current version
-	 *
-	 * @var string
+	 * @var array
 	 */
-	private $version = '';
-
-	/**
-	 * Name
-	 *
-	 * @var string
-	 */
-	private $name = '';
-
-	/**
-	 * Description
-	 *
-	 * @var string
-	 */
-	private $description = '';
-
-	/**
-	 * @var string
-	 */
-	private $author = 'WC1C team';
+	public $meta = [];
 
 	/**
 	 * Extension type
@@ -139,11 +118,48 @@ abstract class Wc1c_Abstract_Extension
 	}
 
 	/**
+	 * Set meta information for extension
+	 *
+	 * @param $name
+	 * @param string $value
+	 */
+	public function set_meta($name, $value = '')
+	{
+		$this->meta[$name] = $value;
+	}
+
+	/**
+	 * Get meta information for extension
+	 *
+	 * @param $name
+	 * @param string $default_value
+	 *
+	 * @return mixed|string
+	 * @throws Exception
+	 */
+	public function get_meta($name, $default_value = '')
+	{
+		$data = $this->meta;
+
+		if($name !== '')
+		{
+			if(is_array($data) && array_key_exists($name, $data))
+			{
+				return $data[$name];
+			}
+
+			return $default_value;
+		}
+
+		throw new Exception('get_meta: $name is not available');
+	}
+
+	/**
 	 * @return string
 	 */
 	public function get_version()
 	{
-		return $this->version;
+		return $this->meta['version'];
 	}
 
 	/**
@@ -151,7 +167,7 @@ abstract class Wc1c_Abstract_Extension
 	 */
 	public function set_version($version)
 	{
-		$this->version = $version;
+		$this->meta['version'] = $version;
 	}
 
 	/**
@@ -159,7 +175,7 @@ abstract class Wc1c_Abstract_Extension
 	 */
 	public function get_author()
 	{
-		return $this->author;
+		return $this->meta['author'];
 	}
 
 	/**
@@ -167,7 +183,7 @@ abstract class Wc1c_Abstract_Extension
 	 */
 	public function set_author($author)
 	{
-		$this->author = $author;
+		$this->meta['author'] = $author;
 	}
 
 	/**
@@ -175,7 +191,7 @@ abstract class Wc1c_Abstract_Extension
 	 */
 	public function get_name()
 	{
-		return $this->name;
+		return $this->meta['name'];
 	}
 
 	/**
@@ -183,7 +199,7 @@ abstract class Wc1c_Abstract_Extension
 	 */
 	public function set_name($name)
 	{
-		$this->name = $name;
+		$this->meta['name'] = $name;
 	}
 
 	/**
@@ -191,7 +207,7 @@ abstract class Wc1c_Abstract_Extension
 	 */
 	public function get_description()
 	{
-		return $this->description;
+		return $this->meta['description'];
 	}
 
 	/**
@@ -199,7 +215,7 @@ abstract class Wc1c_Abstract_Extension
 	 */
 	public function set_description($description)
 	{
-		$this->description = $description;
+		$this->meta['description'] = $description;
 	}
 
 	/**
