@@ -46,7 +46,9 @@ class Wc1c_Admin_Configurations_Update_Form extends Wc1c_Admin_Abstract_Form
 			$this->save();
 		}
 		catch(Exception $e)
-		{}
+		{
+			WC1C()->logger()->notice($e->getMessage());
+		}
 	}
 
 	/**
