@@ -215,9 +215,15 @@ abstract class Wc1c_Admin_Abstract_Form
 
 		$html = '';
 
+		$i = 1;
+
 		foreach($form_fields as $k => $v)
 		{
 			$type = $this->get_field_type($v);
+
+			$v['title'] = $i . ') ' . $v['title'];
+
+			$i++;
 
 			if(method_exists($this, 'generate_' . $type . '_html'))
 			{
@@ -226,6 +232,8 @@ abstract class Wc1c_Admin_Abstract_Form
 				continue;
 			}
 			$html .= $this->generate_text_html($k, $v);
+
+
 		}
 
 		if($echo !== true)
