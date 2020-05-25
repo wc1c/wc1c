@@ -40,7 +40,13 @@ class Wc1c_Admin_Configurations_Update_Form extends Wc1c_Admin_Abstract_Form
 		$this->title_numeric = true;
 
 		$this->load_fields();
-		$this->save();
+
+		try
+		{
+			$this->save();
+		}
+		catch(Exception $e)
+		{}
 	}
 
 	/**
