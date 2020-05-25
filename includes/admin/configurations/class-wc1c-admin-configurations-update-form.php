@@ -37,6 +37,8 @@ class Wc1c_Admin_Configurations_Update_Form extends Wc1c_Admin_Abstract_Form
 		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_main'), 0);
 		add_action('wc1c_admin_configurations_update_show', array($this, 'output_form'), 10);
 
+		$this->title_numeric = true;
+
 		$this->load_fields();
 		$this->save();
 	}

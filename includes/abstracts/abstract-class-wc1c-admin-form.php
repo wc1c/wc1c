@@ -16,6 +16,11 @@ abstract class Wc1c_Admin_Abstract_Form
 	protected $id = '';
 
 	/**
+	 * @var bool
+	 */
+	public $title_numeric = false;
+
+	/**
 	 * Form validation messages
 	 *
 	 * @var array of strings
@@ -216,14 +221,26 @@ abstract class Wc1c_Admin_Abstract_Form
 		$html = '';
 
 		$i = 1;
+		$g = 1;
 
 		foreach($form_fields as $k => $v)
 		{
 			$type = $this->get_field_type($v);
 
-			$v['title'] = $i . ') ' . $v['title'];
-
-			$i++;
+			if($this->title_numeric)
+            {
+	            if($type === 'title')
+	            {
+		            //$v['title'] = $i . ') ' . $v['title'];
+		            $i++;
+		            $g = 1;
+	            }
+	            else
+	            {
+		            $v['title'] = $i . '.' . $g .') ' . $v['title'];
+		            $g++;
+	            }
+            }
 
 			if(method_exists($this, 'generate_' . $type . '_html'))
 			{
