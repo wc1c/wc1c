@@ -388,11 +388,11 @@ class Wc1c_Configuration
 		$update_result = WC1C_Db()->update(WC1C_Db()->base_prefix . 'wc1c', $this->get_data(),
 		    [
 				'config_id' => $this->get_id(),
-				'site_id' => '0'
+				//'site_id' => '0'
 			]
 		);
 
-		if($update_result !== false)
+		if($update_result !== false || $update_result !== 0)
 		{
 			return true;
 		}
