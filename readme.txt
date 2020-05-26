@@ -1,5 +1,5 @@
 === WC1C: integration of WooCommerce with 1C products (different configurations) ===
-Contributors: Mofsy
+Contributors: WC1C, Mofsy
 Tags: 1c, woocommerce, commerceml, woo, woo 1c, woo commerce, 1s, 1с
 Requires at least: 4.2
 Tested up to: 5.4
