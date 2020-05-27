@@ -34,7 +34,7 @@ class Wc1c_Admin_Inject
 	}
 
 	/**
-	 * Добавление колонки в список постов для вывода UID 1С
+	 * Adding a column to the list of products for displaying 1C information
 	 *
 	 * @param $columns
 	 *
@@ -51,7 +51,7 @@ class Wc1c_Admin_Inject
 	}
 
 	/**
-	 * Вывод идентификаторов 1С в колонку с постами
+	 * Information from 1C in products list
 	 *
 	 * @param $column
 	 */
@@ -64,21 +64,26 @@ class Wc1c_Admin_Inject
 			$schema_id = get_post_meta($post->ID, 'wc1c_schema_id', true);
 			$config_id = get_post_meta($post->ID, 'wc1c_configuration_id', true);
 
-			$guid = false;
+			$content = '';
 
-			if($config_id && $schema_id)
+			if($schema_id)
 			{
-				$guid = get_post_meta($post->ID, 'wc1c_prefix_' . $schema_id . '_' . $config_id . '_id80', true);
-
-				echo '<span class="na">' . __('Schema ID: ', 'wc1c') . $schema_id . '</span><br/>';
+				$content .= '<span class="na">' . __('Schema ID: ', 'wc1c') . $schema_id . '</span>';
 			}
-
-			echo $guid ? $guid : '<span class="na">' . __('not found', 'wc1c') . '</span>';
 
 			if($config_id)
 			{
-				echo '<br/><span class="na">' . __('Configuration ID: ', 'wc1c')  . $config_id . '</span>';
+				$content .= '<br/><span class="na">' . __('Configuration ID: ', 'wc1c')  . $config_id . '</span>';
 			}
+
+			if($config_id == false && $schema_id == false)
+			{
+				$content .= '<span class="na">' . __('not found', 'wc1c') . '</span>';
+			}
+
+			$content = apply_filters('wc1c_admin_inject_products_lists_column', $content, $schema_id, $config_id);
+
+			echo $content;
 		}
 	}
 }
