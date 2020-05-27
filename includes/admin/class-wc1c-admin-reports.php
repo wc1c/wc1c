@@ -478,7 +478,7 @@ class Wc1c_Admin_Reports
 		(
 			'title' => __('WC1C version', 'wc1c'),
 			'description' => '',
-			'data' => WC1C()->environment()->get('wc1c_version')
+			'data' => WC1C()->environment()->get('wc1c_version', '')
 		);
 
 		/**
