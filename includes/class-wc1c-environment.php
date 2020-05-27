@@ -129,9 +129,9 @@ class Wc1c_Environment
 	 */
 	public function init_wc1c_version()
 	{
-		if(defined('WC1C_VERSION'))
+		if(defined('WC1C_PLUGIN_VERSION'))
 		{
-			$this->set('wc1c_version', WC1C_VERSION);
+			$this->set('wc1c_version', WC1C_PLUGIN_VERSION);
 
 			return true;
 		}
