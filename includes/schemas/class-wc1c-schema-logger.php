@@ -30,7 +30,9 @@ class Wc1c_Schema_Logger extends Wc1c_Abstract_Logger
 			$date_time = new DateTime('now', new DateTimeZone('UTC'));
 		}
 		catch(Exception $e)
-		{}
+		{
+			return false;
+		}
 
 		$content = array
 		(
