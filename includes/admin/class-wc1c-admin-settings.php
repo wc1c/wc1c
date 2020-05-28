@@ -247,11 +247,13 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 			'default' => 'yes'
 		);
 
+		$logger_path = WC1C()->logger()->get_path() . DIRECTORY_SEPARATOR . WC1C()->logger()->get_name();
+
 		$fields['logger'] = array
 		(
 			'title' => __('Logging level', 'wc1c'),
 			'type' => 'select',
-			'description' => __('You can enable logging, specify the level of error that you want to benefit from logging. You can send reports to developer manually by pressing the button. All sensitive data in the report are deleted. By default, the error rate should not be less than ERROR.', 'wc1c'),
+			'description' => __('You can enable logging, specify the level of error that you want to benefit from logging. You can send reports to developer manually by pressing the button. All sensitive data in the report are deleted. By default, the error rate should not be less than ERROR.', 'wc1c') . '<br/><b>' . __('Current file: ', 'wc1c') . '</b>' . $logger_path,
 			'default' => '400',
 			'options' => array
 			(
