@@ -477,14 +477,8 @@ final class Wc1c
 	 */
 	public function init_extensions($extension_id = '')
 	{
-		/**
-		 * Get all loaded extensions
-		 */
 		$extensions = $this->get_extensions();
 
-		/**
-		 * Invalid extensions
-		 */
 		if(!is_array($extensions))
 		{
 			throw new Exception('init_extensions: $extensions is not array');
@@ -495,9 +489,6 @@ final class Wc1c
 		 */
 		if($extension_id !== '')
 		{
-			/**
-			 * Extension not exists
-			 */
 			if(!array_key_exists($extension_id, $extensions))
 			{
 				throw new Exception('init_extensions: extension not found by id');
@@ -505,42 +496,27 @@ final class Wc1c
 
 			$init_extension = $extensions[$extension_id];
 
-			/**
-			 * Extension validate
-			 */
 			if(!is_object($init_extension))
 			{
 				throw new Exception('init_extensions: $extensions[$extension_id] is not object');
 			}
 
-			/**
-			 * Extension initialized
-			 */
 			if($init_extension->is_initialized())
 			{
 				throw new Exception('init_extensions: old initialized');
 			}
 
-			/**
-			 * Valid areas
-			 */
 			$areas = $init_extension->get_areas();
 			if(false === $this->validate_areas($areas))
 			{
 				return true;
 			}
 
-			/**
-			 * Init method not found
-			 */
 			if(!method_exists($init_extension, 'init'))
 			{
 				throw new Exception('init_extensions: method init not found');
 			}
 
-			/**
-			 * Init
-			 */
 			try
 			{
 				$init_extension->init();
