@@ -429,7 +429,7 @@ final class Wc1c
 	 *  current - current configuration
 	 *  numeric - configuration identifier
 	 *
-	 * @return array|boolean|Wc1c_Configuration
+	 * @return array|Wc1c_Configuration
 	 *
 	 * @throws Exception
 	 */
@@ -650,9 +650,6 @@ final class Wc1c
 			throw new Exception('init_schemas: exception - ' . $e->getMessage());
 		}
 
-		/**
-		 * Invalid schemas
-		 */
 		if(!is_array($schemas))
 		{
 			throw new Exception('init_schemas: $schemas is not array');
@@ -663,17 +660,11 @@ final class Wc1c
 		 */
 		if($schema_id !== '')
 		{
-			/**
-			 * Schema not exists
-			 */
 			if(!array_key_exists($schema_id, $schemas))
 			{
 				throw new Exception('init_schemas: schema not found by id');
 			}
 
-			/**
-			 * Schema validate
-			 */
 			if(!is_object($schemas[$schema_id]))
 			{
 				throw new Exception('init_schemas: $schemas[$schema_id] is not object');
@@ -681,17 +672,11 @@ final class Wc1c
 
 			$init_schema = $schemas[$schema_id];
 
-			/**
-			 * Schema initialized
-			 */
 			if($init_schema->is_initialized())
 			{
 				throw new Exception('init_schemas: old initialized');
 			}
 
-			/**
-			 * Init method not found
-			 */
 			if(!method_exists($init_schema, 'init'))
 			{
 				throw new Exception('init_schemas: method init not found');
@@ -703,12 +688,11 @@ final class Wc1c
 
 				if($configuration_id !== 0)
 				{
-					$configuration = $this->get_configurations($configuration_id);
-
-					$init_schema->set_configuration($configuration);
-					$init_schema->set_options($configuration->get_options());
 					$init_schema->set_configuration_prefix('wc1c_configuration_' . $configuration_id);
 					$init_schema->set_prefix('wc1c_prefix_' . $schema_id . '_' . $configuration_id);
+
+					$configuration = $this->get_configurations($configuration_id);
+					$init_schema->set_configuration($configuration);
 				}
 
 				$init_schema_result = $init_schema->init();
