@@ -21,13 +21,6 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	private $import_full = true;
 
 	/**
-	 * Current time
-	 *
-	 * @var string
-	 */
-	private $time;
-
-	/**
 	 * Current import data
 	 *
 	 * @var array
@@ -50,25 +43,22 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 */
 	public function init()
 	{
-		/**
-		 * Init environment
-		 */
-		$this->init_environment();
+		try
+		{
+			$this->init_environment();
+		}
+		catch(Exception $e)
+		{
+			throw new Exception('init: - ' . $e);
+		}
 
-		/**
-		 * Logger
-		 */
 		if(false === $this->load_logger())
 		{
-			WC1C()->logger()->critical('init: load_logger');
 			throw new Exception('init: load_logger error');
 		}
 
-		$this->logger()->info('init: start');
+		$this->set_options($this->configuration()->get_options());
 
-		/**
-		 * View configuration form
-		 */
 		if(true === is_wc1c_admin_request())
 		{
 			add_filter('wc1c_admin_configurations-update_form_load_fields', array($this, 'configurations_fields_auth'), 10, 1);
@@ -76,15 +66,10 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			add_filter('wc1c_admin_configurations-update_form_load_fields', array($this, 'configurations_fields_tech'), 10, 1);
 		}
 
-		/**
-		 * Api requests handler
-		 */
 		if(true === is_wc1c_api_request())
 		{
 			add_action('wc1c_api_' . $this->get_id(), array($this, 'api_handler'), 10);
 		}
-
-		$this->logger()->debug('init: end', $this);
 
 		return true;
 	}
