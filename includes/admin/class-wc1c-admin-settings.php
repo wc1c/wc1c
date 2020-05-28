@@ -34,32 +34,17 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 	 */
 	public function init()
 	{
-		/**
-		 * Init fields
-		 */
 		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_technical'), 10);
 		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_enable_data'), 20);
 		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_extensions'), 30);
 		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_uninstall'), 40);
 
-		/**
-		 * Load form fields
-		 */
 		$this->load_fields();
 
-		/**
-		 * Load form saved data
-		 */
 		$this->load_saved_data();
 
-		/**
-		 * Form show
-		 */
 		add_action('wc1c_admin_' . $this->get_id() . '_form_show', array($this, 'output_form'), 10);
 
-		/**
-		 * Form save
-		 */
 		$this->save();
 	}
 
@@ -84,22 +69,13 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 	 */
 	public function save()
 	{
-		/**
-		 * Post data
-		 */
 		$post_data = $this->get_posted_data();
 
-		/**
-		 * Data from form available
-		 */
 		if(!isset($post_data['_wc1c-admin-nonce']))
 		{
 			return false;
 		}
 
-		/**
-		 * Security
-		 */
 		if(empty($post_data) || !wp_verify_nonce($post_data['_wc1c-admin-nonce'], 'wc1c-admin-settings-save'))
 		{
 			WC1C_Admin()->add_message('error', __('Save error. Please retry.', 'wc1c'));
@@ -111,17 +87,11 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 		 */
 		foreach($this->get_fields() as $key => $field)
 		{
-			/**
-			 * Title break
-			 */
 			if('title' === $this->get_field_type($field))
 			{
 				continue;
 			}
 
-			/**
-			 * Validate
-			 */
 			try
 			{
 				$this->saved_data[$key] = $this->get_field_value($key, $field, $post_data);
@@ -134,9 +104,6 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 
 		$saved = false;
 
-		/**
-		 * Saving
-		 */
 		try
 		{
 			$saved = WC1C()->settings()->save($this->get_saved_data());
@@ -146,9 +113,6 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 			WC1C_Admin()->add_message('error', $e->getMessage());
 		}
 
-		/**
-		 * Show admin messages
-		 */
 		if($saved)
 		{
 			WC1C_Admin()->add_message('update', __('Saving settings success.', 'wc1c'));
