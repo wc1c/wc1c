@@ -685,7 +685,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 		try
 		{
-			$result_import = $this->file_import($file);
+			$result_import = $this->file_processing($file);
 
 			if($result_import !== false)
 			{
@@ -706,14 +706,11 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 *
 	 * @param $file_path
 	 *
-	 * @throws Exception
-	 *
 	 * @return mixed
+	 * @throws Exception
 	 */
-	private function file_import($file_path)
+	private function file_processing($file_path)
 	{
-		$this->logger()->info('file_import: start');
-
 		$type_file = $this->file_type_detect($file_path);
 
 		$this->logger()->info('file_import: type_file - ' . $type_file);
