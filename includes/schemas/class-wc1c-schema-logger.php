@@ -11,13 +11,12 @@ class Wc1c_Schema_Logger extends Wc1c_Abstract_Logger
 	/**
 	 * Save to file
 	 *
-	 * @throws
-	 *
 	 * @param $level
 	 * @param $message
 	 * @param null $object
 	 *
 	 * @return bool
+	 * @throws Exception
 	 */
 	public function add($level, $message, $object = null)
 	{
@@ -54,27 +53,15 @@ class Wc1c_Schema_Logger extends Wc1c_Abstract_Logger
 			$content['object'] = $object;
 		}
 
-		/**
-		 * Content
-		 */
 		$content = implode(' -|- ', $content);
 
-		/**
-		 * File
-		 */
 		$file = $this->get_path() . DIRECTORY_SEPARATOR . $this->get_name();
 
-		/**
-		 * Dir
-		 */
 		if(!file_exists($this->get_path()))
 		{
 			mkdir($this->get_path());
 		}
 
-		/**
-		 * Write
-		 */
 		file_put_contents
 		(
 			$file,
