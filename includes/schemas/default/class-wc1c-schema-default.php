@@ -840,16 +840,16 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 */
 	private function parse_xml_catalog($xml_catalog_data)
 	{
-		$data['catalog_guid'] = (string) $xml_catalog_data->Ид;
-		$data['classifier_guid'] = (string) $xml_catalog_data->ИдКлассификатора;
-		$data['catalog_name'] = (string) $xml_catalog_data->Наименование;
-		$data['catalog_description']= '';
+		$catalog_data['catalog_guid'] = (string) $xml_catalog_data->Ид;
+		$catalog_data['classifier_guid'] = (string) $xml_catalog_data->ИдКлассификатора;
+		$catalog_data['catalog_name'] = (string) $xml_catalog_data->Наименование;
+		$catalog_data['catalog_description']= '';
 		if($xml_catalog_data->Описание)
 		{
-			$data['catalog_description'] = (string) $xml_catalog_data->Описание;
+			$catalog_data['catalog_description'] = (string) $xml_catalog_data->Описание;
 		}
 
-		$this->logger()->debug('parse_xml_catalog: $data', $data);
+		$this->logger()->debug('parse_xml_catalog: $data', $catalog_data);
 
 		if($xml_catalog_data->Товары)
 		{
@@ -862,25 +862,25 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	/**
 	 * Разбор: Пакет предложений
 	 *
-	 * @param $xml_data
+	 * @param $xml_offers_package_data
 	 *
 	 * @return bool
 	 * @throws Exception
 	 */
-	private function parse_xml_offers_package($xml_data)
+	private function parse_xml_offers_package($xml_offers_package_data)
 	{
-		$offers_pack['offers_package_name'] = (string) $xml_data->Наименование;
-		$offers_pack['offers_package_guid'] = (string) $xml_data->Ид;
-		$offers_pack['catalog_guid'] = (string) $xml_data->ИдКаталога;
-		$offers_pack['classifier_guid'] = (string) $xml_data->ИдКлассификатора;
+		$offers_package['offers_package_name'] = (string) $xml_offers_package_data->Наименование;
+		$offers_package['offers_package_guid'] = (string) $xml_offers_package_data->Ид;
+		$offers_package['catalog_guid'] = (string) $xml_offers_package_data->ИдКаталога;
+		$offers_package['classifier_guid'] = (string) $xml_offers_package_data->ИдКлассификатора;
 
-		$data['offers_package_description']= '';
-		if($xml_data->Описание)
+		$offers_package['offers_package_description']= '';
+		if($xml_offers_package_data->Описание)
 		{
-			$data['offers_package_description'] = (string)$xml_data->Описание;
+			$offers_package['offers_package_description'] = (string)$xml_offers_package_data->Описание;
 		}
 
-		if($xml_data->Предложения)
+		if($xml_offers_package_data->Предложения)
 		{
 			$this->logger()->info('parse_xml_offers_package: $xml_data->Предложения start');
 
@@ -914,17 +914,17 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	/**
 	 * Разбор: Классификатор
 	 *
-	 * @param $xml_data
+	 * @param $xml_classifier_data
 	 *
 	 * @return array|bool
 	 * @throws Exception
 	 */
-	private function parse_xml_classifier($xml_data)
+	private function parse_xml_classifier($xml_classifier_data)
 	{
-		$data['classifier_guid'] = (string)$xml_data->Ид;
-		$data['classifier_name'] = (string)$xml_data->Наименование;
+		$classifier_data['classifier_guid'] = (string)$xml_classifier_data->Ид;
+		$classifier_data['classifier_name'] = (string)$xml_classifier_data->Наименование;
 
-		$this->logger()->debug('parse_xml_classifier: $data ', $data);
+		$this->logger()->debug('parse_xml_classifier: $data ', $classifier_data);
 
 		/**
 		 * Группы
@@ -932,7 +932,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		 *
 		 * cml:Группа
 		 */
-		if($xml_data->Группы)
+		if($xml_classifier_data->Группы)
 		{
 			$this->logger()->info('parse_xml_classifier: classifier_processing_groups start');
 
@@ -947,7 +947,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		 *
 		 * cml:Свойство
 		 */
-		if($xml_data->Свойства)
+		if($xml_classifier_data->Свойства)
 		{
 			$this->logger()->info('parse_xml_classifier: classifier_processing_properties start');
 
@@ -955,7 +955,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			$this->logger()->info('parse_xml_classifier: classifier_processing_properties end, success');
 		}
 
-		return $data;
+		return $classifier_data;
 	}
 
 	/**
