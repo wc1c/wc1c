@@ -10,11 +10,9 @@ defined('ABSPATH') || exit;
 final class Wc1c_Admin
 {
 	/**
-	 * The single instance of the class
-	 *
-	 * @var Wc1c_Admin
+	 * Traits
 	 */
-	protected static $_instance = null;
+	use Trait_Wc1c_Singleton;
 
 	/**
 	 * Admin sections
@@ -36,22 +34,6 @@ final class Wc1c_Admin
 	 * @var string
 	 */
 	private $current_section = 'configurations';
-
-	/**
-	 * Main Wc1c_Admin instance
-	 *
-	 * @static
-	 *
-	 * @return Wc1c_Admin
-	 */
-	public static function instance()
-	{
-		if(is_null(self::$_instance))
-		{
-			self::$_instance = new self();
-		}
-		return self::$_instance;
-	}
 
 	/**
 	 * Wc1c_Admin constructor
