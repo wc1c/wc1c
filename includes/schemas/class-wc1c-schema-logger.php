@@ -50,12 +50,12 @@ class Wc1c_Schema_Logger extends Wc1c_Abstract_Logger
 		{
 			$content['object'] = $object ? 'true' : 'false';
 		}
-		else
+		elseif(!is_null($object) || $object !== '')
 		{
 			$content['object'] = $object;
 		}
 
-		$content = implode(' -|- ', $content);
+		$content = implode(' |- ', $content);
 
 		$file = $this->get_path() . DIRECTORY_SEPARATOR . $this->get_name();
 
