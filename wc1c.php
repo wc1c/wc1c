@@ -23,6 +23,7 @@ if(!defined('WC1C_PLUGIN_FILE'))
 	define('WC1C_PLUGIN_FILE', __FILE__);
 
 	include_once __DIR__ . '/includes/functions-wc1c.php';
+	include_once __DIR__ . '/includes/traits/trait-wc1c-singleton.php';
 	include_once __DIR__ . '/includes/class-wc1c.php';
 }
 

@@ -9,11 +9,9 @@ defined('ABSPATH') || exit;
 final class Wc1c
 {
 	/**
-	 * The single instance of the class
-	 *
-	 * @var Wc1c
+	 * Traits
 	 */
-	protected static $_instance = null;
+	use Trait_Wc1c_Singleton;
 
 	/**
 	 * Logger
@@ -82,21 +80,6 @@ final class Wc1c
 	 * @var array
 	 */
 	private $helpers = [];
-
-	/**
-	 * Main Wc1c instance
-	 *
-	 * @return Wc1c
-	 */
-	public static function instance()
-	{
-		if(is_null(self::$_instance))
-		{
-			self::$_instance = new self();
-		}
-
-		return self::$_instance;
-	}
 
 	/**
 	 * Wc1c constructor
