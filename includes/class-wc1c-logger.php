@@ -48,10 +48,10 @@ class Wc1c_Logger extends Wc1c_Abstract_Logger
         {
 	        $content['object'] = $object ? 'true' : 'false';
         }
-	    elseif(!is_null($object) || $object !== '')
-	    {
-		    $content['object'] = $object;
-	    }
+        elseif(!is_null($object) && $object !== '')
+        {
+	        $content['object'] = $object;
+        }
 
         $content = implode(' |- ', $content);
 
