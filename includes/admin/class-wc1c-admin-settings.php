@@ -37,7 +37,8 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_technical'), 10);
 		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_enable_data'), 20);
 		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_extensions'), 30);
-		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_uninstall'), 40);
+		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_admin'), 40);
+		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_uninstall'), 50);
 
 		$this->load_fields();
 
@@ -229,24 +230,6 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 			'description' => __('Used by technical specialists. Can leave it at that.', 'wc1c'),
 		);
 
-		$fields['api'] = array
-		(
-			'title' => __('API', 'wc1c'),
-			'type' => 'checkbox',
-			'label' => __('Enable', 'wc1c'),
-			'description' => __('This API uses exchange schemas to receive requests from 1C and send data there.', 'wc1c'),
-			'default' => 'yes'
-		);
-
-		$fields['admin_inject'] = array
-		(
-			'title' => __('Admin inject', 'wc1c'),
-			'type' => 'checkbox',
-			'label' => __('Enable', 'wc1c'),
-			'description' => __('Embedding information from the plugin in the admin panel interface.', 'wc1c'),
-			'default' => 'yes'
-		);
-
 		$logger_path = WC1C()->logger()->get_path() . DIRECTORY_SEPARATOR . WC1C()->logger()->get_name();
 
 		$fields['logger'] = array
@@ -269,6 +252,15 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 			)
 		);
 
+		$fields['api'] = array
+		(
+			'title' => __('API', 'wc1c'),
+			'type' => 'checkbox',
+			'label' => __('Enable', 'wc1c'),
+			'description' => __('This API uses exchange schemas to receive requests from 1C and send data there.', 'wc1c'),
+			'default' => 'yes'
+		);
+
 		$fields['upload_directory_name'] = array
 		(
 			'title' => __('Name of upload directory', 'wc1c'),
@@ -276,6 +268,34 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 			'description' => __('You need to change the name of the standard directory for security.', 'wc1c'),
 			'default' => 'wc1c',
 			'css' => 'min-width: 300px;',
+		);
+
+		return $fields;
+	}
+
+	/**
+	 * Add settings for admin panel
+	 *
+	 * @param $fields
+	 *
+	 * @return array
+	 */
+	public function init_fields_admin($fields)
+	{
+		$fields['title_admin'] = array
+		(
+			'title' => __('Admin interface', 'wc1c'),
+			'type' => 'title',
+			'description' => __('Configuring the output of information in the WordPress admin panel.', 'wc1c'),
+		);
+
+		$fields['admin_inject'] = array
+		(
+			'title' => __('Admin inject', 'wc1c'),
+			'type' => 'checkbox',
+			'label' => __('Enable', 'wc1c'),
+			'description' => __('Embedding information from the plugin in the admin panel interface.', 'wc1c'),
+			'default' => 'yes'
 		);
 
 		return $fields;
