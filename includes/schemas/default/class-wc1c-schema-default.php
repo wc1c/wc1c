@@ -677,32 +677,42 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 		if($filename === '')
 		{
-			$this->logger()->warning('Import filename: is empty');
+			$this->logger()->warning('api_catalog_mode_import: filename is empty');
 			$this->api_response_by_type('failure', __('Import filename is empty.', 'wc1c'));
 		}
 
 		$file = $this->get_upload_directory() . '/catalog/' . sanitize_file_name($filename);
 
+		$this->logger()->info('api_catalog_mode_import: file_processing - start');
+
+		$result_file_processing = false;
+
 		try
 		{
-			$result_import = $this->file_processing($file);
-
-			if($result_import !== false)
-			{
-				$this->logger()->info('api_catalog_mode_import: success');
-				$this->api_response_by_type('success', 'Импорт успешно завершен.');
-			}
+			$result_file_processing = $this->file_processing($file);
 		}
 		catch(Exception $e)
 		{
 			$this->logger()->error('api_catalog_mode_import: exception - ' . $e->getMessage(), $e);
 		}
 
+		if($result_file_processing !== false)
+		{
+			if($this->get_options('delete_files_after_import', 'no') === 'yes')
+			{
+				$this->logger()->info('file_import: delete file - ' . $file);
+				unlink($file);
+			}
+
+			$this->logger()->info('api_catalog_mode_import: success');
+			$this->api_response_by_type('success', 'Импорт успешно завершен.');
+		}
+
 		$this->api_response_by_type('failure', 'Импорт завершен с ошибкой.');
 	}
 
 	/**
-	 * Импорт указанного файла
+	 * CommerceML file processing
 	 *
 	 * @param $file_path
 	 *
@@ -713,123 +723,111 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	{
 		$type_file = $this->file_type_detect($file_path);
 
-		$this->logger()->info('file_import: type_file - ' . $type_file);
+		$this->logger()->info('file_processing: type_file - ' . $type_file);
 
-		if(is_file($file_path) && $type_file !== '')
+		if(!is_file($file_path))
 		{
-			if(!defined('LIBXML_VERSION'))
-			{
-				throw new Exception('file_import: LIBXML_VERSION not defined, end & false');
-			}
+			throw new Exception('file_processing: $file_path is not file');
+		}
 
-			if(!function_exists('libxml_use_internal_errors'))
-			{
-				throw new Exception('file_import: libxml_use_internal_errors, end & false');
-			}
+		if($type_file === '')
+		{
+			throw new Exception('file_processing: $type_file is not valid');
+		}
 
-			libxml_use_internal_errors(true);
+		if(!defined('LIBXML_VERSION'))
+		{
+			throw new Exception('file_processing: LIBXML_VERSION not defined');
+		}
 
-			$xml_data = simplexml_load_file($file_path);
+		if(!function_exists('libxml_use_internal_errors'))
+		{
+			throw new Exception('file_processing: libxml_use_internal_errors');
+		}
 
-			if(!$xml_data)
-			{
-				$this->logger()->error('file_import: xml errors', libxml_get_errors());
-				return false;
-			}
+		libxml_use_internal_errors(true);
 
-			try
-			{
-				$this->check_cml($xml_data);
-			}
-			catch(Exception $e)
-			{
-				throw new Exception('file_import: exception - ' . $e->getMessage());
-			}
+		$xml_data = simplexml_load_file($file_path);
 
-			if($this->get_options('skip_file_processing', 'yes') === 'yes')
-			{
-				$this->logger()->info('file_import: skip, end & true');
-				return true;
-			}
+		if(!$xml_data)
+		{
+			$this->logger()->error('file_processing: xml errors, end & false', libxml_get_errors());
+			return false;
+		}
 
-			/**
-			 * Классификатор
-			 *
-			 * cml:Классификатор
-			 */
-			if($xml_data->Классификатор)
-			{
-				$this->logger()->info('file_import: classifier_processing start');
-
-				try
-				{
-					$this->parse_xml_classifier($xml_data->Классификатор);
-				}
-				catch(Exception $e)
-				{
-					$this->logger()->error('file_import: exception - ' . $e->getMessage());
-					return false;
-				}
-
-				$this->logger()->info('file_import: classifier_processing end');
-			}
-
-			/**
-			 * Каталог
-			 *
-			 * cml:Каталог
-			 */
-			if($xml_data->Каталог)
-			{
-				$this->logger()->info('file_import: catalog_processing start');
-
-				try
-				{
-					$this->parse_xml_catalog($xml_data->Каталог);
-				}
-				catch(Exception $e)
-				{
-					$this->logger()->info('file_import:exception - ' . $e->getMessage());
-					return false;
-				}
-
-				$this->logger()->info('file_import: catalog_processing end, success');
-			}
-
-			/**
-			 * Предложения
-			 *
-			 * cml:ПакетПредложений
-			 */
-			if($xml_data->ПакетПредложений)
-			{
-				$this->logger()->info('file_import: offers_package_processing start');
-
-				try
-				{
-					$this->parse_xml_offers_package($xml_data->ПакетПредложений);
-				}
-				catch(Exception $e)
-				{
-					$this->logger()->info('file_import: exception - ' . $e->getMessage());
-					return false;
-				}
-
-				$this->logger()->info('file_import: offers_package_processing end, success');
-			}
-
-			if($this->get_options('delete_files_after_import', 'no') === 'yes')
-			{
-				$this->logger()->info('file_import: delete file - ' . $file_path);
-				unlink($file_path);
-			}
-
-			$this->logger()->info('file_import: end & true');
+		if($this->get_options('skip_file_processing', 'yes') === 'yes')
+		{
+			$this->logger()->info('file_processing: skip, end & true');
 			return true;
 		}
 
-		$this->logger()->info('file_import: end & false');
-		return false;
+		/**
+		 * Классификатор
+		 *
+		 * cml:Классификатор
+		 */
+		if($xml_data->Классификатор && $this->get_options('classifier_processing', 'no') === 'yes')
+		{
+			$this->logger()->info('file_processing: classifier_processing start');
+
+			try
+			{
+				$this->parse_xml_classifier($xml_data->Классификатор);
+			}
+			catch(Exception $e)
+			{
+				$this->logger()->error('file_processing: exception - ' . $e->getMessage());
+				return false;
+			}
+
+			$this->logger()->info('file_processing: classifier_processing end');
+		}
+
+		/**
+		 * Каталог
+		 *
+		 * cml:Каталог
+		 */
+		if($xml_data->Каталог && $this->get_options('catalog_processing', 'no') === 'yes')
+		{
+			$this->logger()->info('file_processing: catalog_processing start');
+
+			try
+			{
+				$this->parse_xml_catalog($xml_data->Каталог);
+			}
+			catch(Exception $e)
+			{
+				$this->logger()->info('file_processing: exception - ' . $e->getMessage());
+				return false;
+			}
+
+			$this->logger()->info('file_processing: catalog_processing end, success');
+		}
+
+		/**
+		 * Предложения
+		 *
+		 * cml:ПакетПредложений
+		 */
+		if($xml_data->ПакетПредложений && $this->get_options('offers_package_processing', 'no') === 'yes')
+		{
+			$this->logger()->info('file_processing: offers_package_processing start');
+
+			try
+			{
+				$this->parse_xml_offers_package($xml_data->ПакетПредложений);
+			}
+			catch(Exception $e)
+			{
+				$this->logger()->info('file_processing: exception - ' . $e->getMessage());
+				return false;
+			}
+
+			$this->logger()->info('file_processing: offers_package_processing end, success');
+		}
+
+		return true;
 	}
 
 	/**
