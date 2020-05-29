@@ -44,6 +44,10 @@ class Wc1c_Logger extends Wc1c_Abstract_Logger
         {
             $content['object'] = print_r($object, true);
         }
+        elseif(is_bool($object))
+        {
+	        $content['object'] = $object ? 'true' : 'false';
+        }
 	    elseif(!is_null($object) || $object !== '')
 	    {
 		    $content['object'] = $object;
