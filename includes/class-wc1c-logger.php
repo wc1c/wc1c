@@ -11,19 +11,15 @@ class Wc1c_Logger extends Wc1c_Abstract_Logger
     /**
      * Save to file
      *
-     * @throws
-     *
      * @param $level
      * @param $message
      * @param null $object
      *
      * @return bool
+     * @throws Exception
      */
     public function add($level, $message, $object = null)
     {
-        /**
-         * Check level
-         */
         if($this->get_level() > $level)
         {
             return false;
@@ -48,32 +44,20 @@ class Wc1c_Logger extends Wc1c_Abstract_Logger
         {
             $content['object'] = print_r($object, true);
         }
-	    else
+	    elseif(!is_null($object) || $object !== '')
 	    {
 		    $content['object'] = $object;
 	    }
 
-        /**
-         * Content
-         */
-        $content = implode(' -|- ', $content);
+        $content = implode(' |- ', $content);
 
-	    /**
-	     * File
-	     */
 	    $file = $this->get_path() . DIRECTORY_SEPARATOR . $this->get_name();
 
-	    /**
-	     * Dir
-	     */
         if(!file_exists($this->get_path()))
         {
         	mkdir($this->get_path()); // todo: move to change with settings
         }
 
-	    /**
-	     * Write
-	     */
         file_put_contents
         (
 	        $file,
