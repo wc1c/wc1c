@@ -831,43 +831,27 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	}
 
 	/**
-	 * Загрузка каталога
+	 * Разбор: Каталог
 	 *
-	 * Каталог товаров содержит перечень товаров. Может составляться разными предприятиями (например, каталог продукции фирмы «1С»).
-	 * У каталога всегда определен владелец, а товары могут описываться по классификатору.
-	 *
-	 * @throws Exception
-	 *
-	 * @param $xml_data
+	 * @param $xml_catalog_data
 	 *
 	 * @return bool
+	 * @throws Exception
 	 */
-	private function parse_xml_catalog($xml_data)
+	private function parse_xml_catalog($xml_catalog_data)
 	{
-		// Глобально уникальный идентификатор каталога (рекомендуется использовать GUID)
-		$data['catalog_guid'] = (string) $xml_data->Ид;
-
-		// Идентификатор классификатора, в соответствии с которым описываются товары
-		$data['classifier_guid'] = (string) $xml_data->ИдКлассификатора;
-
-		// Наименование каталога
-		$data['catalog_name'] = (string) $xml_data->Наименование;
-
-		// Описание каталога
+		$data['catalog_guid'] = (string) $xml_catalog_data->Ид;
+		$data['classifier_guid'] = (string) $xml_catalog_data->ИдКлассификатора;
+		$data['catalog_name'] = (string) $xml_catalog_data->Наименование;
 		$data['catalog_description']= '';
-		if($xml_data->Описание)
+		if($xml_catalog_data->Описание)
 		{
-			$data['catalog_description'] = (string) $xml_data->Описание;
+			$data['catalog_description'] = (string) $xml_catalog_data->Описание;
 		}
 
-		$this->logger()->info('parse_xml_catalog: catalog_guid ' . $data['catalog_guid']);
-		$this->logger()->info('parse_xml_catalog: classifier_guid ' . $data['classifier_guid']);
-		$this->logger()->info('parse_xml_catalog: catalog_name ' . $data['catalog_name']);
+		$this->logger()->debug('parse_xml_catalog: $data', $data);
 
-		/**
-		 * Импорт товаров
-		 */
-		if($xml_data->Товары)
+		if($xml_catalog_data->Товары)
 		{
 			return true;
 		}
@@ -876,11 +860,12 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	}
 
 	/**
-	 * Разбор пакета предложений
+	 * Разбор: Пакет предложений
 	 *
 	 * @param $xml_data
 	 *
 	 * @return bool
+	 * @throws Exception
 	 */
 	private function parse_xml_offers_package($xml_data)
 	{
@@ -889,18 +874,12 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		$offers_pack['catalog_guid'] = (string) $xml_data->ИдКаталога;
 		$offers_pack['classifier_guid'] = (string) $xml_data->ИдКлассификатора;
 
-		/*
-		 * Описание пакета педложений
-		 */
 		$data['offers_package_description']= '';
 		if($xml_data->Описание)
 		{
 			$data['offers_package_description'] = (string)$xml_data->Описание;
 		}
 
-		/*
-		 * Загрузка предложений
-		 */
 		if($xml_data->Предложения)
 		{
 			$this->logger()->info('parse_xml_offers_package: $xml_data->Предложения start');
@@ -909,26 +888,6 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		}
 
 		return true;
-	}
-
-	/**
-	 * Проверка файла по стандарту
-	 *
-	 * @param $xml
-	 *
-	 * @throws Exception
-	 *
-	 * @return bool
-	 */
-	private function check_cml($xml)
-	{
-		if($xml['ВерсияСхемы'])
-		{
-			$this->current_data['xml_version_schema'] = (string)$xml['ВерсияСхемы'];
-			return true;
-		}
-
-		throw new Exception('check_cml: schema is not valid');
 	}
 
 	/**
@@ -953,21 +912,19 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	}
 
 	/**
-	 * Обработка классификатора
-	 *
-	 * @throws
+	 * Разбор: Классификатор
 	 *
 	 * @param $xml_data
 	 *
 	 * @return array|bool
+	 * @throws Exception
 	 */
 	private function parse_xml_classifier($xml_data)
 	{
 		$data['classifier_guid'] = (string)$xml_data->Ид;
 		$data['classifier_name'] = (string)$xml_data->Наименование;
 
-		$this->logger()->info('parse_xml_classifier: classifier_guid ' . $data['classifier_guid']);
-		$this->logger()->info('parse_xml_classifier: classifier_name ' . $data['classifier_name']);
+		$this->logger()->debug('parse_xml_classifier: $data ', $data);
 
 		/**
 		 * Группы
