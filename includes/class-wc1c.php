@@ -621,7 +621,7 @@ final class Wc1c
 		{
 			if(!array_key_exists($schema_id, $schemas))
 			{
-				throw new Exception('init_schemas: schema not found by id');
+				throw new Exception('init_schemas: schema not found by id: ' . $schema_id);
 			}
 
 			if(!is_object($schemas[$schema_id]))
@@ -633,27 +633,27 @@ final class Wc1c
 
 			if($init_schema->is_initialized())
 			{
-				throw new Exception('init_schemas: old initialized');
+				throw new Exception('init_schemas: old initialized, $schema_id: ' . $schema_id);
 			}
 
 			if(!method_exists($init_schema, 'init'))
 			{
-				throw new Exception('init_schemas: method init not found');
+				throw new Exception('init_schemas: method init not found, $schema_id: ' . $schema_id);
+			}
+
+			$current_configuration_id = WC1C()->environment()->get('current_configuration_id', 0);
+
+			if($current_configuration_id !== 0)
+			{
+				$init_schema->set_configuration_prefix('wc1c_configuration_' . $current_configuration_id);
+				$init_schema->set_prefix('wc1c_prefix_' . $schema_id . '_' . $current_configuration_id);
+
+				$configuration = $this->get_configurations($current_configuration_id);
+				$init_schema->set_configuration($configuration);
 			}
 
 			try
 			{
-				$configuration_id = WC1C()->environment()->get('current_configuration_id', 0);
-
-				if($configuration_id !== 0)
-				{
-					$init_schema->set_configuration_prefix('wc1c_configuration_' . $configuration_id);
-					$init_schema->set_prefix('wc1c_prefix_' . $schema_id . '_' . $configuration_id);
-
-					$configuration = $this->get_configurations($configuration_id);
-					$init_schema->set_configuration($configuration);
-				}
-
 				$init_schema_result = $init_schema->init();
 			}
 			catch(Exception $e)
@@ -682,6 +682,7 @@ final class Wc1c
 			}
 			catch(Exception $e)
 			{
+				WC1C()->logger()->error($e->getMessage(), $e);
 				continue;
 			}
 		}
