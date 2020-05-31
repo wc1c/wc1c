@@ -591,9 +591,6 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			}
 		}
 
-		/**
-		 * Empty filename
-		 */
 		if(wc1c_get_var($_GET['filename'], '') === '')
 		{
 			$this->logger()->warning('api_catalog_mode_file: filename is empty');
