@@ -57,10 +57,10 @@ class Wc1c_Logger extends Wc1c_Abstract_Logger
 
 	    $file = $this->get_path() . DIRECTORY_SEPARATOR . $this->get_name();
 
-        if(!file_exists($this->get_path()))
-        {
-        	mkdir($this->get_path()); // todo: move to change with settings
-        }
+	    if(!file_exists($this->get_path()) && !mkdir($this->get_path(), 0755, true))
+	    {
+		    return false;
+	    }
 
         file_put_contents
         (
