@@ -162,7 +162,7 @@ class Wc1c_Admin_Configurations_Table extends Wc1c_Admin_Abstract_Table
 	 */
 	public function get_sortable_columns()
 	{
-		$sortable_columns['config_id'] = array('config_id', true);
+		//$sortable_columns['config_id'] = array('config_id', true);
 		$sortable_columns['status'] = array('status', false);
 
 		return $sortable_columns;
@@ -266,7 +266,7 @@ class Wc1c_Admin_Configurations_Table extends Wc1c_Admin_Abstract_Table
 		 * use sort and pagination data to build a custom query instead, as you'll
 		 * be able to use your precisely-queried data immediately.
 		 */
-		$data = WC1C_Db()->get_results( "SELECT * FROM " . WC1C_Db()->prefix . "wc1c", ARRAY_A );
+		$data = WC1C_Db()->get_results( "SELECT * FROM " . WC1C_Db()->prefix . "wc1c ORDER BY config_id DESC", ARRAY_A );
 
 		/**
 		 * This checks for sorting input and sorts the data in our array accordingly.
@@ -286,7 +286,7 @@ class Wc1c_Admin_Configurations_Table extends Wc1c_Admin_Abstract_Table
 			return ( $order === 'asc' ) ? $result : - $result;
 		}
 
-		usort( $data, 'usort_reorder' );
+		//usort( $data, 'usort_reorder' );
 
 		/**
 		 * REQUIRED for pagination. Let's figure out what page the user is currently
