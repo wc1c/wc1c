@@ -9,26 +9,14 @@ defined('ABSPATH') || exit;
 class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 {
 	/**
-	 * Wc1c_Schema_Logger
+	 * Schema level
 	 *
-	 * @var null
+	 * @var null|Wc1c_Schema_Logger
 	 */
 	private $logger = null;
 
 	/**
-	 * @var string
-	 */
-	private $import_full = true;
-
-	/**
-	 * Current import data
-	 *
-	 * @var array
-	 */
-	private $current_data = [];
-
-	/**
-	 * Main schema directory
+	 * Main schema upload directory
 	 *
 	 * @var string
 	 */
@@ -95,9 +83,10 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 */
 	private function init_environment()
 	{
-		$configuration_id = WC1C()->environment()->get('current_configuration_id', 0);
+		$configuration_id = $this->configuration()->get_id();
+		$upload_directory = WC1C()->environment()->get('wc1c_upload_directory');
 
-		$schema_directory = WC1C()->environment()->get('wc1c_upload_directory') . DIRECTORY_SEPARATOR . $this->get_id() . '_' . $configuration_id;
+		$schema_directory = $upload_directory . '/' . $this->get_id() . '_' . $configuration_id;
 
 		$this->set_upload_directory($schema_directory);
 
