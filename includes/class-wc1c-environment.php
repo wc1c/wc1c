@@ -20,29 +20,14 @@ class Wc1c_Environment
 	 */
 	public function __construct()
 	{
-		/**
-		 * Wc1c version
-		 */
 		$this->init_wc1c_version();
 
-		/**
-		 * Current configuration
-		 */
 		$this->init_current_configuration_id();
 
-		/**
-		 * Upload directory
-		 */
 		$this->init_upload_directory();
 
-		/**
-		 * Wc1c upload directory
-		 */
 		$this->init_wc1c_upload_directory();
 
-		/**
-		 * Other
-		 */
 		$this->init_php_post_max_size();
 		$this->init_php_max_execution_time();
 	}
