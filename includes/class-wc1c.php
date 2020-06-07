@@ -420,9 +420,6 @@ final class Wc1c
 	{
 		if('all' !== $type)
 		{
-			/**
-			 * Current
-			 */
 			if($type === 'current')
 			{
 				$configuration_id = WC1C()->environment()->get('current_configuration_id', 0);
@@ -435,9 +432,6 @@ final class Wc1c
 				throw new Exception('get_configurations: current configuration not loaded');
 			}
 
-			/**
-			 * By id
-			 */
 			if(is_numeric($type) && array_key_exists($type, $this->configurations))
 			{
 				return $this->configurations[$type];
