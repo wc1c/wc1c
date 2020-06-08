@@ -73,7 +73,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	/**
 	 * @param string $upload_directory
 	 */
-	public function set_upload_directory($upload_directory)
+	protected function set_upload_directory($upload_directory)
 	{
 		$this->upload_directory = $upload_directory;
 	}
@@ -288,7 +288,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 *
 	 * @param Wc1c_Schema_Logger|null $logger
 	 */
-	public function set_logger($logger)
+	protected function set_logger($logger)
 	{
 		$this->logger = $logger;
 	}
@@ -945,7 +945,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	}
 
 	/**
-	 * Распаковка ZIP архива
+	 * Extract ZIP files
 	 *
 	 * @param $zip_file_path
 	 *
