@@ -761,7 +761,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		 *
 		 * cml:Классификатор
 		 */
-		if($xml_data->Классификатор && $this->get_options('classifier_processing', 'no') === 'yes')
+		if($xml_data->Классификатор)
 		{
 			$this->logger()->info('file_processing: classifier_processing start');
 
@@ -783,7 +783,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		 *
 		 * cml:Каталог
 		 */
-		if($xml_data->Каталог && $this->get_options('catalog_processing', 'no') === 'yes')
+		if($xml_data->Каталог)
 		{
 			$this->logger()->info('file_processing: catalog_processing start');
 
@@ -805,7 +805,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		 *
 		 * cml:ПакетПредложений
 		 */
-		if($xml_data->ПакетПредложений && $this->get_options('offers_package_processing', 'no') === 'yes')
+		if($xml_data->ПакетПредложений)
 		{
 			$this->logger()->info('file_processing: offers_package_processing start');
 
