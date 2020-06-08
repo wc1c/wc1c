@@ -960,6 +960,378 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	}
 
 	/**
+	 * Парсинг групп из классификатора
+	 *
+	 * @throws Exception
+	 *
+	 * @param $xml_data
+	 * @param string $parent_id
+	 * @param array $groups
+	 *
+	 * @return array - все категории найденные в классификаторе
+	 */
+	private function parse_xml_classifier_groups($xml_data, $parent_id = '', &$groups = [])
+	{
+		foreach($xml_data->Группа as $xml_category)
+		{
+			$id = (string) $xml_category->Ид;
+
+			try
+			{
+				$groups[$id] = $this->parse_xml_group($xml_category, $parent_id);
+			}
+			catch(Exception $e)
+			{
+				$this->logger()->warning('parse_xml_classifier_groups: ' . $e->getMessage());
+				continue;
+			}
+
+			if($xml_category->Группы)
+			{
+				$this->parse_xml_classifier_groups($xml_category->Группы, $id, $groups);
+			}
+		}
+
+		return $groups;
+	}
+
+	/**
+	 * @param $xml_group
+	 * @param string $parent_guid
+	 *
+	 * @return array|mixed|void
+	 * @throws Exception
+	 */
+	private function parse_xml_group($xml_group, $parent_guid = '')
+	{
+		$category_guid = (string) $xml_group->Ид;
+		$category_name = (string) $xml_group->Наименование;
+
+		if($category_guid === '')
+		{
+			throw new Exception('parse_xml_group: $category_guid not valid');
+		}
+		if($category_name === '')
+		{
+			throw new Exception('parse_xml_group: $category_name not valid');
+		}
+
+		$data = array
+		(
+			'category_guid' => $category_guid,
+			'category_name' => $category_name,
+			'category_parent_guid' => $parent_guid,
+			'category_version' => $xml_group->НомерВерсии ? (string) $xml_group->НомерВерсии : ''
+		);
+
+		if($xml_group->Картинка)
+		{
+			$data['category_image'] = (string) $xml_group->Картинка;
+		}
+
+		if((string)$xml_group->ПометкаУдаления === 'true')
+		{
+			$data['category_mark_delete'] = 'yes';
+		}
+
+		$data = apply_filters($this->get_schema_prefix() . '_parse_xml_group', $data);
+
+		return $data;
+	}
+
+	/**
+	 * Обновление данных о группах в классификаторе
+	 *
+	 * @param $classifier_groups
+	 *
+	 * @return bool
+	 */
+	public function update_classifier_groups($classifier_groups = [])
+	{
+		return update_option($this->get_prefix() . '_classifier_groups', $classifier_groups, 'no');
+	}
+
+	/**
+	 * @return array
+	 */
+	public function load_relationship_categories()
+	{
+		return get_option($this->get_prefix() . '_relationship_cats', []);
+	}
+
+	/**
+	 * Загрузка текущих категорий в WooCommerce
+	 *
+	 * @throws
+	 *
+	 * @return array
+	 */
+	private function load_shop_categories()
+	{
+		$cat_args = array
+		(
+			'orderby'    => 'name',
+			'order'      => 'asc',
+			'hide_empty' => false,
+		);
+
+		$current_categories_query = get_terms('product_cat', $cat_args);
+
+		if(is_wp_error($current_categories_query))
+		{
+			throw new Exception('load_categories_wc: end, get_terms error');
+		}
+
+		$this->logger()->debug('load_categories_wc: get_terms $current_categories_query', $current_categories_query);
+
+		if(is_array($current_categories_query))
+		{
+			$categories = [];
+
+			foreach($current_categories_query as $row => $value)
+			{
+				$categories[$value->term_id] = array
+				(
+					'category_id' => $value->term_id,
+					'category_name' => $value->name,
+					'category_slug' => $value->slug,
+					'category_parent_id' => $value->parent,
+					'category_description' => $value->description,
+					'category_product_count' => $value->count,
+					'category_taxonomy_id' => $value->term_taxonomy_id,
+				);
+			}
+
+			return $categories;
+		}
+
+		throw new Exception('load_categories_wc: end, $current_categories_query type error');
+	}
+
+	/**
+	 * Обновление связи категории 1С с категорией WooCommerce
+	 *
+	 * @param $relationship_categories
+	 *
+	 * @return bool
+	 */
+	public function update_relationship_categories($relationship_categories)
+	{
+		return update_option($this->get_prefix() . '_relationship_cats', $relationship_categories, 'no');
+	}
+
+	/**
+	 * Рекурсивный поиск в массиве
+	 *
+	 * @param $needle
+	 * @param $haystack
+	 *
+	 * @return bool|int|string
+	 */
+	private function recursive_array_search($needle,$haystack)
+	{
+		foreach($haystack as $key => $value)
+		{
+			$current_key = $key;
+
+			if($needle === $value OR (is_array($value) && $this->recursive_array_search($needle, $value) !== false))
+			{
+				return $current_key;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Добавление категории
+	 *
+	 * @throws Exception
+	 *
+	 * @param $data
+	 *
+	 * @return int|false
+	 */
+	private function add_category($data)
+	{
+		if(!array_key_exists('category_slug', $data))
+		{
+			$data['category_slug'] = '';
+		}
+		if(!array_key_exists('category_description', $data))
+		{
+			$data['category_description'] = '';
+		}
+		if(!array_key_exists('category_parent_id', $data))
+		{
+			$data['category_parent_id'] = 0;
+		}
+
+		$category_result = wp_insert_term
+		(
+			$data['category_name'],
+			'product_cat',
+			array
+			(
+				'description' => $data['category_description'],
+				'slug' => $data['category_slug'],
+				'parent' => (int) $data['category_parent_id']
+			)
+		);
+
+		if(is_wp_error($category_result))
+		{
+			throw new Exception('add_category: wp_error - ' . $category_result->get_error_message());
+		}
+
+		return isset($category_result['term_id']) ? $category_result['term_id'] : false;
+	}
+
+	/**
+	 * Обработка групп полученных из классификатора
+	 *
+	 * @param array $classifier_groups
+	 *
+	 *@throws Exception
+	 *
+	 * @return bool
+	 */
+	private function processing_classifier_groups($classifier_groups = [])
+	{
+		if($this->is_import_full() !== true)
+		{
+			return true;
+		}
+
+		if(empty($classifier_groups))
+		{
+			return true;
+		}
+
+		$classifier_groups = apply_filters($this->get_schema_prefix() . '_processing_classifier_groups', $classifier_groups);
+
+		if(!is_array($classifier_groups))
+		{
+			throw new Exception('processing_classifier_groups: $groups is not valid');
+		}
+
+		try
+		{
+			$this->update_classifier_groups($classifier_groups);
+		}
+		catch(Exception $e)
+		{
+			throw new Exception('processing_classifier_groups: exception - ' . $e->getMessage());
+		}
+
+		try
+		{
+			$relationship_categories = $this->load_relationship_categories();
+		}
+		catch(Exception $e)
+		{
+			throw new Exception('processing_classifier_groups: exception - ' . $e->getMessage());
+		}
+
+		try
+		{
+			$shop_categories = $this->load_shop_categories();
+		}
+		catch(Exception $e)
+		{
+			throw new Exception('processing_classifier_groups: exception - ' . $e->getMessage());
+		}
+
+		foreach($classifier_groups as $classifier_group => $classifier_group_value)
+		{
+			$classifier_group_value = apply_filters($this->get_schema_prefix() . '_processing_classifier_groups_item', $classifier_group, $classifier_group_value);
+
+			if(!is_array($classifier_group_value))
+			{
+				continue;
+			}
+
+			/**
+			 * Категория имеет связь
+			 */
+			if(isset($relationship_categories[$classifier_group_value['category_guid']]))
+			{
+				$shop_category_id = $relationship_categories[$classifier_group_value['category_guid']];
+
+				/**
+				 * Связанная категория отсутствует в WooCommerce, но связь присутствует
+				 */
+				if(!isset($shop_categories[$shop_category_id]))
+				{
+					/**
+					 * Убираем старую связь для создания новой
+					 */
+					unset($relationship_categories[$classifier_group_value['category_guid']]);
+				}
+				else
+				{
+					/**
+					 * Обновление имени
+					 */
+					// todo
+
+					/**
+					 * Обновление описания
+					 */
+					// todo
+				}
+			}
+
+			$check_category = $this->recursive_array_search($classifier_group_value['category_name'], $shop_categories);
+
+			/**
+			 * Категория с таким именем существует
+			 */
+			if(false !== $check_category)
+			{
+				continue;
+			}
+
+			$category_data = array
+			(
+				'category_name' => $classifier_group_value['category_name'],
+				'category_description' => '',
+				'category_slug' => '',
+				'category_parent_id' => 0,
+			);
+
+			if($classifier_group_value['category_parent_guid'] !== '' && isset($relationship_categories[$classifier_group_value['category_parent_guid']]))
+			{
+				$category_data['category_parent_id'] = (int)$relationship_categories[$classifier_group_value['category_parent_guid']];
+			}
+
+			try
+			{
+				$category_id = $this->add_category($category_data);
+			}
+			catch(Exception $e)
+			{
+				$this->logger()->info('processing_classifier_groups: exception - ' . $e->getMessage());
+				continue;
+			}
+
+			$relationship_categories[$classifier_group_value['category_guid']] = $category_id;
+
+			try
+			{
+				$this->update_relationship_categories($relationship_categories);
+			}
+			catch(Exception $e)
+			{
+				$this->logger()->info('processing_classifier_groups: exception - ' . $e->getMessage());
+				continue;
+			}
+		}
+
+		return true;
+	}
+
+	/**
 	 * Разбор: Классификатор
 	 *
 	 * @param $xml_classifier_data
@@ -986,6 +1358,23 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		{
 			$this->logger()->info('parse_xml_classifier: classifier_processing_groups start');
 
+			try
+			{
+				$classifier_groups = $this->parse_xml_classifier_groups($xml_classifier_data->Группы);
+			}
+			catch(Exception $e)
+			{
+				throw new Exception('parse_xml_classifier: exception - ' . $e->getMessage());
+			}
+
+			try
+			{
+				$this->processing_classifier_groups($classifier_groups);
+			}
+			catch(Exception $e)
+			{
+				throw new Exception('parse_xml_classifier: exception - ' . $e->getMessage());
+			}
 
 			$this->logger()->info('parse_xml_classifier: classifier_processing_groups end, success');
 		}
