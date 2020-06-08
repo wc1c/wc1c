@@ -244,7 +244,7 @@ class Wc1c_Admin_Configurations_Update_Form extends Wc1c_Admin_Abstract_Form
 		(
 			'title' => __('Configuration status', 'wc1c'),
 			'type' => 'select',
-			'description' => __('Select the configuration status.', 'wc1c'),
+			'description' => __('Current configuration status.', 'wc1c'),
 			'default' => 'inactive',
 			'options' => $options
 		);
