@@ -843,6 +843,8 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 */
 	private function parse_xml_catalog($xml_catalog_data)
 	{
+		$this->check_import_type($xml_catalog_data);
+
 		$catalog_data['catalog_guid'] = (string) $xml_catalog_data->Ид;
 		$catalog_data['classifier_guid'] = (string) $xml_catalog_data->ИдКлассификатора;
 		$catalog_data['catalog_name'] = (string) $xml_catalog_data->Наименование;
@@ -856,10 +858,666 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 		if($xml_catalog_data->Товары)
 		{
+			try
+			{
+				$this->parse_xml_catalog_products($xml_catalog_data->Товары);
+			}
+			catch(Exception $e)
+			{
+				throw new Exception('parse_xml_catalog: exception - ' . $e->getMessage());
+			}
+
 			return true;
 		}
 
 		return false;
+	}
+
+	/**
+	 * Обработка продуктов из <Товары>
+	 *
+	 * В формате CML 2.04 характеристики? названия характеристик и их значения для продуктов
+	 * передаются в данном контексте.
+	 *
+	 * @param $xml_catalog_products_data
+	 *
+	 * @return bool
+	 * @throws Exception
+	 */
+	private function parse_xml_catalog_products($xml_catalog_products_data)
+	{
+		if(!$xml_catalog_products_data->Товар)
+		{
+			throw new Exception('parse_xml_catalog_products: product data empty');
+		}
+
+		foreach($xml_catalog_products_data->Товар as $xml_product_data_key => $xml_product_data)
+		{
+			try
+			{
+				$parsed_product_data = $this->parse_xml_product($xml_product_data);
+			}
+			catch(Exception $e)
+			{
+				$this->logger()->info('parse_xml_catalog_products: exception - ' . $e->getMessage());
+				continue;
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * @param $product_xml_data_id
+	 *
+	 * @return mixed
+	 */
+	private function parse_xml_product_id($product_xml_data_id)
+	{
+		$product_guid = explode("#", (string) $product_xml_data_id);
+		$product_data_id['product_guid'] = $product_guid[0];
+		$product_data_id['feature_guid'] = isset($product_guid[1]) ? $product_guid[1] : '';
+
+		return $product_data_id;
+	}
+
+	/**
+	 * Обработка групп продукта
+	 *
+	 * @param $xml_data
+	 *
+	 * @return array массив GUID (идентификаторов групп)
+	 */
+	private function parse_xml_product_groups($xml_data)
+	{
+		$result = [];
+
+		foreach($xml_data->Ид as $category_guid)
+		{
+			/**
+			 * Идентификатор группы товаров в классификаторе
+			 * cml:ИдентфикаторГлобальныйТип
+			 */
+			$result[] = (string)$category_guid;
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Разбор изображений из XML в массив
+	 *
+	 * @throws Exception
+	 *
+	 * @param $xml_data
+	 *
+	 * @return array
+	 */
+	private function parse_xml_product_images($xml_data)
+	{
+		$images = [];
+
+		foreach($xml_data as $image)
+		{
+			$image = (string)$image;
+
+			if(empty($image))
+			{
+				continue;
+			}
+
+			$images[] = $image;
+		}
+
+		return $images;
+	}
+
+	/**
+	 * Разбор значений свойств товара
+	 *
+	 * Описывает значения свойств (характеристик) номенклатурной позиции в соответствии с указанным классификатором.
+	 * Если классификатор не указан, то включать данный элемент не имеет смысла.
+	 *
+	 * @param $xml_product_properties_values_data
+	 *
+	 * @return array
+	 */
+	private function parse_xml_product_properties_values($xml_product_properties_values_data)
+	{
+		$product_properties_values_data = [];
+
+		foreach($xml_product_properties_values_data->ЗначенияСвойства as $xml_property_values_data)
+		{
+			/**
+			 * Глобальный идентификатор
+			 */
+			$property_values_data['property_guid'] = (string)$xml_property_values_data->Ид;
+
+			/**
+			 * Наименование свойства
+			 * может быть, а может и нет
+			 *
+			 * cml:НаименованиеТип
+			 */
+			$property_values_data['property_name'] = '';
+			if($property_values_data->Наименование)
+			{
+				$property_values_data['property_name'] = htmlspecialchars(trim((string)$xml_property_values_data->Наименование));
+			}
+
+			/**
+			 * Значение свойства
+			 * Может быть значением, либо ссылкой на значение справочника классификатора.
+			 */
+			$property_values_data['property_value'] = htmlspecialchars(trim((string)$xml_property_values_data->Значение));
+
+			/**
+			 * Add to all
+			 */
+			$product_properties_values_data[$property_values_data['property_guid']] = $property_values_data;
+		}
+
+		return $product_properties_values_data;
+	}
+
+	/**
+	 * Разбор характеристики с исключением дублей
+	 *
+	 * @throws Exception
+	 *
+	 * @param $xml_data
+	 *
+	 * @return array
+	 */
+	private function parse_xml_product_features($xml_data)
+	{
+		if(!$xml_data->ХарактеристикаТовара)
+		{
+			throw new Exception('parse_xml_product_features: $xml_data->ХарактеристикаТовара empty');
+		}
+
+		$features = [];
+
+		// Уточняет характеристики поставляемого товара. Товар с разными характеристиками может иметь разную цену
+		foreach($xml_data->ХарактеристикаТовара as $product_feature)
+		{
+			/*
+			 * Идентификатор характеристики
+			 *
+			 * cml:НаименованиеТип
+			 * 2.06+
+			 */
+			$id = '';
+			if($product_feature->Ид)
+			{
+				$id = trim(htmlspecialchars((string) $product_feature->Ид));
+			}
+
+			/*
+			 * Наименование характеристики
+			 *
+			 * cml:НаименованиеТип
+			 */
+			$name = trim(htmlspecialchars((string) $product_feature->Наименование));
+
+			/*
+			 * Значение характеристики
+			 *
+			 * cml:ЗначениеТип
+			 */
+			$value = trim(htmlspecialchars((string) $product_feature->Значение));
+
+			/*
+			 * Собираем без дублей в имени
+			 */
+			$features[$name] = array
+			(
+				'feature_id' => $id,
+				'feature_name' => $name,
+				'feature_value' => $value
+			);
+		}
+
+		return $features;
+	}
+
+	/**
+	 * Разбор реквизитов продукта из XML в массив данных продукта
+	 *
+	 * @param $xml_data
+	 *
+	 * @return array
+	 * @throws Exception
+	 */
+	private function parse_xml_product_requisites($xml_data)
+	{
+		$requisites_data = [];
+
+		// Определяет значение поризвольного реквизита документа
+		foreach($xml_data->ЗначениеРеквизита as $requisite)
+		{
+			$name = trim((string)$requisite->Наименование);
+			$value = trim((string)$requisite->Значение);
+
+			$requisites_data[$name] = array
+			(
+				'name' => $name,
+				'value' => $value
+			);
+		}
+
+		return $requisites_data;
+	}
+
+	/**
+	 * Разбор цены продукта
+	 *
+	 * @param $xml_product_price_data
+	 *
+	 * @return array
+	 */
+	private function parse_xml_product_price($xml_product_price_data)
+	{
+		$data_prices = array();
+
+		foreach($xml_product_price_data->Цена as $price_data)
+		{
+			/*
+			 * Идентификатор типа цены
+			 *
+			 * cml:ИдентфикаторГлобальныйТип
+			 */
+			$price_type_guid = (string) $price_data->ИдТипаЦены;
+
+			/*
+			 * Представление цены так, как оно отбражается в прайс-листе. Например: 10у.е./за 1000 шт
+			 *
+			 * cml:НаименованиеТип
+			 */
+			$price_presentation = $price_data->Представление ? (string) $price_data->Представление : '';
+
+			/*
+			 * Цена за единицу товара
+			 *
+			 * cml:СуммаТип
+			 */
+			$price = $price_data->ЦенаЗаЕдиницу ? (float) $price_data->ЦенаЗаЕдиницу : 0;
+
+			/*
+			 * Коэффициент
+			 */
+			$rate = $price_data->Коэффициент ? (float) $price_data->Коэффициент : 1;
+
+			/*
+			 * Валюта
+			 * Код валюты по международному классификатору валют (ISO 4217).
+			 * Если не указана, то используется валюта установленная для данного типа цен
+			 *
+			 * cml:ВалютаТип
+			 */
+			$currency = $price_data->Валюта ? (string) $price_data->Валюта : 'RUB';
+
+			/*
+			 * Минимальное количество товара в указанных единицах, для которого действует данная цена.
+			 *
+			 * cml:КоличествоТип
+			 */
+			$min_quantity = $price_data->МинКоличество ? (string) $price_data->МинКоличество : '0';
+
+			/*
+			 * todo: обрабатывать правильно
+			 * cml:ЕдиницаИзмерения
+			 */
+
+			/**
+			 * Собираем итог
+			 */
+			$data_prices[$price_type_guid] = array
+			(
+				'price' => $price,
+				'price_type_guid' => $price_type_guid,
+				'price_rate' => $rate,
+				'price_currency' => $currency,
+				'price_presentation' => $price_presentation,
+				'min_quantity' => $min_quantity,
+			);
+		}
+
+		return $data_prices;
+	}
+
+	/**
+	 * Разбор остатков продукта
+	 *
+	 * @param $xml_data
+	 *
+	 * @return float|int
+	 */
+	private function parse_xml_product_quantity($xml_data)
+	{
+		$quantity = 0;
+
+		/*
+		 * CML < 2.08
+		 */
+		if($xml_data->Количество)
+		{
+			$quantity = (float)$xml_data->Количество;
+		}
+		elseif($xml_data->Склад)
+		{
+			foreach ($xml_data->Склад as $product_quantity)
+			{
+				$quantity += (float)$product_quantity['КоличествоНаСкладе'];
+			}
+		}
+
+		/*
+		 * CML 2.09, 2.10
+		 */
+		if($xml_data->Остатки)
+		{
+			foreach($xml_data->Остатки->Остаток as $product_quantity)
+			{
+				// Если нет складов или общий остаток предложения
+				if($xml_data->Остаток->Количество)
+				{
+					$quantity = (float)$product_quantity->Количество;
+				}
+				elseif($product_quantity->Склад)
+				{
+					foreach($product_quantity->Склад as $quantity_warehouse)
+					{
+						$quantity += (float)$quantity_warehouse->Количество;
+					}
+				}
+			}
+		}
+
+		return $quantity;
+	}
+
+	/**
+	 * Разбор одной позиции продукта
+	 *
+	 * @param $xml_product_data
+	 *
+	 * @return array
+	 * @throws Exception
+	 */
+	private function parse_xml_product($xml_product_data)
+	{
+		if(!$xml_product_data->Ид)
+		{
+			throw new Exception('parse_xml_product: $product_xml_data->Ид empty');
+		}
+
+		$product_data = $this->parse_xml_product_id($xml_product_data->Ид);
+
+		/***************************************************************************************************************************************
+		 * Базовые данные
+		 *------------------------------------------------------------------------------------------------------------------------------------*/
+
+		/**
+		 * Штрихкод
+		 */
+		$product_data['ean'] = $xml_product_data->Штрихкод ? trim((string)$xml_product_data->Штрихкод) : '';
+		if($product_data['ean'] === '')
+		{
+			$product_data['ean'] = $xml_product_data->ШтрихКод ? trim((string)$xml_product_data->ШтрихКод) : '';
+		}
+
+		/**
+		 * Артикул
+		 */
+		$product_data['sku'] = $xml_product_data->Артикул ? htmlspecialchars(trim((string)$xml_product_data->Артикул)) : '';
+
+		/**
+		 * Наименование товара
+		 */
+		$product_data['name'] = htmlspecialchars(trim((string)$xml_product_data->Наименование));
+
+		/**
+		 * Идентификатор товара у контрагента (идентификатор товара в системе контрагента)
+		 * cml:ИдентификаторГлобальныйТип
+		 */
+		$product_data['product_guid_contractor'] = '';
+		if($xml_product_data->ИдТовараУКонтрагента)
+		{
+			$product_data['product_guid_contractor'] = (string)$xml_product_data->ИдТовараУКонтрагента;
+		}
+
+		/**
+		 * Категории товара
+		 *
+		 * Содержит идентификаторы групп, которым принадлежит данный товар в указанном классификаторе.
+		 * Если классификатор не указан, то включать данный элемент не имеет смысла.
+		 */
+		$product_data['categories'] = [];
+		if($xml_product_data->Группы)
+		{
+			try
+			{
+				$product_data['categories'] = $this->parse_xml_product_groups($xml_product_data->Группы);
+			}
+			catch(Exception $e){}
+		}
+
+		/**
+		 * Описание товара
+		 */
+		$product_data['description'] = '';
+		if($xml_product_data->Описание)
+		{
+			$description = htmlspecialchars(trim((string)$xml_product_data->Описание));
+			$product_data['description'] = str_replace(array("\r\n", "\r", "\n"), "<br />", $description);
+		}
+
+		/**
+		 * Изображения
+		 *
+		 * Имя файла картинки для номенклатурной позиции. Файлы картинок могут поставляться отдельно
+		 * от передаваемого файла с коммерческой информацией
+		 */
+		$product_data['images'] = [];
+		if($xml_product_data->Картинка)
+		{
+			try
+			{
+				$product_data['images'] = $this->parse_xml_product_images($xml_product_data->Картинка);
+			}
+			catch(Exception $e){}
+		}
+		// CML 2.04
+		if($xml_product_data->ОсновнаяКартинка)
+		{
+			try
+			{
+				$product_data['images'] = $this->parse_xml_product_images($xml_product_data->ОсновнаяКартинка);
+			}
+			catch(Exception $e){}
+		}
+
+		/***************************************************************************************************************************************
+		 * Дополнительные данные
+		 *------------------------------------------------------------------------------------------------------------------------------------*/
+
+		/**
+		 * Страна
+		 */
+		$product_data['country'] = '';
+		if($xml_product_data->Страна)
+		{
+			$product_data['country'] = htmlspecialchars(trim((string)$xml_product_data->Страна));
+		}
+
+		/**
+		 * Торговая марка
+		 */
+		$product_data['trademark'] = '';
+		if($xml_product_data->ТорговаяМарка)
+		{
+			$product_data['trademark'] = htmlspecialchars(trim((string)$xml_product_data->ТорговаяМарка));
+		}
+
+		/*
+		 * Производитель todo: вынести разбор в отдельный метод и добавить try catch
+		 *
+		 * Содержит описание страны, непосредственно изготовителя и торговой марки товара.
+		 * Страна - строка
+		 * ТорговаяМарка - строка
+		 * ВладелецТорговойМарки - Контрагент
+		 * Изготовитель - Контрагент
+		 */
+		$product_data['manufacturer'] = [];
+		if($xml_product_data->Изготовитель)
+		{
+			$product_data['manufacturer']['name'] = trim((string)$xml_product_data->Изготовитель->Наименование);
+			$product_data['manufacturer']['name_guid'] = trim((string)$xml_product_data->Изготовитель->Ид);
+		}
+		elseif($xml_product_data->Производитель)
+		{
+			$product_data['manufacturer']['name'] = trim((string)$xml_product_data->Производитель);
+		}
+
+		/**
+		 * Значения свойств
+		 *
+		 * Описывает значения свойств (характеристик) номенклатурной позиции в соответствии с указанным классификатором.
+		 * Если классификатор не указан, то включать данный элемент не имеет смысла.
+		 */
+		$product_data['properties_values'] = [];
+		if($xml_product_data->ЗначенияСвойств)
+		{
+			try
+			{
+				$product_data['properties_values'] = $this->parse_xml_product_properties_values($xml_product_data->ЗначенияСвойств);
+			}
+			catch(Exception $e){}
+		}
+
+		/**
+		 * Характеристики товара
+		 * Уточняет характеристики поставляемого товара. Товар с разными характеристиками может иметь разную цену.
+		 */
+		$product_data['product_features'] = [];
+		if($xml_product_data->ХарактеристикиТовара)
+		{
+			try
+			{
+				$product_data['product_features'] = $this->parse_xml_product_features($xml_product_data->ХарактеристикиТовара);
+			}
+			catch(Exception $e){}
+		}
+
+		/**
+		 * Значения реквизитов товара
+		 * Определяет значение поризвольного реквизита документа
+		 */
+		$requisites_values = false;
+		$product_data['requisites_values'] = [];
+		if($xml_product_data->ЗначениеРеквизита) // cml 2.05-
+		{
+			$requisites_values = $xml_product_data->ЗначениеРеквизита;
+		}
+		elseif($xml_product_data->ЗначенияРеквизитов) // cml 2.05+
+		{
+			$requisites_values = $xml_product_data->ЗначенияРеквизитов;
+		}
+		if($requisites_values)
+		{
+			try
+			{
+				$product_data['requisites_values'] = $this->parse_xml_product_requisites($requisites_values);
+			}
+			catch(Exception $e){}
+		}
+
+		/***************************************************************************************************************************************
+		 * Предложения
+		 *------------------------------------------------------------------------------------------------------------------------------------*/
+
+		/**
+		 * Цены
+		 */
+		$product_data['prices'] = [];
+		if($xml_product_data->Цены)
+		{
+			$product_data['prices'] = $this->parse_xml_product_price($xml_product_data->Цены);
+		}
+
+		/**
+		 * Количество
+		 * Количество предлагаемого товара. Например, может быть указан остаток на складе.
+		 */
+		$product_data['quantity'] = 0;
+		if($xml_product_data->Остатки || $xml_product_data->Количество || $xml_product_data->Склад)
+		{
+			$product_data['quantity'] = $this->parse_xml_product_quantity($xml_product_data);
+		}
+
+		/***************************************************************************************************************************************
+		 * Прочие данные
+		 *------------------------------------------------------------------------------------------------------------------------------------*/
+
+		/**
+		 * Полное наименование
+		 */
+		$product_data['full_name'] = '';
+		if($xml_product_data->ПолноеНаименование)
+		{
+			$product_data['full_name'] = htmlspecialchars(trim((string)$xml_product_data->ПолноеНаименование));
+		}
+		if(isset($product_data['requisites_values']['Полное наименование']))
+		{
+			$product_data['full_name'] = $product_data['requisites_values']['Полное наименование']['value'];
+		}
+
+		/**
+		 * Модель
+		 */
+		$product_data['model'] = '';
+		if($xml_product_data->Модель)
+		{
+			$product_data['model'] = htmlspecialchars(trim((string)$xml_product_data->Модель));
+		}
+
+		/***************************************************************************************************************************************
+		 * Технические данные
+		 *------------------------------------------------------------------------------------------------------------------------------------*/
+
+		/**
+		 * Версия продукта
+		 */
+		$product_data['version'] = '';
+		if($xml_product_data->НомерВерсии)
+		{
+			$product_data['version'] = (string)$xml_product_data->НомерВерсии;
+		}
+
+		/**
+		 * Пометка товара на удаление
+		 */
+		$product_data['delete'] = 'no';
+		if($xml_product_data->ПометкаУдаления)
+		{
+			$product_data['delete'] = trim((string)$xml_product_data->ПометкаУдаления) == 'true' ? 'yes' : 'no';
+		}
+
+		/**
+		 * УНФ
+		 */
+		if($xml_product_data->Статус)
+		{
+			$product_data['delete'] = trim((string)$xml_product_data->Статус) == 'Удален' ? 'yes' : 'no';
+		}
+
+		/**
+		 * Code из 1С?
+		 */
+		$product_data['code'] = '';
+
+		return $product_data;
 	}
 
 	/**
