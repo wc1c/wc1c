@@ -149,7 +149,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 		$fields['delete_files_after_processing'] = array
 		(
-			'title' => __('Deleting files after processing', 'wc1c'),
+			'title' => __('Deleting CommerceML files after processing', 'wc1c'),
 			'type' => 'checkbox',
 			'label' => __('Check the checkbox if want to enable this feature. Disabled by default.', 'wc1c'),
 			'description' => __('If deletion is disabled, the exchange files will remain in the directories until the next exchange. Otherwise, all processed files will be deleted immediately after error-free processing.', 'wc1c'),
