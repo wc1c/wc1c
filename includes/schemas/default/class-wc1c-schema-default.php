@@ -321,7 +321,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 * @param string $type
 	 * @param string $description
 	 */
-	private function api_response_by_type($type = 'failure', $description = '')
+	private function api_handler_response_by_type($type = 'failure', $description = '')
 	{
 		if($this->get_options('convert_cp1251', 'no') === 'yes' && $description !== '')
 		{
@@ -350,7 +350,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 *
 	 * @return bool
 	 */
-	private function api_check_auth_key()
+	private function api_handler_check_auth_key()
 	{
 		$cookie_name = 'wc1c_' . $this->get_id();
 
@@ -422,33 +422,33 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			switch($mode)
 			{
 				case 'checkauth':
-					$this->api_check_auth();
+					$this->api_handler_check_auth();
 					break;
 
 				case 'init':
-					$this->api_mode_init();
+					$this->api_handler_mode_init();
 					break;
 
 				case 'file':
-					$this->api_catalog_mode_file();
+					$this->api_handler_catalog_mode_file();
 					break;
 
 				case 'import':
-					$this->api_catalog_mode_import();
+					$this->api_handler_catalog_mode_import();
 					break;
 
 				default:
-					$this->api_response_by_type('success');
+					$this->api_handler_response_by_type('success');
 			}
 		}
 
-		$this->api_response_by_type('success');
+		$this->api_handler_response_by_type('success');
 	}
 
 	/**
 	 * Checkauth
 	 */
-	private function api_check_auth()
+	private function api_handler_check_auth()
 	{
 		$user_login = '';
 		$user_password = '';
@@ -481,7 +481,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			else
 			{
 				$this->logger()->notice('Проверьте наличие записи в файле .htaccess в корне файла после RewriteEngine On:\nRewriteCond %{HTTP:Authorization} ^(.*)\nRewriteRule ^(.*) - [E=HTTP_AUTHORIZATION:%1]');
-				$this->api_response_by_type('failure', __('Not specified the user. Check the server settings.', 'wc1c'));
+				$this->api_handler_response_by_type('failure', __('Not specified the user. Check the server settings.', 'wc1c'));
 			}
 		}
 		else
@@ -493,13 +493,13 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		if($user_login !== $this->get_options('user_login', ''))
 		{
 			$this->logger()->notice(__('Not a valid username', 'wc1c'));
-			$this->api_response_by_type('failure', __('Not a valid username', 'wc1c'));
+			$this->api_handler_response_by_type('failure', __('Not a valid username', 'wc1c'));
 		}
 
 		if($user_password !== $this->get_options('user_password', ''))
 		{
 			$this->logger()->notice(__('Not a valid user password', 'wc1c'));
-			$this->api_response_by_type('failure', __('Not a valid user password', 'wc1c'));
+			$this->api_handler_response_by_type('failure', __('Not a valid user password', 'wc1c'));
 		}
 
 		if($user_password === '')
@@ -520,11 +520,11 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 * в 1-ой строке содержится признак, разрешен ли Zip (zip=yes);
 	 * во 2-ой строке содержится информация об ограничении файлов по размеру (file_limit=);
 	 */
-	private function api_mode_init()
+	private function api_handler_mode_init()
 	{
-		if($this->api_check_auth_key() === false)
+		if($this->api_handler_check_auth_key() === false)
 		{
-			$this->api_response_by_type('failure', __('Authorization failed', 'wc1c'));
+			$this->api_handler_response_by_type('failure', __('Authorization failed', 'wc1c'));
 		}
 
 		$zip_support = false;
@@ -561,11 +561,11 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 *
 	 * @return void
 	 */
-	private function api_catalog_mode_file()
+	private function api_handler_catalog_mode_file()
 	{
-		if($this->api_check_auth_key() === false)
+		if($this->api_handler_check_auth_key() === false)
 		{
-			$this->api_response_by_type('failure', __('Authorization failed', 'wc1c'));
+			$this->api_handler_response_by_type('failure', __('Authorization failed', 'wc1c'));
 		}
 
 		$schema_upload_dir = $this->get_upload_directory() . '/catalog/';
@@ -576,14 +576,14 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 			if(!is_dir($schema_upload_dir))
 			{
-				$this->api_response_by_type('failure', __('Unable to create a directory: ', 'wc1c') . $schema_upload_dir);
+				$this->api_handler_response_by_type('failure', __('Unable to create a directory: ', 'wc1c') . $schema_upload_dir);
 			}
 		}
 
 		if(wc1c_get_var($_GET['filename'], '') === '')
 		{
 			$this->logger()->warning('api_catalog_mode_file: filename is empty');
-			$this->api_response_by_type('failure', __('Filename is empty.', 'wc1c'));
+			$this->api_handler_response_by_type('failure', __('Filename is empty.', 'wc1c'));
 		}
 
 		$filename = wc1c_get_var($_GET['filename'], '');
@@ -601,7 +601,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		if(!is_writable($schema_upload_dir))
 		{
 			$this->logger()->info('api_catalog_mode_file: directory - ' . $schema_upload_dir . " is not writable!");
-			$this->api_response_by_type('failure', 'Невозможно записать файлы в: ' . $schema_upload_dir);
+			$this->api_handler_response_by_type('failure', 'Невозможно записать файлы в: ' . $schema_upload_dir);
 		}
 
 		$file_data = file_get_contents('php://input');
@@ -629,32 +629,32 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 					if($xml_files_result === false)
 					{
 						$this->logger()->info('api_catalog_mode_file: error extract file - ' . $schema_upload_file_path);
-						$this->api_response_by_type('failure');
+						$this->api_handler_response_by_type('failure');
 					}
 
-					$this->api_response_by_type('success', 'Архив успешно принят и распакован.');
+					$this->api_handler_response_by_type('success', 'Архив успешно принят и распакован.');
 				}
 
 				$this->logger()->info('api_catalog_mode_file: upload file - ' . $schema_upload_file_path . ' success');
-				$this->api_response_by_type('success', 'Файл успешно принят.');
+				$this->api_handler_response_by_type('success', 'Файл успешно принят.');
 			}
 
 			$this->logger()->error('api_catalog_mode_file: ошибка записи файла - ' . $schema_upload_file_path);
-			$this->api_response_by_type('failure', 'Не удалось записать файл: ' . $schema_upload_file_path);
+			$this->api_handler_response_by_type('failure', 'Не удалось записать файл: ' . $schema_upload_file_path);
 		}
 
 		$this->logger()->info('api_catalog_mode_file: file empty - ' . $schema_upload_file_path);
-		$this->api_response_by_type('failure', 'Пришли пустые данные. Повторите попытку.');
+		$this->api_handler_response_by_type('failure', 'Пришли пустые данные. Повторите попытку.');
 	}
 
 	/**
 	 * Catalog import
 	 */
-	private function api_catalog_mode_import()
+	private function api_handler_catalog_mode_import()
 	{
-		if($this->api_check_auth_key() === false)
+		if($this->api_handler_check_auth_key() === false)
 		{
-			$this->api_response_by_type('failure', __('Authorization failed', 'wc1c'));
+			$this->api_handler_response_by_type('failure', __('Authorization failed', 'wc1c'));
 		}
 
 		$this->logger()->info('api_catalog_mode_import: start');
@@ -664,7 +664,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		if($filename === '')
 		{
 			$this->logger()->warning('api_catalog_mode_import: filename is empty');
-			$this->api_response_by_type('failure', __('Import filename is empty.', 'wc1c'));
+			$this->api_handler_response_by_type('failure', __('Import filename is empty.', 'wc1c'));
 		}
 
 		$file = $this->get_upload_directory() . '/catalog/' . sanitize_file_name($filename);
@@ -691,10 +691,10 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			}
 
 			$this->logger()->info('api_catalog_mode_import: success');
-			$this->api_response_by_type('success', 'Импорт успешно завершен.');
+			$this->api_handler_response_by_type('success', 'Импорт успешно завершен.');
 		}
 
-		$this->api_response_by_type('failure', 'Импорт завершен с ошибкой.');
+		$this->api_handler_response_by_type('failure', 'Импорт завершен с ошибкой.');
 	}
 
 	/**
