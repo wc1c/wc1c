@@ -16,6 +16,13 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	private $logger = null;
 
 	/**
+	 * Import full or not
+	 *
+	 * @var bool
+	 */
+	private $import_full = true;
+
+	/**
 	 * Main schema upload directory
 	 *
 	 * @var string
@@ -908,6 +915,51 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	}
 
 	/**
+	 * Проверка на наличие полной выгрузки в каталоге или в предложениях
+	 *
+	 * @param $xml_data
+	 *
+	 * @return boolean
+	 */
+	private function check_import_type($xml_data)
+	{
+		$type = true;
+
+		if($xml_data['СодержитТолькоИзменения'])
+		{
+			$type = (string)$xml_data['СодержитТолькоИзменения'] == "false" ? true : false;
+		}
+		elseif($xml_data->СодержитТолькоИзменения)
+		{
+			$type = (string)$xml_data->СодержитТолькоИзменения == "false" ? true : false;
+		}
+
+		$this->set_import_full($type);
+
+		return $this->is_import_full();
+	}
+
+	/**
+	 * Маркер полного или частичного импорта
+	 *
+	 * @return bool
+	 */
+	private function is_import_full()
+	{
+		return $this->import_full;
+	}
+
+	/**
+	 * Установка полного или частичного импорта
+	 *
+	 * @param bool $import_full
+	 */
+	public function set_import_full($import_full)
+	{
+		$this->import_full = $import_full;
+	}
+
+	/**
 	 * Разбор: Классификатор
 	 *
 	 * @param $xml_classifier_data
@@ -917,6 +969,8 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 */
 	private function parse_xml_classifier($xml_classifier_data)
 	{
+		$this->check_import_type($xml_classifier_data);
+
 		$classifier_data['classifier_guid'] = (string)$xml_classifier_data->Ид;
 		$classifier_data['classifier_name'] = (string)$xml_classifier_data->Наименование;
 
