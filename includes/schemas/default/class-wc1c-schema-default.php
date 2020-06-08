@@ -623,7 +623,9 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			{
 				$this->logger()->info('api_handler_catalog_mode_file: $file_size - ' . $file_size);
 
-				@chmod($schema_upload_file_path , 0777);
+				chmod($schema_upload_file_path , 0777);
+
+				$this->logger()->info('api_handler_catalog_mode_file: upload file - ' . $schema_upload_file_path . ' success');
 
 				if(strpos($filename, '.zip') !== false)
 				{
@@ -644,7 +646,6 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 					$this->api_handler_response_by_type('success', 'Архив успешно принят и распакован.');
 				}
 
-				$this->logger()->info('api_handler_catalog_mode_file: upload file - ' . $schema_upload_file_path . ' success');
 				$this->api_handler_response_by_type('success', 'Файл успешно принят.');
 			}
 
