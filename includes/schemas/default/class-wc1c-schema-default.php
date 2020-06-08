@@ -1530,22 +1530,63 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 */
 	private function parse_xml_offers_package($xml_offers_package_data)
 	{
-		$offers_package['offers_package_name'] = (string) $xml_offers_package_data->Наименование;
-		$offers_package['offers_package_guid'] = (string) $xml_offers_package_data->Ид;
-		$offers_package['catalog_guid'] = (string) $xml_offers_package_data->ИдКаталога;
-		$offers_package['classifier_guid'] = (string) $xml_offers_package_data->ИдКлассификатора;
+		$this->check_import_type($xml_offers_package_data);
 
-		$offers_package['offers_package_description']= '';
+		$offers_package_data['offers_package_name'] = (string) $xml_offers_package_data->Наименование;
+		$offers_package_data['offers_package_guid'] = (string) $xml_offers_package_data->Ид;
+		$offers_package_data['catalog_guid'] = (string) $xml_offers_package_data->ИдКаталога;
+		$offers_package_data['classifier_guid'] = (string) $xml_offers_package_data->ИдКлассификатора;
+
+		$offers_package_data['offers_package_description']= '';
 		if($xml_offers_package_data->Описание)
 		{
-			$offers_package['offers_package_description'] = (string)$xml_offers_package_data->Описание;
+			$offers_package_data['offers_package_description'] = (string)$xml_offers_package_data->Описание;
 		}
 
 		if($xml_offers_package_data->Предложения)
 		{
 			$this->logger()->info('parse_xml_offers_package: $xml_data->Предложения start');
 
+			try
+			{
+				$this->parse_xml_offers($xml_offers_package_data->Предложения);
+			}
+			catch(Exception $e)
+			{
+				$this->logger()->info('parse_xml_offers_package: $xml_data->Предложения exception - ' . $e->getMessage());
+			}
+
 			$this->logger()->info('parse_xml_offers_package: $xml_data->Предложения end');
+		}
+
+		return true;
+	}
+
+	/**
+	 * Разбор предложений
+	 *
+	 * @param $xml_data
+	 *
+	 * @return bool
+	 * @throws Exception
+	 */
+	private function parse_xml_offers($xml_data)
+	{
+		if(!$xml_data->Предложение)
+		{
+			throw new Exception('parse_xml_offers: $xml_data->Предложение is not valid');
+		}
+
+		foreach($xml_data->Предложение as $xml_data_offer)
+		{
+			try
+			{
+				$parsed_product_data_offer = $this->parse_xml_product($xml_data_offer);
+			}
+			catch(Exception $e)
+			{
+				continue;
+			}
 		}
 
 		return true;
