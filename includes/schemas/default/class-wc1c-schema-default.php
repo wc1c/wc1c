@@ -1332,6 +1332,184 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	}
 
 	/**
+	 * Обработка свойств классификатора
+	 *
+	 * @param $xml_data
+	 *
+	 * @return array
+	 */
+	private function parse_xml_classifier_properties($xml_data)
+	{
+		if($xml_data->Свойство)
+		{
+			$properties_xml_data = $xml_data->Свойство;
+		}
+		else
+		{
+			$properties_xml_data = $xml_data->СвойствоНоменклатуры;
+		}
+
+		$classifier_properties = [];
+
+		foreach($properties_xml_data as $property_xml_data)
+		{
+			try
+			{
+				$property_data = $this->parse_xml_property($property_xml_data);
+				$classifier_properties[$property_data['property_guid']] = $property_data;
+			}
+			catch(Exception $e)
+			{
+				$this->logger()->info('parse_xml_classifier_properties: exception - ' . $e->getMessage());
+			}
+		}
+
+		return $classifier_properties;
+	}
+
+	/**
+	 * Свойство
+	 *
+	 * @param $xml_property
+	 *
+	 * @return array
+	 */
+	private function parse_xml_property($xml_property)
+	{
+		/**
+		 * Идентификатор свойства в классификаторе
+		 */
+		$property_data['property_guid'] = (string)$xml_property->Ид;
+
+		/**
+		 * Наименование свойства в классификаторе
+		 */
+		$property_data['property_name'] = htmlspecialchars(trim((string) $xml_property->Наименование));
+
+		/**
+		 * Описание свойства, например, для чего оно предназначено
+		 */
+		$property_data['property_description'] = htmlspecialchars(trim((string) $xml_property->Описание));
+
+		/**
+		 * Обязательное
+		 */
+		$property_data['property_required']  = 'no';
+		if($xml_property->Обязательное)
+		{
+			$property_data['property_required'] = (string)$xml_property->Обязательное == 'true' ? 'yes' : 'no';
+		}
+
+		/**
+		 * Множественное
+		 */
+		$property_data['property_multiple']  = 'no';
+		if($xml_property->Множественное)
+		{
+			$property_data['property_multiple'] = (string)$xml_property->Множественное == 'true' ? 'yes' : 'no';
+		}
+
+		/**
+		 * Тип значений
+		 *
+		 * Один из следующих типов: Строка (по умолчанию), Число,  ДатаВремя, Справочник
+		 */
+		$property_data['property_values_type']  = 'Строка';
+		if($xml_property->ТипЗначений)
+		{
+			$property_data['property_values_type'] = (string)$xml_property->ТипЗначений;
+		}
+
+		/**
+		 * Варианты значений
+		 *
+		 * Содержит коллекцию вариантов значений свойства.
+		 * Если варианты указаны, то при указании  значений данного свойства для товаров должны использоваться значения СТРОГО из данного списка
+		 */
+		$property_values_data = []; // todo: что если не справочник?
+		$property_data['property_values_variants'] = $property_values_data;
+		if($property_data['property_values_type'] === 'Справочник' && $xml_property->ВариантыЗначений->Справочник)
+		{
+			foreach($xml_property->ВариантыЗначений->Справочник as $value)
+			{
+				$property_values_data[(string)$value->ИдЗначения] = htmlspecialchars(trim((string)$value->Значение));
+			}
+
+			$property_data['property_values_variants'] = $property_values_data;
+		}
+
+		/**
+		 * Свойство для товаров
+		 *
+		 * Свойство может (или должно) использоваться при описании товаров в каталоге, пакете предложений, документах
+		 */
+		$property_data['property_use_products'] = 'no';
+		if($xml_property->ДляТоваров)
+		{
+			$property_data['property_use_products'] = (string) $xml_property->ДляТоваров == 'true' ? 'yes' : 'no';
+		}
+
+		/**
+		 * Для предложений
+		 *
+		 * Свойство может (должно) использоваться при описании товара в пакете предложений. Например: гарантийный срок, способ доставки
+		 */
+		$property_data['property_use_offers'] = 'no';
+		if($xml_property->ДляПредложений)
+		{
+			$property_data['property_use_offers'] = (string) $xml_property->ДляПредложений == 'true' ? 'yes' : 'no';
+		}
+
+		/**
+		 * Для документов
+		 *
+		 * Свойство может (должно) использоваться при описании товара в документе. Например: серийный номер
+		 */
+		if($xml_property->ДляДокументов)
+		{
+			$property_data['property_use_documents'] = (string)$xml_property->ДляПредложений == 'true' ? 'yes' : 'no';
+		}
+
+		/**
+		 * Внешний
+		 */
+		$property_data['property_external']  = 'no';
+		if($xml_property->Внешний)
+		{
+			$property_data['property_external'] = (string)$xml_property->Внешний == 'true' ? 'yes' : 'no';
+		}
+
+		/**
+		 * Информационное
+		 */
+		$property_data['property_informational']  = 'no';
+		if($xml_property->Информационное)
+		{
+			$property_data['property_informational'] = (string)$xml_property->Информационное == 'true' ? 'yes' : 'no';
+		}
+
+		/**
+		 * Маркер удаления
+		 */
+		$property_data['property_mark_delete']  = 'no';
+		if($xml_property->ПометкаУдаления)
+		{
+			$property_data['property_mark_delete'] = (string)$xml_property->ПометкаУдаления == 'true' ? 'yes' : 'no';
+		}
+
+		/**
+		 * Номер версии
+		 */
+		$property_data['property_version']  = '';
+		if($xml_property->НомерВерсии)
+		{
+			$property_data['property_version'] = (string)$xml_property->НомерВерсии;
+		}
+
+		return $property_data;
+	}
+
+	/**
 	 * Разбор: Классификатор
 	 *
 	 * @param $xml_classifier_data
@@ -1390,11 +1568,292 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		{
 			$this->logger()->info('parse_xml_classifier: classifier_processing_properties start');
 
+			try
+			{
+				$classifier_properties = $this->parse_xml_classifier_properties($xml_classifier_data->Свойства);
+			}
+			catch(Exception $e)
+			{
+				throw new Exception('parse_xml_classifier: exception - ' . $e->getMessage());
+			}
+
+			try
+			{
+				$this->processing_classifier_properties($classifier_properties);
+			}
+			catch(Exception $e)
+			{
+				throw new Exception('parse_xml_classifier: exception - ' . $e->getMessage());
+			}
 
 			$this->logger()->info('parse_xml_classifier: classifier_processing_properties end, success');
 		}
 
 		return $classifier_data;
+	}
+
+	/**
+	 * Обработка свойств классификатора
+	 *
+	 * @param array $classifier_properties
+	 *
+	 * @return bool
+	 * @throws Exception
+	 */
+	private function processing_classifier_properties($classifier_properties = [])
+	{
+		if(!is_array($classifier_properties))
+		{
+			throw new Exception('processing_classifier_properties: $classifier_properties is not array');
+		}
+
+		if(sizeof($classifier_properties) < 1)
+		{
+			return true;
+		}
+
+		$this->update_classifier_properties($classifier_properties);
+
+		try
+		{
+			$this->set_attributes_by_classifier_properties($classifier_properties);
+		}
+		catch(Exception $e)
+		{
+			throw new Exception('processing_classifier_properties: exception - ' . $e->getMessage());
+		}
+
+		return true;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function load_relationship_attributes_by_classifier_properties()
+	{
+		return get_option($this->get_prefix() . '_relationship_atts_cl_pr', []);
+	}
+
+	/**
+	 * Получение идентификатора таксономии атрибута по описанию
+	 *
+	 * @param $label
+	 *
+	 * @return int
+	 */
+	private function get_attribute_taxonomy_id_by_label($label)
+	{
+		$taxonomies = wp_list_pluck(wc_get_attribute_taxonomies(), 'attribute_id', 'attribute_label');
+
+		return isset($taxonomies[$label]) ? (int) $taxonomies[$label] : 0;
+	}
+
+	/**
+	 * Назначение общих атрибутов из свойств классификатора
+	 *
+	 * @param array $classifier_properties
+	 *
+	 * @throws Exception
+	 */
+	private function set_attributes_by_classifier_properties($classifier_properties = [])
+	{
+		$relationship_attributes_by_classifier_properties = $this->load_relationship_attributes_by_classifier_properties();
+
+		foreach($classifier_properties as $classifier_property_id => $classifier_property)
+		{
+			$attribute_id = 0;
+
+			if(isset($relationship_attributes_by_classifier_properties[$classifier_property['property_guid']]))
+			{
+				$attribute_id = $relationship_attributes_by_classifier_properties[$classifier_property['property_guid']];
+			}
+
+			if($attribute_id === 0)
+			{
+				$attribute_id = $this->get_attribute_taxonomy_id_by_label($classifier_property['property_name']);
+				$relationship_attributes_by_classifier_properties[$classifier_property_id] = $attribute_id;
+			}
+
+			if($attribute_id === 0)
+			{
+				$attribute_data =
+				[
+					'name' => $classifier_property['property_name']
+				];
+
+				try
+				{
+					$attribute_id = $this->add_attribute($attribute_data);
+				}
+				catch(Exception $e)
+				{
+					$this->logger()->warning('set_attributes_by_classifier_properties: exception - ' . $e->getMessage());
+					continue;
+				}
+
+				$relationship_attributes_by_classifier_properties[$classifier_property_id] = $attribute_id;
+			}
+			else
+			{
+				// обновляем название атрибута в WooCommerce
+			}
+
+			if($attribute_id !== 0)
+			{
+				$property_taxonomy = $this->get_attribute_name_by_label($classifier_property['property_name']);
+
+				if($classifier_property['property_values_type'] === 'Справочник')
+				{
+					foreach($classifier_property['property_values_variants'] as $property_values_variant_key => $property_values_variant_value)
+					{
+						try
+						{
+							$property_values_variant_value_term_id = $this->add_attribute_value($property_values_variant_value, 'pa_' . $property_taxonomy);
+						}
+						catch(Exception $e)
+						{
+							$this->logger()->warning('parse_xml_classifier_properties: exception - ' . $e->getMessage());
+						}
+
+						//todo: save $property_values_variant_value_term_id
+					}
+				}
+			}
+		}
+
+		$this->update_relationship_attributes_by_classifier_properties($relationship_attributes_by_classifier_properties);
+	}
+
+	/**
+	 * Добавление общего атрибута
+	 *
+	 * @param $data
+	 *
+	 * @return mixed
+	 * @throws Exception
+	 */
+	private function add_attribute($data)
+	{
+		$attribute_id = $this->get_attribute_taxonomy_id_by_label($data['name']);
+
+		if($attribute_id !== 0)
+		{
+			$taxonomy_name = wc_attribute_taxonomy_name(sanitize_title($this->get_attribute_name_by_label($data['name'])));
+			throw new Exception('add_attribute: exists - ' . $attribute_id . ' taxonomy=' . $taxonomy_name);
+		}
+
+		$attribute_slug = wc_sanitize_taxonomy_name(sanitize_title($data['name']));
+		$max_length = 25;
+		while(strlen($attribute_slug) > $max_length)
+		{
+			$attribute_slug = mb_substr($attribute_slug, 0, mb_strlen($attribute_slug) - 1);
+		}
+
+		$args = array
+		(
+			'name' => $data['name'],
+			'slug' => $attribute_slug,
+			'type' => 'select',
+			'order_by' => 'menu_order',
+			'has_archives' => false,
+		);
+
+		$attribute_id = wc_create_attribute($args); // todo: woocommerce 3.2
+
+		if(is_wp_error($attribute_id))
+		{
+			throw new Exception('add_attribute: error - ' . $attribute_id->get_error_message());
+		}
+
+		return $attribute_id;
+	}
+
+	/**
+	 * Обновление связи свойств классификатора 1С с общими атрибутами WooCommerce
+	 *
+	 * @param $relationship_attributes_by_classifier_properties
+	 *
+	 * @return bool
+	 */
+	public function update_relationship_attributes_by_classifier_properties($relationship_attributes_by_classifier_properties)
+	{
+		return update_option($this->get_prefix() . '_relationship_atts_cl_pr', $relationship_attributes_by_classifier_properties, 'no');
+	}
+
+	/**
+	 * Добавление значения для общего атрибута
+	 *
+	 * @param $name
+	 * @param $taxonomy_name
+	 *
+	 * @return mixed
+	 * @throws Exception
+	 */
+	private function add_attribute_value($name, $taxonomy_name)
+	{
+		register_taxonomy($taxonomy_name, 'product');
+
+		$value_result = wp_insert_term($name, $taxonomy_name, array
+		(
+			'description' => '',
+			'parent' => 0,
+			'slug' => '',
+		));
+
+		if(is_wp_error($value_result))
+		{
+			if(isset($value_result->error_data['term_exists']) && $value_result->error_data['term_exists'])
+			{
+				return $value_result->error_data['term_exists'];
+			}
+
+			throw new Exception('add_attribute_value: error - ' . $value_result->get_error_message());
+		}
+
+		if(isset($value_result['term_id']))
+		{
+			return $value_result['term_id'];
+		}
+
+		throw new Exception('add_attribute_value: error');
+	}
+
+	/**
+	 * Получение названия таксономии атрибута по описанию
+	 *
+	 * @param $label
+	 *
+	 * @return string
+	 */
+	private function get_attribute_name_by_label($label)
+	{
+		$taxonomies = wp_list_pluck(wc_get_attribute_taxonomies(), 'attribute_name', 'attribute_label');
+
+		return isset($taxonomies[$label]) ? $taxonomies[$label] : '';
+	}
+
+	/**
+	 * Обновление свойств каталога
+	 *
+	 * @param $properties_data array - данные свойств из классификатора
+	 *
+	 * @return boolean|array
+	 */
+	public function update_classifier_properties($properties_data)
+	{
+		update_option($this->get_prefix() . '_classifier_properties', $properties_data, 'no');
+
+		return $this->load_classifier_properties();
+	}
+
+	/**
+	 * Получение массива кешированных свойств классификатора
+	 *
+	 * @return array
+	 */
+	public function load_classifier_properties()
+	{
+		return get_option($this->get_prefix() . '_classifier_properties', []);
 	}
 
 	/**
