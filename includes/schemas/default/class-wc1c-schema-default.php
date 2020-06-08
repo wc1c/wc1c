@@ -147,12 +147,21 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			'default' => 'no'
 		);
 
-		$fields['delete_files_after_import'] = array
+		$fields['delete_files_after_processing'] = array
 		(
 			'title' => __('Deleting files after processing', 'wc1c'),
 			'type' => 'checkbox',
 			'label' => __('Check the checkbox if want to enable this feature. Disabled by default.', 'wc1c'),
 			'description' => __('If deletion is disabled, the exchange files will remain in the directories until the next exchange. Otherwise, all processed files will be deleted immediately after error-free processing.', 'wc1c'),
+			'default' => 'no'
+		);
+
+		$fields['delete_zip_files_after_extract'] = array
+		(
+			'title' => __('Deleting ZIP files after extract', 'wc1c'),
+			'type' => 'checkbox',
+			'label' => __('Check the checkbox if want to enable this feature. Disabled by default.', 'wc1c'),
+			'description' => __('If deletion is disabled, the exchange ZIP files will remain in the directories until the next exchange.', 'wc1c'),
 			'default' => 'no'
 		);
 
@@ -356,7 +365,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 		if(!isset($_COOKIE[$cookie_name]))
 		{
-			$this->logger()->warning('api_check_auth_key: $_COOKIE[$cookie_name] empty');
+			$this->logger()->warning('api_handler_check_auth_key: $_COOKIE[$cookie_name] empty');
 			return false;
 		}
 
@@ -364,7 +373,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 		if($_COOKIE[$cookie_name] !== md5($password))
 		{
-			$this->logger()->warning('api_check_auth_key: $_COOKIE[$cookie_name] !== md5($password)');
+			$this->logger()->warning('api_handler_check_auth_key: $_COOKIE[$cookie_name] !== md5($password)');
 			return false;
 		}
 
@@ -530,7 +539,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		$zip_support = false;
 		if(class_exists('ZipArchive'))
 		{
-			$this->logger()->info('api_mode_init: ZipArchive available');
+			$this->logger()->info('api_handler_mode_init: ZipArchive available');
 			$zip_support = true;
 		}
 
@@ -549,7 +558,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			$data[1] = 'file_limit=' . $manual_size;
 		}
 
-		$this->logger()->debug('api_mode_init: $data', $data);
+		$this->logger()->debug('api_handler_mode_init: $data', $data);
 
 		echo $data[0] . "\n";
 		echo $data[1] . "\n";
@@ -620,7 +629,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 				{
 					$xml_files_result = $this->extract_zip($schema_upload_file_path);
 
-					if($this->get_options('delete_zip_files_after_import', 'no') === 'yes')
+					if($this->get_options('delete_zip_files_after_extract', 'no') === 'yes')
 					{
 						$this->logger()->info('api_handler_catalog_mode_file: file zip deleted - ' . $schema_upload_file_path);
 						unlink($schema_upload_file_path);
@@ -657,19 +666,19 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			$this->api_handler_response_by_type('failure', __('Authorization failed', 'wc1c'));
 		}
 
-		$this->logger()->info('api_catalog_mode_import: start');
+		$this->logger()->info('api_handler_catalog_mode_import: start');
 
 		$filename = wc1c_get_var($_GET['filename']);
 
 		if($filename === '')
 		{
-			$this->logger()->warning('api_catalog_mode_import: filename is empty');
+			$this->logger()->warning('api_handler_catalog_mode_import: filename is empty');
 			$this->api_handler_response_by_type('failure', __('Import filename is empty.', 'wc1c'));
 		}
 
 		$file = $this->get_upload_directory() . '/catalog/' . sanitize_file_name($filename);
 
-		$this->logger()->info('api_catalog_mode_import: file_processing - start');
+		$this->logger()->info('api_handler_catalog_mode_import: file_processing - start');
 
 		$result_file_processing = false;
 
@@ -679,18 +688,18 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		}
 		catch(Exception $e)
 		{
-			$this->logger()->error('api_catalog_mode_import: exception - ' . $e->getMessage(), $e);
+			$this->logger()->error('api_handler_catalog_mode_import: exception - ' . $e->getMessage(), $e);
 		}
 
 		if($result_file_processing !== false)
 		{
-			if($this->get_options('delete_files_after_import', 'no') === 'yes')
+			if($this->get_options('delete_files_after_processing', 'no') === 'yes')
 			{
 				$this->logger()->info('file_import: delete file - ' . $file);
 				unlink($file);
 			}
 
-			$this->logger()->info('api_catalog_mode_import: success');
+			$this->logger()->info('api_handler_catalog_mode_import: success');
 			$this->api_handler_response_by_type('success', 'Импорт успешно завершен.');
 		}
 
