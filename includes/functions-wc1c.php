@@ -287,6 +287,11 @@ function wc1c_locate_template($template_name, $template_path = '', $default_path
 		)
 	);
 
+	if($template_path && file_exists(trailingslashit($template_path) . $template_name))
+	{
+		$template = trailingslashit($template_path) . $template_name;
+	}
+
 	// Get default template/
 	if(!$template)
 	{
