@@ -21,9 +21,16 @@ class Wc1c_Tool_Example extends Wc1c_Abstract_Tool
 
 	/**
 	 * Initialize
+	 *
+	 * @return bool|void
 	 */
 	public function init()
 	{
+		if(!is_wc1c_admin_tools_request('example'))
+		{
+			return false;
+		}
+
 		add_action('wc1c_admin_tools_single_show', [$this, 'show']);
 	}
 

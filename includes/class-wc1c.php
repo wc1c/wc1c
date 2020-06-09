@@ -1018,17 +1018,18 @@ final class Wc1c
 		{
 			$tool_example = new Wc1c_Tool_Example();
 
-			$tool_example->set_id('example');
-			$tool_example->set_version(WC1C_PLUGIN_VERSION);
-			$tool_example->set_name(__('Example tool', 'wc1c'));
-			$tool_example->set_description(__('A demo tool that does not carry any functional load.', 'wc1c'));
-
-			$tools[$tool_example->get_id()] = $tool_example;
 		}
 		catch(Exception $e)
 		{
 			throw new Exception('load_tools: exception - ' . $e->getMessage());
 		}
+
+		$tool_example->set_id('example');
+		$tool_example->set_version(WC1C_PLUGIN_VERSION);
+		$tool_example->set_name(__('Example tool', 'wc1c'));
+		$tool_example->set_description(__('A demo tool that does not carry any functional load.', 'wc1c'));
+
+		$tools[$tool_example->get_id()] = $tool_example;
 
 		/**
 		 * External tools loading is enable
