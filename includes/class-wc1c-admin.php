@@ -437,7 +437,6 @@ final class Wc1c_Admin
 		/**
 		 * Other
 		 */
-		include_once WC1C_PLUGIN_PATH . 'includes/functions-wc1c-admin.php';
 		include_once WC1C_PLUGIN_PATH . 'includes/admin/class-wc1c-admin-inject.php';
 
 		/**
