@@ -15,26 +15,14 @@ function is_wc1c_admin_tools_request($tool_id = '')
 			return true;
 		}
 
-		$get_tool_id = wc1c_get_var($_GET['tool_id']);
+		$get_tool_id = wc1c_get_var($_GET['tool_id'], '');
 
 		if($get_tool_id !== $tool_id)
 		{
 			return false;
 		}
 
-		try
-		{
-			$available_tools = WC1C()->get_tools();
-		}
-		catch(Exception $e)
-		{
-			return false;
-		}
-
-		if(array_key_exists($tool_id, $available_tools))
-		{
-			return true;
-		}
+		return true;
 	}
 
 	return false;
