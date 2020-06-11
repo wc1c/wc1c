@@ -194,7 +194,7 @@ class Wc1c_Admin_Configurations_Create extends Wc1c_Admin_Abstract_Form
 			'label' => __('Name of the configuration for easy use. You can enter any data up to 255 characters.', 'wc1c'),
 			'description' => __('Used for convenient distribution of multiple configurations.', 'wc1c'),
 			'default' => '',
-			'css' => 'min-width: 350px;',
+			'css' => 'width: 100%;',
 		);
 
 		try
