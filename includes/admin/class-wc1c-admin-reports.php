@@ -381,6 +381,16 @@ class Wc1c_Admin_Reports
 		);
 
 		/**
+		 * PHP max upload size
+		 */
+		$env_array['php_max_upload_size'] = array
+		(
+			'title' => __('PHP max upload size', 'wc1c'),
+			'description' => '',
+			'data' => (wp_max_upload_size() / 1024 / 1024) . 'M'
+		);
+
+		/**
 		 * PHP max execution time
 		 */
 		$env_array['php_max_execution_time'] = array
@@ -398,16 +408,6 @@ class Wc1c_Admin_Reports
 			'title' => __('PHP max input vars', 'wc1c'),
 			'description' => '',
 			'data' => ini_get('max_input_vars')
-		);
-
-		/**
-		 * PHP max upload size
-		 */
-		$env_array['php_max_upload_size'] = array
-		(
-			'title' => __('PHP max upload size', 'wc1c'),
-			'description' => '',
-			'data' => wp_max_upload_size()
 		);
 
 		/**
