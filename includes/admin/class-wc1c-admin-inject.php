@@ -29,8 +29,16 @@ class Wc1c_Admin_Inject
 	 */
 	private function hooks()
 	{
-		add_filter('manage_edit-product_columns',  array($this, 'manage_edit_product_columns'));
-		add_action('manage_product_posts_custom_column', array($this, 'manage_product_posts_custom_column'));
+		if(WC1C()->settings()->get('admin_inject', 'yes') !== 'yes')
+		{
+			return;
+		}
+
+		if(WC1C()->settings()->get('admin_inject', 'yes') === 'yes')
+		{
+			add_filter('manage_edit-product_columns',  array($this, 'manage_edit_product_columns'));
+			add_action('manage_product_posts_custom_column', array($this, 'manage_product_posts_custom_column'));
+		}
 	}
 
 	/**
