@@ -4,8 +4,8 @@
  * Plugin URI: https://wc1c.info
  * Description: Implementation of a mechanism for flexible exchange of various data between 1C products and a site running WordPress using the WooCommerce plugin.
  * Version: 0.5.0
- * WC requires at least: 3.0
- * WC tested up to: 4.1
+ * WC requires at least: 3.2
+ * WC tested up to: 4.2
  * Text Domain: wc1c
  * Domain Path: /languages
  * Copyright: WC1C team © 2018-2020
