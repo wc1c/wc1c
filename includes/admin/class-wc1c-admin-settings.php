@@ -246,9 +246,6 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 				'250' => __('NOTICE', 'wc1c'),
 				'300' => __('WARNING', 'wc1c'),
 				'400' => __('ERROR', 'wc1c'),
-				'500' => __('CRITICAL', 'wc1c'),
-				'550' => __('ALERT', 'wc1c'),
-				'600' => __('EMERGENCY', 'wc1c')
 			)
 		);
 
