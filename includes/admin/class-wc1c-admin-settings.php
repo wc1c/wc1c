@@ -307,6 +307,15 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 			'default' => 'yes'
 		);
 
+		$fields['admin_inject_edit_products_metabox'] = array
+		(
+			'title' => __('Metabox in edit products', 'wc1c'),
+			'type' => 'checkbox',
+			'label' => __('Enable', 'wc1c'),
+			'description' => __('Output of a Metabox with information from 1C in edit products.', 'wc1c'),
+			'default' => 'yes'
+		);
+
 		return $fields;
 	}
 
