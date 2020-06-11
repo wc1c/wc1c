@@ -199,7 +199,7 @@ class Wc1c_Admin_Configurations_Table extends Wc1c_Admin_Abstract_Table
 
 		    if(isset($_REQUEST['config_id']))
             {
-            	if(is_array($_POST['config_id']))
+            	if(isset($_POST['config_id']) && is_array($_POST['config_id']))
 	            {
 	            	$configs = array_merge($configs, $_REQUEST['config_id']);
 	            }
@@ -210,7 +210,7 @@ class Wc1c_Admin_Configurations_Table extends Wc1c_Admin_Abstract_Table
 
 	            foreach($configs as $config_id)
 	            {
-		            WC1C_Db()->delete(WC1C_Db()->prefix . "wc1c", array('config_id' => $config_id));
+		            WC1C_Db()->delete(WC1C_Db()->prefix . "wc1c", array('config_id' => (int)$config_id));
 	            }
 
 	            echo WC1C_Admin()->format_message('update', __('Configuration deleted', 'wc1c'));
