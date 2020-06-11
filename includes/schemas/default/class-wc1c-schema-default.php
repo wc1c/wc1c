@@ -195,7 +195,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 		$fields['logger'] = array
 		(
-			'title' => __('Logging', 'wc1c'),
+			'title' => __('Logging events', 'wc1c'),
 			'type' => 'select',
 			'description' => __('Can enable logging, specify the level of error that to benefit from logging.
 			 Can send reports to developer. All sensitive data in the report are deleted.
