@@ -715,9 +715,8 @@ abstract class Wc1c_Admin_Abstract_Form
 
 		ob_start();
 		?>
-		</table>
+		</table><a class="nav-link" href="#<?php echo esc_attr($field_key); ?>"></a>
         <div class="wc1c-title-wrap">
-        <a class="nav-link" href="#<?php echo esc_attr($field_key); ?>"></a>
 		<h3 class="wc-settings-sub-title <?php echo esc_attr($data['class']); ?>" id="<?php echo esc_attr($field_key); ?>"><?php echo wp_kses_post($data['title']); ?></h3>
 		<?php if (!empty($data['description'])) : ?>
 		<p><?php echo wp_kses_post($data['description']); ?></p>
