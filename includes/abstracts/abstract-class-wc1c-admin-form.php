@@ -231,7 +231,6 @@ abstract class Wc1c_Admin_Abstract_Form
             {
 	            if($type === 'title')
 	            {
-		            //$v['title'] = $i . ') ' . $v['title'];
 		            $i++;
 		            $g = 1;
 	            }
@@ -248,9 +247,8 @@ abstract class Wc1c_Admin_Abstract_Form
 
 				continue;
 			}
+
 			$html .= $this->generate_text_html($k, $v);
-
-
 		}
 
 		if($echo !== true)
@@ -719,6 +717,7 @@ abstract class Wc1c_Admin_Abstract_Form
 		?>
 		</table>
         <div class="wc1c-title-wrap">
+        <a class="nav-link" href="#<?php echo esc_attr($field_key); ?>"></a>
 		<h3 class="wc-settings-sub-title <?php echo esc_attr($data['class']); ?>" id="<?php echo esc_attr($field_key); ?>"><?php echo wp_kses_post($data['title']); ?></h3>
 		<?php if (!empty($data['description'])) : ?>
 		<p><?php echo wp_kses_post($data['description']); ?></p>
