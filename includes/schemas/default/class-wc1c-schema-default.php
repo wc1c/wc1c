@@ -224,12 +224,12 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			'default' => 'no'
 		);
 
-		$fields['post_file_max_size'] = array
+		$fields['php_post_max_size'] = array
 		(
 			'title' => __('Maximum request size', 'wc1c'),
 			'type' => 'text',
-			'description' => __('Enter the maximum request size. You can only reduce the value.', 'wc1c'),
-			'default' => '',
+			'description' => __('The setting must not take a size larger than specified in the server settings.', 'wc1c'),
+			'default' => WC1C()->environment()->get('php_post_max_size'),
 			'css' => 'min-width: 100px;',
 		);
 
