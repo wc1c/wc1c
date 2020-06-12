@@ -992,7 +992,7 @@ final class Wc1c
 	/**
 	 * @return Wc1c_Timer|null
 	 */
-	public function get_timer()
+	public function timer()
 	{
 		return $this->timer;
 	}
