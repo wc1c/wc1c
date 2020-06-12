@@ -14,6 +14,11 @@ final class Wc1c
 	use Trait_Wc1c_Singleton;
 
 	/**
+	 * @var null|Wc1c_Timer
+	 */
+	private $timer = null;
+
+	/**
 	 * Logger
 	 *
 	 * @var null|Wc1c_Logger
@@ -119,6 +124,7 @@ final class Wc1c
 		/**
 		 * Core
 		 */
+		include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-timer.php';
 		include_once WC1C_PLUGIN_PATH . 'includes/functions-wc1c-admin.php';
 		include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-environment.php';
 		include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-logger.php';
@@ -212,6 +218,16 @@ final class Wc1c
 		try
 		{
 			$this->load_settings();
+		}
+		catch(Exception $e)
+		{
+			WC1C()->logger()->alert('init: exception - ' . $e->getMessage());
+			return false;
+		}
+
+		try
+		{
+			$this->load_timer();
 		}
 		catch(Exception $e)
 		{
@@ -919,6 +935,41 @@ final class Wc1c
 	}
 
 	/**
+	 * Timer loading
+	 *
+	 * @throws Exception
+	 */
+	public function load_timer()
+	{
+		try
+		{
+			$timer = new Wc1c_Timer();
+		}
+		catch(Exception $e)
+		{
+			throw new Exception('load_timer: exception - ' . $e->getMessage());
+		}
+
+		$php_max_execution = $directory = $this->environment()->get('php_max_execution_time', 20);
+
+		if($this->settings()->get('php_max_execution_time', $php_max_execution) !== $php_max_execution)
+		{
+			$php_max_execution = $this->settings()->get('php_max_execution_time', $php_max_execution);
+		}
+
+		$timer->set_maximum($php_max_execution);
+
+		try
+		{
+			$this->set_timer($timer);
+		}
+		catch(Exception $e)
+		{
+			throw new Exception('load_timer: exception - ' . $e->getMessage());
+		}
+	}
+
+	/**
 	 * Set logger
 	 *
 	 * @param $logger
@@ -936,6 +987,22 @@ final class Wc1c
 		}
 
 		throw new Exception('set_logger: $logger is not valid');
+	}
+
+	/**
+	 * @return Wc1c_Timer|null
+	 */
+	public function get_timer()
+	{
+		return $this->timer;
+	}
+
+	/**
+	 * @param Wc1c_Timer|null $timer
+	 */
+	public function set_timer($timer)
+	{
+		$this->timer = $timer;
 	}
 
 	/**
