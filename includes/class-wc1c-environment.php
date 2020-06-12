@@ -100,7 +100,7 @@ class Wc1c_Environment
 	 */
 	public function init_wc1c_upload_directory()
 	{
-		$wc1c_upload_dir = $this->get('upload_directory') . '/wc1c';
+		$wc1c_upload_dir = $this->get('upload_directory') . DIRECTORY_SEPARATOR . 'wc1c';
 
 		$this->set('wc1c_upload_directory', $wc1c_upload_dir);
 
