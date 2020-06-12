@@ -1947,28 +1947,17 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 		foreach($classifier_groups as $classifier_group => $classifier_group_value)
 		{
-			$classifier_group_value = apply_filters($this->get_schema_prefix() . '_processing_classifier_groups_item', $classifier_group, $classifier_group_value);
-
 			if(!is_array($classifier_group_value))
 			{
 				continue;
 			}
 
-			/**
-			 * Категория имеет связь
-			 */
 			if(isset($relationship_categories[$classifier_group_value['category_guid']]))
 			{
 				$shop_category_id = $relationship_categories[$classifier_group_value['category_guid']];
 
-				/**
-				 * Связанная категория отсутствует в WooCommerce, но связь присутствует
-				 */
 				if(!isset($shop_categories[$shop_category_id]))
 				{
-					/**
-					 * Убираем старую связь для создания новой
-					 */
 					unset($relationship_categories[$classifier_group_value['category_guid']]);
 				}
 				else
@@ -1987,9 +1976,6 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 			$check_category = $this->recursive_array_search($classifier_group_value['category_name'], $shop_categories);
 
-			/**
-			 * Категория с таким именем существует
-			 */
 			if(false !== $check_category)
 			{
 				continue;
