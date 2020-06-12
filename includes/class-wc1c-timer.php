@@ -14,7 +14,7 @@ class Wc1c_Timer
 	private $maximum = 30;
 
 	/**
-	 * @var int
+	 * @var int|float
 	 */
 	private $started = 0;
 
@@ -26,10 +26,6 @@ class Wc1c_Timer
 		if(isset($_SERVER['REQUEST_TIME_FLOAT']))
 		{
 			$this->set_started($_SERVER['REQUEST_TIME_FLOAT']);
-		}
-		else
-		{
-			$this->set_started(time());
 		}
 	}
 
@@ -70,7 +66,7 @@ class Wc1c_Timer
 	 */
 	public function get_execution_seconds()
 	{
-		return microtime(true) - $this->started;
+		return microtime(true) - $this->get_started();
 	}
 
 	/**
@@ -78,6 +74,27 @@ class Wc1c_Timer
 	 */
 	public function get_available_seconds()
 	{
-		return $this->maximum - $this->get_execution_seconds();
+		return $this->get_maximum() - $this->get_execution_seconds();
+	}
+
+	/**
+	 * Get available seconds
+	 *
+	 * @param int $seconds
+	 *
+	 * @return bool
+	 */
+	public function is_remaining_bigger_than($seconds = 30)
+	{
+		$max_execution_time = $this->get_maximum();
+
+		if($max_execution_time === 0)
+		{
+			return true;
+		}
+
+		$remaining_seconds = $this->get_available_seconds();
+
+		return ($remaining_seconds >= $seconds);
 	}
 }
