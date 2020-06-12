@@ -267,6 +267,24 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 			'css' => 'min-width: 300px;',
 		);
 
+		$fields['php_post_max_size'] = array
+		(
+			'title' => __('Maximum request size', 'wc1c'),
+			'type' => 'text',
+			'description' => __('The setting must not take a size larger than specified in the server settings.', 'wc1c'),
+			'default' => WC1C()->environment()->get('php_post_max_size'),
+			'css' => 'min-width: 100px;',
+		);
+
+		$fields['php_max_execution_time'] = array
+		(
+			'title' => __('Maximum time for execution PHP', 'wc1c'),
+			'type' => 'text',
+			'description' => __('Value is seconds. The setting must not take a execution time larger than specified in the PHP and web server settings (Apache, Nginx, etc).', 'wc1c'),
+			'default' => WC1C()->environment()->get('php_max_execution_time'),
+			'css' => 'min-width: 100px;',
+		);
+
 		return $fields;
 	}
 
