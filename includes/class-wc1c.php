@@ -311,7 +311,7 @@ final class Wc1c
 	 * @return bool
 	 * @throws Exception
 	 */
-	public function reload_logger()
+	private function reload_logger()
 	{
 		$logger_level = $this->settings()->get('logger', 400);
 		$directory_name = $this->settings()->get('upload_directory_name', 'wc1c');
@@ -374,7 +374,7 @@ final class Wc1c
 	 *
 	 * @throws Exception
 	 */
-	public function load_environment()
+	private function load_environment()
 	{
 		try
 		{
@@ -400,7 +400,7 @@ final class Wc1c
 	 *
 	 * @throws Exception
 	 */
-	public function load_settings()
+	private function load_settings()
 	{
 		try
 		{
@@ -706,7 +706,7 @@ final class Wc1c
 	 *
 	 * @throws Exception
 	 */
-	public function load_schemas()
+	private function load_schemas()
 	{
 		$schemas = [];
 
@@ -906,7 +906,7 @@ final class Wc1c
 	 *
 	 * @throws Exception
 	 */
-	public function load_logger()
+	private function load_logger()
 	{
 		$directory = $this->environment()->get('upload_directory', false);
 
@@ -939,7 +939,7 @@ final class Wc1c
 	 *
 	 * @throws Exception
 	 */
-	public function load_timer()
+	private function load_timer()
 	{
 		try
 		{
@@ -1040,7 +1040,7 @@ final class Wc1c
 	 *
 	 * @throws Exception
 	 */
-	public function load_api()
+	private function load_api()
 	{
 		$default_class_name = 'Wc1c_Api';
 
@@ -1123,7 +1123,7 @@ final class Wc1c
 	 *
 	 * @throws Exception
 	 */
-	public function load_extensions()
+	private function load_extensions()
 	{
 		$extensions = [];
 
