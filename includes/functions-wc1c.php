@@ -316,7 +316,7 @@ function wc1c_convert_size($size)
 		return 0;
 	}
 
-	$type = $size{strlen($size) - 1};
+	$type = $size[strlen($size) - 1];
 
 	if(!is_numeric($type))
 	{
