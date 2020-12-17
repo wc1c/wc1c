@@ -325,13 +325,13 @@ function wc1c_convert_size($size)
 		switch($type)
 		{
 			case 'K':
-				$size = $size * 1024;
+				$size *= 1024;
 				break;
 			case 'M':
-				$size = $size * 1024 * 1024;
+				$size *= 1024 * 1024;
 				break;
 			case 'G':
-				$size = $size * 1024 * 1024 * 1024;
+				$size *= 1024 * 1024 * 1024;
 				break;
 		}
 
