@@ -528,11 +528,11 @@ final class Wc1c
 		/**
 		 * Init all extensions
 		 */
-		foreach($extensions as $extension_id => $extension_object)
+		foreach($extensions as $extension => $extension_object)
 		{
 			try
 			{
-				$this->init_extensions($extension_id);
+				$this->init_extensions($extension);
 			}
 			catch(Exception $exception)
 			{
@@ -685,11 +685,11 @@ final class Wc1c
 		/**
 		 * Init all schemas
 		 */
-		foreach($schemas as $schema_id => $schema_data)
+		foreach($schemas as $schema => $schema_data)
 		{
 			try
 			{
-				$this->init_schemas($schema_id);
+				$this->init_schemas($schema);
 			}
 			catch(Exception $e)
 			{
