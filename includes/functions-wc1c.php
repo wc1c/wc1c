@@ -381,7 +381,7 @@ function wc1c_get_configurations_status_print($status = null)
  */
 function wc1c_set_time_limit($limit = 0)
 {
-	if(function_exists('set_time_limit') && !ini_get('safe_mode') && false === strpos(ini_get('disable_functions'), 'set_time_limit'))
+	if(function_exists('set_time_limit') && false === strpos(ini_get('disable_functions'), 'set_time_limit'))
 	{
 		@set_time_limit($limit);
 		
