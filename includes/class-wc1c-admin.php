@@ -502,12 +502,12 @@ final class Wc1c_Admin
 	 */
 	public function format_message($type, $message, $args = array())
 	{
-		if($type == 'error')
+		if($type === 'error')
 		{
 			return '<div class="updated settings-error notice error is-dismissible"><p><strong>' . $message . '</strong></p><button class="notice-dismiss" type="button"><span class="screen-reader-text">' . __( 'Close', 'wc1c' ) . '</span></button></div>';
 		}
 
-		if($type == 'update')
+		if($type === 'update')
 		{
 			return '<div class="updated settings-update notice is-dismissible"><p><strong>' . $message . '</strong></p><button class="notice-dismiss" type="button"><span class="screen-reader-text">' . __( 'Close', 'wc1c' ) . '</span></button></div>';
 		}
