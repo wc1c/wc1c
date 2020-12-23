@@ -75,7 +75,7 @@ function get_wc1c_admin_tools_url($tool_id = '')
  *
  * @return string
  */
-function get_wc1c_admin_configuration_url($action = 'list', $configuration_id = '')
+function wc1c_admin_get_configuration_url($action = 'list', $configuration_id = '')
 {
 	$path = 'admin.php?page=wc1c&section=configurations';
 
