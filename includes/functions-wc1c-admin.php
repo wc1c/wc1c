@@ -55,7 +55,7 @@ function is_wc1c_admin_section_request($section = '')
  *
  * @return string
  */
-function get_wc1c_admin_tools_url($tool_id = '')
+function wc1c_admin_get_tools_url($tool_id = '')
 {
 	$path = 'admin.php?page=wc1c&section=tools';
 
