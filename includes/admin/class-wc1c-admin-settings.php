@@ -15,14 +15,8 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 	 */
 	public function __construct($init = true)
 	{
-		/**
-		 * Form id
-		 */
 		$this->set_id('settings');
 
-		/**
-		 * Auto init
-		 */
 		if($init)
 		{
 			$this->init();
