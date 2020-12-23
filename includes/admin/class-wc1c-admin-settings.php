@@ -133,7 +133,10 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 	 */
 	public function load_saved_data($saved_data = [])
 	{
-		$saved_data = WC1C()->settings()->get_data();
+		if(empty($saved_data))
+		{
+			$saved_data = WC1C()->settings()->get_data();
+		}
 
 		if(!is_array($saved_data))
 		{
