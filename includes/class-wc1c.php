@@ -567,7 +567,7 @@ final class Wc1c
 		/**
 		 * Admin
 		 */
-		if(in_array('admin', $areas) && is_admin())
+		if(in_array('admin', $areas, true) && is_admin())
 		{
 			return true;
 		}
@@ -575,7 +575,7 @@ final class Wc1c
 		/**
 		 * Site
 		 */
-		if(in_array('site', $areas) && !is_admin())
+		if(in_array('site', $areas, true) && !is_admin())
 		{
 			return true;
 		}
@@ -583,7 +583,7 @@ final class Wc1c
 		/**
 		 * Wc1c admin
 		 */
-		if(in_array('wc1c_admin', $areas) && is_wc1c_admin_request())
+		if(in_array('wc1c_admin', $areas, true) && is_wc1c_admin_request())
 		{
 			return true;
 		}
@@ -591,7 +591,7 @@ final class Wc1c
 		/**
 		 * Wc1c api
 		 */
-		if(in_array('wc1c_api', $areas) && is_wc1c_api_request())
+		if(in_array('wc1c_api', $areas, true) && is_wc1c_api_request())
 		{
 			return true;
 		}
