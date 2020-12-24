@@ -559,7 +559,7 @@ final class Wc1c
 		/**
 		 * Any
 		 */
-		if(in_array('any', $areas))
+		if(in_array('any', $areas, true))
 		{
 			return true;
 		}
