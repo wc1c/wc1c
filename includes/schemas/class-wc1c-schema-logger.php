@@ -59,9 +59,10 @@ class Wc1c_Schema_Logger extends Wc1c_Abstract_Logger
 
 		$file = $this->get_path() . DIRECTORY_SEPARATOR . $this->get_name();
 
-		if(!file_exists($this->get_path()))
+		if(!file_exists($this->get_path()) && !mkdir($concurrent_directory = $this->get_path()) && !is_dir($concurrent_directory))
 		{
-			mkdir($this->get_path());
+			//throw new \RuntimeException(sprintf('Directory "%s" was not created', $concurrent_directory));
+			return false;
 		}
 
 		file_put_contents
