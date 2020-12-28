@@ -135,7 +135,7 @@ final class Wc1c_Admin
 		{
 			try
 			{
-				$inject = new Wc1c_Admin_Inject();
+				new Wc1c_Admin_Inject();
 			}
 			catch(Exception $e){}
 		}
