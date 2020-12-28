@@ -8,24 +8,24 @@
  */
 function is_wc1c_admin_tools_request($tool_id = '')
 {
-	if(is_wc1c_admin_section_request('tools'))
+	if(true !== is_wc1c_admin_section_request('tools'))
 	{
-		if('' === $tool_id)
-		{
-			return true;
-		}
+		return false;
+	}
 
-		$get_tool_id = wc1c_get_var($_GET['tool_id'], '');
-
-		if($get_tool_id !== $tool_id)
-		{
-			return false;
-		}
-
+	if('' === $tool_id)
+	{
 		return true;
 	}
 
-	return false;
+	$get_tool_id = wc1c_get_var($_GET['tool_id'], '');
+
+	if($get_tool_id !== $tool_id)
+	{
+		return false;
+	}
+
+	return true;
 }
 
 /**
