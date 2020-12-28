@@ -84,7 +84,7 @@ class Wc1c_Admin_Inject
 				$content .= '<br/><span class="na">' . __('Configuration ID: ', 'wc1c')  . $config_id . '</span>';
 			}
 
-			if($config_id == false && $schema_id == false)
+			if($config_id === false && $schema_id === false)
 			{
 				$content .= '<span class="na">' . __('not found', 'wc1c') . '</span>';
 			}
