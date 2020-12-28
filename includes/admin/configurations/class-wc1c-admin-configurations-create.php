@@ -209,7 +209,7 @@ class Wc1c_Admin_Configurations_Create extends Wc1c_Admin_Abstract_Form
 		$options = [];
 		foreach($schemas as $schema_id => $schema_object)
 		{
-			$options[$schema_id] = $schema_object->get_name();
+			$options[$schema_id] = $schema_object->get_name() . ' (' . $schema_id . ')';
 		}
 
 		$fields['schema'] = array
