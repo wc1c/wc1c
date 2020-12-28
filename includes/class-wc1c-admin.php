@@ -404,7 +404,7 @@ final class Wc1c_Admin
 
 		foreach($this->get_sections() as $tab_key => $tab_name)
 		{
-			if($this->get_current_section() == $tab_key)
+			if($this->get_current_section() === $tab_key)
 			{
 				$nav .= '<a href="' . admin_url('admin.php?page=wc1c&section=' . $tab_key) . '" class="nav-tab nav-tab-active">' . $tab_name['title'] . '</a>';
 			}
