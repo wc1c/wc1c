@@ -84,12 +84,12 @@ class Wc1c_Admin_Inject
 				$content .= '<br/><span class="na">' . __('Configuration ID: ', 'wc1c')  . $config_id . '</span>';
 			}
 
-			if($config_id === false && $schema_id === false)
+			if($config_id === '' && $schema_id === '')
 			{
 				$content .= '<span class="na">' . __('not found', 'wc1c') . '</span>';
 			}
 
-			$content = apply_filters('wc1c_admin_inject_products_lists_column', $post, $content, $schema_id, $config_id);
+			$content = apply_filters('wc1c_admin_inject_products_lists_column', $content, $schema_id, $config_id, $post);
 
 			echo $content;
 		}
