@@ -213,7 +213,7 @@ abstract class Wc1c_Abstract_Schema
 	 */
 	public function get_options($key = '', $default = null)
 	{
-		if($key != '')
+		if($key !== '')
 		{
 			if(is_array($this->options) && array_key_exists($key, $this->options))
 			{

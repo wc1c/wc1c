@@ -59,7 +59,7 @@ abstract class Wc1c_Abstract_Tool
 	{
 		return $this->id;
 	}
-	
+
 	/**
 	 * @return string
 	 */
