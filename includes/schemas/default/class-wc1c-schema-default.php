@@ -348,16 +348,16 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			header('Content-Type: text/html; charset=Windows-1251');
 		}
 
-		if($type == 'success')
+		if($type === 'success')
 		{
-			echo "success\n";
+			echo 'success' . PHP_EOL;
 		}
 		else
 		{
-			echo "failure\n";
+			echo 'failure' . PHP_EOL;
 		}
 
-		if($description != '')
+		if($description !== '')
 		{
 			echo $description;
 		}
