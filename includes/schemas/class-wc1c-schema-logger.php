@@ -9,6 +9,63 @@ defined('ABSPATH') || exit;
 class Wc1c_Schema_Logger extends Wc1c_Abstract_Logger
 {
 	/**
+	 * Path
+	 *
+	 * @var string
+	 */
+	public $path = '';
+
+	/**
+	 * Datetime
+	 */
+	public $date_time;
+
+	/**
+	 * @return void
+	 */
+	public function init()
+	{
+		try
+		{
+			$this->set_date_time(new DateTime('now', new DateTimeZone('UTC')));
+		}
+		catch(Exception $e)
+		{}
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function get_path()
+	{
+		return $this->path;
+	}
+
+	/**
+	 * @param mixed $path
+	 */
+	public function set_path($path)
+	{
+		$this->path = $path;
+	}
+
+	/**
+	 * @return DateTime
+	 */
+	public function get_date_time()
+	{
+		return $this->date_time;
+	}
+
+	/**
+	 * @param DateTime $date_time
+	 */
+	public function set_date_time($date_time)
+	{
+		$this->date_time = $date_time;
+	}
+
+	/**
 	 * Save to file
 	 *
 	 * @param $level
@@ -25,19 +82,10 @@ class Wc1c_Schema_Logger extends Wc1c_Abstract_Logger
 			return false;
 		}
 
-		try
-		{
-			$date_time = new DateTime('now', new DateTimeZone('UTC'));
-		}
-		catch(Exception $e)
-		{
-			return false;
-		}
-
 		$content = array
 		(
 			$level,
-			$date_time->format(DATE_ATOM),
+			$this->get_date_time()->format(DATE_ATOM),
 			$this->levels[$level],
 			$message
 		);
@@ -59,9 +107,8 @@ class Wc1c_Schema_Logger extends Wc1c_Abstract_Logger
 
 		$file = $this->get_path() . DIRECTORY_SEPARATOR . $this->get_name();
 
-		if(!file_exists($this->get_path()) && !mkdir($concurrent_directory = $this->get_path()) && !is_dir($concurrent_directory))
+		if(!file_exists($this->get_path()) && !mkdir($concurrent_directory = $this->get_path(), 0755, true) && !is_dir($concurrent_directory))
 		{
-			//throw new \RuntimeException(sprintf('Directory "%s" was not created', $concurrent_directory));
 			return false;
 		}
 

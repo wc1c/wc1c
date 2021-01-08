@@ -9,30 +9,18 @@ defined('ABSPATH') || exit;
 abstract class Wc1c_Abstract_Logger
 {
 	/**
+	 * Default level
+	 *
+	 * @var int
+	 */
+	public $level = 400;
+
+	/**
 	 * Log name
 	 *
 	 * @var string
 	 */
 	private $name = 'wc1c.boot.log';
-
-    /**
-     * Path
-     *
-     * @var string
-     */
-    public $path = '';
-
-    /**
-     * Default level
-     *
-     * @var int
-     */
-    public $level = 400;
-
-    /**
-     * Datetime
-     */
-    public $date_time;
 
     /**
      * Logging levels (RFC 5424)
@@ -54,22 +42,16 @@ abstract class Wc1c_Abstract_Logger
 	/**
 	 * Wc1c_Abstract_Logger constructor
 	 *
-	 * @param $path
 	 * @param int $level
 	 * @param string $name
 	 *
 	 * @throws Exception
 	 */
-    public function __construct($path = '', $level = 400, $name = '')
+    public function __construct($level = 400, $name = '')
     {
 	    if($name !== '')
 	    {
 		    $this->set_name($name);
-	    }
-
-	    if($path !== '')
-	    {
-		    $this->set_path($path);
 	    }
 
         if($level !== '')
@@ -95,22 +77,6 @@ abstract class Wc1c_Abstract_Logger
 	}
 
 	/**
-	 * @return mixed
-	 */
-	public function get_path()
-	{
-		return $this->path;
-	}
-
-	/**
-	 * @param mixed $path
-	 */
-	public function set_path($path)
-	{
-		$this->path = $path;
-	}
-
-	/**
 	 * @return int
 	 */
 	public function get_level()
@@ -124,22 +90,6 @@ abstract class Wc1c_Abstract_Logger
 	public function set_level($level)
 	{
 		$this->level = $level;
-	}
-
-	/**
-	 * @return DateTime
-	 */
-	public function get_date_time()
-	{
-		return $this->date_time;
-	}
-
-	/**
-	 * @param DateTime $date_time
-	 */
-	public function set_date_time($date_time)
-	{
-		$this->date_time = $date_time;
 	}
 
     /**
@@ -211,6 +161,13 @@ abstract class Wc1c_Abstract_Logger
         $this->add(600, $message, $object);
     }
 
+	/**
+	 * Initialize
+	 *
+	 * @return mixed
+	 */
+	abstract public function init();
+
     /**
      * Add
      *
@@ -218,7 +175,5 @@ abstract class Wc1c_Abstract_Logger
      * @param $message
      * @param null $object
      */
-    public function add($level, $message, $object = null)
-    {
-    }
+	abstract public function add($level, $message, $object = null);
 }

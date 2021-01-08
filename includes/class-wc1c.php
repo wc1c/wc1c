@@ -939,7 +939,9 @@ final class Wc1c
 
 		try
 		{
-			$logger = new Wc1c_Logger($directory,50, 'wc1c.boot.log');
+			$logger = new Wc1c_Logger(50, 'wc1c.boot.log');
+			$logger->set_path($directory);
+			$logger->init();
 		}
 		catch(Exception $e)
 		{
