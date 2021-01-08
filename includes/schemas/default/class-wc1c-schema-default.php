@@ -9,9 +9,9 @@ defined('ABSPATH') || exit;
 class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 {
 	/**
-	 * Schema level
+	 * Schema logger
 	 *
-	 * @var null|Wc1c_Schema_Logger
+	 * @var Wc1c_Schema_Logger
 	 */
 	private $logger = null;
 
@@ -32,9 +32,9 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	/**
 	 * Initialize
 	 *
-	 * @throws Exception
-	 *
 	 * @return bool
+	 *
+	 * @throws Wc1c_Exception_Runtime
 	 */
 	public function init()
 	{
@@ -44,12 +44,12 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('init: - ' . $e);
+			throw new Wc1c_Exception_Runtime('init: - ' . $e);
 		}
 
 		if(false === $this->init_logger())
 		{
-			throw new Exception('init: load_logger error');
+			throw new Wc1c_Exception_Runtime('init: load_logger error');
 		}
 
 		$this->set_options($this->configuration()->get_options());
