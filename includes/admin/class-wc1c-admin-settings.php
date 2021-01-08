@@ -39,6 +39,7 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 		$this->load_saved_data();
 
 		add_action('wc1c_admin_' . $this->get_id() . '_form_show', array($this, 'output_form'), 10);
+		add_action('wc1c_admin_settings_sidebar_show', array($this, 'output_navigation'), 10);
 
 		$this->save();
 	}
@@ -48,13 +49,12 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 	 */
 	public function output_form()
 	{
-		echo '<form method="post" action="">';
-		wp_nonce_field('wc1c-admin-settings-save', '_wc1c-admin-nonce', false, true);
-		echo '<table class="form-table wc1c-admin-form-table wc1c-admin-settings-form-table">';
-		$this->generate_html($this->get_fields(), true);
-		echo '</table>';
-		echo '<p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="' . __('Save settings', 'wc1c') . '"></p>';
-		echo '</form>';
+		$args =
+			[
+				'object' => $this
+			];
+
+		wc1c_get_template('settings/update_form.php', $args);
 	}
 
 	/**
@@ -145,6 +145,70 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 		$saved_data = apply_filters('wc1c_admin_' . $this->get_id() . '_form_load_saved_data', $saved_data);
 
 		$this->set_saved_data($saved_data);
+	}
+
+	/**
+	 * Navigation show
+	 */
+	public function output_navigation()
+	{
+		$args = [
+			'header' => '<h5 class="p-0 m-0">' . __('Fast navigation', 'wc1c') . '</h5>',
+			'object' => $this
+		];
+
+		$body = '<div class="list-group m-0">';
+
+		$form_fields = $this->get_fields();
+
+		foreach($form_fields as $k => $v)
+		{
+			$type = $this->get_field_type($v);
+
+			if($type !== 'title')
+			{
+				continue;
+			}
+
+			if(method_exists($this, 'generate_navigation_html'))
+			{
+				$body .= $this->{'generate_navigation_html'}($k, $v);
+			}
+		}
+
+		$body .= '</div>';
+
+		$args['body'] = $body;
+
+		wc1c_get_template('settings/update_sidebar_item.php', $args);
+	}
+
+	/**
+	 * Generate navigation HTML
+	 *
+	 * @param string $key - field key
+	 * @param array $data - field data
+	 *
+	 * @return string
+	 */
+	public function generate_navigation_html($key, $data)
+	{
+		$field_key = $this->get_prefix_field_key($key);
+
+		$defaults = array
+		(
+			'title' => '',
+			'class' => '',
+		);
+
+		$data = wp_parse_args($data, $defaults);
+
+		ob_start();
+		?>
+		<a class="list-group-item p-2 m-0 border-0" href="#<?php echo esc_attr($field_key); ?>"><?php echo wp_kses_post($data['title']); ?></a>
+		<?php
+
+		return ob_get_clean();
 	}
 
 	/**
