@@ -32,7 +32,7 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_extensions'), 30);
 		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_admin'), 40);
 		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_enable_data'), 20);
-		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_uninstall'), 50);
+		//add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_uninstall'), 50);
 
 		$this->load_fields();
 
@@ -389,6 +389,24 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 			'type' => 'checkbox',
 			'label' => __('Enable', 'wc1c'),
 			'description' => __('Output of a Metabox with information from 1C in edit products.', 'wc1c'),
+			'default' => 'yes'
+		);
+
+		$fields['admin_inject_orders_column'] = array
+		(
+			'title' => __('Column in orders list', 'wc1c'),
+			'type' => 'checkbox',
+			'label' => __('Enable', 'wc1c'),
+			'description' => __('Output of a column with information from 1C to the list of orders.', 'wc1c'),
+			'default' => 'yes'
+		);
+
+		$fields['admin_inject_edit_orders_metabox'] = array
+		(
+			'title' => __('Metabox in edit orders', 'wc1c'),
+			'type' => 'checkbox',
+			'label' => __('Enable', 'wc1c'),
+			'description' => __('Output of a Metabox with information from 1C in edit orders.', 'wc1c'),
 			'default' => 'yes'
 		);
 
