@@ -553,9 +553,9 @@ final class Wc1c
 			{
 				$this->init_extensions($extension);
 			}
-			catch(Exception $exception)
+			catch(Exception $e)
 			{
-				//todo: log
+				WC1C()->logger()->error($e->getMessage(), $e);
 				continue;
 			}
 		}
