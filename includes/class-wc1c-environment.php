@@ -21,17 +21,47 @@ class Wc1c_Environment
 	public function __construct()
 	{
 		$this->init_wc1c_version();
-
 		$this->init_current_configuration_id();
-
 		$this->init_upload_directory();
-
 		$this->init_wc1c_upload_directory();
-
 		$this->init_php_post_max_size();
 		$this->init_php_max_execution_time();
 	}
 
+	/**
+	 * Get environ data
+	 *
+	 * @param $key
+	 * @param $default
+	 *
+	 * @return mixed
+	 */
+	public function get($key, $default = null)
+	{
+		if(isset($this->data[$key]))
+		{
+			return $this->data[$key];
+		}
+
+		if(false === is_null($default))
+		{
+			return $default;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Set environ data
+	 *
+	 * @param $key
+	 * @param $value
+	 */
+	public function set($key, $value)
+	{
+		$this->data[$key] = $value;
+	}
+	
 	/**
 	 * Configuration current identifier initializing
 	 *
@@ -142,39 +172,5 @@ class Wc1c_Environment
 	public function set_data($data)
 	{
 		$this->data = $data;
-	}
-
-	/**
-	 * Get environ data
-	 *
-	 * @param $key
-	 * @param $default
-	 *
-	 * @return mixed
-	 */
-	public function get($key, $default = null)
-	{
-		if(isset($this->data[$key]))
-		{
-			return $this->data[$key];
-		}
-
-		if(false === is_null($default))
-		{
-			return $default;
-		}
-
-		return false;
-	}
-
-	/**
-	 * Set environ data
-	 *
-	 * @param $key
-	 * @param $value
-	 */
-	public function set($key, $value)
-	{
-		$this->data[$key] = $value;
 	}
 }
