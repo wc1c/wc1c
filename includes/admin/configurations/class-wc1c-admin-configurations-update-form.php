@@ -132,22 +132,13 @@ class Wc1c_Admin_Configurations_Update_Form extends Wc1c_Admin_Abstract_Form
 	 */
 	public function save()
 	{
-		/**
-		 * Post data
-		 */
 		$post_data = $this->get_posted_data();
 
-		/**
-		 * Xss
-		 */
 		if(!isset($post_data['_wc1c-admin-nonce']))
 		{
 			return false;
 		}
 
-		/**
-		 * Xss
-		 */
 		if(empty($post_data) || !wp_verify_nonce($post_data['_wc1c-admin-nonce'], 'wc1c-admin-configurations-update-save'))
 		{
 			WC1C_Admin()->add_message('error', __('Save error. Please retry.', 'wc1c'));
@@ -179,46 +170,21 @@ class Wc1c_Admin_Configurations_Update_Form extends Wc1c_Admin_Abstract_Form
 
 		$configuration_id = WC1C()->environment()->get('current_configuration_id', 0);
 
-		/**
-		 * Get current configuration
-		 */
 		$configuration_data = WC1C()->get_configurations($configuration_id);
 
-		/**
-		 * Data to save
-		 */
 		$data = $this->get_saved_data();
 
-		/**
-		 * Set configuration status
-		 */
 		$configuration_data->set_status($data['status']);
 		unset($data['status']);
 
-		/**
-		 * Set configuration name
-		 */
 		$configuration_data->set_name($data['config_name']);
 		unset($data['config_name']);
 
-		/**
-		 * Update date modify
-		 */
 		$configuration_data->set_date_modify();
-
-		/**
-		 * Options
-		 */
 		$configuration_data->set_options($data);
 
-		/**
-		 * Save
-		 */
 		$saved = $configuration_data->save();
 
-		/**
-		 * Settings saved
-		 */
 		if($saved)
 		{
 			WC1C_Admin()->add_message('update', __('Configuration update success.', 'wc1c'));
