@@ -326,12 +326,9 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 		$size_max_manual = wc1c_convert_size($this->get_options('post_file_max_size'));
 
-		if($size_max_manual)
+		if($size_max_manual && $size_max_manual < $size)
 		{
-			if($size_max_manual < $size)
-			{
-				$size = $size_max_manual;
-			}
+			$size = $size_max_manual;
 		}
 
 		return $size;
