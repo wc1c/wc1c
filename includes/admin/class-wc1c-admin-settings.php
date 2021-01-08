@@ -49,7 +49,7 @@ class Wc1c_Admin_Settings extends Wc1c_Admin_Abstract_Form
 	public function output_form()
 	{
 		echo '<form method="post" action="">';
-		echo wp_nonce_field('wc1c-admin-settings-save', '_wc1c-admin-nonce');
+		wp_nonce_field('wc1c-admin-settings-save', '_wc1c-admin-nonce', false, true);
 		echo '<table class="form-table wc1c-admin-form-table wc1c-admin-settings-form-table">';
 		$this->generate_html($this->get_fields(), true);
 		echo '</table>';
