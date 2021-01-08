@@ -302,7 +302,7 @@ function wc1c_locate_template($template_name, $template_path = '', $default_path
 }
 
 /**
- * Переводит значение из килобайт, мегабат и гигабайт в байты
+ * Convert kb, mb, gb to bytes
  *
  * @param $size
  *
