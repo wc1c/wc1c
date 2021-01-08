@@ -15,14 +15,8 @@ class Wc1c_Admin_Configurations_Create extends Wc1c_Admin_Abstract_Form
 	 */
 	public function __construct($init = true)
 	{
-		/**
-		 * Form id
-		 */
 		$this->set_id('configurations-create');
 
-		/**
-		 * Auto init
-		 */
 		if($init)
 		{
 			$this->init();
@@ -34,29 +28,13 @@ class Wc1c_Admin_Configurations_Create extends Wc1c_Admin_Abstract_Form
 	 */
 	public function init()
 	{
-		/**
-		 * Init fields
-		 */
 		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_main'), 10);
 
-		/**
-		 * Load form fields
-		 */
 		$this->load_fields();
-
-		/**
-		 * Load form saved data
-		 */
 		$this->load_saved_data();
 
-		/**
-		 * Form show
-		 */
 		add_action('wc1c_admin_configurations_create_show', array($this, 'output_form'), 10);
 
-		/**
-		 * Form save
-		 */
 		$this->save();
 	}
 
@@ -81,35 +59,24 @@ class Wc1c_Admin_Configurations_Create extends Wc1c_Admin_Abstract_Form
 	 */
 	public function save()
 	{
-		/**
-		 * Post data
-		 */
 		$post_data = $this->get_posted_data();
 
-		/**
-		 * Xss
-		 */
 		if(!isset($post_data['_wc1c-admin-nonce']))
 		{
 			return false;
 		}
 
-		/**
-		 * Xss
-		 */
 		if(empty($post_data) || !wp_verify_nonce($post_data['_wc1c-admin-nonce'], 'wc1c-admin-configurations-create-save'))
 		{
 			WC1C_Admin()->add_message('error', __('Save error. Please retry.', 'wc1c'));
-
 			return false;
 		}
 
-		/**
-		 * All form fields validate
-		 */
 		foreach($this->get_fields() as $key => $field)
 		{
-			if('title' === $this->get_field_type($field) || 'raw' === $this->get_field_type($field))
+			$field_type = $this->get_field_type($field);
+
+			if('title' === $field_type || 'raw' === $field_type)
 			{
 				continue;
 			}
@@ -124,29 +91,14 @@ class Wc1c_Admin_Configurations_Create extends Wc1c_Admin_Abstract_Form
 			}
 		}
 
-		/**
-		 * Data to save
-		 */
 		$data = $this->get_saved_data();
 
-		/**
-		 * Create new configuration
-		 */
 		$configuration = new Wc1c_Configuration($data);
 
-		/**
-		 * Set configuration status
-		 */
 		$configuration->set_status('draft');
 
-		/**
-		 * Save
-		 */
 		$saved = $configuration->save();
 
-		/**
-		 * Settings saved
-		 */
 		if($saved)
 		{
 			WC1C_Admin()->add_message('update', __('Configuration create success.', 'wc1c'));
@@ -157,25 +109,6 @@ class Wc1c_Admin_Configurations_Create extends Wc1c_Admin_Abstract_Form
 		}
 
 		return true;
-	}
-
-	/**
-	 * Loading saved data
-	 *
-	 * @param array $saved_data
-	 */
-	public function load_saved_data($saved_data = array())
-	{
-		$form_fields = $this->get_fields();
-		$saved_data = array_merge
-		(
-			array_fill_keys(array_keys($form_fields), ''),
-			wp_list_pluck($form_fields, 'default')
-		);
-
-		$saved_data = apply_filters('wc1c_admin_' . $this->get_id() . '_form_load_saved_data', $saved_data);
-
-		$this->set_saved_data($saved_data);
 	}
 
 	/**
