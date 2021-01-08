@@ -1,7 +1,7 @@
 <?php defined('ABSPATH') || exit;?>
 
 <form method="post" action="">
-	<?php echo wp_nonce_field('wc1c-admin-configurations-update-save', '_wc1c-admin-nonce'); ?>
+	<?php wp_nonce_field('wc1c-admin-configurations-update-save', '_wc1c-admin-nonce'); ?>
     <table class="form-table wc1c-admin-form-table">
         <?php $args['object']->generate_html($args['object']->get_fields(), true); ?>
     </table>
