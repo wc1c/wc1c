@@ -114,6 +114,12 @@ final class Wc1c
 		do_action('wc1c_before_includes');
 
 		/**
+		 * Exceptions
+		 */
+		include_once WC1C_PLUGIN_PATH . 'includes/exceptions/class-wc1c-exception.php';
+		include_once WC1C_PLUGIN_PATH . 'includes/exceptions/class-wc1c-exception-runtime.php';
+
+		/**
 		 * Abstract
 		 */
 		include_once WC1C_PLUGIN_PATH . 'includes/abstracts/abstract-class-wc1c-logger.php';
