@@ -75,7 +75,7 @@ abstract class Wc1c_Abstract_Extension
 	 *
 	 * @return mixed
 	 */
-	abstract function init();
+	abstract public function init();
 
 	/**
 	 * @return bool
