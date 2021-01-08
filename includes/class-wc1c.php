@@ -334,9 +334,7 @@ final class Wc1c
 		$this->environment()->set('wc1c_upload_directory', $logger_path);
 
 		WC1C()->logger()->set_path($logger_path);
-
-		$logger_name = 'wc1c.main.log';
-		WC1C()->logger()->set_name($logger_name);
+		WC1C()->logger()->set_name('wc1c.main.log');
 
 		return true;
 	}
