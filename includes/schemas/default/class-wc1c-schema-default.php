@@ -110,7 +110,9 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 		try
 		{
-			$logger = new Wc1c_Schema_Logger($path, $level, 'main.log');
+			$logger = new Wc1c_Schema_Logger($level, 'main.log');
+			$logger->set_path($path);
+			$logger->init();
 		}
 		catch(Exception $e)
 		{
