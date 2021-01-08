@@ -113,7 +113,6 @@ function is_wc1c_admin_request()
 	return false;
 }
 
-
 /**
  * Localisation loading
  */
