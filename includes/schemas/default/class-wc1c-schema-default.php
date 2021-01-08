@@ -570,8 +570,8 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 		$this->logger()->debug('api_handler_mode_init: $data', $data);
 
-		echo $data[0] . "\n";
-		echo $data[1] . "\n";
+		echo $data[0] . PHP_EOL;
+		echo $data[1] . PHP_EOL;
 		exit;
 	}
 
