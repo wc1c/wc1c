@@ -15,9 +15,6 @@ class Wc1c_Admin_Extensions
 	 */
 	public function __construct($init = true)
 	{
-		/**
-		 * Auto init
-		 */
 		if($init)
 		{
 			$this->init();
@@ -29,9 +26,6 @@ class Wc1c_Admin_Extensions
 	 */
 	public function init()
 	{
-		/**
-		 * Output table
-		 */
 		add_action('wc1c_admin_extensions_show', array($this, 'output'), 10);
 	}
 
