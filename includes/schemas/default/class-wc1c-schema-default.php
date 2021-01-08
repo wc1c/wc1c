@@ -526,8 +526,8 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			$user_password = '1234567890qwertyuiop';
 		}
 
-		echo "success\n";
-		echo "wc1c_" . $this->get_id() . "\n";
+		echo 'success' . PHP_EOL;
+		echo 'wc1c_' . $this->get_id() . PHP_EOL;
 		echo md5($user_password);
 		exit;
 	}
