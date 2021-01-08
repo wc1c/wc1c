@@ -28,4 +28,5 @@ if(!defined('WC1C_PLUGIN_FILE'))
 }
 
 register_activation_hook(WC1C_PLUGIN_FILE, 'wc1c_install');
+
 add_action('plugins_loaded', 'WC1C', 0);

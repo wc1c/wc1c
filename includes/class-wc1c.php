@@ -95,11 +95,10 @@ final class Wc1c
 		do_action('wc1c_before_loading');
 
 		$this->define_constants();
-
-		wc1c_load_textdomain();
-
 		$this->init_includes();
 		$this->init_hooks();
+
+		wc1c_load_textdomain();
 
 		// hook
 		do_action('wc1c_after_loading');
