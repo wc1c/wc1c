@@ -135,7 +135,7 @@ abstract class Wc1c_Abstract_Extension
 	 * @param string $default_value
 	 *
 	 * @return mixed|string
-	 * @throws Exception
+	 * @throws Wc1c_Exception_Runtime
 	 */
 	public function get_meta($name, $default_value = '')
 	{
@@ -151,7 +151,7 @@ abstract class Wc1c_Abstract_Extension
 			return $default_value;
 		}
 
-		throw new Exception('get_meta: $name is not available');
+		throw new Wc1c_Exception_Runtime('get_meta: $name is not available');
 	}
 
 	/**

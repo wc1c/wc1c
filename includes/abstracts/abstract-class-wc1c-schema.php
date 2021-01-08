@@ -99,7 +99,7 @@ abstract class Wc1c_Abstract_Schema
 	 *
 	 * @return mixed
 	 */
-	abstract function init();
+	abstract public function init();
 
 	/**
 	 * @return bool

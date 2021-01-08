@@ -14,33 +14,33 @@ final class Wc1c
 	use Trait_Wc1c_Singleton;
 
 	/**
-	 * @var null|Wc1c_Timer
+	 * @var Wc1c_Timer
 	 */
 	private $timer = null;
 
 	/**
 	 * Logger
 	 *
-	 * @var null|Wc1c_Logger
+	 * @var Wc1c_Logger
 	 */
 	private $logger = null;
 
 	/**
 	 * Plugin environment
 	 *
-	 * @var null|Wc1c_Environment
+	 * @var Wc1c_Environment
 	 */
 	private $environment = null;
 
 	/**
-	 * @var null|Wc1c_Database
+	 * @var Wc1c_Database
 	 */
 	private $database = null;
 
 	/**
 	 * Base settings
 	 *
-	 * @var null|Wc1c_Settings
+	 * @var Wc1c_Settings
 	 */
 	private $settings = null;
 
@@ -75,7 +75,7 @@ final class Wc1c
 	/**
 	 * Plugin api
 	 *
-	 * @var null|Wc1c_Api
+	 * @var Wc1c_Api
 	 */
 	private $api = null;
 
@@ -320,15 +320,23 @@ final class Wc1c
 	private function reload_logger()
 	{
 		$logger_level = $this->settings()->get('logger', 400);
+
+		if($logger_level === '')
+		{
+			$logger_level = 100;
+		}
+
+		WC1C()->logger()->set_level($logger_level);
+
 		$directory_name = $this->settings()->get('upload_directory_name', 'wc1c');
 
 		$logger_path = $this->environment()->get('upload_directory') . DIRECTORY_SEPARATOR . $directory_name;
-		$logger_name = 'wc1c.main.log';
 
 		$this->environment()->set('wc1c_upload_directory', $logger_path);
 
-		WC1C()->logger()->set_level($logger_level);
 		WC1C()->logger()->set_path($logger_path);
+
+		$logger_name = 'wc1c.main.log';
 		WC1C()->logger()->set_name($logger_name);
 
 		return true;
@@ -337,7 +345,7 @@ final class Wc1c
 	/**
 	 * Get environment
 	 *
-	 * @return null|Wc1c_Environment
+	 * @return Wc1c_Environment
 	 */
 	public function environment()
 	{
@@ -347,7 +355,7 @@ final class Wc1c
 	/**
 	 * Get settings
 	 *
-	 * @return null|Wc1c_Settings
+	 * @return Wc1c_Settings
 	 */
 	public function settings()
 	{
@@ -359,7 +367,7 @@ final class Wc1c
 	 *
 	 * @param Wc1c_Environment $environment
 	 *
-	 * @throws Exception
+	 * @throws Wc1c_Exception_Runtime
 	 *
 	 * @return true
 	 */
@@ -372,13 +380,13 @@ final class Wc1c
 			return true;
 		}
 
-		throw new Exception('set_environment: $environment is not Wc1c_Environment');
+		throw new Wc1c_Exception_Runtime('set_environment: $environment is not Wc1c_Environment');
 	}
 
 	/**
 	 * Loading environment
 	 *
-	 * @throws Exception
+	 * @throws Wc1c_Exception_Runtime
 	 */
 	private function load_environment()
 	{
@@ -388,7 +396,7 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('load_environment: exception - ' . $e->getMessage());
+			throw new Wc1c_Exception_Runtime('load_environment: exception - ' . $e->getMessage());
 		}
 
 		try
@@ -397,14 +405,14 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('load_environment: exception - ' . $e->getMessage());
+			throw new Wc1c_Exception_Runtime('load_environment: exception - ' . $e->getMessage());
 		}
 	}
 
 	/**
 	 * Plugin settings loading
 	 *
-	 * @throws Exception
+	 * @throws Wc1c_Exception_Runtime
 	 */
 	private function load_settings()
 	{
@@ -414,7 +422,7 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('load_settings: exception - ' . $e->getMessage());
+			throw new Wc1c_Exception_Runtime('load_settings: exception - ' . $e->getMessage());
 		}
 
 		try
@@ -423,7 +431,7 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('load_settings: exception - ' . $e->getMessage());
+			throw new Wc1c_Exception_Runtime('load_settings: exception - ' . $e->getMessage());
 		}
 	}
 
@@ -437,7 +445,7 @@ final class Wc1c
 	 *
 	 * @return array|Wc1c_Configuration
 	 *
-	 * @throws Exception
+	 * @throws Wc1c_Exception_Runtime
 	 */
 	public function get_configurations($type = 'all')
 	{
@@ -452,7 +460,7 @@ final class Wc1c
 					return $this->configurations[$configuration_id];
 				}
 
-				throw new Exception('get_configurations: current configuration not loaded');
+				throw new Wc1c_Exception_Runtime('get_configurations: current configuration not loaded');
 			}
 
 			if(is_numeric($type) && array_key_exists($type, $this->configurations))
@@ -460,7 +468,7 @@ final class Wc1c
 				return $this->configurations[$type];
 			}
 
-			throw new Exception('get_configurations: configuration by id is not loaded');
+			throw new Wc1c_Exception_Runtime('get_configurations: configuration by id is not loaded');
 		}
 
 		return $this->configurations;
@@ -473,15 +481,23 @@ final class Wc1c
 	 * @param string $extension_id
 	 *
 	 * @return boolean
-	 * @throws Exception
+	 *
+	 * @throws Wc1c_Exception_Runtime
 	 */
 	public function init_extensions($extension_id = '')
 	{
-		$extensions = $this->get_extensions();
+		try
+		{
+			$extensions = $this->get_extensions();
+		}
+		catch(Exception $e)
+		{
+			throw new Wc1c_Exception_Runtime('init_extensions: $extensions - ' . $e->getMessage());
+		}
 
 		if(!is_array($extensions))
 		{
-			throw new Exception('init_extensions: $extensions is not array');
+			throw new Wc1c_Exception_Runtime('init_extensions: $extensions is not array');
 		}
 
 		/**
@@ -491,19 +507,19 @@ final class Wc1c
 		{
 			if(!array_key_exists($extension_id, $extensions))
 			{
-				throw new Exception('init_extensions: extension not found by id');
+				throw new Wc1c_Exception_Runtime('init_extensions: extension not found by id');
 			}
 
 			$init_extension = $extensions[$extension_id];
 
 			if(!is_object($init_extension))
 			{
-				throw new Exception('init_extensions: $extensions[$extension_id] is not object');
+				throw new Wc1c_Exception_Runtime('init_extensions: $extensions[$extension_id] is not object');
 			}
 
 			if($init_extension->is_initialized())
 			{
-				throw new Exception('init_extensions: old initialized');
+				throw new Wc1c_Exception_Runtime('init_extensions: old initialized');
 			}
 
 			$areas = $init_extension->get_areas();
@@ -514,7 +530,7 @@ final class Wc1c
 
 			if(!method_exists($init_extension, 'init'))
 			{
-				throw new Exception('init_extensions: method init not found');
+				throw new Wc1c_Exception_Runtime('init_extensions: method init not found');
 			}
 
 			try
@@ -523,7 +539,7 @@ final class Wc1c
 			}
 			catch(Exception $e)
 			{
-				throw new Exception('init_extensions: exception by extension - ' . $e->getMessage());
+				throw new Wc1c_Exception_Runtime('init_extensions: exception by extension - ' . $e->getMessage());
 			}
 
 			$init_extension->set_initialized(true);
@@ -612,8 +628,9 @@ final class Wc1c
 	 *
 	 * @param string $schema_id
 	 *
-	 * @throws Exception
 	 * @return boolean
+	 *
+	 * @throws Wc1c_Exception_Runtime
 	 */
 	public function init_schemas($schema_id = '')
 	{
@@ -623,12 +640,12 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('init_schemas: exception - ' . $e->getMessage());
+			throw new Wc1c_Exception_Runtime('init_schemas: exception - ' . $e->getMessage());
 		}
 
 		if(!is_array($schemas))
 		{
-			throw new Exception('init_schemas: $schemas is not array');
+			throw new Wc1c_Exception_Runtime('init_schemas: $schemas is not array');
 		}
 
 		/**
@@ -638,24 +655,24 @@ final class Wc1c
 		{
 			if(!array_key_exists($schema_id, $schemas))
 			{
-				throw new Exception('init_schemas: schema not found by id: ' . $schema_id);
+				throw new Wc1c_Exception_Runtime('init_schemas: schema not found by id: ' . $schema_id);
 			}
 
 			if(!is_object($schemas[$schema_id]))
 			{
-				throw new Exception('init_schemas: $schemas[$schema_id] is not object');
+				throw new Wc1c_Exception_Runtime('init_schemas: $schemas[$schema_id] is not object');
 			}
 
 			$init_schema = $schemas[$schema_id];
 
 			if($init_schema->is_initialized())
 			{
-				throw new Exception('init_schemas: old initialized, $schema_id: ' . $schema_id);
+				throw new Wc1c_Exception_Runtime('init_schemas: old initialized, $schema_id: ' . $schema_id);
 			}
 
 			if(!method_exists($init_schema, 'init'))
 			{
-				throw new Exception('init_schemas: method init not found, $schema_id: ' . $schema_id);
+				throw new Wc1c_Exception_Runtime('init_schemas: method init not found, $schema_id: ' . $schema_id);
 			}
 
 			$current_configuration_id = WC1C()->environment()->get('current_configuration_id', 0);
@@ -675,12 +692,12 @@ final class Wc1c
 			}
 			catch(Exception $e)
 			{
-				throw new Exception('init_schemas: exception by schema - ' . $e->getMessage());
+				throw new Wc1c_Exception_Runtime('init_schemas: exception by schema - ' . $e->getMessage());
 			}
 
 			if($init_schema_result !== true)
 			{
-				throw new Exception('init_schemas: schema is not initialized');
+				throw new Wc1c_Exception_Runtime('init_schemas: schema is not initialized');
 			}
 
 			$init_schema->set_initialized(true);
@@ -710,7 +727,7 @@ final class Wc1c
 	/**
 	 * Schemas loading
 	 *
-	 * @throws Exception
+	 * @throws Wc1c_Exception_Runtime
 	 */
 	private function load_schemas()
 	{
@@ -722,7 +739,7 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('load_schemas: schema exception - ' . $e->getMessage());
+			throw new Wc1c_Exception_Runtime('load_schemas: schema exception - ' . $e->getMessage());
 		}
 
 		$schema_default->set_id('default');
@@ -749,7 +766,7 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('load_schemas: exception - ' . $e->getMessage());
+			throw new Wc1c_Exception_Runtime('load_schemas: exception - ' . $e->getMessage());
 		}
 	}
 
@@ -758,8 +775,9 @@ final class Wc1c
 	 *
 	 * @param array $schemas
 	 *
-	 * @throws Exception
 	 * @return bool
+	 *
+	 * @throws Wc1c_Exception_Runtime
 	 */
 	public function set_schemas($schemas)
 	{
@@ -770,7 +788,7 @@ final class Wc1c
 			return true;
 		}
 
-		throw new Exception('set_schemas: $schemas is not valid');
+		throw new Wc1c_Exception_Runtime('set_schemas: $schemas is not valid');
 	}
 
 	/**
@@ -790,9 +808,10 @@ final class Wc1c
 	 * Set plugin settings
 	 *
 	 * @param $settings
-	 * @throws Exception
 	 *
 	 * @return bool
+	 *
+	 * @throws Wc1c_Exception_Runtime
 	 */
 	public function set_settings($settings)
 	{
@@ -803,7 +822,7 @@ final class Wc1c
 			return true;
 		}
 
-		throw new Exception('set_settings: $settings is not valid');
+		throw new Wc1c_Exception_Runtime('set_settings: $settings is not valid');
 	}
 
 	/**
@@ -814,7 +833,7 @@ final class Wc1c
 	 *
 	 * @return Wc1c_Configuration
 	 *
-	 * @throws Exception
+	 * @throws Wc1c_Exception_Runtime
 	 */
 	public function load_configuration($id = false, $reload = false)
 	{
@@ -824,17 +843,17 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('load_configuration: exception - ' . $e->getMessage());
+			throw new Wc1c_Exception_Runtime('load_configuration: exception - ' . $e->getMessage());
 		}
 
 		if(false === $id)
 		{
-			throw new Exception('load_configurations: $id is not exists');
+			throw new Wc1c_Exception_Runtime('load_configurations: $id is not exists');
 		}
 
 		if(array_key_exists($id, $configurations) && false === $reload)
 		{
-			throw new Exception('load_configurations: $id is exists & $reload false');
+			throw new Wc1c_Exception_Runtime('load_configurations: $id is exists & $reload false');
 		}
 
 		try
@@ -843,7 +862,7 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('load_configuration: exception - ' . $e->getMessage());
+			throw new Wc1c_Exception_Runtime('load_configuration: exception - ' . $e->getMessage());
 		}
 
 		try
@@ -852,7 +871,7 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('load_configuration: exception - ' . $e->getMessage());
+			throw new Wc1c_Exception_Runtime('load_configuration: exception - ' . $e->getMessage());
 		}
 
 		try
@@ -861,7 +880,7 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('load_configuration: exception - ' . $e->getMessage());
+			throw new Wc1c_Exception_Runtime('load_configuration: exception - ' . $e->getMessage());
 		}
 
 		$load_configuration = apply_filters('wc1c_configuration_load', $load_configuration);
@@ -874,7 +893,7 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('load_configurations: exception - ' . $e->getMessage());
+			throw new Wc1c_Exception_Runtime('load_configurations: exception - ' . $e->getMessage());
 		}
 
 		return $load_configuration;
@@ -888,7 +907,7 @@ final class Wc1c
 	 *
 	 * @return bool
 	 *
-	 * @throws Exception
+	 * @throws Wc1c_Exception_Runtime
 	 */
 	public function set_configurations($configurations, $append = false)
 	{
@@ -904,13 +923,13 @@ final class Wc1c
 			return true;
 		}
 
-		throw new Exception('set_configurations: $configurations is not valid');
+		throw new Wc1c_Exception_Runtime('set_configurations: $configurations is not valid');
 	}
 
 	/**
 	 * Logger loading
 	 *
-	 * @throws Exception
+	 * @throws Wc1c_Exception_Runtime
 	 */
 	private function load_logger()
 	{
@@ -918,7 +937,7 @@ final class Wc1c
 
 		if(false === $directory)
 		{
-			throw new Exception('WordPress upload directory not found');
+			throw new Wc1c_Exception_Runtime('WordPress upload directory not found');
 		}
 
 		try
@@ -927,7 +946,7 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('load_logger: exception - ' . $e->getMessage());
+			throw new Wc1c_Exception_Runtime('load_logger: exception - ' . $e->getMessage());
 		}
 
 		try
@@ -936,14 +955,14 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('load_logger: exception - ' . $e->getMessage());
+			throw new Wc1c_Exception_Runtime('load_logger: exception - ' . $e->getMessage());
 		}
 	}
 
 	/**
 	 * Timer loading
 	 *
-	 * @throws Exception
+	 * @throws Wc1c_Exception_Runtime
 	 */
 	private function load_timer()
 	{
@@ -953,10 +972,10 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('load_timer: exception - ' . $e->getMessage());
+			throw new Wc1c_Exception_Runtime('load_timer: exception - ' . $e->getMessage());
 		}
 
-		$php_max_execution = $directory = $this->environment()->get('php_max_execution_time', 20);
+		$php_max_execution = $this->environment()->get('php_max_execution_time', 20);
 
 		if($this->settings()->get('php_max_execution_time', $php_max_execution) !== $php_max_execution)
 		{
@@ -971,7 +990,7 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('load_timer: exception - ' . $e->getMessage());
+			throw new Wc1c_Exception_Runtime('load_timer: exception - ' . $e->getMessage());
 		}
 	}
 
@@ -981,7 +1000,8 @@ final class Wc1c
 	 * @param $logger
 	 *
 	 * @return $this
-	 * @throws Exception
+	 *
+	 * @throws Wc1c_Exception_Runtime
 	 */
 	public function set_logger($logger)
 	{
@@ -992,7 +1012,7 @@ final class Wc1c
 			return $this;
 		}
 
-		throw new Exception('set_logger: $logger is not valid');
+		throw new Wc1c_Exception_Runtime('set_logger: $logger is not valid');
 	}
 
 	/**
@@ -1014,7 +1034,7 @@ final class Wc1c
 	/**
 	 * Get logger
 	 *
-	 * @return Wc1c_Logger|null
+	 * @return Wc1c_Logger
 	 */
 	public function logger()
 	{
@@ -1044,7 +1064,7 @@ final class Wc1c
 	/**
 	 * API loading
 	 *
-	 * @throws Exception
+	 * @throws Wc1c_Exception_Runtime
 	 */
 	private function load_api()
 	{
@@ -1063,7 +1083,7 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('load_api: not loaded');
+			throw new Wc1c_Exception_Runtime('load_api: not loaded');
 		}
 
 		try
@@ -1072,7 +1092,7 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('load_api: exception - ' . $e->getMessage());
+			throw new Wc1c_Exception_Runtime('load_api: exception - ' . $e->getMessage());
 		}
 	}
 
@@ -1081,7 +1101,7 @@ final class Wc1c
 	 *
 	 * @param string $tool_id
 	 *
-	 * @throws Exception
+	 * @throws Wc1c_Exception_Runtime
 	 */
 	public function load_tools($tool_id = '')
 	{
@@ -1094,7 +1114,7 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('load_tools: exception - ' . $e->getMessage());
+			throw new Wc1c_Exception_Runtime('load_tools: exception - ' . $e->getMessage());
 		}
 
 		$tool_example->set_id('example');
@@ -1120,14 +1140,14 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('load_tools: exception - ' . $e->getMessage());
+			throw new Wc1c_Exception_Runtime('load_tools: exception - ' . $e->getMessage());
 		}
 	}
 
 	/**
 	 * Extensions load
 	 *
-	 * @throws Exception
+	 * @throws Wc1c_Exception_Runtime
 	 */
 	private function load_extensions()
 	{
@@ -1146,7 +1166,7 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('load_extensions: set_extensions - ' . $e->getMessage());
+			throw new Wc1c_Exception_Runtime('load_extensions: set_extensions - ' . $e->getMessage());
 		}
 	}
 
@@ -1156,7 +1176,8 @@ final class Wc1c
 	 * @param string $schema_id
 	 *
 	 * @return array|mixed
-	 * @throws Exception
+	 *
+	 * @throws Wc1c_Exception_Runtime
 	 */
 	public function get_schemas($schema_id = '')
 	{
@@ -1167,7 +1188,7 @@ final class Wc1c
 				return $this->schemas[$schema_id];
 			}
 
-			throw new Exception('get_schemas: $schema_id is unavailable');
+			throw new Wc1c_Exception_Runtime('get_schemas: $schema_id is unavailable');
 		}
 
 		return $this->schemas;
@@ -1179,7 +1200,8 @@ final class Wc1c
 	 * @param string $tool_id
 	 *
 	 * @return array|mixed
-	 * @throws Exception
+	 *
+	 * @throws Wc1c_Exception_Runtime
 	 */
 	public function get_tools($tool_id = '')
 	{
@@ -1190,7 +1212,7 @@ final class Wc1c
 				return $this->tools[$tool_id];
 			}
 
-			throw new Exception('get_tools: $schema_id is unavailable');
+			throw new Wc1c_Exception_Runtime('get_tools: $schema_id is unavailable');
 		}
 
 		return $this->tools;
@@ -1201,8 +1223,9 @@ final class Wc1c
 	 *
 	 * @param array $tools
 	 *
-	 * @throws Exception
 	 * @return bool
+	 *
+	 * @throws Wc1c_Exception_Runtime
 	 */
 	public function set_tools($tools)
 	{
@@ -1213,7 +1236,7 @@ final class Wc1c
 			return true;
 		}
 
-		throw new Exception('set_tools: $tools is not valid');
+		throw new Wc1c_Exception_Runtime('set_tools: $tools is not valid');
 	}
 
 	/**
@@ -1222,7 +1245,8 @@ final class Wc1c
 	 * @param string $extension_id
 	 *
 	 * @return array|object
-	 * @throws Exception
+	 *
+	 * @throws Wc1c_Exception_Runtime
 	 */
 	public function get_extensions($extension_id = '')
 	{
@@ -1233,7 +1257,7 @@ final class Wc1c
 				return $this->extensions[$extension_id];
 			}
 
-			throw new Exception('get_extensions: $extension_id is unavailable');
+			throw new Wc1c_Exception_Runtime('get_extensions: $extension_id is unavailable');
 		}
 
 		return $this->extensions;
@@ -1242,9 +1266,9 @@ final class Wc1c
 	/**
 	 * @param array $extensions
 	 *
-	 * @throws Exception
-	 *
 	 * @return bool
+	 *
+	 * @throws Wc1c_Exception_Runtime
 	 */
 	public function set_extensions($extensions)
 	{
@@ -1255,13 +1279,13 @@ final class Wc1c
 			return true;
 		}
 
-		throw new Exception('set_extensions: $extensions is not valid');
+		throw new Wc1c_Exception_Runtime('set_extensions: $extensions is not valid');
 	}
 
 	/**
 	 * @param string $helper_id
 	 *
-	 * @throws Exception
+	 * @throws Wc1c_Exception_Runtime
 	 */
 	private function load_helpers($helper_id = '')
 	{
@@ -1271,7 +1295,7 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('load_helpers: exception - ' . $e->getMessage());
+			throw new Wc1c_Exception_Runtime('load_helpers: exception - ' . $e->getMessage());
 		}
 
 		$available_helpers = [
@@ -1284,7 +1308,7 @@ final class Wc1c
 
 		if(!array_key_exists($helper_id, $available_helpers))
 		{
-			throw new Exception('load_helpers: helper is unavailable by id - ' . $helper_id);
+			throw new Wc1c_Exception_Runtime('load_helpers: helper is unavailable by id - ' . $helper_id);
 		}
 
 		$helpers[$helper_id] = new $available_helpers[$helper_id]();
@@ -1295,7 +1319,7 @@ final class Wc1c
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('load_helpers: exception - ' . $e->getMessage());
+			throw new Wc1c_Exception_Runtime('load_helpers: exception - ' . $e->getMessage());
 		}
 	}
 
@@ -1304,7 +1328,7 @@ final class Wc1c
 	 *
 	 * @return array|mixed
 	 *
-	 * @throws Exception
+	 * @throws Wc1c_Exception_Runtime
 	 */
 	public function get_helpers($helper_id = '')
 	{
@@ -1321,7 +1345,7 @@ final class Wc1c
 			}
 			catch(Exception $e)
 			{
-				throw new Exception('get_helpers: $helper_id is unavailable');
+				throw new Wc1c_Exception_Runtime('get_helpers: $helper_id is unavailable');
 			}
 
 			return $this->helpers[$helper_id];
@@ -1333,9 +1357,9 @@ final class Wc1c
 	/**
 	 * @param array $helpers
 	 *
-	 * @throws Exception
-	 *
 	 * @return bool
+	 *
+	 * @throws Wc1c_Exception_Runtime
 	 */
 	public function set_helpers($helpers)
 	{
@@ -1346,6 +1370,6 @@ final class Wc1c
 			return true;
 		}
 
-		throw new Exception('set_helpers: $helpers is not valid');
+		throw new Wc1c_Exception_Runtime('set_helpers: $helpers is not valid');
 	}
 }
