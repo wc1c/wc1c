@@ -58,10 +58,7 @@ class Wc1c_Admin_Configurations_Update_Form extends Wc1c_Admin_Abstract_Form
 
 		$body = '<div class="list-group m-0">';
 
-		if(empty($form_fields))
-		{
-			$form_fields = $this->get_fields();
-		}
+		$form_fields = $this->get_fields();
 
 		foreach($form_fields as $k => $v)
 		{
@@ -163,7 +160,9 @@ class Wc1c_Admin_Configurations_Update_Form extends Wc1c_Admin_Abstract_Form
 		 */
 		foreach($this->get_fields() as $key => $field)
 		{
-			if('title' === $this->get_field_type($field) || 'raw' === $this->get_field_type($field))
+		    $field_type = $this->get_field_type($field);
+
+			if('title' === $field_type || 'raw' === $field_type)
 			{
 				continue;
 			}
@@ -237,11 +236,8 @@ class Wc1c_Admin_Configurations_Update_Form extends Wc1c_Admin_Abstract_Form
 	 *
 	 * @param array $saved_data
 	 */
-	public function load_saved_data($saved_data = array())
+	public function load_saved_data($saved_data = [])
 	{
-		/**
-		 * Form fields
-		 */
 		$form_fields = $this->get_fields();
 
 		/**
@@ -266,9 +262,6 @@ class Wc1c_Admin_Configurations_Update_Form extends Wc1c_Admin_Abstract_Form
 		 */
 		$saved_data = apply_filters('wc1c_admin_' . $this->get_id() . '_form_load_saved_data', $saved_data);
 
-		/**
-		 * Local buffer
-		 */
 		$this->set_saved_data($saved_data);
 	}
 
