@@ -14,6 +14,8 @@ final class Wc1c
 	use Trait_Wc1c_Singleton;
 
 	/**
+	 * Timer
+	 *
 	 * @var Wc1c_Timer
 	 */
 	private $timer = null;
@@ -33,6 +35,8 @@ final class Wc1c
 	private $environment = null;
 
 	/**
+	 * Database
+	 *
 	 * @var Wc1c_Database
 	 */
 	private $database = null;
