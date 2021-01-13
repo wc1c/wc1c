@@ -16,18 +16,18 @@ abstract class Wc1c_Abstract_Schema
 	private $initialized = false;
 
 	/**
-	 * Current configuration
-	 *
-	 * @var null|Wc1c_Configuration
-	 */
-	private $configuration = null;
-
-	/**
 	 * Unique schema id
 	 *
 	 * @var string
 	 */
 	private $id = '';
+
+	/**
+	 * Current configuration
+	 *
+	 * @var Wc1c_Configuration
+	 */
+	private $configuration = null;
 
 	/**
 	 * Unique schema options
