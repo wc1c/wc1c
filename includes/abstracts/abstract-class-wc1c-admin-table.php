@@ -349,7 +349,7 @@ abstract class Wc1c_Admin_Abstract_Table
 
 		echo '<label for="bulk-action-selector-' . esc_attr($which) . '" class="screen-reader-text">' . __('Select bulk action') . '</label>';
 		echo '<select name="action' . $two . '" id="bulk-action-selector-' . esc_attr($which) . "\">\n";
-		echo '<option value="-1">' . __('Bulk Actions') . "</option>\n";
+		echo '<option value="-1">' . __('Bulk Actions', 'wc1c') . "</option>\n";
 
 		foreach($this->_actions as $name => $title)
 		{
