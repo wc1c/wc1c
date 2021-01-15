@@ -47,12 +47,22 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			throw new Wc1c_Exception_Runtime('init: - ' . $e);
 		}
 
-		if(false === $this->init_logger())
+		$this->set_options($this->configuration()->get_options());
+
+		try
 		{
-			throw new Wc1c_Exception_Runtime('init: load_logger error');
+			$load_logger = $this->init_logger();
+			if(false === $load_logger)
+			{
+				return false;
+			}
+		}
+		catch(Exception $e)
+		{
+			throw new Wc1c_Exception_Runtime('init: - ' . $e);
 		}
 
-		$this->set_options($this->configuration()->get_options());
+		$this->logger()->info('init: start');
 
 		if(true === is_wc1c_admin_request())
 		{
