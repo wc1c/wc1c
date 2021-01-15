@@ -308,7 +308,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	/**
 	 * Get logger
 	 *
-	 * @return Wc1c_Schema_Logger|null
+	 * @return Wc1c_Schema_Logger
 	 */
 	protected function logger()
 	{
@@ -728,7 +728,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			$this->api_handler_response_by_type('failure', __('Import filename is empty.', 'wc1c'));
 		}
 
-		$file = $this->get_upload_directory() . '/catalog/' . sanitize_file_name($filename);
+		$file = $this->get_upload_directory() . '/catalog/' . $filename;
 
 		$this->logger()->info('api_handler_catalog_mode_import: file_processing - start');
 
@@ -741,9 +741,10 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		catch(Exception $e)
 		{
 			$this->logger()->error('api_handler_catalog_mode_import: exception - ' . $e->getMessage(), $e);
+			$this->api_handler_response_by_type('failure', 'Импорт завершен с ошибкой. ' . $e->getMessage());
 		}
 
-		if($result_file_processing !== false)
+		if($result_file_processing)
 		{
 			if($this->get_options('delete_files_after_processing', 'no') === 'yes')
 			{
@@ -768,19 +769,19 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 */
 	private function file_processing($file_path)
 	{
-		$type_file = $this->file_type_detect($file_path);
-
-		$this->logger()->info('file_processing: type_file - ' . $type_file);
-
 		if(!is_file($file_path))
 		{
 			throw new Exception('file_processing: $file_path is not file');
 		}
 
+		$type_file = $this->file_type_detect($file_path);
+
 		if($type_file === '')
 		{
 			throw new Exception('file_processing: $type_file is not valid');
 		}
+
+		$this->logger()->info('file_processing: type_file - ' . $type_file);
 
 		if(!defined('LIBXML_VERSION'))
 		{
@@ -794,12 +795,12 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 		libxml_use_internal_errors(true);
 
-		$xml_data = simplexml_load_file($file_path);
+		$xml_data = simplexml_load_string(file_get_contents($file_path));
 
 		if(!$xml_data)
 		{
-			$this->logger()->error('file_processing: xml errors, end & false', libxml_get_errors());
-			return false;
+			$this->logger()->error('file_processing: xml errors', libxml_get_errors());
+			throw new Exception('file_processing: xml errors');
 		}
 
 		if($this->get_options('skip_file_processing', 'yes') === 'yes')
@@ -824,7 +825,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			catch(Exception $e)
 			{
 				$this->logger()->error('file_processing: exception - ' . $e->getMessage());
-				return false;
+				throw new Exception('file_processing: exception - ' . $e->getMessage());
 			}
 
 			$this->logger()->info('file_processing: classifier_processing end');
@@ -846,7 +847,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			catch(Exception $e)
 			{
 				$this->logger()->info('file_processing: exception - ' . $e->getMessage());
-				return false;
+				throw new Exception('file_processing: exception - ' . $e->getMessage());
 			}
 
 			$this->logger()->info('file_processing: catalog_processing end, success');
@@ -868,7 +869,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			catch(Exception $e)
 			{
 				$this->logger()->info('file_processing: exception - ' . $e->getMessage());
-				return false;
+				throw new Exception('file_processing: exception - ' . $e->getMessage());
 			}
 
 			$this->logger()->info('file_processing: offers_package_processing end, success');
@@ -892,11 +893,16 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		$catalog_data['catalog_guid'] = (string) $xml_catalog_data->Ид;
 		$catalog_data['classifier_guid'] = (string) $xml_catalog_data->ИдКлассификатора;
 		$catalog_data['catalog_name'] = (string) $xml_catalog_data->Наименование;
+
 		$catalog_data['catalog_description']= '';
 		if($xml_catalog_data->Описание)
 		{
 			$catalog_data['catalog_description'] = (string) $xml_catalog_data->Описание;
 		}
+
+		// todo: владелец каталога, Элемент типа "Контрагент". Служит для определения владельца данного каталога.
+		if($xml_catalog_data->Владелец)
+		{}
 
 		$this->logger()->debug('parse_xml_catalog: $data', $catalog_data);
 
@@ -904,14 +910,14 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		{
 			try
 			{
-				$this->parse_xml_catalog_products($xml_catalog_data->Товары);
+				$parse_catalog_products_result = $this->parse_xml_catalog_products($xml_catalog_data->Товары);
 			}
 			catch(Exception $e)
 			{
 				throw new Exception('parse_xml_catalog: exception - ' . $e->getMessage());
 			}
 
-			return true;
+			return $parse_catalog_products_result;
 		}
 
 		return false;
@@ -1941,7 +1947,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 */
 	private function processing_classifier_groups($classifier_groups = [])
 	{
-		if($this->is_import_full() !== true)
+		if($this->is_import_full() === false)
 		{
 			return true;
 		}
@@ -2253,7 +2259,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		$classifier_data['classifier_guid'] = (string)$xml_classifier_data->Ид;
 		$classifier_data['classifier_name'] = (string)$xml_classifier_data->Наименование;
 
-		$this->logger()->debug('parse_xml_classifier: $data ', $classifier_data);
+		$this->logger()->info('parse_xml_classifier: classifier_guid ' . $classifier_data['classifier_guid'] . ', classifier_name ' . $classifier_data['classifier_name']);
 
 		/**
 		 * Группы
@@ -2336,7 +2342,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			throw new Exception('processing_classifier_properties: $classifier_properties is not array');
 		}
 
-		if(sizeof($classifier_properties) < 1)
+		if(count($classifier_properties) < 1)
 		{
 			return true;
 		}
@@ -2611,11 +2617,11 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 				$import_files = $this->file_type_detect($name);
 
-				if($import_files == 'import_files')
+				if($import_files === 'import_files')
 				{
 					$result = $this->extract_zip_image($zip_archive, $zip_entry, substr($name, $import_files));
 
-					if($result == false)
+					if($result === false)
 					{
 						$error_files++;
 					}
@@ -2626,7 +2632,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 				{
 					$result = $this->extract_zip_xml($zip_archive, $zip_entry, $name);
 
-					if($result == false)
+					if($result === false)
 					{
 						$error_files++;
 					}
@@ -2671,7 +2677,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		/**
 		 * Directory
 		 */
-		if(substr($name, -1) == "/")
+		if(substr($name, -1) === '/')
 		{
 			if(is_dir($uploads_files_dir . $name))
 			{
@@ -2819,7 +2825,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 				}
 				else
 				{
-					$fd = @fopen($import_files_dir . $name, "wb");
+					$fd = @fopen($import_files_dir . $name, 'wb');
 
 					if($fd === false)
 					{
