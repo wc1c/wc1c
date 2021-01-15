@@ -38,6 +38,9 @@ class Wc1c_Admin_Inject
 		{
 			add_filter('manage_edit-product_columns',  array($this, 'manage_edit_product_columns'));
 			add_action('manage_product_posts_custom_column', array($this, 'manage_product_posts_custom_column'));
+
+			add_filter("manage_edit-product_cat_columns", array($this, 'manage_edit_taxonomy_columns'));
+			add_filter("manage_product_cat_custom_column", array($this, 'manage_taxonomy_custom_column'), 10, 3);
 		}
 	}
 
@@ -56,6 +59,46 @@ class Wc1c_Admin_Inject
 		);
 
 		return array_merge($columns, $columns_after);
+	}
+
+	/**
+	 * Adding a column to the categories for displaying 1C information
+	 *
+	 * @param $columns
+	 *
+	 * @return array
+	 */
+	public function manage_edit_taxonomy_columns($columns)
+	{
+		$columns_after = array
+		(
+			'wc1c' => __('1C information', 'wc1c'),
+		);
+
+		return array_merge($columns, $columns_after);
+	}
+
+	/**
+	 * Information from 1C in categories list
+	 *
+	 * @param $columns
+	 * @param $column
+	 * @param $id
+	 *
+	 * @return string
+	 */
+	public function manage_taxonomy_custom_column($columns, $column, $id)
+	{
+		if($column === 'wc1c')
+		{
+			$content = '<span class="na">' . __('not found', 'wc1c') . '</span>';
+
+			$content = apply_filters('wc1c_admin_inject_categories_column', $content, $columns, $id);
+
+			$columns .= $content;
+		}
+
+		return $columns;
 	}
 
 	/**
