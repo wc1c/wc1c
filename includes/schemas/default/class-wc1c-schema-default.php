@@ -99,7 +99,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 
 		WC1C()->environment()->set('wc1c_current_schema_upload_directory', $this->get_upload_directory());
 	}
-	
+
 	/**
 	 * Initializing logger
 	 */
@@ -335,31 +335,47 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	}
 
 	/**
-	 * Echo result
+	 * Send response by type
 	 *
 	 * @param string $type
 	 * @param string $description
 	 */
 	private function api_handler_response_by_type($type = 'failure', $description = '')
 	{
-		if($this->get_options('convert_cp1251', 'no') === 'yes' && $description !== '')
+		if($this->get_options('convert_cp1251', '') === 'yes')
 		{
 			$description = mb_convert_encoding($description, 'cp1251', 'utf-8');
-			header('Content-Type: text/html; charset=Windows-1251');
+			header('Content-Type: text/plain; charset=Windows-1251');
+		}
+
+		if(false === headers_sent())
+		{
+			header('Content-Type: text/plain; charset=utf-8');
 		}
 
 		if($type === 'success')
 		{
 			echo 'success' . PHP_EOL;
+			if($description !== '')
+			{
+				echo $description;
+			}
+		}
+		elseif($type === 'progress')
+		{
+			echo 'progress' . PHP_EOL;
+			if($description !== '')
+			{
+				echo $description;
+			}
 		}
 		else
 		{
 			echo 'failure' . PHP_EOL;
-		}
-
-		if($description !== '')
-		{
-			echo $description;
+			if($description !== '')
+			{
+				echo $description;
+			}
 		}
 		exit;
 	}
@@ -369,21 +385,25 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 *
 	 * @return bool
 	 */
-	private function api_handler_check_auth_key()
+	private function api_handler_checkauth_key()
 	{
-		$cookie_name = 'wc1c_' . $this->get_id();
-
-		if(!isset($_COOKIE[$cookie_name]))
+		if($this->get_options('api_check_auth_key_disabled', 'no') === 'yes')
 		{
-			$this->logger()->warning('api_handler_check_auth_key: $_COOKIE[$cookie_name] empty');
+			return true;
+		}
+
+		$session_name = session_name();
+		$session_id = session_id();
+
+		if(!isset($_COOKIE[$session_name]))
+		{
+			$this->logger()->warning('api_handler_checkauth_key: $_COOKIE[$session_name] is not set');
 			return false;
 		}
 
-		$password = $this->get_options('user_password', '1234567890qwertyuiop');
-
-		if($_COOKIE[$cookie_name] !== md5($password))
+		if($_COOKIE[$session_name] !== $session_id)
 		{
-			$this->logger()->warning('api_handler_check_auth_key: $_COOKIE[$cookie_name] !== md5($password)');
+			$this->logger()->warning('api_handler_check_auth_key: $_COOKIE[$session_name] error ' . $_COOKIE[$session_name] . ' current ' . $session_id);
 			return false;
 		}
 
@@ -395,6 +415,11 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 */
 	public function api_handler()
 	{
+		if(session_status() === PHP_SESSION_NONE)
+		{
+			session_start();
+		}
+
 		$mode = '';
 		$type = '';
 
@@ -425,7 +450,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 				$type = $_GET['type'];
 			}
 
-			if($type == '')
+			if($type === '')
 			{
 				$type = $_GET['get_param?type'];
 			}
@@ -441,7 +466,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			switch($mode)
 			{
 				case 'checkauth':
-					$this->api_handler_check_auth();
+					$this->api_handler_checkauth();
 					break;
 
 				case 'init':
@@ -456,50 +481,55 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 					$this->api_handler_catalog_mode_import();
 					break;
 
+				case 'deactivate':
+				case 'complete':
+					$this->api_handler_response_by_type('success');
+					break;
+
 				default:
 					$this->api_handler_response_by_type('success');
 			}
 		}
 
-		$this->api_handler_response_by_type('success');
+		$this->api_handler_response_by_type('failure', __('Schema: action not found', 'wc1c'));
 	}
 
 	/**
 	 * Checkauth
 	 */
-	private function api_handler_check_auth()
+	private function api_handler_checkauth()
 	{
 		$user_login = '';
 		$user_password = '';
 
 		if(!isset($_SERVER['PHP_AUTH_USER']))
 		{
-			if(isset($_SERVER["REMOTE_USER"]))
+			if(isset($_SERVER['REMOTE_USER']))
 			{
-				$remote_user = $_SERVER["REMOTE_USER"];
+				$remote_user = $_SERVER['REMOTE_USER'];
 
-				if(isset($_SERVER["REDIRECT_REMOTE_USER"]))
+				if(isset($_SERVER['REDIRECT_REMOTE_USER']))
 				{
-					$remote_user = $_SERVER["REMOTE_USER"] ? $_SERVER["REMOTE_USER"] : $_SERVER["REDIRECT_REMOTE_USER"];
+					$remote_user = $_SERVER['REMOTE_USER'] ? $_SERVER['REMOTE_USER'] : $_SERVER['REDIRECT_REMOTE_USER'];
 				}
 			}
-			elseif(isset($_SERVER["REDIRECT_HTTP_AUTHORIZATION"]))
+			elseif(isset($_SERVER['REDIRECT_HTTP_AUTHORIZATION']))
 			{
-				$remote_user = $_SERVER["REDIRECT_HTTP_AUTHORIZATION"];
+				$remote_user = $_SERVER['REDIRECT_HTTP_AUTHORIZATION'];
 			}
 
 			if(isset($remote_user))
 			{
-				$strTmp = base64_decode(substr($remote_user, 6));
+				$str_tmp = base64_decode(substr($remote_user, 6));
 
-				if($strTmp)
+				if($str_tmp)
 				{
-					list($user_login, $user_password) = explode(':', $strTmp);
+					list($user_login, $user_password) = explode(':', $str_tmp);
 				}
 			}
 			else
 			{
-				$this->logger()->notice('Проверьте наличие записи в файле .htaccess в корне файла после RewriteEngine On:\nRewriteCond %{HTTP:Authorization} ^(.*)\nRewriteRule ^(.*) - [E=HTTP_AUTHORIZATION:%1]');
+				$this->logger()->notice('api_handler_check_auth: Проверьте наличие записи в файле .htaccess в корне файла после RewriteEngine On:\nRewriteCond %{HTTP:Authorization} ^(.*)\nRewriteRule ^(.*) - [E=HTTP_AUTHORIZATION:%1]');
 				$this->api_handler_response_by_type('failure', __('Not specified the user. Check the server settings.', 'wc1c'));
 			}
 		}
@@ -521,15 +551,10 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			$this->api_handler_response_by_type('failure', __('Not a valid user password', 'wc1c'));
 		}
 
-		if($user_password === '')
-		{
-			$user_password = '1234567890qwertyuiop';
-		}
-
 		echo 'success' . PHP_EOL;
-		echo 'wc1c_' . $this->get_id() . PHP_EOL;
-		echo md5($user_password);
-		exit;
+		echo session_name() . PHP_EOL;
+		echo session_id() . PHP_EOL;
+		exit();
 	}
 
 	/**
@@ -541,7 +566,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 */
 	private function api_handler_mode_init()
 	{
-		if($this->api_handler_check_auth_key() === false)
+		if($this->api_handler_checkauth_key() === false)
 		{
 			$this->api_handler_response_by_type('failure', __('Authorization failed', 'wc1c'));
 		}
@@ -559,11 +584,11 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			$data[0] = 'zip=yes';
 		}
 
-		$manual_size = wc1c_convert_size($this->get_options('post_file_max_size'));
+		$manual_size = wc1c_convert_size($this->get_options('post_file_max_size', ''));
 		$post_max_size = $this->get_post_file_size_max();
 
 		$data[1] = 'file_limit=' . $post_max_size;
-		if($this->get_options('post_file_max_size') && $manual_size <= $post_max_size)
+		if($manual_size !== 0 && $manual_size <= $post_max_size)
 		{
 			$data[1] = 'file_limit=' . $manual_size;
 		}
@@ -582,48 +607,54 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 */
 	private function api_handler_catalog_mode_file()
 	{
-		if($this->api_handler_check_auth_key() === false)
+		if($this->api_handler_checkauth_key() === false)
 		{
 			$this->api_handler_response_by_type('failure', __('Authorization failed', 'wc1c'));
 		}
 
-		$schema_upload_dir = $this->get_upload_directory() . '/catalog/';
+		$schema_upload_dir = WC1C()->environment()->get('wc1c_current_schema_upload_directory') . '/catalog/';
 
 		if(!is_dir($schema_upload_dir))
 		{
-			mkdir($schema_upload_dir, 0777, true);
-
-			if(!is_dir($schema_upload_dir))
+			if(!mkdir($schema_upload_dir, 0777, true) && !is_dir($schema_upload_dir))
 			{
 				$this->api_handler_response_by_type('failure', __('Unable to create a directory: ', 'wc1c') . $schema_upload_dir);
 			}
 		}
 
-		if(wc1c_get_var($_GET['filename'], '') === '')
+		$filename = wc1c_get_var($_GET['filename'], '');
+
+		if($filename === '')
 		{
 			$this->logger()->warning('api_handler_catalog_mode_file: filename is empty');
 			$this->api_handler_response_by_type('failure', __('Filename is empty.', 'wc1c'));
 		}
 
-		$filename = wc1c_get_var($_GET['filename'], '');
-
 		$schema_upload_file_path = $schema_upload_dir . $filename;
 
-		$this->logger()->info('api_handler_catalog_mode_file: $schema_upload_file_path - ' . $schema_upload_file_path);
+		$this->logger()->info('api_handler_catalog_mode_file: Upload file - $schema_upload_file_path - ' . $schema_upload_file_path);
 
 		if(strpos($filename, 'import_files') !== false)
 		{
-			$this->logger()->info('api_handler_catalog_mode_file: clean_upload_file_tree');
+			$this->logger()->info('api_catalog_mode_file: clean_upload_file_tree');
 			$this->clean_upload_file_tree(dirname($filename), $schema_upload_dir);
 		}
 
 		if(!is_writable($schema_upload_dir))
 		{
-			$this->logger()->info('api_handler_catalog_mode_file: directory - ' . $schema_upload_dir . " is not writable!");
+			$this->logger()->info('api_catalog_mode_file: directory - ' . $schema_upload_dir . " is not writable!");
 			$this->api_handler_response_by_type('failure', 'Невозможно записать файлы в: ' . $schema_upload_dir);
 		}
 
-		$file_data = file_get_contents('php://input');
+		$file_data = false;
+		if(function_exists('file_get_contents'))
+		{
+			$file_data = file_get_contents('php://input');
+		}
+		elseif(isset($GLOBALS['HTTP_RAW_POST_DATA']))
+		{
+			$file_data = &$GLOBALS['HTTP_RAW_POST_DATA'];
+		}
 
 		if($file_data !== false)
 		{
@@ -656,7 +687,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 					$this->api_handler_response_by_type('success', 'Архив успешно принят и распакован.');
 				}
 
-				$this->api_handler_response_by_type('success', 'Файл успешно принят.');
+				$this->api_handler_response_by_type('success', 'Файл успешно принят - ' . $filename);
 			}
 
 			$this->logger()->error('api_handler_catalog_mode_file: ошибка записи файла - ' . $schema_upload_file_path);
@@ -672,7 +703,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 	 */
 	private function api_handler_catalog_mode_import()
 	{
-		if($this->api_handler_check_auth_key() === false)
+		if($this->api_handler_checkauth_key() === false)
 		{
 			$this->api_handler_response_by_type('failure', __('Authorization failed', 'wc1c'));
 		}
@@ -2365,9 +2396,9 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			if($attribute_id === 0)
 			{
 				$attribute_data =
-				[
-					'name' => $classifier_property['property_name']
-				];
+					[
+						'name' => $classifier_property['property_name']
+					];
 
 				try
 				{
@@ -2606,7 +2637,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 		{
 			$this->logger()->info('extract_zip: unpack images count - ' . $img_files);
 		}
-		
+
 		if($error_files > 0)
 		{
 			$this->logger()->error('extract_zip: unpack error files - ' . $img_files);
