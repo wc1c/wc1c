@@ -39,8 +39,8 @@ class Wc1c_Admin_Inject
 			add_filter('manage_edit-product_columns',  array($this, 'manage_edit_product_columns'));
 			add_action('manage_product_posts_custom_column', array($this, 'manage_product_posts_custom_column'));
 
-			add_filter("manage_edit-product_cat_columns", array($this, 'manage_edit_taxonomy_columns'));
-			add_filter("manage_product_cat_custom_column", array($this, 'manage_taxonomy_custom_column'), 10, 3);
+			add_filter('manage_edit-product_cat_columns', array($this, 'manage_edit_taxonomy_columns'));
+			add_filter('manage_product_cat_custom_column', array($this, 'manage_taxonomy_custom_column'), 10, 3);
 		}
 	}
 
