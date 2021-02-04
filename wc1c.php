@@ -8,7 +8,7 @@
  * WC tested up to: 5.0
  * Text Domain: wc1c
  * Domain Path: /languages
- * Copyright: WC1C team © 2018-2020
+ * Copyright: WC1C team © 2018-2021
  * Author: WC1C team
  * Author URI: https://wc1c.info
  * License: GNU General Public License v3.0
