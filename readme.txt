@@ -46,6 +46,12 @@ Support information can be found on the official plugin website. If you have not
 == Changelog ==
 List of major changes from version to version. [Descriptions more](https://wc1c.info/changelog)
 
+= 0.6.0 =
+* Default schema: update
+* Support: WooCommerce 5.0
+* Interface: new design
+* Fix: more
+
 = 0.5.0 =
 * MVP release (public)
 
