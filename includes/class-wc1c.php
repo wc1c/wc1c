@@ -199,7 +199,7 @@ final class Wc1c
 	/**
 	 * Initialization
 	 *
-	 * @return void|false
+	 * @return false
 	 */
 	public function init()
 	{
