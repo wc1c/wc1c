@@ -92,6 +92,8 @@ final class Wc1c
 
 	/**
 	 * Wc1c constructor
+	 *
+	 * @return void
 	 */
 	public function __construct()
 	{
