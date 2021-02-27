@@ -112,6 +112,8 @@ final class Wc1c
 
 	/**
 	 * Include of files
+	 *
+	 * @return void
 	 */
 	private function init_includes()
 	{
@@ -185,6 +187,8 @@ final class Wc1c
 
 	/**
 	 * Initializing actions and filters
+	 *
+	 * @return void
 	 */
 	private function init_hooks()
 	{
@@ -201,7 +205,7 @@ final class Wc1c
 	/**
 	 * Initialization
 	 *
-	 * @return false
+	 * @return bool
 	 */
 	public function init()
 	{
@@ -314,6 +318,8 @@ final class Wc1c
 
 		// hook
 		do_action('wc1c_after_init');
+
+		return true;
 	}
 
 	/**
@@ -379,7 +385,6 @@ final class Wc1c
 		if($environment instanceof Wc1c_Environment)
 		{
 			$this->environment = $environment;
-
 			return true;
 		}
 
@@ -388,6 +393,8 @@ final class Wc1c
 
 	/**
 	 * Loading environment
+	 *
+	 * @return void
 	 *
 	 * @throws Wc1c_Exception_Runtime
 	 */
@@ -414,6 +421,8 @@ final class Wc1c
 
 	/**
 	 * Plugin settings loading
+	 *
+	 * @return void
 	 *
 	 * @throws Wc1c_Exception_Runtime
 	 */
@@ -778,7 +787,7 @@ final class Wc1c
 	 *
 	 * @param array $schemas
 	 *
-	 * @return bool
+	 * @return boolean
 	 *
 	 * @throws Wc1c_Exception_Runtime
 	 */
@@ -787,7 +796,6 @@ final class Wc1c
 		if(is_array($schemas))
 		{
 			$this->schemas = $schemas;
-
 			return true;
 		}
 
@@ -796,6 +804,8 @@ final class Wc1c
 
 	/**
 	 * Define constants
+	 *
+	 * @return void
 	 */
 	private function define_constants()
 	{
@@ -812,7 +822,7 @@ final class Wc1c
 	 *
 	 * @param $settings
 	 *
-	 * @return bool
+	 * @return boolean
 	 *
 	 * @throws Wc1c_Exception_Runtime
 	 */
@@ -821,7 +831,6 @@ final class Wc1c
 		if($settings instanceof Wc1c_Settings)
 		{
 			$this->settings = $settings;
-
 			return true;
 		}
 
@@ -908,7 +917,7 @@ final class Wc1c
 	 * @param $configurations
 	 * @param $append
 	 *
-	 * @return bool
+	 * @return boolean
 	 *
 	 * @throws Wc1c_Exception_Runtime
 	 */
@@ -922,7 +931,6 @@ final class Wc1c
 			}
 
 			$this->configurations = $configurations;
-
 			return true;
 		}
 
@@ -931,6 +939,8 @@ final class Wc1c
 
 	/**
 	 * Logger loading
+	 *
+	 * @return void
 	 *
 	 * @throws Wc1c_Exception_Runtime
 	 */
@@ -967,6 +977,7 @@ final class Wc1c
 	/**
 	 * Timer loading
 	 *
+	 * @return void
 	 * @throws Wc1c_Exception_Runtime
 	 */
 	private function load_timer()
@@ -1013,7 +1024,6 @@ final class Wc1c
 		if($logger instanceof Wc1c_Abstract_Logger)
 		{
 			$this->logger = $logger;
-
 			return $this;
 		}
 
@@ -1049,7 +1059,7 @@ final class Wc1c
 	/**
 	 * Get API
 	 *
-	 * @return null|Wc1c_Api
+	 * @return Wc1c_Api
 	 */
 	public function api()
 	{
@@ -1059,7 +1069,7 @@ final class Wc1c
 	/**
 	 * Set API
 	 *
-	 * @param null|Wc1c_Api $api
+	 * @param Wc1c_Api $api
 	 */
 	public function set_api($api)
 	{
@@ -1069,6 +1079,8 @@ final class Wc1c
 	/**
 	 * API loading
 	 *
+	 * @return void
+	 *
 	 * @throws Wc1c_Exception_Runtime
 	 */
 	private function load_api()
@@ -1077,7 +1089,7 @@ final class Wc1c
 
 		$wc1c_api_class_name = apply_filters('wc1c_api_loading_class_name', $default_class_name);
 
-		if(!class_exists($wc1c_api_class_name))
+		if(false === class_exists($wc1c_api_class_name))
 		{
 			$wc1c_api_class_name = $default_class_name;
 		}
@@ -1105,6 +1117,8 @@ final class Wc1c
 	 * Loading tools
 	 *
 	 * @param string $tool_id
+	 *
+	 * @return void
 	 *
 	 * @throws Wc1c_Exception_Runtime
 	 */
@@ -1151,6 +1165,8 @@ final class Wc1c
 
 	/**
 	 * Extensions load
+	 *
+	 * @return void
 	 *
 	 * @throws Wc1c_Exception_Runtime
 	 */
@@ -1228,7 +1244,7 @@ final class Wc1c
 	 *
 	 * @param array $tools
 	 *
-	 * @return bool
+	 * @return boolean
 	 *
 	 * @throws Wc1c_Exception_Runtime
 	 */
@@ -1237,7 +1253,6 @@ final class Wc1c
 		if(is_array($tools))
 		{
 			$this->tools = $tools;
-
 			return true;
 		}
 
@@ -1280,7 +1295,6 @@ final class Wc1c
 		if(is_array($extensions))
 		{
 			$this->extensions = $extensions;
-
 			return true;
 		}
 
@@ -1290,6 +1304,7 @@ final class Wc1c
 	/**
 	 * @param string $helper_id
 	 *
+	 * @return void
 	 * @throws Wc1c_Exception_Runtime
 	 */
 	private function load_helpers($helper_id = '')
@@ -1371,7 +1386,6 @@ final class Wc1c
 		if(is_array($helpers))
 		{
 			$this->helpers = $helpers;
-
 			return true;
 		}
 
