@@ -18,7 +18,7 @@
  **/
 defined('ABSPATH') || exit;
 
-if(!defined('WC1C_PLUGIN_FILE'))
+if(false === defined('WC1C_PLUGIN_FILE'))
 {
 	define('WC1C_PLUGIN_FILE', __FILE__);
 
