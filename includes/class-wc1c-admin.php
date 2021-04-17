@@ -163,19 +163,6 @@ final class Wc1c_Admin
 		}
 
 		/**
-		 * Settings
-		 */
-		$default_sections['settings'] = array
-		(
-			'title' => __('Settings', 'wc1c'),
-			'callback' => array($this, 'page_settings')
-		);
-		if('settings' === $this->get_current_section())
-		{
-			new Wc1c_Admin_Settings();
-		}
-
-		/**
 		 * Tools
 		 */
 		$default_sections['tools'] = array
@@ -186,6 +173,19 @@ final class Wc1c_Admin
 		if('tools' === $this->get_current_section())
 		{
 			new Wc1c_Admin_Tools();
+		}
+
+		/**
+		 * Settings
+		 */
+		$default_sections['settings'] = array
+		(
+			'title' => __('Settings', 'wc1c'),
+			'callback' => array($this, 'page_settings')
+		);
+		if('settings' === $this->get_current_section())
+		{
+			new Wc1c_Admin_Settings();
 		}
 
 		/**
