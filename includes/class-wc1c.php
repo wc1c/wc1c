@@ -49,28 +49,28 @@ final class Wc1c
 	private $settings = null;
 
 	/**
-	 * All configurations
+	 * All loaded configurations
 	 *
 	 * @var array
 	 */
 	private $configurations = [];
 
 	/**
-	 * All extensions
+	 * All loaded extensions
 	 *
 	 * @var array
 	 */
 	private $extensions = [];
 
 	/**
-	 * All schemas
+	 * All loaded schemas
 	 *
 	 * @var array
 	 */
 	private $schemas = [];
 
 	/**
-	 * All tools
+	 * All loaded tools
 	 *
 	 * @var array
 	 */
@@ -84,7 +84,7 @@ final class Wc1c
 	private $api = null;
 
 	/**
-	 * Loaded helpers
+	 * All loaded helpers
 	 *
 	 * @var array
 	 */
