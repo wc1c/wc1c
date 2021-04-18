@@ -1,6 +1,6 @@
 <?php
 /**
- * Final main Wc1c class
+ * Wc1c class
  *
  * @package Wc1c
  */
