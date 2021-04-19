@@ -34,7 +34,7 @@ class Wc1c_Schema_Logger extends Wc1c_Abstract_Logger
 	}
 
 	/**
-	 * @return mixed
+	 * @return string
 	 */
 	public function get_path()
 	{
@@ -42,7 +42,7 @@ class Wc1c_Schema_Logger extends Wc1c_Abstract_Logger
 	}
 
 	/**
-	 * @param mixed $path
+	 * @param string $path
 	 */
 	public function set_path($path)
 	{
