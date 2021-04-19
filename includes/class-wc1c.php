@@ -1129,7 +1129,6 @@ final class Wc1c
 		try
 		{
 			$tool_example = new Wc1c_Tool_Example();
-
 		}
 		catch(Exception $e)
 		{
