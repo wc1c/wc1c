@@ -252,7 +252,7 @@ final class Wc1c
 
 		try
 		{
-			$this->reload_logger();
+			$this->init_logger();
 		}
 		catch(Exception $e)
 		{
@@ -323,12 +323,13 @@ final class Wc1c
 	}
 
 	/**
-	 * Reload logger
+	 * Init logger
 	 *
 	 * @return bool
+	 *
 	 * @throws Exception
 	 */
-	private function reload_logger()
+	private function init_logger()
 	{
 		$logger_level = $this->settings()->get('logger', 400);
 
