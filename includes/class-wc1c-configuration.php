@@ -346,10 +346,12 @@ class Wc1c_Configuration
 	 */
 	public function check()
 	{
+		$name = $this->get_name();
+
 		/**
-		 * Name empty
+		 * Name is empty
 		 */
-		if(false === $this->get_name() || $this->get_name() === '')
+		if(false === $name || '' === $name)
 		{
 			return false;
 		}
@@ -360,7 +362,7 @@ class Wc1c_Configuration
 	/**
 	 * Update or create configuration data to db
 	 *
-	 * @return false|integer
+	 * @return boolean
 	 */
 	public function save()
 	{
@@ -377,7 +379,7 @@ class Wc1c_Configuration
 
 			$insert_result = WC1C_Db()->insert(WC1C_Db()->base_prefix . 'wc1c', $this->get_data());
 
-			if($insert_result !== false)
+			if(false !== $insert_result)
 			{
 				return true;
 			}
@@ -392,7 +394,7 @@ class Wc1c_Configuration
 			]
 		);
 
-		if($update_result !== false || $update_result !== 0)
+		if(false !== $update_result || 0 !== $update_result)
 		{
 			return true;
 		}
