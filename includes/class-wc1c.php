@@ -332,7 +332,7 @@ final class Wc1c
 	{
 		$logger_level = $this->settings()->get('logger', 400);
 
-		if($logger_level === '')
+		if('' === $logger_level)
 		{
 			$logger_level = 100;
 		}
@@ -463,7 +463,7 @@ final class Wc1c
 	{
 		if('all' !== $type)
 		{
-			if($type === 'current')
+			if('current' === $type)
 			{
 				$configuration_id = WC1C()->environment()->get('current_configuration_id', 0);
 
@@ -515,7 +515,7 @@ final class Wc1c
 		/**
 		 * Init specified extension
 		 */
-		if($extension_id !== '')
+		if('' !== $extension_id)
 		{
 			if(!array_key_exists($extension_id, $extensions))
 			{
@@ -663,7 +663,7 @@ final class Wc1c
 		/**
 		 * Init specified schema
 		 */
-		if($schema_id !== '')
+		if('' !== $schema_id)
 		{
 			if(!array_key_exists($schema_id, $schemas))
 			{
@@ -689,7 +689,7 @@ final class Wc1c
 
 			$current_configuration_id = WC1C()->environment()->get('current_configuration_id', 0);
 
-			if($current_configuration_id !== 0)
+			if(0 !== $current_configuration_id)
 			{
 				$init_schema->set_configuration_prefix('wc1c_configuration_' . $current_configuration_id);
 				$init_schema->set_prefix('wc1c_prefix_' . $schema_id . '_' . $current_configuration_id);
@@ -707,7 +707,7 @@ final class Wc1c
 				throw new Wc1c_Exception_Runtime('init_schemas: exception by schema - ' . $e->getMessage());
 			}
 
-			if($init_schema_result !== true)
+			if(true !== $init_schema_result)
 			{
 				throw new Wc1c_Exception_Runtime('init_schemas: schema is not initialized');
 			}
