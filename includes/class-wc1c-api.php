@@ -41,6 +41,7 @@ class Wc1c_Api
 
 			if('yes' !== WC1C()->settings()->get('api', 'yes'))
 			{
+				WC1C()->logger()->warning(__('Api offline', 'wc1c'));
 				die(__('Api offline', 'wc1c'));
 			}
 
@@ -50,6 +51,7 @@ class Wc1c_Api
 			}
 			catch(Exception $e)
 			{
+				WC1C()->logger()->warning(__('Api unavailable', 'wc1c'));
 				die(__('Api unavailable', 'wc1c'));
 			}
 
@@ -57,6 +59,7 @@ class Wc1c_Api
 
 			if($configuration->get_status() !== 'active')
 			{
+				WC1C()->logger()->warning(__('Configuration offline', 'wc1c'));
 				die(__('Configuration offline', 'wc1c'));
 			}
 
@@ -104,13 +107,13 @@ class Wc1c_Api
 			/**
 			 * Schema action
 			 */
-			if($wc1c_api !== '')
+			if('' !== $wc1c_api)
 			{
 				$wc1c_api_action .= '_' . $configuration->get_schema();
 			}
 
 			/**
-			 * Schema action found
+			 * Schema action is found
 			 */
 			if(has_action($wc1c_api_action))
 			{
@@ -128,6 +131,7 @@ class Wc1c_Api
 			 */
 			if(false === $action)
 			{
+				WC1C()->logger()->warning(__('Api request is very bad!', 'wc1c'));
 				die(__('Api request is very bad!', 'wc1c'));
 			}
 			die();
