@@ -109,7 +109,7 @@ class Wc1c_Configuration
 	/**
 	 * Get configuration name
 	 *
-	 * @return mixed
+	 * @return string|false
 	 */
 	public function get_name()
 	{
