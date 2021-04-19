@@ -30,7 +30,7 @@ class Wc1c_Configuration
 	 */
 	public function __construct($data = [])
 	{
-		if(!empty($data))
+		if(!empty($data) && is_array($data))
 		{
 			$this->set_data($data);
 		}
