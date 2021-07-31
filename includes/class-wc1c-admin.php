@@ -1,7 +1,7 @@
 <?php
 /**
  * Final Admin class
- * Configurations, settings, schemas, tools, reports and more
+ * Configurations, settings, schemas, tools, environments and more
  *
  * @package Wc1c/Admin
  */
@@ -189,16 +189,16 @@ final class Wc1c_Admin
 		}
 
 		/**
-		 * Reports
+		 * Environments
 		 */
-		$default_sections['reports'] = array
+		$default_sections['environments'] = array
 		(
-			'title' => __('Reports', 'wc1c'),
-			'callback' => array($this, 'page_reports')
+			'title' => __('Environments', 'wc1c'),
+			'callback' => array($this, 'page_environments')
 		);
-		if('reports' === $this->get_current_section())
+		if('environments' === $this->get_current_section())
 		{
-			new Wc1c_Admin_Reports();
+			new Wc1c_Admin_Environments();
 		}
 
 		/**
@@ -331,13 +331,13 @@ final class Wc1c_Admin
 	}
 
 	/**
-	 * Reports
+	 * Environments
 	 *
 	 * @return void
 	 */
-	public function page_reports()
+	public function page_environments()
 	{
-		wc1c_get_template('page_reports.php');
+		wc1c_get_template('page_environments.php');
 	}
 
 	/**
@@ -449,11 +449,11 @@ final class Wc1c_Admin
 		}
 
 		/**
-		 * Reports section
+		 * Environments section
 		 */
-		if('reports' === $this->get_current_section())
+		if('environments' === $this->get_current_section())
 		{
-			include_once WC1C_PLUGIN_PATH . 'includes/admin/class-wc1c-admin-reports.php';
+			include_once WC1C_PLUGIN_PATH . 'includes/admin/class-wc1c-admin-environments.php';
 		}
 
 		// hook

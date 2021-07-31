@@ -1,12 +1,12 @@
 <?php
 /**
- * Reports class
+ * Environments class
  *
  * @package Wc1c/Admin
  */
 defined('ABSPATH') || exit;
 
-class Wc1c_Admin_Reports
+class Wc1c_Admin_Environments
 {
 	/**
 	 * Wc1c
@@ -37,7 +37,7 @@ class Wc1c_Admin_Reports
 	private $wc_data = [];
 
 	/**
-	 * Wc1c_Admin_Report constructor
+	 * Wc1c_Admin_Environments constructor
 	 *
 	 * @param bool $init
 	 */
@@ -60,27 +60,27 @@ class Wc1c_Admin_Reports
 		/**
 		 * Print
 		 */
-		add_filter('wc1c_admin_report_data_row_print', array($this, 'filter_data_row_print'), 10, 2);
+		add_filter('wc1c_admin_environment_data_row_print', array($this, 'filter_data_row_print'), 10, 2);
 
 		/**
 		 * WC1C data output
 		 */
-		add_action('wc1c_admin_report_show', array($this, 'wc1c_data_output'), 10);
+		add_action('wc1c_admin_environment_show', array($this, 'wc1c_data_output'), 10);
 
 		/**
 		 * WC data output
 		 */
-		add_action('wc1c_admin_report_show', array($this, 'wc_data_output'), 10);
+		add_action('wc1c_admin_environment_show', array($this, 'wc_data_output'), 10);
 
 		/**
 		 * WP data output
 		 */
-		add_action('wc1c_admin_report_show', array($this, 'wp_data_output'), 10);
+		add_action('wc1c_admin_environment_show', array($this, 'wp_data_output'), 10);
 
 		/**
 		 * Server data output
 		 */
-		add_action('wc1c_admin_report_show', array($this, 'server_data_output'), 10);
+		add_action('wc1c_admin_environment_show', array($this, 'server_data_output'), 10);
 	}
 
 	/**
@@ -129,7 +129,7 @@ class Wc1c_Admin_Reports
 
 		$args = ['title' => __('WordPress environment', 'wc1c'), 'data' => $wp_data];
 
-		wc1c_get_template('reports/item.php', $args);
+		wc1c_get_template('environments/item.php', $args);
 	}
 
 	/**
@@ -143,7 +143,7 @@ class Wc1c_Admin_Reports
 
 		$args = ['title' => __('WC1C environment', 'wc1c'), 'data' => $wc1c_data];
 
-		wc1c_get_template('reports/item.php', $args);
+		wc1c_get_template('environments/item.php', $args);
 	}
 
 	/**
@@ -157,7 +157,7 @@ class Wc1c_Admin_Reports
 
 		$args = ['title' => __('WooCommerce environment', 'wc1c'), 'data' => $wp_data];
 
-		wc1c_get_template('reports/item.php', $args);
+		wc1c_get_template('environments/item.php', $args);
 	}
 
 	/**
@@ -171,7 +171,7 @@ class Wc1c_Admin_Reports
 
 		$args = ['title' => __('Server environment', 'wc1c'), 'data' => $server_data];
 
-		wc1c_get_template('reports/item.php', $args);
+		wc1c_get_template('environments/item.php', $args);
 	}
 
 	/**
