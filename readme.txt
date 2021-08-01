@@ -27,13 +27,11 @@ of 1C and sites created on WordPress with the WooCommerce plugin.
 List of major changes from version to version. [Descriptions more](https://wc1c.info/changelog)
 
 = 0.6.0 =
+Public release.
 * Default schema: update
 * Support: WooCommerce 5.6
 * Interface: new design
 * Fix: more
 
-= 0.5.0 =
-* MVP release (public)
-
-= 0.1.0.1 =
+= 0.1.0 =
 * Init release
