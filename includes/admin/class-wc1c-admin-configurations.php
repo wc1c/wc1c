@@ -33,50 +33,24 @@ class Wc1c_Admin_Configurations
 	 */
 	public function __construct()
 	{
-		/**
-		 * Include files
-		 */
 		$this->includes();
-
-		/**
-		 * Action
-		 */
 		$this->init_current_action();
 
-		/**
-		 * List
-		 */
-		if('list' === $this->get_current_action())
+		$current_action = $this->get_current_action();
+
+		switch ($current_action)
 		{
-			/**
-			 * Table
-			 */
-			add_action('wc1c_admin_configurations_list_show', array($this, 'configurations_list_table'), 10);
-
-			/**
-			 * Page
-			 */
-			add_action('wc1c_admin_configurations_show', array($this, 'configurations_list'), 10);
-		}
-
-		/**
-		 * Create
-		 */
-		if('create' === $this->get_current_action())
-		{
-			new Wc1c_Admin_Configurations_Create();
-
-			add_action('wc1c_admin_configurations_show', array($this, 'configurations_create'), 10);
-		}
-
-		/**
-		 * Update
-		 */
-		if('update' === $this->get_current_action())
-		{
-			new Wc1c_Admin_Configurations_Update();
-
-			add_action('wc1c_admin_configurations_show', array($this, 'configurations_update'), 10);
+			case 'create':
+				new Wc1c_Admin_Configurations_Create();
+				add_action('wc1c_admin_configurations_show', array($this, 'configurations_create'), 10);
+				break;
+			case 'update':
+				new Wc1c_Admin_Configurations_Update();
+				add_action('wc1c_admin_configurations_show', array($this, 'configurations_update'), 10);
+				break;
+			default:
+				add_action('wc1c_admin_configurations_list_show', array($this, 'configurations_list_table'), 10);
+				add_action('wc1c_admin_configurations_show', array($this, 'configurations_list'), 10);
 		}
 	}
 
