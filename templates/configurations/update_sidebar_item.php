@@ -1,4 +1,4 @@
-<?php defined('ABSPATH') || exit;?>
+<?php defined('ABSPATH') || exit; ?>
 
 <?php do_action('wc1c_admin_configurations_update_before_sidebar_item_show'); ?>
 
