@@ -60,27 +60,27 @@ class Wc1c_Admin_Environments
 		/**
 		 * Print
 		 */
-		add_filter('wc1c_admin_environment_data_row_print', array($this, 'filter_data_row_print'), 10, 2);
+		add_filter('wc1c_admin_environments_data_row_print', array($this, 'filter_data_row_print'), 10, 2);
 
 		/**
 		 * WC1C data output
 		 */
-		add_action('wc1c_admin_environment_show', array($this, 'wc1c_data_output'), 10);
+		add_action('wc1c_admin_environments_show', array($this, 'wc1c_data_output'), 10);
 
 		/**
 		 * WC data output
 		 */
-		add_action('wc1c_admin_environment_show', array($this, 'wc_data_output'), 10);
+		add_action('wc1c_admin_environments_show', array($this, 'wc_data_output'), 10);
 
 		/**
 		 * WP data output
 		 */
-		add_action('wc1c_admin_environment_show', array($this, 'wp_data_output'), 10);
+		add_action('wc1c_admin_environments_show', array($this, 'wp_data_output'), 10);
 
 		/**
 		 * Server data output
 		 */
-		add_action('wc1c_admin_environment_show', array($this, 'server_data_output'), 10);
+		add_action('wc1c_admin_environments_show', array($this, 'server_data_output'), 10);
 	}
 
 	/**
