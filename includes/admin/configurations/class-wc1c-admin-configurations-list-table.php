@@ -6,10 +6,10 @@
  */
 defined('ABSPATH') || exit;
 
-class Wc1c_Admin_Configurations_Table extends Wc1c_Admin_Abstract_Table
+class Wc1c_Admin_Configurations_List_Table extends Wc1c_Admin_Abstract_Table
 {
 	/**
-	 * Wc1c_Admin_Configurations_Table constructor
+	 * Wc1c_Admin_Configurations_List_Table constructor
 	 */
 	public function __construct()
 	{

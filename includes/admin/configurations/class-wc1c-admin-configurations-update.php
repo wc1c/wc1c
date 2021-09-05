@@ -27,9 +27,6 @@ class Wc1c_Admin_Configurations_Update
 	 */
 	public function __construct($init = true)
 	{
-		/**
-		 * Auto init
-		 */
 		if($init)
 		{
 			$this->init();
@@ -74,9 +71,6 @@ class Wc1c_Admin_Configurations_Update
 
 		add_action('wc1c_admin_configurations_update_sidebar_show', array($this, 'output_sidebar'), 10);
 
-		/**
-		 * Form
-		 */
 		$form = new Wc1c_Admin_Configurations_Update_Form(false);
 
 		$form_data = $configuration->get_options();
@@ -86,6 +80,16 @@ class Wc1c_Admin_Configurations_Update
 		$form->init();
 
 		$this->set_form($form);
+
+		add_action('wc1c_admin_configurations_show', array($this, 'template_output'), 10);
+	}
+
+	/**
+	 * Template output
+	 */
+	public function template_output()
+	{
+		wc1c_get_template('configurations/update.php');
 	}
 
 	/**

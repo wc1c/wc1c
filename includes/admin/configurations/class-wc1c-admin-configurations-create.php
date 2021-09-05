@@ -33,9 +33,18 @@ class Wc1c_Admin_Configurations_Create extends Wc1c_Admin_Abstract_Form
 		$this->load_fields();
 		$this->load_saved_data();
 
-		add_action('wc1c_admin_configurations_create_show', array($this, 'output_form'), 10);
-
 		$this->save();
+
+		add_action('wc1c_admin_configurations_create_show', array($this, 'output_form'), 10);
+		add_action('wc1c_admin_configurations_show', array($this, 'template_output'), 10);
+	}
+
+	/**
+	 * Template output
+	 */
+	public function template_output()
+	{
+		wc1c_get_template('configurations/create.php');
 	}
 
 	/**
@@ -45,7 +54,7 @@ class Wc1c_Admin_Configurations_Create extends Wc1c_Admin_Abstract_Form
 	{
 		echo '<form method="post" action="">';
 		wp_nonce_field('wc1c-admin-configurations-create-save', '_wc1c-admin-nonce', false, true);
-		echo '<table class="form-table wc1c-admin-form-table">';
+		echo '<table class="form-table wc1c-admin-form-table bg-white">';
 		$this->generate_html($this->get_fields(), true);
 		echo '</table>';
 		echo '<p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="' . __('Create configuration', 'wc1c') . '"></p>';
