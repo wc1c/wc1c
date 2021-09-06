@@ -38,7 +38,12 @@ class Wc1c_Admin_Configurations_List_Table extends Wc1c_Admin_Abstract_Table
 	 */
 	protected function get_table_classes()
 	{
-		return array('widefat', 'striped', $this->_args['plural']);
+		return array
+        (
+		    'widefat',
+            'striped',
+            $this->_args['plural']
+        );
 	}
 
 	/**
@@ -152,7 +157,7 @@ class Wc1c_Admin_Configurations_List_Table extends Wc1c_Admin_Abstract_Table
 	 */
 	public function get_sortable_columns()
 	{
-		//$sortable_columns['config_id'] = array('config_id', true);
+		$sortable_columns['config_id'] = array('config_id', false);
 		$sortable_columns['status'] = array('status', false);
 
 		return $sortable_columns;
@@ -196,27 +201,22 @@ class Wc1c_Admin_Configurations_List_Table extends Wc1c_Admin_Abstract_Table
 		 * use sort and pagination data to build a custom query instead, as you'll
 		 * be able to use your precisely-queried data immediately.
 		 */
-		$data = WC1C_Db()->get_results( "SELECT * FROM " . WC1C_Db()->prefix . "wc1c ORDER BY config_id DESC", ARRAY_A );
+		$orderby = (!empty($_REQUEST['orderby'])) ? $_REQUEST['orderby'] : 'config_id';
+		$order = (!empty($_REQUEST['order'])) ? $_REQUEST['order'] : 'desc';
 
-		/**
-		 * This checks for sorting input and sorts the data in our array accordingly.
-		 *
-		 * In a real-world situation involving a database, you would probably want
-		 * to handle sorting by passing the 'orderby' and 'order' values directly
-		 * to a custom query. The returned data will be pre-sorted, and this array
-		 * sorting technique would be unnecessary.
-		 */
-		function usort_reorder( $a, $b )
-		{
-			$orderby = ( ! empty( $_REQUEST['orderby'] ) ) ? $_REQUEST['orderby'] : 'config_id';
-			$order   = ( ! empty( $_REQUEST['order'] ) ) ? $_REQUEST['order'] : 'desc';
+		if($order !== 'desc' && $order !== 'asc')
+        {
+            $order = 'desc';
+        }
 
-			$result  = strcmp( $a[ $orderby ], $b[ $orderby ] );
+		$sortable_columns = $this->get_sortable_columns();
 
-			return ( $order === 'asc' ) ? $result : - $result;
-		}
+		if($orderby !== 'config_id' && !isset($sortable_columns[$orderby]))
+        {
+            $orderby = 'config_id';
+        }
 
-		//usort( $data, 'usort_reorder' );
+		$data = WC1C_Db()->get_results( "SELECT * FROM " . WC1C_Db()->prefix . "wc1c ORDER BY {$orderby} {$order}", ARRAY_A );
 
 		/**
 		 * REQUIRED for pagination. Let's figure out what page the user is currently
@@ -231,7 +231,7 @@ class Wc1c_Admin_Configurations_List_Table extends Wc1c_Admin_Abstract_Table
 		 * without filtering. We'll need this later, so you should always include it
 		 * in your own package classes.
 		 */
-		$total_items = count( $data );
+		$total_items = count($data);
 
 		/**
 		 * The WP_List_Table class does not handle pagination for us, so we need
