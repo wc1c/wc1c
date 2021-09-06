@@ -123,17 +123,7 @@ class Wc1c_Admin_Configurations_List_Table extends Wc1c_Admin_Abstract_Table
 	 */
 	protected function get_bulk_actions()
 	{
-		/**
-		 * Default actions
-		 */
-	    $actions['remove'] = __('Remove', 'wc1c');
-
-		/**
-		 * Load actions from external code
-		 */
-		$actions = apply_filters('wc1c_admin_configuration_get_table_bulk_actions', $actions);
-
-		return $actions;
+		return [];
 	}
 
 	/**
@@ -144,7 +134,7 @@ class Wc1c_Admin_Configurations_List_Table extends Wc1c_Admin_Abstract_Table
 	public function get_columns()
 	{
 		$columns = [];
-		$columns['cb'] = '<input type="checkbox" />';
+
 		$columns['config_id'] = __('ID', 'wc1c');
 		$columns['config_name'] = __('Name', 'wc1c');
 		$columns['status'] = __('Status', 'wc1c');
@@ -166,60 +156,6 @@ class Wc1c_Admin_Configurations_List_Table extends Wc1c_Admin_Abstract_Table
 		$sortable_columns['status'] = array('status', false);
 
 		return $sortable_columns;
-	}
-
-	/**
-	 * Handles the checkbox column output
-	 *
-	 * @param WP_Post $item The current WP_Post object.
-	 */
-	public function column_cb($item)
-	{
-		?>
-		<label class="screen-reader-text" for="cb-select-<?php echo $item['config_id']; ?>">
-			<?php
-			printf(__( 'Select %s' ), $item['config_name']);
-			?>
-		</label>
-		<input type="checkbox" name="config_id[]" id="cb-select-<?php echo $item['config_id']; ?>" value="<?php echo $item['config_id']; ?>" />
-		<?php
-	}
-
-	/**
-	 * Actions
-	 */
-	public function process_bulk_action()
-	{
-		/**
-		 * Remove configuration
-		 */
-		if('remove' === $this->current_action())
-		{
-		    $configs = [];
-
-		    if(isset($_REQUEST['config_id']))
-            {
-            	if(isset($_POST['config_id']) && is_array($_POST['config_id']))
-	            {
-	            	$configs = array_merge($configs, $_REQUEST['config_id']);
-	            }
-            	else
-	            {
-		            $configs = array($_GET['config_id']);
-	            }
-
-	            foreach($configs as $config_id)
-	            {
-		            WC1C_Db()->delete(WC1C_Db()->prefix . "wc1c", array('config_id' => (int)$config_id));
-	            }
-
-	            echo WC1C_Admin()->format_message('update', __('Configuration deleted', 'wc1c'));
-            }
-		    else
-		    {
-			    echo WC1C_Admin()->format_message('error', __('Configuration ID not found!', 'wc1c'));
-		    }
-		}
 	}
 
 	/**
@@ -250,12 +186,6 @@ class Wc1c_Admin_Configurations_List_Table extends Wc1c_Admin_Abstract_Table
 		 * for sortable columns.
 		 */
 		$this->_column_headers = array( $columns, $hidden, $sortable );
-
-		/**
-		 * Optional. You can handle your bulk actions however you see fit. In this
-		 * case, we'll handle them within our package just to keep things clean.
-		 */
-		$this->process_bulk_action();
 
 		/**
 		 * Instead of querying a database, we're going to fetch the example data
