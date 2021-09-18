@@ -141,9 +141,9 @@ class Wc1c_Admin_Configurations_List_Table extends Wc1c_Admin_Abstract_Table
 		$columns = [];
 
 		$columns['config_id'] = __('ID', 'wc1c');
+		$columns['schema'] = __('Schema ID', 'wc1c');
 		$columns['config_name'] = __('Name', 'wc1c');
 		$columns['status'] = __('Status', 'wc1c');
-		$columns['schema'] = __('Schema ID', 'wc1c');
 		$columns['date_create'] = __('Create date', 'wc1c');
 		$columns['date_activity'] = __('Last activity', 'wc1c');
 
