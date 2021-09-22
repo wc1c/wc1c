@@ -107,8 +107,7 @@ class Wc1c_Admin_Configurations_List_Table extends Wc1c_Admin_Abstract_Table
 		$actions = array
 		(
 			'update'   => '<a href="' . wc1c_admin_get_configuration_url('update', $item['config_id']) . '">' . __('Edit', 'wc1c') . '</a>',
-			//'remove' => '<a href="' . get_wc1c_admin_configuration_url('remove', $item['config_id']) . '">' . __('Remove', 'wc1c') . '</a>',
-			'delete' => sprintf( '<a href="?page=%s&section=configurations&action=%s&config_id=%s">' . __( 'Remove', 'wc1c' ) . '</a>', $_REQUEST['page'], 'remove', $item['config_id'] ),
+			'remove' => '<a href="' . wc1c_admin_get_configuration_url('remove', $item['config_id']) . '">' . __('Remove', 'wc1c') . '</a>',
 		);
 
 		//Return the title contents
