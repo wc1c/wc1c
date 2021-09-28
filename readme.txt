@@ -29,7 +29,7 @@ List of major changes from version to version. [Descriptions more](https://wc1c.
 = 0.6.0 =
 Public release.
 * Default schema: update
-* Support: WooCommerce 5.6
+* Support: WooCommerce 5.7
 * Interface: new design
 * Fix: more
 
