@@ -17,14 +17,14 @@ class Wc1c_Admin_Configurations_List
 	{
 		if($init)
 		{
-			$this->init();
+			$this->init_actions();
 		}
 	}
 
 	/**
 	 * Initialized
 	 */
-	public function init()
+	public function init_actions()
 	{
 		add_action('wc1c_admin_configurations_list_show', array($this, 'configurations_list_table'), 10);
 		add_action('wc1c_admin_configurations_show', array($this, 'template_output'), 10);
