@@ -105,7 +105,7 @@ function is_wc1c_api_request()
  */
 function is_wc1c_admin_request()
 {
-	if(is_admin() !== false && wc1c_get_var($_GET['page'], '') === 'wc1c')
+	if(false !== is_admin() && wc1c_get_var($_GET['page'], '') === 'wc1c')
 	{
 		return true;
 	}
@@ -382,7 +382,7 @@ function wc1c_set_time_limit($limit = 0)
 {
 	if(function_exists('set_time_limit') && false === strpos(ini_get('disable_functions'), 'set_time_limit'))
 	{
-		@set_time_limit($limit);
+		set_time_limit($limit);
 		
 		return true;
 	}
