@@ -42,7 +42,7 @@ final class Wc1c
 	private $database = null;
 
 	/**
-	 * Base settings
+	 * Plugin settings
 	 *
 	 * @var Wc1c_Settings
 	 */
