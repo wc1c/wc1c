@@ -472,7 +472,7 @@ final class Wc1c_Admin
 	 *
 	 * @return string
 	 */
-	public function format_message($type, $message, $args = array())
+	public function format_message($type, $message, $args = [])
 	{
 		if($type === 'error')
 		{
