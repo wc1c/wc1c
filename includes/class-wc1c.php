@@ -137,6 +137,7 @@ final class Wc1c
 		/**
 		 * Core
 		 */
+		include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-datetime.php';
 		include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-timer.php';
 		include_once WC1C_PLUGIN_PATH . 'includes/functions-wc1c-admin.php';
 		include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-environment.php';
