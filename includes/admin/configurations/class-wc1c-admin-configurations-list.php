@@ -9,7 +9,7 @@ defined('ABSPATH') || exit;
 class Wc1c_Admin_Configurations_List
 {
 	/**
-	 * Wc1c_Admin_Configurations_Create constructor
+	 * Wc1c_Admin_Configurations_List constructor.
 	 *
 	 * @param bool $init
 	 */
