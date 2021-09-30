@@ -46,8 +46,14 @@ class Wc1c_Admin_Configurations
 			case 'update':
 				new Wc1c_Admin_Configurations_Update();
 				break;
-			default:
+			case 'remove':
+				new Wc1c_Admin_Configurations_Remove();
+				break;
+			case 'list':
 				new Wc1c_Admin_Configurations_List();
+				break;
+			default:
+				wc1c_get_template('configurations/404.php');
 		}
 	}
 
@@ -60,6 +66,7 @@ class Wc1c_Admin_Configurations
 		include_once WC1C_PLUGIN_PATH . 'includes/admin/configurations/class-wc1c-admin-configurations-list-table.php';
 		include_once WC1C_PLUGIN_PATH . 'includes/admin/configurations/class-wc1c-admin-configurations-list.php';
 		include_once WC1C_PLUGIN_PATH . 'includes/admin/configurations/class-wc1c-admin-configurations-create.php';
+		include_once WC1C_PLUGIN_PATH . 'includes/admin/configurations/class-wc1c-admin-configurations-remove.php';
 		include_once WC1C_PLUGIN_PATH . 'includes/admin/configurations/class-wc1c-admin-configurations-update.php';
 		include_once WC1C_PLUGIN_PATH . 'includes/admin/configurations/class-wc1c-admin-configurations-update-form.php';
 	}
