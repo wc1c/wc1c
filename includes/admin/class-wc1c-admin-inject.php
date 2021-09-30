@@ -21,20 +21,20 @@ class Wc1c_Admin_Inject
 	 */
 	public function init()
 	{
-		$this->hooks();
+		$this->init_hooks();
 	}
 
 	/**
 	 * Hook into actions and filters
 	 */
-	private function hooks()
+	private function init_hooks()
 	{
-		if(WC1C()->settings()->get('admin_inject', 'yes') !== 'yes')
+		if('yes' !== WC1C()->settings()->get('admin_inject', 'yes'))
 		{
 			return;
 		}
 
-		if(WC1C()->settings()->get('admin_inject', 'yes') === 'yes')
+		if('yes' === WC1C()->settings()->get('admin_inject', 'yes'))
 		{
 			add_filter('manage_edit-product_columns',  array($this, 'manage_edit_product_columns'));
 			add_action('manage_product_posts_custom_column', array($this, 'manage_product_posts_custom_column'));
@@ -89,7 +89,7 @@ class Wc1c_Admin_Inject
 	 */
 	public function manage_taxonomy_custom_column($columns, $column, $id)
 	{
-		if($column === 'wc1c')
+		if('wc1c' === $column)
 		{
 			$content = '<span class="na">' . __('not found', 'wc1c') . '</span>';
 
@@ -110,7 +110,7 @@ class Wc1c_Admin_Inject
 	{
 		global $post;
 
-		if($column === 'wc1c')
+		if('wc1c' === $column)
 		{
 			$schema_id = get_post_meta($post->ID, 'wc1c_schema_id', true);
 			$config_id = get_post_meta($post->ID, 'wc1c_configuration_id', true);
