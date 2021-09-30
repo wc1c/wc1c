@@ -214,7 +214,10 @@ final class Wc1c_Admin
 			new Wc1c_Admin_Extensions();
 		}
 
-		$this->set_sections(apply_filters('wc1c_admin_init_sections', $default_sections));
+		// hook
+		$sections = apply_filters('wc1c_admin_init_sections', $default_sections);
+
+		$this->set_sections($sections);
 
 		/**
 		 * Init actions with page
