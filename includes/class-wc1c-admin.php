@@ -131,7 +131,7 @@ final class Wc1c_Admin
 		/**
 		 * Admin inject
 		 */
-		if(WC1C()->settings()->get('admin_inject', 'yes') === 'yes')
+		if('yes' === WC1C()->settings()->get('admin_inject', 'yes'))
 		{
 			try
 			{
