@@ -163,6 +163,30 @@ class Wc1c_Admin_Configurations_List_Table extends Wc1c_Admin_Abstract_Table
 	}
 
 	/**
+	 * Gets the name of the primary column.
+	 *
+	 * @return string The name of the primary column
+	 */
+	protected function get_default_primary_column_name()
+	{
+		return 'config_name';
+	}
+
+	/**
+	 * Get an associative array ( id => link ) with the list
+	 * of views available on this table
+	 *
+	 * @return array
+	 */
+	protected function get_views()
+	{
+		return [
+			'a' => 'b',
+			'v' => 'd'
+		];
+	}
+
+	/**
 	 *
 	 */
 	public function prepare_items()

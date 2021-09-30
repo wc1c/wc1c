@@ -62,13 +62,10 @@ class Wc1c_Admin_Configurations
 	 */
 	public function includes()
 	{
-		include_once WC1C_PLUGIN_PATH . 'includes/abstracts/abstract-class-wc1c-admin-table.php';
-		include_once WC1C_PLUGIN_PATH . 'includes/admin/configurations/class-wc1c-admin-configurations-list-table.php';
 		include_once WC1C_PLUGIN_PATH . 'includes/admin/configurations/class-wc1c-admin-configurations-list.php';
 		include_once WC1C_PLUGIN_PATH . 'includes/admin/configurations/class-wc1c-admin-configurations-create.php';
 		include_once WC1C_PLUGIN_PATH . 'includes/admin/configurations/class-wc1c-admin-configurations-remove.php';
 		include_once WC1C_PLUGIN_PATH . 'includes/admin/configurations/class-wc1c-admin-configurations-update.php';
-		include_once WC1C_PLUGIN_PATH . 'includes/admin/configurations/class-wc1c-admin-configurations-update-form.php';
 	}
 
 	/**

@@ -29,8 +29,17 @@ class Wc1c_Admin_Configurations_Update
 	{
 		if($init)
 		{
+			$this->includes();
 			$this->init();
 		}
+	}
+
+	/**
+	 * Include required files
+	 */
+	public function includes()
+	{
+		include_once WC1C_PLUGIN_PATH . 'includes/admin/configurations/class-wc1c-admin-configurations-update-form.php';
 	}
 
 	/**

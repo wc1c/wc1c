@@ -17,8 +17,18 @@ class Wc1c_Admin_Configurations_List
 	{
 		if($init)
 		{
+			$this->includes();
 			$this->init_actions();
 		}
+	}
+
+	/**
+	 * Include required files
+	 */
+	public function includes()
+	{
+		include_once WC1C_PLUGIN_PATH . 'includes/abstracts/abstract-class-wc1c-admin-table.php';
+		include_once WC1C_PLUGIN_PATH . 'includes/admin/configurations/class-wc1c-admin-configurations-list-table.php';
 	}
 
 	/**

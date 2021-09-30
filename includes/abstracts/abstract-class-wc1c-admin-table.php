@@ -56,7 +56,7 @@ abstract class Wc1c_Admin_Abstract_Table
 	 *
 	 * @var array
 	 */
-	protected $modes = array();
+	protected $modes = [];
 
 	/**
 	 * Stores the value returned by ->get_column_info()
@@ -88,7 +88,7 @@ abstract class Wc1c_Admin_Abstract_Table
 	 *                            Default null.
 	 * }
 	 */
-	public function __construct($args = array())
+	public function __construct($args = [])
 	{
 		$args = wp_parse_args
 		(
@@ -513,6 +513,7 @@ abstract class Wc1c_Admin_Abstract_Table
 		$total_items = $this->_pagination_args['total_items'];
 		$total_pages = $this->_pagination_args['total_pages'];
 		$infinite_scroll = false;
+
 		if(isset($this->_pagination_args['infinite_scroll']))
 		{
 			$infinite_scroll = $this->_pagination_args['infinite_scroll'];
@@ -645,10 +646,12 @@ abstract class Wc1c_Admin_Abstract_Table
 		}
 
 		$pagination_links_class = 'pagination-links';
-		if( ! empty($infinite_scroll))
+
+		if(!empty($infinite_scroll))
 		{
 			$pagination_links_class .= ' hide-if-js';
 		}
+
 		$output .= "\n<span class='$pagination_links_class'>" . join("\n", $page_links) . '</span>';
 
 		if($total_pages)
@@ -728,14 +731,9 @@ abstract class Wc1c_Admin_Abstract_Table
 	{
 		$columns = get_column_headers($this->screen);
 
-		$default = $this->get_default_primary_column_name();
-
 		// If the primary column doesn't exist fall back to the
 		// first non-checkbox column
-		if(!isset($columns[$default]))
-		{
-			$default = Wc1c_Admin_Abstract_Table::get_default_primary_column_name();
-		}
+		$default = $this->get_default_primary_column_name();
 
 		/**
 		 * Filters the name of the primary column for the current list table.
