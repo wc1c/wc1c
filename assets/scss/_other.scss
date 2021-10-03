@@ -4,25 +4,25 @@
   {
     margin-bottom: 10px;
   }
-}
 
-.add_config
-{
-  text-align: right;
-  padding-bottom: 0!important;
-  padding-top: 1em!important;
-  margin: 0!important;
-}
+  .add_config
+  {
+    text-align: right;
+    padding-bottom: 0!important;
+    padding-top: 1em!important;
+    margin: 0!important;
+  }
 
-.nav-tab-wrapper
-{
-  padding-top: 0;
-}
+  .settings-update
+  {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
 
-.settings-update
-{
-  margin-top: 10px;
-  margin-bottom: 10px;
+  .help-tab-content
+  {
+    margin: 0;
+  }
 }
 
 .wc1c-title-wrap
@@ -39,15 +39,5 @@
   p
   {
     margin: 0.3em 0;
-  }
-}
-
-.wc1c-admin-form-table
-{
-  margin: 0;
-
-  .titledesc
-  {
-    padding-left: 5px;
   }
 }
