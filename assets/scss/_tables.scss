@@ -41,6 +41,16 @@
     //width: 200px!important;
   }
 
+  .date_create
+  {
+    max-width: 140px;
+  }
+
+  .date_activity
+  {
+    max-width: 140px;
+  }
+
   .name
   {
     font-size: 16px!important;
@@ -140,11 +150,13 @@
   .column-date_create
   {
     line-height: 1.3em;
+    max-width: 140px;
   }
 
   .column-date_activity
   {
     line-height: 1.3em;
+    max-width: 140px;
   }
 
   .column-schema
