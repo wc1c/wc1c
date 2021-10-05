@@ -1,6 +1,6 @@
 <?php
 /**
- * Singleton trait
+ * Singleton
  *
  * @package Wc1c
  */
@@ -16,6 +16,8 @@ trait Trait_Wc1c_Singleton
 	private static $instances = [];
 
 	/**
+	 * Get instance
+	 *
 	 * @return self
 	 */
 	public static function instance()
