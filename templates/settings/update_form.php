@@ -2,7 +2,7 @@
 
 <form method="post" action="">
 	<?php wp_nonce_field('wc1c-admin-settings-save', '_wc1c-admin-nonce'); ?>
-    <div class="bg-white p-1">
+    <div class="p-1 wc1c-admin-settings">
         <table class="form-table wc1c-admin-form-table wc1c-admin-settings-form-table">
 		    <?php $args['object']->generate_html($args['object']->get_fields(), true); ?>
         </table>

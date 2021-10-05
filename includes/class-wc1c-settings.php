@@ -6,52 +6,44 @@
  */
 defined('ABSPATH') || exit;
 
-class Wc1c_Settings
+class Wc1c_Settings implements Interface_Wc1c_Settings
 {
 	/**
+	 * Name option in wp_options
+	 *
+	 * @var string
+	 */
+	private $option_name = 'wc1c';
+
+	/**
+	 * Current data
+	 *
 	 * @var array
 	 */
 	private $data = [];
 
 	/**
 	 * Wc1c_Settings constructor
-	 *
-	 * @param bool $autoload
-	 *
-	 * @throws Exception
 	 */
-	public function __construct($autoload = true)
-	{
-		if($autoload)
-		{
-			try
-			{
-				$this->load();
-			}
-			catch(Exception $e)
-			{
-				throw new Exception('Wc1c_Settings constructor: load exception - ' . $e->getMessage());
-			}
-		}
-	}
+	public function __construct(){}
 
 	/**
-	 * Settings loading
+	 * Initializing
 	 *
+	 * @return void
 	 * @throws Exception
 	 */
-	public function load()
+	public function init()
 	{
-		$settings = get_site_option('wc1c', []);
+		// get data from wp_options
+		$settings = get_site_option($this->option_name, []);
 
-		/**
-		 * Loading with external code
-		 */
-		$settings = apply_filters('wc1c_settings_loading', $settings);
+		// hook
+		$settings = apply_filters('wc1c_settings_data_init', $settings);
 
 		if(!is_array($settings))
 		{
-			throw new Exception('load: $settings is not array');
+			throw new Wc1c_Exception_Runtime('init: $settings is not array');
 		}
 
 		$settings = array_merge
@@ -66,59 +58,121 @@ class Wc1c_Settings
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('set_data: $settings is not array');
+			throw new Wc1c_Exception_Runtime('init: exception - ' . $e->getMessage());
 		}
 	}
 
 	/**
-	 * Save plugin settings
+	 * Set setting data - single or all
 	 *
-	 * @param $settings array
+	 * @param string|array $setting_data
+	 * @param string $setting_key
 	 *
-	 * @return bool
-	 * @throws Exception
+	 * @return boolean
+	 * @throws Exception|Wc1c_Exception_Runtime
 	 */
-	public function save($settings)
+	public function set($setting_data = '', $setting_key = '')
 	{
-		$settings = apply_filters('wc1c_settings_save', $settings);
+		if(empty($setting_key) && !is_array($setting_data))
+		{
+			return false;
+		}
+
+		$current_data = $this->get_data();
+
+		if(is_array($setting_data) && empty($setting_key))
+		{
+			$current_data = array_merge
+			(
+				$current_data,
+				$setting_data
+			);
+		}
+		else
+		{
+			$current_data[$setting_key] = $setting_data;
+		}
 
 		try
 		{
-			$this->set_data($settings);
+			$this->set_data($current_data);
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('set_data: $settings is not array');
+			throw new Wc1c_Exception_Runtime('set: exception - ' . $e->getMessage());
+		}
+
+		return true;
+	}
+
+	/**
+	 * Save
+	 *
+	 * @param $settings_data null|array - optional
+	 *
+	 * @return bool
+	 * @throws Exception|Wc1c_Exception_Runtime
+	 */
+	public function save($settings_data = null)
+	{
+		$current_data = $this->get_data();
+
+		if(is_array($settings_data))
+		{
+			$settings_data = array_merge($current_data, $settings_data);
+		}
+		else
+		{
+			$settings_data = $current_data;
+		}
+
+		$settings_data = apply_filters('wc1c_settings_data_save', $settings_data);
+
+		try
+		{
+			$this->set_data($settings_data);
+		}
+		catch(Exception $e)
+		{
+			throw new Wc1c_Exception_Runtime('save: exception - ' . $e->getMessage());
 		}
 
 		/**
 		 * Update in DB
 		 *
-		 * Required WP 4.2.0 autoload option
+		 * Required WP 4.2.0 - autoload option
 		 */
-		return update_option('wc1c', $settings, 'no');
+		return update_option($this->option_name, $settings_data, 'no');
 	}
 
 	/**
-	 * Get settings
+	 * Get settings - all or single
 	 *
-	 * @param string $key - optional
-	 * @param null $default
+	 * @param string $setting_key - optional
+	 * @param string $default_return - default data, optional
 	 *
-	 * @return array|bool|mixed
+	 * @return mixed
+	 * @throws Wc1c_Exception_Runtime
 	 */
-	public function get($key = '', $default = null)
+	public function get($setting_key = '', $default_return = '')
 	{
-		$data = $this->get_data();
-
-		if($key !== '')
+		try
 		{
-			if(is_array($data) && array_key_exists($key, $data))
+			$data = $this->get_data();
+		}
+		catch(Exception $e)
+		{
+			throw new Wc1c_Exception_Runtime('get: exception - ' . $e->getMessage());
+		}
+
+		if('' !== $setting_key)
+		{
+			if(array_key_exists($setting_key, $data))
 			{
-				return $data[$key];
+				return $data[$setting_key];
 			}
 
-			return $default;
+			return $default_return;
 		}
 
 		return $data;
@@ -127,30 +181,34 @@ class Wc1c_Settings
 	/**
 	 * Get all data
 	 *
-	 * @return mixed
+	 * @return array
+	 * @throws Exception
 	 */
-	public function get_data()
+	private function get_data()
 	{
+		if(!is_array($this->data))
+		{
+			throw new Wc1c_Exception_Runtime('get_data: $data is not valid array');
+		}
+
 		return $this->data;
 	}
 
 	/**
-	 * Set settings
+	 * Set all data
 	 *
 	 * @param $data
-	 * @throws Exception
 	 *
-	 * @return bool
+	 * @return void
+	 * @throws Exception
 	 */
-	public function set_data($data)
+	private function set_data($data = [])
 	{
-		if(is_array($data))
+		if(!is_array($data))
 		{
-			$this->data = $data;
-
-			return true;
+			throw new Wc1c_Exception_Runtime('set_data: $data is not valid');
 		}
 
-		throw new Exception('set_data: $data is not valid');
+		$this->data = $data;
 	}
 }
