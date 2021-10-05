@@ -6,7 +6,7 @@
  */
 defined('ABSPATH') || exit;
 
-abstract class Wc1c_Admin_Abstract_Form
+abstract class Abstract_Wc1c_Admin_Form
 {
 	/**
 	 * Form id
@@ -182,7 +182,7 @@ abstract class Wc1c_Admin_Abstract_Form
 	 *
 	 * @param array $data - posted data
 	 */
-	public function set_posted_data($data = array())
+	public function set_posted_data($data = [])
 	{
 		$this->posted_data = $data;
 	}
@@ -195,7 +195,7 @@ abstract class Wc1c_Admin_Abstract_Form
 	 */
 	public function get_posted_data()
 	{
-		if( !empty($this->posted_data) && is_array($this->posted_data))
+		if(!empty($this->posted_data) && is_array($this->posted_data))
 		{
 			return $this->posted_data;
 		}
@@ -209,7 +209,7 @@ abstract class Wc1c_Admin_Abstract_Form
 	 * @param array $form_fields (default: array()) Array of form fields
 	 * @param bool $echo - echo or return
 	 *
-	 * @return string|void the html for the form
+	 * @return string the html for the form
 	 */
 	public function generate_html($form_fields = [], $echo = true)
 	{
