@@ -23,8 +23,8 @@ class Wc1c_Admin_Settings_Form extends Abstract_Wc1c_Admin_Form
 	{
 		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', [$this, 'init_fields_technical'], 10);
 		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', [$this, 'init_fields_logger'], 10);
-		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', [$this, 'init_fields_extensions'], 30);
-		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', [$this, 'init_fields_admin'], 40);
+		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', [$this, 'init_fields_admin'], 30);
+		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', [$this, 'init_fields_extensions'], 40);
 		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', [$this, 'init_fields_enable_data'], 20);
 
 		$this->load_fields();
@@ -204,6 +204,24 @@ class Wc1c_Admin_Settings_Form extends Abstract_Wc1c_Admin_Form
 			'default' => 'yes'
 		];
 
+		$fields['admin_inject'] =
+		[
+			'title' => __('Admin inject', 'wc1c'),
+			'type' => 'checkbox',
+			'label' => __('Enable', 'wc1c'),
+			'description' => __('Embedding information from the plugin in the admin panel interface.', 'wc1c'),
+			'default' => 'yes'
+		];
+
+		$fields['extensions'] =
+		[
+			'title' => __('Support extensions', 'wc1c'),
+			'type' => 'checkbox',
+			'label' => __('Enable', 'wc1c'),
+			'description' => __('Support for external extensions. If disabled, all third-party extensions will be unavailable.', 'wc1c'),
+			'default' => 'yes'
+		];
+
 		$fields['upload_directory_name'] =
 		[
 			'title' => __('Name of upload directory', 'wc1c'),
@@ -289,15 +307,6 @@ class Wc1c_Admin_Settings_Form extends Abstract_Wc1c_Admin_Form
 			'description' => __('Configuring the output of information in the WordPress admin panel.', 'wc1c'),
 		);
 
-		$fields['admin_inject'] = array
-		(
-			'title' => __('Admin inject', 'wc1c'),
-			'type' => 'checkbox',
-			'label' => __('Enable', 'wc1c'),
-			'description' => __('Embedding information from the plugin in the admin panel interface.', 'wc1c'),
-			'default' => 'yes'
-		);
-
 		$fields['admin_inject_products_column'] = array
 		(
 			'title' => __('Column in products list', 'wc1c'),
@@ -351,15 +360,6 @@ class Wc1c_Admin_Settings_Form extends Abstract_Wc1c_Admin_Form
 			'title' => __('Extensions', 'wc1c'),
 			'type' => 'title',
 			'description' => __('Used by technical specialists. Can leave it at that.', 'wc1c'),
-		);
-
-		$fields['extensions'] = array
-		(
-			'title' => __('Support extensions', 'wc1c'),
-			'type' => 'checkbox',
-			'label' => __('Enable', 'wc1c'),
-			'description' => __('Support for external extensions. If disabled, all third-party extensions will be unavailable.', 'wc1c'),
-			'default' => 'yes'
 		);
 
 		$fields['extensions_schemas'] = array
