@@ -9,11 +9,15 @@ defined('ABSPATH') || exit;
 class Wc1c_Timer
 {
 	/**
+	 * Maximum time is available in sec
+	 *
 	 * @var int
 	 */
 	private $maximum = 30;
 
 	/**
+	 * Timer started
+	 *
 	 * @var int|float
 	 */
 	private $started = 0;
@@ -30,6 +34,8 @@ class Wc1c_Timer
 	}
 
 	/**
+	 * Available maximum secs
+	 *
 	 * @return int
 	 */
 	public function get_maximum()
@@ -38,6 +44,8 @@ class Wc1c_Timer
 	}
 
 	/**
+	 * Set maximum available secs
+	 *
 	 * @param int $maximum
 	 */
 	public function set_maximum($maximum)
@@ -46,6 +54,8 @@ class Wc1c_Timer
 	}
 
 	/**
+	 * Timer started
+	 *
 	 * @return int
 	 */
 	public function get_started()
@@ -54,6 +64,8 @@ class Wc1c_Timer
 	}
 
 	/**
+	 * Set timer started
+	 *
 	 * @param int $started
 	 */
 	public function set_started($started)
@@ -62,6 +74,8 @@ class Wc1c_Timer
 	}
 
 	/**
+	 * Current executions time in secs
+	 *
 	 * @return float|int
 	 */
 	public function get_execution_seconds()
@@ -70,6 +84,8 @@ class Wc1c_Timer
 	}
 
 	/**
+	 * Available secs for executions
+	 *
 	 * @return float|int
 	 */
 	public function get_available_seconds()
@@ -78,7 +94,7 @@ class Wc1c_Timer
 	}
 
 	/**
-	 * Get available seconds
+	 * Get available seconds bigger than secs
 	 *
 	 * @param int $seconds
 	 *
