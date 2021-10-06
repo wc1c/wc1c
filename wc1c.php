@@ -6,6 +6,8 @@
  * Version: 0.6.0
  * WC requires at least: 3.2
  * WC tested up to: 5.7
+ * Requires at least: 4.2
+ * Requires PHP: 5.6
  * Text Domain: wc1c
  * Domain Path: /languages
  * Copyright: WC1C team © 2018-2021
@@ -21,12 +23,13 @@ defined('ABSPATH') || exit;
 if(false === defined('WC1C_PLUGIN_FILE'))
 {
 	define('WC1C_PLUGIN_FILE', __FILE__);
+	define('WC1C_PLUGIN_PATH', plugin_dir_path(WC1C_PLUGIN_FILE));
 
 	include_once __DIR__ . '/includes/functions-wc1c.php';
-	include_once __DIR__ . '/includes/traits/trait-wc1c-singleton.php';
-	include_once __DIR__ . '/includes/class-wc1c.php';
+	include_once __DIR__ . '/includes/class-wc1c-autoloader.php';
 
-	register_activation_hook(WC1C_PLUGIN_FILE, 'wc1c_install');
+	register_activation_hook(WC1C_PLUGIN_FILE, 'wc1c_activation');
+	register_deactivation_hook(WC1C_PLUGIN_FILE, 'wc1c_deactivation');
+
+	add_action('plugins_loaded', 'WC1C', 10);
 }
-
-add_action('plugins_loaded', 'WC1C', 0);
