@@ -27,7 +27,23 @@ class Wc1c_Autoloader
 
 		spl_autoload_register([$this, 'run']);
 
-		$this->include_path = untrailingslashit(plugin_dir_path(WC1C_PLUGIN_FILE)) . '/';
+		$this->set_include_path(untrailingslashit(plugin_dir_path(WC1C_PLUGIN_FILE)) . '/');
+	}
+
+	/**
+	 * @return string
+	 */
+	public function get_include_path()
+	{
+		return $this->include_path;
+	}
+
+	/**
+	 * @param string $include_path
+	 */
+	public function set_include_path($include_path)
+	{
+		$this->include_path = $include_path;
 	}
 
 	/**
@@ -70,7 +86,7 @@ class Wc1c_Autoloader
 	}
 
 	/**
-	 * Auto-load WC classes on demand to reduce memory consumption.
+	 * Auto-load classes on demand to reduce memory consumption.
 	 *
 	 * @param string $class Class name.
 	 */
@@ -78,46 +94,46 @@ class Wc1c_Autoloader
 	{
 		$class = strtolower($class);
 
-		$path = $this->include_path . 'includes/';
+		$path = $this->get_include_path() . 'includes/';
 
 		$file = $this->get_file_name_from_class($class);
 
 		if(0 === strpos($class, 'wc1c_schema'))
 		{
-			$path = $this->include_path . 'schemas/' . substr(str_replace('_', '-', $class), 12) . '/';
+			$path = $this->get_include_path() . 'schemas/' . substr(str_replace('_', '-', $class), 12) . '/';
 		}
 		elseif(0 === strpos($class, 'wc1c_schema_'))
 		{
-			$path = $this->include_path . 'schemas/';
+			$path = $this->get_include_path() . 'schemas/';
 		}
 		elseif(0 === strpos($class, 'wc1c_tool'))
 		{
-			$path = $this->include_path . 'tools/' . substr(str_replace('_', '-', $class), 10) . '/';
+			$path = $this->get_include_path() . 'tools/' . substr(str_replace('_', '-', $class), 10) . '/';
 		}
 		elseif(0 === strpos($class, 'wc1c_tool_'))
 		{
-			$path = $this->include_path . 'tools/';
+			$path = $this->get_include_path() . 'tools/';
 		}
 		elseif(0 === strpos($class, 'abstract_'))
 		{
-			$path = $this->include_path . 'includes/abstracts/';
+			$path = $this->get_include_path() . 'includes/abstracts/';
 		}
 		elseif(0 === strpos($class, 'trait_'))
 		{
-			$path = $this->include_path . 'includes/traits/';
+			$path = $this->get_include_path() . 'includes/traits/';
 		}
 		elseif(0 === strpos($class, 'interface_'))
 		{
-			$path = $this->include_path . 'includes/interfaces/';
+			$path = $this->get_include_path() . 'includes/interfaces/';
 		}
 		elseif(0 === strpos($class, 'wc1c_admin_'))
 		{
-			$path = $this->include_path . 'includes/admin/';
+			$path = $this->get_include_path() . 'includes/admin/';
 		}
 
 		if(empty($path) || !$this->load_file($path . $file))
 		{
-			$this->load_file($this->include_path . 'includes/' . $file);
+			$this->load_file($this->get_include_path() . 'includes/' . $file);
 		}
 	}
 }
