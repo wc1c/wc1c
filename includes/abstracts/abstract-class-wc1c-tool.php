@@ -6,7 +6,7 @@
  */
 defined('ABSPATH') || exit;
 
-abstract class Wc1c_Abstract_Tool
+abstract class Abstract_Wc1c_Tool extends Abstract_Wc1c implements Interface_Wc1c_Tool
 {
 	/**
 	 * Unique tool id
@@ -14,13 +14,6 @@ abstract class Wc1c_Abstract_Tool
 	 * @var string
 	 */
 	private $id = '';
-
-	/**
-	 * Current version
-	 *
-	 * @var string
-	 */
-	private $version = '';
 
 	/**
 	 * Name
@@ -37,21 +30,20 @@ abstract class Wc1c_Abstract_Tool
 	private $description = '';
 
 	/**
-	 * Set tool id
+	 * Set tool unique id
 	 *
 	 * @param $id
 	 *
-	 * @return $this
+	 * @return Abstract_Wc1c_Tool
 	 */
 	public function set_id($id)
 	{
 		$this->id = $id;
-
 		return $this;
 	}
 
 	/**
-	 * Get tool id
+	 * Get tool unique id
 	 *
 	 * @return string
 	 */
@@ -61,6 +53,8 @@ abstract class Wc1c_Abstract_Tool
 	}
 
 	/**
+	 * Get tool name
+	 *
 	 * @return string
 	 */
 	public function get_name()
@@ -69,14 +63,21 @@ abstract class Wc1c_Abstract_Tool
 	}
 
 	/**
+	 * Set tool name
+	 *
 	 * @param string $name
+	 *
+	 * @return Abstract_Wc1c_Tool
 	 */
 	public function set_name($name)
 	{
 		$this->name = $name;
+		return $this;
 	}
 
 	/**
+	 * Get tool description
+	 *
 	 * @return string
 	 */
 	public function get_description()
@@ -85,26 +86,15 @@ abstract class Wc1c_Abstract_Tool
 	}
 
 	/**
+	 * Set tool description
+	 *
 	 * @param string $description
+	 *
+	 * @return Abstract_Wc1c_Tool
 	 */
 	public function set_description($description)
 	{
 		$this->description = $description;
-	}
-	
-	/**
-	 * @return string
-	 */
-	public function get_version()
-	{
-		return $this->version;
-	}
-
-	/**
-	 * @param string $version
-	 */
-	public function set_version($version)
-	{
-		$this->version = $version;
+		return $this;
 	}
 }
