@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WC1C > integration of WooCommerce with 1C products "
 "(different configurations)\n"
-"POT-Creation-Date: 2021-10-03 19:28+0300\n"
-"PO-Revision-Date: 2021-10-03 19:35+0300\n"
+"POT-Creation-Date: 2021-10-10 14:28+0300\n"
+"PO-Revision-Date: 2021-10-10 14:30+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
 "Language: ru_RU\n"
@@ -103,39 +103,48 @@ msgstr "Последняя страница"
 msgid "Select All"
 msgstr "Выбрать все"
 
-#: includes/admin/class-wc1c-admin-configurations-create-form.php:49
-#: includes/admin/class-wc1c-admin-configurations-remove.php:80
+#: includes/admin/class-wc1c-admin-configurations-create-form.php:50
+#: includes/admin/class-wc1c-admin-configurations-remove.php:85
 #: includes/admin/class-wc1c-admin-configurations-update-form.php:121
-#: includes/admin/class-wc1c-admin-settings.php:76
+#: includes/admin/class-wc1c-admin-settings-form.php:64
 msgid "Save error. Please retry."
 msgstr "Ошибка при сохранении. Пожалуйста повторите."
 
-#: includes/admin/class-wc1c-admin-configurations-create-form.php:76
+#: includes/admin/class-wc1c-admin-configurations-create-form.php:77
 msgid "Configuration create error. Name is required."
 msgstr "Конфигурация не создана. Название конфигурации не заполнено."
 
-#: includes/admin/class-wc1c-admin-configurations-create-form.php:82
+#: includes/admin/class-wc1c-admin-configurations-create-form.php:83
 msgid "Configuration create error. Select schema is required."
 msgstr "Конфигурация не создана. Не выбрана схема для конфигурации."
 
-#: includes/admin/class-wc1c-admin-configurations-create-form.php:96
-msgid "Configuration create success."
-msgstr "Конфигурация успешно создана."
+#: includes/admin/class-wc1c-admin-configurations-create-form.php:92
+msgid "Configuration create error. Name is exists."
+msgstr ""
+"Конфигурация не создана. Конфигурация с таким названием уже существует."
 
-#: includes/admin/class-wc1c-admin-configurations-create-form.php:100
+#: includes/admin/class-wc1c-admin-configurations-create-form.php:105
+msgid "Configuration create success. Configuration created id: "
+msgstr "Конфигурация успешно создана. Идентификатор созданной конфигурации: "
+
+#: includes/admin/class-wc1c-admin-configurations-create-form.php:106
+msgid "edit configuration"
+msgstr "редактировать конфигурацию"
+
+#: includes/admin/class-wc1c-admin-configurations-create-form.php:113
 msgid "Configuration create error. Please retry saving or change fields."
 msgstr ""
 "Создание конфигурации не удалось. Пожалуйста повторите процедуру или смените "
 "поля."
 
-#: includes/admin/class-wc1c-admin-configurations-create.php:45
-#: includes/admin/class-wc1c-admin-configurations-remove.php:134
+#: includes/admin/class-wc1c-admin-configurations-create.php:50
+#: includes/admin/class-wc1c-admin-configurations-remove.php:139
 #: includes/admin/class-wc1c-admin-configurations-update-form.php:222
 msgid "Configuration name"
 msgstr "Название конфигурации"
 
-#: includes/admin/class-wc1c-admin-configurations-create.php:47
-#: includes/admin/class-wc1c-admin-configurations-remove.php:136
+#: includes/admin/class-wc1c-admin-configurations-create.php:52
+#: includes/admin/class-wc1c-admin-configurations-remove.php:141
 #: includes/admin/class-wc1c-admin-configurations-update-form.php:224
 msgid ""
 "Name of the configuration for easy use. You can enter any data up to 255 "
@@ -144,19 +153,19 @@ msgstr ""
 "Имя конфигурации для удобства использования. Вы можете ввести любые данные "
 "длиной до 255 символов."
 
-#: includes/admin/class-wc1c-admin-configurations-create.php:48
-#: includes/admin/class-wc1c-admin-configurations-remove.php:137
+#: includes/admin/class-wc1c-admin-configurations-create.php:53
+#: includes/admin/class-wc1c-admin-configurations-remove.php:142
 #: includes/admin/class-wc1c-admin-configurations-update-form.php:225
 msgid "Used for convenient distribution of multiple configurations."
 msgstr "Используется для удобного распределения нескольких конфигураций."
 
-#: includes/admin/class-wc1c-admin-configurations-create.php:70
-#: includes/admin/class-wc1c-admin-configurations-remove.php:159
+#: includes/admin/class-wc1c-admin-configurations-create.php:75
+#: includes/admin/class-wc1c-admin-configurations-remove.php:164
 msgid "Configuration schema"
 msgstr "Схема конфигурации"
 
-#: includes/admin/class-wc1c-admin-configurations-create.php:72
-#: includes/admin/class-wc1c-admin-configurations-remove.php:161
+#: includes/admin/class-wc1c-admin-configurations-create.php:77
+#: includes/admin/class-wc1c-admin-configurations-remove.php:166
 msgid ""
 "Each scheme has its own algorithms and settings. Use the appropriate scheme "
 "for your tasks."
@@ -181,54 +190,53 @@ msgstr "Редактировать"
 msgid "Remove"
 msgstr "Удалить"
 
-#: includes/admin/class-wc1c-admin-configurations-list-table.php:170
+#: includes/admin/class-wc1c-admin-configurations-list-table.php:159
 msgid "ID"
 msgstr "ID"
 
-#: includes/admin/class-wc1c-admin-configurations-list-table.php:171
+#: includes/admin/class-wc1c-admin-configurations-list-table.php:160
 msgid "Schema ID"
 msgstr "Схема (ID)"
 
-#: includes/admin/class-wc1c-admin-configurations-list-table.php:172
+#: includes/admin/class-wc1c-admin-configurations-list-table.php:161
 msgid "Name"
 msgstr "Название"
 
-#: includes/admin/class-wc1c-admin-configurations-list-table.php:173
+#: includes/admin/class-wc1c-admin-configurations-list-table.php:162
 msgid "Status"
 msgstr "Состояние"
 
-#: includes/admin/class-wc1c-admin-configurations-list-table.php:174
+#: includes/admin/class-wc1c-admin-configurations-list-table.php:163
 msgid "Create date"
 msgstr "Создана"
 
-#: includes/admin/class-wc1c-admin-configurations-list-table.php:175
+#: includes/admin/class-wc1c-admin-configurations-list-table.php:164
 msgid "Last activity"
 msgstr "Активность"
 
-#: includes/admin/class-wc1c-admin-configurations-list-table.php:223
-msgid "All configurations"
-msgstr "Все конфигурации"
+#: includes/admin/class-wc1c-admin-configurations-list-table.php:212
+msgid "All"
+msgstr "Все"
 
-#: includes/admin/class-wc1c-admin-configurations-list-table.php:399
+#: includes/admin/class-wc1c-admin-configurations-list-table.php:388
 msgid "Search"
 msgstr "Найти"
 
-#: includes/admin/class-wc1c-admin-configurations-remove.php:60
+#: includes/admin/class-wc1c-admin-configurations-remove.php:65
 msgid "Remove configuration"
 msgstr "Удалить конфигурацию"
 
-#: includes/admin/class-wc1c-admin-configurations-remove.php:113
+#: includes/admin/class-wc1c-admin-configurations-remove.php:118
 msgid "Configuration remove success."
 msgstr "Конфигурация успешно удалена."
 
-#: includes/admin/class-wc1c-admin-configurations-remove.php:117
+#: includes/admin/class-wc1c-admin-configurations-remove.php:122
 msgid "Configuration remove error. Please retry saving or change fields."
 msgstr ""
 "Удаааление конфигурации не удалось. Пожалуйста повторите процедуру или "
 "смените поля."
 
 #: includes/admin/class-wc1c-admin-configurations-update-form.php:45
-#: includes/admin/class-wc1c-admin-settings.php:156
 msgid "Fast navigation"
 msgstr "Быстрая навигация"
 
@@ -242,49 +250,49 @@ msgstr ""
 "Ошибка обновления конфигурации. Повторите попытку сохранения или изменения "
 "полей."
 
-#: includes/admin/class-wc1c-admin-configurations-update-form.php:243
+#: includes/admin/class-wc1c-admin-configurations-update-form.php:238
 msgid "Configuration status"
 msgstr "Состояние"
 
-#: includes/admin/class-wc1c-admin-configurations-update-form.php:245
+#: includes/admin/class-wc1c-admin-configurations-update-form.php:240
 msgid "Current configuration status."
 msgstr "Текущее состояние конфигурации."
 
-#: includes/admin/class-wc1c-admin-configurations-update.php:92
+#: includes/admin/class-wc1c-admin-configurations-update.php:97
 msgid "About configuration"
 msgstr "О конфигурации"
 
-#: includes/admin/class-wc1c-admin-configurations-update.php:100
-#: includes/admin/class-wc1c-admin-inject.php:127
+#: includes/admin/class-wc1c-admin-configurations-update.php:105
+#: includes/admin/class-wc1c-admin-inject.php:122
 msgid "Configuration ID: "
 msgstr "Идентификатор: "
 
-#: includes/admin/class-wc1c-admin-configurations-update.php:103
-#: includes/admin/class-wc1c-admin-inject.php:122
+#: includes/admin/class-wc1c-admin-configurations-update.php:108
+#: includes/admin/class-wc1c-admin-inject.php:117
 msgid "Schema ID: "
 msgstr "Схема (ID): "
 
-#: includes/admin/class-wc1c-admin-configurations-update.php:106
+#: includes/admin/class-wc1c-admin-configurations-update.php:111
 msgid "Date create: "
 msgstr "Дата создания: "
 
-#: includes/admin/class-wc1c-admin-configurations-update.php:109
+#: includes/admin/class-wc1c-admin-configurations-update.php:114
 msgid "Date modify: "
 msgstr "Дата изменения: "
 
-#: includes/admin/class-wc1c-admin-configurations-update.php:112
+#: includes/admin/class-wc1c-admin-configurations-update.php:117
 msgid "Date active: "
 msgstr "Последняя активность: "
 
-#: includes/admin/class-wc1c-admin-configurations-update.php:115
+#: includes/admin/class-wc1c-admin-configurations-update.php:120
 msgid "Upload directory: "
 msgstr "Каталог загрузки: "
 
-#: includes/admin/class-wc1c-admin-configurations-update.php:129
+#: includes/admin/class-wc1c-admin-configurations-update.php:134
 msgid "About schema"
 msgstr "О схеме"
 
-#: includes/admin/class-wc1c-admin-configurations-update.php:135
+#: includes/admin/class-wc1c-admin-configurations-update.php:140
 msgid "Schema name: "
 msgstr "Имя схемы: "
 
@@ -440,120 +448,201 @@ msgstr "Валюта WooCommerce"
 msgid "WooCommerce currency symbol"
 msgstr "Символ валюты WooCommerce"
 
-#: includes/admin/class-wc1c-admin-help.php:35
+#: includes/admin/class-wc1c-admin-help.php:40
 msgid "Help"
 msgstr "Помощь"
 
-#: includes/admin/class-wc1c-admin-help.php:44 templates/helps/bugs.php:3
+#: includes/admin/class-wc1c-admin-help.php:49 templates/helps/bugs.php:3
 msgid "Found a bug?"
 msgstr "Нашли ошибку?"
 
-#: includes/admin/class-wc1c-admin-help.php:53 templates/helps/features.php:3
+#: includes/admin/class-wc1c-admin-help.php:58 templates/helps/features.php:3
 msgid "Not a feature?"
 msgstr "Нет возможности?"
 
-#: includes/admin/class-wc1c-admin-inject.php:58
-#: includes/admin/class-wc1c-admin-inject.php:75
+#: includes/admin/class-wc1c-admin-inject.php:53
+#: includes/admin/class-wc1c-admin-inject.php:70
 msgid "1C information"
 msgstr "Информация 1С"
 
-#: includes/admin/class-wc1c-admin-inject.php:94
-#: includes/admin/class-wc1c-admin-inject.php:132
+#: includes/admin/class-wc1c-admin-inject.php:89
+#: includes/admin/class-wc1c-admin-inject.php:127
 msgid "not found"
 msgstr "не найдена"
 
-#: includes/admin/class-wc1c-admin-settings.php:113
+#: includes/admin/class-wc1c-admin-settings-form.php:99
 msgid "Saving settings success."
 msgstr "Настройки успешно сохранены."
 
-#: includes/admin/class-wc1c-admin-settings.php:117
-msgid "Saving settings error. Please retry saving or change settings."
-msgstr ""
-"Ошибка сохранения настроек. Пожалуйста повторите сохранение или смените "
-"настройки."
-
-#: includes/admin/class-wc1c-admin-settings.php:225
+#: includes/admin/class-wc1c-admin-settings-form.php:136
 msgid "Enable data by objects"
 msgstr "Работа с данными объектами"
 
-#: includes/admin/class-wc1c-admin-settings.php:227
+#: includes/admin/class-wc1c-admin-settings-form.php:138
 msgid "Specifying the ability to work with data by object types (data types)."
 msgstr ""
 "Указание возможности работы с данными по типам объектов (типам данных)."
 
-#: includes/admin/class-wc1c-admin-settings.php:232
+#: includes/admin/class-wc1c-admin-settings-form.php:143
 msgid "Products"
 msgstr "Продукты"
 
-#: includes/admin/class-wc1c-admin-settings.php:234
-#: includes/admin/class-wc1c-admin-settings.php:243
-#: includes/admin/class-wc1c-admin-settings.php:252
-#: includes/admin/class-wc1c-admin-settings.php:261
-#: includes/admin/class-wc1c-admin-settings.php:270
-#: includes/admin/class-wc1c-admin-settings.php:317
-#: includes/admin/class-wc1c-admin-settings.php:372
-#: includes/admin/class-wc1c-admin-settings.php:381
-#: includes/admin/class-wc1c-admin-settings.php:390
-#: includes/admin/class-wc1c-admin-settings.php:399
-#: includes/admin/class-wc1c-admin-settings.php:408
-#: includes/admin/class-wc1c-admin-settings.php:436
-#: includes/admin/class-wc1c-admin-settings.php:445
-#: includes/admin/class-wc1c-admin-settings.php:454
+#: includes/admin/class-wc1c-admin-settings-form.php:145
+#: includes/admin/class-wc1c-admin-settings-form.php:154
+#: includes/admin/class-wc1c-admin-settings-form.php:163
+#: includes/admin/class-wc1c-admin-settings-form.php:172
+#: includes/admin/class-wc1c-admin-settings-form.php:181
+#: includes/admin/class-wc1c-admin-settings-form.php:323
+#: includes/admin/class-wc1c-admin-settings-form.php:332
+#: includes/admin/class-wc1c-admin-settings-form.php:341
+#: includes/admin/class-wc1c-admin-settings-form.php:350
+#: includes/admin/class-wc1c-admin-settings-form.php:378
+#: includes/admin/class-wc1c-admin-settings-form.php:387
 msgid "Enable"
 msgstr "Включить"
 
-#: includes/admin/class-wc1c-admin-settings.php:235
+#: includes/admin/class-wc1c-admin-settings-form.php:146
 msgid "Ability to work with products (delete, change, add)."
 msgstr "Возможность работы с продуктами (удаление, изменение, добавление)."
 
-#: includes/admin/class-wc1c-admin-settings.php:241
+#: includes/admin/class-wc1c-admin-settings-form.php:152
 msgid "Categories"
 msgstr "Категории"
 
-#: includes/admin/class-wc1c-admin-settings.php:244
+#: includes/admin/class-wc1c-admin-settings-form.php:155
 msgid "Ability to work with categories (delete, change, add)."
 msgstr "Возможность работы с категориями (удаление, изменение, добавление)."
 
-#: includes/admin/class-wc1c-admin-settings.php:250
+#: includes/admin/class-wc1c-admin-settings-form.php:161
 msgid "Attributes"
 msgstr "Атрибуты"
 
-#: includes/admin/class-wc1c-admin-settings.php:253
+#: includes/admin/class-wc1c-admin-settings-form.php:164
 msgid "Ability to work with attributes (delete, change, add)."
 msgstr "Возможность работы с атрибутами (удаление, изменение, добавление)."
 
-#: includes/admin/class-wc1c-admin-settings.php:259
+#: includes/admin/class-wc1c-admin-settings-form.php:170
 msgid "Orders"
 msgstr "Заказы"
 
-#: includes/admin/class-wc1c-admin-settings.php:262
+#: includes/admin/class-wc1c-admin-settings-form.php:173
 msgid "Ability to work with orders (delete, change, add)."
 msgstr "Возможность работы с заказами  (удаление, изменение, добавление)."
 
-#: includes/admin/class-wc1c-admin-settings.php:268
+#: includes/admin/class-wc1c-admin-settings-form.php:179
 msgid "Images"
 msgstr "Изображение"
 
-#: includes/admin/class-wc1c-admin-settings.php:271
+#: includes/admin/class-wc1c-admin-settings-form.php:182
 msgid "Ability to work with images (delete, change, add)."
 msgstr "Возможность работы с изображениями (удаление, изменение, добавление)."
 
-#: includes/admin/class-wc1c-admin-settings.php:289
-msgid "Technical parameters"
-msgstr "Технические параметры"
+#: includes/admin/class-wc1c-admin-settings-form.php:200
+msgid "Изменение интерфейса"
+msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:291
-#: includes/admin/class-wc1c-admin-settings.php:429
-#: includes/admin/class-wc1c-admin-settings.php:475
-msgid "Used by technical specialists. Can leave it at that."
-msgstr "Используется техническими специалистами. Можете оставить все как есть."
+#: includes/admin/class-wc1c-admin-settings-form.php:202
+msgid "Разрешить менять интерфейс панели управления WordPress и WooCommerce"
+msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:298
+#: includes/admin/class-wc1c-admin-settings-form.php:203
+msgid ""
+"Если влючено, в интерфейсе WordPress и WooCommerce появятся новые функции, "
+"согласно настройкам изменения интерфейса."
+msgstr ""
+
+#: includes/admin/class-wc1c-admin-settings-form.php:209
+msgid "Уникальные имена конфигураций"
+msgstr ""
+
+#: includes/admin/class-wc1c-admin-settings-form.php:211
+msgid "Включить проверку имен конфигураций на уникальность"
+msgstr ""
+
+#: includes/admin/class-wc1c-admin-settings-form.php:212
+msgid ""
+"Настройка запрещает создавать конфигурации с одним и тем же названием под "
+"одним и тем же пользователем."
+msgstr ""
+
+#: includes/admin/class-wc1c-admin-settings-form.php:218
+msgid "Name of upload directory"
+msgstr "Имя каталога загрузки"
+
+#: includes/admin/class-wc1c-admin-settings-form.php:220
+msgid "You need to change the name of the standard directory for security."
+msgstr ""
+"Вам необходимо изменить имя стандартного каталога для обеспечения "
+"безопасности."
+
+#: includes/admin/class-wc1c-admin-settings-form.php:227
+msgid "API"
+msgstr "API"
+
+#: includes/admin/class-wc1c-admin-settings-form.php:229
+msgid "Включить прием зпросов по API"
+msgstr ""
+
+#: includes/admin/class-wc1c-admin-settings-form.php:230
+msgid ""
+"Используется для приема фоновых запросов в схемах. Не отключайте данную "
+"опцию, если не знаете для чего она."
+msgstr ""
+
+#: includes/admin/class-wc1c-admin-settings-form.php:236
+#: includes/admin/class-wc1c-admin-settings-form.php:369
+#: includes/class-wc1c-admin.php:210 templates/helps/features.php:36
+msgid "Extensions"
+msgstr "Расширения"
+
+#: includes/admin/class-wc1c-admin-settings-form.php:238
+msgid "Включить поддержку расширений"
+msgstr ""
+
+#: includes/admin/class-wc1c-admin-settings-form.php:239
+msgid ""
+"Если поддержка расширений отключена, все сторонние расширения будут "
+"недоступны."
+msgstr ""
+
+#: includes/admin/class-wc1c-admin-settings-form.php:245
+#: schemas/default/class-wc1c-schema-default.php:241
+msgid "Maximum request size"
+msgstr "Максимальный размер запроса"
+
+#: includes/admin/class-wc1c-admin-settings-form.php:247
+#: schemas/default/class-wc1c-schema-default.php:243
+msgid ""
+"The setting must not take a size larger than specified in the server "
+"settings."
+msgstr ""
+
+#: includes/admin/class-wc1c-admin-settings-form.php:254
+msgid "Maximum time for execution PHP"
+msgstr "Максимальное время выполнения PHP скриптов"
+
+#: includes/admin/class-wc1c-admin-settings-form.php:256
+msgid ""
+"Value is seconds. The setting must not take a execution time larger than "
+"specified in the PHP and web server settings (Apache, Nginx, etc)."
+msgstr ""
+
+#: includes/admin/class-wc1c-admin-settings-form.php:275
 #: schemas/default/class-wc1c-schema-default.php:210
 msgid "Logging events"
 msgstr "Журнал событий"
 
-#: includes/admin/class-wc1c-admin-settings.php:300
+#: includes/admin/class-wc1c-admin-settings-form.php:277
+#: includes/admin/class-wc1c-admin-settings-form.php:371
+#: includes/admin/class-wc1c-admin-settings-form.php:408
+msgid "Used by technical specialists. Can leave it at that."
+msgstr "Используется техническими специалистами. Можете оставить все как есть."
+
+#: includes/admin/class-wc1c-admin-settings-form.php:284
+msgid "Level"
+msgstr ""
+
+#: includes/admin/class-wc1c-admin-settings-form.php:286
 msgid ""
 "All events of the selected level will be recorded in the log file. The "
 "higher the level, the less data is recorded."
@@ -561,154 +650,86 @@ msgstr ""
 "Все события выбранного уровня будут записаны в файл журнала. Чем выше "
 "уровень, тем меньше записывается данных."
 
-#: includes/admin/class-wc1c-admin-settings.php:300
+#: includes/admin/class-wc1c-admin-settings-form.php:287
 #: schemas/default/class-wc1c-schema-default.php:214
 msgid "Current file: "
 msgstr "Текущий файл: "
 
-#: includes/admin/class-wc1c-admin-settings.php:304
+#: includes/admin/class-wc1c-admin-settings-form.php:291
 #: schemas/default/class-wc1c-schema-default.php:218
 msgid "Off"
 msgstr "Выключен"
 
-#: includes/admin/class-wc1c-admin-settings.php:305
+#: includes/admin/class-wc1c-admin-settings-form.php:292
 #: schemas/default/class-wc1c-schema-default.php:219
 msgid "DEBUG"
 msgstr "Отладка"
 
-#: includes/admin/class-wc1c-admin-settings.php:306
+#: includes/admin/class-wc1c-admin-settings-form.php:293
 #: schemas/default/class-wc1c-schema-default.php:220
 msgid "INFO"
 msgstr "Информация"
 
-#: includes/admin/class-wc1c-admin-settings.php:307
+#: includes/admin/class-wc1c-admin-settings-form.php:294
 #: schemas/default/class-wc1c-schema-default.php:221
 msgid "NOTICE"
 msgstr "Уведомления"
 
-#: includes/admin/class-wc1c-admin-settings.php:308
+#: includes/admin/class-wc1c-admin-settings-form.php:295
 #: schemas/default/class-wc1c-schema-default.php:222
 msgid "WARNING"
 msgstr "Предупреждения"
 
-#: includes/admin/class-wc1c-admin-settings.php:309
+#: includes/admin/class-wc1c-admin-settings-form.php:296
 #: schemas/default/class-wc1c-schema-default.php:223
 msgid "ERROR"
 msgstr "Ошибки"
 
-#: includes/admin/class-wc1c-admin-settings.php:315
-msgid "API"
-msgstr "API"
-
-#: includes/admin/class-wc1c-admin-settings.php:318
-msgid ""
-"This API uses exchange schemas to receive requests from 1C and send data "
-"there."
-msgstr ""
-"Этот API использует схемы для приема запросов от 1С и отправки туда данных."
-
-#: includes/admin/class-wc1c-admin-settings.php:324
-msgid "Name of upload directory"
-msgstr "Имя каталога загрузки"
-
-#: includes/admin/class-wc1c-admin-settings.php:326
-msgid "You need to change the name of the standard directory for security."
-msgstr ""
-"Вам необходимо изменить имя стандартного каталога для обеспечения "
-"безопасности."
-
-#: includes/admin/class-wc1c-admin-settings.php:333
-#: schemas/default/class-wc1c-schema-default.php:241
-msgid "Maximum request size"
-msgstr "Максимальный размер запроса"
-
-#: includes/admin/class-wc1c-admin-settings.php:335
-#: schemas/default/class-wc1c-schema-default.php:243
-msgid ""
-"The setting must not take a size larger than specified in the server "
-"settings."
-msgstr ""
-
-#: includes/admin/class-wc1c-admin-settings.php:342
-msgid "Maximum time for execution PHP"
-msgstr "Максимальное время выполнения PHP скриптов"
-
-#: includes/admin/class-wc1c-admin-settings.php:344
-msgid ""
-"Value is seconds. The setting must not take a execution time larger than "
-"specified in the PHP and web server settings (Apache, Nginx, etc)."
-msgstr ""
-
-#: includes/admin/class-wc1c-admin-settings.php:363
+#: includes/admin/class-wc1c-admin-settings-form.php:314
 msgid "Admin interface"
 msgstr "Интерфейс администратора"
 
-#: includes/admin/class-wc1c-admin-settings.php:365
+#: includes/admin/class-wc1c-admin-settings-form.php:316
 msgid "Configuring the output of information in the WordPress admin panel."
 msgstr "Настройка вывода информации в админ-панели WordPress."
 
-#: includes/admin/class-wc1c-admin-settings.php:370
-msgid "Admin inject"
-msgstr "Внедрение в панель администратора"
-
-#: includes/admin/class-wc1c-admin-settings.php:373
-msgid "Embedding information from the plugin in the admin panel interface."
-msgstr "Встраивание информации из плагина в интерфейс админки."
-
-#: includes/admin/class-wc1c-admin-settings.php:379
+#: includes/admin/class-wc1c-admin-settings-form.php:321
 msgid "Column in products list"
 msgstr "Колонка в списке продуктов"
 
-#: includes/admin/class-wc1c-admin-settings.php:382
+#: includes/admin/class-wc1c-admin-settings-form.php:324
 msgid "Output of a column with information from 1C to the list of products."
 msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:388
+#: includes/admin/class-wc1c-admin-settings-form.php:330
 msgid "Metabox in edit products"
 msgstr "Метабокс в редактировании продуктов"
 
-#: includes/admin/class-wc1c-admin-settings.php:391
+#: includes/admin/class-wc1c-admin-settings-form.php:333
 msgid "Output of a Metabox with information from 1C in edit products."
 msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:397
+#: includes/admin/class-wc1c-admin-settings-form.php:339
 msgid "Column in orders list"
 msgstr "Колонка в списке заказов"
 
-#: includes/admin/class-wc1c-admin-settings.php:400
+#: includes/admin/class-wc1c-admin-settings-form.php:342
 msgid "Output of a column with information from 1C to the list of orders."
 msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:406
+#: includes/admin/class-wc1c-admin-settings-form.php:348
 msgid "Metabox in edit orders"
 msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:409
+#: includes/admin/class-wc1c-admin-settings-form.php:351
 msgid "Output of a Metabox with information from 1C in edit orders."
 msgstr ""
 
-#: includes/admin/class-wc1c-admin-settings.php:427
-#: includes/class-wc1c-admin.php:232 templates/helps/features.php:36
-msgid "Extensions"
-msgstr "Расширения"
-
-#: includes/admin/class-wc1c-admin-settings.php:434
-msgid "Support extensions"
-msgstr "Поддержка расширений"
-
-#: includes/admin/class-wc1c-admin-settings.php:437
-msgid ""
-"Support for external extensions. If disabled, all third-party extensions "
-"will be unavailable."
-msgstr ""
-"Поддержка внешних расширений. Если этот параметр отключен, все сторонние "
-"расширения будут недоступны."
-
-#: includes/admin/class-wc1c-admin-settings.php:443
+#: includes/admin/class-wc1c-admin-settings-form.php:376
 msgid "External schemas"
 msgstr "Внешние схемы"
 
-#: includes/admin/class-wc1c-admin-settings.php:446
+#: includes/admin/class-wc1c-admin-settings-form.php:379
 msgid ""
 "Support for external schemas. If disabled, all third-party schemas will be "
 "unavailable."
@@ -716,11 +737,11 @@ msgstr ""
 "Поддержка внешних схем. Если этот параметр отключен, все сторонние схемы "
 "будут недоступны."
 
-#: includes/admin/class-wc1c-admin-settings.php:452
+#: includes/admin/class-wc1c-admin-settings-form.php:385
 msgid "External tools"
 msgstr "Внешние инструменты"
 
-#: includes/admin/class-wc1c-admin-settings.php:455
+#: includes/admin/class-wc1c-admin-settings-form.php:388
 msgid ""
 "Support for external tools. If disabled, all third-party tools will be "
 "unavailable."
@@ -728,15 +749,15 @@ msgstr ""
 "Поддержка внешних инструментов. Если этот параметр отключен, все сторонние "
 "инструменты будут недоступны."
 
-#: includes/admin/class-wc1c-admin-settings.php:473
+#: includes/admin/class-wc1c-admin-settings-form.php:406
 msgid "Uninstall parameters"
 msgstr "Параметры удаления"
 
-#: includes/admin/class-wc1c-admin-settings.php:480
+#: includes/admin/class-wc1c-admin-settings-form.php:413
 msgid "Remove files"
 msgstr "Удаление файлов"
 
-#: includes/admin/class-wc1c-admin-settings.php:482
+#: includes/admin/class-wc1c-admin-settings-form.php:415
 msgid ""
 "Deleting all files in their file system. If the checkbox is not checked, "
 "then the files will not be deleted from the /wp-content/uploads directory"
@@ -744,17 +765,17 @@ msgstr ""
 "Удаление всех файлов в их файловой системе. Если флажок не установлен, то "
 "файлы не будут удалены из каталога /wp-content/uploads"
 
-#: includes/admin/class-wc1c-admin-settings.php:483
+#: includes/admin/class-wc1c-admin-settings-form.php:416
 msgid ""
 "Deleting files is disabled by default. It is best to delete files via FTP"
 msgstr ""
 "Удаление файлов по умолчанию отключено. Лучше всего удалять файлы через FTP"
 
-#: includes/admin/class-wc1c-admin-settings.php:489
+#: includes/admin/class-wc1c-admin-settings-form.php:422
 msgid "Remove settings"
 msgstr "Удаление настроек"
 
-#: includes/admin/class-wc1c-admin-settings.php:491
+#: includes/admin/class-wc1c-admin-settings-form.php:424
 msgid ""
 "Deleting all the main plugin settings. If the checkbox is not checked, then "
 "the plugin settings will remain in the site database."
@@ -762,7 +783,7 @@ msgstr ""
 "Удаление всех основных настроек плагина. Если флажок не установлен, то "
 "настройки плагина останутся в базе данных сайта."
 
-#: includes/admin/class-wc1c-admin-settings.php:492
+#: includes/admin/class-wc1c-admin-settings-form.php:425
 msgid ""
 "Deletion is disabled by default. Cleaning all the basic settings when "
 "finally deleting the plugin."
@@ -770,11 +791,11 @@ msgstr ""
 "Удаление по умолчанию отключено. Очистка всех основных настроек при "
 "окончательном удалении плагина."
 
-#: includes/admin/class-wc1c-admin-settings.php:498
+#: includes/admin/class-wc1c-admin-settings-form.php:431
 msgid "Remove tables"
 msgstr "Удаление таблиц"
 
-#: includes/admin/class-wc1c-admin-settings.php:500
+#: includes/admin/class-wc1c-admin-settings-form.php:433
 msgid ""
 "Deleting all the main plugin tables. If the checkbox is not checked, then "
 "the plugin tables will remain in the site database."
@@ -782,7 +803,7 @@ msgstr ""
 "Удаление всех основных таблиц плагина. Если флажок не установлен, то таблицы "
 "плагина останутся в базе данных сайта."
 
-#: includes/admin/class-wc1c-admin-settings.php:501
+#: includes/admin/class-wc1c-admin-settings-form.php:434
 msgid ""
 "Deletion is disabled by default. Cleaning all the basic tables when finally "
 "deleting the plugin."
@@ -790,28 +811,24 @@ msgstr ""
 "Удаление по умолчанию отключено. Очистка всех основных таблиц при "
 "окончательном удалении плагина."
 
-#: includes/class-wc1c-admin.php:172
+#: includes/class-wc1c-admin.php:165
 msgid "Configurations"
 msgstr "Конфигурации"
 
-#: includes/class-wc1c-admin.php:187
+#: includes/class-wc1c-admin.php:180
 msgid "Tools"
 msgstr "Инструменты"
 
-#: includes/class-wc1c-admin.php:202 includes/class-wc1c-admin.php:351
+#: includes/class-wc1c-admin.php:195 includes/class-wc1c-admin.php:342
 msgid "Settings"
 msgstr "Настройки"
 
-#: includes/class-wc1c-admin.php:217 templates/helps/bugs.php:27
-msgid "Environments"
-msgstr "Окружения"
-
-#: includes/class-wc1c-admin.php:290 includes/class-wc1c-admin.php:291
-#: templates/admin_header.php:4
+#: includes/class-wc1c-admin.php:273 includes/class-wc1c-admin.php:274
+#: templates/header.php:4
 msgid "Integration with 1C"
 msgstr "Интеграция с 1С"
 
-#: includes/class-wc1c-admin.php:443 includes/class-wc1c-admin.php:448
+#: includes/class-wc1c-admin.php:434 includes/class-wc1c-admin.php:439
 msgid "Close"
 msgstr "Закрыть"
 
@@ -831,22 +848,20 @@ msgstr "Конфигурация выключена"
 msgid "Api request is very bad!"
 msgstr "Запрос Api - это очень плохо!"
 
-#: includes/class-wc1c-data-storage-configurations.php:74
+#: includes/class-wc1c-data-storage-configurations.php:69
 msgid "Could not insert configuration into the database"
 msgstr ""
 
-#: includes/class-wc1c-data-storage-configurations.php:105
-#, fuzzy
-#| msgid "Save configuration"
+#: includes/class-wc1c-data-storage-configurations.php:101
 msgid "Invalid configuration"
-msgstr "Сохранить конфигурацию"
+msgstr "Не валидная конфигурация"
 
 #: includes/class-wc1c-storage.php:61
 msgid "Invalid $object_type. Storage by object type is not found."
 msgstr ""
 
 #: includes/class-wc1c-storage.php:79
-msgid "Invalid data storage. Storage by key is not found."
+msgid "Invalid data storage. Storage by key type is not found."
 msgstr ""
 
 #: includes/class-wc1c-storage.php:89
@@ -857,11 +872,11 @@ msgstr ""
 msgid "Invalid data storage. Storage class is not exists."
 msgstr ""
 
-#: includes/class-wc1c.php:652
+#: includes/class-wc1c.php:650
 msgid "Default schema"
 msgstr "Схема по умолчанию"
 
-#: includes/class-wc1c.php:653
+#: includes/class-wc1c.php:651
 msgid ""
 "Standard data exchange using the standard exchange algorithm from 1C via "
 "CommerceML. Exchanges only contains products data."
@@ -869,39 +884,67 @@ msgstr ""
 "Стандартный обмен данными с использованием стандартного алгоритма обмена от "
 "1С через CommerceML. Обмен содержит только данные о продуктах."
 
-#: includes/class-wc1c.php:1015
+#: includes/class-wc1c.php:1006
 msgid "Example tool"
 msgstr "Пример инструмента"
 
-#: includes/class-wc1c.php:1016
+#: includes/class-wc1c.php:1007
 msgid "A demo tool that does not carry any functional load."
 msgstr ""
 "Демонстрационный инструмент, который не несет никакой функциональной "
 "нагрузки."
 
-#: includes/functions-wc1c.php:368
+#: includes/functions-wc1c.php:388 includes/functions-wc1c.php:424
+msgid "Undefined"
+msgstr ""
+
+#: includes/functions-wc1c.php:394
 msgid "Draft"
 msgstr "Черновик"
 
-#: includes/functions-wc1c.php:369
+#: includes/functions-wc1c.php:395
 msgid "Active"
 msgstr "Включена"
 
-#: includes/functions-wc1c.php:370
+#: includes/functions-wc1c.php:396
 msgid "Inactive"
 msgstr "Отключена"
 
-#: includes/functions-wc1c.php:371
+#: includes/functions-wc1c.php:397
 msgid "Error"
 msgstr "Ошибка"
 
-#: includes/functions-wc1c.php:372
+#: includes/functions-wc1c.php:398
 msgid "Processing"
 msgstr "В процессе"
 
-#: includes/functions-wc1c.php:373
+#: includes/functions-wc1c.php:399
 msgid "Deleted"
 msgstr "Удалена"
+
+#: includes/functions-wc1c.php:430
+msgid "Drafts"
+msgstr "Черновики"
+
+#: includes/functions-wc1c.php:431
+msgid "Activated"
+msgstr "Включены"
+
+#: includes/functions-wc1c.php:432
+msgid "Deactivated"
+msgstr "Отключены"
+
+#: includes/functions-wc1c.php:433
+msgid "With errors"
+msgstr "С ошибками"
+
+#: includes/functions-wc1c.php:434
+msgid "In processing"
+msgstr "В процессе"
+
+#: includes/functions-wc1c.php:435
+msgid "Trash"
+msgstr "Удаленные"
 
 #: schemas/default/class-wc1c-schema-default.php:155
 msgid "Processing details"
@@ -1104,10 +1147,6 @@ msgstr "Имя файла пустое."
 msgid "Import filename is empty."
 msgstr "Имя файла импорта пустое."
 
-#: templates/admin_header.php:6
-msgid "New configuration"
-msgstr "Новая конфигурация"
-
 #: templates/configurations/404.php:3
 msgid "Configuration not found."
 msgstr "Конфигурация не найдена."
@@ -1141,9 +1180,17 @@ msgstr "Версия:"
 msgid "Extension ID:"
 msgstr "Идентификатор:"
 
+#: templates/header.php:6
+msgid "New configuration"
+msgstr "Новая конфигурация"
+
 #: templates/helps/bugs.php:24
 msgid "Report a bug"
 msgstr "Отчёт об ошибке"
+
+#: templates/helps/bugs.php:27
+msgid "Environments"
+msgstr "Окружения"
 
 #: templates/helps/features.php:30
 msgid "Request a feature"
@@ -1193,6 +1240,40 @@ msgstr ""
 #. Author of the plugin/theme
 msgid "WC1C team"
 msgstr "Команда WC1C"
+
+#~ msgid "All configurations"
+#~ msgstr "Все конфигурации"
+
+#~ msgid "Saving settings error. Please retry saving or change settings."
+#~ msgstr ""
+#~ "Ошибка сохранения настроек. Пожалуйста повторите сохранение или смените "
+#~ "настройки."
+
+#~ msgid "Technical parameters"
+#~ msgstr "Технические параметры"
+
+#~ msgid ""
+#~ "This API uses exchange schemas to receive requests from 1C and send data "
+#~ "there."
+#~ msgstr ""
+#~ "Этот API использует схемы для приема запросов от 1С и отправки туда "
+#~ "данных."
+
+#~ msgid "Admin inject"
+#~ msgstr "Внедрение в панель администратора"
+
+#~ msgid "Embedding information from the plugin in the admin panel interface."
+#~ msgstr "Встраивание информации из плагина в интерфейс админки."
+
+#~ msgid "Support extensions"
+#~ msgstr "Поддержка расширений"
+
+#~ msgid ""
+#~ "Support for external extensions. If disabled, all third-party extensions "
+#~ "will be unavailable."
+#~ msgstr ""
+#~ "Поддержка внешних расширений. Если этот параметр отключен, все сторонние "
+#~ "расширения будут недоступны."
 
 #~ msgid "Configurations not found. Add a new configuration via the menu."
 #~ msgstr "Конфигурации не найдены. Добавьте новую конфигурацию через меню."
