@@ -429,7 +429,7 @@ function wc1c_configurations_get_statuses_folder($status)
 		[
 			'draft' => __('Drafts', 'wc1c'),
 			'active' => __('Activated', 'wc1c'),
-			'inactive' => __('Inactive', 'wc1c'),
+			'inactive' => __('Deactivated', 'wc1c'),
 			'error' => __('With errors', 'wc1c'),
 			'processing' => __('In processing', 'wc1c'),
 			'deleted' => __('Trash', 'wc1c'),
