@@ -43,12 +43,12 @@
 
   .date_create
   {
-    max-width: 140px;
+    width: 130px;
   }
 
   .date_activity
   {
-    max-width: 140px;
+    width: 130px;
   }
 
   .name
@@ -144,23 +144,25 @@
 
   .column-configuration_id
   {
-
+      width: 44px;
   }
 
   .column-date_create
   {
     line-height: 1.3em;
-    max-width: 140px;
+    width: 130px;
   }
 
   .column-date_activity
   {
     line-height: 1.3em;
-    max-width: 140px;
+    width: 130px;
   }
 
   .column-schema
   {
     border-left: 1px solid #ccd0d4;
+
+    width: 111px;
   }
 }
