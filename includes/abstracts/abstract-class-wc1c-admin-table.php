@@ -7,7 +7,7 @@
  */
 defined('ABSPATH') || exit;
 
-abstract class Wc1c_Admin_Abstract_Table
+abstract class Abstract_Wc1c_Admin_Table
 {
 	/**
 	 * The current list of items
@@ -104,7 +104,7 @@ abstract class Wc1c_Admin_Abstract_Table
 
 		$this->screen = convert_to_screen($args['screen']);
 
-		add_filter("manage_{$this->screen->id}_columns", array($this, 'get_columns'), 0);
+		add_filter("manage_{$this->screen->id}_columns", [$this, 'get_columns'], 0);
 
 		if(!$args['plural'])
 		{
@@ -118,16 +118,16 @@ abstract class Wc1c_Admin_Abstract_Table
 
 		if($args['ajax'])
 		{
-			add_action('admin_footer', array($this, '_js_vars'));
+			add_action('admin_footer', [$this, '_js_vars']);
 		}
 
 		if(empty($this->modes))
 		{
-			$this->modes = array
-            (
+			$this->modes =
+            [
 				'list'    => __('List View'),
 				'excerpt' => __('Excerpt View'),
-			);
+			];
 		}
 	}
 
@@ -229,21 +229,21 @@ abstract class Wc1c_Admin_Abstract_Table
 			return;
 		}
 
-		$input_id = $input_id . '-search-input';
+		$input_id .= '-search-input';
 
-		if( ! empty($_REQUEST['orderby']))
+		if(!empty($_REQUEST['orderby']))
 		{
 			echo '<input type="hidden" name="orderby" value="' . esc_attr($_REQUEST['orderby']) . '" />';
 		}
-		if( ! empty($_REQUEST['order']))
+		if(!empty($_REQUEST['order']))
 		{
 			echo '<input type="hidden" name="order" value="' . esc_attr($_REQUEST['order']) . '" />';
 		}
-		if( ! empty($_REQUEST['post_mime_type']))
+		if(!empty($_REQUEST['post_mime_type']))
 		{
 			echo '<input type="hidden" name="post_mime_type" value="' . esc_attr($_REQUEST['post_mime_type']) . '" />';
 		}
-		if( ! empty($_REQUEST['detached']))
+		if(!empty($_REQUEST['detached']))
 		{
 			echo '<input type="hidden" name="detached" value="' . esc_attr($_REQUEST['detached']) . '" />';
 		}
@@ -315,7 +315,7 @@ abstract class Wc1c_Admin_Abstract_Table
 	 * Display the bulk actions dropdown
 	 *
 	 * @param string $which The location of the bulk actions: 'top' or 'bottom'.
-	 *                      This is designated as optional for backward compatibility.
+	 * This is designated as optional for backward compatibility.
 	 */
 	protected function bulk_actions($which = '')
 	{
@@ -332,7 +332,6 @@ abstract class Wc1c_Admin_Abstract_Table
 			 * This filter can currently only be used to remove bulk actions.
 			 *
 			 * @param string[] $actions An array of the available bulk actions
-			 *
 			 */
 			$this->_actions = apply_filters("bulk_actions-{$this->screen->id}", $this->_actions);
 			$two = '';
@@ -376,12 +375,12 @@ abstract class Wc1c_Admin_Abstract_Table
 			return false;
 		}
 
-		if(isset($_REQUEST['action']) && -1 != $_REQUEST['action'])
+		if(isset($_REQUEST['action']) && -1 !== $_REQUEST['action'])
 		{
 			return $_REQUEST['action'];
 		}
 
-		if(isset($_REQUEST['action2']) && -1 != $_REQUEST['action2'])
+		if(isset($_REQUEST['action2']) && -1 !== $_REQUEST['action2'])
 		{
 			return $_REQUEST['action2'];
 		}
@@ -402,7 +401,7 @@ abstract class Wc1c_Admin_Abstract_Table
 		$action_count = count($actions);
 		$i = 0;
 
-		if( ! $action_count)
+		if(!$action_count)
 		{
 			return '';
 		}
@@ -411,7 +410,9 @@ abstract class Wc1c_Admin_Abstract_Table
 		foreach($actions as $action => $link)
 		{
 			++$i;
-			($i == $action_count) ? $sep = '' : $sep = ' | ';
+
+			($i === $action_count) ? $sep = '' : $sep = ' | ';
+
 			$out .= "<span class='$action'>$link$sep</span>";
 		}
 		$out .= '</div>';
@@ -458,14 +459,14 @@ abstract class Wc1c_Admin_Abstract_Table
 	 */
 	public function get_pagenum()
 	{
-		$pagenum = isset($_REQUEST['paged']) ? absint($_REQUEST['paged']) : 0;
+		$page_num = isset($_REQUEST['paged']) ? absint($_REQUEST['paged']) : 0;
 
-		if(isset($this->_pagination_args['total_pages']) && $pagenum > $this->_pagination_args['total_pages'])
+		if(isset($this->_pagination_args['total_pages']) && $page_num > $this->_pagination_args['total_pages'])
 		{
-			$pagenum = $this->_pagination_args['total_pages'];
+			$page_num = $this->_pagination_args['total_pages'];
 		}
 
-		return max(1, $pagenum);
+		return max(1, $page_num);
 	}
 
 	/**
@@ -548,21 +549,21 @@ abstract class Wc1c_Admin_Abstract_Table
 		$disable_prev  = false;
 		$disable_next  = false;
 
-		if($current == 1)
+		if($current === 1)
 		{
 			$disable_first = true;
 			$disable_prev  = true;
 		}
-		if($current == 2)
+		if($current === 2)
 		{
 			$disable_first = true;
 		}
-		if($current == $total_pages)
+		if($current === $total_pages)
 		{
 			$disable_last = true;
 			$disable_next = true;
 		}
-		if($current == $total_pages - 1)
+		if($current === $total_pages - 1)
 		{
 			$disable_last = true;
 		}
@@ -570,7 +571,8 @@ abstract class Wc1c_Admin_Abstract_Table
 		if($disable_first)
 		{
 			$page_links[] = '<span class="tablenav-pages-navspan button disabled" aria-hidden="true">&laquo;</span>';
-		} else
+		}
+		else
 		{
 			$page_links[] = sprintf(
 				"<a class='first-page button' href='%s'><span class='screen-reader-text'>%s</span><span aria-hidden='true'>%s</span></a>",
@@ -652,7 +654,7 @@ abstract class Wc1c_Admin_Abstract_Table
 			$pagination_links_class .= ' hide-if-js';
 		}
 
-		$output .= "\n<span class='$pagination_links_class'>" . join("\n", $page_links) . '</span>';
+		$output .= "\n<span class='$pagination_links_class'>" . implode("\n", $page_links) . '</span>';
 
 		if($total_pages)
 		{
@@ -740,7 +742,6 @@ abstract class Wc1c_Admin_Abstract_Table
 		 *
 		 * @param string $default Column name default for the specific list table, e.g. 'name'.
 		 * @param string $context Screen ID for specific list table, e.g. 'plugins'.
-		 *
 		 */
 		$column = apply_filters('list_table_primary_column', $default, $this->screen->id);
 
@@ -796,7 +797,7 @@ abstract class Wc1c_Admin_Abstract_Table
 			}
 
 			$data = (array) $data;
-			if( ! isset($data[1]))
+			if(!isset($data[1]))
 			{
 				$data[1] = false;
 			}
@@ -840,7 +841,8 @@ abstract class Wc1c_Admin_Abstract_Table
 		if(isset($_GET['orderby']))
 		{
 			$current_orderby = $_GET['orderby'];
-		} else
+		}
+		else
 		{
 			$current_orderby = '';
 		}
@@ -848,7 +850,8 @@ abstract class Wc1c_Admin_Abstract_Table
 		if(isset($_GET['order']) && 'desc' === $_GET['order'])
 		{
 			$current_order = 'desc';
-		} else
+		}
+		else
 		{
 			$current_order = 'asc';
 		}
@@ -873,7 +876,8 @@ abstract class Wc1c_Admin_Abstract_Table
 			if('cb' === $column_key)
 			{
 				$class[] = 'check-column';
-			} elseif(in_array($column_key, array('posts', 'comments', 'links')))
+			}
+			elseif(in_array($column_key, array('posts', 'comments', 'links')))
 			{
 				$class[] = 'num';
 			}
@@ -892,7 +896,8 @@ abstract class Wc1c_Admin_Abstract_Table
 					$order   = 'asc' === $current_order ? 'desc' : 'asc';
 					$class[] = 'sorted';
 					$class[] = $current_order;
-				} else
+				}
+				else
 				{
 					$order   = $desc_first ? 'desc' : 'asc';
 					$class[] = 'sortable';
@@ -902,13 +907,13 @@ abstract class Wc1c_Admin_Abstract_Table
 				$column_display_name = '<a href="' . esc_url(add_query_arg(compact('orderby', 'order'), $current_url)) . '"><span>' . $column_display_name . '</span><span class="sorting-indicator"></span></a>';
 			}
 
-			$tag   = ('cb' === $column_key) ? 'td' : 'th';
+			$tag = ('cb' === $column_key) ? 'td' : 'th';
 			$scope = ('th' === $tag) ? 'scope="col"' : '';
-			$id    = $with_id ? "id='$column_key'" : '';
+			$id = $with_id ? "id='$column_key'" : '';
 
 			if( ! empty($class))
 			{
-				$class = "class='" . join(' ', $class) . "'";
+				$class = "class='" . implode(' ', $class) . "'";
 			}
 
 			echo "<$tag $scope $id $class>$column_display_name</$tag>";
@@ -999,7 +1004,7 @@ abstract class Wc1c_Admin_Abstract_Table
 	 *
 	 * @param string $which
 	 */
-	protected function extra_tablenav( $which ) {}
+	protected function extra_tablenav($which) {}
 
 	/**
 	 * Generate the tbody element for the list table
@@ -1064,12 +1069,13 @@ abstract class Wc1c_Admin_Abstract_Table
 		foreach($columns as $column_name => $column_display_name)
 		{
 			$classes = "$column_name column-$column_name";
+
 			if($primary === $column_name)
 			{
 				$classes .= ' has-row-actions column-primary';
 			}
 
-			if(in_array($column_name, $hidden))
+			if(in_array($column_name, $hidden, true))
 			{
 				$classes .= ' hidden';
 			}
@@ -1088,18 +1094,12 @@ abstract class Wc1c_Admin_Abstract_Table
 			}
 			elseif(method_exists($this, '_column_' . $column_name))
 			{
-				echo call_user_func(
-					array($this, '_column_' . $column_name),
-					$item,
-					$classes,
-					$data,
-					$primary
-				);
+				echo $this->{'_column_' . $column_name}($item, $classes, $data, $primary);
 			}
 			elseif(method_exists($this, 'column_' . $column_name))
 			{
 				echo "<td $attributes>";
-				echo call_user_func(array($this, 'column_' . $column_name), $item);
+				echo $this->{'column_' . $column_name}($item);
 				echo $this->handle_row_actions($item, $column_name, $primary);
 				echo '</td>';
 			}
@@ -1135,6 +1135,7 @@ abstract class Wc1c_Admin_Abstract_Table
 		$this->prepare_items();
 
 		ob_start();
+
 		if(!empty($_REQUEST['no_placeholder']))
 		{
 			$this->display_rows();
@@ -1146,7 +1147,7 @@ abstract class Wc1c_Admin_Abstract_Table
 
 		$rows = ob_get_clean();
 
-		$response = array('rows' => $rows);
+		$response = ['rows' => $rows];
 
 		if(isset($this->_pagination_args['total_items']))
 		{
@@ -1158,7 +1159,7 @@ abstract class Wc1c_Admin_Abstract_Table
 		}
 		if(isset($this->_pagination_args['total_pages']))
 		{
-			$response['total_pages']      = $this->_pagination_args['total_pages'];
+			$response['total_pages'] = $this->_pagination_args['total_pages'];
 			$response['total_pages_i18n'] = number_format_i18n($this->_pagination_args['total_pages']);
 		}
 
@@ -1170,13 +1171,14 @@ abstract class Wc1c_Admin_Abstract_Table
 	 */
 	public function _js_vars()
     {
-	    $args = array(
+	    $args = [
 		    'class'  => get_class($this),
-		    'screen' => array(
+		    'screen' =>
+            [
 			    'id'   => $this->screen->id,
 			    'base' => $this->screen->base,
-		    ),
-	    );
+		    ],
+	    ];
 
 	    printf("<script type='text/javascript'>list_args = %s;</script>\n", wp_json_encode($args));
 	}
