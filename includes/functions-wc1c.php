@@ -692,5 +692,5 @@ function wc1c_admin_configurations_get_url($action = 'list', $configuration_id =
  */
 function wc1c_admin_back_link($label, $url)
 {
-	echo '<h2 style="margin-bottom: 20px;margin-top: 10px;">' . esc_attr($label) . '<small class="wc-admin-breadcrumb" style="margin-left: 10px;"><a href="' . esc_url($url) . '" aria-label="' . esc_attr($label) . '"> &#x2934;</a></small></h2>';
+	echo '<h2 style="margin-bottom: 20px;margin-top: 15px;">' . esc_attr($label) . '<small class="wc-admin-breadcrumb" style="margin-left: 10px;"><a href="' . esc_url($url) . '" aria-label="' . esc_attr($label) . '"> &#x2934;</a></small></h2>';
 }
