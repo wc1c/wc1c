@@ -6,399 +6,251 @@
  */
 defined('ABSPATH') || exit;
 
-class Wc1c_Configuration
+class Wc1c_Configuration extends Abstract_Wc1c_Data_Configurations
 {
 	/**
-	 * Raw data
+	 * Default data
 	 *
 	 * @var array
 	 */
-	private $data;
-
-	/**
-	 * Available configuration statuses
-	 */
-	private $available_statuses =
+	protected $data =
 	[
-		'draft', 'active', 'inactive', 'error', 'processing'
+		'name' => '',
+		'status' => 'draft',
+		'options' => [],
+		'schema' => 'default',
+		'date_create' => null,
+		'date_modify' => null,
+		'date_activity' => null,
 	];
 
 	/**
 	 * Wc1c_Configuration constructor
 	 *
-	 * @param array
+	 * @param int|object $configuration
+	 *
+	 * @throws Wc1c_Exception|Exception
 	 */
-	public function __construct($data = [])
+	public function __construct($configuration = 0)
 	{
-		if(!empty($data) && is_array($data))
+		parent::__construct();
+
+		if(is_numeric($configuration) && $configuration > 0)
 		{
-			$this->set_data($data);
+			$this->set_id($configuration);
+		}
+		elseif($configuration instanceof self)
+		{
+			$this->set_id(absint($configuration->get_id()));
+		}
+		else
+		{
+			$this->set_object_read(true);
+		}
+
+		$this->storage = Wc1c_Data_Storage::load($this->object_type);
+
+		if($this->get_id() > 0)
+		{
+			$this->storage->read($this);
 		}
 	}
 
 	/**
-	 * Load raw data
+	 * Get name
 	 *
-	 * @param $data
+	 * @param string $context What the value is for. Valid values are view and edit
 	 *
-	 * @return $this
+	 * @return string
 	 */
-	public function set_data($data)
+	public function get_name($context = 'view')
 	{
-		$this->data = $data;
-
-		return $this;
+		return $this->get_prop('name', $context);
 	}
 
 	/**
-	 * Get configuration id
+	 * Set name
 	 *
-	 * @return mixed
-	 */
-	public function get_id()
-	{
-		if(isset($this->data['config_id']))
-		{
-			return apply_filters('wc1c_configuration_get_id', $this->data['config_id']);
-		}
-
-		return false;
-	}
-
-	/**
-	 * Set configuration id
-	 *
-	 * @param $name
-	 *
-	 * @return $this
-	 */
-	public function set_id($name)
-	{
-		$this->data['config_id'] = $name;
-
-		return $this;
-	}
-
-	/**
-	 * @param bool $id
-	 *
-	 * @throws Exception
-	 *
-	 * @return bool
-	 */
-	public function load($id = false)
-	{
-		if(false === $id)
-		{
-			$id = $this->get_id();
-		}
-
-		$config_query = 'SELECT * from ' . WC1C_Db()->base_prefix . 'wc1c WHERE config_id = ' . $id;
-		$config_results = WC1C_Db()->get_results($config_query, ARRAY_A);
-
-		if(empty($config_results))
-		{
-			throw new Exception('load: configuration not found');
-		}
-
-		$this->set_data($config_results[0]);
-
-		return true;
-	}
-
-	/**
-	 * Get configuration name
-	 *
-	 * @return string|false
-	 */
-	public function get_name()
-	{
-		if(isset($this->data['config_name']))
-		{
-			return apply_filters('wc1c_configuration_get_name', $this->data['config_name']);
-		}
-
-		return false;
-	}
-
-	/**
-	 * Get configuration statuses
-	 *
-	 * @return array
-	 */
-	public function get_available_statuses()
-	{
-		return $this->available_statuses;
-	}
-
-	/**
-	 * Set configuration statuses
-	 *
-	 * @param array $available_statuses
-	 *
-	 * @return $this
-	 */
-	public function set_available_statuses($available_statuses)
-	{
-		$this->available_statuses = $available_statuses;
-
-		return $this;
-	}
-
-	/**
-	 * Set configuration name
-	 *
-	 * @param $name
-	 *
-	 * @return $this
+	 * @param string $name name
 	 */
 	public function set_name($name)
 	{
-		$this->data['config_name'] = $name;
-
-		return $this;
+		$this->set_prop('name', $name);
 	}
 
 	/**
-	 * Set configuration status
+	 * Get status
 	 *
-	 * @param $status
+	 * @param string $context What the value is for. Valid values are view and edit
 	 *
-	 * @return $this
+	 * @return string
 	 */
-	public function set_status($status)
+	public function get_status($context = 'view')
 	{
-		$this->data['status'] = $status;
-
-		return $this;
+		return $this->get_prop('status', $context);
 	}
 
 	/**
-	 * Get configuration status
+	 * Set status
 	 *
-	 * @return mixed
+	 * @param string $name status
 	 */
-	public function get_status()
+	public function set_status($name)
 	{
-		if(isset($this->data['status']))
-		{
-			return $this->data['status'];
-		}
-
-		return false;
+		$this->set_prop('status', $name);
 	}
 
 	/**
-	 * Get configuration schema
+	 * Get options
 	 *
-	 * @return mixed
+	 * @param string $context What the value is for. Valid values are view and edit
+	 *
+	 * @return null|string
 	 */
-	public function get_schema()
+	public function get_options($context = 'view')
 	{
-		if(isset($this->data['schema']))
-		{
-			return $this->data['schema'];
-		}
-
-		return false;
+		return $this->get_prop('options', $context);
 	}
 
 	/**
-	 * Get configuration options
+	 * Set options
 	 *
-	 * @return mixed
+	 * @param null|string $name options
 	 */
-	public function get_options()
+	public function set_options($name)
 	{
-		return maybe_unserialize($this->data['options']);
+		$this->set_prop('options', $name);
 	}
 
 	/**
-	 * Set configuration options
+	 * Get schema
 	 *
-	 * @param $options
+	 * @param string $context What the value is for. Valid values are view and edit
 	 *
-	 * @return $this
+	 * @return string
 	 */
-	public function set_options($options)
+	public function get_schema($context = 'view')
 	{
-		$this->data['options'] = maybe_serialize($options);
-
-		return $this;
+		return $this->get_prop('schema', $context);
 	}
 
 	/**
-	 * Get configuration create date
+	 * Set schema
 	 *
-	 * @return mixed
+	 * @param string $name schema id
 	 */
-	public function get_date_create()
+	public function set_schema($name)
 	{
-		if(isset($this->data['date_create']))
-		{
-			return $this->data['date_create'];
-		}
-
-		return false;
+		$this->set_prop('schema', $name);
 	}
 
 	/**
-	 * Get configuration modify date
+	 * Get created date
 	 *
-	 * @return mixed
+	 * @param string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return Wc1c_Datetime|NULL object if the date is set or null if there is no date.
 	 */
-	public function get_date_modify()
+	public function get_date_create($context = 'view')
 	{
-		if(isset($this->data['date_modify']))
-		{
-			return $this->data['date_modify'];
-		}
-
-		return false;
+		return $this->get_prop('date_create', $context);
 	}
 
 	/**
-	 * Get configuration activity date
+	 * Get modified date
 	 *
-	 * @return mixed
+	 * @param string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return Wc1c_Datetime|NULL object if the date is set or null if there is no date.
 	 */
-	public function get_date_activity()
+	public function get_date_modify($context = 'view')
 	{
-		if(isset($this->data['date_activity']))
-		{
-			return $this->data['date_activity'];
-		}
-
-		return false;
+		return $this->get_prop('date_modify', $context);
 	}
 
 	/**
-	 * Set configuration activity date
+	 * Get activity date
 	 *
-	 * @param mixed $date_activity
+	 * @param string $context What the value is for. Valid values are view and edit.
 	 *
-	 * @return $this
+	 * @return Wc1c_Datetime|NULL object if the date is set or null if there is no date.
 	 */
-	public function set_date_activity($date_activity = null)
+	public function get_date_activity($context = 'view')
 	{
-		if(is_null($date_activity))
-		{
-			$date_activity = current_time('mysql');
-		}
-
-		$this->data['date_activity'] = $date_activity;
-
-		return $this;
+		return $this->get_prop('date_activity', $context);
 	}
 
 	/**
-	 * Set configuration modify date
+	 * Set created date
 	 *
-	 * @param mixed $date_modify
+	 * @param string|integer|null $date UTC timestamp, or ISO 8601 DateTime.
+	 * If the DateTime string has no timezone or
+	 * offset, WordPress site timezone will be assumed. Null if their is no date.
 	 *
-	 * @return $this
+	 * @throws Wc1c_Exception
 	 */
-	public function set_date_modify($date_modify = null)
+	public function set_date_create($date = null)
 	{
-		if(is_null($date_modify))
-		{
-			$date_modify = current_time('mysql');
-		}
-
-		$this->data['date_modify'] = $date_modify;
-
-		return $this;
+		$this->set_date_prop('date_create', $date);
 	}
 
 	/**
-	 * Set configuration create date
+	 * Set modified date
 	 *
-	 * @param mixed $date_create
+	 * @param string|integer|null $date UTC timestamp, or ISO 8601 DateTime.
+	 * If the DateTime string has no timezone or
+	 * offset, WordPress site timezone will be assumed. Null if their is no date.
 	 *
-	 * @return $this
+	 * @throws Wc1c_Exception
 	 */
-	public function set_date_create($date_create = null)
+	public function set_date_modify($date = null)
 	{
-		if(is_null($date_create))
-		{
-			$date_create = current_time('mysql');
-		}
-
-		$this->data['date_create'] = $date_create;
-
-		return $this;
+		$this->set_date_prop('date_modify', $date);
 	}
 
 	/**
-	 * Get configuration raw data
+	 * Set activity date
 	 *
-	 * @return mixed
+	 * @param string|integer|null $date UTC timestamp, or ISO 8601 DateTime.
+	 * If the DateTime string has no timezone or
+	 * offset, WordPress site timezone will be assumed. Null if their is no date.
+	 *
+	 * @throws Wc1c_Exception
 	 */
-	public function get_data()
+	public function set_date_activity($date = null)
 	{
-		return $this->data;
+		$this->set_date_prop('date_activity', $date);
 	}
 
 	/**
-	 * Check configuration
+	 * Returns if configuration is active.
 	 *
-	 * @return bool
+	 * @return bool True if validation passes.
 	 */
-	public function check()
+	public function is_active()
 	{
-		$name = $this->get_name();
-
-		/**
-		 * Name is empty
-		 */
-		if(false === $name || '' === $name)
-		{
-			return false;
-		}
-
-		return true;
+		return $this->is_status('active');
 	}
 
 	/**
-	 * Update or create configuration data to db
+	 * Returns if configuration is inactive.
 	 *
-	 * @return boolean
+	 * @return bool True if validation passes.
 	 */
-	public function save()
+	public function is_inactive()
 	{
-		if(true !== $this->check())
-		{
-			return false;
-		}
+		return $this->is_status('inactive');
+	}
 
-		if(false === $this->get_id())
-		{
-			$this->set_date_create(current_time('mysql'));
-			$this->set_date_modify(current_time('mysql'));
-			$this->set_date_activity(current_time('mysql'));
-
-			$insert_result = WC1C_Db()->insert(WC1C_Db()->base_prefix . 'wc1c', $this->get_data());
-
-			if(false !== $insert_result)
-			{
-				return true;
-			}
-
-			return false;
-		}
-
-		$update_result = WC1C_Db()->update(WC1C_Db()->base_prefix . 'wc1c', $this->get_data(),
-		    [
-				'config_id' => $this->get_id(),
-				//'site_id' => '0'
-			]
-		);
-
-		if(false !== $update_result || 0 !== $update_result)
-		{
-			return true;
-		}
-
-		return false;
+	/**
+	 * Returns if configuration is status.
+	 *
+	 * @param string $status
+	 *
+	 * @return bool True if validation passes.
+	 */
+	public function is_status($status = 'active')
+	{
+		return $status === $this->get_status();
 	}
 }
