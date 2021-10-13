@@ -163,6 +163,12 @@ class Wc1c_Admin_Configurations_List_Table extends Abstract_Wc1c_Admin_Table
 			'remove' => '<a href="' . wc1c_admin_configurations_get_url('remove', $item['configuration_id']) . '">' . __('Remove', 'wc1c') . '</a>',
 		];
 
+		if('deleted' === $item['status'])
+		{
+			unset($actions['update']);
+			$actions['remove'] = '<a href="' . wc1c_admin_configurations_get_url('remove', $item['configuration_id']) . '">' . __('Remove forever', 'wc1c') . '</a>';
+		}
+
 		return sprintf( '%1$s <br/> %2$s',
 			/*$1%s*/
 			$item['name'],
