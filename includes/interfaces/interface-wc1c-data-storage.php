@@ -6,7 +6,7 @@
  */
 defined('ABSPATH') || exit;
 
-interface Interface_Wc1c_Storage
+interface Interface_Wc1c_Data_Storage
 {
 	/**
 	 * Method to create a new record

@@ -6,7 +6,7 @@
  */
 defined('ABSPATH') || exit;
 
-class Wc1c_Configuration extends Abstract_Wc1c_Data_Configurations
+class Wc1c_Configuration extends Abstract_Wc1c_Data_Configuration
 {
 	/**
 	 * Default data
