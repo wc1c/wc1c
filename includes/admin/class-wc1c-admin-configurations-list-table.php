@@ -105,7 +105,7 @@ class Wc1c_Admin_Configurations_List_Table extends Abstract_Wc1c_Admin_Table
 			);
 		}
 
-		return '-';
+		return __('No activity', 'wc1c');
 	}
 
 	/**
