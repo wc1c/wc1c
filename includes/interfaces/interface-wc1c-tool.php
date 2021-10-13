@@ -35,4 +35,11 @@ interface Interface_Wc1c_Tool
 	 * @return mixed
 	 */
 	public function init();
+
+	/**
+	 * Output interface
+	 *
+	 * @return mixed
+	 */
+	public function output();
 }
