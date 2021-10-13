@@ -2,7 +2,7 @@
 /**
  * Main exception class
  *
- * @package Wc1c/Exceptons
+ * @package Wc1c/Exceptions
  */
 defined('ABSPATH') || exit;
 
