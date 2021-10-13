@@ -9,6 +9,11 @@ defined('ABSPATH') || exit;
 class Wc1c_Admin_Help
 {
 	/**
+	 * Singleton
+	 */
+	use Trait_Wc1c_Singleton;
+
+	/**
 	 * Hook in tabs.
 	 */
 	public function __construct()
