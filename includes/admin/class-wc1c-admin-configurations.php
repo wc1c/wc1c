@@ -18,7 +18,13 @@ class Wc1c_Admin_Configurations
 	 *
 	 * @var array
 	 */
-	private $actions = [];
+	private $actions =
+	[
+		'list',
+		'create',
+		'update',
+		'remove'
+	];
 
 	/**
 	 * Current action
@@ -32,13 +38,7 @@ class Wc1c_Admin_Configurations
 	 */
 	public function __construct()
 	{
-		$actions =
-		[
-			'list',
-			'create',
-			'update',
-			'remove'
-		];
+		$actions = apply_filters('wc1c_admin_configurations_init_actions', $this->actions);
 
 		$this->set_actions($actions);
 
@@ -60,14 +60,6 @@ class Wc1c_Admin_Configurations
 		}
 
 		add_action('wc1c_admin_body_show', [$this, 'output'], 10);
-	}
-
-	/**
-	 * Output page
-	 */
-	public function output()
-	{
-		wc1c_get_template('configurations/page.php');
 	}
 
 	/**
@@ -131,5 +123,13 @@ class Wc1c_Admin_Configurations
 		$current_action = apply_filters('wc1c_admin_configurations_set_current_action', $current_action);
 
 		$this->current_action = $current_action;
+	}
+
+	/**
+	 * Output page
+	 */
+	public function output()
+	{
+		wc1c_get_template('configurations/page.php');
 	}
 }
