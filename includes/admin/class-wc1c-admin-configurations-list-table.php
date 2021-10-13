@@ -78,10 +78,33 @@ class Wc1c_Admin_Configurations_List_Table extends Abstract_Wc1c_Admin_Table
 			case 'date_create':
 			case 'date_activity':
 			case 'date_modify':
-			return sprintf(__('%s <br/><span class="wc1c-time">Time: %s</span>', 'wc1c'), date_i18n('d/m/Y', strtotime($item[$column_name])), date_i18n('H:i:s', strtotime($item[$column_name])));
+				return $this->pretty_date_columns($item, $column_name);
 			default:
 				return print_r($item, true);
 		}
+	}
+
+	/**
+	 * @param $item
+	 * @param $column_name
+	 *
+	 * @return string
+	 */
+	private function pretty_date_columns($item, $column_name)
+	{
+		$date = $item[$column_name];
+
+		if(!empty($date))
+		{
+			return sprintf
+			(
+				__('%s <br/><span class="wc1c-time">Time: %s</span>', 'wc1c'),
+				date_i18n('d/m/Y', strtotime($date)),
+				date_i18n('H:i:s', strtotime($date))
+			);
+		}
+
+		return '-';
 	}
 
 	/**
