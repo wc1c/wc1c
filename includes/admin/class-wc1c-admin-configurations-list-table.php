@@ -13,7 +13,7 @@ class Wc1c_Admin_Configurations_List_Table extends Abstract_Wc1c_Admin_Table
 	 *
 	 * @var Wc1c_Data_Storage_Configurations
 	 */
-	public $storage_configurations = null;
+	public $storage_configurations;
 
 	/**
 	 * Wc1c_Admin_Configurations_List_Table constructor
