@@ -9,6 +9,18 @@ defined('ABSPATH') || exit;
 class Wc1c_Admin_Configurations
 {
 	/**
+	 * Singleton
+	 */
+	use Trait_Wc1c_Singleton;
+
+	/**
+	 * Available actions
+	 *
+	 * @var array
+	 */
+	private $actions = [];
+
+	/**
 	 * Current action
 	 *
 	 * @var string
@@ -16,60 +28,52 @@ class Wc1c_Admin_Configurations
 	private $current_action = 'list';
 
 	/**
-	 * Available actions
-	 *
-	 * @var array
-	 */
-	private $actions = array
-	(
-		'list',
-		'create',
-		'update',
-		'remove'
-	);
-
-	/**
 	 * Wc1c_Admin_Configurations constructor
 	 */
 	public function __construct()
 	{
-		$this->includes();
-		$this->init_current_action();
+		$actions =
+		[
+			'list',
+			'create',
+			'update',
+			'remove'
+		];
 
-		$current_action = $this->get_current_action();
+		$this->set_actions($actions);
 
-		switch ($current_action)
+		$current_action = $this->init_current_action();
+
+		switch($current_action)
 		{
 			case 'create':
-				new Wc1c_Admin_Configurations_Create();
+				Wc1c_Admin_Configurations_Create::instance();
 				break;
 			case 'update':
-				new Wc1c_Admin_Configurations_Update();
+				Wc1c_Admin_Configurations_Update::instance();
 				break;
 			case 'remove':
-				new Wc1c_Admin_Configurations_Remove();
-				break;
-			case 'list':
-				new Wc1c_Admin_Configurations_List();
+				Wc1c_Admin_Configurations_Remove::instance();
 				break;
 			default:
-				wc1c_get_template('configurations/404.php');
+				Wc1c_Admin_Configurations_List::instance();
 		}
+
+		add_action('wc1c_admin_body_show', [$this, 'output'], 10);
 	}
 
 	/**
-	 * Include required files
+	 * Output page
 	 */
-	public function includes()
+	public function output()
 	{
-		include_once WC1C_PLUGIN_PATH . 'includes/admin/configurations/class-wc1c-admin-configurations-list.php';
-		include_once WC1C_PLUGIN_PATH . 'includes/admin/configurations/class-wc1c-admin-configurations-create.php';
-		include_once WC1C_PLUGIN_PATH . 'includes/admin/configurations/class-wc1c-admin-configurations-remove.php';
-		include_once WC1C_PLUGIN_PATH . 'includes/admin/configurations/class-wc1c-admin-configurations-update.php';
+		wc1c_get_template('configurations/page.php');
 	}
 
 	/**
-	 * Current action detect
+	 * Detect current action
+	 *
+	 * @return string
 	 */
 	public function init_current_action()
 	{
@@ -79,6 +83,8 @@ class Wc1c_Admin_Configurations
 		{
 			$this->set_current_action($do_action);
 		}
+
+		return $this->get_current_action();
 	}
 
 	/**
@@ -88,7 +94,7 @@ class Wc1c_Admin_Configurations
 	 */
 	public function get_actions()
 	{
-		return $this->actions;
+		return apply_filters('wc1c_admin_configurations_get_actions', $this->actions);
 	}
 
 	/**
@@ -98,6 +104,9 @@ class Wc1c_Admin_Configurations
 	 */
 	public function set_actions($actions)
 	{
+		// hook
+		$actions = apply_filters('wc1c_admin_configurations_set_actions', $actions);
+
 		$this->actions = $actions;
 	}
 
@@ -108,7 +117,7 @@ class Wc1c_Admin_Configurations
 	 */
 	public function get_current_action()
 	{
-		return $this->current_action;
+		return apply_filters('wc1c_admin_configurations_get_current_action', $this->current_action);
 	}
 
 	/**
@@ -118,6 +127,9 @@ class Wc1c_Admin_Configurations
 	 */
 	public function set_current_action($current_action)
 	{
+		// hook
+		$current_action = apply_filters('wc1c_admin_configurations_set_current_action', $current_action);
+
 		$this->current_action = $current_action;
 	}
 }
