@@ -6,7 +6,7 @@
 	<div class="col-24 col-lg-17 p-0 order-2 order-lg-1">
         <?php
             $label = __('Back to configurations list', 'wc1c');
-            $url = wc1c_admin_get_configuration_url('list');
+            $url = wc1c_admin_configurations_get_url('list');
             wc1c_admin_back_link($label, $url);
         ?>
 
