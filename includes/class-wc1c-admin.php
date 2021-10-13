@@ -109,9 +109,6 @@ final class Wc1c_Admin
 		// hook
 		do_action('wc1c_admin_before_init');
 
-		/**
-		 * Admin inject
-		 */
 		if('yes' === WC1C()->settings()->get('admin_inject', 'yes'))
 		{
 			Wc1c_Admin_Inject::instance();
@@ -119,14 +116,8 @@ final class Wc1c_Admin
 
 		if(is_wc1c_admin_request())
 		{
-			/**
-			 * Helps
-			 */
 			Wc1c_Admin_Help::instance();
 
-			/**
-			 * Sections
-			 */
 			$this->init_current_section();
 			$this->init_sections();
 		}
@@ -214,7 +205,7 @@ final class Wc1c_Admin
 	}
 
 	/**
-	 * Route
+	 * Route sections
 	 */
 	public function route_sections()
 	{
@@ -265,7 +256,7 @@ final class Wc1c_Admin
 	 *
 	 * @return string
 	 */
-	public function page_tabs() //todo: template
+	public function page_tabs()
 	{
 		$nav = '<nav class="nav-tab-wrapper woo-nav-tab-wrapper">';
 
