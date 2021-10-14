@@ -157,7 +157,7 @@ class Wc1c_Environment
 	/**
 	 * Get all data
 	 *
-	 * @return mixed
+	 * @return array
 	 */
 	public function get_data()
 	{
@@ -167,7 +167,7 @@ class Wc1c_Environment
 	/**
 	 * Set all data
 	 *
-	 * @param mixed $data
+	 * @param array $data
 	 */
 	public function set_data($data)
 	{
