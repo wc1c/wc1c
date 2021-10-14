@@ -9,17 +9,14 @@ defined('ABSPATH') || exit;
 class Wc1c_Admin_Inject
 {
 	/**
+	 * Singleton
+	 */
+	use Trait_Wc1c_Singleton;
+
+	/**
 	 * Wc1c_Admin_Inject constructor
 	 */
 	public function __construct()
-	{
-		$this->init();
-	}
-
-	/**
-	 * Initialization
-	 */
-	public function init()
 	{
 		$this->init_hooks();
 	}
@@ -29,16 +26,14 @@ class Wc1c_Admin_Inject
 	 */
 	private function init_hooks()
 	{
-		if('yes' !== WC1C()->settings()->get('admin_inject', 'yes'))
-		{
-			return;
-		}
-
 		if('yes' === WC1C()->settings()->get('admin_inject', 'yes'))
 		{
 			add_filter('manage_edit-product_columns',  array($this, 'manage_edit_product_columns'));
 			add_action('manage_product_posts_custom_column', array($this, 'manage_product_posts_custom_column'));
+		}
 
+		if('yes' === WC1C()->settings()->get('admin_inject', 'yes'))
+		{
 			add_filter('manage_edit-product_cat_columns', array($this, 'manage_edit_taxonomy_columns'));
 			add_filter('manage_product_cat_custom_column', array($this, 'manage_taxonomy_custom_column'), 10, 3);
 		}
