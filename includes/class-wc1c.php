@@ -6,10 +6,10 @@
  */
 defined('ABSPATH') || exit;
 
-final class Wc1c
+final class Wc1c implements Interface_Wc1c
 {
 	/**
-	 * Traits
+	 * Singleton
 	 */
 	use Trait_Wc1c_Singleton;
 
@@ -18,35 +18,42 @@ final class Wc1c
 	 *
 	 * @var Wc1c_Timer
 	 */
-	private $timer = null;
+	private $timer;
 
 	/**
 	 * Logger
 	 *
 	 * @var Wc1c_Logger
 	 */
-	private $logger = null;
+	private $logger;
 
 	/**
 	 * Plugin environment
 	 *
 	 * @var Wc1c_Environment
 	 */
-	private $environment = null;
-
-	/**
-	 * Database
-	 *
-	 * @var Wc1c_Database
-	 */
-	private $database = null;
+	private $environment;
 
 	/**
 	 * Plugin settings
 	 *
 	 * @var Wc1c_Settings
 	 */
-	private $settings = null;
+	private $settings;
+
+	/**
+	 * Database
+	 *
+	 * @var Wc1c_Database
+	 */
+	private $database;
+
+	/**
+	 * Plugin api
+	 *
+	 * @var Wc1c_Api
+	 */
+	private $api;
 
 	/**
 	 * All loaded configurations
@@ -77,20 +84,6 @@ final class Wc1c
 	private $tools = [];
 
 	/**
-	 * Plugin api
-	 *
-	 * @var Wc1c_Api
-	 */
-	private $api = null;
-
-	/**
-	 * All loaded helpers
-	 *
-	 * @var array
-	 */
-	private $helpers = [];
-
-	/**
 	 * Wc1c constructor
 	 *
 	 * @return void
@@ -101,89 +94,12 @@ final class Wc1c
 		do_action('wc1c_before_loading');
 
 		$this->define_constants();
-		$this->init_includes();
 		$this->init_hooks();
 
 		wc1c_load_textdomain();
 
 		// hook
 		do_action('wc1c_after_loading');
-	}
-
-	/**
-	 * Include of files
-	 *
-	 * @return void
-	 */
-	private function init_includes()
-	{
-		// hook
-		do_action('wc1c_before_includes');
-
-		/**
-		 * Exceptions
-		 */
-		include_once WC1C_PLUGIN_PATH . 'includes/exceptions/class-wc1c-exception.php';
-		include_once WC1C_PLUGIN_PATH . 'includes/exceptions/class-wc1c-exception-runtime.php';
-
-		/**
-		 * Abstract
-		 */
-		include_once WC1C_PLUGIN_PATH . 'includes/abstracts/abstract-class-wc1c-logger.php';
-		include_once WC1C_PLUGIN_PATH . 'includes/abstracts/abstract-class-wc1c-extension.php';
-		include_once WC1C_PLUGIN_PATH . 'includes/abstracts/abstract-class-wc1c-schema.php';
-		include_once WC1C_PLUGIN_PATH . 'includes/abstracts/abstract-class-wc1c-tool.php';
-
-		/**
-		 * Core
-		 */
-		include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-datetime.php';
-		include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-timer.php';
-		include_once WC1C_PLUGIN_PATH . 'includes/functions-wc1c-admin.php';
-		include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-environment.php';
-		include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-logger.php';
-		include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-database.php';
-		include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-configuration.php';
-		include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-settings.php';
-
-		/**
-		 * Helpers
-		 */
-		include_once WC1C_PLUGIN_PATH . 'includes/helpers/class-wc1c-helper-attributes.php';
-		include_once WC1C_PLUGIN_PATH . 'includes/helpers/class-wc1c-helper-products.php';
-		include_once WC1C_PLUGIN_PATH . 'includes/helpers/class-wc1c-helper-category.php';
-		include_once WC1C_PLUGIN_PATH . 'includes/helpers/class-wc1c-helper-images.php';
-		include_once WC1C_PLUGIN_PATH . 'includes/helpers/class-wc1c-helper-cml.php';
-
-		/**
-		 * Schemas
-		 */
-		include_once WC1C_PLUGIN_PATH . 'includes/schemas/class-wc1c-schema-logger.php';
-		include_once WC1C_PLUGIN_PATH . 'includes/schemas/default/class-wc1c-schema-default.php';
-
-		/**
-		 * Standard tools
-		 */
-		include_once WC1C_PLUGIN_PATH . 'includes/tools/example/class-wc1c-tool-example.php';
-
-		/**
-		 * Api
-		 */
-		if(false !== is_wc1c_api_request())
-		{
-			include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-api.php';
-		}
-
-		/**
-		 * Admin
-		 */
-		if(false !== is_admin())
-		{
-			include_once WC1C_PLUGIN_PATH . 'includes/class-wc1c-admin.php';
-		}
-
-		// hook
-		do_action('wc1c_after_includes');
 	}
 
 	/**
@@ -194,12 +110,12 @@ final class Wc1c
 	private function init_hooks()
 	{
 		// init
-		add_action('init', array($this, 'init'), 3);
+		add_action('init', [$this, 'init'], 3);
 
 		// admin
 		if(false !== is_admin())
 		{
-			add_action('init', array('Wc1c_Admin', 'instance'), 5);
+			add_action('init', ['Wc1c_Admin', 'instance'], 5);
 		}
 	}
 
@@ -327,7 +243,6 @@ final class Wc1c
 	 * Init logger
 	 *
 	 * @return bool
-	 *
 	 * @throws Exception
 	 */
 	private function init_logger()
@@ -379,7 +294,6 @@ final class Wc1c
 	 * @param Wc1c_Environment $environment
 	 *
 	 * @throws Wc1c_Exception_Runtime
-	 *
 	 * @return true
 	 */
 	public function set_environment($environment)
@@ -397,7 +311,6 @@ final class Wc1c
 	 * Loading environment
 	 *
 	 * @return void
-	 *
 	 * @throws Wc1c_Exception_Runtime
 	 */
 	private function load_environment()
@@ -422,10 +335,9 @@ final class Wc1c
 	}
 
 	/**
-	 * Plugin settings loading
+	 * Load main settings
 	 *
 	 * @return void
-	 *
 	 * @throws Wc1c_Exception_Runtime
 	 */
 	private function load_settings()
@@ -433,59 +345,19 @@ final class Wc1c
 		try
 		{
 			$settings = new Wc1c_Settings();
+			$settings->init();
 		}
 		catch(Exception $e)
 		{
 			throw new Wc1c_Exception_Runtime('load_settings: exception - ' . $e->getMessage());
 		}
 
-		try
+		if(!$settings instanceof Interface_Wc1c_Settings)
 		{
-			$this->set_settings($settings);
-		}
-		catch(Exception $e)
-		{
-			throw new Wc1c_Exception_Runtime('load_settings: exception - ' . $e->getMessage());
-		}
-	}
-
-	/**
-	 * Get configurations
-	 *
-	 * @param string $type
-	 *  all - all loaded configurations
-	 *  current - current configuration
-	 *  numeric - configuration identifier
-	 *
-	 * @return array|Wc1c_Configuration
-	 *
-	 * @throws Wc1c_Exception_Runtime
-	 */
-	public function get_configurations($type = 'all')
-	{
-		if('all' !== $type)
-		{
-			if('current' === $type)
-			{
-				$configuration_id = WC1C()->environment()->get('current_configuration_id', 0);
-
-				if(array_key_exists($configuration_id, $this->configurations))
-				{
-					return $this->configurations[$configuration_id];
-				}
-
-				throw new Wc1c_Exception_Runtime('get_configurations: current configuration not loaded');
-			}
-
-			if(is_numeric($type) && array_key_exists($type, $this->configurations))
-			{
-				return $this->configurations[$type];
-			}
-
-			throw new Wc1c_Exception_Runtime('get_configurations: configuration by id is not loaded');
+			throw new Wc1c_Exception_Runtime('set_settings: $settings is not valid');
 		}
 
-		return $this->configurations;
+		$this->settings = $settings;
 	}
 
 	/**
@@ -495,7 +367,6 @@ final class Wc1c
 	 * @param string $extension_id
 	 *
 	 * @return boolean
-	 *
 	 * @throws Wc1c_Exception_Runtime
 	 */
 	public function init_extensions($extension_id = '')
@@ -638,16 +509,49 @@ final class Wc1c
 	/**
 	 * Initializing schemas
 	 *
-	 * If a schema ID is specified, only the specified schema is loaded
-	 *
-	 * @param string $schema_id
+	 * @param integer|Wc1c_Configuration $configuration
 	 *
 	 * @return boolean
-	 *
 	 * @throws Wc1c_Exception_Runtime
 	 */
-	public function init_schemas($schema_id = '')
+	public function init_schemas($configuration)
 	{
+		if(false === $configuration)
+		{
+			throw new Wc1c_Exception_Runtime('init_schemas: $configuration is false');
+		}
+
+		if(!is_object($configuration))
+		{
+			try
+			{
+				$storage_configurations = Wc1c_Data_Storage::load('configuration');
+			}
+			catch(Exception $e)
+			{
+				throw new Wc1c_Exception_Runtime('init_schemas: exception - ' . $e->getMessage());
+			}
+
+			if(!$storage_configurations->is_existing_by_id($configuration))
+			{
+				throw new Wc1c_Exception_Runtime('init_schemas: $configuration is not exists');
+			}
+
+			try
+			{
+				$configuration = new Wc1c_Configuration($configuration);
+			}
+			catch(Exception $e)
+			{
+				throw new Wc1c_Exception_Runtime('init_schemas: exception - ' . $e->getMessage());
+			}
+		}
+
+		if(!$configuration instanceof Wc1c_Configuration)
+		{
+			throw new Wc1c_Exception_Runtime('init_schemas: $configuration is not instanceof Wc1c_Configuration');
+		}
+
 		try
 		{
 			$schemas = $this->get_schemas();
@@ -662,80 +566,53 @@ final class Wc1c
 			throw new Wc1c_Exception_Runtime('init_schemas: $schemas is not array');
 		}
 
-		/**
-		 * Init specified schema
-		 */
-		if('' !== $schema_id)
+		$schema_id = $configuration->get_schema();
+
+		if(!array_key_exists($schema_id, $schemas))
 		{
-			if(!array_key_exists($schema_id, $schemas))
-			{
-				throw new Wc1c_Exception_Runtime('init_schemas: schema not found by id: ' . $schema_id);
-			}
-
-			if(!is_object($schemas[$schema_id]))
-			{
-				throw new Wc1c_Exception_Runtime('init_schemas: $schemas[$schema_id] is not object');
-			}
-
-			$init_schema = $schemas[$schema_id];
-
-			if($init_schema->is_initialized())
-			{
-				throw new Wc1c_Exception_Runtime('init_schemas: old initialized, $schema_id: ' . $schema_id);
-			}
-
-			if(!method_exists($init_schema, 'init'))
-			{
-				throw new Wc1c_Exception_Runtime('init_schemas: method init not found, $schema_id: ' . $schema_id);
-			}
-
-			$current_configuration_id = WC1C()->environment()->get('current_configuration_id', 0);
-
-			if(0 !== $current_configuration_id)
-			{
-				$init_schema->set_configuration_prefix('wc1c_configuration_' . $current_configuration_id);
-				$init_schema->set_prefix('wc1c_prefix_' . $schema_id . '_' . $current_configuration_id);
-
-				$configuration = $this->get_configurations($current_configuration_id);
-				$init_schema->set_configuration($configuration);
-			}
-
-			try
-			{
-				$init_schema_result = $init_schema->init();
-			}
-			catch(Exception $e)
-			{
-				throw new Wc1c_Exception_Runtime('init_schemas: exception by schema - ' . $e->getMessage());
-			}
-
-			if(true !== $init_schema_result)
-			{
-				throw new Wc1c_Exception_Runtime('init_schemas: schema is not initialized');
-			}
-
-			$init_schema->set_initialized(true);
-
-			return true;
+			throw new Wc1c_Exception_Runtime('init_schemas: schema not found by id: ' . $schema_id);
 		}
 
-		/**
-		 * Init all schemas
-		 */
-		foreach($schemas as $schema => $schema_data)
+		if(!is_object($schemas[$schema_id]))
 		{
-			try
-			{
-				$this->init_schemas($schema);
-			}
-			catch(Exception $e)
-			{
-				WC1C()->logger()->error($e->getMessage(), $e);
-				continue;
-			}
+			throw new Wc1c_Exception_Runtime('init_schemas: $schemas[$schema_id] is not object');
 		}
 
-		return true;
+		$init_schema = $schemas[$schema_id];
+
+		if($init_schema->is_initialized())
+		{
+			throw new Wc1c_Exception_Runtime('init_schemas: old initialized, $schema_id: ' . $schema_id);
+		}
+
+		if(!method_exists($init_schema, 'init'))
+		{
+			throw new Wc1c_Exception_Runtime('init_schemas: method init not found, $schema_id: ' . $schema_id);
+		}
+
+		$current_configuration_id = $configuration->get_id();
+
+		$init_schema->set_prefix('wc1c_prefix_' . $schema_id . '_' . $current_configuration_id);
+		$init_schema->set_configuration($configuration);
+		$init_schema->set_configuration_prefix('wc1c_configuration_' . $current_configuration_id);
+
+		try
+		{
+			$init_schema_result = $init_schema->init();
+		}
+		catch(Exception $e)
+		{
+			throw new Wc1c_Exception_Runtime('init_schemas: exception by schema - ' . $e->getMessage());
+		}
+
+		if(true !== $init_schema_result)
+		{
+			throw new Wc1c_Exception_Runtime('init_schemas: schema is not initialized');
+		}
+
+		$init_schema->set_initialized(true);
+
+		return $init_schema;
 	}
 
 	/**
@@ -811,32 +688,11 @@ final class Wc1c
 	 */
 	private function define_constants()
 	{
-		$plugin_data = get_file_data(WC1C_PLUGIN_FILE, array('Version' => 'Version'));
-		wc1c_define('WC1C_PLUGIN_VERSION', $plugin_data['Version']);
+		$plugin_data = get_file_data(WC1C_PLUGIN_FILE, ['Version' => 'Version']);
 
-		wc1c_define('WC1C_PLUGIN_URL', plugin_dir_url(WC1C_PLUGIN_FILE));
-		wc1c_define('WC1C_PLUGIN_NAME', plugin_basename(WC1C_PLUGIN_FILE));
-		wc1c_define('WC1C_PLUGIN_PATH', plugin_dir_path(WC1C_PLUGIN_FILE));
-	}
-
-	/**
-	 * Set plugin settings
-	 *
-	 * @param $settings
-	 *
-	 * @return boolean
-	 *
-	 * @throws Wc1c_Exception_Runtime
-	 */
-	public function set_settings($settings)
-	{
-		if($settings instanceof Wc1c_Settings)
-		{
-			$this->settings = $settings;
-			return true;
-		}
-
-		throw new Wc1c_Exception_Runtime('set_settings: $settings is not valid');
+		define('WC1C_PLUGIN_VERSION', $plugin_data['Version']);
+		define('WC1C_PLUGIN_URL', plugin_dir_url(WC1C_PLUGIN_FILE));
+		define('WC1C_PLUGIN_NAME', plugin_basename(WC1C_PLUGIN_FILE));
 	}
 
 	/**
@@ -872,25 +728,7 @@ final class Wc1c
 
 		try
 		{
-			$load_configuration = new Wc1c_Configuration();
-		}
-		catch(Exception $e)
-		{
-			throw new Wc1c_Exception_Runtime('load_configuration: exception - ' . $e->getMessage());
-		}
-
-		try
-		{
-			$load_configuration->set_id($id);
-		}
-		catch(Exception $e)
-		{
-			throw new Wc1c_Exception_Runtime('load_configuration: exception - ' . $e->getMessage());
-		}
-
-		try
-		{
-			$load_configuration->load();
+			$load_configuration = new Wc1c_Configuration($id);
 		}
 		catch(Exception $e)
 		{
@@ -1023,7 +861,7 @@ final class Wc1c
 	 */
 	public function set_logger($logger)
 	{
-		if($logger instanceof Wc1c_Abstract_Logger)
+		if($logger instanceof Abstract_Wc1c_Logger)
 		{
 			$this->logger = $logger;
 			return $this;
@@ -1116,17 +954,15 @@ final class Wc1c
 	}
 
 	/**
-	 * Loading tools
-	 *
 	 * @param string $tool_id
-	 *
-	 * @return void
-	 *
-	 * @throws Wc1c_Exception_Runtime
 	 */
-	public function load_tools($tool_id = '')
+	public function init_tools($tool_id = '')
 	{
-		$tools = [];
+
+		if(!empty($tool_id) && !array_key_exists($tool_id, $this->get_tools()))
+		{
+
+		}
 
 		try
 		{
@@ -1138,27 +974,44 @@ final class Wc1c
 		}
 
 		$tool_example->set_id('example');
-		$tool_example->set_version(WC1C_PLUGIN_VERSION);
 		$tool_example->set_name(__('Example tool', 'wc1c'));
 		$tool_example->set_description(__('A demo tool that does not carry any functional load.', 'wc1c'));
 
 		$tools[$tool_example->get_id()] = $tool_example;
+
+		// TODO: Implement init_tools() method.
+	}
+
+	/**
+	 * Loading tools
+	 *
+	 * @return void
+	 * @throws Wc1c_Exception_Runtime
+	 */
+	public function load_tools()
+	{
+		/**
+		 * key = tool id
+		 * value = callback (Abstract_Wc1c_Tool)
+		 */
+		$tools =
+		[
+			'example' => 'Wc1c_Tool_Example'
+		];
 
 		/**
 		 * External tools loading is enable
 		 */
 		if('yes' === $this->settings()->get('extensions_tools', 'yes'))
 		{
-			$tools = apply_filters('wc1c_tools_loading', $tools);
+			$tools = apply_filters('wc1c_load_tools', $tools);
 		}
-
-		WC1C()->logger()->debug('load_tools: $tools', $tools);
 
 		try
 		{
 			$this->set_tools($tools);
 		}
-		catch(Exception $e)
+		catch(Wc1c_Exception_Runtime $e)
 		{
 			throw new Wc1c_Exception_Runtime('load_tools: exception - ' . $e->getMessage());
 		}
@@ -1179,8 +1032,6 @@ final class Wc1c
 		{
 			$extensions = apply_filters('wc1c_extensions_loading', $extensions);
 		}
-
-		WC1C()->logger()->debug('load_extensions: $extensions', $extensions);
 
 		try
 		{
@@ -1222,7 +1073,6 @@ final class Wc1c
 	 * @param string $tool_id
 	 *
 	 * @return array|mixed
-	 *
 	 * @throws Wc1c_Exception_Runtime
 	 */
 	public function get_tools($tool_id = '')
@@ -1245,19 +1095,17 @@ final class Wc1c
 	 *
 	 * @param array $tools
 	 *
-	 * @return boolean
-	 *
+	 * @return void
 	 * @throws Wc1c_Exception_Runtime
 	 */
 	public function set_tools($tools)
 	{
-		if(is_array($tools))
+		if(!is_array($tools))
 		{
-			$this->tools = $tools;
-			return true;
+			throw new Wc1c_Exception_Runtime('set_tools: $tools is not valid');
 		}
 
-		throw new Wc1c_Exception_Runtime('set_tools: $tools is not valid');
+		$this->tools = $tools;
 	}
 
 	/**
@@ -1300,96 +1148,5 @@ final class Wc1c
 		}
 
 		throw new Wc1c_Exception_Runtime('set_extensions: $extensions is not valid');
-	}
-
-	/**
-	 * @param string $helper_id
-	 *
-	 * @return void
-	 * @throws Wc1c_Exception_Runtime
-	 */
-	private function load_helpers($helper_id = '')
-	{
-		try
-		{
-			$helpers = $this->get_helpers();
-		}
-		catch(Exception $e)
-		{
-			throw new Wc1c_Exception_Runtime('load_helpers: exception - ' . $e->getMessage());
-		}
-
-		$available_helpers = [
-			'cml' => 'Wc1c_Helper_Cml',
-			'products' => 'Wc1c_Helper_Products',
-			'attributes' => 'Wc1c_Helper_Attributes',
-			'category' => 'Wc1c_Helper_Category',
-			'images' => 'Wc1c_Helper_Images'
-		];
-
-		if(!array_key_exists($helper_id, $available_helpers))
-		{
-			throw new Wc1c_Exception_Runtime('load_helpers: helper is unavailable by id - ' . $helper_id);
-		}
-
-		$helpers[$helper_id] = new $available_helpers[$helper_id]();
-
-		try
-		{
-			$this->set_helpers($helpers);
-		}
-		catch(Exception $e)
-		{
-			throw new Wc1c_Exception_Runtime('load_helpers: exception - ' . $e->getMessage());
-		}
-	}
-
-	/**
-	 * @param string $helper_id
-	 *
-	 * @return array|mixed
-	 *
-	 * @throws Wc1c_Exception_Runtime
-	 */
-	public function get_helpers($helper_id = '')
-	{
-		if('' !== $helper_id)
-		{
-			if(array_key_exists($helper_id, $this->helpers))
-			{
-				return $this->helpers[$helper_id];
-			}
-
-			try
-			{
-				$this->load_helpers($helper_id);
-			}
-			catch(Exception $e)
-			{
-				throw new Wc1c_Exception_Runtime('get_helpers: $helper_id is unavailable');
-			}
-
-			return $this->helpers[$helper_id];
-		}
-
-		return $this->helpers;
-	}
-
-	/**
-	 * @param array $helpers
-	 *
-	 * @return bool
-	 *
-	 * @throws Wc1c_Exception_Runtime
-	 */
-	public function set_helpers($helpers)
-	{
-		if(is_array($helpers))
-		{
-			$this->helpers = $helpers;
-			return true;
-		}
-
-		throw new Wc1c_Exception_Runtime('set_helpers: $helpers is not valid');
 	}
 }
