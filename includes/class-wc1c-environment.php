@@ -88,12 +88,13 @@ class Wc1c_Environment
 	 * WordPress upload directory
 	 *
 	 * @return bool
+	 * @throws Wc1c_Exception_Runtime
 	 */
 	public function init_upload_directory()
 	{
 		if(false === function_exists('wp_upload_dir'))
 		{
-			return false;
+			throw new Wc1c_Exception_Runtime('function wp_upload_dir is not exists');
 		}
 
 		$wp_upload_dir = wp_upload_dir();
@@ -144,14 +145,13 @@ class Wc1c_Environment
 	 */
 	public function init_wc1c_version()
 	{
-		if(defined('WC1C_PLUGIN_VERSION'))
+		if(!defined('WC1C_PLUGIN_VERSION'))
 		{
-			$this->set('wc1c_version', WC1C_PLUGIN_VERSION);
-
-			return true;
+			throw new Wc1c_Exception_Runtime('Constant WC1C_PLUGIN_VERSION is not defined');
 		}
 
-		return false;
+		$this->set('wc1c_version', WC1C_PLUGIN_VERSION);
+		return true;
 	}
 
 	/**
