@@ -9,11 +9,18 @@ defined('ABSPATH') || exit;
 interface Interface_Wc1c
 {
 	/**
-	 * Pretty times
+	 * Global timer
 	 *
 	 * @return Wc1c_Timer
 	 */
 	public function timer();
+
+	/**
+	 * Global settings
+	 *
+	 * @return Wc1c_Settings
+	 */
+	public function settings();
 
 	/**
 	 * Initialize
