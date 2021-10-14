@@ -135,7 +135,7 @@ final class Wc1c implements Interface_Wc1c
 		}
 		catch(Exception $e)
 		{
-			return false;
+			throw new Wc1c_Exception_Runtime('init: exception - ' . $e->getMessage());
 		}
 
 		try
@@ -144,7 +144,7 @@ final class Wc1c implements Interface_Wc1c
 		}
 		catch(Exception $e)
 		{
-			return false;
+			throw new Wc1c_Exception_Runtime('init: exception - ' . $e->getMessage());
 		}
 
 		try
@@ -289,25 +289,6 @@ final class Wc1c implements Interface_Wc1c
 	}
 
 	/**
-	 * Set environment
-	 *
-	 * @param Wc1c_Environment $environment
-	 *
-	 * @throws Wc1c_Exception_Runtime
-	 * @return true
-	 */
-	public function set_environment($environment)
-	{
-		if($environment instanceof Wc1c_Environment)
-		{
-			$this->environment = $environment;
-			return true;
-		}
-
-		throw new Wc1c_Exception_Runtime('set_environment: $environment is not Wc1c_Environment');
-	}
-
-	/**
 	 * Loading environment
 	 *
 	 * @return void
@@ -324,14 +305,7 @@ final class Wc1c implements Interface_Wc1c
 			throw new Wc1c_Exception_Runtime('load_environment: exception - ' . $e->getMessage());
 		}
 
-		try
-		{
-			$this->set_environment($environment);
-		}
-		catch(Exception $e)
-		{
-			throw new Wc1c_Exception_Runtime('load_environment: exception - ' . $e->getMessage());
-		}
+		$this->environment = $environment;
 	}
 
 	/**
