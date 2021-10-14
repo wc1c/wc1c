@@ -1,49 +1,38 @@
 <?php
 /**
- * Admin configurations update class
+ * Admin configurations update form class
  *
  * @package Wc1c/Admin
  */
 defined('ABSPATH') || exit;
 
-class Wc1c_Admin_Configurations_Update_Form extends Wc1c_Admin_Abstract_Form
+class Wc1c_Admin_Configurations_Update_Form extends Abstract_Wc1c_Admin_Form
 {
 	/**
-	 * Wc1c_Admin_Configurations_Update constructor
-	 *
-	 * @param bool $init
+	 * Wc1c_Admin_Configurations_Update_Form constructor.
 	 */
-	public function __construct($init = true)
+	public function __construct()
 	{
 		$this->set_id('configurations-update');
 
-		if($init)
-		{
-			$this->init();
-		}
+		$this->title_numeric = true;
+
+		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_main'), 0);
+
+		$this->load_fields();
 	}
 
 	/**
-	 * Initialized
+	 * Output
 	 */
-	public function init()
+	public function output_form()
 	{
-		add_filter('wc1c_admin_' . $this->get_id() . '_form_load_fields', array($this, 'init_fields_main'), 0);
-		add_action('wc1c_admin_configurations_update_show', array($this, 'output_form'), 10);
-		add_action('wc1c_admin_configurations_update_sidebar_show', array($this, 'output_navigation'), 10);
+		$args =
+        [
+            'object' => $this
+        ];
 
-		$this->title_numeric = true;
-
-		$this->load_fields();
-
-		try
-		{
-			$this->save();
-		}
-		catch(Exception $e)
-		{
-			WC1C()->logger()->notice($e->getMessage());
-		}
+		wc1c_get_template('configurations/update_form.php', $args);
 	}
 
 	/**
@@ -51,7 +40,8 @@ class Wc1c_Admin_Configurations_Update_Form extends Wc1c_Admin_Abstract_Form
 	 */
 	public function output_navigation()
 	{
-		$args = [
+		$args =
+        [
 			'header' => '<h5 class="p-0 m-0">' . __('Fast navigation', 'wc1c') . '</h5>',
 			'object' => $this
 		];
@@ -108,19 +98,6 @@ class Wc1c_Admin_Configurations_Update_Form extends Wc1c_Admin_Abstract_Form
 		<?php
 
 		return ob_get_clean();
-	}
-
-	/**
-	 * Form show
-	 */
-	public function output_form()
-	{
-		$args =
-			[
-				'object' => $this
-			];
-
-		wc1c_get_template('configurations/update_form.php', $args);
 	}
 
 	/**
@@ -220,7 +197,7 @@ class Wc1c_Admin_Configurations_Update_Form extends Wc1c_Admin_Abstract_Form
 		 */
 		if(is_array($saved_data) && count($saved_data) > 0)
 		{
-			$saved_data = array_merge($saved_data, $form_data);
+			$saved_data = array_merge($form_data, $saved_data);
 		}
 
 		/**
@@ -240,35 +217,30 @@ class Wc1c_Admin_Configurations_Update_Form extends Wc1c_Admin_Abstract_Form
 	 */
 	public function init_fields_main($fields)
 	{
-		$fields['config_name'] = array
-		(
+		$fields['name'] =
+		[
 			'title' => __('Configuration name', 'wc1c'),
 			'type' => 'text',
 			'label' => __('Name of the configuration for easy use. You can enter any data up to 255 characters.', 'wc1c'),
 			'description' => __('Used for convenient distribution of multiple configurations.', 'wc1c'),
 			'default' => '',
 			'css' => 'min-width: 200px;width:100%;',
-		);
+		];
 
-		$statuses = wc1c_get_configurations_status_print();
+		$options =
+		[
+			'active' => wc1c_configurations_get_statuses_label('active'),
+			'inactive' => wc1c_configurations_get_statuses_label('inactive')
+		];
 
-		/**
-		 * Statuses
-		 */
-		$options = array
-		(
-			'active' => $statuses['active'],
-			'inactive' => $statuses['inactive']
-		);
-
-		$fields['status'] = array
-		(
+		$fields['status'] =
+		[
 			'title' => __('Configuration status', 'wc1c'),
 			'type' => 'select',
 			'description' => __('Current configuration status.', 'wc1c'),
 			'default' => 'inactive',
 			'options' => $options
-		);
+		];
 
 		return $fields;
 	}

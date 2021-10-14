@@ -9,24 +9,26 @@ defined('ABSPATH') || exit;
 class Wc1c_Admin_Extensions
 {
 	/**
-	 * Wc1c_Admin_Extensions constructor
-	 *
-	 * @param bool $init
+	 * Singleton
 	 */
-	public function __construct($init = true)
+	use Trait_Wc1c_Singleton;
+
+	/**
+	 * Wc1c_Admin_Extensions constructor.
+	 */
+	public function __construct()
 	{
-		if($init)
-		{
-			$this->init();
-		}
+		add_action('wc1c_admin_extensions_show', [$this, 'output'], 10);
 	}
 
 	/**
-	 * Initialized
+	 * Extensions
+	 *
+	 * @return void
 	 */
-	public function init()
+	public function page_extensions()
 	{
-		add_action('wc1c_admin_extensions_show', array($this, 'output'), 10);
+		wc1c_get_template('page.php');
 	}
 
 	/**

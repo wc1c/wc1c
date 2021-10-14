@@ -6,23 +6,20 @@
  */
 defined('ABSPATH') || exit;
 
-class Wc1c_Tool_Example extends Wc1c_Abstract_Tool
+class Wc1c_Tool_Environments extends Abstract_Wc1c_Tool
 {
 	/**
-	 * Wc1c_Tool_Example constructor
+	 * Wc1c_Tool_Environments constructor
 	 */
 	public function __construct()
 	{
-		/**
-		 * Init
-		 */
 		$this->init();
 	}
 
 	/**
 	 * Initialize
 	 *
-	 * @return bool|void
+	 * @return bool
 	 */
 	public function init()
 	{

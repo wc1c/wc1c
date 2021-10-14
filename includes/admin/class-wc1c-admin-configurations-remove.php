@@ -6,8 +6,13 @@
  */
 defined('ABSPATH') || exit;
 
-class Wc1c_Admin_Configurations_Remove extends Wc1c_Admin_Abstract_Form
+class Wc1c_Admin_Configurations_Remove extends Abstract_Wc1c_Admin_Form
 {
+	/**
+	 * Singleton
+	 */
+	use Trait_Wc1c_Singleton;
+
 	/**
 	 * Wc1c_Admin_Configurations_Remove constructor.
 	 *

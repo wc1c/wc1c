@@ -6,15 +6,8 @@
  */
 defined('ABSPATH') || exit;
 
-abstract class Wc1c_Abstract_Extension
+abstract class Abstract_Wc1c_Extension
 {
-	/**
-	 * Extension initialized flag
-	 *
-	 * @var bool
-	 */
-	private $initialized = false;
-
 	/**
 	 * Unique id
 	 *
@@ -64,6 +57,13 @@ abstract class Wc1c_Abstract_Extension
 		'wc1c_api',
 		'any'
 	];
+
+	/**
+	 * Extension initialized flag
+	 *
+	 * @var bool
+	 */
+	private $initialized = false;
 
 	/**
 	 * Wc1c_Abstract_Extension constructor

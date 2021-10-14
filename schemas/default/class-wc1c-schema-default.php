@@ -6,7 +6,7 @@
  */
 defined('ABSPATH') || exit;
 
-class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
+class Wc1c_Schema_Default extends Abstract_Wc1c_Schema
 {
 	/**
 	 * Schema logger
@@ -210,7 +210,7 @@ class Wc1c_Schema_Default extends Wc1c_Abstract_Schema
 			'title' => __('Logging events', 'wc1c'),
 			'type' => 'select',
 			'description' => __('Can enable logging, specify the level of error that to benefit from logging.
-			 Can send environments to developer. All sensitive data in the report are deleted.
+			 Can send reports to developer. All sensitive data in the report are deleted.
 			  By default, the error rate should not be less than ERROR.', 'wc1c'). '<br/><b>' . __('Current file: ', 'wc1c') . '</b>' . $logger_path,
 			'default' => '400',
 			'options' => array

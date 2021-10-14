@@ -6,7 +6,7 @@
  */
 defined('ABSPATH') || exit;
 
-abstract class Wc1c_Abstract_Logger
+abstract class Abstract_Wc1c_Logger
 {
 	/**
 	 * Default level
@@ -61,6 +61,8 @@ abstract class Wc1c_Abstract_Logger
     }
 
 	/**
+	 * Get log name
+	 *
 	 * @return string
 	 */
 	public function get_name()
@@ -69,6 +71,8 @@ abstract class Wc1c_Abstract_Logger
 	}
 
 	/**
+	 * Set log name
+	 *
 	 * @param string $name
 	 */
 	public function set_name($name)
@@ -77,6 +81,8 @@ abstract class Wc1c_Abstract_Logger
 	}
 
 	/**
+	 * Get log level
+	 *
 	 * @return int
 	 */
 	public function get_level()
@@ -85,6 +91,8 @@ abstract class Wc1c_Abstract_Logger
 	}
 
 	/**
+	 * Set log level
+	 *
 	 * @param int $level
 	 */
 	public function set_level($level)
@@ -93,72 +101,88 @@ abstract class Wc1c_Abstract_Logger
 	}
 
     /**
+     * Level: warning
+     *
      * @param $message
      */
     public function warning($message)
     {
-        $this->add(300, $message);
+        $this->write(300, $message);
     }
 
     /**
+     * Level: error
+     *
      * @param $message
      * @param null $object
      */
     public function error($message, $object = null)
     {
-        $this->add(400, $message, $object);
+        $this->write(400, $message, $object);
     }
 
     /**
+     * Level: debug
+     *
      * @param $message
      * @param null $object
      */
     public function debug($message, $object = null)
     {
-        $this->add(100, $message, $object);
+        $this->write(100, $message, $object);
     }
 
     /**
+     * Level: info
+     *
      * @param $message
      */
     public function info($message)
     {
-        $this->add(200, $message);
+        $this->write(200, $message);
     }
 
     /**
+     * Level: notice
+     *
      * @param $message
      */
     public function notice($message)
     {
-        $this->add(250, $message);
+        $this->write(250, $message);
     }
 
     /**
+     * Level: critical
+     *
      * @param $message
      * @param null $object
      */
     public function critical($message, $object = null)
     {
-        $this->add(500, $message, $object);
+        $this->write(500, $message, $object);
     }
 
     /**
+     * Level: alert
+     *
      * @param $message
      * @param null $object
      */
     public function alert($message, $object = null)
     {
-        $this->add(550, $message, $object);
+        $this->write(550, $message, $object);
     }
 
     /**
+     * Level: emergency
+     *
      * @param $message
      * @param null $object
      */
     public function emergency($message, $object = null)
     {
-        $this->add(600, $message, $object);
+        $this->write(600, $message, $object);
     }
 
 	/**
@@ -175,5 +199,5 @@ abstract class Wc1c_Abstract_Logger
      * @param $message
      * @param null $object
      */
-	abstract public function add($level, $message, $object = null);
+	abstract public function write($level, $message, $object = null);
 }

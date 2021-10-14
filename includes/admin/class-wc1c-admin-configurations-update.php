@@ -9,88 +9,73 @@ defined('ABSPATH') || exit;
 class Wc1c_Admin_Configurations_Update
 {
 	/**
-	 * Current configuration
-	 *
-	 * @var Wc1c_Configuration|null
+	 * Singleton
 	 */
-	private $configuration = null;
-
-	/**
-	 * @var null|Wc1c_Admin_Configurations_Update_Form
-	 */
-	private $form = null;
+	use Trait_Wc1c_Singleton;
 
 	/**
 	 * Wc1c_Admin_Configurations_Update constructor
-	 *
-	 * @param bool $init
 	 */
-	public function __construct($init = true)
+	public function __construct()
 	{
-		if($init)
+		add_action('wc1c_admin_configurations_show', [$this, 'template_output'], 10);
+
+		$configuration_ready = true;
+		$configuration_id = wc1c_get_var($_GET['config_id'],false);
+
+		if(false === $configuration_id)
 		{
-			$this->includes();
-			$this->init();
-		}
-	}
-
-	/**
-	 * Include required files
-	 */
-	public function includes()
-	{
-		include_once WC1C_PLUGIN_PATH . 'includes/admin/configurations/class-wc1c-admin-configurations-update-form.php';
-	}
-
-	/**
-	 * Initialized
-	 */
-	public function init()
-	{
-		$configuration_id = WC1C()->environment()->get('current_configuration_id', false);
-
-		if($configuration_id === false)
-		{
-			return;
+			$configuration_ready = false;
 		}
 
 		try
 		{
-			$configuration = WC1C()->load_configuration($configuration_id);
+			$storage_configurations = Wc1c_Data_Storage::load('configuration');
 		}
 		catch(Exception $e)
 		{
-			WC1C()->logger()->notice($e->getMessage());
-			add_action('wc1c_admin_configurations_update_show', array($this, 'output_404'), 10);
-			return;
+			throw new Wc1c_Exception_Runtime('init_schemas: exception - ' . $e->getMessage());
 		}
 
-		$this->set_configuration($configuration);
+		if(!$storage_configurations->is_existing_by_id($configuration_id))
+		{
+			throw new Wc1c_Exception_Runtime('init_schemas: $configuration is not exists');
+		}
 
 		try
 		{
-			WC1C()->init_schemas($configuration->get_schema());
+			$configuration = new Wc1c_Configuration($configuration_id);
 		}
 		catch(Exception $e)
 		{
-			WC1C()->logger()->notice($e->getMessage());
-			add_action('wc1c_admin_configurations_update_show', array($this, 'output_404'), 10);
+			throw new Wc1c_Exception_Runtime('init_schemas: exception - ' . $e->getMessage());
+		}
+
+		try
+		{
+			WC1C()->init_schemas($configuration);
+		}
+		catch(Exception $e)
+		{
+			$configuration_ready = false;
+		}
+
+		if(false === $configuration_ready)
+		{
+			add_action('wc1c_admin_configurations_update_show', [$this, 'output_404'], 10);
 			return;
 		}
 
-		add_action('wc1c_admin_configurations_update_sidebar_show', array($this, 'output_sidebar'), 10);
+		//add_action('wc1c_admin_configurations_update_sidebar_show', array($this, 'output_sidebar'), 10);
 
-		$form = new Wc1c_Admin_Configurations_Update_Form(false);
+		$form = new Wc1c_Admin_Configurations_Update_Form();
 
 		$form_data = $configuration->get_options();
-		$form_data['config_name'] = $configuration->get_name();
+		$form_data['name'] = $configuration->get_name();
 		$form_data['status'] = $configuration->get_status();
-		$form->load_saved_data($form_data);
-		$form->init();
 
-		$this->set_form($form);
-
-		add_action('wc1c_admin_configurations_show', array($this, 'template_output'), 10);
+		add_action('wc1c_admin_configurations_update_show', [$form, 'output_form'], 10);
+		add_action('wc1c_admin_configurations_update_sidebar_show', [$form, 'output_navigation'], 10);
 	}
 
 	/**
@@ -99,51 +84,6 @@ class Wc1c_Admin_Configurations_Update
 	public function template_output()
 	{
 		wc1c_get_template('configurations/update.php');
-	}
-
-	/**
-	 * @return Wc1c_Admin_Configurations_Update_Form|null
-	 */
-	public function get_form()
-	{
-		return $this->form;
-	}
-
-	/**
-	 * @param Wc1c_Admin_Configurations_Update_Form|null $form
-	 */
-	public function set_form($form)
-	{
-		$this->form = $form;
-	}
-
-	/**
-	 * @return Wc1c_Configuration|null
-	 */
-	public function get_configuration()
-	{
-		return $this->configuration;
-	}
-
-	/**
-	 * @param Wc1c_Configuration $configuration
-	 */
-	public function set_configuration($configuration)
-	{
-		$this->configuration = $configuration;
-	}
-
-	/**
-	 * Form show
-	 */
-	public function output_form()
-	{
-		$args =
-			[
-				'object' => $this
-			];
-
-		wc1c_get_template('configurations/update_form.php', $args);
 	}
 
 	/**
@@ -205,7 +145,6 @@ class Wc1c_Admin_Configurations_Update
 			wc1c_get_template('configurations/update_sidebar_item.php', $args);
 		}
 		catch(Exception $e){}
-
 	}
 
 	/**

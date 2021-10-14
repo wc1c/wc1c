@@ -6,7 +6,7 @@
  */
 defined('ABSPATH') || exit;
 
-abstract class Wc1c_Abstract_Schema
+abstract class Abstract_Wc1c_Schema
 {
 	/**
 	 * Extension initialized flag

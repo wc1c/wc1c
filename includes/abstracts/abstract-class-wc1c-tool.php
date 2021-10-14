@@ -6,7 +6,7 @@
  */
 defined('ABSPATH') || exit;
 
-abstract class Abstract_Wc1c_Tool extends Abstract_Wc1c implements Interface_Wc1c_Tool
+abstract class Abstract_Wc1c_Tool implements Interface_Wc1c_Tool
 {
 	/**
 	 * Unique tool id
