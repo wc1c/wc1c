@@ -6,7 +6,7 @@
  */
 defined('ABSPATH') || exit;
 
-class Wc1c_Logger extends Wc1c_Abstract_Logger
+class Wc1c_Logger extends Abstract_Wc1c_Logger
 {
 	/**
 	 * Path
@@ -34,7 +34,7 @@ class Wc1c_Logger extends Wc1c_Abstract_Logger
 	}
 
 	/**
-	 * @return mixed
+	 * @return string
 	 */
 	public function get_path()
 	{
@@ -75,7 +75,7 @@ class Wc1c_Logger extends Wc1c_Abstract_Logger
      * @return bool
      * @throws Exception
      */
-    public function add($level, $message, $object = null)
+    public function write($level, $message, $object = null)
     {
         if($this->get_level() > $level)
         {
