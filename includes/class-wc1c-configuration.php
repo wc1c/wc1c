@@ -105,7 +105,7 @@ class Wc1c_Configuration extends Abstract_Wc1c_Data_Configuration
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit
 	 *
-	 * @return null|string
+	 * @return array
 	 */
 	public function get_options($context = 'view')
 	{
@@ -115,7 +115,7 @@ class Wc1c_Configuration extends Abstract_Wc1c_Data_Configuration
 	/**
 	 * Set options
 	 *
-	 * @param null|string $name options
+	 * @param array $name options
 	 */
 	public function set_options($name)
 	{
