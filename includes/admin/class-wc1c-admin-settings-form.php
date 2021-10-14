@@ -195,31 +195,22 @@ class Wc1c_Admin_Settings_Form extends Abstract_Wc1c_Admin_Form
 	 */
 	public function init_fields_technical($fields)
 	{
-		$fields['api'] =
-		[
-			'title' => __('API', 'wc1c'),
-			'type' => 'checkbox',
-			'label' => __('Enable', 'wc1c'),
-			'description' => __('This API uses the schemas to receive requests from 1C and send data there.', 'wc1c'),
-			'default' => 'yes'
-		];
-
 		$fields['admin_inject'] =
 		[
-			'title' => __('Admin inject', 'wc1c'),
+			'title' => __('Изменение интерфейса', 'wc1c'),
 			'type' => 'checkbox',
-			'label' => __('Enable', 'wc1c'),
-			'description' => __('Embedding information from the plugin in the admin panel interface.', 'wc1c'),
+			'label' => __('Разрешить менять интерфейс панели управления WordPress и WooCommerce', 'wc1c'),
+			'description' => __('Если влючено, в интерфейсе WordPress и WooCommerce появятся новые функции, согласно настройкам изменения интерфейса.', 'wc1c'),
 			'default' => 'yes'
 		];
 
-		$fields['extensions'] =
+		$fields['configurations_unique_names'] =
 		[
-			'title' => __('Support extensions', 'wc1c'),
+			'title' => __('Уникальные имена конфигураций', 'wc1c'),
 			'type' => 'checkbox',
-			'label' => __('Enable', 'wc1c'),
-			'description' => __('Support for external extensions. If disabled, all third-party extensions will be unavailable.', 'wc1c'),
-			'default' => 'yes'
+			'label' => __('Включить проверку имен конфигураций на уникальность', 'wc1c'),
+			'description' => __('Настройка запрещает создавать конфигурации с одним и тем же названием под одним и тем же пользователем.', 'wc1c'),
+			'default' => 'no',
 		];
 
 		$fields['upload_directory_name'] =
@@ -229,6 +220,24 @@ class Wc1c_Admin_Settings_Form extends Abstract_Wc1c_Admin_Form
 			'description' => __('You need to change the name of the standard directory for security.', 'wc1c'),
 			'default' => 'wc1c',
 			'css' => 'min-width: 300px;',
+		];
+
+		$fields['api'] =
+		[
+			'title' => __('API', 'wc1c'),
+			'type' => 'checkbox',
+			'label' => __('Включить прием зпросов по API', 'wc1c'),
+			'description' => __('Используется для приема фоновых запросов в схемах. Не отключайте данную опцию, если не знаете для чего она.', 'wc1c'),
+			'default' => 'yes'
+		];
+
+		$fields['extensions'] =
+		[
+			'title' => __('Extensions', 'wc1c'),
+			'type' => 'checkbox',
+			'label' => __('Включить поддержку расширений', 'wc1c'),
+			'description' => __('Если поддержка расширений отключена, все сторонние расширения будут недоступны.', 'wc1c'),
+			'default' => 'yes'
 		];
 
 		$fields['php_post_max_size'] =
@@ -300,12 +309,12 @@ class Wc1c_Admin_Settings_Form extends Abstract_Wc1c_Admin_Form
 	 */
 	public function init_fields_admin($fields)
 	{
-		$fields['title_admin'] = array
-		(
+		$fields['title_admin'] =
+		[
 			'title' => __('Admin interface', 'wc1c'),
 			'type' => 'title',
 			'description' => __('Configuring the output of information in the WordPress admin panel.', 'wc1c'),
-		);
+		];
 
 		$fields['admin_inject_products_column'] = array
 		(
