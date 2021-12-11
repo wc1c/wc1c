@@ -24,9 +24,9 @@ of 1C and sites created on WordPress with the WooCommerce plugin.
 3. Done, goto plugin settings page.
 
 == Changelog ==
-List of major changes from version to version. [Descriptions more](https://wc1c.info/changelog)
+List of major changes from version to version. [Descriptions more](https://wc1c.info/changelogs)
 
-= 0.6.0 =
+= 0.7.0 =
 * Public release.
 
 = 0.1.0 =
