@@ -665,8 +665,6 @@ final class Wc1c implements Interface_Wc1c
 		$plugin_data = get_file_data(WC1C_PLUGIN_FILE, ['Version' => 'Version']);
 
 		define('WC1C_PLUGIN_VERSION', $plugin_data['Version']);
-		define('WC1C_PLUGIN_URL', plugin_dir_url(WC1C_PLUGIN_FILE));
-		define('WC1C_PLUGIN_NAME', plugin_basename(WC1C_PLUGIN_FILE));
 	}
 
 	/**
