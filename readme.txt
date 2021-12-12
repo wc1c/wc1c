@@ -27,7 +27,7 @@ of 1C and sites created on WordPress with the WooCommerce plugin.
 List of major changes from version to version. [Descriptions more](https://wc1c.info/changelogs)
 
 = 0.7.0 =
-* Public release.
+* Public release
 
 = 0.1.0 =
 * Init release
