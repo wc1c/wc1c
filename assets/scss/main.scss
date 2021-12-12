@@ -1,26 +1,7 @@
-/*
-*** Init
+/**
+*** Bootstrap
  */
-@import "bootstrap/functions";
-@import "bootstrap/variables";
-@import "bootstrap/mixins";
-@import "variables";
-@import "mixins";
-
-/*
-*** bootstrap
- */
-@import "bootstrap/buttons";
-@import "bootstrap/transitions";
-@import "bootstrap/badge";
-@import "bootstrap/utilities";
-@import "bootstrap/button-group";
-@import "bootstrap/input-group";
-@import "bootstrap/list-group";
-@import "bootstrap/grid";
-@import "bootstrap/type";
-@import "bootstrap/card";
-@import "bootstrap/tables";
+@import "bootsrap";
 
 /**
 *** tables
