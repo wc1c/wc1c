@@ -84,18 +84,18 @@ function wc1c_install()
 	$table_name = WC1C_Database()->base_prefix . 'wc1c';
 
 	$sql = "CREATE TABLE $table_name (
-	`config_id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`configuration_id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
 	`site_id` INT(11) UNSIGNED NOT NULL DEFAULT '0',
-	`config_name` VARCHAR(155) NULL DEFAULT NULL,
-	`config_default` TINYINT(4) NULL DEFAULT '0',
+	`name` VARCHAR(155) NULL DEFAULT NULL,
+	`default` TINYINT(4) NULL DEFAULT '0',
 	`status` VARCHAR(50) NULL DEFAULT NULL,
 	`options` TEXT NULL DEFAULT NULL,
 	`schema` VARCHAR(50) NULL DEFAULT NULL,
 	`date_create` VARCHAR(50) NULL DEFAULT NULL,
 	`date_modify` VARCHAR(50) NULL DEFAULT NULL,
 	`date_activity` VARCHAR(50) NULL DEFAULT NULL,
-	PRIMARY KEY (`config_id`),
-	UNIQUE INDEX `config_id` (`config_id`)
+	PRIMARY KEY (`configuration_id`),
+	UNIQUE INDEX `configuration_id` (`configuration_id`)
 	) $charset_collate;";
 
 	require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
