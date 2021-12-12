@@ -27,6 +27,16 @@ if(false === defined('WC1C_PLUGIN_FILE'))
 
 	include_once __DIR__ . '/includes/functions-wc1c.php';
 	include_once __DIR__ . '/includes/class-wc1c-autoloader.php';
+	include_once __DIR__ . '/includes/Autoloader.php';
+
+	$loader = new Wc1c\Autoloader();
+
+	$loader->addNamespace('Wc1c', __DIR__ . '/includes');
+	$loader->addNamespace('Digiom\WordPress\Notices', __DIR__ . '/vendor/digiom/notices-wp/src');
+	$loader->addNamespace('Psr\Log', __DIR__ . '/vendor/psr/Log');
+	$loader->addNamespace('Monolog', __DIR__ . '/vendor/monolog/src/Monolog');
+
+	$loader->register();
 
 	register_activation_hook(WC1C_PLUGIN_FILE, 'wc1c_activation');
 	register_deactivation_hook(WC1C_PLUGIN_FILE, 'wc1c_deactivation');
