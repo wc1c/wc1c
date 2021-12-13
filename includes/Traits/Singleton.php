@@ -1,12 +1,20 @@
 <?php
 /**
- * Singleton
- *
- * @package Wc1c
+ * Namespace
+ */
+namespace Wc1c\Traits;
+
+/**
+ * Only WordPress
  */
 defined('ABSPATH') || exit;
 
-trait Trait_Wc1c_Singleton
+/**
+ * Trait Singleton
+ *
+ * @package Wc1c\Traits
+ */
+trait Singleton
 {
 	/**
 	 * All initialized instances
