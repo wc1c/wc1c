@@ -1,12 +1,20 @@
 <?php
 /**
- * Timer class
- *
- * @package Wc1c
+ * Namespace
+ */
+namespace Wc1c;
+
+/**
+ * Only WordPress
  */
 defined('ABSPATH') || exit;
 
-class Wc1c_Timer
+/**
+ * Class Timer
+ *
+ * @package Wc1c
+ */
+class Timer
 {
 	/**
 	 * Maximum time is available in sec
@@ -23,13 +31,13 @@ class Wc1c_Timer
 	private $started = 0;
 
 	/**
-	 * Wc1c_Timer constructor
+	 * Timer constructor.
 	 */
 	public function __construct()
 	{
 		if(isset($_SERVER['REQUEST_TIME_FLOAT']))
 		{
-			$this->set_started($_SERVER['REQUEST_TIME_FLOAT']);
+			$this->setStarted($_SERVER['REQUEST_TIME_FLOAT']);
 		}
 	}
 
@@ -38,7 +46,7 @@ class Wc1c_Timer
 	 *
 	 * @return int
 	 */
-	public function get_maximum()
+	public function getMaximum()
 	{
 		return $this->maximum;
 	}
@@ -48,7 +56,7 @@ class Wc1c_Timer
 	 *
 	 * @param int $maximum
 	 */
-	public function set_maximum($maximum)
+	public function setMaximum($maximum)
 	{
 		$this->maximum = $maximum;
 	}
@@ -58,7 +66,7 @@ class Wc1c_Timer
 	 *
 	 * @return int
 	 */
-	public function get_started()
+	public function getStarted()
 	{
 		return $this->started;
 	}
@@ -68,7 +76,7 @@ class Wc1c_Timer
 	 *
 	 * @param int $started
 	 */
-	public function set_started($started)
+	public function setStarted($started)
 	{
 		$this->started = $started;
 	}
@@ -78,9 +86,9 @@ class Wc1c_Timer
 	 *
 	 * @return float|int
 	 */
-	public function get_execution_seconds()
+	public function getExecutionSeconds()
 	{
-		return microtime(true) - $this->get_started();
+		return microtime(true) - $this->getStarted();
 	}
 
 	/**
@@ -88,9 +96,9 @@ class Wc1c_Timer
 	 *
 	 * @return float|int
 	 */
-	public function get_available_seconds()
+	public function getAvailableSeconds()
 	{
-		return $this->get_maximum() - $this->get_execution_seconds();
+		return $this->getMaximum() - $this->getExecutionSeconds();
 	}
 
 	/**
@@ -100,16 +108,16 @@ class Wc1c_Timer
 	 *
 	 * @return bool
 	 */
-	public function is_remaining_bigger_than($seconds = 30)
+	public function isRemainingBiggerThan($seconds = 30)
 	{
-		$max_execution_time = $this->get_maximum();
+		$max_execution_time = $this->getMaximum();
 
 		if($max_execution_time === 0)
 		{
 			return true;
 		}
 
-		$remaining_seconds = $this->get_available_seconds();
+		$remaining_seconds = $this->getAvailableSeconds();
 
 		return ($remaining_seconds >= $seconds);
 	}
