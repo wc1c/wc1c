@@ -264,7 +264,7 @@ class AllTable extends TableAbstract
 
 		foreach($statuses as $status_key)
 		{
-			$count = $this->storage_configurations->count_by
+			$count = $this->storage_configurations->countBy
 			(
 				[
 					'status' => $status_key
@@ -366,7 +366,7 @@ class AllTable extends TableAbstract
 		}
 		else
 		{
-			$total_items = $this->storage_configurations->count_by($storage_args);
+			$total_items = $this->storage_configurations->countBy($storage_args);
 		}
 
 		$storage_args['offset'] = $offset;
@@ -374,7 +374,7 @@ class AllTable extends TableAbstract
 		$storage_args['orderby'] = $orderby;
 		$storage_args['order'] = $order;
 
-		$this->items = $this->storage_configurations->get_data($storage_args, ARRAY_A);
+		$this->items = $this->storage_configurations->getData($storage_args, ARRAY_A);
 
 		/**
 		 * REQUIRED. We also have to register our pagination options & calculations.
@@ -383,7 +383,7 @@ class AllTable extends TableAbstract
 		(
 			[
 				'total_items' => $total_items,
-                'per_page'    => $per_page,
+                'per_page' => $per_page,
                 'total_pages' => ceil($total_items / $per_page)
             ]
 		);
@@ -425,7 +425,7 @@ class AllTable extends TableAbstract
 
 			if($connection_settings->isConnected())
 			{
-				$this->connect_box(__($connection_settings->get('login', 'Undefined'), 'wc1c' ), true);
+				$this->connect_box(__($connection_settings->get('login', 'Undefined'), 'wc1c'), true);
 			}
 			else
 			{
