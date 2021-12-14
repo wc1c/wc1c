@@ -1,67 +1,58 @@
 <?php
 /**
- * Abstract table class
- * Base class for displaying a list of items in an table
- *
- * @package Wc1c/Admin
+ * Namespace
+ */
+namespace Wc1c\Abstracts;
+
+/**
+ * Only WordPress
  */
 defined('ABSPATH') || exit;
 
-abstract class Abstract_Wc1c_Admin_Table
+/**
+ * TableAbstract
+ *
+ * @package Wc1c\Abstracts
+ */
+abstract class TableAbstract
 {
 	/**
-	 * The current list of items
-     *
-	 * @var array
+	 * @var array The current list of items
 	 */
 	public $items;
 
 	/**
-	 * Various information about the current table
-     *
-	 * @var array
+	 * @var array Various information about the current table
 	 */
 	protected $_args;
 
 	/**
-	 * Various information needed for displaying the pagination
-	 *
-	 * @var array
+	 * @var array Various information needed for displaying the pagination
 	 */
 	protected $_pagination_args = [];
 
 	/**
-	 * The current screen
-	 *
-	 * @var object
+	 * @var object The current screen
 	 */
 	protected $screen;
 
 	/**
-	 * Cached bulk actions
-	 *
-	 * @var array
+	 * @var array Cached bulk actions
 	 */
 	private $_actions;
 
 	/**
-	 * Cached pagination output
-	 *
-	 * @var string
+	 * @var string Cached pagination output
 	 */
 	private $_pagination;
 
 	/**
-	 * The view switcher modes
-	 *
-	 * @var array
+	 * @var array The view switcher modes
 	 */
 	protected $modes = [];
 
 	/**
-	 * Stores the value returned by ->get_column_info()
-	 *
-	 * @var array
+	 * @var array Stores the value returned by ->get_column_info()
 	 */
 	protected $_column_headers;
 
@@ -93,18 +84,17 @@ abstract class Abstract_Wc1c_Admin_Table
 		$args = wp_parse_args
 		(
 			$args,
-			array
-            (
-				'plural'   => '',
+            [
+				'plural' => '',
 				'singular' => '',
-				'ajax'     => false,
-				'screen'   => null,
-			)
+				'ajax' => false,
+				'screen' => null,
+			]
 		);
 
 		$this->screen = convert_to_screen($args['screen']);
 
-		add_filter("manage_{$this->screen->id}_columns", [$this, 'get_columns'], 0);
+		add_filter("manage_{$this->screen->id}_columns", [$this, 'getColumns'], 0);
 
 		if(!$args['plural'])
 		{
@@ -118,48 +108,47 @@ abstract class Abstract_Wc1c_Admin_Table
 
 		if($args['ajax'])
 		{
-			add_action('admin_footer', [$this, '_js_vars']);
+			add_action('admin_footer', [$this, 'jsVars']);
 		}
 
 		if(empty($this->modes))
 		{
 			$this->modes =
             [
-				'list'    => __('List View'),
-				'excerpt' => __('Excerpt View'),
-			];
+                'list' => __('List View'),
+                'excerpt' => __('Excerpt View'),
+            ];
 		}
 	}
 
 	/**
 	 * Checks the current user's permissions
 	 */
-	public function ajax_user_can()
+	public function ajaxUserCan()
 	{
-		die('function Wc1c_Admin_Table::ajax_user_can() must be over-ridden in a sub-class.');
+		die('function Table::ajaxUserCan() must be over-ridden in a sub-class.');
 	}
 
 	/**
 	 * Prepares the list of items for displaying
 	 */
-	abstract public function prepare_items();
+	abstract public function prepareItems();
 
 	/**
 	 * An internal method that sets all the necessary pagination arguments
 	 *
 	 * @param array|string $args Array or string of arguments with information about the pagination.
 	 */
-	protected function set_pagination_args($args)
+	protected function setPaginationArgs($args)
 	{
 		$args = wp_parse_args
-        (
+		(
 			$args,
-			array
-            (
+			[
 				'total_items' => 0,
 				'total_pages' => 0,
-				'per_page'    => 0,
-			)
+				'per_page' => 0,
+			]
 		);
 
 		if(!$args['total_pages'] && $args['per_page'] > 0)
@@ -168,7 +157,7 @@ abstract class Abstract_Wc1c_Admin_Table
 		}
 
 		// Redirect if page number is invalid and headers are not already sent
-		if(!headers_sent() && !wp_doing_ajax() && $args['total_pages'] > 0 && $this->get_pagenum() > $args['total_pages'])
+		if(!headers_sent() && !wp_doing_ajax() && $args['total_pages'] > 0 && $this->getPagenum() > $args['total_pages'])
 		{
 			wp_redirect(add_query_arg('paged', $args['total_pages']));
 			exit;
@@ -185,11 +174,11 @@ abstract class Abstract_Wc1c_Admin_Table
 	 *
 	 * @return int Number of items that correspond to the given pagination argument.
 	 */
-	public function get_pagination_arg($key)
+	public function getPaginationArg($key)
 	{
 		if('page' === $key)
 		{
-			return $this->get_pagenum();
+			return $this->getPagenum();
 		}
 
 		if(isset($this->_pagination_args[$key]))
@@ -203,7 +192,7 @@ abstract class Abstract_Wc1c_Admin_Table
 	 *
 	 * @return bool
 	 */
-	public function has_items()
+	public function hasItems()
 	{
 		return !empty($this->items);
 	}
@@ -211,7 +200,7 @@ abstract class Abstract_Wc1c_Admin_Table
 	/**
 	 * Message to be displayed when there are no items
 	 */
-	public function no_items()
+	public function noItems()
 	{
 		_e('No items found.');
 	}
@@ -222,9 +211,9 @@ abstract class Abstract_Wc1c_Admin_Table
 	 * @param string $text The 'submit' button label
 	 * @param string $input_id ID attribute value for the search input field
 	 */
-	public function search_box($text, $input_id)
+	public function searchBox($text, $input_id)
 	{
-		if(empty($_REQUEST['s']) && ! $this->has_items())
+		if(empty($_REQUEST['s']) && ! $this->hasItems())
 		{
 			return;
 		}
@@ -248,11 +237,11 @@ abstract class Abstract_Wc1c_Admin_Table
 			echo '<input type="hidden" name="detached" value="' . esc_attr($_REQUEST['detached']) . '" />';
 		}
 		?>
-        <p class="search-box">
-            <label class="screen-reader-text" for="<?php echo esc_attr($input_id); ?>"><?php echo $text; ?>:</label>
-            <input type="search" id="<?php echo esc_attr($input_id); ?>" name="s" value="<?php _admin_search_query(); ?>"/>
+		<p class="search-box">
+			<label class="screen-reader-text" for="<?php echo esc_attr($input_id); ?>"><?php echo $text; ?>:</label>
+			<input type="search" id="<?php echo esc_attr($input_id); ?>" name="s" value="<?php _admin_search_query(); ?>"/>
 			<?php submit_button($text, '', '', false, array('id' => 'search-submit')); ?>
-        </p>
+		</p>
 		<?php
 	}
 
@@ -262,8 +251,8 @@ abstract class Abstract_Wc1c_Admin_Table
 	 *
 	 * @return array
 	 */
-	protected function get_views()
-    {
+	protected function getViews()
+	{
 		return [];
 	}
 
@@ -271,8 +260,8 @@ abstract class Abstract_Wc1c_Admin_Table
 	 * Display the list of views available on this table
 	 */
 	public function views()
-    {
-		$views = $this->get_views();
+	{
+		$views = $this->getViews();
 
 		/**
 		 * Filters the list of available list table views.
@@ -282,7 +271,7 @@ abstract class Abstract_Wc1c_Admin_Table
 		 *
 		 * @param string[] $views An array of available list table views.
 		 */
-	    $views = apply_filters("views_{$this->screen->id}", $views);
+		$views = apply_filters("views_{$this->screen->id}", $views);
 
 		if(empty($views))
 		{
@@ -292,10 +281,10 @@ abstract class Abstract_Wc1c_Admin_Table
 		$this->screen->render_screen_reader_content('heading_views');
 
 		echo "<ul class='subsubsub'>\n";
-	    foreach($views as $class => $view)
-	    {
-		    $views[$class] = "\t<li class='$class'>$view";
-	    }
+		foreach($views as $class => $view)
+		{
+			$views[$class] = "\t<li class='$class'>$view";
+		}
 		echo implode(" |</li>\n", $views) . "</li>\n";
 		echo '</ul>';
 	}
@@ -306,8 +295,8 @@ abstract class Abstract_Wc1c_Admin_Table
 	 *
 	 * @return array
 	 */
-	protected function get_bulk_actions()
-    {
+	protected function getBulkActions()
+	{
 		return [];
 	}
 
@@ -317,11 +306,11 @@ abstract class Abstract_Wc1c_Admin_Table
 	 * @param string $which The location of the bulk actions: 'top' or 'bottom'.
 	 * This is designated as optional for backward compatibility.
 	 */
-	protected function bulk_actions($which = '')
+	protected function bulkActions($which = '')
 	{
 		if(is_null($this->_actions))
 		{
-			$this->_actions = $this->get_bulk_actions();
+			$this->_actions = $this->getBulkActions();
 
 			/**
 			 * Filters the list table Bulk Actions drop-down.
@@ -368,7 +357,7 @@ abstract class Abstract_Wc1c_Admin_Table
 	 *
 	 * @return string|false The action name or False if no action was selected
 	 */
-	public function current_action()
+	public function currentAction()
 	{
 		if(isset($_REQUEST['filter_action']) && ! empty($_REQUEST['filter_action']))
 		{
@@ -393,10 +382,10 @@ abstract class Abstract_Wc1c_Admin_Table
 	 *
 	 * @param string[] $actions An array of action links
 	 * @param bool $always_visible Whether the actions should be always visible
-     *
+	 *
 	 * @return string
 	 */
-	protected function row_actions($actions, $always_visible = false)
+	protected function rowActions($actions, $always_visible = false)
 	{
 		$action_count = count($actions);
 		$i = 0;
@@ -427,11 +416,11 @@ abstract class Abstract_Wc1c_Admin_Table
 	 *
 	 * @param string $current_mode
 	 */
-	protected function view_switcher($current_mode)
+	protected function viewSwitcher($current_mode)
 	{
 		?>
-        <input type="hidden" name="mode" value="<?php echo esc_attr($current_mode); ?>"/>
-        <div class="view-switch">
+		<input type="hidden" name="mode" value="<?php echo esc_attr($current_mode); ?>"/>
+		<div class="view-switch">
 			<?php
 			foreach($this->modes as $mode => $title)
 			{
@@ -448,7 +437,7 @@ abstract class Abstract_Wc1c_Admin_Table
 				);
 			}
 			?>
-        </div>
+		</div>
 		<?php
 	}
 
@@ -457,7 +446,7 @@ abstract class Abstract_Wc1c_Admin_Table
 	 *
 	 * @return int
 	 */
-	public function get_pagenum()
+	public function getPagenum()
 	{
 		$page_num = isset($_REQUEST['paged']) ? absint($_REQUEST['paged']) : 0;
 
@@ -474,10 +463,10 @@ abstract class Abstract_Wc1c_Admin_Table
 	 *
 	 * @param string $option
 	 * @param int $default
-     *
+	 *
 	 * @return int
 	 */
-	protected function get_items_per_page($option, $default = 20)
+	protected function getItemsPerPage($option, $default = 20)
 	{
 		$per_page = (int) get_user_option($option);
 		if(empty($per_page) || $per_page < 1)
@@ -496,7 +485,7 @@ abstract class Abstract_Wc1c_Admin_Table
 		 *
 		 * @param int $per_page Number of items to be displayed. Default 20
 		 */
-		return (int) apply_filters("{$option}", $per_page);
+		return (int) apply_filters($option, $per_page);
 	}
 
 	/**
@@ -526,13 +515,13 @@ abstract class Abstract_Wc1c_Admin_Table
 		}
 
 		$output = '<span class="displaying-num">' . sprintf
-            (
+			(
 			/* translators: %s: Number of items. */
 				_n('%s item', '%s items', $total_items),
 				number_format_i18n($total_items)
 			) . '</span>';
 
-		$current = $this->get_pagenum();
+		$current = $this->getPagenum();
 		$removable_query_args = wp_removable_query_args();
 
 		$current_url = set_url_scheme('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
@@ -676,7 +665,7 @@ abstract class Abstract_Wc1c_Admin_Table
 	 *
 	 * @return array
 	 */
-	abstract public function get_columns();
+	abstract public function getColumns();
 
 	/**
 	 * Get a list of sortable columns. The format is:
@@ -688,8 +677,8 @@ abstract class Abstract_Wc1c_Admin_Table
 	 *
 	 * @return array
 	 */
-	protected function get_sortable_columns()
-    {
+	protected function getSortableColumns()
+	{
 		return [];
 	}
 
@@ -698,9 +687,9 @@ abstract class Abstract_Wc1c_Admin_Table
 	 *
 	 * @return string Name of the default primary column, in this case, an empty string
 	 */
-	protected function get_default_primary_column_name()
+	protected function getDefaultPrimaryColumnName()
 	{
-		$columns = $this->get_columns();
+		$columns = $this->getColumns();
 		$column  = '';
 
 		if(empty($columns))
@@ -729,13 +718,13 @@ abstract class Abstract_Wc1c_Admin_Table
 	 *
 	 * @return string The name of the primary column.
 	 */
-	protected function get_primary_column_name()
+	protected function getPrimaryColumnName()
 	{
 		$columns = get_column_headers($this->screen);
 
 		// If the primary column doesn't exist fall back to the
 		// first non-checkbox column
-		$default = $this->get_default_primary_column_name();
+		$default = $this->getDefaultPrimaryColumnName();
 
 		/**
 		 * Filters the name of the primary column for the current list table.
@@ -758,13 +747,13 @@ abstract class Abstract_Wc1c_Admin_Table
 	 *
 	 * @return array
 	 */
-	protected function get_column_info()
+	protected function getColumnInfo()
 	{
 		if(isset($this->_column_headers) && is_array($this->_column_headers))
 		{
 			// Back-compat for list tables that have been manually setting $_column_headers for horse reasons.
 			// In 4.3, we added a fourth argument for primary column.
-			$column_headers = array([], [], [], $this->get_primary_column_name());
+			$column_headers = array([], [], [], $this->getPrimaryColumnName());
 			foreach($this->_column_headers as $key => $value)
 			{
 				$column_headers[$key] = $value;
@@ -776,7 +765,7 @@ abstract class Abstract_Wc1c_Admin_Table
 		$columns = get_column_headers($this->screen);
 		$hidden  = get_hidden_columns($this->screen);
 
-		$sortable_columns = $this->get_sortable_columns();
+		$sortable_columns = $this->getSortableColumns();
 
 		/**
 		 * Filters the list table sortable columns for a specific screen.
@@ -805,7 +794,7 @@ abstract class Abstract_Wc1c_Admin_Table
 			$sortable[$id] = $data;
 		}
 
-		$primary = $this->get_primary_column_name();
+		$primary = $this->getPrimaryColumnName();
 		$this->_column_headers = array($columns, $hidden, $sortable, $primary);
 
 		return $this->_column_headers;
@@ -816,9 +805,9 @@ abstract class Abstract_Wc1c_Admin_Table
 	 *
 	 * @return int
 	 */
-	public function get_column_count()
+	public function getColumnCount()
 	{
-		list ($columns, $hidden) = $this->get_column_info();
+		list ($columns, $hidden) = $this->getColumnInfo();
 		$hidden = array_intersect(array_keys($columns), array_filter($hidden));
 
 		return count($columns) - count($hidden);
@@ -831,9 +820,9 @@ abstract class Abstract_Wc1c_Admin_Table
 	 *
 	 * @param bool $with_id Whether to set the id attribute or not
 	 */
-	public function print_column_headers($with_id = true)
+	public function printColumnHeaders($with_id = true)
 	{
-		list($columns, $hidden, $sortable, $primary) = $this->get_column_info();
+		list($columns, $hidden, $sortable, $primary) = $this->getColumnInfo();
 
 		$current_url = set_url_scheme('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
 		$current_url = remove_query_arg('paged', $current_url);
@@ -868,7 +857,7 @@ abstract class Abstract_Wc1c_Admin_Table
 		{
 			$class = array('manage-column', "column-$column_key");
 
-			if(in_array($column_key, $hidden))
+			if(in_array($column_key, $hidden, true))
 			{
 				$class[] = 'hidden';
 			}
@@ -927,37 +916,37 @@ abstract class Abstract_Wc1c_Admin_Table
 	{
 		$singular = $this->_args['singular'];
 
-		$this->display_tablenav('top');
+		$this->displayTablenav('top');
 
 		$this->screen->render_screen_reader_content('heading_list');
 		?>
-        <table class="wp-list-table <?php echo implode(' ', $this->get_table_classes()); ?>">
-            <thead>
-            <tr>
-				<?php $this->print_column_headers(); ?>
-            </tr>
-            </thead>
+		<table class="wp-list-table <?php echo implode(' ', $this->getTableClasses()); ?>">
+			<thead>
+			<tr>
+				<?php $this->printColumnHeaders(); ?>
+			</tr>
+			</thead>
 
-            <tbody id="the-list"
+			<tbody id="the-list"
 				<?php
 				if($singular)
 				{
 					echo " data-wp-lists='list:$singular'";
 				}
 				?>
-            >
-			<?php $this->display_rows_or_placeholder(); ?>
-            </tbody>
+			>
+			<?php $this->displayRowsOrPlaceholder(); ?>
+			</tbody>
 
-            <tfoot>
-            <tr>
-				<?php $this->print_column_headers(false); ?>
-            </tr>
-            </tfoot>
+			<tfoot>
+			<tr>
+				<?php $this->printColumnHeaders(false); ?>
+			</tr>
+			</tfoot>
 
-        </table>
+		</table>
 		<?php
-		$this->display_tablenav('bottom');
+		$this->displayTablenav('bottom');
 	}
 
 	/**
@@ -965,37 +954,37 @@ abstract class Abstract_Wc1c_Admin_Table
 	 *
 	 * @return array List of CSS classes for the table tag
 	 */
-	protected function get_table_classes()
+	protected function getTableClasses()
 	{
 		return array('widefat', 'fixed', 'striped', $this->_args['plural']);
 	}
 
 	/**
 	 * Generate the table navigation above or below the table
-     *
+	 *
 	 * @param string $which
 	 */
-	protected function display_tablenav($which)
+	protected function displayTablenav($which)
 	{
 		if('top' === $which)
 		{
 			wp_nonce_field('bulk-' . $this->_args['plural']);
 		}
 		?>
-        <div class="tablenav <?php echo esc_attr($which); ?>">
+		<div class="tablenav <?php echo esc_attr($which); ?>">
 
-			<?php if($this->has_items()) : ?>
-                <div class="alignleft actions bulkactions">
-					<?php $this->bulk_actions($which); ?>
-                </div>
+			<?php if($this->hasItems()) : ?>
+				<div class="alignleft actions bulkactions">
+					<?php $this->bulkActions($which); ?>
+				</div>
 			<?php
 			endif;
-			$this->extra_tablenav($which);
+			$this->extraTablenav($which);
 			$this->pagination($which);
 			?>
 
-            <br class="clear"/>
-        </div>
+			<br class="clear"/>
+		</div>
 		<?php
 	}
 
@@ -1004,21 +993,21 @@ abstract class Abstract_Wc1c_Admin_Table
 	 *
 	 * @param string $which
 	 */
-	protected function extra_tablenav($which) {}
+	protected function extraTablenav($which) {}
 
 	/**
 	 * Generate the tbody element for the list table
 	 */
-	public function display_rows_or_placeholder()
+	public function displayRowsOrPlaceholder()
 	{
-		if($this->has_items())
+		if($this->hasItems())
 		{
-			$this->display_rows();
+			$this->displayRows();
 		}
 		else
 		{
-			echo '<tr class="no-items"><td class="colspanchange" colspan="' . $this->get_column_count() . '">';
-			$this->no_items();
+			echo '<tr class="no-items"><td class="colspanchange" colspan="' . $this->getColumnCount() . '">';
+			$this->noItems();
 			echo '</td></tr>';
 		}
 	}
@@ -1026,11 +1015,11 @@ abstract class Abstract_Wc1c_Admin_Table
 	/**
 	 * Generate the table rows
 	 */
-	public function display_rows()
+	public function displayRows()
 	{
 		foreach($this->items as $item)
 		{
-			$this->single_row($item);
+			$this->singleRow($item);
 		}
 	}
 
@@ -1039,10 +1028,10 @@ abstract class Abstract_Wc1c_Admin_Table
 	 *
 	 * @param object $item The current item
 	 */
-	public function single_row($item)
+	public function singleRow($item)
 	{
 		echo '<tr>';
-		$this->single_row_columns($item);
+		$this->singleRowColumns($item);
 		echo '</tr>';
 	}
 
@@ -1050,21 +1039,21 @@ abstract class Abstract_Wc1c_Admin_Table
 	 * @param object $item
 	 * @param string $column_name
 	 */
-	protected function column_default($item, $column_name) {}
+	protected function columnDefault($item, $column_name) {}
 
 	/**
 	 * @param object $item
 	 */
-	protected function column_cb($item) {}
+	protected function columnCb($item) {}
 
 	/**
 	 * Generates the columns for a single row of the table
 	 *
 	 * @param object $item The current item
 	 */
-	protected function single_row_columns($item)
+	protected function singleRowColumns($item)
 	{
-		list($columns, $hidden, $sortable, $primary) = $this->get_column_info();
+		list($columns, $hidden, $sortable, $primary) = $this->getColumnInfo();
 
 		foreach($columns as $column_name => $column_display_name)
 		{
@@ -1089,7 +1078,7 @@ abstract class Abstract_Wc1c_Admin_Table
 			if('cb' === $column_name)
 			{
 				echo '<th scope="row" class="check-column">';
-				echo $this->column_cb($item);
+				echo $this->columnCb($item);
 				echo '</th>';
 			}
 			elseif(method_exists($this, '_column_' . $column_name))
@@ -1100,14 +1089,14 @@ abstract class Abstract_Wc1c_Admin_Table
 			{
 				echo "<td $attributes>";
 				echo $this->{'column_' . $column_name}($item);
-				echo $this->handle_row_actions($item, $column_name, $primary);
+				echo $this->handleRowActions($item, $column_name, $primary);
 				echo '</td>';
 			}
 			else
 			{
 				echo "<td $attributes>";
-				echo $this->column_default($item, $column_name);
-				echo $this->handle_row_actions($item, $column_name, $primary);
+				echo $this->columnDefault($item, $column_name);
+				echo $this->handleRowActions($item, $column_name, $primary);
 				echo '</td>';
 			}
 		}
@@ -1119,10 +1108,10 @@ abstract class Abstract_Wc1c_Admin_Table
 	 * @param object $item The item being acted upon.
 	 * @param string $column_name Current column name.
 	 * @param string $primary Primary column name.
-     *
+	 *
 	 * @return string The row actions HTML, or an empty string if the current column is the primary column.
 	 */
-	protected function handle_row_actions($item, $column_name, $primary)
+	protected function handleRowActions($item, $column_name, $primary)
 	{
 		return $column_name === $primary ? '<button type="button" class="toggle-row"><span class="screen-reader-text">' . __('Show more details') . '</span></button>' : '';
 	}
@@ -1130,19 +1119,19 @@ abstract class Abstract_Wc1c_Admin_Table
 	/**
 	 * Handle an incoming ajax request (called from admin-ajax.php)
 	 */
-	public function ajax_response()
+	public function ajaxResponse()
 	{
-		$this->prepare_items();
+		$this->prepareItems();
 
 		ob_start();
 
 		if(!empty($_REQUEST['no_placeholder']))
 		{
-			$this->display_rows();
+			$this->displayRows();
 		}
 		else
 		{
-			$this->display_rows_or_placeholder();
+			$this->displayRowsOrPlaceholder();
 		}
 
 		$rows = ob_get_clean();
@@ -1169,17 +1158,17 @@ abstract class Abstract_Wc1c_Admin_Table
 	/**
 	 * Send required variables to JavaScript land
 	 */
-	public function _js_vars()
-    {
-	    $args = [
-		    'class'  => get_class($this),
-		    'screen' =>
+	public function jsVars()
+	{
+		$args = [
+			'class' => get_class($this),
+			'screen' =>
             [
-			    'id'   => $this->screen->id,
-			    'base' => $this->screen->base,
-		    ],
-	    ];
+                'id' => $this->screen->id,
+                'base' => $this->screen->base,
+            ],
+		];
 
-	    printf("<script type='text/javascript'>list_args = %s;</script>\n", wp_json_encode($args));
+		printf("<script type='text/javascript'>list_args = %s;</script>\n", wp_json_encode($args));
 	}
 }
