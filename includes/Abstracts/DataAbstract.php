@@ -1,13 +1,28 @@
 <?php
 /**
- * Abstract data
- * Implemented by classes using the same CRUD(s) pattern
- *
- * @package Wc1c/Abstracts
+ * Namespace
+ */
+namespace Wc1c\Abstracts;
+
+/**
+ * Only WordPress
  */
 defined('ABSPATH') || exit;
 
-abstract class Abstract_Wc1c_Data
+/**
+ * Dependencies
+ */
+use WP_Error;
+use DateTimeZone;
+use Wc1c\Exceptions\Exception;
+use Wc1c\Datetime;
+
+/**
+ * DataAbstract - Implemented by classes using the same CRUD(s) pattern
+ *
+ * @package Wc1c\Abstracts
+ */
+abstract class DataAbstract
 {
 	/**
 	 * This is the name of this object type
@@ -61,7 +76,6 @@ abstract class Abstract_Wc1c_Data
 
 	/**
 	 * Extra data for this object. Name value pairs (name + default value)
-	 *
 	 * Used as a standard way for sub classes (like key types) to add additional information to an inherited class.
 	 *
 	 * @var array
@@ -69,7 +83,7 @@ abstract class Abstract_Wc1c_Data
 	protected $extra_data = [];
 
 	/**
-	 * Abstract_Wc1c_Data constructor.
+	 * Data constructor.
 	 *
 	 * @param int $read
 	 */
@@ -84,9 +98,9 @@ abstract class Abstract_Wc1c_Data
 	 *
 	 * @return string
 	 */
-	protected function get_hook_prefix()
+	protected function getHookPrefix()
 	{
-		return 'wc1c_data_' . $this->object_type . '_get_';
+		return WC1C_PREFIX . 'data_' . $this->object_type . '_get_';
 	}
 
 	/**
@@ -94,7 +108,7 @@ abstract class Abstract_Wc1c_Data
 	 *
 	 * @return int
 	 */
-	public function get_id()
+	public function getId()
 	{
 		return $this->id;
 	}
@@ -104,7 +118,7 @@ abstract class Abstract_Wc1c_Data
 	 *
 	 * @return object
 	 */
-	public function get_storage()
+	public function getStorage()
 	{
 		return $this->storage;
 	}
@@ -121,7 +135,7 @@ abstract class Abstract_Wc1c_Data
 		if($this->storage)
 		{
 			$this->storage->delete($this, ['force_delete' => $force_delete]);
-			$this->set_id(0);
+			$this->setId(0);
 
 			return true;
 		}
@@ -139,19 +153,19 @@ abstract class Abstract_Wc1c_Data
 	{
 		if(!$this->storage)
 		{
-			return $this->get_id();
+			return $this->getId();
 		}
 
 		/**
 		 * Trigger action before saving to the DB.
 		 * Allows you to adjust object props before save.
 		 *
-		 * @param Abstract_Wc1c_Data $this The object being saved
-		 * @param Abstract_Wc1c_Data $data_store THe data storage persisting the data
+		 * @param DataAbstract $this The object being saved
+		 * @param DataAbstract $data_store THe data storage persisting the data
 		 */
-		do_action('wc1c_data_' . $this->object_type . '_before_object_save', $this, $this->storage);
+		do_action(WC1C_PREFIX . 'data_' . $this->object_type . '_before_object_save', $this, $this->storage);
 
-		if($this->get_id())
+		if($this->getId())
 		{
 			$this->storage->update($this);
 		}
@@ -163,12 +177,12 @@ abstract class Abstract_Wc1c_Data
 		/**
 		 * Trigger action after saving to the DB
 		 *
-		 * @param Abstract_Wc1c_Data $this The object being saved.
-		 * @param Abstract_Wc1c_Data $data_store THe data storage persisting the data.
+		 * @param DataAbstract $this The object being saved.
+		 * @param DataAbstract $data_store THe data storage persisting the data.
 		 */
-		do_action('wc1c_data_' . $this->object_type . '_after_object_save', $this, $this->storage);
+		do_action(WC1C_PREFIX . 'data_' . $this->object_type . '_after_object_save', $this, $this->storage);
 
-		return $this->get_id();
+		return $this->getId();
 	}
 
 	/**
@@ -178,7 +192,7 @@ abstract class Abstract_Wc1c_Data
 	 */
 	public function __toString()
 	{
-		$result = wp_json_encode($this->get_data());
+		$result = wp_json_encode($this->getData());
 
 		if(!is_string($result))
 		{
@@ -193,9 +207,9 @@ abstract class Abstract_Wc1c_Data
 	 *
 	 * @return array
 	 */
-	public function get_data()
+	public function getData()
 	{
-		return array_merge(['id' => $this->get_id()], $this->data);
+		return array_merge(['id' => $this->getId()], $this->data);
 	}
 
 	/**
@@ -204,7 +218,7 @@ abstract class Abstract_Wc1c_Data
 	 *
 	 * @return array
 	 */
-	public function get_data_keys()
+	public function getDataKeys()
 	{
 		return array_keys($this->data);
 	}
@@ -215,7 +229,7 @@ abstract class Abstract_Wc1c_Data
 	 *
 	 * @return array
 	 */
-	public function get_extra_data_keys()
+	public function getExtraDataKeys()
 	{
 		return array_keys($this->extra_data);
 	}
@@ -225,7 +239,7 @@ abstract class Abstract_Wc1c_Data
 	 *
 	 * @param int $id ID
 	 */
-	public function set_id($id)
+	public function setId($id)
 	{
 		$this->id = absint($id);
 	}
@@ -233,12 +247,12 @@ abstract class Abstract_Wc1c_Data
 	/**
 	 * Set all props to default values
 	 */
-	public function set_defaults()
+	public function setDefaults()
 	{
 		$this->data = $this->default_data;
 		$this->changes = [];
 
-		$this->set_object_read(false);
+		$this->setObjectRead(false);
 	}
 
 	/**
@@ -246,7 +260,7 @@ abstract class Abstract_Wc1c_Data
 	 *
 	 * @param boolean $read Should read?
 	 */
-	public function set_object_read($read = true)
+	public function setObjectRead($read = true)
 	{
 		$this->object_read = (bool) $read;
 	}
@@ -256,7 +270,7 @@ abstract class Abstract_Wc1c_Data
 	 *
 	 * @return boolean
 	 */
-	public function get_object_read()
+	public function getObjectRead()
 	{
 		return (bool) $this->object_read;
 	}
@@ -271,7 +285,7 @@ abstract class Abstract_Wc1c_Data
 	 *
 	 * @return bool|WP_Error
 	 */
-	public function set_props($props, $context = 'set')
+	public function setProps($props, $context = 'set')
 	{
 		$errors = false;
 
@@ -286,7 +300,7 @@ abstract class Abstract_Wc1c_Data
 
 				$setter = "set_$prop";
 
-				if(is_callable(array($this, $setter)))
+				if(is_callable([$this, $setter]))
 				{
 					$this->{$setter}($value);
 				}
@@ -307,13 +321,12 @@ abstract class Abstract_Wc1c_Data
 
 	/**
 	 * Sets a prop for a setter method
-	 *
-	 * This stores changes in a special array so we can track what needs saving the the DB later
+	 * This storage changes in a special array, so we can track what needs saving the DB later
 	 *
 	 * @param string $prop Name of prop to set
 	 * @param mixed $value Value of the prop
 	 */
-	protected function set_prop($prop, $value)
+	protected function setProp($prop, $value)
 	{
 		if(array_key_exists($prop, $this->data))
 		{
@@ -336,7 +349,7 @@ abstract class Abstract_Wc1c_Data
 	 *
 	 * @return array
 	 */
-	public function get_changes()
+	public function getChanges()
 	{
 		return $this->changes;
 	}
@@ -344,7 +357,7 @@ abstract class Abstract_Wc1c_Data
 	/**
 	 * Merge changes with data and clear
 	 */
-	public function apply_changes()
+	public function applyChanges()
 	{
 		$this->data = array_replace_recursive($this->data, $this->changes);
 		$this->changes = [];
@@ -361,7 +374,7 @@ abstract class Abstract_Wc1c_Data
 	 *
 	 * @return mixed
 	 */
-	protected function get_prop($prop, $context = 'view')
+	protected function getProp($prop, $context = 'view')
 	{
 		$value = null;
 
@@ -371,7 +384,7 @@ abstract class Abstract_Wc1c_Data
 
 			if('view' === $context)
 			{
-				$value = apply_filters($this->get_hook_prefix() . $prop, $value, $this);
+				$value = apply_filters($this->getHookPrefix() . $prop, $value, $this);
 			}
 		}
 
@@ -384,27 +397,26 @@ abstract class Abstract_Wc1c_Data
 	 * @param string $prop Name of prop to set
 	 * @param string|integer $value Value of the prop
 	 *
-	 * @throws Wc1c_Exception|Exception
+	 * @throws Exception|\Exception
 	 */
-	protected function set_date_prop($prop, $value)
+	protected function setDateProp($prop, $value)
 	{
 		try
 		{
 			if(empty($value))
 			{
-				$this->set_prop($prop, null);
-
+				$this->setProp($prop, null);
 				return;
 			}
 
-			if(is_a($value, 'Wc1c_Datetime'))
+			if(is_a($value, 'Datetime'))
 			{
 				$datetime = $value;
 			}
 			elseif(is_numeric($value))
 			{
 				// Timestamps are handled as UTC timestamps in all cases
-				$datetime = new Wc1c_Datetime("@{$value}", new DateTimeZone('UTC'));
+				$datetime = new Datetime("@{$value}", new DateTimeZone('UTC'));
 			}
 			else
 			{
@@ -418,7 +430,8 @@ abstract class Abstract_Wc1c_Data
 				{
 					$timestamp = wc1c_string_to_timestamp(get_gmt_from_date(gmdate('Y-m-d H:i:s', wc1c_string_to_timestamp($value))));
 				}
-				$datetime = new Wc1c_Datetime("@{$timestamp}", new DateTimeZone('UTC'));
+
+				$datetime = new Datetime("@{$timestamp}", new DateTimeZone('UTC'));
 			}
 
 			// Set local timezone or offset
@@ -428,12 +441,12 @@ abstract class Abstract_Wc1c_Data
 			}
 			else
 			{
-				$datetime->set_utc_offset(wc1c_timezone_offset());
+				$datetime->setUtcOffset(wc1c_timezone_offset());
 			}
 
-			$this->set_prop($prop, $datetime);
+			$this->setProp($prop, $datetime);
 		}
-		catch(Wc1c_Exception $e){}
+		catch(Exception $e){}
 	}
 
 	/**
@@ -442,12 +455,11 @@ abstract class Abstract_Wc1c_Data
 	 * @param string $code Error code
 	 * @param string $message Error message
 	 * @param int $http_status_code HTTP status code
-	 * @param array $data Extra error data
 	 *
-	 * @throws Wc1c_Exception_Data Data Exception
+	 * @throws Exception Data Exception
 	 */
-	protected function error($code, $message, $http_status_code = 400, $data = [])
+	protected function error($code, $message, $http_status_code = 400)
 	{
-		throw new Wc1c_Exception_Data($code, $message, $http_status_code, $data);
+		throw new Exception($code, $message, $http_status_code);
 	}
 }
