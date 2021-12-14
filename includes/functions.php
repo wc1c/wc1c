@@ -1,31 +1,17 @@
 <?php
 /**
- * Use for plugin activation hook
- */
-function wc1c_activation()
-{
-}
-
-/**
- * Use for plugin deactivation hook
- */
-function wc1c_deactivation()
-{
-}
-
-/**
  * Main instance of Wc1c
  *
- * @return Wc1c|boolean
+ * @return Wc1c\Core|boolean
  */
-function WC1C()
+function wc1c()
 {
 	if(version_compare(PHP_VERSION, '5.6.0') < 0)
 	{
 		return false;
 	}
 
-	if(!is_callable('Wc1c::instance'))
+	if(!is_callable('Wc1c\Core::instance'))
 	{
 		return false;
 	}
@@ -35,22 +21,17 @@ function WC1C()
 		return false;
 	}
 
-	return Wc1c::instance();
+	return Wc1c\Core::instance();
 }
 
 /**
- * Main instance of Wc1c_Admin
+ * Main instance of Admin
  *
- * @return Wc1c_Admin|boolean
+ * @return Wc1c\Admin
  */
-function WC1C_Admin()
+function wc1c_admin()
 {
-	if(!is_callable('Wc1c_Admin::instance'))
-	{
-		return false;
-	}
-
-	return Wc1c_Admin::instance();
+	return Wc1c\Admin::instance();
 }
 
 /**
@@ -58,53 +39,10 @@ function WC1C_Admin()
  *
  * @return wpdb
  */
-function WC1C_Database()
+function wc1c_wpdb()
 {
 	global $wpdb;
 	return $wpdb;
-}
-
-/**
- * Install db tables
- *
- * @return bool
- */
-function wc1c_install()
-{
-	$wc1c_db_version = 1;
-	$current_db = get_site_option('wc1c_db_version');
-
-	if($current_db == $wc1c_db_version)
-	{
-		return false;
-	}
-
-	$charset_collate = WC1C_Database()->get_charset_collate();
-
-	$table_name = WC1C_Database()->base_prefix . 'wc1c';
-
-	$sql = "CREATE TABLE $table_name (
-	`configuration_id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-	`site_id` INT(11) UNSIGNED NOT NULL DEFAULT '0',
-	`name` VARCHAR(155) NULL DEFAULT NULL,
-	`default` TINYINT(4) NULL DEFAULT '0',
-	`status` VARCHAR(50) NULL DEFAULT NULL,
-	`options` TEXT NULL DEFAULT NULL,
-	`schema` VARCHAR(50) NULL DEFAULT NULL,
-	`date_create` VARCHAR(50) NULL DEFAULT NULL,
-	`date_modify` VARCHAR(50) NULL DEFAULT NULL,
-	`date_activity` VARCHAR(50) NULL DEFAULT NULL,
-	PRIMARY KEY (`configuration_id`),
-	UNIQUE INDEX `configuration_id` (`configuration_id`)
-	) $charset_collate;";
-
-	require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-
-	dbDelta($sql);
-
-	add_site_option('wc1c_db_version', $wc1c_db_version);
-
-	return true;
 }
 
 /**
@@ -135,33 +73,6 @@ function is_wc1c_admin_request()
 	}
 
 	return false;
-}
-
-/**
- * Localisation loading
- */
-function wc1c_load_textdomain()
-{
-	/**
-	 * WP 5.x or later
-	 */
-	if(function_exists('determine_locale'))
-	{
-		$locale = determine_locale();
-	}
-	else
-	{
-		$locale = is_admin() && function_exists('get_user_locale') ? get_user_locale() : get_locale();
-	}
-
-	/**
-	 * Change locale from external code
-	 */
-	$locale = apply_filters('plugin_locale', $locale, 'wc1c');
-
-	unload_textdomain('wc1c');
-	load_textdomain('wc1c', WP_LANG_DIR . '/plugins/wc1c-' . $locale . '.mo');
-	load_textdomain('wc1c', WC1C_PLUGIN_PATH . 'languages/wc1c-' . $locale . '.mo');
 }
 
 /**
@@ -679,7 +590,7 @@ function wc1c_admin_configurations_get_url($action = 'list', $configuration_id =
 		return admin_url($path);
 	}
 
-	$path .= '&config_id=' . $configuration_id;
+	$path .= '&configuration_id=' . $configuration_id;
 
 	return admin_url($path);
 }
