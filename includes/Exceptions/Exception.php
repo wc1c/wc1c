@@ -17,7 +17,7 @@ use Exception as SystemException;
 /**
  * Exception
  *
- * @package Wc1c/Exceptions
+ * @package Wc1c\Exceptions
  */
 class Exception extends SystemException
 {}

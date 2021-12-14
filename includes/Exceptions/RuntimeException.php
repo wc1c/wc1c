@@ -17,7 +17,7 @@ use RuntimeException as SystemRuntimeException;
 /**
  * RuntimeException
  *
- * @package Wc1c/Exceptions
+ * @package Wc1c\Exceptions
  */
 class RuntimeException extends SystemRuntimeException
 {}
