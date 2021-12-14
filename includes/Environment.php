@@ -30,15 +30,7 @@ class Environment
 	/**
 	 * Environment constructor
 	 */
-	public function __construct()
-	{
-		$this->initWc1cVersion();
-		$this->initCurrentConfigurationId();
-		$this->initUploadDirectory();
-		$this->initWc1cUploadDirectory();
-		$this->initPhpPostMaxSize();
-		$this->initPhpMaxExecutionTime();
-	}
+	public function __construct(){}
 
 	/**
 	 * Get data
