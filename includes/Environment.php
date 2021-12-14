@@ -14,14 +14,17 @@ defined('ABSPATH') || exit;
  */
 use Wc1c\Exceptions\Exception;
 use Wc1c\Exceptions\RuntimeException;
+use Wc1c\Traits\Singleton;
 
 /**
  * Environment
  *
  * @package Wc1c
  */
-class Environment
+final class Environment
 {
+	use Singleton;
+
 	/**
 	 * @var array Environ data
 	 */
