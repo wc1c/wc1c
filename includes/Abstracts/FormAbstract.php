@@ -1,12 +1,20 @@
 <?php
 /**
- * Abstract Form class
- *
- * @package Wc1c/Admin
+ * Namespace
+ */
+namespace Wc1c\Abstracts;
+
+/**
+ * Only WordPress
  */
 defined('ABSPATH') || exit;
 
-abstract class Abstract_Wc1c_Admin_Form
+/**
+ * Class FormAbstract
+ *
+ * @package Wc1c\Abstracts
+ */
+abstract class FormAbstract
 {
 	/**
 	 * Form id
@@ -115,7 +123,7 @@ abstract class Abstract_Wc1c_Admin_Form
 	 */
 	public function load_saved_data($saved_data = [])
 	{
-	    $saved_data = apply_filters('wc1c_admin_' . $this->get_id() . '_form_load_saved_data', $saved_data);
+		$saved_data = apply_filters(WC1C_PREFIX . $this->get_id() . '_form_load_saved_data', $saved_data);
 		$this->set_saved_data($saved_data);
 	}
 
@@ -126,7 +134,7 @@ abstract class Abstract_Wc1c_Admin_Form
 	 */
 	public function load_fields($fields = [])
 	{
-	    $fields = apply_filters('wc1c_admin_' . $this->get_id() . '_form_load_fields', $fields);
+		$fields = apply_filters(WC1C_PREFIX . $this->get_id() . '_form_load_fields', $fields);
 		$this->set_fields($fields);
 	}
 
@@ -139,7 +147,7 @@ abstract class Abstract_Wc1c_Admin_Form
 	 */
 	public function get_prefix_field_key($key)
 	{
-		return 'wc1c_admin_' . $this->get_id() . '_form_field_' . $key;
+		return WC1C_PREFIX . $this->get_id() . '_form_field_' . $key;
 	}
 
 	/**
@@ -228,18 +236,18 @@ abstract class Abstract_Wc1c_Admin_Form
 			$type = $this->get_field_type($v);
 
 			if($this->title_numeric)
-            {
-	            if($type === 'title')
-	            {
-		            $i++;
-		            $g = 1;
-	            }
-	            else
-	            {
-		            $v['title'] = $i . '.' . $g .') ' . $v['title'];
-		            $g++;
-	            }
-            }
+			{
+				if($type === 'title')
+				{
+					$i++;
+					$g = 1;
+				}
+				else
+				{
+					$v['title'] = $i . '.' . $g .') ' . $v['title'];
+					$g++;
+				}
+			}
 
 			if(method_exists($this, 'generate_' . $type . '_html'))
 			{
@@ -464,18 +472,18 @@ abstract class Abstract_Wc1c_Admin_Form
 
 		ob_start();
 		?>
-        <tr valign="top">
-            <th scope="row" class="titledesc">
-                <label for="<?php echo esc_attr( $field_key ); ?>"><?php echo wp_kses_post( $data['title'] ); ?> <?php echo $this->get_tooltip_html( $data ); // WPCS: XSS ok. ?></label>
-            </th>
-            <td class="forminp">
-                <fieldset>
-                    <legend class="screen-reader-text"><span><?php echo wp_kses_post( $data['title'] ); ?></span></legend>
-                    <?php echo wp_kses_post($data['raw']); ?>
+		<tr valign="top">
+			<th scope="row" class="titledesc">
+				<label for="<?php echo esc_attr( $field_key ); ?>"><?php echo wp_kses_post( $data['title'] ); ?> <?php echo $this->get_tooltip_html( $data ); // WPCS: XSS ok. ?></label>
+			</th>
+			<td class="forminp">
+				<fieldset>
+					<legend class="screen-reader-text"><span><?php echo wp_kses_post( $data['title'] ); ?></span></legend>
+					<?php echo wp_kses_post($data['raw']); ?>
 					<?php echo $this->get_description_html($data); ?>
-                </fieldset>
-            </td>
-        </tr>
+				</fieldset>
+			</td>
+		</tr>
 		<?php
 
 		return ob_get_clean();
@@ -716,12 +724,12 @@ abstract class Abstract_Wc1c_Admin_Form
 		ob_start();
 		?>
 		</table><a class="nav-link" href="#<?php echo esc_attr($field_key); ?>"></a>
-        <div class="wc1c-title-wrap">
-		<h3 class="wc-settings-sub-title <?php echo esc_attr($data['class']); ?>" id="<?php echo esc_attr($field_key); ?>"><?php echo wp_kses_post($data['title']); ?></h3>
-		<?php if (!empty($data['description'])) : ?>
-		<p><?php echo wp_kses_post($data['description']); ?></p>
-		<?php endif; ?>
-        </div><table class="form-table wc1c-admin-form-table">
+		<div class="wc1c-title-wrap">
+			<h3 class="wc-settings-sub-title <?php echo esc_attr($data['class']); ?>" id="<?php echo esc_attr($field_key); ?>"><?php echo wp_kses_post($data['title']); ?></h3>
+			<?php if (!empty($data['description'])) : ?>
+				<p><?php echo wp_kses_post($data['description']); ?></p>
+			<?php endif; ?>
+		</div><table class="form-table wc1c-form-table">
 		<?php
 
 		return ob_get_clean();
@@ -772,20 +780,18 @@ abstract class Abstract_Wc1c_Admin_Form
 		$value = is_null($value) ? '' : $value;
 
 		return wp_kses(trim(stripslashes($value)),
-			array_merge
-			(
-				array
-                (
-					'iframe' => array
-					(
-						'src' => true,
-						'style' => true,
-						'id' => true,
-						'class' => true,
-					),
-				),
-				wp_kses_allowed_html('post')
-			)
+		       array_merge
+		       (
+		           ['iframe' =>
+			           [
+			               'src' => true,
+			               'style' => true,
+			               'id' => true,
+			               'class' => true,
+		               ],
+		           ],
+		           wp_kses_allowed_html('post')
+		       )
 		);
 	}
 
@@ -833,7 +839,7 @@ abstract class Abstract_Wc1c_Admin_Form
 		{
 			return array_map(array($this, 'clean'), $var);
 		}
-	
+
 		return is_scalar($var) ? sanitize_text_field($var) : $var;
 	}
 
@@ -945,11 +951,4 @@ abstract class Abstract_Wc1c_Admin_Form
 
 		return $this->validate_text_field($key, $value);
 	}
-
-	/**
-	 * Save form data
-	 *
-	 * @return boolean
-	 */
-	abstract public function save();
 }
