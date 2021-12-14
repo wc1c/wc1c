@@ -1,26 +1,39 @@
 <?php
 /**
- * Meta
- *
- * @package Wc1c
+ * Namespace
+ */
+namespace Wc1c\Data;
+
+/**
+ * Only WordPress
  */
 defined('ABSPATH') || exit;
 
-class Wc1c_Data_Meta implements JsonSerializable
-{
-	/**
-	 * Current data for metadata
-	 *
-	 * @var array
-	 */
-	protected $current_data;
+/**
+ * Dependencies
+ */
+use JsonSerializable;
 
+/**
+ * Class Meta
+ *
+ * @package Wc1c\Data
+ */
+class Meta implements JsonSerializable
+{
 	/**
 	 * Metadata data
 	 *
 	 * @var array
 	 */
 	protected $data;
+
+	/**
+	 * Current data for metadata
+	 *
+	 * @var array
+	 */
+	protected $current_data;
 
 	/**
 	 * Constructor
@@ -31,23 +44,23 @@ class Wc1c_Data_Meta implements JsonSerializable
 	{
 		$this->current_data = $meta;
 
-		$this->apply_changes();
+		$this->applyChanges();
 	}
 
 	/**
 	 * When converted to JSON
 	 *
-	 * @return object|array
+	 * @return array
 	 */
 	public function jsonSerialize()
 	{
-		return $this->get_data();
+		return $this->getData();
 	}
 
 	/**
 	 * Merge changes with data and clear.
 	 */
-	public function apply_changes()
+	public function applyChanges()
 	{
 		$this->data = $this->current_data;
 	}
@@ -98,7 +111,7 @@ class Wc1c_Data_Meta implements JsonSerializable
 	 *
 	 * @return array
 	 */
-	public function get_changes()
+	public function getChanges()
 	{
 		$changes = [];
 		foreach($this->current_data as $id => $value)
@@ -117,7 +130,7 @@ class Wc1c_Data_Meta implements JsonSerializable
 	 *
 	 * @return array
 	 */
-	public function get_data()
+	public function getData()
 	{
 		return $this->data;
 	}

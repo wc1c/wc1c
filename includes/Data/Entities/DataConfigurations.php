@@ -93,7 +93,9 @@ abstract class DataConfigurations extends DataAbstract
 					continue;
 				}
 
-				$setter = "set_$prop";
+				$prop = str_replace(' ', '', ucwords(str_replace('_', ' ', $prop)));
+
+				$setter = "set$prop";
 
 				if(is_callable([$this, $setter]))
 				{
@@ -444,7 +446,7 @@ abstract class DataConfigurations extends DataAbstract
 				$meta->id = $this->storage->addMeta($this, $meta);
 				$meta->applyChanges();
 			}
-			else if($meta->get_changes())
+			else if($meta->getChanges())
 			{
 				$this->storage->updateMeta($this, $meta);
 				$meta->applyChanges();

@@ -1,35 +1,51 @@
 <?php
 /**
- * Data storage
- *
- * @package Wc1c
+ * Namespace
+ */
+namespace Wc1c\Data;
+
+/**
+ * Only WordPress
  */
 defined('ABSPATH') || exit;
 
-class Wc1c_Data_Storage implements Interface_Wc1c_Data_Storage
+/**
+ * Dependencies
+ */
+use Wc1c\Exceptions\Exception;
+use Wc1c\Data\Interfaces\StorageInterface;
+use Wc1c\Abstracts\DataAbstract;
+use Wc1c\Data\Storages\StorageConfigurations;
+
+/**
+ * Class Storage
+ *
+ * @package Wc1c\Data
+ */
+class Storage implements StorageInterface
 {
 	/**
 	 * Contains an array of default supported data storages
 	 *
 	 * Format of object name => class name
-	 * Example: 'key' => 'Wc1c_Data_Storage_Configurations'
+	 * Example: 'key' => 'StorageUniqueName'
 	 *
 	 * You can also pass something like key_<type> for codes storage and
 	 * that type will be used first when available, if a store is requested like
 	 * this and doesn't exist, then the store would fall back to 'key'.
-	 * Ran through `wc1c_data_storages`.
+	 * Ran through PREFIX `_data_storages`.
 	 *
 	 * @var array
 	 */
 	private $storages =
 	[
-		'configuration' => 'Wc1c_Data_Storage_Configurations',
+		'configuration' => StorageConfigurations::class,
 	];
 
 	/**
 	 * Contains an instance of the data store class that we are working with
 	 *
-	 * @var Wc1c_Data_Storage
+	 * @var Storage
 	 */
 	private $instance = null;
 
@@ -48,37 +64,37 @@ class Wc1c_Data_Storage implements Interface_Wc1c_Data_Storage
 	private $current_object_type;
 
 	/**
-	 * Tells Wc1c_Storage which object (configurations, etc) store we want to work with
+	 * Tells Storage which object (configurations, etc) store we want to work with
 	 *
 	 * @param string $object_type Name of object
 	 *
-	 * @throws Wc1c_Exception When validation fails
+	 * @throws Exception When validation fails
 	 */
 	public function __construct($object_type)
 	{
 		if(empty($object_type))
 		{
-			throw new Wc1c_Exception(__('Invalid $object_type. Storage by object type is not found.', 'wc1c'));
+			throw new Exception('Invalid $object_type. Storage by object type is not found.');
 		}
 
-		$this->set_current_object_type($object_type);
+		$this->setCurrentObjectType($object_type);
 
 		// hook
-		$this->set_storages(apply_filters('wc1c_data_storages', $this->get_storages()));
+		$this->setStorages(apply_filters(WC1C_PREFIX . 'data_storages', $this->getStorages()));
 
-		if(!array_key_exists($object_type, $this->get_storages()))
+		if(!array_key_exists($object_type, $this->getStorages()))
 		{
-			throw new Wc1c_Exception(__('Invalid data storage. Storage by key type is not found.', 'wc1c'));
+			throw new Exception('Invalid data storage. Storage by key type is not found.');
 		}
 
 		// hook
-		$storage = apply_filters('wc1c_data_storages_' . $object_type, $this->storages[$object_type]);
+		$storage = apply_filters(WC1C_PREFIX . 'data_storages_' . $object_type, $this->storages[$object_type]);
 
 		if(is_object($storage))
 		{
-			if(!$storage instanceof Interface_Wc1c_Data_Storage)
+			if(!$storage instanceof StorageInterface)
 			{
-				throw new Wc1c_Exception(__('Invalid data storage. Interface error.', 'wc1c'));
+				throw new Exception('Invalid data storage. Interface error.');
 			}
 
 			$this->current_class_name = get_class($storage);
@@ -88,7 +104,7 @@ class Wc1c_Data_Storage implements Interface_Wc1c_Data_Storage
 		{
 			if(!class_exists($storage))
 			{
-				throw new Wc1c_Exception(__('Invalid data storage. Storage class is not exists.', 'wc1c'));
+				throw new Exception('Invalid data storage. Storage class is not exists.');
 			}
 
 			$this->current_class_name = $storage;
@@ -99,7 +115,7 @@ class Wc1c_Data_Storage implements Interface_Wc1c_Data_Storage
 	/**
 	 * @return string
 	 */
-	public function get_current_object_type()
+	public function getCurrentObjectType()
 	{
 		return $this->current_object_type;
 	}
@@ -107,7 +123,7 @@ class Wc1c_Data_Storage implements Interface_Wc1c_Data_Storage
 	/**
 	 * @param string $current_object_type
 	 */
-	public function set_current_object_type($current_object_type)
+	public function setCurrentObjectType($current_object_type)
 	{
 		$this->current_object_type = $current_object_type;
 	}
@@ -115,7 +131,7 @@ class Wc1c_Data_Storage implements Interface_Wc1c_Data_Storage
 	/**
 	 * @return array
 	 */
-	protected function get_storages()
+	protected function getStorages()
 	{
 		return $this->storages;
 	}
@@ -123,7 +139,7 @@ class Wc1c_Data_Storage implements Interface_Wc1c_Data_Storage
 	/**
 	 * @param array $storages
 	 */
-	protected function set_storages($storages)
+	protected function setStorages($storages)
 	{
 		$this->storages = $storages;
 	}
@@ -153,12 +169,12 @@ class Wc1c_Data_Storage implements Interface_Wc1c_Data_Storage
 	 *
 	 * @param string $object_type Name of object
 	 *
-	 * @return Wc1c_Data_Storage
-	 * @throws Wc1c_Exception When validation fails
+	 * @return Storage
+	 * @throws Exception When validation fails
 	 */
 	public static function load($object_type)
 	{
-		return new Wc1c_Data_Storage($object_type);
+		return new Storage($object_type);
 	}
 
 	/**
@@ -166,7 +182,7 @@ class Wc1c_Data_Storage implements Interface_Wc1c_Data_Storage
 	 *
 	 * @return string
 	 */
-	public function get_current_class_name()
+	public function getCurrentClassName()
 	{
 		return $this->current_class_name;
 	}
@@ -174,7 +190,7 @@ class Wc1c_Data_Storage implements Interface_Wc1c_Data_Storage
 	/**
 	 * Reads an object from the data storage
 	 *
-	 * @param Abstract_Wc1c_Data $data Wc1c data instance
+	 * @param DataAbstract $data Data instance
 	 */
 	public function read(&$data)
 	{
@@ -184,7 +200,7 @@ class Wc1c_Data_Storage implements Interface_Wc1c_Data_Storage
 	/**
 	 * Create an object in the data storage
 	 *
-	 * @param Abstract_Wc1c_Data $data Wc1c data instance
+	 * @param DataAbstract $data Data instance
 	 */
 	public function create(&$data)
 	{
@@ -194,7 +210,7 @@ class Wc1c_Data_Storage implements Interface_Wc1c_Data_Storage
 	/**
 	 * Update an object in the data storage
 	 *
-	 * @param Abstract_Wc1c_Data $data Wc1c data instance
+	 * @param DataAbstract $data Data instance
 	 */
 	public function update(&$data)
 	{
@@ -204,7 +220,7 @@ class Wc1c_Data_Storage implements Interface_Wc1c_Data_Storage
 	/**
 	 * Delete an object from the data storage
 	 *
-	 * @param Abstract_Wc1c_Data $data Wc1c data instance
+	 * @param DataAbstract $data Data instance
 	 * @param array $args Array of args to pass to the delete method
 	 */
 	public function delete(&$data, $args = [])

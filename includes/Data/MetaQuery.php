@@ -1,18 +1,24 @@
 <?php
 /**
- * Meta query
- *
- * @package Wc1c
+ * Namespace
+ */
+namespace Wc1c\Data;
+
+/**
+ * Only WordPress
  */
 defined('ABSPATH') || exit;
 
-class Wc1c_Data_Meta_Query
+/**
+ * Class MetaQuery
+ *
+ * @package Wc1c\Data
+ */
+class MetaQuery
 {
 	/**
 	 * Array of metadata queries.
-	 *
-	 * See Wc1c_Storage_Data_Meta_Query::__construct() for information
-	 * on meta query arguments
+	 * See MetaQuery::__construct() for information on meta query arguments
 	 *
 	 * @var array
 	 */
@@ -75,6 +81,16 @@ class Wc1c_Data_Meta_Query
 	protected $has_or_relation = false;
 
 	/**
+	 * @param $type
+	 *
+	 * @return string
+	 */
+	public function get_meta_table($type)
+	{
+		return wc1c_wpdb()->base_prefix . 'wc1c_' . $type . 's_meta';
+	}
+
+	/**
 	 * Constructs a meta query based on 'meta_*' query vars
 	 *
 	 * @param array $qv The query variables
@@ -104,23 +120,20 @@ class Wc1c_Data_Meta_Query
 			$primary_meta_query['value'] = $qv['meta_value'];
 		}
 
-		$existing_meta_query = isset($qv['meta_query']) && is_array($qv['meta_query']) ? $qv['meta_query'] : array();
+		$existing_meta_query = isset($qv['meta_query']) && is_array($qv['meta_query']) ? $qv['meta_query'] : [];
 
 		if(!empty($primary_meta_query) && !empty($existing_meta_query))
 		{
-			$meta_query = array
-			(
+			$meta_query =
+			[
 				'relation' => 'AND',
 				$primary_meta_query,
 				$existing_meta_query,
-			);
+			];
 		}
 		elseif(!empty($primary_meta_query))
 		{
-			$meta_query = array
-			(
-				$primary_meta_query,
-			);
+			$meta_query = [$primary_meta_query,];
 		}
 		elseif(!empty($existing_meta_query))
 		{
@@ -205,12 +218,10 @@ class Wc1c_Data_Meta_Query
 			if('relation' === $key)
 			{
 				$relation = $query;
-
 			}
 			elseif(!is_array($query))
 			{
 				continue;
-
 				// First-order clause.
 			}
 			elseif($this->is_first_order_clause($query))
@@ -221,7 +232,6 @@ class Wc1c_Data_Meta_Query
 				}
 
 				$clean_queries[$key] = $query;
-
 				// Otherwise, it's a nested query, so we recurse.
 			}
 			else
@@ -255,7 +265,6 @@ class Wc1c_Data_Meta_Query
 		elseif(1 === count($clean_queries))
 		{
 			$clean_queries['relation'] = 'OR';
-
 			// Default to AND.
 		}
 		else
@@ -279,16 +288,6 @@ class Wc1c_Data_Meta_Query
 	protected function is_first_order_clause($query)
 	{
 		return isset($query['key']) || isset($query['value']);
-	}
-
-	/**
-	 * @param $type
-	 *
-	 * @return string
-	 */
-	public function get_meta_table($type)
-	{
-		return Wc1c_Database()->base_prefix . 'wc1c_' . $type . 's_meta';
 	}
 
 	/**
@@ -346,7 +345,7 @@ class Wc1c_Data_Meta_Query
 		 * @param object $context The main query object
 		 */
 		return apply_filters_ref_array
-		('wc1c_data_meta_get_sql',
+		(WC1C_PREFIX . 'data_meta_get_sql',
 			[
 				$sql,
 				$this->queries,
@@ -512,11 +511,11 @@ class Wc1c_Data_Meta_Query
 	{
 		global $wpdb;
 
-		$sql_chunks = array
-		(
+		$sql_chunks =
+		[
 			'where' => [],
 			'join'  => [],
-		);
+		];
 
 		if(isset($clause['compare']))
 		{
@@ -527,8 +526,8 @@ class Wc1c_Data_Meta_Query
 			$clause['compare'] = isset($clause['value']) && is_array($clause['value']) ? 'IN' : '=';
 		}
 
-		$non_numeric_operators = array
-		(
+		$non_numeric_operators =
+		[
 			'=',
 			'!=',
 			'LIKE',
@@ -540,17 +539,17 @@ class Wc1c_Data_Meta_Query
 			'RLIKE',
 			'REGEXP',
 			'NOT REGEXP',
-		);
+		];
 
-		$numeric_operators = array
-		(
+		$numeric_operators =
+		[
 			'>',
 			'>=',
 			'<',
 			'<=',
 			'BETWEEN',
 			'NOT BETWEEN',
-		);
+		];
 
 		if(!in_array($clause['compare'], $non_numeric_operators, true) && !in_array($clause['compare'], $numeric_operators, true))
 		{
@@ -784,7 +783,6 @@ class Wc1c_Data_Meta_Query
 				default:
 					$where = $wpdb->prepare('%s', $meta_value);
 					break;
-
 			}
 
 			if($where)
@@ -879,9 +877,9 @@ class Wc1c_Data_Meta_Query
 		 * @param array $clause First-order query clause.
 		 * @param array $parent_query Parent of $clause.
 		 *
-		 * @param Wc1c_Data_Meta_Query $this Wc1c_Data_Meta_Query object
+		 * @param MetaQuery $this MetaQuery object
 		 */
-		return apply_filters('wc1c_data_meta_query_find_compatible_table_alias', $alias, $clause, $parent_query, $this);
+		return apply_filters(WC1C_PREFIX . 'data_meta_query_find_compatible_table_alias', $alias, $clause, $parent_query, $this);
 	}
 
 	/**
