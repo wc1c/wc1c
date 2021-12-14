@@ -56,7 +56,7 @@ class AllTable extends TableAbstract
 	/**
 	 * No items found text
 	 */
-	public function no_items()
+	public function noItems()
 	{
 		wc1c_get_template('configurations/empty.php');
 	}
@@ -66,7 +66,7 @@ class AllTable extends TableAbstract
 	 *
 	 * @return array - list of CSS classes for the table tag
 	 */
-	protected function get_table_classes()
+	protected function getTableClasses()
 	{
 		return
         [
@@ -84,7 +84,7 @@ class AllTable extends TableAbstract
 	 *
 	 * @return mixed
 	 */
-	public function column_default($item, $column_name)
+	public function columnDefault($item, $column_name)
 	{
 		switch ($column_name)
 		{
@@ -191,7 +191,7 @@ class AllTable extends TableAbstract
 		return sprintf( '<span class="name">%1$s</span>%2$s<br/>%3$s',
 			$item['name'],
 			$connection_schema,
-			$this->row_actions($actions, true)
+			$this->rowActions($actions, true)
 		);
 	}
 
@@ -200,7 +200,7 @@ class AllTable extends TableAbstract
 	 *
 	 * @return array
 	 */
-	public function get_columns()
+	public function getColumns()
 	{
 		$columns = [];
 
@@ -218,7 +218,7 @@ class AllTable extends TableAbstract
 	 *
 	 * @return array
 	 */
-	public function get_sortable_columns()
+	public function getSortableColumns()
 	{
 		$sortable_columns['configuration_id'] = ['configuration_id', false];
 		$sortable_columns['status'] = ['status', false];
@@ -231,7 +231,7 @@ class AllTable extends TableAbstract
 	 *
 	 * @return string The name of the primary column
 	 */
-	protected function get_default_primary_column_name()
+	protected function getDefaultPrimaryColumnName()
 	{
 		return 'configuration_id';
 	}
@@ -242,7 +242,7 @@ class AllTable extends TableAbstract
 	 * @return array
 	 * @throws Exception
 	 */
-	protected function get_views()
+	protected function getViews()
 	{
 		$status_links = [];
 		$current = !empty($_REQUEST['status']) ? $_REQUEST['status'] : 'all';
@@ -295,7 +295,7 @@ class AllTable extends TableAbstract
 	/**
 	 * Build items
 	 */
-	public function prepare_items()
+	public function prepareItems()
 	{
 		/**
 		 * First, lets decide how many records per page to show
@@ -309,9 +309,9 @@ class AllTable extends TableAbstract
 		 * can be defined in another method (as we've done here) before being
 		 * used to build the value for our _column_headers property.
 		 */
-		$columns = $this->get_columns();
+		$columns = $this->getColumns();
 		$hidden = [];
-		$sortable = $this->get_sortable_columns();
+		$sortable = $this->getSortableColumns();
 
 		/**
 		 * REQUIRED. Finally, we build an array to be used by the class for column
@@ -326,7 +326,7 @@ class AllTable extends TableAbstract
 		 * looking at. We'll need this later, so you should always include it in
 		 * your own package classes.
 		 */
-		$current_page = $this->get_pagenum();
+		$current_page = $this->getPagenum();
 
 		/**
 		 * Instead of querying a database, we're going to fetch the example data
@@ -379,7 +379,7 @@ class AllTable extends TableAbstract
 		/**
 		 * REQUIRED. We also have to register our pagination options & calculations.
 		 */
-		$this->set_pagination_args
+		$this->setPaginationArgs
 		(
 			[
 				'total_items' => $total_items,
@@ -415,7 +415,7 @@ class AllTable extends TableAbstract
 	 *
 	 * @param string $which
 	 */
-	protected function extra_tablenav($which)
+	protected function extraTablenav($which)
 	{
 		if('top' === $which)
 		{

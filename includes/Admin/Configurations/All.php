@@ -30,7 +30,7 @@ class All extends ScreenAbstract
 	public function output()
 	{
 		$list_table = new AllTable();
-		$list_table->prepare_items();
+		$list_table->prepareItems();
 		$list_table->display();
 	}
 }
