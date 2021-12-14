@@ -76,7 +76,7 @@ abstract class DataAbstract
 
 	/**
 	 * Extra data for this object. Name value pairs (name + default value)
-	 * Used as a standard way for sub classes (like key types) to add additional information to an inherited class.
+	 * Used as a standard way for subclasses (like key types) to add additional information to an inherited class.
 	 *
 	 * @var array
 	 */
@@ -298,7 +298,9 @@ abstract class DataAbstract
 					continue;
 				}
 
-				$setter = "set_$prop";
+				$prop = str_replace(' ', '', ucwords(str_replace('_', ' ', $prop)));
+
+				$setter = "set$prop";
 
 				if(is_callable([$this, $setter]))
 				{
