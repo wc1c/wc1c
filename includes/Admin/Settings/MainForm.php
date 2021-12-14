@@ -66,6 +66,15 @@ class MainForm extends Form
 			'default' => 'yes'
 		];
 
+		$fields['configurations_show_per_page'] =
+		[
+			'title' => __('Number in the list', 'wc1c'),
+			'type' => 'text',
+			'description' => __('The number of displayed configurations on one page.', 'wc1c'),
+			'default' => 10,
+			'css' => 'min-width: 20px;',
+		];
+
 		$fields['configurations_draft_delete'] =
 		[
 			'title' => __('Deleting drafts without trash', 'wc1c'),
@@ -91,8 +100,8 @@ class MainForm extends Form
 		[
 			'title' => __('API', 'wc1c'),
 			'type' => 'checkbox',
-			'label' => __('Включить прием запросов по API?', 'wc1c'),
-			'description' => __('Используется для приема фоновых запросов от 1С в схемах обмена. Не отключайте данную опцию, если не знаете для чего она.', 'wc1c'),
+			'label' => __('Enable API requests?', 'wc1c'),
+			'description' => __('It is used to receive background requests from 1C in exchange schemes. Do not disable this option if you do not know what it is for.', 'wc1c'),
 			'default' => 'yes'
 		];
 
