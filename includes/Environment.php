@@ -1,35 +1,47 @@
 <?php
 /**
- * Environment class
- *
- * @package Wc1c
+ * Namespace
+ */
+namespace Wc1c;
+
+/**
+ * Only WordPress
  */
 defined('ABSPATH') || exit;
 
-class Wc1c_Environment
+/**
+ * Dependencies
+ */
+use Wc1c\Exceptions\Exception;
+use Wc1c\Exceptions\RuntimeException;
+
+/**
+ * Environment
+ *
+ * @package Wc1c
+ */
+class Environment
 {
 	/**
-	 * Environ data
-	 *
-	 * @var array
+	 * @var array Environ data
 	 */
 	private $data;
 
 	/**
-	 * Wc1c_Environment constructor
+	 * Environment constructor
 	 */
 	public function __construct()
 	{
-		$this->init_wc1c_version();
-		$this->init_current_configuration_id();
-		$this->init_upload_directory();
-		$this->init_wc1c_upload_directory();
-		$this->init_php_post_max_size();
-		$this->init_php_max_execution_time();
+		$this->initWc1cVersion();
+		$this->initCurrentConfigurationId();
+		$this->initUploadDirectory();
+		$this->initWc1cUploadDirectory();
+		$this->initPhpPostMaxSize();
+		$this->initPhpMaxExecutionTime();
 	}
 
 	/**
-	 * Get environ data
+	 * Get data
 	 *
 	 * @param $key
 	 * @param $default
@@ -41,6 +53,24 @@ class Wc1c_Environment
 		if(isset($this->data[$key]))
 		{
 			return $this->data[$key];
+		}
+		else
+		{
+			$key = str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
+
+			$getter = "init$key";
+
+			if(is_callable([$this, $getter]))
+			{
+				try
+				{
+					$getter_value = $this->{$getter}($default);
+					$this->set($key, $getter_value);
+				}
+				catch(Exception $e){}
+
+				return $this->get($key);
+			}
 		}
 
 		if(false === is_null($default))
@@ -61,15 +91,15 @@ class Wc1c_Environment
 	{
 		$this->data[$key] = $value;
 	}
-	
+
 	/**
 	 * Configuration current identifier initializing
 	 *
 	 * @return bool
 	 */
-	public function init_current_configuration_id()
+	public function initCurrentConfigurationId()
 	{
-		$config_id = wc1c_get_var($_GET['config_id'], 0);
+		$config_id = wc1c_get_var($_GET['configuration_id'], 0);
 
 		if(0 < $config_id && 99999999 > $config_id)
 		{
@@ -88,13 +118,13 @@ class Wc1c_Environment
 	 * WordPress upload directory
 	 *
 	 * @return bool
-	 * @throws Wc1c_Exception_Runtime
+	 * @throws RuntimeException
 	 */
-	public function init_upload_directory()
+	public function initUploadDirectory()
 	{
 		if(false === function_exists('wp_upload_dir'))
 		{
-			throw new Wc1c_Exception_Runtime('function wp_upload_dir is not exists');
+			throw new RuntimeException('function wp_upload_dir is not exists');
 		}
 
 		$wp_upload_dir = wp_upload_dir();
@@ -107,7 +137,7 @@ class Wc1c_Environment
 	/**
 	 * PHP post max size
 	 */
-	public function init_php_post_max_size()
+	public function initPhpPostMaxSize()
 	{
 		$this->set('php_post_max_size', ini_get('post_max_size'));
 
@@ -117,7 +147,7 @@ class Wc1c_Environment
 	/**
 	 * PHP max execution time
 	 */
-	public function init_php_max_execution_time()
+	public function initPhpMaxExecutionTime()
 	{
 		$this->set('php_max_execution_time', ini_get('max_execution_time'));
 
@@ -129,7 +159,7 @@ class Wc1c_Environment
 	 *
 	 * @return bool
 	 */
-	public function init_wc1c_upload_directory()
+	public function initWc1cUploadDirectory()
 	{
 		$wc1c_upload_dir = $this->get('upload_directory') . DIRECTORY_SEPARATOR . 'wc1c';
 
@@ -143,14 +173,16 @@ class Wc1c_Environment
 	 *
 	 * @return bool
 	 */
-	public function init_wc1c_version()
+	public function initWc1cVersion()
 	{
-		if(!defined('WC1C_PLUGIN_VERSION'))
+		if(!function_exists('get_file_data'))
 		{
-			throw new Wc1c_Exception_Runtime('Constant WC1C_PLUGIN_VERSION is not defined');
+			throw new RuntimeException('Function get_file_data is not exists');
 		}
 
-		$this->set('wc1c_version', WC1C_PLUGIN_VERSION);
+		$plugin_data = get_file_data(WC1C_PLUGIN_FILE, ['Version' => 'Version']);
+
+		$this->set('wc1c_version', $plugin_data['Version']);
 		return true;
 	}
 
@@ -159,7 +191,7 @@ class Wc1c_Environment
 	 *
 	 * @return array
 	 */
-	public function get_data()
+	public function getData()
 	{
 		return $this->data;
 	}
@@ -169,7 +201,7 @@ class Wc1c_Environment
 	 *
 	 * @param array $data
 	 */
-	public function set_data($data)
+	public function setData($data)
 	{
 		$this->data = $data;
 	}
