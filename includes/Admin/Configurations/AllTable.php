@@ -1,22 +1,39 @@
 <?php
 /**
- * Admin configurations list table class
- *
- * @package Wc1c/Admin
+ * Namespace
+ */
+namespace Wc1c\Admin\Configurations;
+
+/**
+ * Only WordPress
  */
 defined('ABSPATH') || exit;
 
-class Wc1c_Admin_Configurations_List_Table extends Abstract_Wc1c_Admin_Table
+/**
+ * Dependencies
+ */
+use Exception;
+use Wc1c\Abstracts\TableAbstract;
+use Wc1c\Data\Storage;
+use Wc1c\Data\Storages\StorageConfigurations;
+use Wc1c\Settings\ConnectionSettings;
+
+/**
+ * Class ListsTable
+ *
+ * @package Wc1c\Admin\Configurations
+ */
+class AllTable extends TableAbstract
 {
 	/**
 	 * Configurations storage
 	 *
-	 * @var Wc1c_Data_Storage_Configurations
+	 * @var StorageConfigurations
 	 */
 	public $storage_configurations;
 
 	/**
-	 * Wc1c_Admin_Configurations_List_Table constructor
+	 * ListsTable constructor.
 	 */
 	public function __construct()
 	{
@@ -29,7 +46,7 @@ class Wc1c_Admin_Configurations_List_Table extends Abstract_Wc1c_Admin_Table
 
 		try
 		{
-			$this->storage_configurations = Wc1c_Data_Storage::load('configuration');
+			$this->storage_configurations = Storage::load('configuration');
 		}
 		catch(Exception $e){}
 
@@ -41,13 +58,13 @@ class Wc1c_Admin_Configurations_List_Table extends Abstract_Wc1c_Admin_Table
 	 */
 	public function no_items()
 	{
-		wc1c_get_template('configurations/list_empty.php');
+		wc1c_get_template('configurations/empty.php');
 	}
 
 	/**
 	 * Get a list of CSS classes for the WP_List_Table table tag
 	 *
-	 * @return array  - list of CSS classes for the table tag
+	 * @return array - list of CSS classes for the table tag
 	 */
 	protected function get_table_classes()
 	{
@@ -99,7 +116,7 @@ class Wc1c_Admin_Configurations_List_Table extends Abstract_Wc1c_Admin_Table
 		{
 			return sprintf
 			(
-				__('%s <br/><span class="wc1c-time">Time: %s</span>', 'wc1c'),
+				__('%s <br/><span class="time">Time: %s</span>', 'wc1c'),
 				date_i18n('d/m/Y', $timestamp),
 				date_i18n('H:i:s', $timestamp)
 			);
@@ -109,7 +126,7 @@ class Wc1c_Admin_Configurations_List_Table extends Abstract_Wc1c_Admin_Table
 	}
 
 	/**
-	 * Configuration status
+	 * Account status
 	 *
 	 * @param $item
 	 *
@@ -149,7 +166,7 @@ class Wc1c_Admin_Configurations_List_Table extends Abstract_Wc1c_Admin_Table
 	}
 
 	/**
-	 * Configuration name
+	 * Account name
 	 *
 	 * @param $item
 	 *
@@ -160,19 +177,20 @@ class Wc1c_Admin_Configurations_List_Table extends Abstract_Wc1c_Admin_Table
 		$actions =
 		[
 			'update' => '<a href="' . wc1c_admin_configurations_get_url('update', $item['configuration_id']) . '">' . __('Edit', 'wc1c') . '</a>',
-			'remove' => '<a href="' . wc1c_admin_configurations_get_url('remove', $item['configuration_id']) . '">' . __('Remove', 'wc1c') . '</a>',
+			'delete' => '<a href="' . wc1c_admin_configurations_get_url('delete', $item['configuration_id']) . '">' . __('Mark as deleted', 'wc1c') . '</a>',
 		];
 
 		if('deleted' === $item['status'])
 		{
 			unset($actions['update']);
-			$actions['remove'] = '<a href="' . wc1c_admin_configurations_get_url('remove', $item['configuration_id']) . '">' . __('Remove forever', 'wc1c') . '</a>';
+			$actions['delete'] = '<a href="' . wc1c_admin_configurations_get_url('delete', $item['configuration_id']) . '">' . __('Remove forever', 'wc1c') . '</a>';
 		}
 
-		return sprintf( '%1$s <br/> %2$s',
-			/*$1%s*/
+		$connection_schema = __('Schema: ', 'wc1c') . '<b>' . $item['schema'] . '</b>';
+
+		return sprintf( '<span class="name">%1$s</span>%2$s<br/>%3$s',
 			$item['name'],
-			/*$2%s*/
+			$connection_schema,
 			$this->row_actions($actions, true)
 		);
 	}
@@ -187,8 +205,7 @@ class Wc1c_Admin_Configurations_List_Table extends Abstract_Wc1c_Admin_Table
 		$columns = [];
 
 		$columns['configuration_id'] = __('ID', 'wc1c');
-		$columns['schema'] = __('Schema ID', 'wc1c');
-		$columns['name'] = __('Name', 'wc1c');
+		$columns['name'] = __('Base information', 'wc1c');
 		$columns['status'] = __('Status', 'wc1c');
 		$columns['date_create'] = __('Create date', 'wc1c');
 		$columns['date_activity'] = __('Last activity', 'wc1c');
@@ -247,7 +264,8 @@ class Wc1c_Admin_Configurations_List_Table extends Abstract_Wc1c_Admin_Table
 
 		foreach($statuses as $status_key)
 		{
-			$count = $this->storage_configurations->count_by(
+			$count = $this->storage_configurations->count_by
+			(
 				[
 					'status' => $status_key
 				]
@@ -282,7 +300,7 @@ class Wc1c_Admin_Configurations_List_Table extends Abstract_Wc1c_Admin_Table
 		/**
 		 * First, lets decide how many records per page to show
 		 */
-		$per_page = WC1C()->settings()->get('configurations_show_per_page', 10);
+		$per_page = wc1c()->settings()->get('configurations_show_per_page', 10);
 
 		/**
 		 * REQUIRED. Now we need to define our column headers. This includes a complete
@@ -329,21 +347,11 @@ class Wc1c_Admin_Configurations_List_Table extends Abstract_Wc1c_Admin_Table
 		$orderby = (!empty($_REQUEST['orderby'])) ? $_REQUEST['orderby'] : 'configuration_id';
 		$order = (!empty($_REQUEST['order'])) ? $_REQUEST['order'] : 'desc';
 
-		$configurations_args = [];
+		$storage_args = [];
 
 		if(array_key_exists('status', $_GET) && in_array($_GET['status'], wc1c_configurations_get_statuses(), true))
 		{
-			$configurations_args['status'] = $_GET['status'];
-		}
-
-		if(!empty($_REQUEST['s']))
-		{
-			$configurations_args['name'] =
-			[
-				'key' => 'name',
-				'value' => sanitize_text_field($_REQUEST['s']),
-				'compare_key' => 'LIKE'
-			];
+			$storage_args['status'] = $_GET['status'];
 		}
 
 		/**
@@ -352,21 +360,21 @@ class Wc1c_Admin_Configurations_List_Table extends Abstract_Wc1c_Admin_Table
 		 * without filtering. We'll need this later, so you should always include it
 		 * in your own package classes.
 		 */
-		if(empty($configurations_args))
+		if(empty($storage_args))
 		{
 			$total_items = $this->storage_configurations->count();
 		}
 		else
 		{
-			$total_items = $this->storage_configurations->count_by($configurations_args);
+			$total_items = $this->storage_configurations->count_by($storage_args);
 		}
 
-		$configurations_args['offset'] = $offset;
-		$configurations_args['limit'] = $per_page;
-		$configurations_args['orderby'] = $orderby;
-		$configurations_args['order'] = $order;
+		$storage_args['offset'] = $offset;
+		$storage_args['limit'] = $per_page;
+		$storage_args['orderby'] = $orderby;
+		$storage_args['order'] = $order;
 
-		$this->items = $this->storage_configurations->get_data($configurations_args, ARRAY_A);
+		$this->items = $this->storage_configurations->get_data($storage_args, ARRAY_A);
 
 		/**
 		 * REQUIRED. We also have to register our pagination options & calculations.
@@ -382,27 +390,24 @@ class Wc1c_Admin_Configurations_List_Table extends Abstract_Wc1c_Admin_Table
 	}
 
 	/**
-	 * Search box
+	 * Connect box
 	 *
 	 * @param string $text Button text
-	 * @param string $input_id Input ID
+	 * @param false $status
 	 */
-	public function search_box($text, $input_id)
+	public function connect_box($text, $status = false)
 	{
-		if(empty($_REQUEST['s']) && !$this->has_items())
+		$class = 'button';
+		if($status === false)
 		{
-			return;
+			$class .= ' button-primary';
+		}
+		else
+		{
+			$class .= ' button-green';
 		}
 
-		$input_id .= '-search-input';
-
-		$search_query = isset($_REQUEST['s']) ? sanitize_text_field(wp_unslash($_REQUEST['s'])) : '';
-
-		echo '<p class="search-box">';
-		echo '<label class="screen-reader-text" for="' . esc_attr($input_id) . '">' . esc_html($text) . ':</label>';
-		echo '<input type="search" id="' . esc_attr($input_id) . '" name="s" value="' . esc_attr($search_query) . '" />';
-		submit_button($text, '', '', false, array('id' => 'search-submit'));
-		echo '</p>';
+		echo '<a href="' . admin_url('admin.php?page=wc1c&section=settings&do_settings=connection') . '" class="' . $class . '" style="float: right;"> ' . $text . ' </a>';
 	}
 
 	/**
@@ -415,7 +420,17 @@ class Wc1c_Admin_Configurations_List_Table extends Abstract_Wc1c_Admin_Table
 		if('top' === $which)
 		{
 			$this->views();
-			$this->search_box(__( 'Search', 'wc1c' ), 'name');
+
+			$connection_settings = new ConnectionSettings();
+
+			if($connection_settings->isConnected())
+			{
+				$this->connect_box(__($connection_settings->get('login', 'Undefined'), 'wc1c' ), true);
+			}
+			else
+			{
+				$this->connect_box(__( 'Connection to the WC1C', 'wc1c'));
+			}
 		}
 	}
 }
