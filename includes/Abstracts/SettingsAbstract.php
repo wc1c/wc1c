@@ -1,19 +1,41 @@
 <?php
 /**
- * Settings class
- *
- * @package Wc1c
+ * Namespace
+ */
+namespace Wc1c\Abstracts;
+
+/**
+ * Only WordPress
  */
 defined('ABSPATH') || exit;
 
-class Wc1c_Settings implements Interface_Wc1c_Settings
+/**
+ * Dependencies
+ */
+use Wc1c\Exceptions\Exception;
+use Wc1c\Exceptions\RuntimeException;
+use Wc1c\Interfaces\SettingsInterface;
+
+/**
+ * Class SettingsAbstract
+ *
+ * @package Wc1c/Abstracts
+ */
+abstract class SettingsAbstract implements SettingsInterface
 {
+	/**
+	 * Name option prefix in wp_options
+	 *
+	 * @var string
+	 */
+	protected $option_name_prefix = WC1C_PREFIX . 'settings_';
+
 	/**
 	 * Name option in wp_options
 	 *
 	 * @var string
 	 */
-	private $option_name = 'wc1c';
+	protected $option_name = '';
 
 	/**
 	 * Current data
@@ -23,9 +45,22 @@ class Wc1c_Settings implements Interface_Wc1c_Settings
 	private $data = [];
 
 	/**
-	 * Wc1c_Settings constructor
+	 * Set option name with prefix
+	 *
+	 * @param string $name Option name without prefix
 	 */
-	public function __construct(){}
+	public function setOptionName($name)
+	{
+		$this->option_name = $this->option_name_prefix . $name;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getOptionName()
+	{
+		return $this->option_name;
+	}
 
 	/**
 	 * Initializing
@@ -36,29 +71,29 @@ class Wc1c_Settings implements Interface_Wc1c_Settings
 	public function init()
 	{
 		// get data from wp_options
-		$settings = get_site_option($this->option_name, []);
+		$settings = get_site_option($this->getOptionName() , []);
 
 		// hook
-		$settings = apply_filters('wc1c_settings_data_init', $settings);
+		$settings = apply_filters($this->getOptionName() . 'data_init', $settings);
 
 		if(!is_array($settings))
 		{
-			throw new Wc1c_Exception_Runtime('init: $settings is not array');
+			throw new RuntimeException('init: $settings is not array');
 		}
 
 		$settings = array_merge
 		(
-			$this->get_data(),
+			$this->getData(),
 			$settings
 		);
 
 		try
 		{
-			$this->set_data($settings);
+			$this->setData($settings);
 		}
 		catch(Exception $e)
 		{
-			throw new Wc1c_Exception_Runtime('init: exception - ' . $e->getMessage());
+			throw new RuntimeException('init: exception - ' . $e->getMessage());
 		}
 	}
 
@@ -69,7 +104,7 @@ class Wc1c_Settings implements Interface_Wc1c_Settings
 	 * @param string $setting_key
 	 *
 	 * @return boolean
-	 * @throws Exception|Wc1c_Exception_Runtime
+	 * @throws Exception|RuntimeException
 	 */
 	public function set($setting_data = '', $setting_key = '')
 	{
@@ -78,7 +113,7 @@ class Wc1c_Settings implements Interface_Wc1c_Settings
 			return false;
 		}
 
-		$current_data = $this->get_data();
+		$current_data = $this->getData();
 
 		if(is_array($setting_data) && empty($setting_key))
 		{
@@ -95,11 +130,11 @@ class Wc1c_Settings implements Interface_Wc1c_Settings
 
 		try
 		{
-			$this->set_data($current_data);
+			$this->setData($current_data);
 		}
 		catch(Exception $e)
 		{
-			throw new Wc1c_Exception_Runtime('set: exception - ' . $e->getMessage());
+			throw new RuntimeException('set: exception - ' . $e->getMessage());
 		}
 
 		return true;
@@ -111,11 +146,11 @@ class Wc1c_Settings implements Interface_Wc1c_Settings
 	 * @param $settings_data null|array - optional
 	 *
 	 * @return bool
-	 * @throws Exception|Wc1c_Exception_Runtime
+	 * @throws Exception|RuntimeException
 	 */
 	public function save($settings_data = null)
 	{
-		$current_data = $this->get_data();
+		$current_data = $this->getData();
 
 		if(is_array($settings_data))
 		{
@@ -126,23 +161,21 @@ class Wc1c_Settings implements Interface_Wc1c_Settings
 			$settings_data = $current_data;
 		}
 
-		$settings_data = apply_filters('wc1c_settings_data_save', $settings_data);
+		$settings_data = apply_filters($this->getOptionName() . 'data_save', $settings_data);
 
 		try
 		{
-			$this->set_data($settings_data);
+			$this->setData($settings_data);
 		}
 		catch(Exception $e)
 		{
-			throw new Wc1c_Exception_Runtime('save: exception - ' . $e->getMessage());
+			throw new RuntimeException('save: exception - ' . $e->getMessage());
 		}
 
 		/**
 		 * Update in DB
-		 *
-		 * Required WP 4.2.0 - autoload option
 		 */
-		return update_option($this->option_name, $settings_data, 'no');
+		return update_option($this->getOptionName(), $settings_data, 'no');
 	}
 
 	/**
@@ -152,17 +185,17 @@ class Wc1c_Settings implements Interface_Wc1c_Settings
 	 * @param string $default_return - default data, optional
 	 *
 	 * @return mixed
-	 * @throws Wc1c_Exception_Runtime
+	 * @throws RuntimeException
 	 */
 	public function get($setting_key = '', $default_return = '')
 	{
 		try
 		{
-			$data = $this->get_data();
+			$data = $this->getData();
 		}
 		catch(Exception $e)
 		{
-			throw new Wc1c_Exception_Runtime('get: exception - ' . $e->getMessage());
+			throw new RuntimeException('get: exception - ' . $e->getMessage());
 		}
 
 		if('' !== $setting_key)
@@ -184,11 +217,11 @@ class Wc1c_Settings implements Interface_Wc1c_Settings
 	 * @return array
 	 * @throws Exception
 	 */
-	private function get_data()
+	private function getData()
 	{
 		if(!is_array($this->data))
 		{
-			throw new Wc1c_Exception_Runtime('get_data: $data is not valid array');
+			throw new RuntimeException('get_data: $data is not valid array');
 		}
 
 		return $this->data;
@@ -202,11 +235,11 @@ class Wc1c_Settings implements Interface_Wc1c_Settings
 	 * @return void
 	 * @throws Exception
 	 */
-	private function set_data($data = [])
+	private function setData($data = [])
 	{
 		if(!is_array($data))
 		{
-			throw new Wc1c_Exception_Runtime('set_data: $data is not valid');
+			throw new RuntimeException('set_data: $data is not valid');
 		}
 
 		$this->data = $data;

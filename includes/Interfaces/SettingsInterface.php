@@ -1,50 +1,63 @@
 <?php
 /**
- * Interface: Settings
- *
- * @package Wc1c/Interfaces
+ * Namespace
+ */
+namespace Wc1c\Interfaces;
+
+/**
+ * Only WordPress
  */
 defined('ABSPATH') || exit;
 
-interface Interface_Wc1c_Settings
+/**
+ * Dependencies
+ */
+use Wc1c\Exceptions\Exception;
+
+/**
+ * SettingsInterface
+ *
+ * @package Wc1c\Interfaces
+ */
+interface SettingsInterface
 {
 	/**
 	 * Initializing
 	 *
 	 * @return void
-	 * @throws Wc1c_Exception
+	 * @throws Exception
 	 */
 	public function init();
 
 	/**
-	 * Get settings - all or single
+	 * Get - all or single
 	 *
 	 * @param string $setting_key - optional
 	 * @param mixed $default_return - default data, optional
 	 *
 	 * @return mixed
-	 * @throws Wc1c_Exception
+	 * @throws Exception
 	 */
 	public function get($setting_key = '', $default_return = '');
 
 	/**
-	 * Set settings - all or single
+	 * Set - all or single
 	 *
 	 * @param mixed $setting_data - all data, or single
 	 * @param string $setting_key - optional
 	 *
 	 * @return mixed
-	 * @throws Wc1c_Exception
+	 * @throws Exception
 	 */
 	public function set($setting_data = '', $setting_key = '');
 
 	/**
-	 * Save settings
+	 * Save
 	 *
 	 * @param array $settings_data Data to save
 	 *
 	 * @return mixed
-	 * @throws Wc1c_Exception
+	 * @throws Exception
 	 */
 	public function save($settings_data = null);
 }
