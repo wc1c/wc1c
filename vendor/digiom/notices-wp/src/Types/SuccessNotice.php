@@ -46,7 +46,7 @@ class SuccessNotice extends NoticeAbstract
 		if($this->isDismissible())
 		{
 			$classes[] = 'is-dismissible';
-			$dismiss = '<button id="notice-' . esc_attr($this->getId()) . '" class="notice-dismiss" type="button"><span class="screen-reader-text">' . __('Close', 'wsklad' ) . '</span></button>';
+			$dismiss = '<button id="notice-' . esc_attr($this->getId()) . '" class="notice-dismiss" type="button"><span class="screen-reader-text">' . __('Close', 'wc1c' ) . '</span></button>';
 		}
 
 		$content = sprintf
