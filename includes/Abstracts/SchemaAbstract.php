@@ -1,96 +1,84 @@
 <?php
 /**
- * Abstract Schema class
- *
- * @package Wc1c
+ * Namespace
+ */
+namespace Wc1c\Abstracts;
+
+/**
+ * Only WordPress
  */
 defined('ABSPATH') || exit;
 
-abstract class Abstract_Wc1c_Schema
+/**
+ * Dependencies
+ */
+use Wc1c\Configuration;
+use Wc1c\Exceptions\Exception;
+
+/**
+ * SchemaAbstract
+ *
+ * @package Wc1c\Abstracts
+ */
+abstract class SchemaAbstract
 {
 	/**
-	 * Extension initialized flag
-	 *
-	 * @var bool
+	 * @var bool Initialized flag
 	 */
 	private $initialized = false;
 
 	/**
-	 * Unique schema id
-	 *
-	 * @var string
+	 * @var string Unique schema id
 	 */
 	private $id = '';
 
 	/**
-	 * Current configuration
-	 *
-	 * @var Wc1c_Configuration
+	 * @var Configuration Current configuration
 	 */
 	private $configuration = null;
 
 	/**
-	 * Unique schema options
-	 *
-	 * @var array
+	 * @var array Unique schema options
 	 */
 	private $options = [];
 
 	/**
-	 * Unique prefix
-	 *
-	 * wc1c_prefix_{schema_id}_{config_id}
-	 *
-	 * @var string
+	 * @var string Unique prefix wc1c_prefix_{schema_id}_{configuration_id}
 	 */
 	private $prefix = '';
 
 	/**
-	 * Unique configuration prefix
-	 *
-	 * wc1c_configuration_{config_id}
-	 *
-	 * @var string
+	 * @var string Unique configuration prefix wc1c_configuration_{configuration_id}
 	 */
 	private $configuration_prefix = '';
 
 	/**
-	 * Unique schema prefix
-	 *
-	 * wc1c_schema_{schema_id}
-	 *
-	 * @var string
+	 * @var string Unique schema prefix wc1c_schema_{schema_id}
 	 */
 	private $schema_prefix = '';
 
 	/**
-	 * Current version
-	 *
-	 * @var string
+	 * @var string Current version
 	 */
 	private $version = '';
 
 	/**
-	 * Name
-	 *
-	 * @var string
+	 * @var string Name
 	 */
 	private $name = '';
 
 	/**
-	 * Description
-	 *
-	 * @var string
+	 * @var string Description
 	 */
 	private $description = '';
 
 	/**
-	 * @var string
+	 * @var string Schema Author
 	 */
 	private $author = 'WC1C team';
 
 	/**
-	 * Wc1c_Abstract_Schema constructor
+	 * SchemaAbstract constructor.
 	 */
 	public function __construct(){}
 
@@ -104,7 +92,7 @@ abstract class Abstract_Wc1c_Schema
 	/**
 	 * @return bool
 	 */
-	public function is_initialized()
+	public function isInitialized()
 	{
 		return $this->initialized;
 	}
@@ -112,7 +100,7 @@ abstract class Abstract_Wc1c_Schema
 	/**
 	 * @param bool $initialized
 	 */
-	public function set_initialized($initialized)
+	public function setInitialized($initialized)
 	{
 		$this->initialized = $initialized;
 	}
@@ -124,7 +112,7 @@ abstract class Abstract_Wc1c_Schema
 	 *
 	 * @return $this
 	 */
-	public function set_id($id)
+	public function setId($id)
 	{
 		$this->id = $id;
 
@@ -136,7 +124,7 @@ abstract class Abstract_Wc1c_Schema
 	 *
 	 * @return string
 	 */
-	public function get_id()
+	public function getId()
 	{
 		return $this->id;
 	}
@@ -144,7 +132,7 @@ abstract class Abstract_Wc1c_Schema
 	/**
 	 * @return string
 	 */
-	public function get_name()
+	public function getName()
 	{
 		return $this->name;
 	}
@@ -152,7 +140,7 @@ abstract class Abstract_Wc1c_Schema
 	/**
 	 * @param string $name
 	 */
-	public function set_name($name)
+	public function setName($name)
 	{
 		$this->name = $name;
 	}
@@ -160,7 +148,7 @@ abstract class Abstract_Wc1c_Schema
 	/**
 	 * @return string
 	 */
-	public function get_description()
+	public function getDescription()
 	{
 		return $this->description;
 	}
@@ -168,7 +156,7 @@ abstract class Abstract_Wc1c_Schema
 	/**
 	 * @param string $description
 	 */
-	public function set_description($description)
+	public function setDescription($description)
 	{
 		$this->description = $description;
 	}
@@ -176,7 +164,7 @@ abstract class Abstract_Wc1c_Schema
 	/**
 	 * @return string
 	 */
-	public function get_author()
+	public function getAuthor()
 	{
 		return $this->author;
 	}
@@ -184,7 +172,7 @@ abstract class Abstract_Wc1c_Schema
 	/**
 	 * @param string $author
 	 */
-	public function set_author($author)
+	public function setAuthor($author)
 	{
 		$this->author = $author;
 	}
@@ -196,7 +184,7 @@ abstract class Abstract_Wc1c_Schema
 	 *
 	 * @return $this
 	 */
-	public function set_options($options)
+	public function setOptions($options)
 	{
 		$this->options = $options;
 
@@ -211,7 +199,7 @@ abstract class Abstract_Wc1c_Schema
 	 *
 	 * @return array|bool|null
 	 */
-	public function get_options($key = '', $default = null)
+	public function getOptions($key = '', $default = null)
 	{
 		if($key !== '')
 		{
@@ -234,7 +222,7 @@ abstract class Abstract_Wc1c_Schema
 	/**
 	 * @return string
 	 */
-	public function get_version()
+	public function getVersion()
 	{
 		return $this->version;
 	}
@@ -242,7 +230,7 @@ abstract class Abstract_Wc1c_Schema
 	/**
 	 * @param string $version
 	 */
-	public function set_version($version)
+	public function setVersion($version)
 	{
 		$this->version = $version;
 	}
@@ -250,7 +238,7 @@ abstract class Abstract_Wc1c_Schema
 	/**
 	 * @return string
 	 */
-	public function get_prefix()
+	public function getPrefix()
 	{
 		return $this->prefix;
 	}
@@ -258,7 +246,7 @@ abstract class Abstract_Wc1c_Schema
 	/**
 	 * @param string $prefix
 	 */
-	public function set_prefix($prefix)
+	public function setPrefix($prefix)
 	{
 		$this->prefix = $prefix;
 	}
@@ -266,7 +254,7 @@ abstract class Abstract_Wc1c_Schema
 	/**
 	 * @return string
 	 */
-	public function get_configuration_prefix()
+	public function getConfigurationPrefix()
 	{
 		return $this->configuration_prefix;
 	}
@@ -274,7 +262,7 @@ abstract class Abstract_Wc1c_Schema
 	/**
 	 * @param string $configuration_prefix
 	 */
-	public function set_configuration_prefix($configuration_prefix)
+	public function setConfigurationPrefix($configuration_prefix)
 	{
 		$this->configuration_prefix = $configuration_prefix;
 	}
@@ -282,7 +270,7 @@ abstract class Abstract_Wc1c_Schema
 	/**
 	 * @return string
 	 */
-	public function get_schema_prefix()
+	public function getSchemaPrefix()
 	{
 		return $this->schema_prefix;
 	}
@@ -290,13 +278,13 @@ abstract class Abstract_Wc1c_Schema
 	/**
 	 * @param string $schema_prefix
 	 */
-	public function set_schema_prefix($schema_prefix)
+	public function setSchemaPrefix($schema_prefix)
 	{
 		$this->schema_prefix = $schema_prefix;
 	}
 
 	/**
-	 * @return Wc1c_Configuration|null
+	 * @return Configuration
 	 */
 	public function configuration()
 	{
@@ -304,9 +292,9 @@ abstract class Abstract_Wc1c_Schema
 	}
 
 	/**
-	 * @param Wc1c_Configuration|null $configuration
+	 * @param Configuration|null $configuration
 	 */
-	public function set_configuration($configuration)
+	public function setConfiguration($configuration)
 	{
 		$this->configuration = $configuration;
 	}
