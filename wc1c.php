@@ -42,8 +42,5 @@ if(false === defined('WC1C_PLUGIN_FILE'))
 
 	$loader->register();
 
-	register_activation_hook(WC1C_PLUGIN_FILE, WC1C_PREFIX . 'activation');
-	register_deactivation_hook(WC1C_PLUGIN_FILE, WC1C_PREFIX . 'deactivation');
-
-	add_action('plugins_loaded', 'WC1C', 10);
+	add_action('plugins_loaded', 'wc1c', 10);
 }
