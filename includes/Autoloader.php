@@ -10,9 +10,9 @@ namespace Wc1c;
 defined('ABSPATH') || exit;
 
 /**
- * Class Autoloader
+ * Autoloader
  *
- * @package Wsklad
+ * @package Wc1c
  */
 class Autoloader
 {
