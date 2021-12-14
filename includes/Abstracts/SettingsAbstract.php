@@ -17,9 +17,9 @@ use Wc1c\Exceptions\RuntimeException;
 use Wc1c\Interfaces\SettingsInterface;
 
 /**
- * Class SettingsAbstract
+ * SettingsAbstract
  *
- * @package Wc1c/Abstracts
+ * @package Wc1c\Abstracts
  */
 abstract class SettingsAbstract implements SettingsInterface
 {
@@ -66,7 +66,7 @@ abstract class SettingsAbstract implements SettingsInterface
 	 * Initializing
 	 *
 	 * @return void
-	 * @throws Exception
+	 * @throws RuntimeException
 	 */
 	public function init()
 	{
@@ -104,7 +104,7 @@ abstract class SettingsAbstract implements SettingsInterface
 	 * @param string $setting_key
 	 *
 	 * @return boolean
-	 * @throws Exception|RuntimeException
+	 * @throws RuntimeException
 	 */
 	public function set($setting_data = '', $setting_key = '')
 	{
@@ -146,7 +146,7 @@ abstract class SettingsAbstract implements SettingsInterface
 	 * @param $settings_data null|array - optional
 	 *
 	 * @return bool
-	 * @throws Exception|RuntimeException
+	 * @throws RuntimeException
 	 */
 	public function save($settings_data = null)
 	{
@@ -215,7 +215,7 @@ abstract class SettingsAbstract implements SettingsInterface
 	 * Get all data
 	 *
 	 * @return array
-	 * @throws Exception
+	 * @throws RuntimeException
 	 */
 	private function getData()
 	{
@@ -233,7 +233,7 @@ abstract class SettingsAbstract implements SettingsInterface
 	 * @param $data
 	 *
 	 * @return void
-	 * @throws Exception
+	 * @throws RuntimeException
 	 */
 	private function setData($data = [])
 	{
