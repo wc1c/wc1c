@@ -1,20 +1,30 @@
 <?php
 /**
- * Add content to the help tab
- *
- * @package Wc1c/Admin
+ * Namespace
+ */
+namespace Wc1c\Admin;
+
+/**
+ * Only WordPress
  */
 defined('ABSPATH') || exit;
 
-class Wc1c_Admin_Help
+/**
+ * Dependencies
+ */
+use Wc1c\Traits\Singleton;
+
+/**
+ * Class Help
+ *
+ * @package Wc1c\Admin
+ */
+class Help
 {
-	/**
-	 * Singleton
-	 */
-	use Trait_Wc1c_Singleton;
+	use Singleton;
 
 	/**
-	 * Hook in tabs.
+	 * Help constructor.
 	 */
 	public function __construct()
 	{
@@ -36,8 +46,8 @@ class Wc1c_Admin_Help
 		$screen->add_help_tab
 		(
 			[
-				'id'      => 'wc1c_help_tab',
-				'title'   => __( 'Help', 'wc1c' ),
+				'id' => WC1C_PREFIX . 'help_tab',
+				'title' => __('Help', 'wc1c'),
 				'content' => wc1c_get_template_html('/helps/main.php')
 			]
 		);
@@ -45,8 +55,8 @@ class Wc1c_Admin_Help
 		$screen->add_help_tab
 		(
 			[
-				'id'      => 'wc1c_bugs_tab',
-				'title'   => __( 'Found a bug?', 'wc1c' ),
+				'id' => WC1C_PREFIX . 'bugs_tab',
+				'title' => __('Found a bug?', 'wc1c'),
 				'content' => wc1c_get_template_html('/helps/bugs.php')
 			]
 		);
@@ -54,8 +64,8 @@ class Wc1c_Admin_Help
 		$screen->add_help_tab
 		(
 			[
-				'id'      => 'wc1c_features_tab',
-				'title'   => __( 'Not a feature?', 'wc1c' ),
+				'id' => WC1C_PREFIX . 'features_tab',
+				'title' => __('Not a feature?', 'wc1c'),
 				'content' => wc1c_get_template_html('/helps/features.php')
 			]
 		);
