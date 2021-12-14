@@ -1,14 +1,28 @@
 <?php
 /**
- * Abstract data
- *
- * Implemented by classes using the same CRUD(s) pattern
- *
- * @package Wc1c/Abstracts
+ * Namespace
+ */
+namespace Wc1c\Data\Entities;
+
+/**
+ * Only WordPress
  */
 defined('ABSPATH') || exit;
 
-abstract class Abstract_Wc1c_Data_Configuration extends Abstract_Wc1c_Data
+/**
+ * Dependencies
+ */
+use Wc1c\Exceptions\Exception;
+use WP_Error;
+use Wc1c\Data\Meta;
+use Wc1c\Abstracts\DataAbstract;
+
+/**
+ * Class DataConfigurations
+ *
+ * @package Wc1c\Data\Entities
+ */
+abstract class DataConfigurations extends DataAbstract
 {
 	/**
 	 * This is the name of this object type
@@ -29,7 +43,7 @@ abstract class Abstract_Wc1c_Data_Configuration extends Abstract_Wc1c_Data
 	 *
 	 * @return bool
 	 */
-	protected function filter_null_meta($meta)
+	protected function filterNullMeta($meta)
 	{
 		return !is_null($meta->value);
 	}
@@ -39,11 +53,11 @@ abstract class Abstract_Wc1c_Data_Configuration extends Abstract_Wc1c_Data
 	 *
 	 * @return array of objects
 	 */
-	public function get_meta_data()
+	public function getMetaData()
 	{
-		$this->maybe_read_meta_data();
+		$this->maybeReadMetaData();
 
-		return array_values(array_filter($this->meta_data, [$this, 'filter_null_meta']));
+		return array_values(array_filter($this->meta_data, [$this, 'filterNullMeta']));
 	}
 
 	/**
@@ -51,9 +65,9 @@ abstract class Abstract_Wc1c_Data_Configuration extends Abstract_Wc1c_Data
 	 *
 	 * @return array
 	 */
-	public function get_data()
+	public function getData()
 	{
-		return array_merge(['id' => $this->get_id()], $this->data, ['meta_data' => $this->get_meta_data()]);
+		return array_merge(['id' => $this->getId()], $this->data, ['meta_data' => $this->getMetaData()]);
 	}
 
 	/**
@@ -66,7 +80,7 @@ abstract class Abstract_Wc1c_Data_Configuration extends Abstract_Wc1c_Data
 	 *
 	 * @return bool|WP_Error
 	 */
-	public function set_props($props, $context = 'set')
+	public function setProps($props, $context = 'set')
 	{
 		$errors = false;
 
@@ -107,7 +121,7 @@ abstract class Abstract_Wc1c_Data_Configuration extends Abstract_Wc1c_Data
 	 *
 	 * @return bool true if it's an internal key, false otherwise
 	 */
-	protected function is_internal_meta_key($key)
+	protected function isInternalMetaKey($key)
 	{
 		$internal_meta_key = !empty($key) && $this->storage && in_array($key, $this->storage->get_internal_meta_keys(), true);
 
@@ -127,7 +141,7 @@ abstract class Abstract_Wc1c_Data_Configuration extends Abstract_Wc1c_Data
 	}
 
 	/**
-	 * Get Meta Data by Key
+	 * Get Metadata by Key
 	 *
 	 * @param string $key Meta Key
 	 * @param bool $single return first found meta with key, or all with $key
@@ -135,9 +149,9 @@ abstract class Abstract_Wc1c_Data_Configuration extends Abstract_Wc1c_Data
 	 *
 	 * @return mixed
 	 */
-	public function get_meta($key = '', $single = true, $context = 'view')
+	public function getMeta($key = '', $single = true, $context = 'view')
 	{
-		if($this->is_internal_meta_key($key))
+		if($this->isInternalMetaKey($key))
 		{
 			$function = 'get_' . $key;
 
@@ -147,9 +161,9 @@ abstract class Abstract_Wc1c_Data_Configuration extends Abstract_Wc1c_Data
 			}
 		}
 
-		$this->maybe_read_meta_data();
+		$this->maybeReadMetaData();
 
-		$meta_data = $this->get_meta_data();
+		$meta_data = $this->getMetaData();
 		$array_keys = array_keys(wp_list_pluck($meta_data, 'key'), $key, true);
 		$value = $single ? '' : [];
 
@@ -168,45 +182,45 @@ abstract class Abstract_Wc1c_Data_Configuration extends Abstract_Wc1c_Data
 
 		if('view' === $context)
 		{
-			$value = apply_filters($this->get_hook_prefix() . $key, $value, $this);
+			$value = apply_filters($this->getHookPrefix() . $key, $value, $this);
 		}
 
 		return $value;
 	}
 
 	/**
-	 * See if meta data exists, since get_meta always returns a '' or array()
+	 * See if metadata exists, since get_meta always returns a '' or array()
 	 *
 	 * @param string $key meta Key
 	 *
 	 * @return boolean
 	 */
-	public function meta_exists($key = '')
+	public function metaExists($key = '')
 	{
-		$this->maybe_read_meta_data();
+		$this->maybeReadMetaData();
 
-		$array_keys = wp_list_pluck($this->get_meta_data(), 'key');
+		$array_keys = wp_list_pluck($this->getMetaData(), 'key');
 
 		return in_array($key, $array_keys, true);
 	}
 
 	/**
-	 * Set all meta data from array
+	 * Set all metadata from array
 	 *
 	 * @param array $data Key/Value pairs
 	 */
-	public function set_meta_data($data)
+	public function setMetaData($data)
 	{
 		if(!empty($data) && is_array($data))
 		{
-			$this->maybe_read_meta_data();
+			$this->maybeReadMetaData();
 
 			foreach($data as $meta)
 			{
 				$meta = (array) $meta;
 				if(isset($meta['key'], $meta['value'], $meta['id']))
 				{
-					$this->meta_data[] = new Wc1c_Data_Meta
+					$this->meta_data[] = new Meta
 					(
 						[
 							'id' => $meta['id'],
@@ -220,7 +234,7 @@ abstract class Abstract_Wc1c_Data_Configuration extends Abstract_Wc1c_Data
 	}
 
 	/**
-	 * Add meta data
+	 * Add metadata
 	 *
 	 * @param string $key Meta key
 	 * @param string|array $value Meta value
@@ -228,9 +242,9 @@ abstract class Abstract_Wc1c_Data_Configuration extends Abstract_Wc1c_Data
 	 *
 	 * @return void
 	 */
-	public function add_meta_data($key, $value, $unique = false)
+	public function addMetaData($key, $value, $unique = false)
 	{
-		if($this->is_internal_meta_key($key))
+		if($this->isInternalMetaKey($key))
 		{
 			$function = 'set_' . $key;
 
@@ -240,13 +254,13 @@ abstract class Abstract_Wc1c_Data_Configuration extends Abstract_Wc1c_Data
 			}
 		}
 
-		$this->maybe_read_meta_data();
+		$this->maybeReadMetaData();
 		if($unique)
 		{
-			$this->delete_meta_data($key);
+			$this->deleteMetaData($key);
 		}
 
-		$this->meta_data[] = new Wc1c_Data_Meta
+		$this->meta_data[] = new Meta
 		(
 			[
 				'key' => $key,
@@ -264,9 +278,9 @@ abstract class Abstract_Wc1c_Data_Configuration extends Abstract_Wc1c_Data
 	 *
 	 * @return mixed|void
 	 */
-	public function update_meta_data($key, $value, $meta_id = 0)
+	public function updateMetaData($key, $value, $meta_id = 0)
 	{
-		if($this->is_internal_meta_key($key))
+		if($this->isInternalMetaKey($key))
 		{
 			$function = 'set_' . $key;
 
@@ -276,7 +290,7 @@ abstract class Abstract_Wc1c_Data_Configuration extends Abstract_Wc1c_Data
 			}
 		}
 
-		$this->maybe_read_meta_data();
+		$this->maybeReadMetaData();
 
 		$array_key = false;
 
@@ -314,18 +328,18 @@ abstract class Abstract_Wc1c_Data_Configuration extends Abstract_Wc1c_Data
 		}
 		else
 		{
-			$this->add_meta_data($key, $value, true);
+			$this->addMetaData($key, $value, true);
 		}
 	}
 
 	/**
-	 * Delete meta data
+	 * Delete metadata
 	 *
 	 * @param string $key Meta key
 	 */
-	public function delete_meta_data($key)
+	public function deleteMetaData($key)
 	{
-		$this->maybe_read_meta_data();
+		$this->maybeReadMetaData();
 
 		$array_keys = array_keys(wp_list_pluck($this->meta_data, 'key'), $key, true);
 
@@ -339,13 +353,13 @@ abstract class Abstract_Wc1c_Data_Configuration extends Abstract_Wc1c_Data
 	}
 
 	/**
-	 * Delete meta data
+	 * Delete metadata by ID
 	 *
 	 * @param int $mid Meta ID
 	 */
-	public function delete_meta_data_by_id($mid)
+	public function deleteMetaDataById($mid)
 	{
-		$this->maybe_read_meta_data();
+		$this->maybeReadMetaData();
 		$array_keys = array_keys(wp_list_pluck($this->meta_data, 'id'), (int) $mid, true);
 
 		if($array_keys)
@@ -360,24 +374,24 @@ abstract class Abstract_Wc1c_Data_Configuration extends Abstract_Wc1c_Data
 	/**
 	 * Read meta data if null
 	 */
-	protected function maybe_read_meta_data()
+	protected function maybeReadMetaData()
 	{
 		if(is_null($this->meta_data))
 		{
-			$this->read_meta_data();
+			$this->readMetaData();
 		}
 	}
 
 	/**
-	 * Read Meta Data from the database. Ignore any internal properties
+	 * Read Metadata from the database. Ignore any internal properties
 	 *
-	 * Uses it's own caches because get_metadata does not provide meta_ids
+	 * Uses its own caches because get_metadata does not provide meta_ids
 	 */
-	public function read_meta_data()
+	public function readMetaData()
 	{
 		$this->meta_data = [];
 
-		if(!$this->get_id())
+		if(!$this->getId())
 		{
 			return;
 		}
@@ -387,13 +401,13 @@ abstract class Abstract_Wc1c_Data_Configuration extends Abstract_Wc1c_Data
 			return;
 		}
 
-		$raw_meta_data = $this->storage->read_meta($this);
+		$raw_meta_data = $this->storage->readMeta($this);
 
 		if($raw_meta_data)
 		{
 			foreach($raw_meta_data as $meta)
 			{
-				$this->meta_data[] = new Wc1c_Data_Meta
+				$this->meta_data[] = new Meta
 				(
 					[
 						'id' => (int) $meta->meta_id,
@@ -406,9 +420,9 @@ abstract class Abstract_Wc1c_Data_Configuration extends Abstract_Wc1c_Data
 	}
 
 	/**
-	 * Update Meta Data in the database
+	 * Update Metadata in the database
 	 */
-	public function save_meta_data()
+	public function saveMetaData()
 	{
 		if(!$this->storage || is_null($this->meta_data))
 		{
@@ -421,19 +435,19 @@ abstract class Abstract_Wc1c_Data_Configuration extends Abstract_Wc1c_Data
 			{
 				if(!empty($meta->id))
 				{
-					$this->storage->delete_meta($this, $meta);
+					$this->storage->deleteMeta($this, $meta);
 					unset($this->meta_data[$array_key]);
 				}
 			}
 			elseif(empty($meta->id))
 			{
-				$meta->id = $this->storage->add_meta($this, $meta);
-				$meta->apply_changes();
+				$meta->id = $this->storage->addMeta($this, $meta);
+				$meta->applyChanges();
 			}
 			else if($meta->get_changes())
 			{
-				$this->storage->update_meta($this, $meta);
-				$meta->apply_changes();
+				$this->storage->updateMeta($this, $meta);
+				$meta->applyChanges();
 			}
 		}
 	}
