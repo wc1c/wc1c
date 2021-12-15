@@ -12,9 +12,9 @@ defined('ABSPATH') || exit;
 /**
  * Dependencies
  */
+use Wc1c\Admin\Traits\ProcessConfigurationTrait;
 use Wc1c\Exceptions\Exception;
-use Wc1c\Configuration;
-use Wc1c\Traits\Singleton;
+use Wc1c\Traits\SingletonTrait;
 
 /**
  * Class Delete
@@ -23,37 +23,18 @@ use Wc1c\Traits\Singleton;
  */
 class Delete
 {
-	use Singleton;
-
-	/**
-	 * @var Configuration
-	 */
-	protected $configuration;
+	use SingletonTrait;
+	use ProcessConfigurationTrait;
 
 	/**
 	 * Delete constructor.
+	 *
 	 * @throws Exception
 	 */
 	public function __construct()
 	{
 		$configuration_id = wc1c_get_var($_GET['configuration_id'], 0);
-		$error = false;
-
-		try
-		{
-			$configuration = new Configuration($configuration_id);
-
-			if(!$configuration->getStorage()->isExistingById($configuration_id))
-			{
-				$error = true;
-			}
-
-			$this->setConfiguration($configuration);
-		}
-		catch(Exception $e)
-		{
-			$error = true;
-		}
+		$error = $this->setConfiguration($configuration_id);
 
 		if($error)
 		{
@@ -61,19 +42,19 @@ class Delete
 		}
 		else
 		{
-			$this->process($this->getConfiguration());
+			$this->process();
 		}
 	}
 
 	/**
 	 * Delete processing
 	 *
-	 * @param $configuration
-	 *
 	 * @throws Exception
 	 */
-	public function process($configuration)
+	public function process()
 	{
+		$configuration = $this->getConfiguration();
+
 		$delete = false;
 		$redirect = true;
 		$force_delete = false;
@@ -158,22 +139,6 @@ class Delete
 			wp_safe_redirect(wc1c_admin_configurations_get_url());
 			die;
 		}
-	}
-
-	/**
-	 * @return Configuration
-	 */
-	public function getConfiguration()
-	{
-		return $this->configuration;
-	}
-
-	/**
-	 * @param Configuration $configuration
-	 */
-	public function setConfiguration($configuration)
-	{
-		$this->configuration = $configuration;
 	}
 
 	/**
