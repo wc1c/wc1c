@@ -52,7 +52,7 @@ function wc1c_wpdb()
  */
 function is_wc1c_api_request()
 {
-	if(wc1c_get_var($_GET['wc1c-api'], false))
+	if(wc1c_get_var($_GET['wc1c-input'], false))
 	{
 		return true;
 	}
