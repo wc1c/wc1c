@@ -15,7 +15,7 @@ defined('ABSPATH') || exit;
 use Wc1c\Exceptions\Exception;
 use Wc1c\Abstracts\FormAbstract;
 use Wc1c\Interfaces\SettingsInterface;
-use Wc1c\Traits\Singleton;
+use Wc1c\Traits\SingletonTrait;
 
 /**
  * Class Form
@@ -24,7 +24,7 @@ use Wc1c\Traits\Singleton;
  */
 abstract class Form extends FormAbstract
 {
-	use Singleton;
+	use SingletonTrait;
 
 	/**
 	 * @var SettingsInterface
