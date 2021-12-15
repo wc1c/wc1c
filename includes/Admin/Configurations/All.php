@@ -13,7 +13,7 @@ defined('ABSPATH') || exit;
  * Dependencies
  */
 use Wc1c\Abstracts\ScreenAbstract;
-use Wc1c\Traits\Singleton;
+use Wc1c\Traits\SingletonTrait;
 
 /**
  * Class Lists
@@ -22,7 +22,7 @@ use Wc1c\Traits\Singleton;
  */
 class All extends ScreenAbstract
 {
-	use Singleton;
+	use SingletonTrait;
 
 	/**
 	 * Build and output table
