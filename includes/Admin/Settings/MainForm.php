@@ -33,6 +33,7 @@ class MainForm extends Form
 		$this->setSettings(new MainSettings());
 
 		add_filter(WC1C_PREFIX . $this->get_id() . '_form_load_fields', [$this, 'init_fields_main'], 10);
+		add_filter(WC1C_PREFIX . $this->get_id() . '_form_load_fields', [$this, 'init_fields_technical'], 10);
 		add_filter(WC1C_PREFIX . $this->get_id() . '_form_load_fields', [$this, 'init_fields_configurations'], 10);
 		add_filter(WC1C_PREFIX . $this->get_id() . '_form_load_fields', [$this, 'init_fields_interface'], 10);
 		add_filter(WC1C_PREFIX . $this->get_id() . '_form_load_fields', [$this, 'init_fields_enable_data'], 10);
@@ -88,21 +89,19 @@ class MainForm extends Form
 	}
 
 	/**
-	 * Add for Main
+	 * Add for Technical
 	 *
 	 * @param $fields
 	 *
 	 * @return array
 	 */
-	public function init_fields_main($fields)
+	public function init_fields_technical($fields)
 	{
-		$fields['api'] =
+		$fields['technical_title'] =
 		[
-			'title' => __('API', 'wc1c'),
-			'type' => 'checkbox',
-			'label' => __('Enable API requests?', 'wc1c'),
-			'description' => __('It is used to receive background requests from 1C in exchange schemes. Do not disable this option if you do not know what it is for.', 'wc1c'),
-			'default' => 'yes'
+			'title' => __('Technical settings', 'wc1c'),
+			'type' => 'title',
+			'description' => __('Used to set up the environment.', 'wc1c'),
 		];
 
 		$fields['php_post_max_size'] =
@@ -121,6 +120,27 @@ class MainForm extends Form
 			'description' => __('Value is seconds. The setting must not take a execution time larger than specified in the PHP and web server settings (Apache, Nginx, etc).', 'wc1c'),
 			'default' => wc1c()->environment()->get('php_max_execution_time'),
 			'css' => 'min-width: 100px;',
+		];
+
+		return $fields;
+	}
+
+	/**
+	 * Add for Main
+	 *
+	 * @param $fields
+	 *
+	 * @return array
+	 */
+	public function init_fields_main($fields)
+	{
+		$fields['api'] =
+		[
+			'title' => __('Input: background requests', 'wc1c'),
+			'type' => 'checkbox',
+			'label' => __('Enable Input: background requests?', 'wc1c'),
+			'description' => __('It is used to receive background requests from 1C in exchange schemes. Do not disable this option if you do not know what it is for.', 'wc1c'),
+			'default' => 'yes'
 		];
 
 		return $fields;
