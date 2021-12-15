@@ -15,19 +15,19 @@ defined('ABSPATH') || exit;
 use Monolog\Logger;
 
 /**
- * Class CoreLog
+ * SchemaLog
  *
  * @package Wc1c
  */
-final class CoreLog extends Logger
+class SchemaLog extends Logger
 {
 	/**
 	 * @var string
 	 */
-	protected $name = 'core';
+	protected $name = 'schema';
 
 	/**
-	 * CoreLog constructor.
+	 * SchemaLog constructor.
 	 *
 	 * @param array $handlers
 	 * @param array $processors
