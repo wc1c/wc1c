@@ -38,7 +38,7 @@ class Delete
 
 		if($error)
 		{
-			add_action(WC1C_ADMIN_PREFIX . 'show', [$this, 'output_error'], 10);
+			add_action(WC1C_ADMIN_PREFIX . 'show', [$this, 'outputError'], 10);
 		}
 		else
 		{
@@ -144,7 +144,7 @@ class Delete
 	/**
 	 * Output error
 	 */
-	public function output_error()
+	public function outputError()
 	{
 		wc1c_get_template('configurations/delete_error.php');
 	}
