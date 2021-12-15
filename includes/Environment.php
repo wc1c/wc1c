@@ -14,7 +14,7 @@ defined('ABSPATH') || exit;
  */
 use Wc1c\Exceptions\Exception;
 use Wc1c\Exceptions\RuntimeException;
-use Wc1c\Traits\Singleton;
+use Wc1c\Traits\SingletonTrait;
 
 /**
  * Environment
@@ -23,7 +23,7 @@ use Wc1c\Traits\Singleton;
  */
 final class Environment
 {
-	use Singleton;
+	use SingletonTrait;
 
 	/**
 	 * @var array Environ data
