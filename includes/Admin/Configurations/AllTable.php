@@ -186,7 +186,7 @@ class AllTable extends TableAbstract
 			$actions['delete'] = '<a href="' . wc1c_admin_configurations_get_url('delete', $item['configuration_id']) . '">' . __('Remove forever', 'wc1c') . '</a>';
 		}
 
-		$connection_schema = __('Schema: ', 'wc1c') . '<b>' . $item['schema'] . '</b>';
+		$connection_schema = __('Schema: ', 'wc1c') . '<b> ' . $item['schema'] . '</b>';
 
 		return sprintf( '<span class="name">%1$s</span>%2$s<br/>%3$s',
 			$item['name'],
