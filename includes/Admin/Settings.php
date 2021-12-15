@@ -15,8 +15,8 @@ defined('ABSPATH') || exit;
 use Wc1c\Admin\Settings\ConnectionForm;
 use Wc1c\Admin\Settings\MainForm;
 use Wc1c\Admin\Settings\OtherForm;
-use Wc1c\Traits\Sections;
-use Wc1c\Traits\Singleton;
+use Wc1c\Traits\SectionsTrait;
+use Wc1c\Traits\SingletonTrait;
 
 /**
  * Settings
@@ -25,8 +25,8 @@ use Wc1c\Traits\Singleton;
  */
 class Settings
 {
-	use Singleton;
-	use Sections;
+	use SingletonTrait;
+	use SectionsTrait;
 
 	/**
 	 * Settings constructor.
