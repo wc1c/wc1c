@@ -14,7 +14,7 @@ defined('ABSPATH') || exit;
  */
 use Wc1c\Abstracts\ScreenAbstract;
 use Wc1c\Exceptions\Exception;
-use Wc1c\Traits\Singleton;
+use Wc1c\Traits\SingletonTrait;
 
 /**
  * Class Create
@@ -23,7 +23,7 @@ use Wc1c\Traits\Singleton;
  */
 class Create extends ScreenAbstract
 {
-	use Singleton;
+	use SingletonTrait;
 
 	/**
 	 * @throws Exception
