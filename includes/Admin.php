@@ -18,8 +18,8 @@ use Wc1c\Admin\Configurations;
 use Wc1c\Admin\Extensions;
 use Wc1c\Admin\Settings;
 use Wc1c\Admin\Tools;
-use Wc1c\Traits\Sections;
-use Wc1c\Traits\Singleton;
+use Wc1c\Traits\SectionsTrait;
+use Wc1c\Traits\SingletonTrait;
 
 /**
  * Admin
@@ -28,8 +28,8 @@ use Wc1c\Traits\Singleton;
  */
 final class Admin
 {
-	use Singleton;
-	use Sections;
+	use SingletonTrait;
+	use SectionsTrait;
 
 	/**
 	 * @var ManagerInterface Admin notices
