@@ -45,7 +45,7 @@ trait ProcessConfigurationTrait
 				$error = true;
 			}
 
-			$this->setConfiguration($configuration);
+			$this->configuration = $configuration;
 		}
 		catch(Exception $e)
 		{
