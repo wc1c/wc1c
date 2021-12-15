@@ -12,7 +12,7 @@ defined('ABSPATH') || exit;
 /**
  * Dependencies
  */
-use Wc1c\Traits\Singleton;
+use Wc1c\Traits\SingletonTrait;
 
 /**
  * Init
@@ -21,7 +21,7 @@ use Wc1c\Traits\Singleton;
  */
 final class Init
 {
-	use Singleton;
+	use SingletonTrait;
 
 	/**
 	 * Init constructor.
