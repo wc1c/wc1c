@@ -1,8 +1,8 @@
 <?php defined('ABSPATH') || exit; ?>
 
-<?php do_action('wc1c_admin_configurations_update_before_sidebar_item_show'); ?>
+<?php do_action(WC1C_ADMIN_PREFIX . 'configurations_update_before_sidebar_item_show'); ?>
 
-<div class="card mt-0 ml-lg-2 mb-2 p-0" style="max-width: 100%;">
+<div class="card mb-2 p-0">
     <?php if(isset($args['header'])): ?>
     <div class="card-header p-2">
         <?php echo $args['header']; ?>
@@ -20,4 +20,4 @@
 	<?php endif; ?>
 </div>
 
-<?php do_action('wc1c_admin_configurations_update_after_sidebar_item_show'); ?>
+<?php do_action(WC1C_ADMIN_PREFIX . 'configurations_update_after_sidebar_item_show'); ?>
