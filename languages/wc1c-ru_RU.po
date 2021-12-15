@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WC1C > integration of WooCommerce with 1C products "
 "(different configurations)\n"
 "POT-Creation-Date: 2021-12-15 07:30+0300\n"
-"PO-Revision-Date: 2021-12-15 07:49+0300\n"
+"PO-Revision-Date: 2021-12-15 07:53+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
 "Language: ru_RU\n"
@@ -1038,7 +1038,7 @@ msgstr "Ошибка. Удаление недоступно"
 
 #: templates/configurations/delete_form.php:16
 msgid "Delete"
-msgstr "Удалена"
+msgstr "Удалить"
 
 #: templates/configurations/empty.php:4
 msgid "Configurations not found."
@@ -1066,7 +1066,7 @@ msgstr ""
 
 #: templates/connection/form.php:13
 msgid "Connect by Login & Password"
-msgstr ""
+msgstr "Подключится по Логину и Паролю"
 
 #: templates/connection/form.php:16
 msgid "Disconnect"
