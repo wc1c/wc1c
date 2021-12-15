@@ -12,7 +12,7 @@ defined('ABSPATH') || exit;
 /**
  * Dependencies
  */
-use Wc1c\Traits\Singleton;
+use Wc1c\Traits\SingletonTrait;
 use Wc1c\Admin\Configurations\Create;
 use Wc1c\Admin\Configurations\Update;
 use Wc1c\Admin\Configurations\Delete;
@@ -25,7 +25,7 @@ use Wc1c\Admin\Configurations\All;
  */
 class Configurations
 {
-	use Singleton;
+	use SingletonTrait;
 
 	/**
 	 * @var array Available actions
