@@ -14,7 +14,7 @@ defined('ABSPATH') || exit;
  *
  * @package Wc1c\Traits
  */
-trait Sections
+trait SectionsTrait
 {
 	/**
 	 * Sections

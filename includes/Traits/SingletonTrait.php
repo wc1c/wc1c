@@ -14,7 +14,7 @@ defined('ABSPATH') || exit;
  *
  * @package Wc1c\Traits
  */
-trait Singleton
+trait SingletonTrait
 {
 	/**
 	 * All initialized instances
