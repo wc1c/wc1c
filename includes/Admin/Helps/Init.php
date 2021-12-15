@@ -2,7 +2,7 @@
 /**
  * Namespace
  */
-namespace Wc1c\Admin;
+namespace Wc1c\Admin\Helps;
 
 /**
  * Only WordPress
@@ -15,16 +15,16 @@ defined('ABSPATH') || exit;
 use Wc1c\Traits\Singleton;
 
 /**
- * Class Help
+ * Init
  *
- * @package Wc1c\Admin
+ * @package Wc1c\Admin\Helps
  */
-class Help
+final class Init
 {
 	use Singleton;
 
 	/**
-	 * Help constructor.
+	 * Init constructor.
 	 */
 	public function __construct()
 	{

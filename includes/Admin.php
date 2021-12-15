@@ -16,7 +16,6 @@ use Digiom\WordPress\Notices\Interfaces\ManagerInterface;
 use Digiom\WordPress\Notices\Manager;
 use Wc1c\Admin\Configurations;
 use Wc1c\Admin\Extensions;
-use Wc1c\Admin\Help;
 use Wc1c\Admin\Settings;
 use Wc1c\Admin\Tools;
 use Wc1c\Traits\Sections;
@@ -54,7 +53,7 @@ final class Admin
 			add_action('init', [$this, 'init'], 10);
 			add_action('admin_enqueue_scripts', [$this, 'initStyles']);
 
-			Help::instance();
+			Admin\Helps\Init::instance();
 		}
 
 		if(defined('WC1C_PLUGIN_NAME'))
