@@ -35,17 +35,6 @@ function wc1c_admin()
 }
 
 /**
- * Use in plugin for DB queries
- *
- * @return wpdb
- */
-function wc1c_wpdb()
-{
-	global $wpdb;
-	return $wpdb;
-}
-
-/**
  * Is WC1C api request?
  *
  * @return bool
