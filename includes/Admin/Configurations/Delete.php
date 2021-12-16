@@ -94,7 +94,7 @@ class Delete
 
 				if(!$delete_form->save())
 				{
-					add_action(WC1C_ADMIN_PREFIX . 'configurations_form_delete_show', [$delete_form, 'output_form']);
+					add_action(WC1C_ADMIN_PREFIX . 'configurations_form_delete_show', [$delete_form, 'outputForm']);
 					add_action(WC1C_ADMIN_PREFIX . 'show', [$this, 'output'], 10);
 				}
 				else

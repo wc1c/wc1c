@@ -136,7 +136,7 @@ class ConnectionForm extends Form
 	/**
 	 * Form show
 	 */
-	public function output_form()
+	public function outputForm()
 	{
 		$args =
 		[

@@ -213,7 +213,7 @@ class CreateForm extends FormAbstract
 	/**
 	 * Form show
 	 */
-	public function output_form()
+	public function outputForm()
 	{
 		$args =
 		[

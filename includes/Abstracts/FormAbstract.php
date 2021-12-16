@@ -179,7 +179,7 @@ abstract class FormAbstract
 	/**
 	 * Output
 	 */
-	public function output_form()
+	public function outputForm()
 	{
 		echo '<table id="' . $this->get_id() . '" class="form-table">' . $this->generate_html($this->get_fields(), false) . '</table>';
 	}

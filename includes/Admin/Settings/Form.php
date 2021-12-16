@@ -59,7 +59,7 @@ abstract class Form extends FormAbstract
 		$this->load_saved_data($this->getSettings()->get());
 		$this->save();
 
-		add_action(WC1C_ADMIN_PREFIX . 'show', [$this, 'output_form']);
+		add_action(WC1C_ADMIN_PREFIX . 'show', [$this, 'outputForm']);
 	}
 
 	/**
@@ -147,7 +147,7 @@ abstract class Form extends FormAbstract
 	/**
 	 * Form show
 	 */
-	public function output_form()
+	public function outputForm()
 	{
 		$args =
 		[
