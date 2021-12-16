@@ -12,18 +12,17 @@ defined('ABSPATH') || exit;
 /**
  * Dependencies
  */
-
-use mysql_xdevapi\CrudOperationBindable;
-use Wc1c\Exceptions\Exception;
 use stdClass;
+use Wc1c\Exceptions\RuntimeException;
 use WP_Error;
+use Wc1c\Exceptions\Exception;
 use Wc1c\Configuration;
 use Wc1c\Data\Interfaces\StorageMetaInterface;
 use Wc1c\Abstracts\DataAbstract;
 use Wc1c\Data\MetaQuery;
 
 /**
- * Class StorageAccounts
+ * StorageAccounts
  *
  * @package Wc1c\Data\Storages
  */
@@ -73,6 +72,16 @@ class StorageConfigurations implements StorageMetaInterface
 			$data->setDateCreate(time());
 		}
 
+		try
+		{
+			$schema = wc1c()->getSchemas($data->getSchema());
+			$schema_version = $schema->getVersion();
+		}
+		catch(RuntimeException $exception)
+		{
+			$schema_version = '';
+		}
+
 		$insert_data =
 		[
 			'user_id' => $data->getUserId() ?: get_current_user_id(),
@@ -83,6 +92,10 @@ class StorageConfigurations implements StorageMetaInterface
 			'date_create' => gmdate('Y-m-d H:i:s', $data->getDateCreate('edit')->getTimestamp()),
 			'date_modify' => $data->getDateModify(),
 			'date_activity' => $data->getDateActivity(),
+			'wc1c_version_init' => wc1c()->environment()->get('wc1c_version'),
+			'wc1c_version' => wc1c()->environment()->get('wc1c_version'),
+			'schema_version' => $schema_version,
+			'schema_version_init' => $schema_version,
 		];
 
 		if(false === wc1c_wpdb()->insert($this->getTableName(), $insert_data))
