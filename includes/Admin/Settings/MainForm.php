@@ -162,7 +162,7 @@ class MainForm extends Form
 			'description' => __('Settings for the user interface.', 'wc1c'),
 		];
 
-		$fields['admin_inject'] =
+		$fields['admin_interface'] =
 		[
 			'title' => __('Changing the interface', 'wc1c'),
 			'type' => 'checkbox',
@@ -171,7 +171,7 @@ class MainForm extends Form
 			'default' => 'yes'
 		];
 
-		$fields['admin_inject_products_column'] =
+		$fields['admin_interface_products_column'] =
 		[
 			'title' => __('Column in products list', 'wc1c'),
 			'type' => 'checkbox',
@@ -180,7 +180,7 @@ class MainForm extends Form
 			'default' => 'yes'
 		];
 
-		$fields['admin_inject_edit_products_metabox'] =
+		$fields['admin_interface_products_edit_metabox'] =
 		[
 			'title' => __('Metabox in edit products', 'wc1c'),
 			'type' => 'checkbox',
@@ -189,7 +189,7 @@ class MainForm extends Form
 			'default' => 'yes'
 		];
 
-		$fields['admin_inject_orders_column'] =
+		$fields['admin_interface_orders_column'] =
 		[
 			'title' => __('Column in orders list', 'wc1c'),
 			'type' => 'checkbox',
@@ -198,12 +198,21 @@ class MainForm extends Form
 			'default' => 'yes'
 		];
 
-		$fields['admin_inject_edit_orders_metabox'] =
+		$fields['admin_interface_orders_edit_metabox'] =
 		[
 			'title' => __('Metabox in edit orders', 'wc1c'),
 			'type' => 'checkbox',
 			'label' => __('Enable', 'wc1c'),
 			'description' => __('Output of a Metabox with information from 1C in edit orders.', 'wc1c'),
+			'default' => 'yes'
+		];
+
+		$fields['admin_interface_categories_column'] =
+		[
+			'title' => __('Column in categories list', 'wc1c'),
+			'type' => 'checkbox',
+			'label' => __('Enable', 'wc1c'),
+			'description' => __('Output of a column with information from 1C to the list of categories.', 'wc1c'),
 			'default' => 'yes'
 		];
 
