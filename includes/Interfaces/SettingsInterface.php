@@ -35,8 +35,7 @@ interface SettingsInterface
 	 * @param string $setting_key - optional
 	 * @param mixed $default_return - default data, optional
 	 *
-	 * @return mixed
-	 * @throws Exception
+	 * @return bool|string|array
 	 */
 	public function get($setting_key = '', $default_return = '');
 
