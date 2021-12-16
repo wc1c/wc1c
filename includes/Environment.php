@@ -51,9 +51,9 @@ final class Environment
 		}
 		else
 		{
-			$key = str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
+			$key_getter = str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
 
-			$getter = "init$key";
+			$getter = "init$key_getter";
 
 			if(is_callable([$this, $getter]))
 			{
