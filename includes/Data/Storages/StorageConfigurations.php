@@ -47,7 +47,7 @@ class StorageConfigurations implements StorageMetaInterface
 	 */
 	public function getTableName()
 	{
-		return wc1c_wpdb()->base_prefix . 'wc1c';
+		return wc1c()->database()->base_prefix . 'wc1c';
 	}
 
 	/**
@@ -98,13 +98,13 @@ class StorageConfigurations implements StorageMetaInterface
 			'schema_version_init' => $schema_version,
 		];
 
-		if(false === wc1c_wpdb()->insert($this->getTableName(), $insert_data))
+		if(false === wc1c()->database()->insert($this->getTableName(), $insert_data))
 		{
-			$object_id = new WP_Error('db_insert_error', __('Could not insert Account into the database'), wc1c_wpdb()->last_error);
+			$object_id = new WP_Error('db_insert_error', __('Could not insert Account into the database'), wc1c()->database()->last_error);
 		}
 		else
 		{
-			$object_id = wc1c_wpdb()->insert_id;
+			$object_id = wc1c()->database()->insert_id;
 		}
 
 		if($object_id && !is_wp_error($object_id))
@@ -137,7 +137,7 @@ class StorageConfigurations implements StorageMetaInterface
 
 		$table_name = $this->getTableName();
 
-		$object_data = wc1c_wpdb()->get_row(wc1c_wpdb()->prepare("SELECT * FROM $table_name WHERE configuration_id = %d LIMIT 1", $data->getId()));
+		$object_data = wc1c()->database()->get_row(wc1c()->database()->prepare("SELECT * FROM $table_name WHERE configuration_id = %d LIMIT 1", $data->getId()));
 
 		if(!is_null($object_data))
 		{
@@ -223,7 +223,7 @@ class StorageConfigurations implements StorageMetaInterface
 				$update_data['date_activity'] = gmdate('Y-m-d H:i:s', $data->getDateModify('edit')->getTimestamp());
 			}
 
-			wc1c_wpdb()->update($this->getTableName(), $update_data, ['configuration_id' => $data->getId()]);
+			wc1c()->database()->update($this->getTableName(), $update_data, ['configuration_id' => $data->getId()]);
 
 			$data->readMetaData();
 		}
@@ -260,7 +260,7 @@ class StorageConfigurations implements StorageMetaInterface
 		{
 			do_action(WC1C_PREFIX . 'data_storage_configuration_before_delete', $object_id);
 
-			wc1c_wpdb()->delete($this->getTableName(), ['configuration_id' => $data->getId()]);
+			wc1c()->database()->delete($this->getTableName(), ['configuration_id' => $data->getId()]);
 
 			$data->setId(0);
 
@@ -286,9 +286,9 @@ class StorageConfigurations implements StorageMetaInterface
 	 */
 	public function isExistingById($object_id)
 	{
-		return (bool) wc1c_wpdb()->get_var
+		return (bool) wc1c()->database()->get_var
 		(
-			wc1c_wpdb()->prepare
+			wc1c()->database()->prepare
 			(
 				"SELECT configuration_id FROM " . $this->getTableName() . " WHERE  configuration_id = %d LIMIT 1",
 				$object_id
@@ -305,9 +305,9 @@ class StorageConfigurations implements StorageMetaInterface
 	 */
 	public function isExistingByName($value)
 	{
-		return (bool) wc1c_wpdb()->get_var
+		return (bool) wc1c()->database()->get_var
 		(
-			wc1c_wpdb()->prepare(
+			wc1c()->database()->prepare(
 				"
 				SELECT configuration_id
 				FROM " . $this->getTableName() . "
@@ -399,7 +399,7 @@ class StorageConfigurations implements StorageMetaInterface
 		 */
 		do_action(WC1C_PREFIX . 'data_storage_configuration_meta_add', $data->getId(), $meta_key, $_meta_value);
 
-		$result = wc1c_wpdb()->insert
+		$result = wc1c()->database()->insert
 		(
 			$meta_table,
 			[
@@ -414,7 +414,7 @@ class StorageConfigurations implements StorageMetaInterface
 			return false;
 		}
 
-		$meta_id = (int) wc1c_wpdb()->insert_id;
+		$meta_id = (int) wc1c()->database()->insert_id;
 
 		/**
 		 * Fires immediately after meta of a specific type is added
@@ -465,7 +465,7 @@ class StorageConfigurations implements StorageMetaInterface
 		// hook
 		do_action(WC1C_PREFIX . 'data_storage_configuration_meta_delete', [$meta_id, $data->getId(), $meta->key, $meta->value]);
 
-		$result = (bool) wc1c_wpdb()->delete
+		$result = (bool) wc1c()->database()->delete
 		(
 			$meta_table,
 			['meta_id' => $meta_id]
@@ -521,7 +521,7 @@ class StorageConfigurations implements StorageMetaInterface
 			// hook
 			do_action(WC1C_PREFIX . 'data_storage_configuration_meta_update', $meta_id, $data->getId(), $meta->key, $meta_value);
 
-			$result = wc1c_wpdb()->update($meta_table, $metadata, $where, '%s', '%d');
+			$result = wc1c()->database()->update($meta_table, $metadata, $where, '%s', '%d');
 
 			if(!$result)
 			{
@@ -559,7 +559,7 @@ class StorageConfigurations implements StorageMetaInterface
 			return false;
 		}
 
-		$meta = wc1c_wpdb()->get_row(wc1c_wpdb()->prepare("SELECT * FROM $meta_table WHERE meta_id = %d", $meta_id));
+		$meta = wc1c()->database()->get_row(wc1c()->database()->prepare("SELECT * FROM $meta_table WHERE meta_id = %d", $meta_id));
 
 		if(empty($meta))
 		{
@@ -585,9 +585,9 @@ class StorageConfigurations implements StorageMetaInterface
 	{
 		$meta_table = $this->getMetaTableName();
 
-		$raw_meta_data = wc1c_wpdb()->get_results
+		$raw_meta_data = wc1c()->database()->get_results
 		(
-			wc1c_wpdb()->prepare
+			wc1c()->database()->prepare
 			(
 				"SELECT meta_id, name, value
 				FROM {$meta_table}
@@ -624,7 +624,7 @@ class StorageConfigurations implements StorageMetaInterface
 	 */
 	public function count()
 	{
-		$count = wc1c_wpdb()->get_var('SELECT COUNT(*) FROM ' . $this->getTableName() . ';');
+		$count = wc1c()->database()->get_var('SELECT COUNT(*) FROM ' . $this->getTableName() . ';');
 
 		return (int) $count;
 	}
@@ -663,7 +663,7 @@ class StorageConfigurations implements StorageMetaInterface
 		$sql_query .= $this->parseQueryConditions($query);
 		$sql_query .= $where . ';';
 
-		$count = wc1c_wpdb()->get_var($sql_query);
+		$count = wc1c()->database()->get_var($sql_query);
 
 		return (int) $count;
 	}
@@ -712,7 +712,7 @@ class StorageConfigurations implements StorageMetaInterface
 			unset($args['limit']);
 		}
 
-		$fields = wc1c_wpdb()->base_prefix . 'wc1c.*';
+		$fields = wc1c()->database()->base_prefix . 'wc1c.*';
 
 		if(isset($args['fields']) && is_array($args['fields']))
 		{
@@ -722,11 +722,11 @@ class StorageConfigurations implements StorageMetaInterface
 			{
 				if(is_array($field))
 				{
-					$raw_field[] = wc1c_wpdb()->base_prefix . $field['name'] . ' as ' . $field['alias'];
+					$raw_field[] = wc1c()->database()->base_prefix . $field['name'] . ' as ' . $field['alias'];
 					continue;
 				}
 
-				$raw_field[] = wc1c_wpdb()->base_prefix . $field;
+				$raw_field[] = wc1c()->database()->base_prefix . $field;
 			}
 
 			$fields = implode(', ', $raw_field);
@@ -753,7 +753,7 @@ class StorageConfigurations implements StorageMetaInterface
 
 		$sql_query .= $where . $orderby . $limit . $offset . ';';
 
-		$data = wc1c_wpdb()->get_results($sql_query, $type);
+		$data = wc1c()->database()->get_results($sql_query, $type);
 
 		if(!$data)
 		{
@@ -778,7 +778,7 @@ class StorageConfigurations implements StorageMetaInterface
 			{
 				if(isset($value['compare_key']) && $value['compare_key'] === 'LIKE')
 				{
-					$result .= "AND {$column_name} LIKE '%" . esc_sql(wc1c_wpdb()->esc_like(wp_unslash($value['value']))) . "%' ";
+					$result .= "AND {$column_name} LIKE '%" . esc_sql(wc1c()->database()->esc_like(wp_unslash($value['value']))) . "%' ";
 				}
 				else
 				{

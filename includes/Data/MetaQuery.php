@@ -87,7 +87,7 @@ class MetaQuery
 	 */
 	public function get_meta_table($type)
 	{
-		return wc1c_wpdb()->base_prefix . 'wc1c_' . $type . 's_meta';
+		return wc1c()->database()->base_prefix . 'wc1c_' . $type . 's_meta';
 	}
 
 	/**
