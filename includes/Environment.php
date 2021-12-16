@@ -102,7 +102,7 @@ final class Environment
 			{
 				$this->set('current_configuration_id', $config_id);
 
-				return true;
+				return $this->get('current_configuration_id');
 			}
 		}
 
@@ -126,7 +126,7 @@ final class Environment
 
 		$this->set('upload_directory', $wp_upload_dir['basedir']);
 
-		return true;
+		return $this->get('upload_directory');
 	}
 
 	/**
@@ -136,7 +136,7 @@ final class Environment
 	{
 		$this->set('php_post_max_size', ini_get('post_max_size'));
 
-		return true;
+		return $this->get('php_post_max_size');
 	}
 
 	/**
@@ -146,7 +146,7 @@ final class Environment
 	{
 		$this->set('php_max_execution_time', ini_get('max_execution_time'));
 
-		return true;
+		return $this->get('php_max_execution_time');
 	}
 
 	/**
@@ -160,7 +160,7 @@ final class Environment
 
 		$this->set('wc1c_upload_directory', $wc1c_upload_dir);
 
-		return true;
+		return $this->get('wc1c_upload_directory');
 	}
 
 	/**
@@ -178,7 +178,8 @@ final class Environment
 		$plugin_data = get_file_data(WC1C_PLUGIN_FILE, ['Version' => 'Version']);
 
 		$this->set('wc1c_version', $plugin_data['Version']);
-		return true;
+
+		return $this->get('wc1c_version');
 	}
 
 	/**
