@@ -46,6 +46,11 @@ final class Admin
 
 		$this->notices();
 
+		if('yes' === wc1c()->settings()->get('admin_interface', 'yes'))
+		{
+			Admin\Columns\Init::instance();
+		}
+
 		add_action('admin_menu', [$this, 'addMenu'], 30);
 
 		if(is_wc1c_admin_request())
