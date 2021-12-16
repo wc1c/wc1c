@@ -291,4 +291,23 @@ class Configuration extends DataConfigurations
 	{
 		return $status === $this->getStatus();
 	}
+
+	/**
+	 * Returns upload directory for configuration.
+	 *
+	 * @param string $context
+	 *
+	 * @return string
+	 */
+	public function getUploadDirectory($context = 'main')
+	{
+		$upload_directory = wc1c()->environment()->get('wc1c_upload_directory') . '/' . $this->getSchema() . '-' . $this->getId();
+
+		if($context === 'logs')
+		{
+			$upload_directory .= '/logs';
+		}
+
+		return $upload_directory;
+	}
 }
