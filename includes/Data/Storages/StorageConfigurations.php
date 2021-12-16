@@ -55,7 +55,7 @@ class StorageConfigurations implements StorageMetaInterface
 	 */
 	public function getMetaTableName()
 	{
-		return wc1c_wpdb()->base_prefix . $this->getTableName() . '_meta';
+		return $this->getTableName() . '_meta';
 	}
 
 	/**
