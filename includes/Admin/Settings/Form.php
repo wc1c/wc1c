@@ -78,7 +78,7 @@ abstract class Form extends FormAbstract
 
 		if(empty($post_data) || !wp_verify_nonce($post_data['_wc1c-admin-nonce'], 'wc1c-admin-settings-save'))
 		{
-			wc1c_admin()->notices()->create
+			wc1c()->admin()->notices()->create
 			(
 				[
 					'type' => 'error',
@@ -105,7 +105,7 @@ abstract class Form extends FormAbstract
 			}
 			catch(Exception $e)
 			{
-				wc1c_admin()->notices()->create
+				wc1c()->admin()->notices()->create
 				(
 					[
 						'type' => 'error',
@@ -122,7 +122,7 @@ abstract class Form extends FormAbstract
 		}
 		catch(Exception $e)
 		{
-			wc1c_admin()->notices()->create
+			wc1c()->admin()->notices()->create
 			(
 				[
 					'type' => 'error',
@@ -133,7 +133,7 @@ abstract class Form extends FormAbstract
 			return false;
 		}
 
-		wc1c_admin()->notices()->create
+		wc1c()->admin()->notices()->create
 		(
 			[
 				'type' => 'update',
