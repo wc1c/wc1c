@@ -44,20 +44,6 @@ function wc1c_get_var(&$var, $default = null)
 }
 
 /**
- * Define constant if not already set
- *
- * @param string $name constant name
- * @param string|bool $value constant value
- */
-function wc1c_define($name, $value)
-{
-	if(!defined($name))
-	{
-		define($name, $value);
-	}
-}
-
-/**
  * Get templates
  *
  * @param string $template_name template name
@@ -415,24 +401,6 @@ function wc1c_timezone_offset()
 	}
 
 	return (float) get_option('gmt_offset', 0) * HOUR_IN_SECONDS;
-}
-
-/**
- * Pretty debug
- *
- * @param $data
- * @param bool $die
- */
-function wc1c_debug($data, $die = true)
-{
-	echo "<pre>";
-	var_dump($data);
-	echo "</pre>";
-
-	if($die)
-	{
-		die;
-	}
 }
 
 /**
