@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WC1C > integration of WooCommerce with 1C products "
 "(different configurations)\n"
-"POT-Creation-Date: 2021-12-17 11:22+0300\n"
-"PO-Revision-Date: 2021-12-17 11:25+0300\n"
+"POT-Creation-Date: 2021-12-17 15:30+0300\n"
+"PO-Revision-Date: 2021-12-17 15:32+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
 "Language: ru_RU\n"
@@ -134,12 +134,12 @@ msgid "not found"
 msgstr "не найдена"
 
 #: includes/Admin/Columns/WooCommerce/Products.php:70
-#: includes/Admin/Configurations/Update.php:162
+#: includes/Admin/Configurations/Update.php:161
 msgid "Schema ID: "
 msgstr "Схема (ID): "
 
 #: includes/Admin/Columns/WooCommerce/Products.php:75
-#: includes/Admin/Configurations/Update.php:159
+#: includes/Admin/Configurations/Update.php:158
 msgid "Configuration ID: "
 msgstr "Идентификатор: "
 
@@ -305,31 +305,31 @@ msgstr ""
 "Ошибка обновления конфигурации. Повторите попытку сохранения или изменения "
 "полей."
 
-#: includes/Admin/Configurations/Update.php:153
+#: includes/Admin/Configurations/Update.php:152
 msgid "About configuration"
 msgstr "О конфигурации"
 
-#: includes/Admin/Configurations/Update.php:165
+#: includes/Admin/Configurations/Update.php:164
 msgid "Date create: "
 msgstr "Дата создания: "
 
-#: includes/Admin/Configurations/Update.php:168
+#: includes/Admin/Configurations/Update.php:167
 msgid "Date modify: "
 msgstr "Дата изменения: "
 
-#: includes/Admin/Configurations/Update.php:171
+#: includes/Admin/Configurations/Update.php:170
 msgid "Date active: "
 msgstr "Последняя активность: "
 
-#: includes/Admin/Configurations/Update.php:174
+#: includes/Admin/Configurations/Update.php:173
 msgid "Upload directory: "
 msgstr "Каталог загрузки: "
 
-#: includes/Admin/Configurations/Update.php:188
+#: includes/Admin/Configurations/Update.php:187
 msgid "About schema"
 msgstr "О схеме"
 
-#: includes/Admin/Configurations/Update.php:194
+#: includes/Admin/Configurations/Update.php:193
 msgid "Schema name: "
 msgstr "Имя схемы: "
 
@@ -737,27 +737,17 @@ msgstr ""
 "Если этот параметр включен, сайт будет отправлять анонимные данные об "
 "использовании плагина на серверы WC1C один раз в неделю в фоновом режиме."
 
-#: includes/Core.php:474
+#: includes/Core.php:468
 msgid "Default schema based on CML"
 msgstr "Схема по умолчанию на основе CML"
 
-#: includes/Core.php:475
+#: includes/Core.php:469
 msgid ""
 "Standard data exchange using the standard exchange algorithm from 1C via "
 "CommerceML. Exchanges only contains products data."
 msgstr ""
 "Стандартный обмен данными с использованием стандартного алгоритма обмена от "
 "1С через CommerceML. Обмен содержит только данные о продуктах."
-
-#: includes/Core.php:650
-msgid "Example tool"
-msgstr "Пример инструмента"
-
-#: includes/Core.php:651
-msgid "A demo tool that does not carry any functional load."
-msgstr ""
-"Демонстрационный инструмент, который не несет никакой функциональной "
-"нагрузки."
 
 #: includes/Data/Storages/StorageConfigurations.php:103
 msgid "Could not insert into the database"
@@ -988,55 +978,225 @@ msgstr "Имя файла пустое."
 msgid "Import filename is empty."
 msgstr "Имя файла импорта пустое."
 
-#: includes/functions.php:253 includes/functions.php:289
+#: includes/Tools/Core.php:135
+msgid "Example tool"
+msgstr "Пример инструмента"
+
+#: includes/Tools/Core.php:136
+msgid "A demo tool that does not carry any functional load."
+msgstr ""
+"Демонстрационный инструмент, который не несет никакой функциональной "
+"нагрузки."
+
+#: includes/Tools/Environments/Init.php:67 templates/helps/bugs.php:27
+msgid "Environments"
+msgstr "Окружения"
+
+#: includes/Tools/Environments/Init.php:68
+msgid "Data about all current environments."
+msgstr "Данные обо всех текущих окружениях."
+
+#: includes/Tools/Environments/Init.php:127
+msgid "yes"
+msgstr "да"
+
+#: includes/Tools/Environments/Init.php:131
+msgid "not"
+msgstr "нет"
+
+#: includes/Tools/Environments/Init.php:155
+msgid "WordPress environment"
+msgstr "Окружение WordPress"
+
+#: includes/Tools/Environments/Init.php:169
+msgid "WC1C environment"
+msgstr "Окружение WC1C"
+
+#: includes/Tools/Environments/Init.php:183
+msgid "WooCommerce environment"
+msgstr "Окружение WooCommerce"
+
+#: includes/Tools/Environments/Init.php:197
+msgid "Server environment"
+msgstr "Окружение сервера"
+
+#: includes/Tools/Environments/Init.php:223
+msgid "Home URL"
+msgstr "Домашний адрес"
+
+#: includes/Tools/Environments/Init.php:233
+msgid "Site URL"
+msgstr "Адрес сайта"
+
+#: includes/Tools/Environments/Init.php:243
+msgid "WordPress version"
+msgstr "Версия WordPress"
+
+#: includes/Tools/Environments/Init.php:253
+msgid "WordPress multisite"
+msgstr "WordPress мультисайт"
+
+#: includes/Tools/Environments/Init.php:263
+msgid "WordPress debug"
+msgstr "Отладка WordPress"
+
+#: includes/Tools/Environments/Init.php:273
+msgid "WordPress cron"
+msgstr "WordPress cron"
+
+#: includes/Tools/Environments/Init.php:283
+msgid "WordPress language"
+msgstr "Язык WordPress"
+
+#: includes/Tools/Environments/Init.php:293
+msgid "WordPress memory limit"
+msgstr "Лимит памяти WordPress"
+
+#: includes/Tools/Environments/Init.php:328
+msgid "Server info"
+msgstr "Информация сервера"
+
+#: includes/Tools/Environments/Init.php:338
+msgid "PHP version"
+msgstr "Версия PHP"
+
+#: includes/Tools/Environments/Init.php:348
+msgid "Database version"
+msgstr "Версия СУБД"
+
+#: includes/Tools/Environments/Init.php:358
+msgid "Suhosin"
+msgstr "Сухосин"
+
+#: includes/Tools/Environments/Init.php:368
+msgid "Fsockopen or curl enabled"
+msgstr "Fsockopen or curl enabled"
+
+#: includes/Tools/Environments/Init.php:382
+msgid "CURL info"
+msgstr "CURL info"
+
+#: includes/Tools/Environments/Init.php:393
+msgid "Default timezone"
+msgstr "Временная зона"
+
+#: includes/Tools/Environments/Init.php:403
+msgid "PHP post max size"
+msgstr "PHP post max size"
+
+#: includes/Tools/Environments/Init.php:413
+msgid "PHP max upload size"
+msgstr "PHP max upload size"
+
+#: includes/Tools/Environments/Init.php:423
+msgid "PHP max execution time"
+msgstr "PHP max execution time"
+
+#: includes/Tools/Environments/Init.php:433
+msgid "PHP max input vars"
+msgstr "PHP max input vars"
+
+#: includes/Tools/Environments/Init.php:443
+msgid "PHP soapclient enabled"
+msgstr "PHP soapclient enabled"
+
+#: includes/Tools/Environments/Init.php:453
+msgid "PHP domdocument enabled"
+msgstr "PHP domdocument enabled"
+
+#: includes/Tools/Environments/Init.php:463
+msgid "PHP gzip enabled"
+msgstr "PHP gzip enabled"
+
+#: includes/Tools/Environments/Init.php:473
+msgid "PHP mbstring enabled"
+msgstr "PHP mbstring enabled"
+
+#: includes/Tools/Environments/Init.php:504
+msgid "WC1C version"
+msgstr "Версия WC1C"
+
+#: includes/Tools/Environments/Init.php:514
+msgid "Upload directory"
+msgstr "Каталог загрузки"
+
+#: includes/Tools/Environments/Init.php:527
+msgid "Count extensions"
+msgstr "Количество расширений"
+
+#: includes/Tools/Environments/Init.php:543
+msgid "Count schemas"
+msgstr "Количество схем"
+
+#: includes/Tools/Environments/Init.php:559
+msgid "Count tools"
+msgstr "Количество иструментов"
+
+#: includes/Tools/Environments/Init.php:587
+msgid "WooCommerce version"
+msgstr "Версия WooCommerce"
+
+#: includes/Tools/Environments/Init.php:604
+msgid "WooCommerce product types"
+msgstr "Типы продуктов WooCommerce"
+
+#: includes/Tools/Environments/Init.php:614
+msgid "WooCommerce currency"
+msgstr "Валюта WooCommerce"
+
+#: includes/Tools/Environments/Init.php:624
+msgid "WooCommerce currency symbol"
+msgstr "Символ валюты WooCommerce"
+
+#: includes/functions.php:239 includes/functions.php:275
 msgid "Undefined"
 msgstr "Неопределенный"
 
-#: includes/functions.php:259
+#: includes/functions.php:245
 msgid "Draft"
 msgstr "Черновик"
 
-#: includes/functions.php:260
+#: includes/functions.php:246
 msgid "Active"
 msgstr "Включена"
 
-#: includes/functions.php:261
+#: includes/functions.php:247
 msgid "Inactive"
 msgstr "Отключена"
 
-#: includes/functions.php:262 templates/configurations/update_error.php:10
+#: includes/functions.php:248 templates/configurations/update_error.php:10
 msgid "Error"
 msgstr "Ошибка"
 
-#: includes/functions.php:263
+#: includes/functions.php:249
 msgid "Processing"
 msgstr "В процессе"
 
-#: includes/functions.php:264
+#: includes/functions.php:250
 msgid "Deleted"
 msgstr "Удалена"
 
-#: includes/functions.php:295
+#: includes/functions.php:281
 msgid "Drafts"
 msgstr "Черновики"
 
-#: includes/functions.php:296
+#: includes/functions.php:282
 msgid "Activated"
 msgstr "Включены"
 
-#: includes/functions.php:297
+#: includes/functions.php:283
 msgid "Deactivated"
 msgstr "Отключены"
 
-#: includes/functions.php:298
+#: includes/functions.php:284
 msgid "With errors"
 msgstr "С ошибками"
 
-#: includes/functions.php:299
+#: includes/functions.php:285
 msgid "In processing"
 msgstr "В процессе"
 
-#: includes/functions.php:300
+#: includes/functions.php:286
 msgid "Trash"
 msgstr "Удаленные"
 
@@ -1049,8 +1209,8 @@ msgid "Create configuration"
 msgstr "Создать конфигурацию"
 
 #: templates/configurations/delete.php:5
-msgid "Use the forms to delete the configuration from WooCommerce."
-msgstr "Используйте формы, чтобы удалить конфигурацию из WooCommerce."
+msgid "Use the form to delete the configuration from WooCommerce."
+msgstr "Используйте форму, чтобы удалить конфигурацию из WooCommerce."
 
 #: templates/configurations/delete_error.php:3
 msgid "Error. Delete is not available"
@@ -1091,11 +1251,8 @@ msgstr "Обновление не доступно."
 
 #: templates/connection/description.php:6
 msgid ""
-"Configuring the site connection to official services and services from the "
-"WC1C team."
-msgstr ""
-"Настройка подключения сайта к официальным сервисам и сервисам от команды "
-"WC1C."
+"Configuring the site connection to official services from the WC1C team."
+msgstr "Настройка подключения сайта к официальным сервисам от команды WC1C."
 
 #: templates/connection/form.php:13
 msgid "Connect by Login & Password"
@@ -1133,10 +1290,6 @@ msgstr "Новая конфигурация"
 msgid "Report a bug"
 msgstr "Отчёт об ошибке"
 
-#: templates/helps/bugs.php:27
-msgid "Environments"
-msgstr "Окружения"
-
 #: templates/helps/features.php:30
 msgid "Request a feature"
 msgstr "Запрос возможности"
@@ -1153,13 +1306,17 @@ msgstr "Ошибка. Страница для настроек не найден
 msgid "Save settings"
 msgstr "Сохранить настройки"
 
-#: templates/tools/404.php:3
-msgid "Tools not found."
-msgstr "Инструменты не найдены."
+#: templates/tools/empty.php:3
+msgid "Tools not found or unavailable."
+msgstr "Инструменты не найдены или недоступны."
 
 #: templates/tools/item.php:14
 msgid "Open"
 msgstr "Открыть"
+
+#: templates/tools/single.php:8
+msgid "Back to all tools"
+msgstr "Вернуться ко всем инструментам"
 
 #: vendor/digiom/notices-wp/src/Types/ErrorNotice.php:49
 #: vendor/digiom/notices-wp/src/Types/InfoNotice.php:47
@@ -1215,120 +1372,6 @@ msgstr "Команда WC1C"
 #~ msgstr ""
 #~ "Удаааление конфигурации не удалось. Пожалуйста повторите процедуру или "
 #~ "смените поля."
-
-#~ msgid "yes"
-#~ msgstr "да"
-
-#~ msgid "not"
-#~ msgstr "нет"
-
-#~ msgid "WordPress environment"
-#~ msgstr "Окружение WordPress"
-
-#~ msgid "WC1C environment"
-#~ msgstr "Окружение WC1C"
-
-#~ msgid "WooCommerce environment"
-#~ msgstr "Окружение WooCommerce"
-
-#~ msgid "Server environment"
-#~ msgstr "Окружение сервера"
-
-#~ msgid "Home URL"
-#~ msgstr "Домашний адрес"
-
-#~ msgid "Site URL"
-#~ msgstr "Адрес сайта"
-
-#~ msgid "WordPress version"
-#~ msgstr "Версия WordPress"
-
-#~ msgid "WordPress multisite"
-#~ msgstr "WordPress мультисайт"
-
-#~ msgid "WordPress debug"
-#~ msgstr "Отладка WordPress"
-
-#~ msgid "WordPress cron"
-#~ msgstr "WordPress cron"
-
-#~ msgid "WordPress language"
-#~ msgstr "Язык WordPress"
-
-#~ msgid "WordPress memory limit"
-#~ msgstr "Лимит памяти WordPress"
-
-#~ msgid "Server info"
-#~ msgstr "Информация сервера"
-
-#~ msgid "PHP version"
-#~ msgstr "Версия PHP"
-
-#~ msgid "Database version"
-#~ msgstr "Версия СУБД"
-
-#~ msgid "Suhosin"
-#~ msgstr "Сухосин"
-
-#~ msgid "Fsockopen or curl enabled"
-#~ msgstr "Fsockopen or curl enabled"
-
-#~ msgid "CURL info"
-#~ msgstr "CURL info"
-
-#~ msgid "Default timezone"
-#~ msgstr "Временная зона"
-
-#~ msgid "PHP post max size"
-#~ msgstr "PHP post max size"
-
-#~ msgid "PHP max upload size"
-#~ msgstr "PHP max upload size"
-
-#~ msgid "PHP max execution time"
-#~ msgstr "PHP max execution time"
-
-#~ msgid "PHP max input vars"
-#~ msgstr "PHP max input vars"
-
-#~ msgid "PHP soapclient enabled"
-#~ msgstr "PHP soapclient enabled"
-
-#~ msgid "PHP domdocument enabled"
-#~ msgstr "PHP domdocument enabled"
-
-#~ msgid "PHP gzip enabled"
-#~ msgstr "PHP gzip enabled"
-
-#~ msgid "PHP mbstring enabled"
-#~ msgstr "PHP mbstring enabled"
-
-#~ msgid "WC1C version"
-#~ msgstr "Версия WC1C"
-
-#~ msgid "Upload directory"
-#~ msgstr "Каталог загрузки"
-
-#~ msgid "Count extensions"
-#~ msgstr "Количество расширений"
-
-#~ msgid "Count schemas"
-#~ msgstr "Количество схем"
-
-#~ msgid "Count tools"
-#~ msgstr "Количество иструментов"
-
-#~ msgid "WooCommerce version"
-#~ msgstr "Версия WooCommerce"
-
-#~ msgid "WooCommerce product types"
-#~ msgstr "Типы продуктов WooCommerce"
-
-#~ msgid "WooCommerce currency"
-#~ msgstr "Валюта WooCommerce"
-
-#~ msgid "WooCommerce currency symbol"
-#~ msgstr "Символ валюты WooCommerce"
 
 #~ msgid "Name of upload directory"
 #~ msgstr "Имя каталога загрузки"

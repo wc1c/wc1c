@@ -4,7 +4,7 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: WC1C > integration of WooCommerce with 1C products "
 "(different configurations)\n"
-"POT-Creation-Date: 2021-12-17 11:25+0300\n"
+"POT-Creation-Date: 2021-12-17 15:30+0300\n"
 "PO-Revision-Date: 2019-03-19 20:30+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
@@ -132,12 +132,12 @@ msgid "not found"
 msgstr ""
 
 #: includes/Admin/Columns/WooCommerce/Products.php:70
-#: includes/Admin/Configurations/Update.php:162
+#: includes/Admin/Configurations/Update.php:161
 msgid "Schema ID: "
 msgstr ""
 
 #: includes/Admin/Columns/WooCommerce/Products.php:75
-#: includes/Admin/Configurations/Update.php:159
+#: includes/Admin/Configurations/Update.php:158
 msgid "Configuration ID: "
 msgstr ""
 
@@ -291,31 +291,31 @@ msgstr ""
 msgid "Configuration update error. Please retry saving or change fields."
 msgstr ""
 
-#: includes/Admin/Configurations/Update.php:153
+#: includes/Admin/Configurations/Update.php:152
 msgid "About configuration"
 msgstr ""
 
-#: includes/Admin/Configurations/Update.php:165
+#: includes/Admin/Configurations/Update.php:164
 msgid "Date create: "
 msgstr ""
 
-#: includes/Admin/Configurations/Update.php:168
+#: includes/Admin/Configurations/Update.php:167
 msgid "Date modify: "
 msgstr ""
 
-#: includes/Admin/Configurations/Update.php:171
+#: includes/Admin/Configurations/Update.php:170
 msgid "Date active: "
 msgstr ""
 
-#: includes/Admin/Configurations/Update.php:174
+#: includes/Admin/Configurations/Update.php:173
 msgid "Upload directory: "
 msgstr ""
 
-#: includes/Admin/Configurations/Update.php:188
+#: includes/Admin/Configurations/Update.php:187
 msgid "About schema"
 msgstr ""
 
-#: includes/Admin/Configurations/Update.php:194
+#: includes/Admin/Configurations/Update.php:193
 msgid "Schema name: "
 msgstr ""
 
@@ -695,22 +695,14 @@ msgid ""
 "servers once a week in the background."
 msgstr ""
 
-#: includes/Core.php:474
+#: includes/Core.php:468
 msgid "Default schema based on CML"
 msgstr ""
 
-#: includes/Core.php:475
+#: includes/Core.php:469
 msgid ""
 "Standard data exchange using the standard exchange algorithm from 1C via "
 "CommerceML. Exchanges only contains products data."
-msgstr ""
-
-#: includes/Core.php:650
-msgid "Example tool"
-msgstr ""
-
-#: includes/Core.php:651
-msgid "A demo tool that does not carry any functional load."
 msgstr ""
 
 #: includes/Data/Storages/StorageConfigurations.php:103
@@ -914,55 +906,223 @@ msgstr ""
 msgid "Import filename is empty."
 msgstr ""
 
-#: includes/functions.php:253 includes/functions.php:289
+#: includes/Tools/Core.php:135
+msgid "Example tool"
+msgstr ""
+
+#: includes/Tools/Core.php:136
+msgid "A demo tool that does not carry any functional load."
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:67 templates/helps/bugs.php:27
+msgid "Environments"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:68
+msgid "Data about all current environments."
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:127
+msgid "yes"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:131
+msgid "not"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:155
+msgid "WordPress environment"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:169
+msgid "WC1C environment"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:183
+msgid "WooCommerce environment"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:197
+msgid "Server environment"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:223
+msgid "Home URL"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:233
+msgid "Site URL"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:243
+msgid "WordPress version"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:253
+msgid "WordPress multisite"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:263
+msgid "WordPress debug"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:273
+msgid "WordPress cron"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:283
+msgid "WordPress language"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:293
+msgid "WordPress memory limit"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:328
+msgid "Server info"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:338
+msgid "PHP version"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:348
+msgid "Database version"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:358
+msgid "Suhosin"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:368
+msgid "Fsockopen or curl enabled"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:382
+msgid "CURL info"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:393
+msgid "Default timezone"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:403
+msgid "PHP post max size"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:413
+msgid "PHP max upload size"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:423
+msgid "PHP max execution time"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:433
+msgid "PHP max input vars"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:443
+msgid "PHP soapclient enabled"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:453
+msgid "PHP domdocument enabled"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:463
+msgid "PHP gzip enabled"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:473
+msgid "PHP mbstring enabled"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:504
+msgid "WC1C version"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:514
+msgid "Upload directory"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:527
+msgid "Count extensions"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:543
+msgid "Count schemas"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:559
+msgid "Count tools"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:587
+msgid "WooCommerce version"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:604
+msgid "WooCommerce product types"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:614
+msgid "WooCommerce currency"
+msgstr ""
+
+#: includes/Tools/Environments/Init.php:624
+msgid "WooCommerce currency symbol"
+msgstr ""
+
+#: includes/functions.php:239 includes/functions.php:275
 msgid "Undefined"
 msgstr ""
 
-#: includes/functions.php:259
+#: includes/functions.php:245
 msgid "Draft"
 msgstr ""
 
-#: includes/functions.php:260
+#: includes/functions.php:246
 msgid "Active"
 msgstr ""
 
-#: includes/functions.php:261
+#: includes/functions.php:247
 msgid "Inactive"
 msgstr ""
 
-#: includes/functions.php:262 templates/configurations/update_error.php:10
+#: includes/functions.php:248 templates/configurations/update_error.php:10
 msgid "Error"
 msgstr ""
 
-#: includes/functions.php:263
+#: includes/functions.php:249
 msgid "Processing"
 msgstr ""
 
-#: includes/functions.php:264
+#: includes/functions.php:250
 msgid "Deleted"
 msgstr ""
 
-#: includes/functions.php:295
+#: includes/functions.php:281
 msgid "Drafts"
 msgstr ""
 
-#: includes/functions.php:296
+#: includes/functions.php:282
 msgid "Activated"
 msgstr ""
 
-#: includes/functions.php:297
+#: includes/functions.php:283
 msgid "Deactivated"
 msgstr ""
 
-#: includes/functions.php:298
+#: includes/functions.php:284
 msgid "With errors"
 msgstr ""
 
-#: includes/functions.php:299
+#: includes/functions.php:285
 msgid "In processing"
 msgstr ""
 
-#: includes/functions.php:300
+#: includes/functions.php:286
 msgid "Trash"
 msgstr ""
 
@@ -975,7 +1135,7 @@ msgid "Create configuration"
 msgstr ""
 
 #: templates/configurations/delete.php:5
-msgid "Use the forms to delete the configuration from WooCommerce."
+msgid "Use the form to delete the configuration from WooCommerce."
 msgstr ""
 
 #: templates/configurations/delete_error.php:3
@@ -1016,9 +1176,7 @@ msgid "Update is not available."
 msgstr ""
 
 #: templates/connection/description.php:6
-msgid ""
-"Configuring the site connection to official services and services from the WC1C "
-"team."
+msgid "Configuring the site connection to official services from the WC1C team."
 msgstr ""
 
 #: templates/connection/form.php:13
@@ -1057,10 +1215,6 @@ msgstr ""
 msgid "Report a bug"
 msgstr ""
 
-#: templates/helps/bugs.php:27
-msgid "Environments"
-msgstr ""
-
 #: templates/helps/features.php:30
 msgid "Request a feature"
 msgstr ""
@@ -1077,12 +1231,16 @@ msgstr ""
 msgid "Save settings"
 msgstr ""
 
-#: templates/tools/404.php:3
-msgid "Tools not found."
+#: templates/tools/empty.php:3
+msgid "Tools not found or unavailable."
 msgstr ""
 
 #: templates/tools/item.php:14
 msgid "Open"
+msgstr ""
+
+#: templates/tools/single.php:8
+msgid "Back to all tools"
 msgstr ""
 
 #: vendor/digiom/notices-wp/src/Types/ErrorNotice.php:49
