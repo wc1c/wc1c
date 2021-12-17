@@ -12,8 +12,7 @@ defined('ABSPATH') || exit;
 /**
  * Dependencies
  */
-use Wc1c\Exceptions\Exception;
-use Wc1c\Traits\SectionsTrait;
+use Wc1c\Traits\SingletonTrait;
 
 /**
  * Templates
@@ -22,7 +21,7 @@ use Wc1c\Traits\SectionsTrait;
  */
 final class Templates
 {
-	use SectionsTrait;
+	use SingletonTrait;
 
 	/**
 	 * Templates constructor.
