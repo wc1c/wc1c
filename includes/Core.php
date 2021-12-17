@@ -64,11 +64,6 @@ final class Core
 	private $schemas = [];
 
 	/**
-	 * @var array All loaded tools
-	 */
-	private $tools = [];
-
-	/**
 	 * Core constructor.
 	 *
 	 * @return void
@@ -93,8 +88,6 @@ final class Core
 
 	/**
 	 * Initialization
-	 *
-	 * @return bool
 	 */
 	public function init()
 	{
@@ -108,7 +101,6 @@ final class Core
 		catch(Exception $e)
 		{
 			wc1c()->log()->alert('init: exception - ' . $e->getMessage());
-			return false;
 		}
 
 		try
@@ -118,7 +110,6 @@ final class Core
 		catch(Exception $e)
 		{
 			wc1c()->log()->alert('init: exception - ' . $e->getMessage());
-			return false;
 		}
 
 		try
@@ -128,7 +119,6 @@ final class Core
 		catch(Exception $e)
 		{
 			wc1c()->log()->alert('init: exception - ' . $e->getMessage());
-			return false;
 		}
 
 		try
@@ -138,7 +128,6 @@ final class Core
 		catch(Exception $e)
 		{
 			wc1c()->log()->alert('init: exception - ' . $e->getMessage());
-			return false;
 		}
 
 		try
@@ -148,19 +137,17 @@ final class Core
 		catch(Exception $e)
 		{
 			wc1c()->log()->alert('init: exception - ' . $e->getMessage());
-			return false;
 		}
 
 		if(false !== is_wc1c_api_request() || false !== is_wc1c_admin_request())
 		{
 			try
 			{
-				//$this->loadTools();
+				$this->tools();
 			}
 			catch(Exception $e)
 			{
-				wc1c()->log()->alert('init: exception - ' . $e->getMessage());
-				return false;
+				wc1c()->log()->alert('exception - ' . $e->getMessage());
 			}
 		}
 
@@ -173,14 +160,11 @@ final class Core
 			catch(Exception $e)
 			{
 				wc1c()->log()->alert('init: exception - ' . $e->getMessage());
-				return false;
 			}
 		}
 
 		// hook
 		do_action(WC1C_PREFIX . 'after_init');
-
-		return true;
 	}
 
 	/**
@@ -211,6 +195,16 @@ final class Core
 	public function request()
 	{
 		return Request::instance();
+	}
+
+	/**
+	 * Tools
+	 *
+	 * @return Tools\Core
+	 */
+	public function tools()
+	{
+		return Tools\Core::instance();
 	}
 
 	/**
@@ -553,7 +547,10 @@ final class Core
 	}
 
 	/**
+	 * Timer
+	 *
 	 * @return Timer
+	 * @throws Exception
 	 */
 	public function timer()
 	{
@@ -561,7 +558,6 @@ final class Core
 		{
 			$this->loadTimer();
 		}
-
 		return $this->timer;
 	}
 
@@ -631,64 +627,6 @@ final class Core
 	}
 
 	/**
-	 * @param string $tool_id
-	 *
-	 * @throws Exception
-	 */
-	public function initTools($tool_id = '')
-	{
-		try
-		{
-			$tool_example = new Wc1c_Tool_Example();
-		}
-		catch(Exception $e)
-		{
-			throw new Exception('exception - ' . $e->getMessage());
-		}
-
-		$tool_example->set_id('example');
-		$tool_example->set_name(__('Example tool', 'wc1c'));
-		$tool_example->set_description(__('A demo tool that does not carry any functional load.', 'wc1c'));
-
-		$tools[$tool_example->get_id()] = $tool_example;
-	}
-
-	/**
-	 * Loading tools
-	 *
-	 * @return void
-	 * @throws Exception
-	 */
-	public function loadTools()
-	{
-		/**
-		 * key = tool id
-		 * value = callback - ToolAbstract
-		 */
-		$tools =
-		[
-			'example' => 'Example'
-		];
-
-		/**
-		 * External tools loading is enabled
-		 */
-		if('yes' === $this->settings()->get('extensions_tools', 'yes'))
-		{
-			$tools = apply_filters(WC1C_PREFIX . 'load_tools', $tools);
-		}
-
-		try
-		{
-			$this->setTools($tools);
-		}
-		catch(Exception $e)
-		{
-			throw new Exception('exception - ' . $e->getMessage());
-		}
-	}
-
-	/**
 	 * Extensions load
 	 *
 	 * @return void
@@ -734,47 +672,6 @@ final class Core
 		}
 
 		return $this->schemas;
-	}
-
-	/**
-	 * Get tools
-	 *
-	 * @param string $tool_id
-	 *
-	 * @return array|mixed
-	 * @throws Exception
-	 */
-	public function getTools($tool_id = '')
-	{
-		if('' !== $tool_id)
-		{
-			if(array_key_exists($tool_id, $this->tools))
-			{
-				return $this->tools[$tool_id];
-			}
-
-			throw new Exception('$schema_id is unavailable');
-		}
-
-		return $this->tools;
-	}
-
-	/**
-	 * Set tools
-	 *
-	 * @param array $tools
-	 *
-	 * @return void
-	 * @throws Exception
-	 */
-	public function setTools($tools)
-	{
-		if(!is_array($tools))
-		{
-			throw new Exception('$tools is not valid');
-		}
-
-		$this->tools = $tools;
 	}
 
 	/**
