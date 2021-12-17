@@ -1,0 +1,28 @@
+/*
+*** Init
+ */
+@import "D:/Sources/bootstrap/bootstrap-5.1.3/scss/functions";
+@import "D:/Sources/bootstrap/bootstrap-5.1.3/scss/variables";
+@import "D:/Sources/bootstrap/bootstrap-5.1.3/scss/mixins";
+@import "variables";
+@import "mixins";
+
+/*
+*** bootstrap
+ */
+@import "D:/Sources/bootstrap/bootstrap-5.1.3/scss/root";
+@import "D:/Sources/bootstrap/bootstrap-5.1.3/scss/buttons";
+@import "D:/Sources/bootstrap/bootstrap-5.1.3/scss/transitions";
+@import "D:/Sources/bootstrap/bootstrap-5.1.3/scss/badge";
+@import "D:/Sources/bootstrap/bootstrap-5.1.3/scss/utilities";
+@import "D:/Sources/bootstrap/bootstrap-5.1.3/scss/button-group";
+@import "D:/Sources/bootstrap/bootstrap-5.1.3/scss/list-group";
+@import "D:/Sources/bootstrap/bootstrap-5.1.3/scss/grid";
+@import "D:/Sources/bootstrap/bootstrap-5.1.3/scss/card";
+@import "D:/Sources/bootstrap/bootstrap-5.1.3/scss/tables";
+
+// Helpers
+@import "D:/Sources/bootstrap/bootstrap-5.1.3/scss/helpers";
+
+// Utilities
+@import "D:/Sources/bootstrap/bootstrap-5.1.3/scss/utilities/api";

@@ -1,20 +1,22 @@
 <?php defined('ABSPATH') || exit;?>
 
-<?php do_action('wc1c_admin_before_configurations_update_show'); ?>
+<?php do_action(WC1C_ADMIN_PREFIX . 'before_configurations_update_show'); ?>
 
-<div class="row m-0">
-	<div class="col-24 col-lg-17 p-0 order-2 order-lg-1">
+<div class="row g-0">
+	<div class="col-24 col-lg-17 order-2 order-lg-1">
         <?php
             $label = __('Back to configurations list', 'wc1c');
-            $url = wc1c_admin_configurations_get_url('list');
-            wc1c_admin_back_link($label, $url);
+            $url = wc1c_admin_configurations_get_url('all');
+            wc1c()->templates()->adminBackLink($label, $url);
         ?>
 
-		<?php do_action('wc1c_admin_configurations_update_show'); ?>
+        <div class="pe-0 pe-lg-2">
+	        <?php do_action(WC1C_ADMIN_PREFIX . 'configurations_update_show'); ?>
+        </div>
 	</div>
-	<div class="col-24 col-lg-7 p-0 order-1 order-lg-2">
-		<?php do_action('wc1c_admin_configurations_update_sidebar_show'); ?>
+	<div class="col-24 col-lg-7 order-1 order-lg-2">
+		<?php do_action(WC1C_ADMIN_PREFIX . 'configurations_update_sidebar_show'); ?>
 	</div>
 </div>
 
-<?php do_action('wc1c_admin_after_configurations_update_show'); ?>
+<?php do_action(WC1C_ADMIN_PREFIX . 'after_configurations_update_show'); ?>
