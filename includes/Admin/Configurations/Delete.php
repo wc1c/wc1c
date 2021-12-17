@@ -135,7 +135,7 @@ class Delete
 
 		if($redirect)
 		{
-			wc1c_admin()->notices()->create($notice_args);
+			wc1c()->admin()->notices()->create($notice_args);
 			wp_safe_redirect(wc1c_admin_configurations_get_url());
 			die;
 		}

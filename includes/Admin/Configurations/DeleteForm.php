@@ -83,7 +83,7 @@ class DeleteForm extends FormAbstract
 
 		if(empty($post_data) || !wp_verify_nonce($post_data['_wc1c-admin-nonce-configurations-delete'], 'wc1c-admin-configurations-delete-save'))
 		{
-			wc1c_admin()->notices()->create
+			wc1c()->admin()->notices()->create
 			(
 				[
 					'type' => 'error',
@@ -109,7 +109,7 @@ class DeleteForm extends FormAbstract
 			}
 			catch(Exception $e)
 			{
-				wc1c_admin()->notices()->create
+				wc1c()->admin()->notices()->create
 				(
 					[
 						'type' => 'error',
@@ -125,7 +125,7 @@ class DeleteForm extends FormAbstract
 
 		if(!isset($data['accept']) || $data['accept'] !== 'yes')
 		{
-			wc1c_admin()->notices()->create
+			wc1c()->admin()->notices()->create
 			(
 				[
 					'type' => 'error',

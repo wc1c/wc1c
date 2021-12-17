@@ -99,7 +99,7 @@ class CreateForm extends FormAbstract
 
 		if(empty($post_data) || !wp_verify_nonce($post_data['_wc1c-admin-nonce'], 'wc1c-admin-configurations-create-save'))
 		{
-			wc1c_admin()->notices()->create
+			wc1c()->admin()->notices()->create
 			(
 				[
 					'type' => 'error',
@@ -125,7 +125,7 @@ class CreateForm extends FormAbstract
 			}
 			catch(Exception $e)
 			{
-				wc1c_admin()->notices()->create
+				wc1c()->admin()->notices()->create
 				(
 					[
 						'type' => 'error',
@@ -139,7 +139,7 @@ class CreateForm extends FormAbstract
 
 		if(empty($data['name']))
 		{
-			wc1c_admin()->notices()->create
+			wc1c()->admin()->notices()->create
 			(
 				[
 					'type' => 'error',
@@ -152,7 +152,7 @@ class CreateForm extends FormAbstract
 
 		if(empty($data['schema']))
 		{
-			wc1c_admin()->notices()->create
+			wc1c()->admin()->notices()->create
 			(
 				[
 					'type' => 'error',
@@ -169,7 +169,7 @@ class CreateForm extends FormAbstract
 
 		if('yes' === wc1c()->settings()->get('configurations_unique_name', 'yes') && $data_storage->isExistingByName($data['name']))
 		{
-			wc1c_admin()->notices()->create
+			wc1c()->admin()->notices()->create
 			(
 				[
 					'type' => 'error',
@@ -186,7 +186,7 @@ class CreateForm extends FormAbstract
 
 		if($configuration->save())
 		{
-			wc1c_admin()->notices()->create
+			wc1c()->admin()->notices()->create
 			(
 				[
 					'type' => 'update',
@@ -199,7 +199,7 @@ class CreateForm extends FormAbstract
 			return true;
 		}
 
-		wc1c_admin()->notices()->create
+		wc1c()->admin()->notices()->create
 		(
 			[
 				'type' => 'error',

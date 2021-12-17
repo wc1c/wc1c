@@ -91,7 +91,7 @@ class Update
 
 			if($saved)
 			{
-				wc1c_admin()->notices()->create
+				wc1c()->admin()->notices()->create
 				(
 					[
 						'type' => 'update',
@@ -101,7 +101,7 @@ class Update
 			}
 			else
 			{
-				wc1c_admin()->notices()->create
+				wc1c()->admin()->notices()->create
 				(
 					[
 						'type' => 'error',
