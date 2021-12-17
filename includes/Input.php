@@ -45,7 +45,7 @@ class Input
 
 		if(false !== $wc1c_input)
 		{
-			wc1c_define('WC1C_INPUT_REQUEST', true);
+			wc1c()->define('WC1C_INPUT_REQUEST', true);
 
 			if('yes' !== wc1c()->settings()->get('input', 'yes'))
 			{
