@@ -141,7 +141,6 @@ class Update
 		wc1c_get_template('configurations/update.php');
 	}
 
-
 	/**
 	 * Sidebar show
 	 */
