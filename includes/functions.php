@@ -159,17 +159,6 @@ function wc1c_configurations_get_statuses_folder($status)
 }
 
 /**
- * Old WP
- */
-if(!function_exists('wp_doing_ajax'))
-{
-	function wp_doing_ajax()
-	{
-		return apply_filters( 'wp_doing_ajax', defined( 'DOING_AJAX' ) && DOING_AJAX );
-	}
-}
-
-/**
  * Convert mysql datetime to PHP timestamp, forcing UTC. Wrapper for strtotime
  *
  * @param string $time_string Time string
