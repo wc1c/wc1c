@@ -1,40 +1,5 @@
 <?php
 /**
- * Main instance of Wc1c
- *
- * @return Wc1c\Core|boolean
- */
-function wc1c()
-{
-	if(version_compare(PHP_VERSION, '5.6.0') < 0)
-	{
-		return false;
-	}
-
-	if(!is_callable('Wc1c\Core::instance'))
-	{
-		return false;
-	}
-
-	if(!in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')), true))
-	{
-		return false;
-	}
-
-	return Wc1c\Core::instance();
-}
-
-/**
- * Main instance of Admin
- *
- * @return Wc1c\Admin
- */
-function wc1c_admin()
-{
-	return Wc1c\Admin::instance();
-}
-
-/**
  * Is WC1C api request?
  *
  * @return bool
