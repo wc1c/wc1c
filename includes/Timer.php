@@ -121,4 +121,23 @@ class Timer
 
 		return ($remaining_seconds >= $seconds);
 	}
+
+	/**
+	 * Wrapper for set_time_limit to see if it is enabled
+	 *
+	 * @param int $limit time limit
+	 *
+	 * @return bool
+	 */
+	public function setTimeLimit($limit = 0)
+	{
+		if(function_exists('set_time_limit') && false === strpos(ini_get('disable_functions'), 'set_time_limit'))
+		{
+			set_time_limit($limit);
+
+			return true;
+		}
+
+		return false;
+	}
 }
