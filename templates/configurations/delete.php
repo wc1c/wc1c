@@ -2,7 +2,7 @@
 
 <div class="row">
 	<div class="col pt-4 pb-2">
-		<?php _e('Use the forms to delete the configuration from WooCommerce.', 'wc1c'); ?>
+		<?php _e('Use the form to delete the configuration from WooCommerce.', 'wc1c'); ?>
 	</div>
 </div>
 
