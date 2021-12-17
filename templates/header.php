@@ -8,4 +8,4 @@
 
 <hr class="wp-header-end">
 
-<?php wc1c_admin()->notices()->output(); ?>
+<?php wc1c()->admin()->notices()->output(); ?>
