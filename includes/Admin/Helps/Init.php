@@ -48,7 +48,7 @@ final class Init
 			[
 				'id' => WC1C_PREFIX . 'help_tab',
 				'title' => __('Help', 'wc1c'),
-				'content' => wc1c_get_template_html('/helps/main.php')
+				'content' => wc1c()->templates()->getTemplateHtml('/helps/main.php')
 			]
 		);
 
@@ -57,7 +57,7 @@ final class Init
 			[
 				'id' => WC1C_PREFIX . 'bugs_tab',
 				'title' => __('Found a bug?', 'wc1c'),
-				'content' => wc1c_get_template_html('/helps/bugs.php')
+				'content' => wc1c()->templates()->getTemplateHtml('/helps/bugs.php')
 			]
 		);
 
@@ -66,7 +66,7 @@ final class Init
 			[
 				'id' => WC1C_PREFIX . 'features_tab',
 				'title' => __('Not a feature?', 'wc1c'),
-				'content' => wc1c_get_template_html('/helps/features.php')
+				'content' => wc1c()->templates()->getTemplateHtml('/helps/features.php')
 			]
 		);
 	}

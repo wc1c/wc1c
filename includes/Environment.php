@@ -94,7 +94,7 @@ final class Environment
 	 */
 	public function initCurrentConfigurationId()
 	{
-		$config_id = wc1c_get_var($_GET['configuration_id'], 0);
+		$config_id = wc1c()->getVar($_GET['configuration_id'], 0);
 
 		if(0 < $config_id && 99999999 > $config_id)
 		{

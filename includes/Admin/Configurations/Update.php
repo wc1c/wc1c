@@ -32,7 +32,7 @@ class Update
 	 */
 	public function __construct()
 	{
-		$configuration_id = wc1c_get_var($_GET['configuration_id'], 0);
+		$configuration_id = wc1c()->getVar($_GET['configuration_id'], 0);
 
 		if(false === $this->setConfiguration($configuration_id))
 		{
@@ -120,7 +120,7 @@ class Update
 	 */
 	public function outputError()
 	{
-		wc1c_get_template('configurations/update_error.php');
+		wc1c()->templates()->getTemplate('configurations/update_error.php');
 	}
 
 	/**
@@ -128,7 +128,7 @@ class Update
 	 */
 	public function outputSchemaError()
 	{
-		wc1c_get_template('configurations/update_schema_error.php');
+		wc1c()->templates()->getTemplate('configurations/update_schema_error.php');
 	}
 
 	/**
@@ -138,7 +138,7 @@ class Update
 	 */
 	public function output()
 	{
-		wc1c_get_template('configurations/update.php');
+		wc1c()->templates()->getTemplate('configurations/update.php');
 	}
 
 	/**
@@ -177,7 +177,7 @@ class Update
 
 		$args['body'] = $body;
 
-		wc1c_get_template('configurations/update_sidebar_item.php', $args);
+		wc1c()->templates()->getTemplate('configurations/update_sidebar_item.php', $args);
 
 		try
 		{
@@ -197,7 +197,7 @@ class Update
 
 			$args['body'] = $body;
 
-			wc1c_get_template('configurations/update_sidebar_item.php', $args);
+			wc1c()->templates()->getTemplate('configurations/update_sidebar_item.php', $args);
 		}
 		catch(RuntimeException $e){}
 	}

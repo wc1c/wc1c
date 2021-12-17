@@ -67,7 +67,7 @@ final class Tools extends ScreenAbstract
 	 */
 	protected function initCurrentId()
 	{
-		$tool_id = wc1c_get_var($_GET['tool_id'], '');
+		$tool_id = wc1c()->getVar($_GET['tool_id'], '');
 
 		if(!empty($tool_id) && array_key_exists($tool_id, $this->tools))
 		{
@@ -103,7 +103,7 @@ final class Tools extends ScreenAbstract
 	{
 		if(empty($this->tools))
 		{
-			wc1c_get_template('tools/empty.php');
+			wc1c()->templates()->getTemplate('tools/empty.php');
 			return;
 		}
 
@@ -115,7 +115,7 @@ final class Tools extends ScreenAbstract
 				'object' => new $this->tools[$this->getCurrentToolId()]()
 			];
 
-			wc1c_get_template('tools/single.php', $args);
+			wc1c()->templates()->getTemplate('tools/single.php', $args);
 		}
 		else
 		{
@@ -132,10 +132,10 @@ final class Tools extends ScreenAbstract
 					'object' => new $tool_object(),
 				];
 
-				wc1c_get_template('tools/item.php', $args);
+				wc1c()->templates()->getTemplate('tools/item.php', $args);
 			}
 		}
 
-		wc1c_get_template('tools/all.php');
+		wc1c()->templates()->getTemplate('tools/all.php');
 	}
 }

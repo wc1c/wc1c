@@ -64,7 +64,7 @@ class DeleteForm extends FormAbstract
 			'object' => $this
 		];
 
-		wc1c_get_template('configurations/delete_form.php', $args);
+		wc1c()->templates()->getTemplate('configurations/delete_form.php', $args);
 	}
 
 	/**

@@ -185,7 +185,7 @@ final class Admin
 			}
 		}
 
-		wc1c_get_template('wrap.php');
+		wc1c()->templates()->getTemplate('wrap.php');
 	}
 
 	/**
@@ -193,7 +193,7 @@ final class Admin
 	 */
 	public function wrapError()
 	{
-		wc1c_get_template('error.php');
+		wc1c()->templates()->getTemplate('error.php');
 	}
 
 	/**
@@ -201,7 +201,7 @@ final class Admin
 	 */
 	public function wrapHeader()
 	{
-		wc1c_get_template('header.php');
+		wc1c()->templates()->getTemplate('header.php');
 	}
 
 	/**
@@ -209,7 +209,7 @@ final class Admin
 	 */
 	public function wrapSections()
 	{
-		wc1c_get_template('sections.php');
+		wc1c()->templates()->getTemplate('sections.php');
 	}
 
 	/**

@@ -58,7 +58,7 @@ class AllTable extends TableAbstract
 	 */
 	public function noItems()
 	{
-		wc1c_get_template('configurations/empty.php');
+		wc1c()->templates()->getTemplate('configurations/empty.php');
 	}
 
 	/**

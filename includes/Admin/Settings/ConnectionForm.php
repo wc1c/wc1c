@@ -54,7 +54,7 @@ class ConnectionForm extends Form
 	 */
 	public function before_form_show()
 	{
-		wc1c_get_template('/connection/description.php');
+		wc1c()->templates()->getTemplate('/connection/description.php');
 	}
 
 	/**
@@ -143,6 +143,6 @@ class ConnectionForm extends Form
 			'object' => $this
 		];
 
-		wc1c_get_template('connection/form.php', $args);
+		wc1c()->templates()->getTemplate('connection/form.php', $args);
 	}
 }

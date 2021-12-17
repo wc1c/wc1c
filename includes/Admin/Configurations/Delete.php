@@ -33,7 +33,7 @@ class Delete
 	 */
 	public function __construct()
 	{
-		$configuration_id = wc1c_get_var($_GET['configuration_id'], 0);
+		$configuration_id = wc1c()->getVar($_GET['configuration_id'], 0);
 		$error = $this->setConfiguration($configuration_id);
 
 		if($error)
@@ -146,7 +146,7 @@ class Delete
 	 */
 	public function outputError()
 	{
-		wc1c_get_template('configurations/delete_error.php');
+		wc1c()->templates()->getTemplate('configurations/delete_error.php');
 	}
 
 	/**
@@ -156,6 +156,6 @@ class Delete
 	 */
 	public function output()
 	{
-		wc1c_get_template('configurations/delete.php');
+		wc1c()->templates()->getTemplate('configurations/delete.php');
 	}
 }

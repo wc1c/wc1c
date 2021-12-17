@@ -44,7 +44,7 @@ class Create extends ScreenAbstract
 	 */
 	public function wrapError()
 	{
-		wc1c_get_template('configurations/error.php');
+		wc1c()->templates()->getTemplate('configurations/error.php');
 	}
 
 	/**
@@ -54,6 +54,6 @@ class Create extends ScreenAbstract
 	 */
 	public function output()
 	{
-		wc1c_get_template('configurations/create.php');
+		wc1c()->templates()->getTemplate('configurations/create.php');
 	}
 }
