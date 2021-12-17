@@ -10,23 +10,26 @@ namespace Wc1c;
 defined('ABSPATH') || exit;
 
 /**
- * Class Timer
+ * Dependencies
+ */
+use Wc1c\Traits\SingletonTrait;
+
+/**
+ * Timer
  *
  * @package Wc1c
  */
-class Timer
+final class Timer
 {
+	use SingletonTrait;
+
 	/**
-	 * Maximum time is available in sec
-	 *
-	 * @var int
+	 * @var int Maximum time is available in sec
 	 */
 	private $maximum = 30;
 
 	/**
-	 * Timer started
-	 *
-	 * @var int|float
+	 * @var int|float Timer started
 	 */
 	private $started = 0;
 
