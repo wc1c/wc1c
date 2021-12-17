@@ -34,11 +34,6 @@ final class Core
 	use LoggerAwareTrait;
 
 	/**
-	 * @var Environment
-	 */
-	private $environment;
-
-	/**
 	 * @var Timer
 	 */
 	private $timer;
@@ -195,12 +190,27 @@ final class Core
 	 */
 	public function environment()
 	{
-		if(is_null($this->environment))
-		{
-			$this->environment = Environment::instance();
-		}
+		return Environment::instance();
+	}
 
-		return $this->environment;
+	/**
+	 * Templates
+	 *
+	 * @return Templates
+	 */
+	public function templates()
+	{
+		return Templates::instance();
+	}
+
+	/**
+	 * Request
+	 *
+	 * @return Request
+	 */
+	public function request()
+	{
+		return Request::instance();
 	}
 
 	/**
@@ -543,10 +553,15 @@ final class Core
 	}
 
 	/**
-	 * @return Timer|null
+	 * @return Timer
 	 */
 	public function timer()
 	{
+		if(is_null($this->timer))
+		{
+			$this->loadTimer();
+		}
+
 		return $this->timer;
 	}
 
