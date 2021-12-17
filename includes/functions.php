@@ -511,11 +511,11 @@ function wc1c_admin_tools_get_url($tool_id = '')
  *
  * @return string
  */
-function wc1c_admin_configurations_get_url($action = 'list', $configuration_id = '')
+function wc1c_admin_configurations_get_url($action = 'all', $configuration_id = '')
 {
 	$path = 'admin.php?page=wc1c&section=configurations';
 
-	if('list' !== $action)
+	if('all' !== $action)
 	{
 		$path .= '&do_action=' . $action;
 	}
