@@ -33,7 +33,7 @@ class Input
 		add_filter('parse_request', [$this, 'handleRequests']);
 
 		// hook
-		do_action(WC1C_PREFIX . 'api_after_loading');
+		do_action(WC1C_PREFIX . 'input_after_loading');
 	}
 
 	/**
