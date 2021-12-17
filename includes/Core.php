@@ -89,7 +89,7 @@ final class Core
 		// admin
 		if(false !== is_admin())
 		{
-			add_action('init', [Admin::class, 'instance'], 5);
+			add_action('init', [$this, 'admin'], 5);
 		}
 
 		// hook
@@ -838,5 +838,43 @@ final class Core
 	{
 		global $wpdb;
 		return $wpdb;
+	}
+
+	/**
+	 * Main instance of Admin
+	 *
+	 * @return Admin
+	 */
+	public function admin()
+	{
+		return Admin::instance();
+	}
+
+	/**
+	 * Get data if set, otherwise return a default value or null
+	 * Prevents notices when data is not set
+	 *
+	 * @param mixed $var variable
+	 * @param string $default default value
+	 *
+	 * @return mixed
+	 */
+	public function getVar(&$var, $default = null)
+	{
+		return isset($var) ? $var : $default;
+	}
+
+	/**
+	 * Define constant if not already set
+	 *
+	 * @param string $name constant name
+	 * @param string|bool $value constant value
+	 */
+	public function define($name, $value)
+	{
+		if(!defined($name))
+		{
+			define($name, $value);
+		}
 	}
 }
