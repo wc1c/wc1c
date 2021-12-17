@@ -22,6 +22,31 @@ defined('ABSPATH') || exit;
 
 if(false === defined('WC1C_PLUGIN_FILE'))
 {
+	/**
+	 * Main instance of Wc1c
+	 *
+	 * @return Wc1c\Core|boolean
+	 */
+	function wc1c()
+	{
+		if(version_compare(PHP_VERSION, '5.6.0') < 0)
+		{
+			return false;
+		}
+
+		if(!is_callable('Wc1c\Core::instance'))
+		{
+			return false;
+		}
+
+		if(!in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')), true))
+		{
+			return false;
+		}
+
+		return Wc1c\Core::instance();
+	}
+
 	define('WC1C_PREFIX', 'wc1c_');
 	define('WC1C_ADMIN_PREFIX', 'wc1c_admin_');
 
