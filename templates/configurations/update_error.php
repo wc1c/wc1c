@@ -2,8 +2,8 @@
 
 <?php
 $label = __('Back to configurations list', 'wc1c');
-$url = wc1c_admin_configurations_get_url('list');
-wc1c_admin_back_link($label, $url);
+$url = wc1c_admin_configurations_get_url('all');
+wc1c()->templates()->adminBackLink($label, $url);
 ?>
 
 <?php
