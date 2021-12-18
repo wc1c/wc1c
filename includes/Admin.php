@@ -51,10 +51,7 @@ final class Admin
 			Admin\Helps\Init::instance();
 		}
 
-		if(defined('WC1C_PLUGIN_NAME'))
-		{
-			add_filter('plugin_action_links_' . WC1C_PLUGIN_NAME, [$this, 'linksLeft']);
-		}
+		add_filter('plugin_action_links_' . WC1C_PLUGIN_NAME, [$this, 'linksLeft']);
 
 		// hook
 		do_action(WC1C_ADMIN_PREFIX . 'after_loading');
