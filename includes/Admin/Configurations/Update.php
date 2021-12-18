@@ -99,8 +99,8 @@ class Update
 			}
 		}
 
-		add_action('wc1c_admin_configurations_update_sidebar_show', [$this, 'outputSidebar'], 10);
-		add_action('wc1c_admin_configurations_update_show', [$form, 'outputForm'], 10);
+		add_action(WC1C_ADMIN_PREFIX . 'configurations_update_sidebar_show', [$this, 'outputSidebar'], 10);
+		add_action(WC1C_ADMIN_PREFIX . 'configurations_update_show', [$form, 'outputForm'], 10);
 	}
 
 	/**
@@ -143,19 +143,19 @@ class Update
 
 		$body = '<ul class="list-group m-0 list-group-flush">';
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Configuration ID: ', 'wc1c') . $configuration->getid();
+		$body .= __('ID: ', 'wc1c') . $configuration->getId();
 		$body .= '</li>';
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Schema ID: ', 'wc1c') . $configuration->getschema();
+		$body .= __('Schema ID: ', 'wc1c') . $configuration->getSchema();
 		$body .= '</li>';
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Date create: ', 'wc1c') . $configuration->getDateCreate();
+		$body .= __('Date create: ', 'wc1c') . wc1c_pretty_date($configuration->getDateCreate());
 		$body .= '</li>';
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Date modify: ', 'wc1c') . $configuration->getDateModify();
+		$body .= __('Date modify: ', 'wc1c') . wc1c_pretty_date($configuration->getDateModify());
 		$body .= '</li>';
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Date active: ', 'wc1c') . $configuration->getDateActivity();
+		$body .= __('Date active: ', 'wc1c') . wc1c_pretty_date($configuration->getDateActivity());
 		$body .= '</li>';
 		$body .= '<li class="list-group-item p-2 m-0">';
 		$body .= __('Upload directory: ', 'wc1c') . '<div class="p-1 mt-1 bg-light">' . $configuration->getUploadDirectory() . '</div>';
@@ -172,13 +172,13 @@ class Update
 			$schema = wc1c()->getSchemas($configuration->getSchema());
 
 			$args = [
-				'header' => '<h4 class="p-0 m-0">' . __('About schema', 'wc1c') . '</h4>',
+				'header' => '<h3 class="p-0 m-0">' . __('About schema', 'wc1c') . '</h3>',
 				'object' => $this
 			];
 
 			$body = '<ul class="list-group m-0 list-group-flush">';
 			$body .= '<li class="list-group-item p-2 m-0">';
-			$body .= __('Schema name: ', 'wc1c') . $schema->getName();
+			$body .= $schema->getDescription();
 			$body .= '</li>';
 
 			$body .= '</ul>';
