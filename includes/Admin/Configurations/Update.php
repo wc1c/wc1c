@@ -33,6 +33,7 @@ class Update
 			catch(Exception $e)
 			{
 				add_action(WC1C_ADMIN_PREFIX . 'configurations_update_show', [$this, 'outputSchemaError'], 10);
+				add_filter(WC1C_ADMIN_PREFIX . 'configurations_update_schema_error_text', [$this, 'outputSchemaErrorText'], 10, 1);
 			}
 
 			$this->process();
@@ -186,5 +187,19 @@ class Update
 			wc1c()->templates()->getTemplate('configurations/update_sidebar_item.php', $args);
 		}
 		catch(RuntimeException $e){}
+	}
+
+	/**
+	 * @param $text
+	 *
+	 * @return string
+	 */
+	public function outputSchemaErrorText($text)
+	{
+		$new_text = __('The exchange scheme on the basis of which created configuration is unavailable .', 'wc1c');
+
+		$new_text .= '<br />' . __('Install the missing schema to work this configuration, change the status and name, or delete the configuration.', 'wc1c');;
+
+		return $new_text;
 	}
 }
