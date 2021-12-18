@@ -141,7 +141,7 @@ class UpdateForm extends FormAbstract
 
 		$args =
         [
-            'header' => '<h4 class="p-0 m-0">' . __('Fast navigation', 'wc1c') . '</h4>',
+            'header' => '<h3 class="p-0 m-0">' . __('Fast navigation', 'wc1c') . '</h3>',
             'object' => $this
         ];
 
