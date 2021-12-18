@@ -98,7 +98,7 @@ final class Environment
 
 		if(0 < $config_id && 99999999 > $config_id)
 		{
-			if(wc1c()->request()->isInput() || wc1c()->request()->isWc1cAdmin())
+			if(wc1c()->context()->isInput() || wc1c()->context()->isWc1cAdmin())
 			{
 				$this->set('current_configuration_id', $config_id);
 
