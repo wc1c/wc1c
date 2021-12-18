@@ -180,7 +180,7 @@ class Update
 
 			$body = '<ul class="list-group m-0 list-group-flush">';
 			$body .= '<li class="list-group-item p-2 m-0">';
-			$body .= __('Schema name: ', 'wc1c') . $schema->getname();
+			$body .= __('Schema name: ', 'wc1c') . $schema->getName();
 			$body .= '</li>';
 
 			$body .= '</ul>';
