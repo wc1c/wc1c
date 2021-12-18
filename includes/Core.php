@@ -359,7 +359,7 @@ final class Core
 			}
 			catch(Exception $e)
 			{
-				throw new Exception('init_schemas: exception - ' . $e->getMessage());
+				throw new Exception('exception - ' . $e->getMessage());
 			}
 
 			if(!$storage_configurations->isExistingById($configuration))
@@ -388,12 +388,12 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('init_schemas: exception - ' . $e->getMessage());
+			throw new Exception('exception - ' . $e->getMessage());
 		}
 
 		if(!is_array($schemas))
 		{
-			throw new Exception('init_schemas: $schemas is not array');
+			throw new Exception('$schemas is not array');
 		}
 
 		$schema_id = $configuration->getSchema();
