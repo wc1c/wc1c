@@ -49,6 +49,7 @@ final class Admin
 			add_action('admin_enqueue_scripts', [$this, 'initStyles']);
 
 			Admin\Helps\Init::instance();
+			Admin\Wizards\Init::instance();
 		}
 
 		add_filter('plugin_action_links_' . WC1C_PLUGIN_NAME, [$this, 'linksLeft']);
