@@ -34,6 +34,11 @@ final class Core
 	use LoggerAwareTrait;
 
 	/**
+	 * @var Context
+	 */
+	private $context;
+
+	/**
 	 * @var Timer
 	 */
 	private $timer;
@@ -68,10 +73,12 @@ final class Core
 	 *
 	 * @return void
 	 */
-	public function __construct()
+	public function __construct($context)
 	{
 		// hook
 		do_action(WC1C_PREFIX . 'before_loading');
+
+		$this->context = $context;
 
 		// init
 		add_action('init', [$this, 'init'], 3);
@@ -132,7 +139,7 @@ final class Core
 			wc1c()->log()->alert('Schemas load exception - ' . $e->getMessage());
 		}
 
-		if(false !== wc1c()->request()->isInput() || false !== wc1c()->request()->isWc1cAdmin())
+		if(false !== wc1c()->context()->isInput() || false !== wc1c()->context()->isWc1cAdmin())
 		{
 			try
 			{
@@ -144,7 +151,7 @@ final class Core
 			}
 		}
 
-		if(false !== wc1c()->request()->isInput())
+		if(false !== wc1c()->context()->isInput())
 		{
 			try
 			{
@@ -181,13 +188,13 @@ final class Core
 	}
 
 	/**
-	 * Request
+	 * Context
 	 *
-	 * @return Request
+	 * @return Context
 	 */
-	public function request()
+	public function context()
 	{
-		return Request::instance();
+		return $this->context;
 	}
 
 	/**
