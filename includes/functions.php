@@ -315,3 +315,25 @@ function wc1c_admin_configurations_get_url($action = 'all', $configuration_id = 
 
 	return admin_url($path);
 }
+
+/**
+ * @param $date
+ *
+ * @return string
+ */
+function wc1c_pretty_date($date)
+{
+	if(!$date)
+	{
+		return __('not', 'wc1c');
+	}
+
+	$timestamp_create = wc1c_string_to_timestamp($date) + wc1c_timezone_offset();
+
+	return sprintf
+	(
+		__('%s <span class="time">in: %s</span> ', 'wc1c'),
+		date_i18n('d/m/Y', $timestamp_create),
+		date_i18n('H:i:s', $timestamp_create)
+	);
+}
