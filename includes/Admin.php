@@ -1,17 +1,7 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c;
+<?php namespace Wc1c;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use Digiom\WordPress\Notices\Interfaces\ManagerInterface;
 use Digiom\WordPress\Notices\Manager;
 use Wc1c\Admin\Configurations;
