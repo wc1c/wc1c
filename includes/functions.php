@@ -264,7 +264,7 @@ function is_wc1c_admin_section_request($section = '')
 		return false;
 	}
 
-	if(wc1c()->request()->isWc1cAdmin())
+	if(wc1c()->context()->isWc1cAdmin())
 	{
 		return true;
 	}
