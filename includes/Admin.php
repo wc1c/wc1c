@@ -53,7 +53,7 @@ final class Admin
 
 		add_action('admin_menu', [$this, 'addMenu'], 30);
 
-		if(is_wc1c_admin_request())
+		if(wc1c()->request()->isWc1cAdmin())
 		{
 			add_action('init', [$this, 'init'], 10);
 			add_action('admin_enqueue_scripts', [$this, 'initStyles']);

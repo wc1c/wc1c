@@ -139,7 +139,7 @@ final class Core
 			wc1c()->log()->alert('init: exception - ' . $e->getMessage());
 		}
 
-		if(false !== is_wc1c_api_request() || false !== is_wc1c_admin_request())
+		if(false !== wc1c()->request()->isInput() || false !== wc1c()->request()->isWc1cAdmin())
 		{
 			try
 			{
@@ -151,7 +151,7 @@ final class Core
 			}
 		}
 
-		if(false !== is_wc1c_api_request())
+		if(false !== wc1c()->request()->isInput())
 		{
 			try
 			{

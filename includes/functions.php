@@ -1,35 +1,5 @@
 <?php
 /**
- * Is WC1C api request?
- *
- * @return bool
- */
-function is_wc1c_api_request()
-{
-	if(wc1c()->getVar($_GET['wc1c-input'], false))
-	{
-		return true;
-	}
-
-	return false;
-}
-
-/**
- * Is WC1C admin request?
- *
- * @return bool
- */
-function is_wc1c_admin_request()
-{
-	if(false !== is_admin() && 'wc1c' === wc1c()->getVar($_GET['page'], ''))
-	{
-		return true;
-	}
-
-	return false;
-}
-
-/**
  * Convert kb, mb, gb to bytes
  *
  * @param $size
@@ -245,9 +215,7 @@ function wc1c_timezone_offset()
 
 	if($timezone)
 	{
-		$timezone_object = new DateTimeZone($timezone);
-
-		return $timezone_object->getOffset(new DateTime('now'));
+		return (new DateTimeZone($timezone))->getOffset(new DateTime('now'));
 	}
 
 	return (float) get_option('gmt_offset', 0) * HOUR_IN_SECONDS;
@@ -291,12 +259,12 @@ function is_wc1c_admin_tools_request($tool_id = '')
  */
 function is_wc1c_admin_section_request($section = '')
 {
-	if('' === $section)
+	if(wc1c()->getVar($_GET['section'], '') !== $section)
 	{
 		return false;
 	}
 
-	if(is_wc1c_admin_request() && wc1c()->getVar($_GET['section'], '') === $section)
+	if(wc1c()->request()->isWc1cAdmin())
 	{
 		return true;
 	}
