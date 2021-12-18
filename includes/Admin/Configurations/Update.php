@@ -1,24 +1,14 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Admin\Configurations;
+<?php namespace Wc1c\Admin\Configurations;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use Wc1c\Admin\Traits\ProcessConfigurationTrait;
 use Wc1c\Exceptions\Exception;
 use Wc1c\Exceptions\RuntimeException;
 use Wc1c\Traits\SingletonTrait;
 
 /**
- * Class Update
+ * Update
  *
  * @package Wc1c\Admin\Configurations
  */

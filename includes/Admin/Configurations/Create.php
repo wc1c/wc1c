@@ -1,23 +1,13 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Admin\Configurations;
+<?php namespace Wc1c\Admin\Configurations;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use Wc1c\Abstracts\ScreenAbstract;
 use Wc1c\Exceptions\Exception;
 use Wc1c\Traits\SingletonTrait;
 
 /**
- * Class Create
+ * Create
  *
  * @package Wc1c\Admin\Configurations
  */

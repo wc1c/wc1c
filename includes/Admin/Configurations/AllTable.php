@@ -1,25 +1,15 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Admin\Configurations;
+<?php namespace Wc1c\Admin\Configurations;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
-use Exception;
+use Wc1c\Exceptions\Exception;
 use Wc1c\Abstracts\TableAbstract;
 use Wc1c\Data\Storage;
 use Wc1c\Data\Storages\StorageConfigurations;
 use Wc1c\Settings\ConnectionSettings;
 
 /**
- * Class ListsTable
+ * AllTable
  *
  * @package Wc1c\Admin\Configurations
  */

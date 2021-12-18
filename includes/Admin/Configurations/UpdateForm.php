@@ -1,22 +1,12 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Admin\Configurations;
+<?php namespace Wc1c\Admin\Configurations;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use Wc1c\Exceptions\Exception;
 use Wc1c\Abstracts\FormAbstract;
 
 /**
- * Class UpdateForm
+ * UpdateForm
  *
  * @package Wc1c\Admin\Configurations
  */
