@@ -52,11 +52,9 @@ class Update
 	public function process()
 	{
 		$configuration = $this->getConfiguration();
-
 		$form = new UpdateForm();
 
 		$form_data = $configuration->getOptions();
-
 		$form_data['name'] = $configuration->getName();
 		$form_data['status'] = $configuration->getStatus();
 
@@ -72,7 +70,7 @@ class Update
 			$configuration->setName($data['name']);
 			unset($data['name']);
 
-			$configuration->setDateModify();
+			$configuration->setDateModify(time());
 			$configuration->setOptions($data);
 
 			$saved = $configuration->save();
