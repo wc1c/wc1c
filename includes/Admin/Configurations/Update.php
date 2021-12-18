@@ -55,8 +55,6 @@ class Update
 
 		$form = new UpdateForm();
 
-		$form->load_fields();
-
 		$form_data = $configuration->getOptions();
 
 		$form_data['name'] = $configuration->getName();

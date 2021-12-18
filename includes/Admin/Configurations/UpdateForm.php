@@ -19,7 +19,7 @@ class UpdateForm extends FormAbstract
 	{
 		$this->set_id('configurations-update');
 
-		add_filter(WC1C_PREFIX . $this->get_id() . '_form_load_fields', [$this, 'init_fields_main'], 10);
+		add_filter(WC1C_PREFIX . $this->get_id() . '_form_load_fields', [$this, 'init_fields_main'], 3);
 		add_action('wc1c_admin_configurations_update_sidebar_show', [$this, 'output_navigation'], 20);
 
 		$this->load_fields();
