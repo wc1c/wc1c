@@ -176,6 +176,11 @@ class AllTable extends TableAbstract
 			$actions['delete'] = '<a href="' . wc1c_admin_configurations_get_url('delete', $item['configuration_id']) . '">' . __('Remove forever', 'wc1c') . '</a>';
 		}
 
+		if('draft' === $item['status'] && 'yes' === wc1c()->settings()->get('configurations_draft_delete', 'yes'))
+		{
+			$actions['delete'] = '<a href="' . wc1c_admin_configurations_get_url('delete', $item['configuration_id']) . '">' . __('Remove forever', 'wc1c') . '</a>';
+		}
+
 		$connection_schema = __('Schema:', 'wc1c') . ' ' . $item['schema'];
 
 		return sprintf( '<span class="name">%1$s</span>%2$s<br/>%3$s',
