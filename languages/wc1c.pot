@@ -4,7 +4,7 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: WC1C > integration of WooCommerce with 1C products "
 "(different configurations)\n"
-"POT-Creation-Date: 2021-12-19 18:55+0300\n"
+"POT-Creation-Date: 2021-12-19 20:09+0300\n"
 "PO-Revision-Date: 2019-03-19 20:30+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
@@ -714,6 +714,10 @@ msgid ""
 "servers once a week in the background."
 msgstr ""
 
+#: includes/Admin/Wizards/Setup/Database.php:43
+msgid "Create tables error. Please retry."
+msgstr ""
+
 #: includes/Admin/Wizards/SetupWizard.php:54
 msgid "Setup wizard"
 msgstr ""
@@ -1360,28 +1364,32 @@ msgstr ""
 msgid "Its should not take longer than five minutes."
 msgstr ""
 
-#: templates/wizards/steps/check.php:28 templates/wizards/steps/database.php:19
+#: templates/wizards/steps/check.php:29 templates/wizards/steps/database.php:21
 msgid "Lets Go!"
 msgstr ""
 
-#: templates/wizards/steps/check.php:33
+#: templates/wizards/steps/check.php:35
 msgid "Need to fix the compatibility errors and return to the setup wizard."
 msgstr ""
 
 #: templates/wizards/steps/complete.php:15
-msgid "Установка успешно завершена!"
+msgid "Installation completed!"
 msgstr ""
 
 #: templates/wizards/steps/complete.php:16
-msgid "Теперь можно перейти к использованию плагина WC1C."
+msgid "Now you can proceed to using the WC1C plugin."
 msgstr ""
 
-#: templates/wizards/steps/complete.php:19
-msgid "Перейти к использованию"
+#: templates/wizards/steps/complete.php:20
+msgid "Go to use"
 msgstr ""
 
 #: templates/wizards/steps/database.php:15
-msgid "Создание таблиц в базе данных"
+msgid "Creating tables in the database"
+msgstr ""
+
+#: templates/wizards/steps/database.php:16
+msgid "If continue, the required tables will be created in the database."
 msgstr ""
 
 #: vendor/digiom/notices-wp/src/Types/ErrorNotice.php:49
