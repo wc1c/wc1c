@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WC1C > integration of WooCommerce with 1C products "
 "(different configurations)\n"
-"POT-Creation-Date: 2021-12-17 15:30+0300\n"
-"PO-Revision-Date: 2021-12-17 15:32+0300\n"
+"POT-Creation-Date: 2021-12-19 14:32+0300\n"
+"PO-Revision-Date: 2021-12-19 14:35+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
 "Language: ru_RU\n"
@@ -103,23 +103,23 @@ msgstr "Последняя страница"
 msgid "Select All"
 msgstr "Выбрать все"
 
-#: includes/Admin.php:104 includes/Admin.php:105 templates/header.php:3
+#: includes/Admin.php:92 includes/Admin.php:93 templates/header.php:3
 msgid "Integration with 1C"
 msgstr "Интеграция с 1С"
 
-#: includes/Admin.php:122 includes/Admin/Settings/MainForm.php:56
+#: includes/Admin.php:110 includes/Admin/Settings/MainForm.php:46
 msgid "Configurations"
 msgstr "Конфигурации"
 
-#: includes/Admin.php:129
+#: includes/Admin.php:117
 msgid "Tools"
 msgstr "Инструменты"
 
-#: includes/Admin.php:136 includes/Admin.php:224
+#: includes/Admin.php:124 includes/Admin.php:212
 msgid "Settings"
 msgstr "Настройки"
 
-#: includes/Admin.php:143 templates/helps/features.php:36
+#: includes/Admin.php:131 templates/helps/features.php:36
 msgid "Extensions"
 msgstr "Расширения"
 
@@ -134,76 +134,76 @@ msgid "not found"
 msgstr "не найдена"
 
 #: includes/Admin/Columns/WooCommerce/Products.php:70
-#: includes/Admin/Configurations/Update.php:161
+#: includes/Admin/Configurations/Update.php:148
 msgid "Schema ID: "
 msgstr "Схема (ID): "
 
 #: includes/Admin/Columns/WooCommerce/Products.php:75
-#: includes/Admin/Configurations/Update.php:158
 msgid "Configuration ID: "
 msgstr "Идентификатор: "
 
-#: includes/Admin/Configurations/AllTable.php:119
+#: includes/Admin/Configurations/AllTable.php:109
 #, php-format
 msgid "%s <br/><span class=\"time\">Time: %s</span>"
 msgstr "%s <br/><span class=\"time\">Время: %s</span>"
 
-#: includes/Admin/Configurations/AllTable.php:125
+#: includes/Admin/Configurations/AllTable.php:115
 msgid "No activity"
 msgstr "Не было"
 
-#: includes/Admin/Configurations/AllTable.php:179
+#: includes/Admin/Configurations/AllTable.php:169
 msgid "Edit"
 msgstr "Редактировать"
 
-#: includes/Admin/Configurations/AllTable.php:180
+#: includes/Admin/Configurations/AllTable.php:170
 msgid "Mark as deleted"
 msgstr "Пометить на удаление"
 
-#: includes/Admin/Configurations/AllTable.php:186
+#: includes/Admin/Configurations/AllTable.php:176
+#: includes/Admin/Configurations/AllTable.php:181
 msgid "Remove forever"
 msgstr "Удалить окончательно"
 
-#: includes/Admin/Configurations/AllTable.php:189
+#: includes/Admin/Configurations/AllTable.php:184
 msgid "Schema:"
 msgstr "Схема:"
 
-#: includes/Admin/Configurations/AllTable.php:207
+#: includes/Admin/Configurations/AllTable.php:202
 msgid "ID"
 msgstr "ID"
 
-#: includes/Admin/Configurations/AllTable.php:208
+#: includes/Admin/Configurations/AllTable.php:203
 msgid "Base information"
 msgstr "Базовая информация"
 
-#: includes/Admin/Configurations/AllTable.php:209
+#: includes/Admin/Configurations/AllTable.php:204
 msgid "Status"
 msgstr "Состояние"
 
-#: includes/Admin/Configurations/AllTable.php:210
+#: includes/Admin/Configurations/AllTable.php:205
 msgid "Create date"
 msgstr "Создана"
 
-#: includes/Admin/Configurations/AllTable.php:211
+#: includes/Admin/Configurations/AllTable.php:206
 msgid "Last activity"
 msgstr "Активность"
 
-#: includes/Admin/Configurations/AllTable.php:259
+#: includes/Admin/Configurations/AllTable.php:254
 msgid "All"
 msgstr "Все"
 
-#: includes/Admin/Configurations/AllTable.php:432
+#: includes/Admin/Configurations/AllTable.php:427
 #: includes/Admin/Settings.php:63
 msgid "Connection to the WC1C"
 msgstr "Подключение к WC1C"
 
-#: includes/Admin/Configurations/CreateForm.php:50
-#: includes/Admin/Configurations/UpdateForm.php:49
+#: includes/Admin/Configurations/CreateForm.php:39
+#: includes/Admin/Configurations/UpdateForm.php:39
 msgid "Configuration name"
 msgstr "Название конфигурации"
 
-#: includes/Admin/Configurations/CreateForm.php:52
-#: includes/Admin/Configurations/UpdateForm.php:51
+#: includes/Admin/Configurations/CreateForm.php:41
+#: includes/Admin/Configurations/UpdateForm.php:41
 msgid ""
 "Name of the configuration for easy use. You can enter any data up to 255 "
 "characters."
@@ -211,16 +211,16 @@ msgstr ""
 "Имя конфигурации для удобства использования. Вы можете ввести любые данные "
 "длиной до 255 символов."
 
-#: includes/Admin/Configurations/CreateForm.php:53
-#: includes/Admin/Configurations/UpdateForm.php:52
+#: includes/Admin/Configurations/CreateForm.php:42
+#: includes/Admin/Configurations/UpdateForm.php:42
 msgid "Used for convenient distribution of multiple configurations."
 msgstr "Используется для удобного распределения нескольких конфигураций."
 
-#: includes/Admin/Configurations/CreateForm.php:75
+#: includes/Admin/Configurations/CreateForm.php:64
 msgid "Configuration schema"
 msgstr "Схема конфигурации"
 
-#: includes/Admin/Configurations/CreateForm.php:77
+#: includes/Admin/Configurations/CreateForm.php:66
 msgid ""
 "Each scheme has its own algorithms and settings. Use the appropriate scheme "
 "for your tasks."
@@ -228,58 +228,58 @@ msgstr ""
 "Каждая схема имеет свои алгоритмы и настройки. Используйте соответствующую "
 "схему для ваших задач."
 
-#: includes/Admin/Configurations/CreateForm.php:106
+#: includes/Admin/Configurations/CreateForm.php:95
 msgid "Configuration create error. Please retry."
 msgstr "Конфигурация не создана. Пожалуйста повторите."
 
-#: includes/Admin/Configurations/CreateForm.php:146
+#: includes/Admin/Configurations/CreateForm.php:135
 msgid "Configuration create error. Name is required."
 msgstr "Конфигурация не создана. Название конфигурации не заполнено."
 
-#: includes/Admin/Configurations/CreateForm.php:159
+#: includes/Admin/Configurations/CreateForm.php:148
 msgid "Configuration create error. Schema is required."
 msgstr "Конфигурация не создана. Не выбрана схема."
 
-#: includes/Admin/Configurations/CreateForm.php:176
+#: includes/Admin/Configurations/CreateForm.php:165
 msgid "Configuration create error. Name is exists."
 msgstr ""
 "Конфигурация не создана. Конфигурация с таким названием уже существует."
 
-#: includes/Admin/Configurations/CreateForm.php:193
+#: includes/Admin/Configurations/CreateForm.php:182
 msgid "Configuration create success. Configuration id: "
 msgstr "Конфигурация успешно создана. Идентификатор конфигурации: "
 
-#: includes/Admin/Configurations/CreateForm.php:194
+#: includes/Admin/Configurations/CreateForm.php:183
 msgid "edit configuration"
 msgstr "редактировать конфигурацию"
 
-#: includes/Admin/Configurations/CreateForm.php:206
+#: includes/Admin/Configurations/CreateForm.php:195
 msgid "Configuration create error. Please retry saving or change fields."
 msgstr ""
 "Создание конфигурации не удалось. Пожалуйста повторите процедуру или смените "
 "поля."
 
-#: includes/Admin/Configurations/Delete.php:63
+#: includes/Admin/Configurations/Delete.php:53
 msgid "Error. The configuration to be deleted is active and cannot be deleted."
 msgstr "Ошибка. Удаляемая конфигурация активна и не может быть удалена."
 
-#: includes/Admin/Configurations/Delete.php:116
+#: includes/Admin/Configurations/Delete.php:106
 msgid "The configuration has been marked as deleted."
 msgstr "Конфигурация помечена как удаленная."
 
-#: includes/Admin/Configurations/Delete.php:124
+#: includes/Admin/Configurations/Delete.php:114
 msgid "The configuration has been successfully deleted."
 msgstr "Конфигурация успешно удалена."
 
-#: includes/Admin/Configurations/Delete.php:131
+#: includes/Admin/Configurations/Delete.php:121
 msgid "Deleting error. Please retry again."
 msgstr "Ошибка при удалении. Пожалуйста, попробуйте еще раз."
 
-#: includes/Admin/Configurations/DeleteForm.php:48
+#: includes/Admin/Configurations/DeleteForm.php:38
 msgid "Delete confirmation"
 msgstr "Подтверждение удаления"
 
-#: includes/Admin/Configurations/DeleteForm.php:50
+#: includes/Admin/Configurations/DeleteForm.php:40
 msgid ""
 "I confirm that Configuration will be permanently and irrevocably deleted "
 "from WooCommerce."
@@ -287,65 +287,79 @@ msgstr ""
 "Я подтверждаю, что Конфигурация будет окончательно и безвозвратно удалена из "
 "WooCommerce."
 
-#: includes/Admin/Configurations/DeleteForm.php:90
+#: includes/Admin/Configurations/DeleteForm.php:80
 msgid "Delete error. Please retry."
 msgstr "Ошибка при удалении. Пожалуйста повторите."
 
-#: includes/Admin/Configurations/DeleteForm.php:132
+#: includes/Admin/Configurations/DeleteForm.php:122
 msgid "Delete error. Confirmation of final deletion is required."
 msgstr "Ошибка удаления. Требуется подтверждение окончательного удаления."
 
-#: includes/Admin/Configurations/Update.php:98
+#: includes/Admin/Configurations/Update.php:85
 msgid "Configuration update success."
 msgstr "Конфигурация успешно обновлена."
 
-#: includes/Admin/Configurations/Update.php:108
+#: includes/Admin/Configurations/Update.php:95
 msgid "Configuration update error. Please retry saving or change fields."
 msgstr ""
 "Ошибка обновления конфигурации. Повторите попытку сохранения или изменения "
 "полей."
 
-#: includes/Admin/Configurations/Update.php:152
+#: includes/Admin/Configurations/Update.php:139
 msgid "About configuration"
 msgstr "О конфигурации"
 
-#: includes/Admin/Configurations/Update.php:164
+#: includes/Admin/Configurations/Update.php:145
+msgid "ID: "
+msgstr "ИД: "
+
+#: includes/Admin/Configurations/Update.php:151
 msgid "Date create: "
 msgstr "Дата создания: "
 
-#: includes/Admin/Configurations/Update.php:167
+#: includes/Admin/Configurations/Update.php:154
 msgid "Date modify: "
 msgstr "Дата изменения: "
 
-#: includes/Admin/Configurations/Update.php:170
+#: includes/Admin/Configurations/Update.php:157
 msgid "Date active: "
 msgstr "Последняя активность: "
 
-#: includes/Admin/Configurations/Update.php:173
+#: includes/Admin/Configurations/Update.php:160
 msgid "Upload directory: "
 msgstr "Каталог загрузки: "
 
-#: includes/Admin/Configurations/Update.php:187
+#: includes/Admin/Configurations/Update.php:174
 msgid "About schema"
 msgstr "О схеме"
 
-#: includes/Admin/Configurations/Update.php:193
-msgid "Schema name: "
-msgstr "Имя схемы: "
+#: includes/Admin/Configurations/Update.php:199
+msgid ""
+"The exchange scheme on the basis of which created configuration is "
+"unavailable ."
+msgstr "Схема обмена на основании которой создана конфигурация, недоступна."
 
-#: includes/Admin/Configurations/UpdateForm.php:65
+#: includes/Admin/Configurations/Update.php:201
+msgid ""
+"Install the missing schema to work this configuration, change the status and "
+"name, or delete the configuration."
+msgstr ""
+"Установите отсутствующую схему для работы с этой конфигурацией, измените "
+"статус и имя или удалите конфигурацию."
+
+#: includes/Admin/Configurations/UpdateForm.php:55
 msgid "Configuration status"
 msgstr "Состояние"
 
-#: includes/Admin/Configurations/UpdateForm.php:67
+#: includes/Admin/Configurations/UpdateForm.php:57
 msgid "Current configuration status."
 msgstr "Текущее состояние конфигурации."
 
-#: includes/Admin/Configurations/UpdateForm.php:108
+#: includes/Admin/Configurations/UpdateForm.php:98
 msgid "Update error. Please retry."
 msgstr "Ошибка при обновлении. Пожалуйста повторите."
 
-#: includes/Admin/Configurations/UpdateForm.php:154
+#: includes/Admin/Configurations/UpdateForm.php:144
 msgid "Fast navigation"
 msgstr "Быстрая навигация"
 
@@ -438,41 +452,41 @@ msgstr "Ошибка при сохранении. Пожалуйста повт�
 msgid "Save success."
 msgstr "Успешное сохранение."
 
-#: includes/Admin/Settings/MainForm.php:58
+#: includes/Admin/Settings/MainForm.php:48
 msgid "Settings for the Configurations."
 msgstr "Настройки для конфигураций."
 
-#: includes/Admin/Settings/MainForm.php:63
+#: includes/Admin/Settings/MainForm.php:53
 msgid "Unique configuration names"
 msgstr "Уникальные имена конфигураций"
 
-#: includes/Admin/Settings/MainForm.php:65
+#: includes/Admin/Settings/MainForm.php:55
 msgid "Require unique names for configurations?"
 msgstr "Требовать уникальные имена для конфигураций?"
 
-#: includes/Admin/Settings/MainForm.php:66
+#: includes/Admin/Settings/MainForm.php:56
 msgid "If enabled, you will need to provide unique names when configurations."
 msgstr ""
 "Если этот параметр включен, нужно будет указывать уникальные имена при "
 "настройке."
 
-#: includes/Admin/Settings/MainForm.php:72
+#: includes/Admin/Settings/MainForm.php:62
 msgid "Number in the list"
 msgstr "Количество на одной странице"
 
-#: includes/Admin/Settings/MainForm.php:74
+#: includes/Admin/Settings/MainForm.php:64
 msgid "The number of displayed configurations on one page."
 msgstr "Количество отображаемых конфигураций на одной странице."
 
-#: includes/Admin/Settings/MainForm.php:81
+#: includes/Admin/Settings/MainForm.php:71
 msgid "Deleting drafts without trash"
 msgstr "Удаление черновиков без пометки на удаление"
 
-#: includes/Admin/Settings/MainForm.php:83
+#: includes/Admin/Settings/MainForm.php:73
 msgid "Enable deleting drafts without placing them in the trash?"
 msgstr "Разрешить удалять черновики, не помещая их в корзину?"
 
-#: includes/Admin/Settings/MainForm.php:84
+#: includes/Admin/Settings/MainForm.php:74
 msgid ""
 "If enabled, configurations for connections in the draft status will be "
 "deleted without being added to the basket."
@@ -480,31 +494,33 @@ msgstr ""
 "Если этот параметр включен, конфигурации для подключений в статусе черновик "
 "будут удаляться без добавления в корзину."
 
-#: includes/Admin/Settings/MainForm.php:102
+#: includes/Admin/Settings/MainForm.php:92
 msgid "Technical settings"
 msgstr "Технические настройки"
 
-#: includes/Admin/Settings/MainForm.php:104
+#: includes/Admin/Settings/MainForm.php:94
 msgid "Used to set up the environment."
 msgstr "Используется для настройки окружения."
 
-#: includes/Admin/Settings/MainForm.php:109
-#: includes/Schemas/DefaultCML/Init.php:250
+#: includes/Admin/Settings/MainForm.php:99
+#: includes/Schemas/DefaultCML/Admin.php:123
+#: includes/Schemas/DefaultCML/Input.php:202
 msgid "Maximum request size"
 msgstr "Максимальный размер запроса"
 
-#: includes/Admin/Settings/MainForm.php:111
-#: includes/Schemas/DefaultCML/Init.php:252
+#: includes/Admin/Settings/MainForm.php:101
+#: includes/Schemas/DefaultCML/Admin.php:125
+#: includes/Schemas/DefaultCML/Input.php:204
 msgid ""
 "The setting must not take a size larger than specified in the server "
 "settings."
 msgstr "Параметр не должен быть больше, чем указано в настройках сервера."
 
-#: includes/Admin/Settings/MainForm.php:118
+#: includes/Admin/Settings/MainForm.php:108
 msgid "Maximum time for execution PHP"
 msgstr "Максимальное время выполнения PHP скриптов"
 
-#: includes/Admin/Settings/MainForm.php:120
+#: includes/Admin/Settings/MainForm.php:110
 msgid ""
 "Value is seconds. The setting must not take a execution time larger than "
 "specified in the PHP and web server settings (Apache, Nginx, etc)."
@@ -512,15 +528,15 @@ msgstr ""
 "Значение - секунды. Настройка не должна занимать время выполнения больше, "
 "чем указано в настройках PHP и веб-сервера (Apache, Nginx и т. Д.)."
 
-#: includes/Admin/Settings/MainForm.php:139
+#: includes/Admin/Settings/MainForm.php:129
 msgid "Input: background requests"
 msgstr "Ввод: фоновые запросы"
 
-#: includes/Admin/Settings/MainForm.php:141
+#: includes/Admin/Settings/MainForm.php:131
 msgid "Enable Input: background requests?"
 msgstr "Включить ввод: фоновые запросы?"
 
-#: includes/Admin/Settings/MainForm.php:142
+#: includes/Admin/Settings/MainForm.php:132
 msgid ""
 "It is used to receive background requests from 1C in exchange schemes. Do "
 "not disable this option if you do not know what it is for."
@@ -528,24 +544,24 @@ msgstr ""
 "Используется для получения фоновых запросов от 1С в схемах обмена. Не "
 "отключайте эту опцию, если не знаете, для чего она нужна."
 
-#: includes/Admin/Settings/MainForm.php:160
+#: includes/Admin/Settings/MainForm.php:150
 msgid "Interface"
 msgstr "Интерфейс"
 
-#: includes/Admin/Settings/MainForm.php:162
+#: includes/Admin/Settings/MainForm.php:152
 msgid "Settings for the user interface."
 msgstr "Настройки пользовательского интерфейса."
 
-#: includes/Admin/Settings/MainForm.php:167
+#: includes/Admin/Settings/MainForm.php:157
 msgid "Changing the interface"
 msgstr "Изменение интерфейса"
 
-#: includes/Admin/Settings/MainForm.php:169
+#: includes/Admin/Settings/MainForm.php:159
 msgid "Allow changes to WordPress and WooCommerce dashboard interface?"
 msgstr ""
 "Разрешить изменения в интерфейсе панели управления WordPress и WooCommerce?"
 
-#: includes/Admin/Settings/MainForm.php:170
+#: includes/Admin/Settings/MainForm.php:160
 msgid ""
 "If enabled, new features will appear in the WordPress and WooCommerce "
 "interface according to the interface change settings."
@@ -553,72 +569,72 @@ msgstr ""
 "Если этот параметр включен, новые функции появятся в интерфейсе WordPress и "
 "WooCommerce в соответствии с настройками изменения интерфейса."
 
-#: includes/Admin/Settings/MainForm.php:176
+#: includes/Admin/Settings/MainForm.php:166
 msgid "Column in products list"
 msgstr "Колонка в списке продуктов"
 
-#: includes/Admin/Settings/MainForm.php:178
-#: includes/Admin/Settings/MainForm.php:187
-#: includes/Admin/Settings/MainForm.php:196
-#: includes/Admin/Settings/MainForm.php:205
-#: includes/Admin/Settings/MainForm.php:214
-#: includes/Admin/Settings/MainForm.php:287
-#: includes/Admin/Settings/MainForm.php:296
-#: includes/Admin/Settings/MainForm.php:305
-#: includes/Admin/Settings/MainForm.php:314
-#: includes/Admin/Settings/MainForm.php:323
+#: includes/Admin/Settings/MainForm.php:168
+#: includes/Admin/Settings/MainForm.php:177
+#: includes/Admin/Settings/MainForm.php:186
+#: includes/Admin/Settings/MainForm.php:195
+#: includes/Admin/Settings/MainForm.php:204
+#: includes/Admin/Settings/MainForm.php:277
+#: includes/Admin/Settings/MainForm.php:286
+#: includes/Admin/Settings/MainForm.php:295
+#: includes/Admin/Settings/MainForm.php:304
+#: includes/Admin/Settings/MainForm.php:313
 msgid "Enable"
 msgstr "Включить"
 
-#: includes/Admin/Settings/MainForm.php:179
+#: includes/Admin/Settings/MainForm.php:169
 msgid "Output of a column with information from 1C to the list of products."
 msgstr "Вывод столбца с информацией из 1С в список товаров."
 
-#: includes/Admin/Settings/MainForm.php:185
+#: includes/Admin/Settings/MainForm.php:175
 msgid "Metabox in edit products"
 msgstr "Метабокс в редактировании продуктов"
 
-#: includes/Admin/Settings/MainForm.php:188
+#: includes/Admin/Settings/MainForm.php:178
 msgid "Output of a Metabox with information from 1C in edit products."
 msgstr "Вывод метабокса с информацией из 1С в редактирование продуктов."
 
-#: includes/Admin/Settings/MainForm.php:194
+#: includes/Admin/Settings/MainForm.php:184
 msgid "Column in orders list"
 msgstr "Колонка в списке заказов"
 
-#: includes/Admin/Settings/MainForm.php:197
+#: includes/Admin/Settings/MainForm.php:187
 msgid "Output of a column with information from 1C to the list of orders."
 msgstr "Вывод столбца с информацией из 1С в список заказов."
 
-#: includes/Admin/Settings/MainForm.php:203
+#: includes/Admin/Settings/MainForm.php:193
 msgid "Metabox in edit orders"
 msgstr "Метабокс при редактировании заказов"
 
-#: includes/Admin/Settings/MainForm.php:206
+#: includes/Admin/Settings/MainForm.php:196
 msgid "Output of a Metabox with information from 1C in edit orders."
 msgstr "Вывод Метабокса с информацией из 1С при редактировании заказов."
 
-#: includes/Admin/Settings/MainForm.php:212
+#: includes/Admin/Settings/MainForm.php:202
 msgid "Column in categories list"
 msgstr "Колонка в списке категорий"
 
-#: includes/Admin/Settings/MainForm.php:215
+#: includes/Admin/Settings/MainForm.php:205
 msgid "Output of a column with information from 1C to the list of categories."
 msgstr "Вывод столбца с информацией из 1С в список категорий."
 
-#: includes/Admin/Settings/MainForm.php:233
+#: includes/Admin/Settings/MainForm.php:223
 msgid "Technical events"
 msgstr "Технические события"
 
-#: includes/Admin/Settings/MainForm.php:235
+#: includes/Admin/Settings/MainForm.php:225
 msgid "Used by technical specialists. Can leave it at that."
 msgstr "Используется техническими специалистами. Можете оставить все как есть."
 
-#: includes/Admin/Settings/MainForm.php:240
+#: includes/Admin/Settings/MainForm.php:230
 msgid "Level"
 msgstr "Уровень"
 
-#: includes/Admin/Settings/MainForm.php:242
+#: includes/Admin/Settings/MainForm.php:232
 msgid ""
 "All events of the selected level will be recorded in the log file. The "
 "higher the level, the less data is recorded."
@@ -626,45 +642,51 @@ msgstr ""
 "Все события выбранного уровня будут записаны в файл журнала. Чем выше "
 "уровень, тем меньше записывается данных."
 
-#: includes/Admin/Settings/MainForm.php:246
-#: includes/Schemas/DefaultCML/Init.php:227
+#: includes/Admin/Settings/MainForm.php:236
+#: includes/Schemas/DefaultCML/Admin.php:100
+#: includes/Schemas/DefaultCML/Input.php:179
 msgid "Off"
 msgstr "Выключен"
 
-#: includes/Admin/Settings/MainForm.php:247
-#: includes/Schemas/DefaultCML/Init.php:228
+#: includes/Admin/Settings/MainForm.php:237
+#: includes/Schemas/DefaultCML/Admin.php:101
+#: includes/Schemas/DefaultCML/Input.php:180
 msgid "DEBUG"
 msgstr "Отладка"
 
-#: includes/Admin/Settings/MainForm.php:248
-#: includes/Schemas/DefaultCML/Init.php:229
+#: includes/Admin/Settings/MainForm.php:238
+#: includes/Schemas/DefaultCML/Admin.php:102
+#: includes/Schemas/DefaultCML/Input.php:181
 msgid "INFO"
 msgstr "Информация"
 
-#: includes/Admin/Settings/MainForm.php:249
-#: includes/Schemas/DefaultCML/Init.php:230
+#: includes/Admin/Settings/MainForm.php:239
+#: includes/Schemas/DefaultCML/Admin.php:103
+#: includes/Schemas/DefaultCML/Input.php:182
 msgid "NOTICE"
 msgstr "Уведомления"
 
-#: includes/Admin/Settings/MainForm.php:250
-#: includes/Schemas/DefaultCML/Init.php:231
+#: includes/Admin/Settings/MainForm.php:240
+#: includes/Schemas/DefaultCML/Admin.php:104
+#: includes/Schemas/DefaultCML/Input.php:183
 msgid "WARNING"
 msgstr "Предупреждения"
 
-#: includes/Admin/Settings/MainForm.php:251
-#: includes/Schemas/DefaultCML/Init.php:232
+#: includes/Admin/Settings/MainForm.php:241
+#: includes/Schemas/DefaultCML/Admin.php:105
+#: includes/Schemas/DefaultCML/Input.php:184
 msgid "ERROR"
 msgstr "Ошибки"
 
-#: includes/Admin/Settings/MainForm.php:257
+#: includes/Admin/Settings/MainForm.php:247
 msgid "Access to technical events"
 msgstr "Доступ к техническим событиям"
 
-#: includes/Admin/Settings/MainForm.php:259
+#: includes/Admin/Settings/MainForm.php:249
 msgid "Allow the WC1C team to access technical events?"
 msgstr "Разрешить команде WC1C доступ к техническим событиям?"
 
-#: includes/Admin/Settings/MainForm.php:260
+#: includes/Admin/Settings/MainForm.php:250
 msgid ""
 "If allowed, the WC1C team will be able to access technical events and "
 "release the necessary updates based on them."
@@ -672,52 +694,52 @@ msgstr ""
 "Если разрешено, команда WC1C сможет получить доступ к техническим событиям и "
 "выпустить на их основе необходимые обновления."
 
-#: includes/Admin/Settings/MainForm.php:278
+#: includes/Admin/Settings/MainForm.php:268
 msgid "Enable data by objects"
 msgstr "Работа с данными объектами"
 
-#: includes/Admin/Settings/MainForm.php:280
+#: includes/Admin/Settings/MainForm.php:270
 msgid "Specifying the ability to work with data by object types (data types)."
 msgstr ""
 "Указание возможности работы с данными по типам объектов (типам данных)."
 
-#: includes/Admin/Settings/MainForm.php:285
+#: includes/Admin/Settings/MainForm.php:275
 msgid "Products"
 msgstr "Продукты"
 
-#: includes/Admin/Settings/MainForm.php:288
+#: includes/Admin/Settings/MainForm.php:278
 msgid "Ability to work with products (delete, change, add)."
 msgstr "Возможность работы с продуктами (удаление, изменение, добавление)."
 
-#: includes/Admin/Settings/MainForm.php:294
+#: includes/Admin/Settings/MainForm.php:284
 msgid "Categories"
 msgstr "Категории"
 
-#: includes/Admin/Settings/MainForm.php:297
+#: includes/Admin/Settings/MainForm.php:287
 msgid "Ability to work with categories (delete, change, add)."
 msgstr "Возможность работы с категориями (удаление, изменение, добавление)."
 
-#: includes/Admin/Settings/MainForm.php:303
+#: includes/Admin/Settings/MainForm.php:293
 msgid "Attributes"
 msgstr "Атрибуты"
 
-#: includes/Admin/Settings/MainForm.php:306
+#: includes/Admin/Settings/MainForm.php:296
 msgid "Ability to work with attributes (delete, change, add)."
 msgstr "Возможность работы с атрибутами (удаление, изменение, добавление)."
 
-#: includes/Admin/Settings/MainForm.php:312
+#: includes/Admin/Settings/MainForm.php:302
 msgid "Orders"
 msgstr "Заказы"
 
-#: includes/Admin/Settings/MainForm.php:315
+#: includes/Admin/Settings/MainForm.php:305
 msgid "Ability to work with orders (delete, change, add)."
 msgstr "Возможность работы с заказами  (удаление, изменение, добавление)."
 
-#: includes/Admin/Settings/MainForm.php:321
+#: includes/Admin/Settings/MainForm.php:311
 msgid "Images"
 msgstr "Изображение"
 
-#: includes/Admin/Settings/MainForm.php:324
+#: includes/Admin/Settings/MainForm.php:314
 msgid "Ability to work with images (delete, change, add)."
 msgstr "Возможность работы с изображениями (удаление, изменение, добавление)."
 
@@ -736,6 +758,26 @@ msgid ""
 msgstr ""
 "Если этот параметр включен, сайт будет отправлять анонимные данные об "
 "использовании плагина на серверы WC1C один раз в неделю в фоновом режиме."
+
+#: includes/Admin/Wizards/SetupWizard.php:51
+msgid "Setup wizard"
+msgstr "Мастер установки"
+
+#: includes/Admin/Wizards/SetupWizard.php:78
+msgid "Compatibility"
+msgstr "Совместимость"
+
+#: includes/Admin/Wizards/SetupWizard.php:83
+msgid "Database"
+msgstr "База данных"
+
+#: includes/Admin/Wizards/SetupWizard.php:88
+msgid "Connect to WC1C"
+msgstr "Подключение к WC1C"
+
+#: includes/Admin/Wizards/SetupWizard.php:93
+msgid "Completing"
+msgstr "Завершение"
 
 #: includes/Core.php:468
 msgid "Default schema based on CML"
@@ -769,28 +811,37 @@ msgstr "Конфигурация выключена."
 msgid "Input request is very bad!"
 msgstr "Запрос ввода - не верный!"
 
-#: includes/Schemas/DefaultCML/Init.php:164
+#: includes/Schemas/DefaultCML/Admin.php:37
+#: includes/Schemas/DefaultCML/Input.php:116
 msgid "Processing details"
 msgstr "Детали обработки"
 
-#: includes/Schemas/DefaultCML/Init.php:166
+#: includes/Schemas/DefaultCML/Admin.php:39
+#: includes/Schemas/DefaultCML/Input.php:118
 msgid "Changing the behavior of the file processing."
 msgstr "Изменение поведения обработки файлов."
 
-#: includes/Schemas/DefaultCML/Init.php:171
+#: includes/Schemas/DefaultCML/Admin.php:44
+#: includes/Schemas/DefaultCML/Input.php:123
 msgid "Skip processing of files"
 msgstr "Пропуск обработки файлов"
 
-#: includes/Schemas/DefaultCML/Init.php:173
-#: includes/Schemas/DefaultCML/Init.php:182
-#: includes/Schemas/DefaultCML/Init.php:191
-#: includes/Schemas/DefaultCML/Init.php:243
-#: includes/Schemas/DefaultCML/Init.php:261
+#: includes/Schemas/DefaultCML/Admin.php:46
+#: includes/Schemas/DefaultCML/Admin.php:55
+#: includes/Schemas/DefaultCML/Admin.php:64
+#: includes/Schemas/DefaultCML/Admin.php:116
+#: includes/Schemas/DefaultCML/Admin.php:134
+#: includes/Schemas/DefaultCML/Input.php:125
+#: includes/Schemas/DefaultCML/Input.php:134
+#: includes/Schemas/DefaultCML/Input.php:143
+#: includes/Schemas/DefaultCML/Input.php:195
+#: includes/Schemas/DefaultCML/Input.php:213
 msgid "Check the checkbox if want to enable this feature. Disabled by default."
 msgstr ""
 "Установите флажок, если надо включить эту функцию. По умолчанию отключено."
 
-#: includes/Schemas/DefaultCML/Init.php:174
+#: includes/Schemas/DefaultCML/Admin.php:47
+#: includes/Schemas/DefaultCML/Input.php:126
 msgid ""
 "Disabling the actual processing of CommerceML files. Files will be accepted, "
 "but instead of processing them, they will be skipped with successful "
@@ -800,11 +851,13 @@ msgstr ""
 "вместо того, чтобы обрабатывать их, они будут пропущены при успешном "
 "завершении обработки."
 
-#: includes/Schemas/DefaultCML/Init.php:180
+#: includes/Schemas/DefaultCML/Admin.php:53
+#: includes/Schemas/DefaultCML/Input.php:132
 msgid "Deleting CommerceML files after processing"
 msgstr "Удаление CommerceML файлов после обработки"
 
-#: includes/Schemas/DefaultCML/Init.php:183
+#: includes/Schemas/DefaultCML/Admin.php:56
+#: includes/Schemas/DefaultCML/Input.php:135
 msgid ""
 "If deletion is disabled, the exchange files will remain in the directories "
 "until the next exchange. Otherwise, all processed files will be deleted "
@@ -814,11 +867,13 @@ msgstr ""
 "обмена. В противном случае все обработанные файлы будут удалены сразу же "
 "после безошибочной обработки."
 
-#: includes/Schemas/DefaultCML/Init.php:189
+#: includes/Schemas/DefaultCML/Admin.php:62
+#: includes/Schemas/DefaultCML/Input.php:141
 msgid "Deleting ZIP files after extract"
 msgstr "Удаление ZIP файлов после обработки"
 
-#: includes/Schemas/DefaultCML/Init.php:192
+#: includes/Schemas/DefaultCML/Admin.php:65
+#: includes/Schemas/DefaultCML/Input.php:144
 msgid ""
 "If deletion is disabled, the exchange ZIP files will remain in the "
 "directories until the next exchange."
@@ -826,11 +881,13 @@ msgstr ""
 "Если удаление отключено, то ZIP-файлы обмена останутся в каталогах до "
 "следующего обмена."
 
-#: includes/Schemas/DefaultCML/Init.php:210
+#: includes/Schemas/DefaultCML/Admin.php:83
+#: includes/Schemas/DefaultCML/Input.php:162
 msgid "Technical details"
 msgstr "Технические параметры"
 
-#: includes/Schemas/DefaultCML/Init.php:212
+#: includes/Schemas/DefaultCML/Admin.php:85
+#: includes/Schemas/DefaultCML/Input.php:164
 msgid ""
 "Changing processing behavior for compatibility of the environment and other "
 "systems."
@@ -838,11 +895,13 @@ msgstr ""
 "Изменение поведения обработки для обеспечения совместимости среды и других "
 "систем."
 
-#: includes/Schemas/DefaultCML/Init.php:219
+#: includes/Schemas/DefaultCML/Admin.php:92
+#: includes/Schemas/DefaultCML/Input.php:171
 msgid "Logging events"
 msgstr "Журнал событий"
 
-#: includes/Schemas/DefaultCML/Init.php:221
+#: includes/Schemas/DefaultCML/Admin.php:94
+#: includes/Schemas/DefaultCML/Input.php:173
 msgid ""
 "Can enable logging, specify the level of error that to benefit from "
 "logging.\n"
@@ -855,27 +914,33 @@ msgstr ""
 "вручную, нажав на кнопку. Все конфиденциальные данные в отчете удаляются. По "
 "умолчанию частота ошибок не должна быть меньше, чем ошибка."
 
-#: includes/Schemas/DefaultCML/Init.php:223
+#: includes/Schemas/DefaultCML/Admin.php:96
+#: includes/Schemas/DefaultCML/Input.php:175
 msgid "Current file: "
 msgstr "Текущий файл: "
 
-#: includes/Schemas/DefaultCML/Init.php:233
+#: includes/Schemas/DefaultCML/Admin.php:106
+#: includes/Schemas/DefaultCML/Input.php:185
 msgid "CRITICAL"
 msgstr "Критичные ошибки"
 
-#: includes/Schemas/DefaultCML/Init.php:234
+#: includes/Schemas/DefaultCML/Admin.php:107
+#: includes/Schemas/DefaultCML/Input.php:186
 msgid "ALERT"
 msgstr "Тревога"
 
-#: includes/Schemas/DefaultCML/Init.php:235
+#: includes/Schemas/DefaultCML/Admin.php:108
+#: includes/Schemas/DefaultCML/Input.php:187
 msgid "EMERGENCY"
 msgstr "Чрезвычайная ситуация"
 
-#: includes/Schemas/DefaultCML/Init.php:241
+#: includes/Schemas/DefaultCML/Admin.php:114
+#: includes/Schemas/DefaultCML/Input.php:193
 msgid "Converting to Windows-1251"
 msgstr "Преобразование в Windows-1251"
 
-#: includes/Schemas/DefaultCML/Init.php:244
+#: includes/Schemas/DefaultCML/Admin.php:117
+#: includes/Schemas/DefaultCML/Input.php:196
 msgid ""
 "Data from utf-8 will be converted to Windows-1251 encoding. Use this feature "
 "for compatibility with older versions of 1C."
@@ -883,11 +948,13 @@ msgstr ""
 "Данные из utf-8 будут преобразованы в кодировку Windows-1251. Используйте "
 "эту функцию для обеспечения совместимости с более старыми версиями 1С."
 
-#: includes/Schemas/DefaultCML/Init.php:259
+#: includes/Schemas/DefaultCML/Admin.php:132
+#: includes/Schemas/DefaultCML/Input.php:211
 msgid "Support for data compression"
 msgstr "Поддержка сжатия данных"
 
-#: includes/Schemas/DefaultCML/Init.php:262
+#: includes/Schemas/DefaultCML/Admin.php:135
+#: includes/Schemas/DefaultCML/Input.php:214
 msgid ""
 "1C can transfer files in archives to reduce the number of HTTP requests and "
 "compress data. In this case, the load may increase when unpacking archives, "
@@ -898,19 +965,23 @@ msgstr ""
 "архивов, или даже распаковка может оказаться невозможной из-за ограничений "
 "сервера."
 
-#: includes/Schemas/DefaultCML/Init.php:280
+#: includes/Schemas/DefaultCML/Admin.php:153
+#: includes/Schemas/DefaultCML/Input.php:232
 msgid "Requests authorization"
 msgstr "Авторизация запросов"
 
-#: includes/Schemas/DefaultCML/Init.php:282
+#: includes/Schemas/DefaultCML/Admin.php:155
+#: includes/Schemas/DefaultCML/Input.php:234
 msgid "Data for authorization of requests. These settings will connect 1C."
 msgstr "Данные для авторизации запросов. По этим настройкам подключится 1С."
 
-#: includes/Schemas/DefaultCML/Init.php:290
+#: includes/Schemas/DefaultCML/Admin.php:163
+#: includes/Schemas/DefaultCML/Input.php:242
 msgid "Requests URL"
 msgstr "Адрес для запросов"
 
-#: includes/Schemas/DefaultCML/Init.php:293
+#: includes/Schemas/DefaultCML/Admin.php:166
+#: includes/Schemas/DefaultCML/Input.php:245
 msgid ""
 "This address is entered in the exchange settings on the 1C side. It will "
 "receive requests from 1C."
@@ -918,11 +989,13 @@ msgstr ""
 "Этот адрес вводится в настройках обмена на стороне 1С. Он будет получать "
 "запросы от 1С."
 
-#: includes/Schemas/DefaultCML/Init.php:298
+#: includes/Schemas/DefaultCML/Admin.php:171
+#: includes/Schemas/DefaultCML/Input.php:250
 msgid "Login to connect"
 msgstr "Имя пользователя"
 
-#: includes/Schemas/DefaultCML/Init.php:300
+#: includes/Schemas/DefaultCML/Admin.php:173
+#: includes/Schemas/DefaultCML/Input.php:252
 msgid ""
 "Enter the username to connect from 1C. It should be the same as when setting "
 "up in 1C."
@@ -930,11 +1003,13 @@ msgstr ""
 "Введите логин для подключения из 1С. Он должен быть таким же, как и при "
 "настройке в 1С."
 
-#: includes/Schemas/DefaultCML/Init.php:307
+#: includes/Schemas/DefaultCML/Admin.php:180
+#: includes/Schemas/DefaultCML/Input.php:259
 msgid "Password to connect"
 msgstr "Пароль для подключения"
 
-#: includes/Schemas/DefaultCML/Init.php:309
+#: includes/Schemas/DefaultCML/Admin.php:182
+#: includes/Schemas/DefaultCML/Input.php:261
 msgid ""
 "Enter the users password to connect from 1C. It must be the same as when "
 "setting up in 1C."
@@ -942,39 +1017,51 @@ msgstr ""
 "Введите пароль пользователя для подключения из 1С. Он должен быть таким же, "
 "как и при настройке в 1С."
 
-#: includes/Schemas/DefaultCML/Init.php:513
+#: includes/Schemas/DefaultCML/Init.php:294
+#: includes/Schemas/DefaultCML/Input.php:465
 msgid "Schema: action not found"
 msgstr "Схема: действие не найдено"
 
-#: includes/Schemas/DefaultCML/Init.php:552
+#: includes/Schemas/DefaultCML/Init.php:333
+#: includes/Schemas/DefaultCML/Input.php:504
 msgid "Not specified the user. Check the server settings."
 msgstr "Не указан пользователь. Проверьте настройки сервера."
 
-#: includes/Schemas/DefaultCML/Init.php:563
-#: includes/Schemas/DefaultCML/Init.php:564
+#: includes/Schemas/DefaultCML/Init.php:344
+#: includes/Schemas/DefaultCML/Init.php:345
+#: includes/Schemas/DefaultCML/Input.php:515
+#: includes/Schemas/DefaultCML/Input.php:516
 msgid "Not a valid username"
 msgstr "Неверное имя пользователя"
 
-#: includes/Schemas/DefaultCML/Init.php:569
-#: includes/Schemas/DefaultCML/Init.php:570
+#: includes/Schemas/DefaultCML/Init.php:350
+#: includes/Schemas/DefaultCML/Init.php:351
+#: includes/Schemas/DefaultCML/Input.php:521
+#: includes/Schemas/DefaultCML/Input.php:522
 msgid "Not a valid user password"
 msgstr "Неверный пароль пользователя"
 
-#: includes/Schemas/DefaultCML/Init.php:590
-#: includes/Schemas/DefaultCML/Init.php:631
-#: includes/Schemas/DefaultCML/Init.php:727
+#: includes/Schemas/DefaultCML/Init.php:371
+#: includes/Schemas/DefaultCML/Init.php:412
+#: includes/Schemas/DefaultCML/Init.php:508
+#: includes/Schemas/DefaultCML/Input.php:542
+#: includes/Schemas/DefaultCML/Input.php:583
+#: includes/Schemas/DefaultCML/Input.php:679
 msgid "Authorization failed"
 msgstr "Не удалось выполнить авторизацию"
 
-#: includes/Schemas/DefaultCML/Init.php:640
+#: includes/Schemas/DefaultCML/Init.php:421
+#: includes/Schemas/DefaultCML/Input.php:592
 msgid "Unable to create a directory: "
 msgstr "Невозможно создать каталог: "
 
-#: includes/Schemas/DefaultCML/Init.php:649
+#: includes/Schemas/DefaultCML/Init.php:430
+#: includes/Schemas/DefaultCML/Input.php:601
 msgid "Filename is empty."
 msgstr "Имя файла пустое."
 
-#: includes/Schemas/DefaultCML/Init.php:737
+#: includes/Schemas/DefaultCML/Init.php:518
+#: includes/Schemas/DefaultCML/Input.php:689
 msgid "Import filename is empty."
 msgstr "Имя файла импорта пустое."
 
@@ -1000,7 +1087,7 @@ msgstr "Данные обо всех текущих окружениях."
 msgid "yes"
 msgstr "да"
 
-#: includes/Tools/Environments/Init.php:131
+#: includes/Tools/Environments/Init.php:131 includes/functions.php:328
 msgid "not"
 msgstr "нет"
 
@@ -1148,57 +1235,62 @@ msgstr "Валюта WooCommerce"
 msgid "WooCommerce currency symbol"
 msgstr "Символ валюты WooCommerce"
 
-#: includes/functions.php:239 includes/functions.php:275
+#: includes/functions.php:70 includes/functions.php:106
 msgid "Undefined"
 msgstr "Неопределенный"
 
-#: includes/functions.php:245
+#: includes/functions.php:76
 msgid "Draft"
 msgstr "Черновик"
 
-#: includes/functions.php:246
+#: includes/functions.php:77
 msgid "Active"
 msgstr "Включена"
 
-#: includes/functions.php:247
+#: includes/functions.php:78
 msgid "Inactive"
 msgstr "Отключена"
 
-#: includes/functions.php:248 templates/configurations/update_error.php:10
+#: includes/functions.php:79 templates/configurations/update_error.php:10
 msgid "Error"
 msgstr "Ошибка"
 
-#: includes/functions.php:249
+#: includes/functions.php:80
 msgid "Processing"
 msgstr "В процессе"
 
-#: includes/functions.php:250
+#: includes/functions.php:81
 msgid "Deleted"
 msgstr "Удалена"
 
-#: includes/functions.php:281
+#: includes/functions.php:112
 msgid "Drafts"
 msgstr "Черновики"
 
-#: includes/functions.php:282
+#: includes/functions.php:113
 msgid "Activated"
 msgstr "Включены"
 
-#: includes/functions.php:283
+#: includes/functions.php:114
 msgid "Deactivated"
 msgstr "Отключены"
 
-#: includes/functions.php:284
+#: includes/functions.php:115
 msgid "With errors"
 msgstr "С ошибками"
 
-#: includes/functions.php:285
+#: includes/functions.php:116
 msgid "In processing"
 msgstr "В процессе"
 
-#: includes/functions.php:286
+#: includes/functions.php:117
 msgid "Trash"
 msgstr "Удаленные"
+
+#: includes/functions.php:335
+#, php-format
+msgid "%s <span class=\"time\">in: %s</span> "
+msgstr "%s <br/><span class=\"time\">в: %s</span> "
 
 #: templates/configurations/create.php:6
 msgid "Back to all configurations"
@@ -1318,6 +1410,14 @@ msgstr "Открыть"
 msgid "Back to all tools"
 msgstr "Вернуться ко всем инструментам"
 
+#: templates/wizards/error.php:3
+msgid "Error. Step not found or unavailable."
+msgstr "Ошибка. Шаг не найден или не доступен."
+
+#: templates/wizards/page.php:41
+msgid "Step"
+msgstr "Шаг"
+
 #: vendor/digiom/notices-wp/src/Types/ErrorNotice.php:49
 #: vendor/digiom/notices-wp/src/Types/InfoNotice.php:47
 #: vendor/digiom/notices-wp/src/Types/SuccessNotice.php:49
@@ -1346,6 +1446,9 @@ msgstr ""
 #. Author of the plugin/theme
 msgid "WC1C team"
 msgstr "Команда WC1C"
+
+#~ msgid "Schema name: "
+#~ msgstr "Имя схемы: "
 
 #~ msgid "API"
 #~ msgstr "API"
@@ -1508,10 +1611,6 @@ msgstr "Команда WC1C"
 
 #~ msgid "Create new configuration"
 #~ msgstr "Создание новой конфигурации"
-
-#~ msgid ""
-#~ "The established exchange schemes are used to create the configuration."
-#~ msgstr "Для создания конфигурации используются установленные схемы обмена."
 
 #~ msgid "1. Enter a convenient name."
 #~ msgstr "1. Введите удобное имя."
