@@ -162,7 +162,11 @@ final class Admin
 		}
 		else
 		{
-			add_action(WC1C_ADMIN_PREFIX . 'show', [$this, 'wrapHeader'], 3);
+			if(false === get_option('wc1c_wizard', false))
+			{
+				add_action(WC1C_ADMIN_PREFIX . 'show', [$this, 'wrapHeader'], 3);
+			}
+
 			add_action(WC1C_ADMIN_PREFIX . 'show', [$this, 'wrapSections'], 7);
 
 			$callback = $sections[$current_section]['callback'];

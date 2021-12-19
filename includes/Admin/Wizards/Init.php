@@ -21,7 +21,7 @@ final class Init
 		/**
 		 * Setup
 		 */
-		if(false !== get_option('wc1c_wizard_setup', false))
+		if('setup' === get_option('wc1c_wizard', false))
 		{
 			SetupWizard::instance();
 		}
@@ -29,7 +29,7 @@ final class Init
 		/**
 		 * Update
 		 */
-		if(false !== get_option('wc1c_wizard_update', false))
+		if('update' === get_option('wc1c_wizard', false))
 		{
 			UpdateWizard::instance();
 		}
