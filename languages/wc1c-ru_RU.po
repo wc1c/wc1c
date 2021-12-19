@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WC1C > integration of WooCommerce with 1C products "
 "(different configurations)\n"
-"POT-Creation-Date: 2021-12-19 14:32+0300\n"
-"PO-Revision-Date: 2021-12-19 14:35+0300\n"
+"POT-Creation-Date: 2021-12-19 20:07+0300\n"
+"PO-Revision-Date: 2021-12-19 20:08+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
 "Language: ru_RU\n"
@@ -115,7 +115,7 @@ msgstr "Конфигурации"
 msgid "Tools"
 msgstr "Инструменты"
 
-#: includes/Admin.php:124 includes/Admin.php:212
+#: includes/Admin.php:124 includes/Admin.php:216
 msgid "Settings"
 msgstr "Настройки"
 
@@ -759,23 +759,23 @@ msgstr ""
 "Если этот параметр включен, сайт будет отправлять анонимные данные об "
 "использовании плагина на серверы WC1C один раз в неделю в фоновом режиме."
 
-#: includes/Admin/Wizards/SetupWizard.php:51
+#: includes/Admin/Wizards/Setup/Database.php:43
+msgid "Create tables error. Please retry."
+msgstr "Ошибка создания таблиц. Пожалуйста повторите."
+
+#: includes/Admin/Wizards/SetupWizard.php:54
 msgid "Setup wizard"
 msgstr "Мастер установки"
 
-#: includes/Admin/Wizards/SetupWizard.php:78
+#: includes/Admin/Wizards/SetupWizard.php:81
 msgid "Compatibility"
 msgstr "Совместимость"
 
-#: includes/Admin/Wizards/SetupWizard.php:83
+#: includes/Admin/Wizards/SetupWizard.php:86
 msgid "Database"
 msgstr "База данных"
 
-#: includes/Admin/Wizards/SetupWizard.php:88
-msgid "Connect to WC1C"
-msgstr "Подключение к WC1C"
-
-#: includes/Admin/Wizards/SetupWizard.php:93
+#: includes/Admin/Wizards/SetupWizard.php:91
 msgid "Completing"
 msgstr "Завершение"
 
@@ -1414,9 +1414,67 @@ msgstr "Вернуться ко всем инструментам"
 msgid "Error. Step not found or unavailable."
 msgstr "Ошибка. Шаг не найден или не доступен."
 
-#: templates/wizards/page.php:41
+#: templates/wizards/page.php:42
 msgid "Step"
 msgstr "Шаг"
+
+#: templates/wizards/steps/check.php:15
+msgid "Welcome to WC1C!"
+msgstr "Добро пожаловать в WC1C!"
+
+#: templates/wizards/steps/check.php:16
+msgid ""
+"Thank you for choosing WC1C to website! This is only complete solution for "
+"integrating WooCommerce with 1C."
+msgstr ""
+"Спасибо, что выбрали WC1C для сайта! Это единственное полноценное решение "
+"для интеграции WooCommerce с 1С."
+
+#: templates/wizards/steps/check.php:18
+msgid "This quick setup wizard will help you configure the basic settings."
+msgstr ""
+"Этот мастер быстрой настройки поможет вам настроить основные параметры."
+
+#: templates/wizards/steps/check.php:22
+msgid ""
+"PHP scripts execution time is less than 10 seconds. WC1C requires at least "
+"20. Set php_max_execution_time to more than 20 seconds."
+msgstr ""
+"Время выполнения PHP-скриптов менее 10 секунд. WC1C требует как минимум 20. "
+"Установите для php_max_execution_time значение более 20 секунд."
+
+#: templates/wizards/steps/check.php:26
+msgid "Its should not take longer than five minutes."
+msgstr "Это не должно занять больше пяти минут."
+
+#: templates/wizards/steps/check.php:29 templates/wizards/steps/database.php:21
+msgid "Lets Go!"
+msgstr "Погнали!"
+
+#: templates/wizards/steps/check.php:35
+msgid "Need to fix the compatibility errors and return to the setup wizard."
+msgstr ""
+"Необходимо исправить ошибки совместимости и вернуться к мастеру настройки."
+
+#: templates/wizards/steps/complete.php:15
+msgid "Installation completed!"
+msgstr "Установка завершена!"
+
+#: templates/wizards/steps/complete.php:16
+msgid "Now you can proceed to using the WC1C plugin."
+msgstr "Теперь вы можете перейти к использованию плагина WC1C."
+
+#: templates/wizards/steps/complete.php:20
+msgid "Go to use"
+msgstr "Перейти к использованию"
+
+#: templates/wizards/steps/database.php:15
+msgid "Creating tables in the database"
+msgstr "Создание таблиц в базе данных"
+
+#: templates/wizards/steps/database.php:16
+msgid "If continue, the required tables will be created in the database."
+msgstr "Если продолжить, необходимые таблицы будут созданы в базе данных."
 
 #: vendor/digiom/notices-wp/src/Types/ErrorNotice.php:49
 #: vendor/digiom/notices-wp/src/Types/InfoNotice.php:47

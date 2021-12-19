@@ -4,7 +4,7 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: WC1C > integration of WooCommerce with 1C products "
 "(different configurations)\n"
-"POT-Creation-Date: 2021-12-19 14:31+0300\n"
+"POT-Creation-Date: 2021-12-19 18:55+0300\n"
 "PO-Revision-Date: 2019-03-19 20:30+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
@@ -113,7 +113,7 @@ msgstr ""
 msgid "Tools"
 msgstr ""
 
-#: includes/Admin.php:124 includes/Admin.php:212
+#: includes/Admin.php:124 includes/Admin.php:216
 msgid "Settings"
 msgstr ""
 
@@ -714,23 +714,19 @@ msgid ""
 "servers once a week in the background."
 msgstr ""
 
-#: includes/Admin/Wizards/SetupWizard.php:51
+#: includes/Admin/Wizards/SetupWizard.php:54
 msgid "Setup wizard"
 msgstr ""
 
-#: includes/Admin/Wizards/SetupWizard.php:78
+#: includes/Admin/Wizards/SetupWizard.php:81
 msgid "Compatibility"
 msgstr ""
 
-#: includes/Admin/Wizards/SetupWizard.php:83
+#: includes/Admin/Wizards/SetupWizard.php:86
 msgid "Database"
 msgstr ""
 
-#: includes/Admin/Wizards/SetupWizard.php:88
-msgid "Connect to WC1C"
-msgstr ""
-
-#: includes/Admin/Wizards/SetupWizard.php:93
+#: includes/Admin/Wizards/SetupWizard.php:91
 msgid "Completing"
 msgstr ""
 
@@ -1336,8 +1332,56 @@ msgstr ""
 msgid "Error. Step not found or unavailable."
 msgstr ""
 
-#: templates/wizards/page.php:41
+#: templates/wizards/page.php:42
 msgid "Step"
+msgstr ""
+
+#: templates/wizards/steps/check.php:15
+msgid "Welcome to WC1C!"
+msgstr ""
+
+#: templates/wizards/steps/check.php:16
+msgid ""
+"Thank you for choosing WC1C to website! This is only complete solution for "
+"integrating WooCommerce with 1C."
+msgstr ""
+
+#: templates/wizards/steps/check.php:18
+msgid "This quick setup wizard will help you configure the basic settings."
+msgstr ""
+
+#: templates/wizards/steps/check.php:22
+msgid ""
+"PHP scripts execution time is less than 10 seconds. WC1C requires at least 20. "
+"Set php_max_execution_time to more than 20 seconds."
+msgstr ""
+
+#: templates/wizards/steps/check.php:26
+msgid "Its should not take longer than five minutes."
+msgstr ""
+
+#: templates/wizards/steps/check.php:28 templates/wizards/steps/database.php:19
+msgid "Lets Go!"
+msgstr ""
+
+#: templates/wizards/steps/check.php:33
+msgid "Need to fix the compatibility errors and return to the setup wizard."
+msgstr ""
+
+#: templates/wizards/steps/complete.php:15
+msgid "Установка успешно завершена!"
+msgstr ""
+
+#: templates/wizards/steps/complete.php:16
+msgid "Теперь можно перейти к использованию плагина WC1C."
+msgstr ""
+
+#: templates/wizards/steps/complete.php:19
+msgid "Перейти к использованию"
+msgstr ""
+
+#: templates/wizards/steps/database.php:15
+msgid "Создание таблиц в базе данных"
 msgstr ""
 
 #: vendor/digiom/notices-wp/src/Types/ErrorNotice.php:49
