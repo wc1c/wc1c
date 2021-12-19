@@ -1,22 +1,12 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Admin\Configurations;
+<?php namespace Wc1c\Admin\Configurations;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use Wc1c\Exceptions\Exception;
 use Wc1c\Abstracts\FormAbstract;
 
 /**
- * Class UpdateForm
+ * UpdateForm
  *
  * @package Wc1c\Admin\Configurations
  */
@@ -29,7 +19,7 @@ class UpdateForm extends FormAbstract
 	{
 		$this->set_id('configurations-update');
 
-		add_filter(WC1C_PREFIX . $this->get_id() . '_form_load_fields', [$this, 'init_fields_main'], 10);
+		add_filter(WC1C_PREFIX . $this->get_id() . '_form_load_fields', [$this, 'init_fields_main'], 3);
 		add_action('wc1c_admin_configurations_update_sidebar_show', [$this, 'output_navigation'], 20);
 
 		$this->load_fields();
@@ -82,7 +72,7 @@ class UpdateForm extends FormAbstract
 			'object' => $this
 		];
 
-		wc1c_get_template('configurations/update_form.php', $args);
+		wc1c()->templates()->getTemplate('configurations/update_form.php', $args);
 	}
 
 	/**
@@ -151,7 +141,7 @@ class UpdateForm extends FormAbstract
 
 		$args =
         [
-            'header' => '<h4 class="p-0 m-0">' . __('Fast navigation', 'wc1c') . '</h4>',
+            'header' => '<h3 class="p-0 m-0">' . __('Fast navigation', 'wc1c') . '</h3>',
             'object' => $this
         ];
 
@@ -181,7 +171,7 @@ class UpdateForm extends FormAbstract
         {
 	        $args['body'] = $body;
 
-	        wc1c_get_template('configurations/update_sidebar_item.php', $args);
+	        wc1c()->templates()->getTemplate('configurations/update_sidebar_item.php', $args);
         }
 	}
 

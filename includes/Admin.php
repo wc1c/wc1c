@@ -1,17 +1,7 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c;
+<?php namespace Wc1c;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use Digiom\WordPress\Notices\Interfaces\ManagerInterface;
 use Digiom\WordPress\Notices\Manager;
 use Wc1c\Admin\Configurations;
@@ -53,18 +43,16 @@ final class Admin
 
 		add_action('admin_menu', [$this, 'addMenu'], 30);
 
-		if(is_wc1c_admin_request())
+		if(wc1c()->context()->isWc1cAdmin())
 		{
 			add_action('init', [$this, 'init'], 10);
 			add_action('admin_enqueue_scripts', [$this, 'initStyles']);
 
 			Admin\Helps\Init::instance();
+			Admin\Wizards\Init::instance();
 		}
 
-		if(defined('WC1C_PLUGIN_NAME'))
-		{
-			add_filter('plugin_action_links_' . WC1C_PLUGIN_NAME, [$this, 'linksLeft']);
-		}
+		add_filter('plugin_action_links_' . WC1C_PLUGIN_NAME, [$this, 'linksLeft']);
 
 		// hook
 		do_action(WC1C_ADMIN_PREFIX . 'after_loading');
@@ -157,7 +145,7 @@ final class Admin
 	 */
 	public function initStyles()
 	{
-		wp_enqueue_style(WC1C_ADMIN_PREFIX . 'main', WC1C_PLUGIN_URL . 'assets/css/main.css');
+		wp_enqueue_style(WC1C_ADMIN_PREFIX . 'main', WC1C_PLUGIN_URL . 'assets/css/main.min.css');
 	}
 
 	/**
@@ -174,7 +162,11 @@ final class Admin
 		}
 		else
 		{
-			add_action(WC1C_ADMIN_PREFIX . 'show', [$this, 'wrapHeader'], 3);
+			if(false === get_option('wc1c_wizard', false))
+			{
+				add_action(WC1C_ADMIN_PREFIX . 'show', [$this, 'wrapHeader'], 3);
+			}
+
 			add_action(WC1C_ADMIN_PREFIX . 'show', [$this, 'wrapSections'], 7);
 
 			$callback = $sections[$current_section]['callback'];
@@ -185,7 +177,7 @@ final class Admin
 			}
 		}
 
-		wc1c_get_template('wrap.php');
+		wc1c()->templates()->getTemplate('wrap.php');
 	}
 
 	/**
@@ -193,7 +185,7 @@ final class Admin
 	 */
 	public function wrapError()
 	{
-		wc1c_get_template('error.php');
+		wc1c()->templates()->getTemplate('error.php');
 	}
 
 	/**
@@ -201,7 +193,7 @@ final class Admin
 	 */
 	public function wrapHeader()
 	{
-		wc1c_get_template('header.php');
+		wc1c()->templates()->getTemplate('header.php');
 	}
 
 	/**
@@ -209,7 +201,7 @@ final class Admin
 	 */
 	public function wrapSections()
 	{
-		wc1c_get_template('sections.php');
+		wc1c()->templates()->getTemplate('sections.php');
 	}
 
 	/**

@@ -1,174 +1,5 @@
 <?php
 /**
- * Is WC1C api request?
- *
- * @return bool
- */
-function is_wc1c_api_request()
-{
-	if(wc1c_get_var($_GET['wc1c-input'], false))
-	{
-		return true;
-	}
-
-	return false;
-}
-
-/**
- * Is WC1C admin request?
- *
- * @return bool
- */
-function is_wc1c_admin_request()
-{
-	if(false !== is_admin() && 'wc1c' === wc1c_get_var($_GET['page'], ''))
-	{
-		return true;
-	}
-
-	return false;
-}
-
-/**
- * Get data if set, otherwise return a default value or null
- * Prevents notices when data is not set
- *
- * @param mixed $var variable
- * @param string $default default value
- *
- * @return mixed
- */
-function wc1c_get_var(&$var, $default = null)
-{
-	return isset($var) ? $var : $default;
-}
-
-/**
- * Get templates
- *
- * @param string $template_name template name
- * @param array $args arguments (default: array)
- * @param string $template_path template path (default: '')
- * @param string $default_path default path (default: '')
- */
-function wc1c_get_template($template_name, $args = [], $template_path = '', $default_path = '')
-{
-	$located = wc1c_locate_template($template_name, $template_path, $default_path);
-
-	if(!file_exists($located))
-	{
-		return;
-	}
-
-	$located = apply_filters('wc1c_get_template', $located, $template_name, $args, $template_path, $default_path);
-
-	do_action('wc1c_get_template_before', $template_name, $template_path, $located, $args);
-
-	include $located;
-
-	do_action('wc1c_get_template_after', $template_name, $template_path, $located, $args);
-}
-
-/**
- * Get template part
- *
- * @param mixed $slug Template slug
- * @param string $name Template name (default: '')
- */
-function wc1c_get_template_part($slug, $name = '')
-{
-	$template = '';
-
-	// Look in yourtheme/wc1c/slug-name.php
-	if($name)
-	{
-		$template = locate_template(['wc1c/' . "{$slug}-{$name}.php"]);
-	}
-
-	// Get default slug-name.php
-	if(!$template && $name && file_exists(WC1C_PLUGIN_PATH . "templates/{$slug}-{$name}.php"))
-	{
-		$template = WC1C_PLUGIN_PATH . "templates/{$slug}-{$name}.php";
-	}
-
-	// If template file doesn't exist, look in yourtheme/wc1c/slug.php
-	if(!$template)
-	{
-		$template = locate_template(['wc1c/' . "{$slug}.php"]);
-	}
-
-	// Allow 3rd party plugins to filter template file from their plugin
-	$template = apply_filters('wc1c_get_template_part', $template, $slug, $name);
-
-	if($template)
-	{
-		load_template($template, false);
-	}
-}
-
-/**
- * Like wc1c_get_template, but returns the HTML instead of outputting
- *
- * @param string $template_name template name
- * @param array $args arguments (default: array)
- * @param string $template_path template path (default: '')
- * @param string $default_path default path (default: '')
- *
- * @return string
- */
-function wc1c_get_template_html($template_name, $args = [], $template_path = '', $default_path = '')
-{
-	ob_start();
-	wc1c_get_template($template_name, $args, $template_path, $default_path);
-
-	return ob_get_clean();
-}
-
-/**
- * Locate a template and return the path for inclusion
- *
- * This is the load order:
- *
- * yourtheme/$template_path/$template_name
- * yourtheme/wc1c/$template_name
- * $default_path/$template_name
- *
- * @param string $template_name template name
- * @param string $template_path template path (default: '')
- * @param string $default_path default path (default: '')
- *
- * @return string
- */
-function wc1c_locate_template($template_name, $template_path = '', $default_path = '')
-{
-	$template = false;
-
-	if(!$template_path)
-	{
-		$template_path = 'wc1c';
-	}
-
-	if(!$default_path)
-	{
-		$default_path = WC1C_PLUGIN_PATH . 'templates/';
-	}
-
-	if($template_path && file_exists(trailingslashit($template_path) . $template_name))
-	{
-		$template = trailingslashit($template_path) . $template_name;
-	}
-
-	// Get default template/
-	if(!$template)
-	{
-		$template = $default_path . $template_name;
-	}
-
-	// Return what we found
-	return apply_filters('wc1c_locate_template', $template, $template_name, $template_path);
-}
-
-/**
  * Convert kb, mb, gb to bytes
  *
  * @param $size
@@ -298,17 +129,6 @@ function wc1c_configurations_get_statuses_folder($status)
 }
 
 /**
- * Old WP
- */
-if(!function_exists('wp_doing_ajax'))
-{
-	function wp_doing_ajax()
-	{
-		return apply_filters( 'wp_doing_ajax', defined( 'DOING_AJAX' ) && DOING_AJAX );
-	}
-}
-
-/**
  * Convert mysql datetime to PHP timestamp, forcing UTC. Wrapper for strtotime
  *
  * @param string $time_string Time string
@@ -395,9 +215,7 @@ function wc1c_timezone_offset()
 
 	if($timezone)
 	{
-		$timezone_object = new DateTimeZone($timezone);
-
-		return $timezone_object->getOffset(new DateTime('now'));
+		return (new DateTimeZone($timezone))->getOffset(new DateTime('now'));
 	}
 
 	return (float) get_option('gmt_offset', 0) * HOUR_IN_SECONDS;
@@ -422,7 +240,7 @@ function is_wc1c_admin_tools_request($tool_id = '')
 		return true;
 	}
 
-	$get_tool_id = wc1c_get_var($_GET['tool_id'], '');
+	$get_tool_id = wc1c()->getVar($_GET['tool_id'], '');
 
 	if($get_tool_id !== $tool_id)
 	{
@@ -441,12 +259,12 @@ function is_wc1c_admin_tools_request($tool_id = '')
  */
 function is_wc1c_admin_section_request($section = '')
 {
-	if('' === $section)
+	if(wc1c()->getVar($_GET['section'], '') !== $section)
 	{
 		return false;
 	}
 
-	if(is_wc1c_admin_request() && wc1c_get_var($_GET['section'], '') === $section)
+	if(wc1c()->context()->isWc1cAdmin())
 	{
 		return true;
 	}
@@ -496,4 +314,26 @@ function wc1c_admin_configurations_get_url($action = 'all', $configuration_id = 
 	$path .= '&configuration_id=' . $configuration_id;
 
 	return admin_url($path);
+}
+
+/**
+ * @param $date
+ *
+ * @return string
+ */
+function wc1c_pretty_date($date)
+{
+	if(!$date)
+	{
+		return __('not', 'wc1c');
+	}
+
+	$timestamp_create = wc1c_string_to_timestamp($date) + wc1c_timezone_offset();
+
+	return sprintf
+	(
+		__('%s <span class="time">in: %s</span> ', 'wc1c'),
+		date_i18n('d/m/Y', $timestamp_create),
+		date_i18n('H:i:s', $timestamp_create)
+	);
 }

@@ -1,22 +1,12 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Admin\Configurations;
+<?php namespace Wc1c\Admin\Configurations;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use Wc1c\Exceptions\Exception;
 use Wc1c\Abstracts\FormAbstract;
 
 /**
- * Class DeleteForm
+ * DeleteForm
  *
  * @package Wc1c\Admin\Configurations
  */
@@ -64,7 +54,7 @@ class DeleteForm extends FormAbstract
 			'object' => $this
 		];
 
-		wc1c_get_template('configurations/delete_form.php', $args);
+		wc1c()->templates()->getTemplate('configurations/delete_form.php', $args);
 	}
 
 	/**

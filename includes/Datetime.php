@@ -1,22 +1,12 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c;
+<?php namespace Wc1c;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use Datetime as SystemDatetime;
 use DateTimeZone;
 
 /**
- * Class Datetime
+ * Datetime
  *
  * @package Wc1c
  */

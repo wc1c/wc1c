@@ -42,7 +42,7 @@ final class Request
 	 */
 	public function isInput()
 	{
-		if(wc1c_get_var($_GET['wc1c-input'], false))
+		if(wc1c()->getVar($_GET['wc1c-input'], false))
 		{
 			return true;
 		}
@@ -57,7 +57,7 @@ final class Request
 	 */
 	public function isWc1cAdmin()
 	{
-		if(false !== is_admin() && 'wc1c' === wc1c_get_var($_GET['page'], ''))
+		if(false !== is_admin() && 'wc1c' === wc1c()->getVar($_GET['page'], ''))
 		{
 			return true;
 		}

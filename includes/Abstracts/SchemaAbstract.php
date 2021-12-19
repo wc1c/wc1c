@@ -1,17 +1,7 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Abstracts;
+<?php namespace Wc1c\Abstracts;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use Wc1c\Configuration;
 use Wc1c\Exceptions\Exception;
 

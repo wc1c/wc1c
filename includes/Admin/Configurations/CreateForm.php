@@ -1,17 +1,6 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Admin\Configurations;
+<?php namespace Wc1c\Admin\Configurations;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
-
-/**
- * Dependencies
- */
 
 use Wc1c\Configuration;
 use Wc1c\Exceptions\Exception;
@@ -220,6 +209,6 @@ class CreateForm extends FormAbstract
 			'object' => $this
 		];
 
-		wc1c_get_template('configurations/create_form.php', $args);
+		wc1c()->templates()->getTemplate('configurations/create_form.php', $args);
 	}
 }

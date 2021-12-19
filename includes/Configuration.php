@@ -239,7 +239,7 @@ class Configuration extends DataConfigurations
 	 * If the DateTime string has no timezone or
 	 * offset, WordPress site timezone will be assumed. Null if their is no date.
 	 *
-	 * @throws Exception|\Exception
+	 * @throws Exception
 	 */
 	public function setDateModify($date = null)
 	{
@@ -253,7 +253,7 @@ class Configuration extends DataConfigurations
 	 * If the DateTime string has no timezone or
 	 * offset, WordPress site timezone will be assumed. Null if their is no date.
 	 *
-	 * @throws Exception|\Exception
+	 * @throws Exception
 	 */
 	public function setDateActivity($date = null)
 	{

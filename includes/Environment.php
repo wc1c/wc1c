@@ -94,11 +94,11 @@ final class Environment
 	 */
 	public function initCurrentConfigurationId()
 	{
-		$config_id = wc1c_get_var($_GET['configuration_id'], 0);
+		$config_id = wc1c()->getVar($_GET['configuration_id'], 0);
 
 		if(0 < $config_id && 99999999 > $config_id)
 		{
-			if(is_wc1c_api_request() || is_wc1c_admin_request())
+			if(wc1c()->context()->isInput() || wc1c()->context()->isWc1cAdmin())
 			{
 				$this->set('current_configuration_id', $config_id);
 

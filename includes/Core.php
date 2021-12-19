@@ -34,12 +34,17 @@ final class Core
 	use LoggerAwareTrait;
 
 	/**
+	 * @var Context
+	 */
+	private $context;
+
+	/**
 	 * @var Timer
 	 */
 	private $timer;
 
 	/**
-	 * @var MainSettings
+	 * @var SettingsInterface
 	 */
 	private $settings;
 
@@ -68,10 +73,12 @@ final class Core
 	 *
 	 * @return void
 	 */
-	public function __construct()
+	public function __construct($context)
 	{
 		// hook
 		do_action(WC1C_PREFIX . 'before_loading');
+
+		$this->context = $context;
 
 		// init
 		add_action('init', [$this, 'init'], 3);
@@ -94,14 +101,7 @@ final class Core
 		// hook
 		do_action(WC1C_PREFIX . 'before_init');
 
-		try
-		{
-			$this->localization();
-		}
-		catch(Exception $e)
-		{
-			wc1c()->log()->alert('init: exception - ' . $e->getMessage());
-		}
+		$this->localization();
 
 		try
 		{
@@ -109,7 +109,7 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			wc1c()->log()->alert('init: exception - ' . $e->getMessage());
+			wc1c()->log()->alert('Timer exception - ' . $e->getMessage());
 		}
 
 		try
@@ -118,7 +118,7 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			wc1c()->log()->alert('init: exception - ' . $e->getMessage());
+			wc1c()->log()->alert('Extensions exception - ' . $e->getMessage());
 		}
 
 		try
@@ -127,7 +127,7 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			wc1c()->log()->alert('init: exception - ' . $e->getMessage());
+			wc1c()->log()->alert('Init extensions exception - ' . $e->getMessage());
 		}
 
 		try
@@ -136,10 +136,10 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			wc1c()->log()->alert('init: exception - ' . $e->getMessage());
+			wc1c()->log()->alert('Schemas load exception - ' . $e->getMessage());
 		}
 
-		if(false !== is_wc1c_api_request() || false !== is_wc1c_admin_request())
+		if(false !== wc1c()->context()->isInput() || false !== wc1c()->context()->isWc1cAdmin())
 		{
 			try
 			{
@@ -147,11 +147,11 @@ final class Core
 			}
 			catch(Exception $e)
 			{
-				wc1c()->log()->alert('exception - ' . $e->getMessage());
+				wc1c()->log()->alert('Tools exception - ' . $e->getMessage());
 			}
 		}
 
-		if(false !== is_wc1c_api_request())
+		if(false !== wc1c()->context()->isInput())
 		{
 			try
 			{
@@ -159,7 +159,7 @@ final class Core
 			}
 			catch(Exception $e)
 			{
-				wc1c()->log()->alert('init: exception - ' . $e->getMessage());
+				wc1c()->log()->alert('Input exception - ' . $e->getMessage());
 			}
 		}
 
@@ -188,13 +188,13 @@ final class Core
 	}
 
 	/**
-	 * Request
+	 * Context
 	 *
-	 * @return Request
+	 * @return Context
 	 */
-	public function request()
+	public function context()
 	{
-		return Request::instance();
+		return $this->context;
 	}
 
 	/**
@@ -268,7 +268,7 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('$extensions - ' . $e->getMessage());
+			throw new Exception('Get extensions exception - ' . $e->getMessage());
 		}
 
 		if(!is_array($extensions))
@@ -300,7 +300,7 @@ final class Core
 
 			if(!method_exists($init_extension, 'init'))
 			{
-				throw new Exception('method init not found');
+				throw new Exception('method init is not found');
 			}
 
 			try
@@ -309,7 +309,7 @@ final class Core
 			}
 			catch(Exception $e)
 			{
-				throw new Exception('exception by extension - ' . $e->getMessage());
+				throw new Exception('Init extension exception - ' . $e->getMessage());
 			}
 
 			$init_extension->setInitialized(true);
@@ -359,7 +359,7 @@ final class Core
 			}
 			catch(Exception $e)
 			{
-				throw new Exception('init_schemas: exception - ' . $e->getMessage());
+				throw new Exception('exception - ' . $e->getMessage());
 			}
 
 			if(!$storage_configurations->isExistingById($configuration))
@@ -388,12 +388,12 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('init_schemas: exception - ' . $e->getMessage());
+			throw new Exception('exception - ' . $e->getMessage());
 		}
 
 		if(!is_array($schemas))
 		{
-			throw new Exception('init_schemas: $schemas is not array');
+			throw new Exception('$schemas is not array');
 		}
 
 		$schema_id = $configuration->getSchema();
@@ -460,7 +460,7 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			throw new RuntimeException('schema init exception - ' . $e->getMessage());
+			throw new RuntimeException('Schema init exception - ' . $e->getMessage());
 		}
 
 		$schema_default->setId('defaultcml');
@@ -518,18 +518,11 @@ final class Core
 	 */
 	private function loadTimer()
 	{
-		try
-		{
-			$timer = new Timer();
-		}
-		catch(Exception $e)
-		{
-			throw new Exception('load_timer: exception - ' . $e->getMessage());
-		}
+		$timer = new Timer();
 
 		$php_max_execution = $this->environment()->get('php_max_execution_time', 20);
 
-		if($this->settings()->get('php_max_execution_time', $php_max_execution) !== $php_max_execution)
+		if($php_max_execution !== $this->settings()->get('php_max_execution_time', $php_max_execution))
 		{
 			$php_max_execution = $this->settings()->get('php_max_execution_time', $php_max_execution);
 		}
@@ -542,7 +535,7 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('load_timer: exception - ' . $e->getMessage());
+			throw new Exception('Set timer exception - ' . $e->getMessage());
 		}
 	}
 
@@ -558,15 +551,23 @@ final class Core
 		{
 			$this->loadTimer();
 		}
+
 		return $this->timer;
 	}
 
 	/**
-	 * @param Timer|null $timer
+	 * @param Timer $timer
+	 *
+	 * @throws Exception
 	 */
 	public function setTimer($timer)
 	{
-		$this->timer = $timer;
+		if($timer instanceof Timer)
+		{
+			$this->timer = $timer;
+		}
+
+		throw new Exception('$timer is not Timer');
 	}
 
 	/**
@@ -647,7 +648,7 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('load_extensions: set_extensions - ' . $e->getMessage());
+			throw new Exception('Extensions set exception - ' . $e->getMessage());
 		}
 	}
 
@@ -708,6 +709,7 @@ final class Core
 		if(is_array($extensions))
 		{
 			$this->extensions = $extensions;
+
 			return true;
 		}
 

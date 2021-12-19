@@ -1,23 +1,13 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Admin\Configurations;
+<?php namespace Wc1c\Admin\Configurations;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use Wc1c\Abstracts\ScreenAbstract;
 use Wc1c\Exceptions\Exception;
 use Wc1c\Traits\SingletonTrait;
 
 /**
- * Class Create
+ * Create
  *
  * @package Wc1c\Admin\Configurations
  */
@@ -44,7 +34,7 @@ class Create extends ScreenAbstract
 	 */
 	public function wrapError()
 	{
-		wc1c_get_template('configurations/error.php');
+		wc1c()->templates()->getTemplate('configurations/error.php');
 	}
 
 	/**
@@ -54,6 +44,6 @@ class Create extends ScreenAbstract
 	 */
 	public function output()
 	{
-		wc1c_get_template('configurations/create.php');
+		wc1c()->templates()->getTemplate('configurations/create.php');
 	}
 }

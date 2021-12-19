@@ -154,6 +154,6 @@ abstract class Form extends FormAbstract
 			'object' => $this
 		];
 
-		wc1c_get_template('settings/form.php', $args);
+		wc1c()->templates()->getTemplate('settings/form.php', $args);
 	}
 }

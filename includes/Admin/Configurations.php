@@ -79,7 +79,7 @@ class Configurations
 	 */
 	public function init_current_action()
 	{
-		$do_action = wc1c_get_var($_GET['do_action'], 'all');
+		$do_action = wc1c()->getVar($_GET['do_action'], 'all');
 
 		if(in_array($do_action, $this->get_actions(), true))
 		{

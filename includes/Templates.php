@@ -56,20 +56,20 @@ final class Templates
 	 */
 	public function getTemplate($template_name, $args = [], $template_path = '', $default_path = '')
 	{
-		$located = wc1c_locate_template($template_name, $template_path, $default_path);
+		$located = $this->locateTemplate($template_name, $template_path, $default_path);
 
 		if(!file_exists($located))
 		{
 			return;
 		}
 
-		$located = apply_filters('wc1c_get_template', $located, $template_name, $args, $template_path, $default_path);
+		$located = apply_filters(WC1C_PREFIX . 'get_template', $located, $template_name, $args, $template_path, $default_path);
 
-		do_action('wc1c_get_template_before', $template_name, $template_path, $located, $args);
+		do_action(WC1C_PREFIX . 'get_template_before', $template_name, $template_path, $located, $args);
 
 		include $located;
 
-		do_action('wc1c_get_template_after', $template_name, $template_path, $located, $args);
+		do_action(WC1C_PREFIX . 'get_template_after', $template_name, $template_path, $located, $args);
 	}
 
 	/**
@@ -101,7 +101,7 @@ final class Templates
 		}
 
 		// Allow 3rd party plugins to filter template file from their plugin
-		$template = apply_filters('wc1c_get_template_part', $template, $slug, $name);
+		$template = apply_filters(WC1C_PREFIX . 'get_template_part', $template, $slug, $name);
 
 		if($template)
 		{
@@ -110,7 +110,7 @@ final class Templates
 	}
 
 	/**
-	 * Like wc1c_get_template, but returns the HTML instead of outputting
+	 * Like wc1c()->templates()->getTemplate, but returns the HTML instead of outputting
 	 *
 	 * @param string $template_name template name
 	 * @param array $args arguments (default: array)
@@ -168,6 +168,6 @@ final class Templates
 		}
 
 		// Return what we found
-		return apply_filters('wc1c_locate_template', $template, $template_name, $template_path);
+		return apply_filters(WC1C_PREFIX . 'locate_template', $template, $template_name, $template_path);
 	}
 }

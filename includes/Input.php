@@ -41,7 +41,7 @@ class Input
 	 */
 	public function handleRequests()
 	{
-		$wc1c_input = wc1c_get_var($_GET['wc1c-input'], false);
+		$wc1c_input = wc1c()->getVar($_GET['wc1c-input'], false);
 
 		if(false !== $wc1c_input)
 		{

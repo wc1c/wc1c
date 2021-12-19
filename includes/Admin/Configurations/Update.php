@@ -1,24 +1,14 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Admin\Configurations;
+<?php namespace Wc1c\Admin\Configurations;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use Wc1c\Admin\Traits\ProcessConfigurationTrait;
 use Wc1c\Exceptions\Exception;
 use Wc1c\Exceptions\RuntimeException;
 use Wc1c\Traits\SingletonTrait;
 
 /**
- * Class Update
+ * Update
  *
  * @package Wc1c\Admin\Configurations
  */
@@ -32,7 +22,7 @@ class Update
 	 */
 	public function __construct()
 	{
-		$configuration_id = wc1c_get_var($_GET['configuration_id'], 0);
+		$configuration_id = wc1c()->getVar($_GET['configuration_id'], 0);
 
 		if(false === $this->setConfiguration($configuration_id))
 		{
@@ -43,6 +33,7 @@ class Update
 			catch(Exception $e)
 			{
 				add_action(WC1C_ADMIN_PREFIX . 'configurations_update_show', [$this, 'outputSchemaError'], 10);
+				add_filter(WC1C_ADMIN_PREFIX . 'configurations_update_schema_error_text', [$this, 'outputSchemaErrorText'], 10, 1);
 			}
 
 			$this->process();
@@ -62,13 +53,9 @@ class Update
 	public function process()
 	{
 		$configuration = $this->getConfiguration();
-
 		$form = new UpdateForm();
 
-		$form->load_fields();
-
 		$form_data = $configuration->getOptions();
-
 		$form_data['name'] = $configuration->getName();
 		$form_data['status'] = $configuration->getStatus();
 
@@ -84,7 +71,7 @@ class Update
 			$configuration->setName($data['name']);
 			unset($data['name']);
 
-			$configuration->setDateModify();
+			$configuration->setDateModify(time());
 			$configuration->setOptions($data);
 
 			$saved = $configuration->save();
@@ -111,8 +98,8 @@ class Update
 			}
 		}
 
-		add_action('wc1c_admin_configurations_update_sidebar_show', [$this, 'outputSidebar'], 10);
-		add_action('wc1c_admin_configurations_update_show', [$form, 'outputForm'], 10);
+		add_action(WC1C_ADMIN_PREFIX . 'configurations_update_sidebar_show', [$this, 'outputSidebar'], 10);
+		add_action(WC1C_ADMIN_PREFIX . 'configurations_update_show', [$form, 'outputForm'], 10);
 	}
 
 	/**
@@ -120,7 +107,7 @@ class Update
 	 */
 	public function outputError()
 	{
-		wc1c_get_template('configurations/update_error.php');
+		wc1c()->templates()->getTemplate('configurations/update_error.php');
 	}
 
 	/**
@@ -128,7 +115,7 @@ class Update
 	 */
 	public function outputSchemaError()
 	{
-		wc1c_get_template('configurations/update_schema_error.php');
+		wc1c()->templates()->getTemplate('configurations/update_schema_error.php');
 	}
 
 	/**
@@ -138,7 +125,7 @@ class Update
 	 */
 	public function output()
 	{
-		wc1c_get_template('configurations/update.php');
+		wc1c()->templates()->getTemplate('configurations/update.php');
 	}
 
 	/**
@@ -155,19 +142,19 @@ class Update
 
 		$body = '<ul class="list-group m-0 list-group-flush">';
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Configuration ID: ', 'wc1c') . $configuration->getid();
+		$body .= __('ID: ', 'wc1c') . $configuration->getId();
 		$body .= '</li>';
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Schema ID: ', 'wc1c') . $configuration->getschema();
+		$body .= __('Schema ID: ', 'wc1c') . $configuration->getSchema();
 		$body .= '</li>';
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Date create: ', 'wc1c') . $configuration->getDateCreate();
+		$body .= __('Date create: ', 'wc1c') . wc1c_pretty_date($configuration->getDateCreate());
 		$body .= '</li>';
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Date modify: ', 'wc1c') . $configuration->getDateModify();
+		$body .= __('Date modify: ', 'wc1c') . wc1c_pretty_date($configuration->getDateModify());
 		$body .= '</li>';
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Date active: ', 'wc1c') . $configuration->getDateActivity();
+		$body .= __('Date active: ', 'wc1c') . wc1c_pretty_date($configuration->getDateActivity());
 		$body .= '</li>';
 		$body .= '<li class="list-group-item p-2 m-0">';
 		$body .= __('Upload directory: ', 'wc1c') . '<div class="p-1 mt-1 bg-light">' . $configuration->getUploadDirectory() . '</div>';
@@ -177,28 +164,42 @@ class Update
 
 		$args['body'] = $body;
 
-		wc1c_get_template('configurations/update_sidebar_item.php', $args);
+		wc1c()->templates()->getTemplate('configurations/update_sidebar_item.php', $args);
 
 		try
 		{
 			$schema = wc1c()->getSchemas($configuration->getSchema());
 
 			$args = [
-				'header' => '<h4 class="p-0 m-0">' . __('About schema', 'wc1c') . '</h4>',
+				'header' => '<h3 class="p-0 m-0">' . __('About schema', 'wc1c') . '</h3>',
 				'object' => $this
 			];
 
 			$body = '<ul class="list-group m-0 list-group-flush">';
 			$body .= '<li class="list-group-item p-2 m-0">';
-			$body .= __('Schema name: ', 'wc1c') . $schema->getname();
+			$body .= $schema->getDescription();
 			$body .= '</li>';
 
 			$body .= '</ul>';
 
 			$args['body'] = $body;
 
-			wc1c_get_template('configurations/update_sidebar_item.php', $args);
+			wc1c()->templates()->getTemplate('configurations/update_sidebar_item.php', $args);
 		}
 		catch(RuntimeException $e){}
+	}
+
+	/**
+	 * @param $text
+	 *
+	 * @return string
+	 */
+	public function outputSchemaErrorText($text)
+	{
+		$new_text = __('The exchange scheme on the basis of which created configuration is unavailable .', 'wc1c');
+
+		$new_text .= '<br />' . __('Install the missing schema to work this configuration, change the status and name, or delete the configuration.', 'wc1c');
+
+		return $new_text;
 	}
 }

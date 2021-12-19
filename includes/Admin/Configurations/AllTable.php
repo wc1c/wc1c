@@ -1,25 +1,15 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Admin\Configurations;
+<?php namespace Wc1c\Admin\Configurations;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
-use Exception;
+use Wc1c\Exceptions\Exception;
 use Wc1c\Abstracts\TableAbstract;
 use Wc1c\Data\Storage;
 use Wc1c\Data\Storages\StorageConfigurations;
 use Wc1c\Settings\ConnectionSettings;
 
 /**
- * Class ListsTable
+ * AllTable
  *
  * @package Wc1c\Admin\Configurations
  */
@@ -58,7 +48,7 @@ class AllTable extends TableAbstract
 	 */
 	public function noItems()
 	{
-		wc1c_get_template('configurations/empty.php');
+		wc1c()->templates()->getTemplate('configurations/empty.php');
 	}
 
 	/**
@@ -183,6 +173,11 @@ class AllTable extends TableAbstract
 		if('deleted' === $item['status'])
 		{
 			unset($actions['update']);
+			$actions['delete'] = '<a href="' . wc1c_admin_configurations_get_url('delete', $item['configuration_id']) . '">' . __('Remove forever', 'wc1c') . '</a>';
+		}
+
+		if('draft' === $item['status'] && 'yes' === wc1c()->settings()->get('configurations_draft_delete', 'yes'))
+		{
 			$actions['delete'] = '<a href="' . wc1c_admin_configurations_get_url('delete', $item['configuration_id']) . '">' . __('Remove forever', 'wc1c') . '</a>';
 		}
 

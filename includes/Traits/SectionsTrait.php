@@ -47,7 +47,9 @@ trait SectionsTrait
 	 */
 	public function setCurrentSection($current_section)
 	{
-		$this->current_section = $current_section;
+		$final = apply_filters(WC1C_ADMIN_PREFIX . 'init_sections_current', $current_section);
+
+		$this->current_section = $final;
 	}
 
 	/**
