@@ -145,7 +145,7 @@ final class Admin
 	 */
 	public function initStyles()
 	{
-		wp_enqueue_style(WC1C_ADMIN_PREFIX . 'main', WC1C_PLUGIN_URL . 'assets/css/main.css');
+		wp_enqueue_style(WC1C_ADMIN_PREFIX . 'main', WC1C_PLUGIN_URL . 'assets/css/main.min.css');
 	}
 
 	/**
