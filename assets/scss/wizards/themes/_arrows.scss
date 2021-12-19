@@ -7,7 +7,7 @@ $toolbar-btn-bg-color         : #17a2b8;
 
 $nav-border-color             : #eeeeee;
 
-$nav-active-primary-color     : #5bc0de;
+$nav-active-primary-color     : #7f54b3;
 $nav-active-secondary-color   : #ffffff;
 
 $nav-inactive-primary-color   : #f8f8f8;
@@ -54,6 +54,7 @@ $nav-danger-secondary-color   : #ffffff;
     .nav-item
     {
       margin-bottom: 0;
+      text-align: left;
     }
 
     .nav-link {
@@ -64,6 +65,7 @@ $nav-danger-secondary-color   : #ffffff;
       margin-left: -30px;
       padding-left: 40px;
       margin-bottom: 0;
+      text-align: left;
 
       @media screen and (max-width: $breakpoint-phone) {
         overflow: hidden;
