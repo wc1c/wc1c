@@ -1,17 +1,7 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c;
+<?php namespace Wc1c;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use wpdb;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
@@ -49,9 +39,9 @@ final class Core
 	private $settings;
 
 	/**
-	 * @var Input
+	 * @var Receiver
 	 */
-	private $input;
+	private $receiver;
 
 	/**
 	 * @var array Loaded configurations
@@ -139,7 +129,7 @@ final class Core
 			wc1c()->log()->alert('Schemas load exception - ' . $e->getMessage());
 		}
 
-		if(false !== wc1c()->context()->isInput() || false !== wc1c()->context()->isWc1cAdmin())
+		if(false !== wc1c()->context()->isReceiver() || false !== wc1c()->context()->isWc1cAdmin())
 		{
 			try
 			{
@@ -151,15 +141,15 @@ final class Core
 			}
 		}
 
-		if(false !== wc1c()->context()->isInput())
+		if(false !== wc1c()->context()->isReceiver())
 		{
 			try
 			{
-				$this->loadingInput();
+				$this->loadReceiver();
 			}
 			catch(Exception $e)
 			{
-				wc1c()->log()->alert('Input exception - ' . $e->getMessage());
+				wc1c()->log()->alert('Receiver exception - ' . $e->getMessage());
 			}
 		}
 
@@ -571,23 +561,23 @@ final class Core
 	}
 
 	/**
-	 * Get input
+	 * Get Receiver
 	 *
-	 * @return Input
+	 * @return Receiver
 	 */
-	public function input()
+	public function receiver()
 	{
-		return $this->input;
+		return $this->receiver;
 	}
 
 	/**
-	 * Set input
+	 * Set Receiver
 	 *
-	 * @param Input $input
+	 * @param Receiver $receiver
 	 */
-	public function setInput($input)
+	public function setReceiver($receiver)
 	{
-		$this->input = $input;
+		$this->receiver = $receiver;
 	}
 
 	/**
@@ -596,15 +586,15 @@ final class Core
 	 * @return void
 	 * @throws Exception
 	 */
-	private function loadingInput()
+	private function loadReceiver()
 	{
-		$default_class_name = 'Input';
+		$default_class_name = 'Receiver';
 
-		$use_class_name = apply_filters(WC1C_PREFIX . 'input_loading_class_name', $default_class_name);
+		$use_class_name = apply_filters(WC1C_PREFIX . 'receiver_loading_class_name', $default_class_name);
 
 		if(false === class_exists($use_class_name))
 		{
-			$this->log()->info(WC1C_PREFIX . 'input_loading_class_name: class is not exists - ' . $use_class_name);
+			$this->log()->info(WC1C_PREFIX . 'receiver_loading_class_name: class is not exists - ' . $use_class_name);
 			$use_class_name = $default_class_name;
 		}
 
@@ -619,11 +609,11 @@ final class Core
 
 		try
 		{
-			$this->setInput($api);
+			$this->setReceiver($api);
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('setInput - ' . $e->getMessage());
+			throw new Exception('setReceiver - ' . $e->getMessage());
 		}
 	}
 
