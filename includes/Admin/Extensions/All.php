@@ -1,22 +1,12 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Admin\Extensions;
+<?php namespace Wc1c\Admin\Extensions;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use Wc1c\Abstracts\ScreenAbstract;
 use Wc1c\Traits\SingletonTrait;
 
 /**
- * Class Lists
+ * All
  *
  * @package Wc1c\Admin\Extensions
  */
@@ -29,7 +19,7 @@ class All extends ScreenAbstract
 	 */
 	public function output()
 	{
-		$extensions = wc1c()->getExtensions();
+		$extensions = wc1c()->extensions()->get();
 
 		if(empty($extensions))
 		{

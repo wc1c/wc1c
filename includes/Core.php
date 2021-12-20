@@ -44,16 +44,6 @@ final class Core
 	private $receiver;
 
 	/**
-	 * @var array Loaded configurations
-	 */
-	private $configurations = [];
-
-	/**
-	 * @var array Loaded extensions
-	 */
-	private $extensions = [];
-
-	/**
 	 * @var array Loaded schemas
 	 */
 	private $schemas = [];
@@ -95,7 +85,7 @@ final class Core
 
 		try
 		{
-			$this->loadTimer();
+			$this->timer();
 		}
 		catch(Exception $e)
 		{
@@ -104,20 +94,11 @@ final class Core
 
 		try
 		{
-			$this->loadExtensions();
+			$this->extensions();
 		}
 		catch(Exception $e)
 		{
 			wc1c()->log()->alert('Extensions exception - ' . $e->getMessage());
-		}
-
-		try
-		{
-			$this->initExtensions();
-		}
-		catch(Exception $e)
-		{
-			wc1c()->log()->alert('Init extensions exception - ' . $e->getMessage());
 		}
 
 		try
@@ -155,6 +136,16 @@ final class Core
 
 		// hook
 		do_action(WC1C_PREFIX . 'after_init');
+	}
+
+	/**
+	 * Extensions
+	 *
+	 * @return Extensions\Core
+	 */
+	public function extensions()
+	{
+		return Extensions\Core::instance();
 	}
 
 	/**
@@ -215,7 +206,7 @@ final class Core
 	}
 
 	/**
-	 * Get settings
+	 * Settings
 	 *
 	 * @param string $context
 	 *
@@ -240,90 +231,6 @@ final class Core
 		}
 
 		return $this->settings;
-	}
-
-	/**
-	 * Initializing extensions
-	 *
-	 * @param string $extension_id If an extension ID is specified, only the specified extension is loaded
-	 *
-	 * @return boolean
-	 * @throws Exception
-	 */
-	public function initExtensions($extension_id = '')
-	{
-		try
-		{
-			$extensions = $this->getExtensions();
-		}
-		catch(Exception $e)
-		{
-			throw new Exception('Get extensions exception - ' . $e->getMessage());
-		}
-
-		if(!is_array($extensions))
-		{
-			throw new Exception('$extensions is not array');
-		}
-
-		/**
-		 * Init specified extension
-		 */
-		if('' !== $extension_id)
-		{
-			if(!array_key_exists($extension_id, $extensions))
-			{
-				throw new Exception('extension not found by id');
-			}
-
-			$init_extension = $extensions[$extension_id];
-
-			if(!is_object($init_extension))
-			{
-				throw new Exception('$extensions[$extension_id] is not object');
-			}
-
-			if($init_extension->is_initialized())
-			{
-				throw new Exception('old initialized');
-			}
-
-			if(!method_exists($init_extension, 'init'))
-			{
-				throw new Exception('method init is not found');
-			}
-
-			try
-			{
-				$init_extension->init();
-			}
-			catch(Exception $e)
-			{
-				throw new Exception('Init extension exception - ' . $e->getMessage());
-			}
-
-			$init_extension->setInitialized(true);
-
-			return true;
-		}
-
-		/**
-		 * Init all extensions
-		 */
-		foreach($extensions as $extension => $extension_object)
-		{
-			try
-			{
-				$this->initExtensions($extension);
-			}
-			catch(Exception $e)
-			{
-				wc1c()->log()->error($e->getMessage(), $e);
-				continue;
-			}
-		}
-
-		return true;
 	}
 
 	/**
@@ -501,63 +408,29 @@ final class Core
 	}
 
 	/**
-	 * Timer loading
-	 *
-	 * @return void
-	 * @throws Exception
-	 */
-	private function loadTimer()
-	{
-		$timer = new Timer();
-
-		$php_max_execution = $this->environment()->get('php_max_execution_time', 20);
-
-		if($php_max_execution !== $this->settings()->get('php_max_execution_time', $php_max_execution))
-		{
-			$php_max_execution = $this->settings()->get('php_max_execution_time', $php_max_execution);
-		}
-
-		$timer->setMaximum($php_max_execution);
-
-		try
-		{
-			$this->setTimer($timer);
-		}
-		catch(Exception $e)
-		{
-			throw new Exception('Set timer exception - ' . $e->getMessage());
-		}
-	}
-
-	/**
 	 * Timer
 	 *
 	 * @return Timer
-	 * @throws Exception
 	 */
 	public function timer()
 	{
 		if(is_null($this->timer))
 		{
-			$this->loadTimer();
-		}
+			$timer = new Timer();
 
-		return $this->timer;
-	}
+			$php_max_execution = $this->environment()->get('php_max_execution_time', 20);
 
-	/**
-	 * @param Timer $timer
-	 *
-	 * @throws Exception
-	 */
-	public function setTimer($timer)
-	{
-		if($timer instanceof Timer)
-		{
+			if($php_max_execution !== $this->settings()->get('php_max_execution_time', $php_max_execution))
+			{
+				$php_max_execution = $this->settings()->get('php_max_execution_time', $php_max_execution);
+			}
+
+			$timer->setMaximum($php_max_execution);
+
 			$this->timer = $timer;
 		}
 
-		throw new Exception('$timer is not Timer');
+		return $this->timer;
 	}
 
 	/**
@@ -618,31 +491,6 @@ final class Core
 	}
 
 	/**
-	 * Extensions load
-	 *
-	 * @return void
-	 * @throws Exception
-	 */
-	private function loadExtensions()
-	{
-		$extensions = [];
-
-		if('yes' === $this->settings()->get('extensions', 'yes'))
-		{
-			$extensions = apply_filters(WC1C_PREFIX . 'extensions_loading', $extensions);
-		}
-
-		try
-		{
-			$this->setExtensions($extensions);
-		}
-		catch(Exception $e)
-		{
-			throw new Exception('Extensions set exception - ' . $e->getMessage());
-		}
-	}
-
-	/**
 	 * Get schemas
 	 *
 	 * @param string $schema_id
@@ -663,47 +511,6 @@ final class Core
 		}
 
 		return $this->schemas;
-	}
-
-	/**
-	 * Get initialized extensions
-	 *
-	 * @param string $extension_id
-	 *
-	 * @return array|object
-	 * @throws Exception
-	 */
-	public function getExtensions($extension_id = '')
-	{
-		if('' !== $extension_id)
-		{
-			if(array_key_exists($extension_id, $this->extensions))
-			{
-				return $this->extensions[$extension_id];
-			}
-
-			throw new Exception('$extension_id is unavailable');
-		}
-
-		return $this->extensions;
-	}
-
-	/**
-	 * @param array $extensions
-	 *
-	 * @return bool
-	 * @throws Exception
-	 */
-	public function setExtensions($extensions)
-	{
-		if(is_array($extensions))
-		{
-			$this->extensions = $extensions;
-
-			return true;
-		}
-
-		throw new Exception('$extensions is not valid');
 	}
 
 	/**
