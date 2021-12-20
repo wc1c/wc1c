@@ -68,7 +68,7 @@ final class Core
 		// hook
 		do_action(WC1C_PREFIX . 'before_loading');
 
-		$this->context = $context;
+		$this->context = apply_filters(WC1C_PREFIX . 'context_loading', $context);
 
 		// init
 		add_action('init', [$this, 'init'], 3);
