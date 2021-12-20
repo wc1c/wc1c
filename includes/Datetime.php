@@ -62,7 +62,7 @@ class Datetime extends SystemDatetime
 	}
 
 	/**
-	 * Missing in PHP 5.2 so just here so it can be supported consistently
+	 * Missing in PHP 5.2 so just here, so it can be supported consistently
 	 *
 	 * @return int
 	 */
