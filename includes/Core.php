@@ -44,11 +44,6 @@ final class Core
 	private $receiver;
 
 	/**
-	 * @var array Loaded schemas
-	 */
-	private $schemas = [];
-
-	/**
 	 * Core constructor.
 	 *
 	 * @return void
@@ -103,11 +98,11 @@ final class Core
 
 		try
 		{
-			$this->loadSchemas();
+			$this->schemas();
 		}
 		catch(Exception $e)
 		{
-			wc1c()->log()->alert('Schemas load exception - ' . $e->getMessage());
+			wc1c()->log()->alert('Schemas exception - ' . $e->getMessage());
 		}
 
 		if(false !== wc1c()->context()->isReceiver() || false !== wc1c()->context()->isWc1cAdmin())
@@ -146,6 +141,16 @@ final class Core
 	public function extensions()
 	{
 		return Extensions\Core::instance();
+	}
+
+	/**
+	 * Schemas
+	 *
+	 * @return Schemas\Core
+	 */
+	public function schemas()
+	{
+		return Schemas\Core::instance();
 	}
 
 	/**
@@ -234,180 +239,6 @@ final class Core
 	}
 
 	/**
-	 * Initializing schemas
-	 *
-	 * @param integer|Configuration $configuration
-	 *
-	 * @return boolean
-	 * @throws Exception
-	 */
-	public function initSchemas($configuration)
-	{
-		if(false === $configuration)
-		{
-			throw new Exception('$configuration is false');
-		}
-
-		if(!is_object($configuration))
-		{
-			try
-			{
-				$storage_configurations = Storage::load('configuration');
-			}
-			catch(Exception $e)
-			{
-				throw new Exception('exception - ' . $e->getMessage());
-			}
-
-			if(!$storage_configurations->isExistingById($configuration))
-			{
-				throw new Exception('$configuration is not exists');
-			}
-
-			try
-			{
-				$configuration = new Configuration($configuration);
-			}
-			catch(Exception $e)
-			{
-				throw new Exception('exception - ' . $e->getMessage());
-			}
-		}
-
-		if(!$configuration instanceof Configuration)
-		{
-			throw new Exception('$configuration is not instanceof Configuration');
-		}
-
-		try
-		{
-			$schemas = $this->getSchemas();
-		}
-		catch(Exception $e)
-		{
-			throw new Exception('exception - ' . $e->getMessage());
-		}
-
-		if(!is_array($schemas))
-		{
-			throw new Exception('$schemas is not array');
-		}
-
-		$schema_id = $configuration->getSchema();
-
-		if(!array_key_exists($schema_id, $schemas))
-		{
-			throw new Exception('schema not found by id: ' . $schema_id);
-		}
-
-		if(!is_object($schemas[$schema_id]))
-		{
-			throw new Exception('$schemas[$schema_id] is not object');
-		}
-
-		$init_schema = $schemas[$schema_id];
-
-		if($init_schema->isInitialized())
-		{
-			throw new Exception('old initialized, $schema_id: ' . $schema_id);
-		}
-
-		if(!method_exists($init_schema, 'init'))
-		{
-			throw new Exception('method init not found, $schema_id: ' . $schema_id);
-		}
-
-		$current_configuration_id = $configuration->getId();
-
-		$init_schema->setPrefix(WC1C_PREFIX . 'prefix_' . $schema_id . '_' . $current_configuration_id);
-		$init_schema->setConfiguration($configuration);
-		$init_schema->setConfigurationPrefix(WC1C_PREFIX . 'configuration_' . $current_configuration_id);
-
-		try
-		{
-			$init_schema_result = $init_schema->init();
-		}
-		catch(Exception $e)
-		{
-			throw new Exception('exception by schema - ' . $e->getMessage());
-		}
-
-		if(true !== $init_schema_result)
-		{
-			throw new Exception('schema is not initialized');
-		}
-
-		$init_schema->setInitialized(true);
-
-		return $init_schema;
-	}
-
-	/**
-	 * Schemas loading
-	 *
-	 * @throws RuntimeException
-	 */
-	private function loadSchemas()
-	{
-		$schemas = [];
-
-		try
-		{
-			$schema_default = new Schemas\DefaultCML\Init();
-		}
-		catch(Exception $e)
-		{
-			throw new RuntimeException('Schema init exception - ' . $e->getMessage());
-		}
-
-		$schema_default->setId('defaultcml');
-		$schema_default->setVersion('0.1.0');
-		$schema_default->setName(__('Default schema based on CML', 'wc1c'));
-		$schema_default->setDescription(__('Standard data exchange using the standard exchange algorithm from 1C via CommerceML. Exchanges only contains products data.', 'wc1c'));
-		$schema_default->setSchemaPrefix(WC1C_PREFIX . 'schema_' . $schema_default->getId());
-
-		$schemas['defaultcml'] = $schema_default;
-
-		/**
-		 * External schemas
-		 */
-		if('yes' === $this->settings()->get('extensions_schemas', 'yes'))
-		{
-			$schemas = apply_filters(WC1C_PREFIX . 'schemas_loading', $schemas);
-		}
-
-		wc1c()->log()->debug('wc1c_schemas_loading $schemas', $schemas);
-
-		try
-		{
-			$this->setSchemas($schemas);
-		}
-		catch(Exception $e)
-		{
-			throw new RuntimeException('exception - ' . $e->getMessage());
-		}
-	}
-
-	/**
-	 * Set schemas
-	 *
-	 * @param array $schemas
-	 *
-	 * @return boolean
-	 * @throws Exception
-	 */
-	public function setSchemas($schemas)
-	{
-		if(is_array($schemas))
-		{
-			$this->schemas = $schemas;
-			return true;
-		}
-
-		throw new Exception('$schemas is not valid');
-	}
-
-	/**
 	 * Timer
 	 *
 	 * @return Timer
@@ -488,29 +319,6 @@ final class Core
 		{
 			throw new Exception('setReceiver - ' . $e->getMessage());
 		}
-	}
-
-	/**
-	 * Get schemas
-	 *
-	 * @param string $schema_id
-	 *
-	 * @return array|mixed
-	 * @throws RuntimeException
-	 */
-	public function getSchemas($schema_id = '')
-	{
-		if('' !== $schema_id)
-		{
-			if(array_key_exists($schema_id, $this->schemas))
-			{
-				return $this->schemas[$schema_id];
-			}
-
-			throw new RuntimeException('$schema_id is unavailable');
-		}
-
-		return $this->schemas;
 	}
 
 	/**
