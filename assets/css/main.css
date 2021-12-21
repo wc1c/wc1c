@@ -8268,8 +8268,16 @@
   background-color: rgba(128, 0, 128, 0.9);
   color: white;
 }
+.woocommerce_page_wc1c .column-status span.deleted {
+  background-color: rgba(128, 0, 128, 0.4);
+  color: white;
+}
 .woocommerce_page_wc1c .column-status span.active {
   background-color: rgba(18, 128, 3, 0.6);
+  color: white;
+}
+.woocommerce_page_wc1c .column-status span.processing {
+  background-color: #128003;
   color: white;
 }
 .woocommerce_page_wc1c .column-status span.inactive {
@@ -8278,14 +8286,6 @@
 }
 .woocommerce_page_wc1c .column-status span.error {
   background-color: #b8151a;
-  color: white;
-}
-.woocommerce_page_wc1c .column-status span.processing {
-  background-color: #128003;
-  color: white;
-}
-.woocommerce_page_wc1c .column-status span.deleted {
-  background-color: rgba(128, 0, 128, 0.4);
   color: white;
 }
 .woocommerce_page_wc1c .configurations td {
