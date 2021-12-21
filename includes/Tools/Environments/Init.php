@@ -522,7 +522,7 @@ class Init extends ToolAbstract
 		 */
 		try
 		{
-			$schemas = wc1c()->getSchemas();
+			$schemas = wc1c()->schemas()->get();
 			$env_array['wc1c_schemas_count'] = array
 			(
 				'title' => __('Count schemas', 'wc1c'),
