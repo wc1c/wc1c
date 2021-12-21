@@ -67,7 +67,7 @@ class StorageConfigurations implements StorageMetaInterface
 
 		try
 		{
-			$schema = wc1c()->getSchemas($data->getSchema());
+			$schema = wc1c()->schemas()->get($data->getSchema());
 			$schema_version = $schema->getVersion();
 		}
 		catch(RuntimeException $exception)

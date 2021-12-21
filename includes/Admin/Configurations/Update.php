@@ -32,7 +32,7 @@ class Update
 		{
 			try
 			{
-				wc1c()->initSchemas($this->getConfiguration());
+				wc1c()->schemas()->init($this->getConfiguration());
 			}
 			catch(Exception $e)
 			{
@@ -176,7 +176,7 @@ class Update
 
 		try
 		{
-			$schema = wc1c()->getSchemas($configuration->getSchema());
+			$schema = wc1c()->schemas()->get($configuration->getSchema());
 
 			$args = [
 				'header' => '<h3 class="p-0 m-0">' . __('About schema', 'wc1c') . '</h3>',

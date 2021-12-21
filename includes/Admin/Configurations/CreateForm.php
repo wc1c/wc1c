@@ -49,7 +49,7 @@ class CreateForm extends FormAbstract
 
 		try
 		{
-			$schemas = wc1c()->getSchemas();
+			$schemas = wc1c()->schemas()->get();
 		}
 		catch(Exception $e)
 		{
