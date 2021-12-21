@@ -10,6 +10,7 @@ use Wc1c\Admin\Settings;
 use Wc1c\Admin\Tools;
 use Wc1c\Traits\SectionsTrait;
 use Wc1c\Traits\SingletonTrait;
+use Wc1c\Traits\UtilityTrait;
 
 /**
  * Admin
@@ -20,6 +21,7 @@ final class Admin
 {
 	use SingletonTrait;
 	use SectionsTrait;
+	use UtilityTrait;
 
 	/**
 	 * @var ManagerInterface Admin notices
@@ -193,7 +195,9 @@ final class Admin
 	 */
 	public function wrapHeader()
 	{
-		wc1c()->templates()->getTemplate('header.php');
+		$args['url_create'] = $this->utilityAdminConfigurationsGetUrl('create');
+
+		wc1c()->templates()->getTemplate('header.php', $args);
 	}
 
 	/**

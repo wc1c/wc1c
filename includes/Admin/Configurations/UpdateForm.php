@@ -4,6 +4,7 @@ defined('ABSPATH') || exit;
 
 use Wc1c\Exceptions\Exception;
 use Wc1c\Abstracts\FormAbstract;
+use Wc1c\Traits\ConfigurationsUtilityTrait;
 
 /**
  * UpdateForm
@@ -12,6 +13,8 @@ use Wc1c\Abstracts\FormAbstract;
  */
 class UpdateForm extends FormAbstract
 {
+    use ConfigurationsUtilityTrait;
+
 	/**
 	 * UpdateForm constructor.
 	 */
@@ -46,8 +49,8 @@ class UpdateForm extends FormAbstract
 
 		$options =
 		[
-			'active' => wc1c_configurations_get_statuses_label('active'),
-			'inactive' => wc1c_configurations_get_statuses_label('inactive')
+			'active' => $this->utilityConfigurationsGetStatusesLabel('active'),
+			'inactive' => $this->utilityConfigurationsGetStatusesLabel('inactive')
 		];
 
 		$fields['status'] =

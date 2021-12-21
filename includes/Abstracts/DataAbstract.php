@@ -1,17 +1,8 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Abstracts;
+<?php namespace Wc1c\Abstracts;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
+use Wc1c\Traits\DatetimeUtilityTrait;
 use WP_Error;
 use DateTimeZone;
 use Wc1c\Exceptions\Exception;
@@ -24,61 +15,45 @@ use Wc1c\Datetime;
  */
 abstract class DataAbstract
 {
+	use DatetimeUtilityTrait;
+
 	/**
-	 * This is the name of this object type
-	 *
-	 * @var string
+	 * @var string This is the name of this object type
 	 */
 	protected $object_type = 'data';
 
 	/**
-	 * This is false until the object is read from the DB
-	 *
-	 * @var bool
+	 * @var bool This is false until the object is read from the DB
 	 */
 	protected $object_read = false;
 
 	/**
-	 * Object id
-	 *
-	 * @var int
+	 * @var int Object id
 	 */
 	private $id = 0;
 
 	/**
-	 * Contains a reference to the data storage
-	 * for this class
-	 *
-	 * @var object
+	 * @var object Contains a reference to the data storage for this class
 	 */
 	protected $storage;
 
 	/**
-	 * Raw key data
-	 *
-	 * @var array
+	 * @var array Raw key data
 	 */
 	protected $data = [];
 
 	/**
-	 * Set to _data on construct so we can track and reset data if needed
-	 *
-	 * @var array
+	 * @var array Set to _data on construct so we can track and reset data if needed
 	 */
 	protected $default_data = [];
 
 	/**
-	 * Data changes for this object
-	 *
-	 * @var array
+	 * @var array Data changes for this object
 	 */
 	protected $changes = [];
 
 	/**
-	 * Extra data for this object. Name value pairs (name + default value)
-	 * Used as a standard way for subclasses (like key types) to add additional information to an inherited class.
-	 *
-	 * @var array
+	 * @var array Extra data for this object. Name value pairs (name + default value). Used as a standard way for subclasses (like key types) to add additional information to an inherited class.
 	 */
 	protected $extra_data = [];
 
@@ -425,12 +400,12 @@ abstract class DataAbstract
 				// Strings are defined in local WP timezone. Convert to UTC
 				if(1 === preg_match('/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(Z|((-|\+)\d{2}:\d{2}))$/', $value, $date_bits))
 				{
-					$offset = !empty($date_bits[7]) ? iso8601_timezone_to_offset($date_bits[7]) : wc1c_timezone_offset();
+					$offset = !empty($date_bits[7]) ? iso8601_timezone_to_offset($date_bits[7]) : $this->utilityTimezoneOffset();
 					$timestamp = gmmktime($date_bits[4], $date_bits[5], $date_bits[6], $date_bits[2], $date_bits[3], $date_bits[1]) - $offset;
 				}
 				else
 				{
-					$timestamp = wc1c_string_to_timestamp(get_gmt_from_date(gmdate('Y-m-d H:i:s', wc1c_string_to_timestamp($value))));
+					$timestamp = $this->utilityStringToTimestamp(get_gmt_from_date(gmdate('Y-m-d H:i:s', $this->utilityStringToTimestamp($value))));
 				}
 
 				$datetime = new Datetime("@{$timestamp}", new DateTimeZone('UTC'));
@@ -439,11 +414,11 @@ abstract class DataAbstract
 			// Set local timezone or offset
 			if(get_option('timezone_string'))
 			{
-				$datetime->setTimezone(new DateTimeZone(wc1c_timezone_string()));
+				$datetime->setTimezone(new DateTimeZone($this->utilityTimezoneString()));
 			}
 			else
 			{
-				$datetime->setUtcOffset(wc1c_timezone_offset());
+				$datetime->setUtcOffset($this->utilityTimezoneOffset());
 			}
 
 			$this->setProp($prop, $datetime);

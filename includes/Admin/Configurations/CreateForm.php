@@ -5,14 +5,17 @@ defined('ABSPATH') || exit;
 use Wc1c\Configuration;
 use Wc1c\Exceptions\Exception;
 use Wc1c\Abstracts\FormAbstract;
+use Wc1c\Traits\UtilityTrait;
 
 /**
- * Class CreateForm
+ * CreateForm
  *
  * @package Wc1c\Admin\Configurations
  */
 class CreateForm extends FormAbstract
 {
+	use UtilityTrait;
+
 	/**
 	 * CreateForm constructor.
 	 */
@@ -180,7 +183,7 @@ class CreateForm extends FormAbstract
 				[
 					'type' => 'update',
 					'data' => __('Configuration create success. Configuration id: ' . $configuration->getId(), 'wc1c')
-					          . ' (<a href="' . wc1c_admin_configurations_get_url('update', $configuration->getId()) . '">' . __('edit configuration', 'wc1c') . '</a>)'
+					          . ' (<a href="' . $this->utilityAdminConfigurationsGetUrl('update', $configuration->getId()) . '">' . __('edit configuration', 'wc1c') . '</a>)'
 				]
 			);
 
