@@ -5,7 +5,6 @@ defined('ABSPATH') || exit;
 use wpdb;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
-use Wc1c\Data\Storage;
 use Wc1c\Exceptions\Exception;
 use Wc1c\Exceptions\RuntimeException;
 use Wc1c\Interfaces\SettingsInterface;
