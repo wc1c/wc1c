@@ -5,16 +5,15 @@ defined('ABSPATH') || exit;
 use Wc1c\Traits\SingletonTrait;
 
 /**
- * Activation
+ * Uninstall
  *
  * @package Wc1c
  */
-final class Activation
+final class Uninstall
 {
 	use SingletonTrait;
 
 	public function __construct()
 	{
-		update_option('wc1c_wizard', 'setup');
 	}
 }

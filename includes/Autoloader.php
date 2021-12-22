@@ -34,6 +34,10 @@ final class Autoloader
 		$this->addNamespace('Psr\Log', WC1C_PLUGIN_PATH . '/vendor/psr/Log');
 		$this->addNamespace('Monolog', WC1C_PLUGIN_PATH . '/vendor/monolog/src/Monolog');
 
+		register_activation_hook(WC1C_PLUGIN_FILE, [Activation::class, 'instance']);
+		register_deactivation_hook(WC1C_PLUGIN_FILE, [Deactivation::class, 'instance']);
+		register_uninstall_hook(WC1C_PLUGIN_FILE, [Uninstall::class, 'instance']);
+
 		add_action('plugins_loaded', 'wc1c', 10);
 	}
 

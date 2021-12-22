@@ -2,6 +2,8 @@
 
 defined('ABSPATH') || exit;
 
+use Wc1c\Traits\SingletonTrait;
+
 /**
  * Deactivation
  *
@@ -9,6 +11,8 @@ defined('ABSPATH') || exit;
  */
 final class Deactivation
 {
+	use SingletonTrait;
+
 	public function __construct()
 	{
 	}
