@@ -1,4 +1,5 @@
-<?php
+<?php use Wc1c\Core;
+
 /**
  * Plugin Name: WC1C
  * Plugin URI: https://wc1c.info
@@ -20,6 +21,11 @@
  **/
 defined('ABSPATH') || exit;
 
+if(version_compare(PHP_VERSION, '5.6.0') < 0)
+{
+	return false;
+}
+
 if(false === defined('WC1C_PLUGIN_FILE'))
 {
 	/**
@@ -29,17 +35,7 @@ if(false === defined('WC1C_PLUGIN_FILE'))
 	 */
 	function wc1c()
 	{
-		if(version_compare(PHP_VERSION, '5.6.0') < 0)
-		{
-			return false;
-		}
-
-		if(!in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')), true))
-		{
-			return false;
-		}
-
-		if(!is_callable('Wc1c\Core::instance'))
+		if(!class_exists(Wc1c\Core::class))
 		{
 			return false;
 		}
