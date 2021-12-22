@@ -1,5 +1,4 @@
-<?php use Wc1c\Core;
-
+<?php
 /**
  * Plugin Name: WC1C
  * Plugin URI: https://wc1c.info
