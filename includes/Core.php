@@ -2,6 +2,7 @@
 
 defined('ABSPATH') || exit;
 
+use Monolog\Formatter\JsonFormatter;
 use Monolog\Handler\StreamHandler;
 use wpdb;
 use Psr\Log\LoggerAwareTrait;
@@ -211,7 +212,11 @@ final class Core
 
 				if($level !== '')
 				{
+					$formatter = new JsonFormatter();
+
 					$handler = new StreamHandler($path, $level);
+					$handler->setFormatter($formatter);
+
 					$logger->pushHandler($handler);
 				}
 			}
