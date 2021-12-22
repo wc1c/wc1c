@@ -2,6 +2,7 @@
 
 defined('ABSPATH') || exit;
 
+use Monolog\Handler\StreamHandler;
 use wpdb;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
@@ -202,6 +203,19 @@ final class Core
 		if(is_null($this->log))
 		{
 			$logger = new CoreLog();
+
+			try
+			{
+				$path = $this->environment()->get('wc1c_upload_directory') . '/logs/core.log';
+				$level = $this->settings()->get('logger_level', '');
+
+				if($level !== '')
+				{
+					$handler = new StreamHandler($path, $level);
+					$logger->pushHandler($handler);
+				}
+			}
+			catch(\Exception $e){}
 
 			$this->setLog($logger);
 		}
