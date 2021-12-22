@@ -5,11 +5,11 @@ defined('ABSPATH') || exit;
 use Exception;
 
 /**
- * Autoloader
+ * Loader
  *
  * @package Wc1c
  */
-final class Autoloader
+final class Loader
 {
 	/**
 	 * An associative array where the key is a namespace prefix and the value
@@ -37,6 +37,8 @@ final class Autoloader
 		register_activation_hook(WC1C_PLUGIN_FILE, [Activation::class, 'instance']);
 		register_deactivation_hook(WC1C_PLUGIN_FILE, [Deactivation::class, 'instance']);
 		register_uninstall_hook(WC1C_PLUGIN_FILE, [Uninstall::class, 'instance']);
+
+		wc1c()->register(new Context());
 
 		add_action('plugins_loaded', 'wc1c', 10);
 	}

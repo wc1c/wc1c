@@ -49,11 +49,18 @@ final class Core
 	 *
 	 * @return void
 	 */
-	public function __construct($context)
+	public function __construct()
 	{
-		// hook
-		do_action(WC1C_PREFIX . 'before_loading');
+		do_action(WC1C_PREFIX . 'loading');
+	}
 
+	/**
+	 * @param $context
+	 *
+	 * @return void
+	 */
+	public function register($context)
+	{
 		$this->context = apply_filters(WC1C_PREFIX . 'context_loading', $context);
 
 		// init
@@ -64,9 +71,6 @@ final class Core
 		{
 			add_action('init', [$this, 'admin'], 5);
 		}
-
-		// hook
-		do_action(WC1C_PREFIX . 'after_loading');
 	}
 
 	/**

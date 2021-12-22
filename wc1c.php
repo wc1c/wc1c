@@ -34,7 +34,7 @@ if(false === defined('WC1C_PLUGIN_FILE'))
 	 */
 	function wc1c()
 	{
-		return new Wc1c\Core(new Wc1c\Context());
+		return Wc1c\Core::instance();
 	}
 
 	define('WC1C_PREFIX', 'wc1c_');
@@ -45,9 +45,9 @@ if(false === defined('WC1C_PLUGIN_FILE'))
 	define('WC1C_PLUGIN_URL', plugin_dir_url(__FILE__));
 	define('WC1C_PLUGIN_NAME', plugin_basename(WC1C_PLUGIN_FILE));
 
-	include_once __DIR__ . '/includes/Autoloader.php';
+	include_once __DIR__ . '/includes/Loader.php';
 
-	$loader = new Wc1c\Autoloader();
+	$loader = new Wc1c\Loader();
 
 	try
 	{
