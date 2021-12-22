@@ -30,15 +30,10 @@ if(false === defined('WC1C_PLUGIN_FILE'))
 	/**
 	 * Main instance of Wc1c
 	 *
-	 * @return Wc1c\Core|boolean
+	 * @return Wc1c\Core
 	 */
 	function wc1c()
 	{
-		if(!class_exists(Wc1c\Core::class))
-		{
-			return false;
-		}
-
 		return new Wc1c\Core(new Wc1c\Context());
 	}
 
@@ -54,12 +49,9 @@ if(false === defined('WC1C_PLUGIN_FILE'))
 
 	$loader = new Wc1c\Autoloader();
 
-	$loader->addNamespace('Wc1c', __DIR__ . '/includes');
-	$loader->addNamespace('Digiom\WordPress\Notices', __DIR__ . '/vendor/digiom/notices-wp/src');
-	$loader->addNamespace('Psr\Log', __DIR__ . '/vendor/psr/Log');
-	$loader->addNamespace('Monolog', __DIR__ . '/vendor/monolog/src/Monolog');
-
-	$loader->register();
-
-	add_action('plugins_loaded', 'wc1c', 10);
+	try
+	{
+		$loader->register();
+	}
+	catch(Exception $e){}
 }
