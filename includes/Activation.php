@@ -15,6 +15,9 @@ final class Activation
 
 	public function __construct()
 	{
-		update_option('wc1c_wizard', 'setup');
+		if(false === get_option('wc1c_version', false))
+		{
+			update_option('wc1c_wizard', 'setup');
+		}
 	}
 }
