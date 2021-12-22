@@ -102,10 +102,17 @@ abstract class SchemaAbstract
 	/**
 	 * Get schema id
 	 *
+	 * @param bool $lower
+	 *
 	 * @return string
 	 */
-	public function getId()
+	public function getId($lower = true)
 	{
+		if($lower)
+		{
+			return strtolower($this->id);
+		}
+
 		return $this->id;
 	}
 
