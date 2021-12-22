@@ -291,7 +291,7 @@ final class Core
 	 */
 	private function loadReceiver()
 	{
-		$default_class_name = 'Receiver';
+		$default_class_name = Receiver::class;
 
 		$use_class_name = apply_filters(WC1C_PREFIX . 'receiver_loading_class_name', $default_class_name);
 

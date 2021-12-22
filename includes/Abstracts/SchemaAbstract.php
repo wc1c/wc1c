@@ -25,7 +25,7 @@ abstract class SchemaAbstract
 	/**
 	 * @var Configuration Current configuration
 	 */
-	private $configuration = null;
+	private $configuration;
 
 	/**
 	 * @var array Unique schema options

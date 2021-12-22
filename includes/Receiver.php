@@ -9,7 +9,7 @@ use Wc1c\Exceptions\Exception;
  *
  * @package Wc1c
  */
-class Receiver
+final class Receiver
 {
 	/**
 	 * Receiver constructor.
@@ -66,7 +66,7 @@ class Receiver
 
 			try
 			{
-				wc1c()->initSchemas($configuration);
+				wc1c()->schemas()->init($configuration);
 			}
 			catch(Exception $e)
 			{
