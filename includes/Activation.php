@@ -19,5 +19,10 @@ final class Activation
 		{
 			update_option('wc1c_wizard', 'setup');
 		}
+
+		if(false === get_option('wc1c_version_init', false))
+		{
+			update_option('wc1c_version_init', wc1c()->environment()->get('wc1c_version'));
+		}
 	}
 }
