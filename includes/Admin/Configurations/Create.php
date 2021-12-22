@@ -5,6 +5,7 @@ defined('ABSPATH') || exit;
 use Wc1c\Abstracts\ScreenAbstract;
 use Wc1c\Exceptions\Exception;
 use Wc1c\Traits\SingletonTrait;
+use Wc1c\Traits\UtilityTrait;
 
 /**
  * Create
@@ -14,6 +15,7 @@ use Wc1c\Traits\SingletonTrait;
 class Create extends ScreenAbstract
 {
 	use SingletonTrait;
+	use UtilityTrait;
 
 	/**
 	 * @throws Exception
@@ -44,6 +46,8 @@ class Create extends ScreenAbstract
 	 */
 	public function output()
 	{
-		wc1c()->templates()->getTemplate('configurations/create.php');
+		$args['back_url'] = $this->utilityAdminConfigurationsGetUrl('all');
+
+		wc1c()->templates()->getTemplate('configurations/create.php', $args);
 	}
 }

@@ -4,8 +4,7 @@
     <div class="col pt-2 pb-2">
 	    <?php
             $label = __('Back to all configurations', 'wc1c');
-            $url = wc1c_admin_configurations_get_url('all');
-            wc1c()->templates()->adminBackLink($label, $url);
+            wc1c()->templates()->adminBackLink($label, $args['back_url']);
 	    ?>
     </div>
 </div>

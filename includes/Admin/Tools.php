@@ -1,30 +1,22 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Admin;
+<?php namespace Wc1c\Admin;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use Wc1c\Abstracts\ScreenAbstract;
 use Wc1c\Exceptions\Exception;
 use Wc1c\Exceptions\RuntimeException;
 use Wc1c\Traits\SingletonTrait;
+use Wc1c\Traits\UtilityTrait;
 
 /**
- * Class Tools
+ * Tools
  *
  * @package Wc1c\Admin
  */
 final class Tools extends ScreenAbstract
 {
 	use SingletonTrait;
+	use UtilityTrait;
 
 	/**
 	 * @var array All available tools
@@ -107,12 +99,17 @@ final class Tools extends ScreenAbstract
 			return;
 		}
 
-		if($this->getCurrentToolId() !== '' && is_wc1c_admin_tools_request())
+		if($this->getCurrentToolId() !== '' && $this->utilityIsWc1cAdminToolsRequest())
 		{
+			$tool = new $this->tools[$this->getCurrentToolId()];
+
 			$args =
 			[
 				'id' => $this->getCurrentToolId(),
-				'object' => new $this->tools[$this->getCurrentToolId()]()
+				'name' => $tool->getName(),
+				'description' => $tool->getDescription(),
+				'back_url' => $this->utilityAdminToolsGetUrl(),
+				'object' => $tool,
 			];
 
 			wc1c()->templates()->getTemplate('tools/single.php', $args);
@@ -126,10 +123,15 @@ final class Tools extends ScreenAbstract
 					continue;
 				}
 
+				$tool = new $tool_object();
+
 				$args =
 				[
 					'id' => $tool_id,
-					'object' => new $tool_object(),
+					'name' => $tool->getName(),
+					'description' => $tool->getDescription(),
+					'url' => $this->utilityAdminToolsGetUrl($tool_id),
+					'object' => $tool,
 				];
 
 				wc1c()->templates()->getTemplate('tools/item.php', $args);

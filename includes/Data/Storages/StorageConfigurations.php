@@ -1,20 +1,11 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Data\Storages;
+<?php namespace Wc1c\Data\Storages;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use stdClass;
-use Wc1c\Exceptions\RuntimeException;
+use Wc1c\Traits\DatetimeUtilityTrait;
 use WP_Error;
+use Wc1c\Exceptions\RuntimeException;
 use Wc1c\Exceptions\Exception;
 use Wc1c\Configuration;
 use Wc1c\Data\Interfaces\StorageMetaInterface;
@@ -28,6 +19,8 @@ use Wc1c\Data\MetaQuery;
  */
 class StorageConfigurations implements StorageMetaInterface
 {
+	use DatetimeUtilityTrait;
+
 	/**
 	 * Data stored in meta keys, but not considered "meta" for an object.
 	 *
@@ -74,7 +67,7 @@ class StorageConfigurations implements StorageMetaInterface
 
 		try
 		{
-			$schema = wc1c()->getSchemas($data->getSchema());
+			$schema = wc1c()->schemas()->get($data->getSchema());
 			$schema_version = $schema->getVersion();
 		}
 		catch(RuntimeException $exception)
@@ -149,9 +142,9 @@ class StorageConfigurations implements StorageMetaInterface
 					'status'=> $object_data->status ?: 'draft',
 					'options' => maybe_unserialize($object_data->options) ?: [],
 					'schema' => $object_data->schema ?: '',
-					'date_create' => 0 < $object_data->date_create ? wc1c_string_to_timestamp($object_data->date_create) : null,
-					'date_modify' => 0 < $object_data->date_modify ? wc1c_string_to_timestamp($object_data->date_modify) : null,
-					'date_activity' => 0 < $object_data->date_activity ? wc1c_string_to_timestamp($object_data->date_activity) : null,
+					'date_create' => 0 < $object_data->date_create ? $this->utilityStringToTimestamp($object_data->date_create) : null,
+					'date_modify' => 0 < $object_data->date_modify ? $this->utilityStringToTimestamp($object_data->date_modify) : null,
+					'date_activity' => 0 < $object_data->date_activity ? $this->utilityStringToTimestamp($object_data->date_activity) : null,
 				]
 			);
 		}

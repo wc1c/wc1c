@@ -1,9 +1,10 @@
 <?php namespace Wc1c\Admin\Wizards\Setup;
 
+defined('ABSPATH') || exit;
+
 use Wc1c\Admin\Wizards\StepAbstract;
 use Wc1c\Traits\SingletonTrait;
-
-defined('ABSPATH') || exit;
+use Wc1c\Traits\UtilityTrait;
 
 /**
  * Complete
@@ -13,6 +14,7 @@ defined('ABSPATH') || exit;
 class Complete extends StepAbstract
 {
 	use SingletonTrait;
+	use UtilityTrait;
 
 	/**
 	 * Complete constructor.
@@ -41,7 +43,8 @@ class Complete extends StepAbstract
 	{
 		$args =
 		[
-			'step' => $this
+			'step' => $this,
+			'back_url' => $this->utilityAdminConfigurationsGetUrl('all'),
 		];
 
 		wc1c()->templates()->getTemplate('wizards/steps/complete.php', $args);

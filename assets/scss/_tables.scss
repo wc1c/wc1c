@@ -113,9 +113,21 @@
         color: white;
       }
 
+      &.deleted
+      {
+        background-color: rgba(128, 0, 128, 0.4);
+        color: white;
+      }
+
       &.active
       {
         background-color: rgba(18, 128, 3, 0.6);
+        color: white;
+      }
+
+      &.processing
+      {
+        background-color: #128003;
         color: white;
       }
 
@@ -128,18 +140,6 @@
       &.error
       {
         background-color: #b8151a;
-        color: white;
-      }
-
-      &.processing
-      {
-        background-color: #128003;
-        color: white;
-      }
-
-      &.deleted
-      {
-        background-color: rgba(128, 0, 128, 0.4);
         color: white;
       }
     }
@@ -173,7 +173,6 @@
   .column-schema
   {
     border-left: 1px solid #ccd0d4;
-
     width: 111px;
   }
 }

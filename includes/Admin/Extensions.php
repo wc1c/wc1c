@@ -1,17 +1,7 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Admin;
+<?php namespace Wc1c\Admin;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use Wc1c\Admin\Extensions\All;
 use Wc1c\Traits\SingletonTrait;
 
@@ -20,7 +10,7 @@ use Wc1c\Traits\SingletonTrait;
  *
  * @package Wc1c\Admin
  */
-class Extensions
+final class Extensions
 {
 	use SingletonTrait;
 
@@ -44,9 +34,9 @@ class Extensions
 	{
 		$actions = apply_filters(WC1C_ADMIN_PREFIX . 'extensions_init_actions', $this->actions);
 
-		$this->set_actions($actions);
+		$this->setActions($actions);
 
-		$current_action = $this->init_current_action();
+		$current_action = $this->initCurrentAction();
 
 		switch($current_action)
 		{
@@ -63,16 +53,16 @@ class Extensions
 	 *
 	 * @return string
 	 */
-	public function init_current_action()
+	public function initCurrentAction()
 	{
 		$do_action = wc1c()->getVar($_GET['do_action'], 'all');
 
-		if(in_array($do_action, $this->get_actions(), true))
+		if(in_array($do_action, $this->getActions(), true))
 		{
-			$this->set_current_action($do_action);
+			$this->setCurrentAction($do_action);
 		}
 
-		return $this->get_current_action();
+		return $this->getCurrentAction();
 	}
 
 	/**
@@ -80,7 +70,7 @@ class Extensions
 	 *
 	 * @return array
 	 */
-	public function get_actions()
+	public function getActions()
 	{
 		return apply_filters(WC1C_ADMIN_PREFIX . 'extensions_get_actions', $this->actions);
 	}
@@ -90,7 +80,7 @@ class Extensions
 	 *
 	 * @param array $actions
 	 */
-	public function set_actions($actions)
+	public function setActions($actions)
 	{
 		// hook
 		$actions = apply_filters(WC1C_ADMIN_PREFIX . 'extensions_set_actions', $actions);
@@ -103,7 +93,7 @@ class Extensions
 	 *
 	 * @return string
 	 */
-	public function get_current_action()
+	public function getCurrentAction()
 	{
 		return apply_filters(WC1C_ADMIN_PREFIX . 'extensions_get_current_action', $this->current_action);
 	}
@@ -113,7 +103,7 @@ class Extensions
 	 *
 	 * @param string $current_action
 	 */
-	public function set_current_action($current_action)
+	public function setCurrentAction($current_action)
 	{
 		// hook
 		$current_action = apply_filters(WC1C_ADMIN_PREFIX . 'extensions_set_current_action', $current_action);

@@ -1,18 +1,10 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Tools\Environments;
+<?php namespace Wc1c\Tools\Environments;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use Wc1c\Abstracts\ToolAbstract;
+use Wc1c\Exceptions\Exception;
+use Wc1c\Traits\UtilityTrait;
 
 /**
  * Init
@@ -21,31 +13,25 @@ use Wc1c\Abstracts\ToolAbstract;
  */
 class Init extends ToolAbstract
 {
+	use UtilityTrait;
+
 	/**
-	 * Wc1c
-	 *
-	 * @var array
+	 * @var array Wc1c data
 	 */
 	private $wc1c_data = [];
 
 	/**
-	 * Server
-	 *
-	 * @var array
+	 * @var array Server data
 	 */
 	private $server_data = [];
 
 	/**
-	 * Wordpress
-	 *
-	 * @var array
+	 * @var array WordPress data
 	 */
 	private $wp_data = [];
 
 	/**
-	 * WooCommerce
-	 *
-	 * @var array
+	 * @var array WooCommerce data
 	 */
 	private $wc_data = [];
 
@@ -67,7 +53,7 @@ class Init extends ToolAbstract
 		$this->setName(__('Environments', 'wc1c'));
 		$this->setDescription(__('Data about all current environments.', 'wc1c'));
 
-		if(!is_wc1c_admin_tools_request('environments'))
+		if(!$this->utilityIsWc1cAdminToolsRequest('environments'))
 		{
 			return;
 		}
@@ -521,28 +507,27 @@ class Init extends ToolAbstract
 		 */
 		try
 		{
-			$extensions = wc1c()->getExtensions();
+			$extensions = wc1c()->extensions()->get();
 			$env_array['wc1c_extensions_count'] = array
 			(
 				'title' => __('Count extensions', 'wc1c'),
 				'description' => '',
-				'data' => sizeof($extensions)
+				'data' => count($extensions)
 			);
 		}
-		catch(Exception $e)
-		{}
+		catch(Exception $e){}
 
 		/**
 		 * Schemas count
 		 */
 		try
 		{
-			$schemas = wc1c()->getSchemas();
+			$schemas = wc1c()->schemas()->get();
 			$env_array['wc1c_schemas_count'] = array
 			(
 				'title' => __('Count schemas', 'wc1c'),
 				'description' => '',
-				'data' => sizeof($schemas)
+				'data' => count($schemas)
 			);
 		}
 		catch(Exception $e)

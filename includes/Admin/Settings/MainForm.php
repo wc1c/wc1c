@@ -124,11 +124,11 @@ class MainForm extends Form
 	 */
 	public function init_fields_main($fields)
 	{
-		$fields['api'] =
+		$fields['receiver'] =
 		[
-			'title' => __('Input: background requests', 'wc1c'),
+			'title' => __('Receiver', 'wc1c'),
 			'type' => 'checkbox',
-			'label' => __('Enable Input: background requests?', 'wc1c'),
+			'label' => __('Enable data Receiver: background requests?', 'wc1c'),
 			'description' => __('It is used to receive background requests from 1C in exchange schemes. Do not disable this option if you do not know what it is for.', 'wc1c'),
 			'default' => 'yes'
 		];

@@ -23,13 +23,13 @@ final class Context
 	}
 
 	/**
-	 * Is input request?
+	 * Is Receiver request?
 	 *
 	 * @return bool
 	 */
-	public function isInput()
+	public function isReceiver()
 	{
-		if(wc1c()->getVar($_GET['wc1c-input'], false))
+		if(wc1c()->getVar($_GET['wc1c-receiver'], false))
 		{
 			return true;
 		}

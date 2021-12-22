@@ -5,6 +5,7 @@ defined('ABSPATH') || exit;
 use Wc1c\Admin\Traits\ProcessConfigurationTrait;
 use Wc1c\Exceptions\Exception;
 use Wc1c\Traits\SingletonTrait;
+use Wc1c\Traits\UtilityTrait;
 
 /**
  * Delete
@@ -15,6 +16,7 @@ class Delete
 {
 	use SingletonTrait;
 	use ProcessConfigurationTrait;
+	use UtilityTrait;
 
 	/**
 	 * Delete constructor.
@@ -126,7 +128,7 @@ class Delete
 		if($redirect)
 		{
 			wc1c()->admin()->notices()->create($notice_args);
-			wp_safe_redirect(wc1c_admin_configurations_get_url());
+			wp_safe_redirect($this->utilityAdminConfigurationsGetUrl());
 			die;
 		}
 	}

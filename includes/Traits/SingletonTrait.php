@@ -1,25 +1,16 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Traits;
+<?php namespace Wc1c\Traits;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
 /**
- * Trait Singleton
+ * SingletonTrait
  *
  * @package Wc1c\Traits
  */
 trait SingletonTrait
 {
 	/**
-	 * All initialized instances
-	 *
-	 * @var array
+	 * @var array All initialized instances
 	 */
 	private static $instances = [];
 

@@ -7,6 +7,9 @@ use Wc1c\Abstracts\TableAbstract;
 use Wc1c\Data\Storage;
 use Wc1c\Data\Storages\StorageConfigurations;
 use Wc1c\Settings\ConnectionSettings;
+use Wc1c\Traits\ConfigurationsUtilityTrait;
+use Wc1c\Traits\DatetimeUtilityTrait;
+use Wc1c\Traits\UtilityTrait;
 
 /**
  * AllTable
@@ -15,15 +18,17 @@ use Wc1c\Settings\ConnectionSettings;
  */
 class AllTable extends TableAbstract
 {
+	use ConfigurationsUtilityTrait;
+	use DatetimeUtilityTrait;
+	use UtilityTrait;
+
 	/**
-	 * Configurations storage
-	 *
-	 * @var StorageConfigurations
+	 * @var StorageConfigurations Configurations storage
 	 */
 	public $storage_configurations;
 
 	/**
-	 * ListsTable constructor.
+	 * AllTable constructor.
 	 */
 	public function __construct()
 	{
@@ -100,7 +105,7 @@ class AllTable extends TableAbstract
 	private function pretty_columns_date($item, $column_name)
 	{
 		$date = $item[$column_name];
-		$timestamp = wc1c_string_to_timestamp($date) + wc1c_timezone_offset();
+		$timestamp = $this->utilityStringToTimestamp($date) + $this->utilityTimezoneOffset();
 
 		if(!empty($date))
 		{
@@ -124,8 +129,8 @@ class AllTable extends TableAbstract
 	 */
 	public function column_status($item)
 	{
-		$status = wc1c_configurations_get_statuses_label($item['status']);
-		$status_return = wc1c_configurations_get_statuses_label('error');
+		$status = $this->utilityConfigurationsGetStatusesLabel($item['status']);
+		$status_return = $this->utilityConfigurationsGetStatusesLabel('error');
 
 		if($item['status'] === 'draft')
 		{
@@ -166,24 +171,26 @@ class AllTable extends TableAbstract
 	{
 		$actions =
 		[
-			'update' => '<a href="' . wc1c_admin_configurations_get_url('update', $item['configuration_id']) . '">' . __('Edit', 'wc1c') . '</a>',
-			'delete' => '<a href="' . wc1c_admin_configurations_get_url('delete', $item['configuration_id']) . '">' . __('Mark as deleted', 'wc1c') . '</a>',
+			'update' => '<a href="' . $this->utilityAdminConfigurationsGetUrl('update', $item['configuration_id']) . '">' . __('Edit', 'wc1c') . '</a>',
+			'delete' => '<a href="' . $this->utilityAdminConfigurationsGetUrl('delete', $item['configuration_id']) . '">' . __('Mark as deleted', 'wc1c') . '</a>',
 		];
 
 		if('deleted' === $item['status'])
 		{
 			unset($actions['update']);
-			$actions['delete'] = '<a href="' . wc1c_admin_configurations_get_url('delete', $item['configuration_id']) . '">' . __('Remove forever', 'wc1c') . '</a>';
+			$actions['delete'] = '<a href="' . $this->utilityAdminConfigurationsGetUrl('delete', $item['configuration_id']) . '">' . __('Remove forever', 'wc1c') . '</a>';
 		}
 
 		if('draft' === $item['status'] && 'yes' === wc1c()->settings()->get('configurations_draft_delete', 'yes'))
 		{
-			$actions['delete'] = '<a href="' . wc1c_admin_configurations_get_url('delete', $item['configuration_id']) . '">' . __('Remove forever', 'wc1c') . '</a>';
+			$actions['delete'] = '<a href="' . $this->utilityAdminConfigurationsGetUrl('delete', $item['configuration_id']) . '">' . __('Remove forever', 'wc1c') . '</a>';
 		}
 
 		$connection_schema = __('Schema:', 'wc1c') . ' ' . $item['schema'];
 
-		return sprintf( '<span class="name">%1$s</span>%2$s<br/>%3$s',
+		return sprintf
+		(
+			'<span class="name">%1$s</span>%2$s<br/>%3$s',
 			$item['name'],
 			$connection_schema,
 			$this->rowActions($actions, true)
@@ -255,7 +262,7 @@ class AllTable extends TableAbstract
 			$this->storage_configurations->count()
 		);
 
-		$statuses = wc1c_configurations_get_statuses();
+		$statuses = $this->utilityConfigurationsGetStatuses();
 
 		foreach($statuses as $status_key)
 		{
@@ -279,7 +286,7 @@ class AllTable extends TableAbstract
 				'<a href="%s" %s>%s <span class="count">(%d)</span></a>',
 				$sold_url,
 				$class,
-				wc1c_configurations_get_statuses_folder($status_key),
+				$this->utilityConfigurationsGetStatusesFolder($status_key),
 				$count
 			);
 		}
@@ -344,7 +351,7 @@ class AllTable extends TableAbstract
 
 		$storage_args = [];
 
-		if(array_key_exists('status', $_GET) && in_array($_GET['status'], wc1c_configurations_get_statuses(), true))
+		if(array_key_exists('status', $_GET) && in_array($_GET['status'], $this->utilityConfigurationsGetStatuses(), true))
 		{
 			$storage_args['status'] = $_GET['status'];
 		}

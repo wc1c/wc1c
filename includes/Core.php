@@ -1,17 +1,7 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c;
+<?php namespace Wc1c;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use wpdb;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
@@ -49,24 +39,9 @@ final class Core
 	private $settings;
 
 	/**
-	 * @var Input
+	 * @var Receiver
 	 */
-	private $input;
-
-	/**
-	 * @var array Loaded configurations
-	 */
-	private $configurations = [];
-
-	/**
-	 * @var array Loaded extensions
-	 */
-	private $extensions = [];
-
-	/**
-	 * @var array Loaded schemas
-	 */
-	private $schemas = [];
+	private $receiver;
 
 	/**
 	 * Core constructor.
@@ -78,7 +53,7 @@ final class Core
 		// hook
 		do_action(WC1C_PREFIX . 'before_loading');
 
-		$this->context = $context;
+		$this->context = apply_filters(WC1C_PREFIX . 'context_loading', $context);
 
 		// init
 		add_action('init', [$this, 'init'], 3);
@@ -105,7 +80,7 @@ final class Core
 
 		try
 		{
-			$this->loadTimer();
+			$this->timer();
 		}
 		catch(Exception $e)
 		{
@@ -114,7 +89,7 @@ final class Core
 
 		try
 		{
-			$this->loadExtensions();
+			$this->extensions();
 		}
 		catch(Exception $e)
 		{
@@ -123,23 +98,14 @@ final class Core
 
 		try
 		{
-			$this->initExtensions();
+			$this->schemas();
 		}
 		catch(Exception $e)
 		{
-			wc1c()->log()->alert('Init extensions exception - ' . $e->getMessage());
+			wc1c()->log()->alert('Schemas exception - ' . $e->getMessage());
 		}
 
-		try
-		{
-			$this->loadSchemas();
-		}
-		catch(Exception $e)
-		{
-			wc1c()->log()->alert('Schemas load exception - ' . $e->getMessage());
-		}
-
-		if(false !== wc1c()->context()->isInput() || false !== wc1c()->context()->isWc1cAdmin())
+		if(false !== wc1c()->context()->isReceiver() || false !== wc1c()->context()->isWc1cAdmin())
 		{
 			try
 			{
@@ -151,20 +117,40 @@ final class Core
 			}
 		}
 
-		if(false !== wc1c()->context()->isInput())
+		if(false !== wc1c()->context()->isReceiver())
 		{
 			try
 			{
-				$this->loadingInput();
+				$this->loadReceiver();
 			}
 			catch(Exception $e)
 			{
-				wc1c()->log()->alert('Input exception - ' . $e->getMessage());
+				wc1c()->log()->alert('Receiver exception - ' . $e->getMessage());
 			}
 		}
 
 		// hook
 		do_action(WC1C_PREFIX . 'after_init');
+	}
+
+	/**
+	 * Extensions
+	 *
+	 * @return Extensions\Core
+	 */
+	public function extensions()
+	{
+		return Extensions\Core::instance();
+	}
+
+	/**
+	 * Schemas
+	 *
+	 * @return Schemas\Core
+	 */
+	public function schemas()
+	{
+		return Schemas\Core::instance();
 	}
 
 	/**
@@ -225,7 +211,7 @@ final class Core
 	}
 
 	/**
-	 * Get settings
+	 * Settings
 	 *
 	 * @param string $context
 	 *
@@ -253,341 +239,49 @@ final class Core
 	}
 
 	/**
-	 * Initializing extensions
-	 *
-	 * @param string $extension_id If an extension ID is specified, only the specified extension is loaded
-	 *
-	 * @return boolean
-	 * @throws Exception
-	 */
-	public function initExtensions($extension_id = '')
-	{
-		try
-		{
-			$extensions = $this->getExtensions();
-		}
-		catch(Exception $e)
-		{
-			throw new Exception('Get extensions exception - ' . $e->getMessage());
-		}
-
-		if(!is_array($extensions))
-		{
-			throw new Exception('$extensions is not array');
-		}
-
-		/**
-		 * Init specified extension
-		 */
-		if('' !== $extension_id)
-		{
-			if(!array_key_exists($extension_id, $extensions))
-			{
-				throw new Exception('extension not found by id');
-			}
-
-			$init_extension = $extensions[$extension_id];
-
-			if(!is_object($init_extension))
-			{
-				throw new Exception('$extensions[$extension_id] is not object');
-			}
-
-			if($init_extension->is_initialized())
-			{
-				throw new Exception('old initialized');
-			}
-
-			if(!method_exists($init_extension, 'init'))
-			{
-				throw new Exception('method init is not found');
-			}
-
-			try
-			{
-				$init_extension->init();
-			}
-			catch(Exception $e)
-			{
-				throw new Exception('Init extension exception - ' . $e->getMessage());
-			}
-
-			$init_extension->setInitialized(true);
-
-			return true;
-		}
-
-		/**
-		 * Init all extensions
-		 */
-		foreach($extensions as $extension => $extension_object)
-		{
-			try
-			{
-				$this->initExtensions($extension);
-			}
-			catch(Exception $e)
-			{
-				wc1c()->log()->error($e->getMessage(), $e);
-				continue;
-			}
-		}
-
-		return true;
-	}
-
-	/**
-	 * Initializing schemas
-	 *
-	 * @param integer|Configuration $configuration
-	 *
-	 * @return boolean
-	 * @throws Exception
-	 */
-	public function initSchemas($configuration)
-	{
-		if(false === $configuration)
-		{
-			throw new Exception('$configuration is false');
-		}
-
-		if(!is_object($configuration))
-		{
-			try
-			{
-				$storage_configurations = Storage::load('configuration');
-			}
-			catch(Exception $e)
-			{
-				throw new Exception('exception - ' . $e->getMessage());
-			}
-
-			if(!$storage_configurations->isExistingById($configuration))
-			{
-				throw new Exception('$configuration is not exists');
-			}
-
-			try
-			{
-				$configuration = new Configuration($configuration);
-			}
-			catch(Exception $e)
-			{
-				throw new Exception('exception - ' . $e->getMessage());
-			}
-		}
-
-		if(!$configuration instanceof Configuration)
-		{
-			throw new Exception('$configuration is not instanceof Configuration');
-		}
-
-		try
-		{
-			$schemas = $this->getSchemas();
-		}
-		catch(Exception $e)
-		{
-			throw new Exception('exception - ' . $e->getMessage());
-		}
-
-		if(!is_array($schemas))
-		{
-			throw new Exception('$schemas is not array');
-		}
-
-		$schema_id = $configuration->getSchema();
-
-		if(!array_key_exists($schema_id, $schemas))
-		{
-			throw new Exception('schema not found by id: ' . $schema_id);
-		}
-
-		if(!is_object($schemas[$schema_id]))
-		{
-			throw new Exception('$schemas[$schema_id] is not object');
-		}
-
-		$init_schema = $schemas[$schema_id];
-
-		if($init_schema->isInitialized())
-		{
-			throw new Exception('old initialized, $schema_id: ' . $schema_id);
-		}
-
-		if(!method_exists($init_schema, 'init'))
-		{
-			throw new Exception('method init not found, $schema_id: ' . $schema_id);
-		}
-
-		$current_configuration_id = $configuration->getId();
-
-		$init_schema->setPrefix(WC1C_PREFIX . 'prefix_' . $schema_id . '_' . $current_configuration_id);
-		$init_schema->setConfiguration($configuration);
-		$init_schema->setConfigurationPrefix(WC1C_PREFIX . 'configuration_' . $current_configuration_id);
-
-		try
-		{
-			$init_schema_result = $init_schema->init();
-		}
-		catch(Exception $e)
-		{
-			throw new Exception('exception by schema - ' . $e->getMessage());
-		}
-
-		if(true !== $init_schema_result)
-		{
-			throw new Exception('schema is not initialized');
-		}
-
-		$init_schema->setInitialized(true);
-
-		return $init_schema;
-	}
-
-	/**
-	 * Schemas loading
-	 *
-	 * @throws RuntimeException
-	 */
-	private function loadSchemas()
-	{
-		$schemas = [];
-
-		try
-		{
-			$schema_default = new Schemas\DefaultCML\Init();
-		}
-		catch(Exception $e)
-		{
-			throw new RuntimeException('Schema init exception - ' . $e->getMessage());
-		}
-
-		$schema_default->setId('defaultcml');
-		$schema_default->setVersion('0.1.0');
-		$schema_default->setName(__('Default schema based on CML', 'wc1c'));
-		$schema_default->setDescription(__('Standard data exchange using the standard exchange algorithm from 1C via CommerceML. Exchanges only contains products data.', 'wc1c'));
-		$schema_default->setSchemaPrefix(WC1C_PREFIX . 'schema_' . $schema_default->getId());
-
-		$schemas['defaultcml'] = $schema_default;
-
-		/**
-		 * External schemas
-		 */
-		if('yes' === $this->settings()->get('extensions_schemas', 'yes'))
-		{
-			$schemas = apply_filters(WC1C_PREFIX . 'schemas_loading', $schemas);
-		}
-
-		wc1c()->log()->debug('wc1c_schemas_loading $schemas', $schemas);
-
-		try
-		{
-			$this->setSchemas($schemas);
-		}
-		catch(Exception $e)
-		{
-			throw new RuntimeException('exception - ' . $e->getMessage());
-		}
-	}
-
-	/**
-	 * Set schemas
-	 *
-	 * @param array $schemas
-	 *
-	 * @return boolean
-	 * @throws Exception
-	 */
-	public function setSchemas($schemas)
-	{
-		if(is_array($schemas))
-		{
-			$this->schemas = $schemas;
-			return true;
-		}
-
-		throw new Exception('$schemas is not valid');
-	}
-
-	/**
-	 * Timer loading
-	 *
-	 * @return void
-	 * @throws Exception
-	 */
-	private function loadTimer()
-	{
-		$timer = new Timer();
-
-		$php_max_execution = $this->environment()->get('php_max_execution_time', 20);
-
-		if($php_max_execution !== $this->settings()->get('php_max_execution_time', $php_max_execution))
-		{
-			$php_max_execution = $this->settings()->get('php_max_execution_time', $php_max_execution);
-		}
-
-		$timer->setMaximum($php_max_execution);
-
-		try
-		{
-			$this->setTimer($timer);
-		}
-		catch(Exception $e)
-		{
-			throw new Exception('Set timer exception - ' . $e->getMessage());
-		}
-	}
-
-	/**
 	 * Timer
 	 *
 	 * @return Timer
-	 * @throws Exception
 	 */
 	public function timer()
 	{
 		if(is_null($this->timer))
 		{
-			$this->loadTimer();
+			$timer = new Timer();
+
+			$php_max_execution = $this->environment()->get('php_max_execution_time', 20);
+
+			if($php_max_execution !== $this->settings()->get('php_max_execution_time', $php_max_execution))
+			{
+				$php_max_execution = $this->settings()->get('php_max_execution_time', $php_max_execution);
+			}
+
+			$timer->setMaximum($php_max_execution);
+
+			$this->timer = $timer;
 		}
 
 		return $this->timer;
 	}
 
 	/**
-	 * @param Timer $timer
+	 * Get Receiver
 	 *
-	 * @throws Exception
+	 * @return Receiver
 	 */
-	public function setTimer($timer)
+	public function receiver()
 	{
-		if($timer instanceof Timer)
-		{
-			$this->timer = $timer;
-		}
-
-		throw new Exception('$timer is not Timer');
+		return $this->receiver;
 	}
 
 	/**
-	 * Get input
+	 * Set Receiver
 	 *
-	 * @return Input
+	 * @param Receiver $receiver
 	 */
-	public function input()
+	public function setReceiver($receiver)
 	{
-		return $this->input;
-	}
-
-	/**
-	 * Set input
-	 *
-	 * @param Input $input
-	 */
-	public function setInput($input)
-	{
-		$this->input = $input;
+		$this->receiver = $receiver;
 	}
 
 	/**
@@ -596,15 +290,15 @@ final class Core
 	 * @return void
 	 * @throws Exception
 	 */
-	private function loadingInput()
+	private function loadReceiver()
 	{
-		$default_class_name = 'Input';
+		$default_class_name = 'Receiver';
 
-		$use_class_name = apply_filters(WC1C_PREFIX . 'input_loading_class_name', $default_class_name);
+		$use_class_name = apply_filters(WC1C_PREFIX . 'receiver_loading_class_name', $default_class_name);
 
 		if(false === class_exists($use_class_name))
 		{
-			$this->log()->info(WC1C_PREFIX . 'input_loading_class_name: class is not exists - ' . $use_class_name);
+			$this->log()->info(WC1C_PREFIX . 'receiver_loading_class_name: class is not exists - ' . $use_class_name);
 			$use_class_name = $default_class_name;
 		}
 
@@ -619,101 +313,12 @@ final class Core
 
 		try
 		{
-			$this->setInput($api);
+			$this->setReceiver($api);
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('setInput - ' . $e->getMessage());
+			throw new Exception('setReceiver - ' . $e->getMessage());
 		}
-	}
-
-	/**
-	 * Extensions load
-	 *
-	 * @return void
-	 * @throws Exception
-	 */
-	private function loadExtensions()
-	{
-		$extensions = [];
-
-		if('yes' === $this->settings()->get('extensions', 'yes'))
-		{
-			$extensions = apply_filters(WC1C_PREFIX . 'extensions_loading', $extensions);
-		}
-
-		try
-		{
-			$this->setExtensions($extensions);
-		}
-		catch(Exception $e)
-		{
-			throw new Exception('Extensions set exception - ' . $e->getMessage());
-		}
-	}
-
-	/**
-	 * Get schemas
-	 *
-	 * @param string $schema_id
-	 *
-	 * @return array|mixed
-	 * @throws RuntimeException
-	 */
-	public function getSchemas($schema_id = '')
-	{
-		if('' !== $schema_id)
-		{
-			if(array_key_exists($schema_id, $this->schemas))
-			{
-				return $this->schemas[$schema_id];
-			}
-
-			throw new RuntimeException('$schema_id is unavailable');
-		}
-
-		return $this->schemas;
-	}
-
-	/**
-	 * Get initialized extensions
-	 *
-	 * @param string $extension_id
-	 *
-	 * @return array|object
-	 * @throws Exception
-	 */
-	public function getExtensions($extension_id = '')
-	{
-		if('' !== $extension_id)
-		{
-			if(array_key_exists($extension_id, $this->extensions))
-			{
-				return $this->extensions[$extension_id];
-			}
-
-			throw new Exception('$extension_id is unavailable');
-		}
-
-		return $this->extensions;
-	}
-
-	/**
-	 * @param array $extensions
-	 *
-	 * @return bool
-	 * @throws Exception
-	 */
-	public function setExtensions($extensions)
-	{
-		if(is_array($extensions))
-		{
-			$this->extensions = $extensions;
-
-			return true;
-		}
-
-		throw new Exception('$extensions is not valid');
 	}
 
 	/**

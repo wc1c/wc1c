@@ -1,32 +1,21 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Traits;
+<?php namespace Wc1c\Traits;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
 /**
- * Trait Sections
+ * SectionsTrait
  *
  * @package Wc1c\Traits
  */
 trait SectionsTrait
 {
 	/**
-	 * Sections
-	 *
-	 * @var array
+	 * @var array Sections
 	 */
 	private $sections = [];
 
 	/**
-	 * Current section
-	 *
-	 * @var string
+	 * @var string Current section
 	 */
 	private $current_section = '';
 

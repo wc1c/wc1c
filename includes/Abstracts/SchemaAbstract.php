@@ -43,11 +43,6 @@ abstract class SchemaAbstract
 	private $configuration_prefix = '';
 
 	/**
-	 * @var string Unique schema prefix wc1c_schema_{schema_id}
-	 */
-	private $schema_prefix = '';
-
-	/**
 	 * @var string Current version
 	 */
 	private $version = '';
@@ -66,11 +61,6 @@ abstract class SchemaAbstract
 	 * @var string Schema Author
 	 */
 	private $author = 'WC1C team';
-
-	/**
-	 * SchemaAbstract constructor.
-	 */
-	public function __construct(){}
 
 	/**
 	 * @throws Exception
@@ -102,7 +92,7 @@ abstract class SchemaAbstract
 	 *
 	 * @return $this
 	 */
-	public function setId($id)
+	protected function setId($id)
 	{
 		$this->id = $id;
 
@@ -130,7 +120,7 @@ abstract class SchemaAbstract
 	/**
 	 * @param string $name
 	 */
-	public function setName($name)
+	protected function setName($name)
 	{
 		$this->name = $name;
 	}
@@ -146,7 +136,7 @@ abstract class SchemaAbstract
 	/**
 	 * @param string $description
 	 */
-	public function setDescription($description)
+	protected function setDescription($description)
 	{
 		$this->description = $description;
 	}
@@ -162,7 +152,7 @@ abstract class SchemaAbstract
 	/**
 	 * @param string $author
 	 */
-	public function setAuthor($author)
+	protected function setAuthor($author)
 	{
 		$this->author = $author;
 	}
@@ -220,7 +210,7 @@ abstract class SchemaAbstract
 	/**
 	 * @param string $version
 	 */
-	public function setVersion($version)
+	protected function setVersion($version)
 	{
 		$this->version = $version;
 	}
@@ -258,11 +248,11 @@ abstract class SchemaAbstract
 	}
 
 	/**
-	 * @return string
+	 * @return string Unique schema prefix wc1c_schema_{schema_id}
 	 */
 	public function getSchemaPrefix()
 	{
-		return $this->schema_prefix;
+		return WC1C_PREFIX . 'schema_' . $this->getId();
 	}
 
 	/**

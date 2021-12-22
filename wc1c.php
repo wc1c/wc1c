@@ -55,7 +55,6 @@ if(false === defined('WC1C_PLUGIN_FILE'))
 	define('WC1C_PLUGIN_URL', plugin_dir_url(__FILE__));
 	define('WC1C_PLUGIN_NAME', plugin_basename(WC1C_PLUGIN_FILE));
 
-	include_once __DIR__ . '/includes/functions.php';
 	include_once __DIR__ . '/includes/Autoloader.php';
 
 	$loader = new Wc1c\Autoloader();

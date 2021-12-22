@@ -5,7 +5,9 @@ defined('ABSPATH') || exit;
 use Wc1c\Admin\Traits\ProcessConfigurationTrait;
 use Wc1c\Exceptions\Exception;
 use Wc1c\Exceptions\RuntimeException;
+use Wc1c\Traits\DatetimeUtilityTrait;
 use Wc1c\Traits\SingletonTrait;
+use Wc1c\Traits\UtilityTrait;
 
 /**
  * Update
@@ -16,6 +18,8 @@ class Update
 {
 	use SingletonTrait;
 	use ProcessConfigurationTrait;
+	use DatetimeUtilityTrait;
+	use UtilityTrait;
 
 	/**
 	 * Update constructor.
@@ -28,7 +32,7 @@ class Update
 		{
 			try
 			{
-				wc1c()->initSchemas($this->getConfiguration());
+				wc1c()->schemas()->init($this->getConfiguration());
 			}
 			catch(Exception $e)
 			{
@@ -107,7 +111,9 @@ class Update
 	 */
 	public function outputError()
 	{
-		wc1c()->templates()->getTemplate('configurations/update_error.php');
+		$args['back_url'] = $this->utilityAdminConfigurationsGetUrl('all');
+
+		wc1c()->templates()->getTemplate('configurations/update_error.php', $args);
 	}
 
 	/**
@@ -125,7 +131,9 @@ class Update
 	 */
 	public function output()
 	{
-		wc1c()->templates()->getTemplate('configurations/update.php');
+		$args['back_url'] = $this->utilityAdminConfigurationsGetUrl('all');
+
+		wc1c()->templates()->getTemplate('configurations/update.php', $args);
 	}
 
 	/**
@@ -148,13 +156,13 @@ class Update
 		$body .= __('Schema ID: ', 'wc1c') . $configuration->getSchema();
 		$body .= '</li>';
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Date create: ', 'wc1c') . wc1c_pretty_date($configuration->getDateCreate());
+		$body .= __('Date create: ', 'wc1c') . $this->utilityPrettyDate($configuration->getDateCreate());
 		$body .= '</li>';
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Date modify: ', 'wc1c') . wc1c_pretty_date($configuration->getDateModify());
+		$body .= __('Date modify: ', 'wc1c') . $this->utilityPrettyDate($configuration->getDateModify());
 		$body .= '</li>';
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Date active: ', 'wc1c') . wc1c_pretty_date($configuration->getDateActivity());
+		$body .= __('Date active: ', 'wc1c') . $this->utilityPrettyDate($configuration->getDateActivity());
 		$body .= '</li>';
 		$body .= '<li class="list-group-item p-2 m-0">';
 		$body .= __('Upload directory: ', 'wc1c') . '<div class="p-1 mt-1 bg-light">' . $configuration->getUploadDirectory() . '</div>';
@@ -168,7 +176,7 @@ class Update
 
 		try
 		{
-			$schema = wc1c()->getSchemas($configuration->getSchema());
+			$schema = wc1c()->schemas()->get($configuration->getSchema());
 
 			$args = [
 				'header' => '<h3 class="p-0 m-0">' . __('About schema', 'wc1c') . '</h3>',

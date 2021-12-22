@@ -1,33 +1,23 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Log;
+<?php namespace Wc1c\Log;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use Monolog\Logger;
 
 /**
- * InputLog
+ * ReceiverLog
  *
  * @package Wc1c
  */
-class InputLog extends Logger
+class ReceiverLog extends Logger
 {
 	/**
 	 * @var string
 	 */
-	protected $name = 'input';
+	protected $name = 'receiver';
 
 	/**
-	 * InputLog constructor.
+	 * ReceiverLog constructor.
 	 *
 	 * @param array $handlers
 	 * @param array $processors
