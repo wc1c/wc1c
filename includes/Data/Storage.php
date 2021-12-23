@@ -1,24 +1,14 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Data;
+<?php namespace Wc1c\Data;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use Wc1c\Exceptions\Exception;
 use Wc1c\Data\Interfaces\StorageInterface;
 use Wc1c\Abstracts\DataAbstract;
 use Wc1c\Data\Storages\StorageConfigurations;
 
 /**
- * Class Storage
+ * Storage
  *
  * @package Wc1c\Data
  */

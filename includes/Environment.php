@@ -1,17 +1,7 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c;
+<?php namespace Wc1c;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use Wc1c\Exceptions\Exception;
 use Wc1c\Exceptions\RuntimeException;
 use Wc1c\Traits\SingletonTrait;
@@ -161,6 +151,104 @@ final class Environment
 		$this->set('wc1c_upload_directory', $wc1c_upload_dir);
 
 		return $this->get('wc1c_upload_directory');
+	}
+
+	/**
+	 * Wc1c logs directory
+	 *
+	 * @return bool
+	 */
+	public function initWc1cLogsDirectory()
+	{
+		$wc1c_logs_dir = $this->get('wc1c_upload_directory') . DIRECTORY_SEPARATOR . 'logs';
+
+		$this->set('wc1c_logs_directory', $wc1c_logs_dir);
+
+		return $this->get('wc1c_logs_directory');
+	}
+
+	/**
+	 * Wc1c tools directory
+	 *
+	 * @return bool
+	 */
+	public function initWc1cToolsDirectory()
+	{
+		$wc1c_logs_dir = $this->get('wc1c_upload_directory') . DIRECTORY_SEPARATOR . 'tools';
+
+		$this->set('wc1c_tools_directory', $wc1c_logs_dir);
+
+		return $this->get('wc1c_tools_directory');
+	}
+
+	/**
+	 * Wc1c tools logs directory
+	 *
+	 * @return bool
+	 */
+	public function initWc1cToolsLogsDirectory()
+	{
+		$wc1c_logs_dir = $this->get('wc1c_tools_directory') . DIRECTORY_SEPARATOR . 'logs';
+
+		$this->set('wc1c_tools_logs_directory', $wc1c_logs_dir);
+
+		return $this->get('wc1c_tools_logs_directory');
+	}
+
+	/**
+	 * Wc1c schemas directory
+	 *
+	 * @return bool
+	 */
+	public function initWc1cSchemasDirectory()
+	{
+		$wc1c_logs_dir = $this->get('wc1c_upload_directory') . DIRECTORY_SEPARATOR . 'schemas';
+
+		$this->set('wc1c_schemas_directory', $wc1c_logs_dir);
+
+		return $this->get('wc1c_schemas_directory');
+	}
+
+	/**
+	 * Wc1c schemas logs directory
+	 *
+	 * @return bool
+	 */
+	public function initWc1cSchemasLogsDirectory()
+	{
+		$wc1c_logs_dir = $this->get('wc1c_schemas_directory') . DIRECTORY_SEPARATOR . 'logs';
+
+		$this->set('wc1c_schemas_logs_directory', $wc1c_logs_dir);
+
+		return $this->get('wc1c_schemas_logs_directory');
+	}
+
+	/**
+	 * Wc1c configurations directory
+	 *
+	 * @return bool
+	 */
+	public function initWc1cConfigurationsDirectory()
+	{
+		$wc1c_logs_dir = $this->get('wc1c_upload_directory') . DIRECTORY_SEPARATOR . 'configurations';
+
+		$this->set('wc1c_configurations_directory', $wc1c_logs_dir);
+
+		return $this->get('wc1c_configurations_directory');
+	}
+
+	/**
+	 * Wc1c configurations logs directory
+	 *
+	 * @return bool
+	 */
+	public function initWc1cConfigurationsLogsDirectory()
+	{
+		$wc1c_logs_dir = $this->get('wc1c_configurations_directory') . DIRECTORY_SEPARATOR . 'logs';
+
+		$this->set('wc1c_configurations_logs_directory', $wc1c_logs_dir);
+
+		return $this->get('wc1c_configurations_logs_directory');
 	}
 
 	/**

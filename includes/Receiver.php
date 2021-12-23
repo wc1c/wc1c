@@ -33,13 +33,16 @@ final class Receiver
 	{
 		$wc1c_receiver = wc1c()->getVar($_GET['wc1c-receiver'], false);
 
+		wc1c()->log('receiver')->info(__('Receiver request start.', 'wc1c'));
+		wc1c()->log('receiver')->debug(__('Receiver request params.', 'wc1c'), ['GET' => $_GET, 'POST' => $_POST, 'SERVER' => $_SERVER]);
+
 		if(false !== $wc1c_receiver)
 		{
 			wc1c()->define('WC1C_RECEIVER_REQUEST', true);
 
 			if('yes' !== wc1c()->settings()->get('receiver', 'yes'))
 			{
-				wc1c()->log()->warning(__('Receiver is offline. Request reject.', 'wc1c'));
+				wc1c()->log('receiver')->warning(__('Receiver is offline. Request reject.', 'wc1c'));
 				die(__('Receiver is offline. Request reject.', 'wc1c'));
 			}
 
@@ -49,20 +52,28 @@ final class Receiver
 			}
 			catch(Exception $e)
 			{
-				wc1c()->log()->warning(__('Input unavailable', 'wc1c'));
-				die(__('Input unavailable', 'wc1c'));
+				wc1c()->log('receiver')->warning(__('Input unavailable', 'wc1c'), ['exception' => $e]);
+				die(__('Receiver is unavailable.', 'wc1c'));
 			}
 
 			wc1c()->environment()->set('current_configuration_id', $wc1c_receiver);
 
-			if($configuration->getStatus() !== 'active')
+			if($configuration->getStatus() !== 'active' && $configuration->getStatus() !==  'processing')
 			{
-				wc1c()->log()->warning(__('Configuration offline.', 'wc1c'));
+				wc1c()->log('receiver')->warning(__('Configuration offline.', 'wc1c'));
 				die(__('Configuration offline.', 'wc1c'));
 			}
 
-			$configuration->setDateActivity(time());
-			$configuration->save();
+			try
+			{
+				$configuration->setDateActivity(time());
+				$configuration->save();
+			}
+			catch(Exception $e)
+			{
+				wc1c()->log('receiver')->error('Configuration save error.', ['exception' => $e]);
+				die(__('Configuration offline.', 'wc1c'));
+			}
 
 			try
 			{
@@ -70,40 +81,29 @@ final class Receiver
 			}
 			catch(Exception $e)
 			{
-				wc1c()->log()->error($e->getMessage(), $e);
-				die('Exception: ' . $e->getMessage());
+				wc1c()->log('receiver')->error('Schema is not initialized.', ['exception' => $e]);
+				die(__('Schema offline.', 'wc1c'));
 			}
 
 			$action = false;
-
-			ob_start();
-			nocache_headers();
-
-			$wc1c_receiver_action = 'wc1c_receiver';
+			$wc1c_receiver_action = 'wc1c_receiver_' . $configuration->getSchema();
 
 			if(has_action($wc1c_receiver_action))
 			{
 				$action = true;
+
+				ob_start();
+				nocache_headers();
+
 				do_action($wc1c_receiver_action);
-			}
 
-			if('' !== $wc1c_receiver)
-			{
-				$wc1c_receiver_action .= '_' . $configuration->getSchema();
+				ob_end_clean();
 			}
-
-			if(has_action($wc1c_receiver_action))
-			{
-				$action = true;
-				do_action($wc1c_receiver_action);
-			}
-
-			ob_end_clean();
 
 			if(false === $action)
 			{
-				wc1c()->log()->warning(__('Receiver request is very bad!', 'wc1c'));
-				die(__('Receiver request is very bad!', 'wc1c'));
+				wc1c()->log('receiver')->warning(__('Receiver request is very bad! Action not found.', 'wc1c'), ['action' => $wc1c_receiver_action]);
+				die(__('Receiver request is very bad! Action not found.', 'wc1c'));
 			}
 			die();
 		}

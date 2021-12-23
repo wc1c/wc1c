@@ -167,9 +167,7 @@ class StorageConfigurations implements StorageMetaInterface
 		$changes = $data->getChanges();
 
 		// Only changed update data changes
-		if
-		(
-			array_intersect
+		if(array_intersect
 			(
 				[
 					'user_id',
@@ -192,9 +190,9 @@ class StorageConfigurations implements StorageMetaInterface
 				'status' => $data->getStatus(),
 				'options' => maybe_serialize($data->getOptions()),
 				'schema' => $data->getSchema(),
-				'date_create' => $data->getDateCreate(),
-				'date_modify' => $data->getDateModify(),
-				'date_activity' => $data->getDateActivity(),
+				//'date_create' => $data->getDateCreate(),
+				//'date_modify' => $data->getDateModify(),
+				//'date_activity' => $data->getDateActivity(),
 			];
 
 			if($data->getDateCreate('edit'))
@@ -206,14 +204,10 @@ class StorageConfigurations implements StorageMetaInterface
 			{
 				$update_data['date_modify'] = gmdate('Y-m-d H:i:s', $data->getDateModify('edit')->getTimestamp());
 			}
-			else
-			{
-				$update_data['date_modify'] = current_time('mysql', 1);
-			}
 
-			if(isset($changes['date_activity']) && $data->getDateModify('edit'))
+			if(isset($changes['date_activity']) && $data->getDateActivity('edit'))
 			{
-				$update_data['date_activity'] = gmdate('Y-m-d H:i:s', $data->getDateModify('edit')->getTimestamp());
+				$update_data['date_activity'] = gmdate('Y-m-d H:i:s', $data->getDateActivity('edit')->getTimestamp());
 			}
 
 			wc1c()->database()->update($this->getTableName(), $update_data, ['configuration_id' => $data->getId()]);

@@ -2,15 +2,14 @@
 
 defined('ABSPATH') || exit;
 
-use Monolog\Formatter\JsonFormatter;
-use Monolog\Handler\StreamHandler;
 use wpdb;
-use Psr\Log\LoggerAwareTrait;
+use Wc1c\Log\Formatter;
+use Wc1c\Log\Handler;
 use Psr\Log\LoggerInterface;
 use Wc1c\Exceptions\Exception;
 use Wc1c\Exceptions\RuntimeException;
 use Wc1c\Interfaces\SettingsInterface;
-use Wc1c\Log\CoreLog;
+use Wc1c\Log\Logger;
 use Wc1c\Traits\SingletonTrait;
 use Wc1c\Settings\MainSettings;
 
@@ -22,7 +21,11 @@ use Wc1c\Settings\MainSettings;
 final class Core
 {
 	use SingletonTrait;
-	use LoggerAwareTrait;
+
+	/**
+	 * @var array
+	 */
+	private $log = [];
 
 	/**
 	 * @var Context
@@ -199,37 +202,68 @@ final class Core
 	}
 
 	/**
-	 * Log
+	 * Logger
+	 *
+	 * @param string $channel
+	 * @param string $name
 	 *
 	 * @return LoggerInterface
 	 */
-	public function log()
+	public function log($channel = 'main', $name = '')
 	{
-		if(is_null($this->log))
+		$channel = strtolower($channel);
+
+		if(!isset($this->log[$channel]))
 		{
-			$logger = new CoreLog();
+			if('' === $name)
+			{
+				$name = $channel;
+			}
+
+			$logger = new Logger($channel);
+
+			switch($channel)
+			{
+				case 'receiver':
+					$path = $this->environment()->get('wc1c_logs_directory') . '/' . $name . '.log';
+					$level = $this->settings()->get('logger_receiver_level', 'logger_level');
+					break;
+				case 'tools':
+					$path = $this->environment()->get('wc1c_tools_logs_directory') . '/' . $name . '.log';
+					$level = $this->settings()->get('logger_tools_level', 'logger_level');
+					break;
+				case 'schemas':
+					$path = $this->environment()->get('wc1c_schemas_logs_directory') . '/' . $name . '.log';
+					$level = $this->settings()->get('logger_schemas_level', 'logger_level');
+					break;
+				case 'configurations':
+					$path = $name . '.log';
+					$level = $this->settings()->get('logger_configurations_level', 'logger_level');
+					break;
+				default:
+					$path = $this->environment()->get('wc1c_logs_directory') . '/main.log';
+					$level = $this->settings()->get('logger_level', 300);
+			}
+
+			if('logger_level' === $level)
+			{
+				$level = $this->settings()->get('logger_level', 300);
+			}
 
 			try
 			{
-				$path = $this->environment()->get('wc1c_upload_directory') . '/logs/core.log';
-				$level = $this->settings()->get('logger_level', '');
+				$formatter = new Formatter();
+				$handler = new Handler($path, $level);
+				$handler->setFormatter($formatter);
 
-				if($level !== '')
-				{
-					$formatter = new JsonFormatter();
-
-					$handler = new StreamHandler($path, $level);
-					$handler->setFormatter($formatter);
-
-					$logger->pushHandler($handler);
-				}
+				$logger->pushHandler($handler);
 			}
 			catch(\Exception $e){}
 
-			$this->setLog($logger);
+			$this->log[$channel] = $logger;
 		}
 
-		return $this->log;
+		return $this->log[$channel];
 	}
 
 	/**
@@ -307,7 +341,7 @@ final class Core
 	}
 
 	/**
-	 * Input loading
+	 * Receiver loading
 	 *
 	 * @return void
 	 * @throws Exception
@@ -330,7 +364,7 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('not loaded');
+			throw new Exception('Receiver is not loaded');
 		}
 
 		try
@@ -339,7 +373,7 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('setReceiver - ' . $e->getMessage());
+			throw new Exception('Set receiver - ' . $e->getMessage());
 		}
 	}
 
@@ -348,9 +382,7 @@ final class Core
 	 */
 	public function localization()
 	{
-		/**
-		 * WP 5.x or later
-		 */
+		/** WP 5.x or later */
 		if(function_exists('determine_locale'))
 		{
 			$locale = determine_locale();
@@ -360,9 +392,6 @@ final class Core
 			$locale = is_admin() && function_exists('get_user_locale') ? get_user_locale() : get_locale();
 		}
 
-		/**
-		 * Change locale from external code
-		 */
 		$locale = apply_filters('plugin_locale', $locale, 'wc1c');
 
 		unload_textdomain('wc1c');

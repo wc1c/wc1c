@@ -38,6 +38,8 @@ class Update
 			{
 				add_action(WC1C_ADMIN_PREFIX . 'configurations_update_show', [$this, 'outputSchemaError'], 10);
 				add_filter(WC1C_ADMIN_PREFIX . 'configurations_update_schema_error_text', [$this, 'outputSchemaErrorText'], 10, 1);
+
+				wc1c()->log()->notice('Schema is not initialize', ['exception' => $e]);
 			}
 
 			$this->process();
@@ -45,6 +47,8 @@ class Update
 		else
 		{
 			add_action(WC1C_ADMIN_PREFIX . 'show', [$this, 'outputError'], 10);
+
+			wc1c()->log()->notice('Configuration update is not available', ['configuration_id' => $configuration_id]);
 			return;
 		}
 

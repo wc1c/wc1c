@@ -144,12 +144,12 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('exception by schema - ' . $e->getMessage());
+			throw new Exception('Exception by schema - ' . $e->getMessage());
 		}
 
 		if(true !== $init_schema_result)
 		{
-			throw new Exception('schema is not initialized');
+			throw new Exception('Schema is not initialized');
 		}
 
 		$init_schema->setInitialized(true);
@@ -176,7 +176,7 @@ final class Core
 				return $this->schemas[$schema_id];
 			}
 
-			throw new RuntimeException('$schema_id is unavailable');
+			throw new RuntimeException('Schema by ID is unavailable');
 		}
 
 		return $this->schemas;
@@ -210,7 +210,7 @@ final class Core
 			$schemas = apply_filters(WC1C_PREFIX . 'schemas_loading', $schemas);
 		}
 
-		wc1c()->log()->debug(WC1C_PREFIX . 'schemas_loading $schemas', $schemas);
+		wc1c()->log()->debug('Schemas loading', ['schemas' => $schemas]);
 
 		try
 		{

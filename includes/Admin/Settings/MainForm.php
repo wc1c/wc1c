@@ -220,26 +220,93 @@ class MainForm extends Form
 	{
 		$fields['logger_title'] =
 		[
-			'title' => __('Technical events', 'wc1c'),
+			'title' => __('Event logs', 'wc1c'),
 			'type' => 'title',
-			'description' => __('Used by technical specialists. Can leave it at that.', 'wc1c'),
+			'description' => __('Global settings for technical event logging.', 'wc1c'),
 		];
 
 		$fields['logger_level'] =
 		[
-			'title' => __('Level', 'wc1c'),
+			'title' => __('Level for main events', 'wc1c'),
 			'type' => 'select',
 			'description' => __('All events of the selected level will be recorded in the log file. The higher the level, the less data is recorded.', 'wc1c'),
 			'default' => '300',
 			'options' =>
 			[
-				'' => __('Off', 'wc1c'),
-				'100' => __('DEBUG', 'wc1c'),
-				'200' => __('INFO', 'wc1c'),
-				'250' => __('NOTICE', 'wc1c'),
-				'300' => __('WARNING', 'wc1c'),
-				'400' => __('ERROR', 'wc1c'),
-			]
+				'100' => __('DEBUG (100)', 'wc1c'),
+				'200' => __('INFO (200)', 'wc1c'),
+				'250' => __('NOTICE (250)', 'wc1c'),
+				'300' => __('WARNING (300)', 'wc1c'),
+				'400' => __('ERROR (400)', 'wc1c'),
+			],
+		];
+
+		$fields['logger_receiver_level'] =
+		[
+			'title' => __('Level for receiver', 'wc1c'),
+			'type' => 'select',
+			'description' => __('All events of the selected level will be recorded the Receiver events in the log file. The higher the level, the less data is recorded.', 'wc1c'),
+			'default' => 'logger_level',
+			'options' =>
+			[
+				'logger_level' => __('Use level for main events', 'wc1c'),
+				'100' => __('DEBUG (100)', 'wc1c'),
+				'200' => __('INFO (200)', 'wc1c'),
+				'250' => __('NOTICE (250)', 'wc1c'),
+				'300' => __('WARNING (300)', 'wc1c'),
+				'400' => __('ERROR (400)', 'wc1c'),
+			],
+		];
+
+		$fields['logger_tools_level'] =
+		[
+			'title' => __('Level for tools', 'wc1c'),
+			'type' => 'select',
+			'description' => __('All events of the selected level will be recorded the tools events in the log file. The higher the level, the less data is recorded.', 'wc1c'),
+			'default' => 'logger_level',
+			'options' =>
+			[
+				'logger_level' => __('Use level for main events', 'wc1c'),
+				'100' => __('DEBUG (100)', 'wc1c'),
+				'200' => __('INFO (200)', 'wc1c'),
+				'250' => __('NOTICE (250)', 'wc1c'),
+				'300' => __('WARNING (300)', 'wc1c'),
+				'400' => __('ERROR (400)', 'wc1c'),
+			],
+		];
+
+		$fields['logger_schemas_level'] =
+		[
+			'title' => __('Level for schemas', 'wc1c'),
+			'type' => 'select',
+			'description' => __('All events of the selected level will be recorded the schemas events in the log file. The higher the level, the less data is recorded.', 'wc1c'),
+			'default' => 'logger_level',
+			'options' =>
+			[
+				'logger_level' => __('Use level for main events', 'wc1c'),
+				'100' => __('DEBUG (100)', 'wc1c'),
+				'200' => __('INFO (200)', 'wc1c'),
+				'250' => __('NOTICE (250)', 'wc1c'),
+				'300' => __('WARNING (300)', 'wc1c'),
+				'400' => __('ERROR (400)', 'wc1c'),
+			],
+		];
+
+		$fields['logger_configurations_level'] =
+		[
+			'title' => __('Level for configurations', 'wc1c'),
+			'type' => 'select',
+			'description' => __('All events of the selected level will be recorded the configurations events in the log file. The higher the level, the less data is recorded.', 'wc1c'),
+			'default' => 'logger_level',
+			'options' =>
+			[
+				'logger_level' => __('Use level for main events', 'wc1c'),
+				'100' => __('DEBUG (100)', 'wc1c'),
+				'200' => __('INFO (200)', 'wc1c'),
+				'250' => __('NOTICE (250)', 'wc1c'),
+				'300' => __('WARNING (300)', 'wc1c'),
+				'400' => __('ERROR (400)', 'wc1c'),
+			],
 		];
 
 		$fields['logger_wc1c'] =

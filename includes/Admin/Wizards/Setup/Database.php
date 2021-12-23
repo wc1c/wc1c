@@ -70,7 +70,7 @@ class Database extends StepAbstract
 	 */
 	public function tablesInstall()
 	{
-		$wc1c_version_database = wc1c()->environment()->get('wc1c_version');
+		$wc1c_version_database = 1;
 
 		$current_db = get_site_option('wc1c_version_database', false);
 
