@@ -214,7 +214,7 @@ final class Core
 		{
 			$logger = new Logger($channel);
 
-			$path = $this->environment()->get('wc1c_upload_directory') . '/logs/' . $channel .'.log';
+			$path = $this->environment()->get('wc1c_logs_directory') . '/' . $channel .'.log';
 			$level = $this->settings()->get('logger_level', '');
 
 			if($level !== '')

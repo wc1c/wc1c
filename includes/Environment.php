@@ -1,17 +1,7 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c;
+<?php namespace Wc1c;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use Wc1c\Exceptions\Exception;
 use Wc1c\Exceptions\RuntimeException;
 use Wc1c\Traits\SingletonTrait;
@@ -161,6 +151,20 @@ final class Environment
 		$this->set('wc1c_upload_directory', $wc1c_upload_dir);
 
 		return $this->get('wc1c_upload_directory');
+	}
+
+	/**
+	 * Wc1c logs directory
+	 *
+	 * @return bool
+	 */
+	public function initWc1cLogsDirectory()
+	{
+		$wc1c_logs_dir = $this->get('wc1c_upload_directory') . DIRECTORY_SEPARATOR . 'logs';
+
+		$this->set('wc1c_logs_directory', $wc1c_logs_dir);
+
+		return $this->get('wc1c_logs_directory');
 	}
 
 	/**
