@@ -1,17 +1,7 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c;
+<?php namespace Wc1c;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use Wc1c\Exceptions\Exception;
 use Wc1c\Data\Storage;
 use Wc1c\Data\Entities\DataConfigurations;
@@ -24,9 +14,7 @@ use Wc1c\Data\Entities\DataConfigurations;
 class Configuration extends DataConfigurations
 {
 	/**
-	 * Default data
-	 *
-	 * @var array
+	 * @var array Default data
 	 */
 	protected $data =
 	[
@@ -301,7 +289,7 @@ class Configuration extends DataConfigurations
 	 */
 	public function getUploadDirectory($context = 'main')
 	{
-		$upload_directory = wc1c()->environment()->get('wc1c_upload_directory') . '/' . $this->getSchema() . '-' . $this->getId();
+		$upload_directory = wc1c()->environment()->get('wc1c_configurations_directory') . '/' . $this->getSchema() . '-' . $this->getId();
 
 		if($context === 'logs')
 		{
