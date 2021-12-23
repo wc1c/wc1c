@@ -311,7 +311,7 @@ final class Core
 	}
 
 	/**
-	 * Input loading
+	 * Receiver loading
 	 *
 	 * @return void
 	 * @throws Exception
@@ -334,7 +334,7 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('not loaded');
+			throw new Exception('Receiver is not loaded');
 		}
 
 		try
@@ -343,7 +343,7 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('setReceiver - ' . $e->getMessage());
+			throw new Exception('Set receiver - ' . $e->getMessage());
 		}
 	}
 
