@@ -30,6 +30,7 @@ class Complete extends StepAbstract
 	public function process()
 	{
 		delete_option('wc1c_wizard');
+		update_option('wc1c_version', wc1c()->environment()->get('wc1c_version'));
 
 		add_action(WC1C_PREFIX . 'wizard_content_output', [$this, 'output'], 10);
 	}

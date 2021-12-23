@@ -1,21 +1,11 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Log;
+<?php namespace Wc1c\Log;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use Monolog\Logger;
 
 /**
- * Class CoreLog
+ * CoreLog
  *
  * @package Wc1c
  */

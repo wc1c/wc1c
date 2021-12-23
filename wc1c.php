@@ -20,31 +20,21 @@
  **/
 defined('ABSPATH') || exit;
 
+if(version_compare(PHP_VERSION, '5.6.0') < 0)
+{
+	return false;
+}
+
 if(false === defined('WC1C_PLUGIN_FILE'))
 {
 	/**
 	 * Main instance of Wc1c
 	 *
-	 * @return Wc1c\Core|boolean
+	 * @return Wc1c\Core
 	 */
 	function wc1c()
 	{
-		if(version_compare(PHP_VERSION, '5.6.0') < 0)
-		{
-			return false;
-		}
-
-		if(!in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')), true))
-		{
-			return false;
-		}
-
-		if(!is_callable('Wc1c\Core::instance'))
-		{
-			return false;
-		}
-
-		return new Wc1c\Core(new Wc1c\Context());
+		return Wc1c\Core::instance();
 	}
 
 	define('WC1C_PREFIX', 'wc1c_');
@@ -55,16 +45,13 @@ if(false === defined('WC1C_PLUGIN_FILE'))
 	define('WC1C_PLUGIN_URL', plugin_dir_url(__FILE__));
 	define('WC1C_PLUGIN_NAME', plugin_basename(WC1C_PLUGIN_FILE));
 
-	include_once __DIR__ . '/includes/Autoloader.php';
+	include_once __DIR__ . '/includes/Loader.php';
 
-	$loader = new Wc1c\Autoloader();
+	$loader = new Wc1c\Loader();
 
-	$loader->addNamespace('Wc1c', __DIR__ . '/includes');
-	$loader->addNamespace('Digiom\WordPress\Notices', __DIR__ . '/vendor/digiom/notices-wp/src');
-	$loader->addNamespace('Psr\Log', __DIR__ . '/vendor/psr/Log');
-	$loader->addNamespace('Monolog', __DIR__ . '/vendor/monolog/src/Monolog');
-
-	$loader->register();
-
-	add_action('plugins_loaded', 'wc1c', 10);
+	try
+	{
+		$loader->register();
+	}
+	catch(Exception $e){}
 }

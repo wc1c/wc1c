@@ -167,6 +167,8 @@ final class Core
 	 */
 	public function get($schema_id = '')
 	{
+		$schema_id = strtolower($schema_id);
+
 		if('' !== $schema_id)
 		{
 			if(array_key_exists($schema_id, $this->schemas))

@@ -1,20 +1,15 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c;
+<?php namespace Wc1c;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
+use Exception;
+
 /**
- * Autoloader
+ * Loader
  *
  * @package Wc1c
  */
-class Autoloader
+final class Loader
 {
 	/**
 	 * An associative array where the key is a namespace prefix and the value
@@ -28,10 +23,24 @@ class Autoloader
 	 * Register loader with SPL autoloader stack.
 	 *
 	 * @return void
+	 * @throws Exception
 	 */
 	public function register()
 	{
 		spl_autoload_register([$this, 'loadClass']);
+
+		$this->addNamespace('Wc1c', WC1C_PLUGIN_PATH . '/includes');
+		$this->addNamespace('Digiom\WordPress\Notices', WC1C_PLUGIN_PATH . '/vendor/digiom/notices-wp/src');
+		$this->addNamespace('Psr\Log', WC1C_PLUGIN_PATH . '/vendor/psr/Log');
+		$this->addNamespace('Monolog', WC1C_PLUGIN_PATH . '/vendor/monolog/src/Monolog');
+
+		register_activation_hook(WC1C_PLUGIN_FILE, [Activation::class, 'instance']);
+		register_deactivation_hook(WC1C_PLUGIN_FILE, [Deactivation::class, 'instance']);
+		register_uninstall_hook(WC1C_PLUGIN_FILE, [Uninstall::class, 'instance']);
+
+		wc1c()->register(new Context());
+
+		add_action('plugins_loaded', 'wc1c', 10);
 	}
 
 	/**

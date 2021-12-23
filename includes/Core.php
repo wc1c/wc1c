@@ -2,10 +2,11 @@
 
 defined('ABSPATH') || exit;
 
+use Monolog\Formatter\JsonFormatter;
+use Monolog\Handler\StreamHandler;
 use wpdb;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
-use Wc1c\Data\Storage;
 use Wc1c\Exceptions\Exception;
 use Wc1c\Exceptions\RuntimeException;
 use Wc1c\Interfaces\SettingsInterface;
@@ -48,11 +49,18 @@ final class Core
 	 *
 	 * @return void
 	 */
-	public function __construct($context)
+	public function __construct()
 	{
-		// hook
-		do_action(WC1C_PREFIX . 'before_loading');
+		do_action(WC1C_PREFIX . 'loading');
+	}
 
+	/**
+	 * @param $context
+	 *
+	 * @return void
+	 */
+	public function register($context)
+	{
 		$this->context = apply_filters(WC1C_PREFIX . 'context_loading', $context);
 
 		// init
@@ -63,9 +71,6 @@ final class Core
 		{
 			add_action('init', [$this, 'admin'], 5);
 		}
-
-		// hook
-		do_action(WC1C_PREFIX . 'after_loading');
 	}
 
 	/**
@@ -204,6 +209,23 @@ final class Core
 		{
 			$logger = new CoreLog();
 
+			try
+			{
+				$path = $this->environment()->get('wc1c_upload_directory') . '/logs/core.log';
+				$level = $this->settings()->get('logger_level', '');
+
+				if($level !== '')
+				{
+					$formatter = new JsonFormatter();
+
+					$handler = new StreamHandler($path, $level);
+					$handler->setFormatter($formatter);
+
+					$logger->pushHandler($handler);
+				}
+			}
+			catch(\Exception $e){}
+
 			$this->setLog($logger);
 		}
 
@@ -292,7 +314,7 @@ final class Core
 	 */
 	private function loadReceiver()
 	{
-		$default_class_name = 'Receiver';
+		$default_class_name = Receiver::class;
 
 		$use_class_name = apply_filters(WC1C_PREFIX . 'receiver_loading_class_name', $default_class_name);
 
