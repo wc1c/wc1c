@@ -58,7 +58,7 @@ final class Receiver
 
 			wc1c()->environment()->set('current_configuration_id', $wc1c_receiver);
 
-			if($configuration->getStatus() !== 'active' || $configuration->getStatus() !==  'processing')
+			if($configuration->getStatus() !== 'active' && $configuration->getStatus() !==  'processing')
 			{
 				wc1c()->log('receiver')->warning(__('Configuration offline.', 'wc1c'));
 				die(__('Configuration offline.', 'wc1c'));
