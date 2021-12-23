@@ -210,7 +210,7 @@ final class Core
 			$schemas = apply_filters(WC1C_PREFIX . 'schemas_loading', $schemas);
 		}
 
-		wc1c()->log()->debug(WC1C_PREFIX . 'Schemas loading', ['schemas' => $schemas]);
+		wc1c()->log()->debug('Schemas loading', ['schemas' => $schemas]);
 
 		try
 		{
