@@ -2,15 +2,14 @@
 
 defined('ABSPATH') || exit;
 
-use Monolog\Formatter\JsonFormatter;
-use Monolog\Handler\StreamHandler;
 use wpdb;
-use Psr\Log\LoggerAwareTrait;
+use Wc1c\Log\Formatter;
+use Wc1c\Log\Handler;
 use Psr\Log\LoggerInterface;
 use Wc1c\Exceptions\Exception;
 use Wc1c\Exceptions\RuntimeException;
 use Wc1c\Interfaces\SettingsInterface;
-use Wc1c\Log\CoreLog;
+use Wc1c\Log\Logger;
 use Wc1c\Traits\SingletonTrait;
 use Wc1c\Settings\MainSettings;
 
@@ -22,7 +21,11 @@ use Wc1c\Settings\MainSettings;
 final class Core
 {
 	use SingletonTrait;
-	use LoggerAwareTrait;
+
+	/**
+	 * @var array
+	 */
+	private $log = [];
 
 	/**
 	 * @var Context
@@ -199,37 +202,38 @@ final class Core
 	}
 
 	/**
-	 * Log
+	 * Logger
 	 *
 	 * @return LoggerInterface
 	 */
-	public function log()
+	public function log($channel = 'main')
 	{
-		if(is_null($this->log))
+		$channel = strtolower($channel);
+
+		if(!isset($this->log[$channel]))
 		{
-			$logger = new CoreLog();
+			$logger = new Logger($channel);
 
-			try
+			$path = $this->environment()->get('wc1c_upload_directory') . '/logs/' . $channel .'.log';
+			$level = $this->settings()->get('logger_level', '');
+
+			if($level !== '')
 			{
-				$path = $this->environment()->get('wc1c_upload_directory') . '/logs/core.log';
-				$level = $this->settings()->get('logger_level', '');
-
-				if($level !== '')
+				try
 				{
-					$formatter = new JsonFormatter();
-
-					$handler = new StreamHandler($path, $level);
+					$formatter = new Formatter();
+					$handler = new Handler($path, $level);
 					$handler->setFormatter($formatter);
 
 					$logger->pushHandler($handler);
 				}
+				catch(\Exception $e){}
 			}
-			catch(\Exception $e){}
 
-			$this->setLog($logger);
+			$this->log[$channel] = $logger;
 		}
 
-		return $this->log;
+		return $this->log[$channel];
 	}
 
 	/**
@@ -348,9 +352,7 @@ final class Core
 	 */
 	public function localization()
 	{
-		/**
-		 * WP 5.x or later
-		 */
+		/** WP 5.x or later */
 		if(function_exists('determine_locale'))
 		{
 			$locale = determine_locale();
@@ -360,9 +362,6 @@ final class Core
 			$locale = is_admin() && function_exists('get_user_locale') ? get_user_locale() : get_locale();
 		}
 
-		/**
-		 * Change locale from external code
-		 */
 		$locale = apply_filters('plugin_locale', $locale, 'wc1c');
 
 		unload_textdomain('wc1c');

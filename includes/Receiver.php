@@ -39,7 +39,7 @@ final class Receiver
 
 			if('yes' !== wc1c()->settings()->get('receiver', 'yes'))
 			{
-				wc1c()->log()->warning(__('Receiver is offline. Request reject.', 'wc1c'));
+				wc1c()->log('receiver')->warning(__('Receiver is offline. Request reject.', 'wc1c'));
 				die(__('Receiver is offline. Request reject.', 'wc1c'));
 			}
 
@@ -49,7 +49,7 @@ final class Receiver
 			}
 			catch(Exception $e)
 			{
-				wc1c()->log()->warning(__('Input unavailable', 'wc1c'));
+				wc1c()->log('receiver')->warning(__('Input unavailable', 'wc1c'));
 				die(__('Input unavailable', 'wc1c'));
 			}
 
@@ -57,7 +57,7 @@ final class Receiver
 
 			if($configuration->getStatus() !== 'active')
 			{
-				wc1c()->log()->warning(__('Configuration offline.', 'wc1c'));
+				wc1c()->log('receiver')->warning(__('Configuration offline.', 'wc1c'));
 				die(__('Configuration offline.', 'wc1c'));
 			}
 
@@ -70,7 +70,7 @@ final class Receiver
 			}
 			catch(Exception $e)
 			{
-				wc1c()->log()->error($e->getMessage(), $e);
+				wc1c()->log('receiver')->error($e->getMessage(), $e);
 				die('Exception: ' . $e->getMessage());
 			}
 
@@ -102,7 +102,7 @@ final class Receiver
 
 			if(false === $action)
 			{
-				wc1c()->log()->warning(__('Receiver request is very bad!', 'wc1c'));
+				wc1c()->log('receiver')->warning(__('Receiver request is very bad!', 'wc1c'));
 				die(__('Receiver request is very bad!', 'wc1c'));
 			}
 			die();
