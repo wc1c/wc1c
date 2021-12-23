@@ -204,31 +204,61 @@ final class Core
 	/**
 	 * Logger
 	 *
+	 * @param string $channel
+	 * @param string $name
+	 *
 	 * @return LoggerInterface
 	 */
-	public function log($channel = 'main')
+	public function log($channel = 'main', $name = '')
 	{
 		$channel = strtolower($channel);
 
 		if(!isset($this->log[$channel]))
 		{
+			if('' === $name)
+			{
+				$name = $channel;
+			}
+
 			$logger = new Logger($channel);
 
-			$path = $this->environment()->get('wc1c_logs_directory') . '/' . $channel .'.log';
-			$level = $this->settings()->get('logger_level', '');
-
-			if($level !== '')
+			switch($channel)
 			{
-				try
-				{
-					$formatter = new Formatter();
-					$handler = new Handler($path, $level);
-					$handler->setFormatter($formatter);
-
-					$logger->pushHandler($handler);
-				}
-				catch(\Exception $e){}
+				case 'receiver':
+					$path = $this->environment()->get('wc1c_logs_directory') . '/' . $name . '.log';
+					$level = $this->settings()->get('logger_receiver_level', 'logger_level');
+					break;
+				case 'tools':
+					$path = $this->environment()->get('wc1c_tools_logs_directory') . '/' . $name . '.log';
+					$level = $this->settings()->get('logger_tools_level', 'logger_level');
+					break;
+				case 'schemas':
+					$path = $this->environment()->get('wc1c_schemas_logs_directory') . '/' . $name . '.log';
+					$level = $this->settings()->get('logger_schemas_level', 'logger_level');
+					break;
+				case 'configurations':
+					$path = $this->environment()->get('wc1c_configurations_logs_directory') . '/' . $name . '.log';
+					$level = $this->settings()->get('logger_configurations_level', 'logger_level');
+					break;
+				default:
+					$path = $this->environment()->get('wc1c_logs_directory') . '/main.log';
+					$level = $this->settings()->get('logger_level', 300);
 			}
+
+			if('logger_level' === $level)
+			{
+				$level = $this->settings()->get('logger_level', 300);
+			}
+
+			try
+			{
+				$formatter = new Formatter();
+				$handler = new Handler($path, $level);
+				$handler->setFormatter($formatter);
+
+				$logger->pushHandler($handler);
+			}
+			catch(\Exception $e){}
 
 			$this->log[$channel] = $logger;
 		}
