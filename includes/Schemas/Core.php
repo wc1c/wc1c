@@ -176,7 +176,7 @@ final class Core
 				return $this->schemas[$schema_id];
 			}
 
-			throw new RuntimeException('$schema_id is unavailable');
+			throw new RuntimeException('Schema by ID is unavailable');
 		}
 
 		return $this->schemas;
