@@ -237,7 +237,7 @@ final class Core
 					$level = $this->settings()->get('logger_schemas_level', 'logger_level');
 					break;
 				case 'configurations':
-					$path = $this->environment()->get('wc1c_configurations_logs_directory') . '/' . $name . '.log';
+					$path = $name . '.log';
 					$level = $this->settings()->get('logger_configurations_level', 'logger_level');
 					break;
 				default:
