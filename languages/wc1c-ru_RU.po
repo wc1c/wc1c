@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WC1C > integration of WooCommerce with 1C products "
 "(different configurations)\n"
 "POT-Creation-Date: 2021-12-24 08:22+0300\n"
-"PO-Revision-Date: 2021-12-24 08:33+0300\n"
+"PO-Revision-Date: 2021-12-24 08:42+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
 "Language: ru_RU\n"
@@ -528,13 +528,11 @@ msgstr ""
 
 #: includes/Admin/Settings/MainForm.php:129
 msgid "Receiver"
-msgstr ""
+msgstr "Получатель"
 
 #: includes/Admin/Settings/MainForm.php:131
-#, fuzzy
-#| msgid "Enable Input: background requests?"
 msgid "Enable data Receiver: background requests?"
-msgstr "Включить ввод: фоновые запросы?"
+msgstr "Включить получателя данных: фоновые запросы?"
 
 #: includes/Admin/Settings/MainForm.php:132
 msgid ""
