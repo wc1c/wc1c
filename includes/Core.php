@@ -97,7 +97,7 @@ final class Core
 
 		try
 		{
-			$this->extensions();
+			$this->extensions()->load();
 		}
 		catch(Exception $e)
 		{
@@ -106,7 +106,16 @@ final class Core
 
 		try
 		{
-			$this->schemas();
+			$this->extensions()->init();
+		}
+		catch(Exception $e)
+		{
+			wc1c()->log()->alert('Extensions init exception - ' . $e->getMessage());
+		}
+
+		try
+		{
+			$this->schemas()->load();
 		}
 		catch(Exception $e)
 		{
