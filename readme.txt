@@ -20,7 +20,7 @@ of 1C and sites created on WordPress with the WooCommerce plugin.
 
 == Installation ==
 1. Archive extract and upload folder "wc1c" to /wp-content/plugins (final path: /wp-content/plugins/wc1c/).
-2. Plugin activation.
+2. Activate the plugin.
 3. Done, goto plugin settings page.
 
 == Changelog ==
