@@ -10,7 +10,7 @@
  * Requires PHP: 5.6
  * Text Domain: wc1c
  * Domain Path: /languages
- * Copyright: WC1C team © 2018-2021
+ * Copyright: WC1C team © 2018-2022
  * Author: WC1C team
  * Author URI: https://wc1c.info
  * License: GNU General Public License v3.0
