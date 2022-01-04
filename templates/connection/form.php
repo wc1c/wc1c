@@ -20,7 +20,12 @@
 	    <input type="submit" name="submit" id="submit" class="button button-primary" value="<?php echo $button; ?>">
 
         <?php if(false === $connection_state) : ?>
-        <a href="https://wc1c.info/account/apps?site=dev.wc1c.info&return=" class="button button-secondary"><?php _e('Connect by WC1C site', 'wc1c'); ?></a>
+
+            <?php
+	            $current_url = home_url(add_query_arg($_GET));
+            ?>
+
+            <a href="<?php echo $args['object']->connection->buildUrl($current_url); ?>" class="button button-secondary"><?php _e('Connect by WC1C site', 'wc1c'); ?></a>
         <?php endif; ?>
     </p>
 </form>

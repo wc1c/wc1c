@@ -24,6 +24,11 @@ class ApplicationsPasswords
 	/**
 	 * @var string
 	 */
+	private $app_name;
+
+	/**
+	 * @var string
+	 */
 	private $login;
 
 	/**
@@ -195,5 +200,62 @@ class ApplicationsPasswords
 	private function isInvalidCredentials($credentials)
 	{
 		return (!isset($credentials['login']) && !isset($credentials['password'])) && !isset($credentials['token']);
+	}
+
+	/**
+	 * Удаление активного пароля приложений
+	 *
+	 * @return boolean
+	 */
+	public function deleteToken()
+	{
+		$path = '/deactivate';
+	}
+
+	/**
+	 * Верификация текущих данных для подключения
+	 *
+	 * @return void
+	 */
+	public function verify()
+	{
+
+	}
+
+	/**
+	 * Создание пароля приложений на стороне сервиса
+	 *
+	 * @return boolean|string
+	 */
+	public function createToken()
+	{
+
+		return false;
+	}
+
+	/**
+	 * Создание ссылки для перехода пользователя на авторизацию приложения
+	 *
+	 * @return string
+	 */
+	public function buildUrl($return)
+	{
+		return $this->getHost() . '/account/apps?action=authorize&return_url=' . $return .'&app_name=' . $this->app_name;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getAppName()
+	{
+		return $this->app_name;
+	}
+
+	/**
+	 * @param string $app_name
+	 */
+	public function setAppName($app_name)
+	{
+		$this->app_name = $app_name;
 	}
 }
