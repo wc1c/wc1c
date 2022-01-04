@@ -8235,7 +8235,7 @@
   border-bottom: 1px solid #ccd0d4;
 }
 .woocommerce_page_wc1c .column-configuration_id {
-  width: 55px;
+  width: 75px;
   border-right: 1px solid #ccd0d4;
 }
 .woocommerce_page_wc1c .remove a {
@@ -8246,8 +8246,8 @@
   vertical-align: middle !important;
 }
 .woocommerce_page_wc1c .no-items .colspanchange {
-  padding-top: 170px !important;
-  padding-bottom: 170px !important;
+  padding-top: 70px !important;
+  padding-bottom: 70px !important;
   text-align: center;
 }
 .woocommerce_page_wc1c .column-status {
@@ -8290,9 +8290,6 @@
 }
 .woocommerce_page_wc1c .configurations td {
   vertical-align: middle !important;
-}
-.woocommerce_page_wc1c .column-configuration_id {
-  width: 44px;
 }
 .woocommerce_page_wc1c .column-date_create {
   line-height: 1.3em;
