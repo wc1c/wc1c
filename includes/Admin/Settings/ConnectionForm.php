@@ -32,13 +32,11 @@ class ConnectionForm extends Form
 		try
 		{
 			$this->connection = new Connection();
-			$this->connection->setAppName(site_url());
+			$this->connection->setAppName(get_bloginfo());
 		}
 		catch(\Exception $e){}
 
 		$this->setSettings($connectionSettings);
-
-		add_action(WC1C_ADMIN_PREFIX . 'show', [$this, 'before_form_show'], 10);
 
 		if($connectionSettings->isConnected())
 		{
@@ -232,14 +230,6 @@ class ConnectionForm extends Form
 		);
 
 		return true;
-	}
-
-	/**
-	 * Show description
-	 */
-	public function before_form_show()
-	{
-		wc1c()->templates()->getTemplate('/connection/description.php');
 	}
 
 	/**
