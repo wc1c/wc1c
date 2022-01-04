@@ -59,19 +59,100 @@ class CreateForm extends FormAbstract
 		$options = [];
 		foreach($schemas as $schema_id => $schema_object)
 		{
-			$options[$schema_id] = '(' . $schema_id . ') ' . $schema_object->getName();
+			$options[$schema_id] = $schema_object->getName();
 		}
 
 		$fields['schema'] =
 		[
 			'title' => __('Configuration schema', 'wc1c'),
-			'type' => 'select',
+			'type' => 'radio',
 			'description' => __('Each scheme has its own algorithms and settings. Use the appropriate scheme for your tasks.', 'wc1c'),
-			'default' => 'default',
-			'options' => $options
+			'default' => 'defaultcml',
+			'options' => $options,
+			'class' => 'form-check-input',
+			'class_label' => 'form-check-label',
 		];
 
 		return $fields;
+	}
+
+	/**
+	 * Generate radio HTML
+	 *
+	 * @param string $key - field key
+	 * @param array $data - field data
+	 *
+	 * @return string
+	 */
+	public function generate_radio_html($key, $data)
+	{
+		$field_key = $this->get_prefix_field_key($key);
+
+		$defaults = array
+		(
+			'title' => '',
+			'label' => '',
+			'disabled' => false,
+			'class' => '',
+			'css' => '',
+			'type' => 'text',
+			'desc_tip' => false,
+			'description' => '',
+			'custom_attributes' => [],
+			'options' => [],
+		);
+
+		$data = wp_parse_args($data, $defaults);
+
+		if(!$data['label'])
+		{
+			$data['label'] = $data['title'];
+		}
+
+		ob_start();
+		?>
+		<tr valign="top">
+			<th scope="row" class="titledesc">
+				<label for="<?php echo esc_attr( $field_key ); ?>"><?php echo wp_kses_post( $data['title'] ); ?> <?php echo $this->get_tooltip_html($data); ?></label>
+
+				<div class="mt-2" style="font-weight: normal;">
+					<?php echo $this->get_description_html($data); ?>
+				</div>
+
+			</th>
+			<td class="forminp">
+				<fieldset>
+					<legend class="screen-reader-text"><span><?php echo wp_kses_post( $data['title'] ); ?></span></legend>
+
+					<?php foreach ( (array) $data['options'] as $option_key => $option_value ) : ?>
+
+					<div class="mb-3 border-1 border-light p-2" style="border: solid;">
+
+						<input name="<?php echo esc_attr( $field_key ); ?>" id="<?php echo esc_attr( $option_key ); ?>" <?php disabled( $data['disabled'], true ); ?> class="<?php echo esc_attr( $data['class'] ); ?>" type="radio" value="<?php echo esc_attr($option_key); ?>" <?php checked( (string) $option_key, esc_attr( $this->get_field_data( $key ) ) ); ?> />
+
+						<label class="<?php echo esc_attr( $data['class_label'] ); ?>" for="<?php echo esc_attr( $option_key ); ?>">
+							<?php echo wp_kses_post($option_value); ?>
+						</label>
+
+						<div>
+							<?php
+								$schema = wc1c()->schemas()->get($option_key);
+								echo wp_kses_post($schema->getDescription());
+							?>
+							<hr>
+							<?php _e('Identifier:', 'wc1c'); ?> <b><?php echo esc_attr($option_key); ?></b>
+						</div>
+
+					</div>
+
+					<?php endforeach; ?>
+
+				</fieldset>
+			</td>
+		</tr>
+		<?php
+
+		return ob_get_clean();
 	}
 
 	/**

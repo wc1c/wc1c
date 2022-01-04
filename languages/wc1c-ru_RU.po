@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WC1C > integration of WooCommerce with 1C products "
 "(different configurations)\n"
-"POT-Creation-Date: 2021-12-24 08:22+0300\n"
-"PO-Revision-Date: 2021-12-24 08:42+0300\n"
+"POT-Creation-Date: 2022-01-04 22:41+0300\n"
+"PO-Revision-Date: 2022-01-04 22:44+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
 "Language: ru_RU\n"
@@ -23,11 +23,11 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: includes/Abstracts/FormAbstract.php:694
+#: includes/Abstracts/FormAbstract.php:756
 msgid "Select all"
 msgstr "Выбрать все"
 
-#: includes/Abstracts/FormAbstract.php:694
+#: includes/Abstracts/FormAbstract.php:756
 msgid "Select none"
 msgstr "Выбрать ничего"
 
@@ -107,7 +107,7 @@ msgstr "Выбрать все"
 msgid "Integration with 1C"
 msgstr "Интеграция с 1С"
 
-#: includes/Admin.php:112 includes/Admin/Settings/MainForm.php:46
+#: includes/Admin.php:112 includes/Admin/Settings/MainForm.php:45
 msgid "Configurations"
 msgstr "Конфигурации"
 
@@ -142,57 +142,57 @@ msgstr "Схема (ID): "
 msgid "Configuration ID: "
 msgstr "Идентификатор: "
 
-#: includes/Admin/Configurations/AllTable.php:114
+#: includes/Admin/Configurations/AllTable.php:116
 #, php-format
 msgid "%s <br/><span class=\"time\">Time: %s</span>"
 msgstr "%s <br/><span class=\"time\">Время: %s</span>"
 
-#: includes/Admin/Configurations/AllTable.php:120
+#: includes/Admin/Configurations/AllTable.php:122
 msgid "No activity"
 msgstr "Не было"
 
-#: includes/Admin/Configurations/AllTable.php:174
+#: includes/Admin/Configurations/AllTable.php:176
 msgid "Edit"
 msgstr "Редактировать"
 
-#: includes/Admin/Configurations/AllTable.php:175
+#: includes/Admin/Configurations/AllTable.php:177
 msgid "Mark as deleted"
 msgstr "Пометить на удаление"
 
-#: includes/Admin/Configurations/AllTable.php:181
-#: includes/Admin/Configurations/AllTable.php:186
+#: includes/Admin/Configurations/AllTable.php:183
+#: includes/Admin/Configurations/AllTable.php:188
 msgid "Remove forever"
 msgstr "Удалить окончательно"
 
-#: includes/Admin/Configurations/AllTable.php:189
+#: includes/Admin/Configurations/AllTable.php:191
 msgid "Schema:"
 msgstr "Схема:"
 
-#: includes/Admin/Configurations/AllTable.php:209
+#: includes/Admin/Configurations/AllTable.php:211
 msgid "ID"
 msgstr "ID"
 
-#: includes/Admin/Configurations/AllTable.php:210
+#: includes/Admin/Configurations/AllTable.php:212
 msgid "Base information"
 msgstr "Базовая информация"
 
-#: includes/Admin/Configurations/AllTable.php:211
+#: includes/Admin/Configurations/AllTable.php:213
 msgid "Status"
 msgstr "Состояние"
 
-#: includes/Admin/Configurations/AllTable.php:212
+#: includes/Admin/Configurations/AllTable.php:214
 msgid "Create date"
 msgstr "Создана"
 
-#: includes/Admin/Configurations/AllTable.php:213
+#: includes/Admin/Configurations/AllTable.php:215
 msgid "Last activity"
 msgstr "Активность"
 
-#: includes/Admin/Configurations/AllTable.php:261
+#: includes/Admin/Configurations/AllTable.php:263
 msgid "All"
 msgstr "Все"
 
-#: includes/Admin/Configurations/AllTable.php:434
+#: includes/Admin/Configurations/AllTable.php:436
 #: includes/Admin/Settings.php:63
 msgid "Connection to the WC1C"
 msgstr "Подключение к WC1C"
@@ -228,32 +228,36 @@ msgstr ""
 "Каждая схема имеет свои алгоритмы и настройки. Используйте соответствующую "
 "схему для ваших задач."
 
-#: includes/Admin/Configurations/CreateForm.php:98
+#: includes/Admin/Configurations/CreateForm.php:143
+msgid "Identifier:"
+msgstr "Идентификатор:"
+
+#: includes/Admin/Configurations/CreateForm.php:179
 msgid "Configuration create error. Please retry."
 msgstr "Конфигурация не создана. Пожалуйста повторите."
 
-#: includes/Admin/Configurations/CreateForm.php:138
+#: includes/Admin/Configurations/CreateForm.php:219
 msgid "Configuration create error. Name is required."
 msgstr "Конфигурация не создана. Название конфигурации не заполнено."
 
-#: includes/Admin/Configurations/CreateForm.php:151
+#: includes/Admin/Configurations/CreateForm.php:232
 msgid "Configuration create error. Schema is required."
 msgstr "Конфигурация не создана. Не выбрана схема."
 
-#: includes/Admin/Configurations/CreateForm.php:168
+#: includes/Admin/Configurations/CreateForm.php:249
 msgid "Configuration create error. Name is exists."
 msgstr ""
 "Конфигурация не создана. Конфигурация с таким названием уже существует."
 
-#: includes/Admin/Configurations/CreateForm.php:185
+#: includes/Admin/Configurations/CreateForm.php:266
 msgid "Configuration create success. Configuration id: "
 msgstr "Конфигурация успешно создана. Идентификатор конфигурации: "
 
-#: includes/Admin/Configurations/CreateForm.php:186
+#: includes/Admin/Configurations/CreateForm.php:267
 msgid "edit configuration"
 msgstr "редактировать конфигурацию"
 
-#: includes/Admin/Configurations/CreateForm.php:198
+#: includes/Admin/Configurations/CreateForm.php:279
 msgid "Configuration create error. Please retry saving or change fields."
 msgstr ""
 "Создание конфигурации не удалось. Пожалуйста повторите процедуру или смените "
@@ -383,29 +387,49 @@ msgstr "Основные настройки"
 msgid "Other"
 msgstr "Прочие"
 
-#: includes/Admin/Settings/ConnectionForm.php:71
+#: includes/Admin/Settings/ConnectionForm.php:73
+msgid "Connection error. Please retry."
+msgstr "Ошибка подключения. Пожалуйста повторите."
+
+#: includes/Admin/Settings/ConnectionForm.php:119
+msgid "Connection error. Login is required."
+msgstr "Ошибка подключения. Требуется логин."
+
+#: includes/Admin/Settings/ConnectionForm.php:132
+msgid "Connection error. Password is required."
+msgstr "Ошибка подключения. Требуется пароль."
+
+#: includes/Admin/Settings/ConnectionForm.php:188
+msgid "Connection error. Password or Login is invalid."
+msgstr "Ошибка подключения. Пароль или логин с ошибками."
+
+#: includes/Admin/Settings/ConnectionForm.php:228
+msgid "Connection success."
+msgstr "Успешное подключение."
+
+#: includes/Admin/Settings/ConnectionForm.php:246
 msgid "Site is connected to WC1C"
 msgstr "Сайт подключен к WC1C"
 
-#: includes/Admin/Settings/ConnectionForm.php:73
+#: includes/Admin/Settings/ConnectionForm.php:248
 msgid "To create a new connection, need to disconnect the current connection."
 msgstr ""
 "Чтобы создать новое соединение, необходимо отключить текущее соединение."
 
-#: includes/Admin/Settings/ConnectionForm.php:78
-#: includes/Admin/Settings/ConnectionForm.php:117
+#: includes/Admin/Settings/ConnectionForm.php:253
+#: includes/Admin/Settings/ConnectionForm.php:292
 msgid "Login"
 msgstr "Логин"
 
-#: includes/Admin/Settings/ConnectionForm.php:80
+#: includes/Admin/Settings/ConnectionForm.php:255
 msgid "Connected login from the WC1C website."
 msgstr "Подключенный логин с сайта WC1C."
 
-#: includes/Admin/Settings/ConnectionForm.php:88
+#: includes/Admin/Settings/ConnectionForm.php:263
 msgid "App token"
 msgstr "Токен приложения"
 
-#: includes/Admin/Settings/ConnectionForm.php:90
+#: includes/Admin/Settings/ConnectionForm.php:265
 msgid ""
 "The current application token for the user. This token can be revoked in "
 "your personal account on the WC1C website, as well as by clicking the "
@@ -414,11 +438,11 @@ msgstr ""
 "Текущий токен приложения для пользователя. Этот токен можно отозвать в "
 "личном кабинете на сайте WC1C, а также нажав кнопку «Отключиться от WC1C»."
 
-#: includes/Admin/Settings/ConnectionForm.php:110
+#: includes/Admin/Settings/ConnectionForm.php:285
 msgid "Site is not connected to WC1C"
 msgstr "Сайт не подключен к WC1C"
 
-#: includes/Admin/Settings/ConnectionForm.php:112
+#: includes/Admin/Settings/ConnectionForm.php:287
 msgid ""
 "To create a new connection, need to enter a username and password from the "
 "WC1C website, or follow the link and authorize the application on the WC1C "
@@ -428,15 +452,15 @@ msgstr ""
 "с веб-сайта WC1C или перейти по ссылке и авторизовать приложение на веб-"
 "сайте WC1C."
 
-#: includes/Admin/Settings/ConnectionForm.php:119
+#: includes/Admin/Settings/ConnectionForm.php:294
 msgid "The login when registering on the WC1C website."
 msgstr "Логин при регистрации на сайте WC1C."
 
-#: includes/Admin/Settings/ConnectionForm.php:126
+#: includes/Admin/Settings/ConnectionForm.php:301
 msgid "Password"
 msgstr "Пароль"
 
-#: includes/Admin/Settings/ConnectionForm.php:128
+#: includes/Admin/Settings/ConnectionForm.php:303
 msgid ""
 "The current password on the WC1C site for the user. This password is not "
 "saved on site. A token for the application will be generated instead."
@@ -452,41 +476,41 @@ msgstr "Ошибка при сохранении. Пожалуйста повт�
 msgid "Save success."
 msgstr "Успешное сохранение."
 
-#: includes/Admin/Settings/MainForm.php:48
+#: includes/Admin/Settings/MainForm.php:47
 msgid "Settings for the Configurations."
 msgstr "Настройки для конфигураций."
 
-#: includes/Admin/Settings/MainForm.php:53
+#: includes/Admin/Settings/MainForm.php:52
 msgid "Unique configuration names"
 msgstr "Уникальные имена конфигураций"
 
-#: includes/Admin/Settings/MainForm.php:55
+#: includes/Admin/Settings/MainForm.php:54
 msgid "Require unique names for configurations?"
 msgstr "Требовать уникальные имена для конфигураций?"
 
-#: includes/Admin/Settings/MainForm.php:56
+#: includes/Admin/Settings/MainForm.php:55
 msgid "If enabled, you will need to provide unique names when configurations."
 msgstr ""
 "Если этот параметр включен, нужно будет указывать уникальные имена при "
 "настройке."
 
-#: includes/Admin/Settings/MainForm.php:62
+#: includes/Admin/Settings/MainForm.php:61
 msgid "Number in the list"
 msgstr "Количество на одной странице"
 
-#: includes/Admin/Settings/MainForm.php:64
+#: includes/Admin/Settings/MainForm.php:63
 msgid "The number of displayed configurations on one page."
 msgstr "Количество отображаемых конфигураций на одной странице."
 
-#: includes/Admin/Settings/MainForm.php:71
+#: includes/Admin/Settings/MainForm.php:70
 msgid "Deleting drafts without trash"
 msgstr "Удаление черновиков без пометки на удаление"
 
-#: includes/Admin/Settings/MainForm.php:73
+#: includes/Admin/Settings/MainForm.php:72
 msgid "Enable deleting drafts without placing them in the trash?"
 msgstr "Разрешить удалять черновики, не помещая их в корзину?"
 
-#: includes/Admin/Settings/MainForm.php:74
+#: includes/Admin/Settings/MainForm.php:73
 msgid ""
 "If enabled, configurations for connections in the draft status will be "
 "deleted without being added to the basket."
@@ -494,31 +518,31 @@ msgstr ""
 "Если этот параметр включен, конфигурации для подключений в статусе черновик "
 "будут удаляться без добавления в корзину."
 
-#: includes/Admin/Settings/MainForm.php:92
+#: includes/Admin/Settings/MainForm.php:91
 msgid "Technical settings"
 msgstr "Технические настройки"
 
-#: includes/Admin/Settings/MainForm.php:94
+#: includes/Admin/Settings/MainForm.php:93
 msgid "Used to set up the environment."
 msgstr "Используется для настройки окружения."
 
-#: includes/Admin/Settings/MainForm.php:99
+#: includes/Admin/Settings/MainForm.php:98
 #: includes/Schemas/DefaultCML/Admin.php:146
 msgid "Maximum request size"
 msgstr "Максимальный размер запроса"
 
-#: includes/Admin/Settings/MainForm.php:101
+#: includes/Admin/Settings/MainForm.php:100
 #: includes/Schemas/DefaultCML/Admin.php:148
 msgid ""
 "The setting must not take a size larger than specified in the server "
 "settings."
 msgstr "Параметр не должен быть больше, чем указано в настройках сервера."
 
-#: includes/Admin/Settings/MainForm.php:108
+#: includes/Admin/Settings/MainForm.php:107
 msgid "Maximum time for execution PHP"
 msgstr "Максимальное время выполнения PHP скриптов"
 
-#: includes/Admin/Settings/MainForm.php:110
+#: includes/Admin/Settings/MainForm.php:109
 msgid ""
 "Value is seconds. The setting must not take a execution time larger than "
 "specified in the PHP and web server settings (Apache, Nginx, etc)."
@@ -526,15 +550,15 @@ msgstr ""
 "Значение - секунды. Настройка не должна занимать время выполнения больше, "
 "чем указано в настройках PHP и веб-сервера (Apache, Nginx и т. Д.)."
 
-#: includes/Admin/Settings/MainForm.php:129
+#: includes/Admin/Settings/MainForm.php:128
 msgid "Receiver"
 msgstr "Получатель"
 
-#: includes/Admin/Settings/MainForm.php:131
+#: includes/Admin/Settings/MainForm.php:130
 msgid "Enable data Receiver: background requests?"
 msgstr "Включить получателя данных: фоновые запросы?"
 
-#: includes/Admin/Settings/MainForm.php:132
+#: includes/Admin/Settings/MainForm.php:131
 msgid ""
 "It is used to receive background requests from 1C in exchange schemes. Do "
 "not disable this option if you do not know what it is for."
@@ -542,24 +566,24 @@ msgstr ""
 "Используется для получения фоновых запросов от 1С в схемах обмена. Не "
 "отключайте эту опцию, если не знаете, для чего она нужна."
 
-#: includes/Admin/Settings/MainForm.php:150
+#: includes/Admin/Settings/MainForm.php:149
 msgid "Interface"
 msgstr "Интерфейс"
 
-#: includes/Admin/Settings/MainForm.php:152
+#: includes/Admin/Settings/MainForm.php:151
 msgid "Settings for the user interface."
 msgstr "Настройки пользовательского интерфейса."
 
-#: includes/Admin/Settings/MainForm.php:157
+#: includes/Admin/Settings/MainForm.php:156
 msgid "Changing the interface"
 msgstr "Изменение интерфейса"
 
-#: includes/Admin/Settings/MainForm.php:159
+#: includes/Admin/Settings/MainForm.php:158
 msgid "Allow changes to WordPress and WooCommerce dashboard interface?"
 msgstr ""
 "Разрешить изменения в интерфейсе панели управления WordPress и WooCommerce?"
 
-#: includes/Admin/Settings/MainForm.php:160
+#: includes/Admin/Settings/MainForm.php:159
 msgid ""
 "If enabled, new features will appear in the WordPress and WooCommerce "
 "interface according to the interface change settings."
@@ -567,72 +591,67 @@ msgstr ""
 "Если этот параметр включен, новые функции появятся в интерфейсе WordPress и "
 "WooCommerce в соответствии с настройками изменения интерфейса."
 
-#: includes/Admin/Settings/MainForm.php:166
+#: includes/Admin/Settings/MainForm.php:165
 msgid "Column in products list"
 msgstr "Колонка в списке продуктов"
 
-#: includes/Admin/Settings/MainForm.php:168
-#: includes/Admin/Settings/MainForm.php:177
-#: includes/Admin/Settings/MainForm.php:186
-#: includes/Admin/Settings/MainForm.php:195
-#: includes/Admin/Settings/MainForm.php:204
-#: includes/Admin/Settings/MainForm.php:344
-#: includes/Admin/Settings/MainForm.php:353
-#: includes/Admin/Settings/MainForm.php:362
-#: includes/Admin/Settings/MainForm.php:371
-#: includes/Admin/Settings/MainForm.php:380
+#: includes/Admin/Settings/MainForm.php:167
+#: includes/Admin/Settings/MainForm.php:176
+#: includes/Admin/Settings/MainForm.php:185
+#: includes/Admin/Settings/MainForm.php:194
+#: includes/Admin/Settings/MainForm.php:203
 msgid "Enable"
 msgstr "Включить"
 
-#: includes/Admin/Settings/MainForm.php:169
+#: includes/Admin/Settings/MainForm.php:168
 msgid "Output of a column with information from 1C to the list of products."
 msgstr "Вывод столбца с информацией из 1С в список товаров."
 
-#: includes/Admin/Settings/MainForm.php:175
+#: includes/Admin/Settings/MainForm.php:174
 msgid "Metabox in edit products"
 msgstr "Метабокс в редактировании продуктов"
 
-#: includes/Admin/Settings/MainForm.php:178
+#: includes/Admin/Settings/MainForm.php:177
 msgid "Output of a Metabox with information from 1C in edit products."
 msgstr "Вывод метабокса с информацией из 1С в редактирование продуктов."
 
-#: includes/Admin/Settings/MainForm.php:184
+#: includes/Admin/Settings/MainForm.php:183
 msgid "Column in orders list"
 msgstr "Колонка в списке заказов"
 
-#: includes/Admin/Settings/MainForm.php:187
+#: includes/Admin/Settings/MainForm.php:186
 msgid "Output of a column with information from 1C to the list of orders."
 msgstr "Вывод столбца с информацией из 1С в список заказов."
 
-#: includes/Admin/Settings/MainForm.php:193
+#: includes/Admin/Settings/MainForm.php:192
 msgid "Metabox in edit orders"
 msgstr "Метабокс при редактировании заказов"
 
-#: includes/Admin/Settings/MainForm.php:196
+#: includes/Admin/Settings/MainForm.php:195
 msgid "Output of a Metabox with information from 1C in edit orders."
 msgstr "Вывод Метабокса с информацией из 1С при редактировании заказов."
 
-#: includes/Admin/Settings/MainForm.php:202
+#: includes/Admin/Settings/MainForm.php:201
 msgid "Column in categories list"
 msgstr "Колонка в списке категорий"
 
-#: includes/Admin/Settings/MainForm.php:205
+#: includes/Admin/Settings/MainForm.php:204
 msgid "Output of a column with information from 1C to the list of categories."
 msgstr "Вывод столбца с информацией из 1С в список категорий."
 
-#: includes/Admin/Settings/MainForm.php:223
+#: includes/Admin/Settings/MainForm.php:222
 msgid "Event logs"
 msgstr "Журналы событий"
 
-#: includes/Admin/Settings/MainForm.php:225
+#: includes/Admin/Settings/MainForm.php:224
 msgid "Global settings for technical event logging."
 msgstr "Глобальные настройки для регистрации технических событий."
 
-#: includes/Admin/Settings/MainForm.php:230
+#: includes/Admin/Settings/MainForm.php:229
 msgid "Level for main events"
 msgstr "Уровень для основных событий"
 
-#: includes/Admin/Settings/MainForm.php:232
+#: includes/Admin/Settings/MainForm.php:231
 msgid ""
 "All events of the selected level will be recorded in the log file. The "
 "higher the level, the less data is recorded."
@@ -640,51 +659,51 @@ msgstr ""
 "Все события выбранного уровня будут записаны в файл журнала. Чем выше "
 "уровень, тем меньше записывается данных."
 
+#: includes/Admin/Settings/MainForm.php:235
+#: includes/Admin/Settings/MainForm.php:252
+#: includes/Admin/Settings/MainForm.php:269
+#: includes/Admin/Settings/MainForm.php:286
+#: includes/Admin/Settings/MainForm.php:303
+msgid "DEBUG (100)"
+msgstr "Отладка — DEBUG (100)"
+
 #: includes/Admin/Settings/MainForm.php:236
 #: includes/Admin/Settings/MainForm.php:253
 #: includes/Admin/Settings/MainForm.php:270
 #: includes/Admin/Settings/MainForm.php:287
 #: includes/Admin/Settings/MainForm.php:304
-msgid "DEBUG (100)"
-msgstr "Отладка — DEBUG (100)"
+msgid "INFO (200)"
+msgstr "Информация — INFO (200)"
 
 #: includes/Admin/Settings/MainForm.php:237
 #: includes/Admin/Settings/MainForm.php:254
 #: includes/Admin/Settings/MainForm.php:271
 #: includes/Admin/Settings/MainForm.php:288
 #: includes/Admin/Settings/MainForm.php:305
-msgid "INFO (200)"
-msgstr "Информация — INFO (200)"
+msgid "NOTICE (250)"
+msgstr "Замечание — NOTICE (250)"
 
 #: includes/Admin/Settings/MainForm.php:238
 #: includes/Admin/Settings/MainForm.php:255
 #: includes/Admin/Settings/MainForm.php:272
 #: includes/Admin/Settings/MainForm.php:289
 #: includes/Admin/Settings/MainForm.php:306
-msgid "NOTICE (250)"
-msgstr "Замечание — NOTICE (250)"
+msgid "WARNING (300)"
+msgstr "Предупреждение — WARNING (300)"
 
 #: includes/Admin/Settings/MainForm.php:239
 #: includes/Admin/Settings/MainForm.php:256
 #: includes/Admin/Settings/MainForm.php:273
 #: includes/Admin/Settings/MainForm.php:290
 #: includes/Admin/Settings/MainForm.php:307
-msgid "WARNING (300)"
-msgstr "Предупреждение — WARNING (300)"
-
-#: includes/Admin/Settings/MainForm.php:240
-#: includes/Admin/Settings/MainForm.php:257
-#: includes/Admin/Settings/MainForm.php:274
-#: includes/Admin/Settings/MainForm.php:291
-#: includes/Admin/Settings/MainForm.php:308
 msgid "ERROR (400)"
 msgstr "Ошибка — ERROR (400)"
 
-#: includes/Admin/Settings/MainForm.php:246
+#: includes/Admin/Settings/MainForm.php:245
 msgid "Level for receiver"
 msgstr "Уровень для приемника"
 
-#: includes/Admin/Settings/MainForm.php:248
+#: includes/Admin/Settings/MainForm.php:247
 msgid ""
 "All events of the selected level will be recorded the Receiver events in the "
 "log file. The higher the level, the less data is recorded."
@@ -692,18 +711,18 @@ msgstr ""
 "Все события выбранного уровня будут записаны как события приемника в файл "
 "журнала. Чем выше уровень, тем меньше данных записывается."
 
-#: includes/Admin/Settings/MainForm.php:252
-#: includes/Admin/Settings/MainForm.php:269
-#: includes/Admin/Settings/MainForm.php:286
-#: includes/Admin/Settings/MainForm.php:303
+#: includes/Admin/Settings/MainForm.php:251
+#: includes/Admin/Settings/MainForm.php:268
+#: includes/Admin/Settings/MainForm.php:285
+#: includes/Admin/Settings/MainForm.php:302
 msgid "Use level for main events"
 msgstr "Использовать уровень для основных событий"
 
-#: includes/Admin/Settings/MainForm.php:263
+#: includes/Admin/Settings/MainForm.php:262
 msgid "Level for tools"
 msgstr "Уровень для инструментов"
 
-#: includes/Admin/Settings/MainForm.php:265
+#: includes/Admin/Settings/MainForm.php:264
 msgid ""
 "All events of the selected level will be recorded the tools events in the "
 "log file. The higher the level, the less data is recorded."
@@ -711,11 +730,11 @@ msgstr ""
 "Все события выбранного уровня будут записываться как события инструментов в "
 "файл журнала. Чем выше уровень, тем меньше данных записывается."
 
-#: includes/Admin/Settings/MainForm.php:280
+#: includes/Admin/Settings/MainForm.php:279
 msgid "Level for schemas"
 msgstr "Уровень для схем"
 
-#: includes/Admin/Settings/MainForm.php:282
+#: includes/Admin/Settings/MainForm.php:281
 msgid ""
 "All events of the selected level will be recorded the schemas events in the "
 "log file. The higher the level, the less data is recorded."
@@ -723,11 +742,11 @@ msgstr ""
 "Все события выбранного уровня будут записаны как события схемам в файл "
 "журнала. Чем выше уровень, тем меньше данных записывается."
 
-#: includes/Admin/Settings/MainForm.php:297
+#: includes/Admin/Settings/MainForm.php:296
 msgid "Level for configurations"
 msgstr "Уровень для конфигураций"
 
-#: includes/Admin/Settings/MainForm.php:299
+#: includes/Admin/Settings/MainForm.php:298
 msgid ""
 "All events of the selected level will be recorded the configurations events "
 "in the log file. The higher the level, the less data is recorded."
@@ -735,70 +754,21 @@ msgstr ""
 "Все события выбранного уровня будут записываться как события конфигурации в "
 "файл журнала. Чем выше уровень, тем меньше данных записывается."
 
-#: includes/Admin/Settings/MainForm.php:314
+#: includes/Admin/Settings/MainForm.php:313
 msgid "Access to technical events"
 msgstr "Доступ к техническим событиям"
 
-#: includes/Admin/Settings/MainForm.php:316
+#: includes/Admin/Settings/MainForm.php:315
 msgid "Allow the WC1C team to access technical events?"
 msgstr "Разрешить команде WC1C доступ к техническим событиям?"
 
-#: includes/Admin/Settings/MainForm.php:317
+#: includes/Admin/Settings/MainForm.php:316
 msgid ""
 "If allowed, the WC1C team will be able to access technical events and "
 "release the necessary updates based on them."
 msgstr ""
 "Если разрешено, команда WC1C сможет получить доступ к техническим событиям и "
 "выпустить на их основе необходимые обновления."
-
-#: includes/Admin/Settings/MainForm.php:335
-msgid "Enable data by objects"
-msgstr "Работа с данными объектами"
-
-#: includes/Admin/Settings/MainForm.php:337
-msgid "Specifying the ability to work with data by object types (data types)."
-msgstr ""
-"Указание возможности работы с данными по типам объектов (типам данных)."
-
-#: includes/Admin/Settings/MainForm.php:342
-msgid "Products"
-msgstr "Продукты"
-
-#: includes/Admin/Settings/MainForm.php:345
-msgid "Ability to work with products (delete, change, add)."
-msgstr "Возможность работы с продуктами (удаление, изменение, добавление)."
-
-#: includes/Admin/Settings/MainForm.php:351
-msgid "Categories"
-msgstr "Категории"
-
-#: includes/Admin/Settings/MainForm.php:354
-msgid "Ability to work with categories (delete, change, add)."
-msgstr "Возможность работы с категориями (удаление, изменение, добавление)."
-
-#: includes/Admin/Settings/MainForm.php:360
-msgid "Attributes"
-msgstr "Атрибуты"
-
-#: includes/Admin/Settings/MainForm.php:363
-msgid "Ability to work with attributes (delete, change, add)."
-msgstr "Возможность работы с атрибутами (удаление, изменение, добавление)."
-
-#: includes/Admin/Settings/MainForm.php:369
-msgid "Orders"
-msgstr "Заказы"
-
-#: includes/Admin/Settings/MainForm.php:372
-msgid "Ability to work with orders (delete, change, add)."
-msgstr "Возможность работы с заказами  (удаление, изменение, добавление)."
-
-#: includes/Admin/Settings/MainForm.php:378
-msgid "Images"
-msgstr "Изображение"
-
-#: includes/Admin/Settings/MainForm.php:381
-msgid "Ability to work with images (delete, change, add)."
-msgstr "Возможность работы с изображениями (удаление, изменение, добавление)."
 
 #: includes/Admin/Settings/OtherForm.php:51
 msgid "Usage data"
@@ -1393,9 +1363,13 @@ msgstr "Ошибка. Удаление недоступно"
 msgid "Delete"
 msgstr "Удалить"
 
-#: templates/configurations/empty.php:4
+#: templates/configurations/empty.php:3
 msgid "Configurations not found."
 msgstr "Конфигурации не найдены."
+
+#: templates/configurations/empty.php:6 templates/header.php:6
+msgid "New configuration"
+msgstr "Новая конфигурация"
 
 #: templates/configurations/error.php:3
 msgid "Error. Page for configurations not found."
@@ -1422,11 +1396,6 @@ msgstr "Предупреждение"
 msgid "Update is not available."
 msgstr "Обновление не доступно."
 
-#: templates/connection/description.php:6
-msgid ""
-"Configuring the site connection to official services from the WC1C team."
-msgstr "Настройка подключения сайта к официальным сервисам от команды WC1C."
-
 #: templates/connection/form.php:13
 msgid "Connect by Login & Password"
 msgstr "Подключится по Логину и Паролю"
@@ -1434,6 +1403,10 @@ msgstr "Подключится по Логину и Паролю"
 #: templates/connection/form.php:16
 msgid "Disconnect"
 msgstr "Отключить"
+
+#: templates/connection/form.php:28
+msgid "Connect by WC1C site"
+msgstr "Подключение через сайт WC1C"
 
 #: templates/error.php:3
 msgid "Error. Page not found."
@@ -1454,10 +1427,6 @@ msgstr "Версия:"
 #: templates/extensions/item.php:23
 msgid "Extension ID:"
 msgstr "Идентификатор:"
-
-#: templates/header.php:6
-msgid "New configuration"
-msgstr "Новая конфигурация"
 
 #: templates/helps/bugs.php:24
 msgid "Report a bug"
@@ -1585,6 +1554,49 @@ msgstr ""
 #. Author of the plugin/theme
 msgid "WC1C team"
 msgstr "Команда WC1C"
+
+#~ msgid "Enable data by objects"
+#~ msgstr "Работа с данными объектами"
+
+#~ msgid ""
+#~ "Specifying the ability to work with data by object types (data types)."
+#~ msgstr ""
+#~ "Указание возможности работы с данными по типам объектов (типам данных)."
+
+#~ msgid "Products"
+#~ msgstr "Продукты"
+
+#~ msgid "Ability to work with products (delete, change, add)."
+#~ msgstr "Возможность работы с продуктами (удаление, изменение, добавление)."
+
+#~ msgid "Categories"
+#~ msgstr "Категории"
+
+#~ msgid "Ability to work with categories (delete, change, add)."
+#~ msgstr "Возможность работы с категориями (удаление, изменение, добавление)."
+
+#~ msgid "Attributes"
+#~ msgstr "Атрибуты"
+
+#~ msgid "Ability to work with attributes (delete, change, add)."
+#~ msgstr "Возможность работы с атрибутами (удаление, изменение, добавление)."
+
+#~ msgid "Orders"
+#~ msgstr "Заказы"
+
+#~ msgid "Ability to work with orders (delete, change, add)."
+#~ msgstr "Возможность работы с заказами  (удаление, изменение, добавление)."
+
+#~ msgid "Images"
+#~ msgstr "Изображение"
+
+#~ msgid "Ability to work with images (delete, change, add)."
+#~ msgstr ""
+#~ "Возможность работы с изображениями (удаление, изменение, добавление)."
+
+#~ msgid ""
+#~ "Configuring the site connection to official services from the WC1C team."
+#~ msgstr "Настройка подключения сайта к официальным сервисам от команды WC1C."
 
 #~ msgid "Input: background requests"
 #~ msgstr "Ввод: фоновые запросы"

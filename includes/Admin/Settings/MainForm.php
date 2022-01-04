@@ -26,7 +26,6 @@ class MainForm extends Form
 		add_filter(WC1C_PREFIX . $this->get_id() . '_form_load_fields', [$this, 'init_fields_technical'], 10);
 		add_filter(WC1C_PREFIX . $this->get_id() . '_form_load_fields', [$this, 'init_fields_configurations'], 10);
 		add_filter(WC1C_PREFIX . $this->get_id() . '_form_load_fields', [$this, 'init_fields_interface'], 10);
-		add_filter(WC1C_PREFIX . $this->get_id() . '_form_load_fields', [$this, 'init_fields_enable_data'], 10);
 		add_filter(WC1C_PREFIX . $this->get_id() . '_form_load_fields', [$this, 'init_fields_logger'], 10);
 
 		$this->init();
@@ -315,70 +314,6 @@ class MainForm extends Form
 			'type' => 'checkbox',
 			'label' => __('Allow the WC1C team to access technical events?', 'wc1c'),
 			'description' => __('If allowed, the WC1C team will be able to access technical events and release the necessary updates based on them.', 'wc1c'),
-			'default' => 'no'
-		];
-
-		return $fields;
-	}
-
-	/**
-	 * Add settings for enabled data
-	 *
-	 * @param $fields
-	 *
-	 * @return array
-	 */
-	public function init_fields_enable_data($fields)
-	{
-		$fields['title_enable_data'] =
-		[
-			'title' => __('Enable data by objects', 'wc1c'),
-			'type' => 'title',
-			'description' => __('Specifying the ability to work with data by object types (data types).', 'wc1c'),
-		];
-
-		$fields['enable_data_products'] =
-		[
-			'title' => __('Products', 'wc1c'),
-			'type' => 'checkbox',
-			'label' => __('Enable', 'wc1c'),
-			'description' => __('Ability to work with products (delete, change, add).', 'wc1c'),
-			'default' => 'no'
-		];
-
-		$fields['enable_data_category'] =
-		[
-			'title' => __('Categories', 'wc1c'),
-			'type' => 'checkbox',
-			'label' => __('Enable', 'wc1c'),
-			'description' => __('Ability to work with categories (delete, change, add).', 'wc1c'),
-			'default' => 'no'
-		];
-
-		$fields['enable_data_attributes'] =
-		[
-			'title' => __('Attributes', 'wc1c'),
-			'type' => 'checkbox',
-			'label' => __('Enable', 'wc1c'),
-			'description' => __('Ability to work with attributes (delete, change, add).', 'wc1c'),
-			'default' => 'no'
-		];
-
-		$fields['enable_data_orders'] =
-		[
-			'title' => __('Orders', 'wc1c'),
-			'type' => 'checkbox',
-			'label' => __('Enable', 'wc1c'),
-			'description' => __('Ability to work with orders (delete, change, add).', 'wc1c'),
-			'default' => 'no'
-		];
-
-		$fields['enable_data_images'] =
-		[
-			'title' => __('Images', 'wc1c'),
-			'type' => 'checkbox',
-			'label' => __('Enable', 'wc1c'),
-			'description' => __('Ability to work with images (delete, change, add).', 'wc1c'),
 			'default' => 'no'
 		];
 

@@ -588,6 +588,68 @@ abstract class FormAbstract
 	}
 
 	/**
+	 * Generate radio HTML
+	 *
+	 * @param string $key - field key
+	 * @param array $data - field data
+	 *
+	 * @return string
+	 */
+	public function generate_radio_html($key, $data)
+	{
+		$field_key = $this->get_prefix_field_key($key);
+
+		$defaults = array
+		(
+			'title' => '',
+			'label' => '',
+			'disabled' => false,
+			'class' => '',
+			'css' => '',
+			'type' => 'radio',
+			'desc_tip' => false,
+			'description' => '',
+			'custom_attributes' => [],
+			'options' => [],
+		);
+
+		$data = wp_parse_args($data, $defaults);
+
+		if(!$data['label'])
+		{
+			$data['label'] = $data['title'];
+		}
+
+		ob_start();
+		?>
+        <tr valign="top">
+            <th scope="row" class="titledesc">
+                <label for="<?php echo esc_attr( $field_key ); ?>"><?php echo wp_kses_post( $data['title'] ); ?> <?php echo $this->get_tooltip_html($data); ?></label>
+            </th>
+            <td class="forminp">
+                <fieldset>
+                    <legend class="screen-reader-text"><span><?php echo wp_kses_post( $data['title'] ); ?></span></legend>
+
+	                    <?php foreach ( (array) $data['options'] as $option_key => $option_value ) : ?>
+                            <input name="<?php echo esc_attr( $field_key ); ?>" id="<?php echo esc_attr( $option_key ); ?>" <?php disabled( $data['disabled'], true ); ?> class="<?php echo esc_attr( $data['class'] ); ?>" type="radio" value="<?php echo esc_attr($option_key); ?>" <?php checked( (string) $option_key, esc_attr( $this->get_field_data( $key ) ) ); ?> />
+
+                            <label class="<?php echo esc_attr( $data['class_label'] ); ?>" for="<?php echo esc_attr( $option_key ); ?>">
+	                             <?php echo wp_kses_post($option_value); ?>
+                            </label>
+                            <br/>
+                        <?php endforeach; ?>
+
+                    <br/>
+                    <?php echo $this->get_description_html($data); ?>
+                </fieldset>
+            </td>
+        </tr>
+		<?php
+
+		return ob_get_clean();
+	}
+
+	/**
 	 * Generate Select HTML
 	 *
 	 * @param string $key - field key

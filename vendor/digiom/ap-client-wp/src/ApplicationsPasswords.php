@@ -240,7 +240,7 @@ class ApplicationsPasswords
 	 */
 	public function buildUrl($return)
 	{
-		return $this->getHost() . '/account/apps?action=authorize&return_url=' . $return .'&app_name=' . $this->app_name;
+		return $this->getHost() . '/account/apps?action=authorize&return_url=' . $return .'&app_name=' . urlencode($this->getAppName());
 	}
 
 	/**
