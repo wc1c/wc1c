@@ -53,7 +53,9 @@ class AllTable extends TableAbstract
 	 */
 	public function noItems()
 	{
-		wc1c()->templates()->getTemplate('configurations/empty.php');
+		$args['url_create'] = $this->utilityAdminConfigurationsGetUrl('create');
+
+		wc1c()->templates()->getTemplate('configurations/empty.php', $args);
 	}
 
 	/**
