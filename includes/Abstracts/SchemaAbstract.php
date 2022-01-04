@@ -4,6 +4,7 @@ defined('ABSPATH') || exit;
 
 use Wc1c\Configuration;
 use Wc1c\Exceptions\Exception;
+use Wc1c\Log\Logger;
 
 /**
  * SchemaAbstract
@@ -284,5 +285,28 @@ abstract class SchemaAbstract
 	public function setConfiguration($configuration)
 	{
 		$this->configuration = $configuration;
+	}
+
+	/**
+	 * Logger
+	 *
+	 * @return Logger
+	 */
+	public function log($channel = 'configurations')
+	{
+		if($channel === 'configurations')
+		{
+			$name = $this->configuration()->getUploadDirectory('logs') . DIRECTORY_SEPARATOR . 'main';
+			return wc1c()->log($channel, $name);
+		}
+
+		if($channel === 'schemas')
+		{
+			$name = $this->configuration()->getSchema();
+			return wc1c()->log($channel, $name);
+		}
+
+		$name = $this->configuration()->getUploadDirectory('logs') . DIRECTORY_SEPARATOR . $channel;
+		return wc1c()->log('configurations', $name);
 	}
 }

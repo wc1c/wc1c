@@ -27,7 +27,6 @@ final class Core
 	 */
 	public function __construct()
 	{
-		$this->load();
 	}
 
 	/**
@@ -187,7 +186,7 @@ final class Core
 	 *
 	 * @throws RuntimeException
 	 */
-	private function load()
+	public function load()
 	{
 		$schemas = [];
 

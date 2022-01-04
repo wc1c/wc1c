@@ -86,14 +86,14 @@ final class Core
 				throw new Exception('$extensions[$extension_id] is not object');
 			}
 
-			if($init_extension->is_initialized())
+			if($init_extension->isInitialized())
 			{
-				throw new Exception('old initialized');
+				throw new Exception('Old extension initialized.');
 			}
 
 			if(!method_exists($init_extension, 'init'))
 			{
-				throw new Exception('method init is not found');
+				throw new Exception('Method init is not found');
 			}
 
 			try
@@ -159,7 +159,7 @@ final class Core
 	 * @return void
 	 * @throws Exception
 	 */
-	private function load()
+	public function load()
 	{
 		$extensions = [];
 

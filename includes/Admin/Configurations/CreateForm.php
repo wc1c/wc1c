@@ -182,7 +182,7 @@ class CreateForm extends FormAbstract
 			(
 				[
 					'type' => 'update',
-					'data' => __('Configuration create success. Configuration id: ' . $configuration->getId(), 'wc1c')
+					'data' => __('Configuration create success. Configuration id: ', 'wc1c') . $configuration->getId()
 					          . ' (<a href="' . $this->utilityAdminConfigurationsGetUrl('update', $configuration->getId()) . '">' . __('edit configuration', 'wc1c') . '</a>)'
 				]
 			);
