@@ -39,7 +39,6 @@ class ConnectionForm extends Form
 		$this->init();
 	}
 
-
 	/**
 	 * Save
 	 *
