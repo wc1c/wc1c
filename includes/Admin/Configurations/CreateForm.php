@@ -140,7 +140,7 @@ class CreateForm extends FormAbstract
 								echo wp_kses_post($schema->getDescription());
 							?>
 							<hr>
-							<?php _e('Identifier:'); ?> <b><?php echo esc_attr($option_key); ?></b>
+							<?php _e('Identifier:', 'wc1c'); ?> <b><?php echo esc_attr($option_key); ?></b>
 						</div>
 
 					</div>
