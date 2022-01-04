@@ -1,7 +1,7 @@
 <?php defined('ABSPATH') || exit;?>
 
 <form method="post" action="">
-	<?php wp_nonce_field('wsklad-admin-settings-save', '_wsklad-admin-nonce'); ?>
+	<?php wp_nonce_field('wc1c-admin-settings-save', '_wc1c-admin-nonce'); ?>
     <div class="wc1c-admin-settings wc1c-admin-connection">
         <table class="form-table wc1c-admin-form-table wc1c-admin-settings-form-table">
 		    <?php $args['object']->generate_html($args['object']->get_fields(), true); ?>
@@ -16,6 +16,11 @@
                 $button = __('Disconnect', 'wc1c');
             }
         ?>
+
 	    <input type="submit" name="submit" id="submit" class="button button-primary" value="<?php echo $button; ?>">
+
+        <?php if(false === $connection_state) : ?>
+        <a href="https://wc1c.info/account/apps?site=dev.wc1c.info&return=" class="button button-secondary"><?php _e('Connect by WC1C site', 'wc1c'); ?></a>
+        <?php endif; ?>
     </p>
 </form>
