@@ -3,7 +3,6 @@
 defined('ABSPATH') || exit;
 
 use Digiom\ApClientWP\ApplicationsPasswords;
-use Wc1c\Traits\SingletonTrait;
 
 /**
  * Connection
@@ -12,5 +11,8 @@ use Wc1c\Traits\SingletonTrait;
  */
 final class Connection extends ApplicationsPasswords
 {
-	use SingletonTrait;
+	/**
+	 * @var string
+	 */
+	private $host = 'https://wc1c.info';
 }
