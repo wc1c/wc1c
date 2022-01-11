@@ -2,14 +2,14 @@
 
 defined('ABSPATH') || exit;
 
-use Digiom\ApClientWP\ApplicationsPasswords;
+use Digiom\Wap\Client;
 
 /**
  * Connection
  *
  * @package Wc1c
  */
-final class Connection extends ApplicationsPasswords
+final class Connection extends Client
 {
 	/**
 	 * @var string
