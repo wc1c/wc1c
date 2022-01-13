@@ -82,6 +82,13 @@ class ConnectionForm extends Form
 			if(isset($_GET['password']))
 			{
 				$password = urldecode($_GET['password']);
+
+				$result_verify = $this->connection->verify($user_login, $password);
+
+				if(true !== $result_verify)
+				{
+					$password = '';
+				}
 			}
 
 			if($password !== '')
