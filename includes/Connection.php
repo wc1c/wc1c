@@ -2,37 +2,17 @@
 
 defined('ABSPATH') || exit;
 
-use Exception;
-use Digiom\ApClientWP\ApplicationsPasswords;
-use Wc1c\Traits\SingletonTrait;
+use Digiom\Wap\Client;
 
 /**
  * Connection
  *
  * @package Wc1c
  */
-final class Connection extends ApplicationsPasswords
+final class Connection extends Client
 {
-	use SingletonTrait;
-
 	/**
-	 * Connection constructor.
-	 *
-	 * @throws Exception
+	 * @var string
 	 */
-	public function __construct($login = '', $password = '', $use_token = false)
-	{
-		$credentials['login'] = $login;
-
-		if($use_token)
-		{
-			$credentials['token'] = $password;
-		}
-		else
-		{
-			$credentials['password'] = $password;
-		}
-
-		parent::__construct('https://wc1c.info', true, $credentials);
-	}
+	protected $host = 'https://wc1c.info';
 }

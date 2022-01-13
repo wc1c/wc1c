@@ -18,19 +18,4 @@ class ConnectionSettings extends SettingsAbstract
 	{
 		$this->setOptionName('connection');
 	}
-
-	/**
-	 * Account connected?
-	 *
-	 * @return bool
-	 */
-	public function isConnected()
-	{
-		if($this->get('token', '') !== '')
-		{
-			return true;// todo: проверять подключение раз в n времени с сохранением в транзиты
-		}
-
-		return false;
-	}
 }
