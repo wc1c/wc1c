@@ -4,7 +4,6 @@ defined('ABSPATH') || exit;
 
 use Wc1c\Connection;
 use Wc1c\Exceptions\Exception;
-use Wc1c\Settings\ConnectionSettings;
 
 /**
  * ConnectionForm
@@ -13,6 +12,11 @@ use Wc1c\Settings\ConnectionSettings;
  */
 class ConnectionForm extends Form
 {
+	/**
+	 * @var bool Connection status
+	 */
+	public $status = false;
+
 	/**
 	 * @var Connection
 	 */
@@ -27,7 +31,9 @@ class ConnectionForm extends Form
 	{
 		$this->set_id('settings-connection');
 
-		$connectionSettings = new ConnectionSettings();
+		$settings = wc1c()->settings('connection');
+
+		$this->setSettings($settings);
 
 		try
 		{
@@ -36,18 +42,92 @@ class ConnectionForm extends Form
 		}
 		catch(\Exception $e){}
 
-		$this->setSettings($connectionSettings);
+		try
+		{
+			$this->apHandle();
+		}
+		catch(\Exception $e){}
 
-		if($connectionSettings->isConnected())
+		if('' !== $settings->get('token', ''))
+		{
+			$this->status = true;
+		}
+
+		if($this->status !== false)
 		{
 			add_filter(WC1C_PREFIX . $this->get_id() . '_form_load_fields', [$this, 'init_fields_connected'], 10);
 		}
 		else
 		{
-			add_filter(WC1C_PREFIX . $this->get_id() . '_form_load_fields', [$this, 'init_fields_main'], 10);
+			add_action(WC1C_ADMIN_PREFIX . 'show', [$this, 'output'], 10);
 		}
 
 		$this->init();
+	}
+
+	/**
+	 * Handle AP
+	 *
+	 * @return void
+	 */
+	public function apHandle()
+	{
+		if(isset($_GET['site_url'], $_GET['user_login']))
+		{
+			$site_url = $_GET['site_url'];
+			$user_login = sanitize_key($_GET['user_login']);
+			$password = '';
+			$sold_url = remove_query_arg(['site_url', 'user_login', 'password']);
+
+			if(isset($_GET['password']))
+			{
+				$password = sanitize_key($_GET['password']);
+			}
+
+			if($password !== '')
+			{
+				try
+				{
+					$this->settings->save(['token' => $password, 'login' => $user_login]);
+
+					wc1c()->admin()->notices()->create
+					(
+						[
+							'type' => 'update',
+							'data' => sprintf
+							(
+								__( 'The user with the login %s on the site %s successfully connected to the current site.', 'wc1c'),
+								'<strong>' . esc_html($user_login) . '</strong>',
+								'<strong>' . esc_html($site_url) . '</strong>'
+							)
+						]
+					);
+
+					wp_safe_redirect($sold_url);
+					die;
+				}
+				catch(Exception $e)
+				{
+					wc1c()->log()->addNotice('Settings is not successful save.', ['exception' => $e]);
+				}
+			}
+
+			wc1c()->admin()->notices()->create
+			(
+				[
+					'type' => 'error',
+					'data' => sprintf
+					(
+						__('Error connecting user with login %s on site %s to the current site. Please try again later.', 'wc1c'),
+						'<strong>' . esc_html($user_login) . '</strong>',
+						'<strong>' . esc_html($site_url) . '</strong>'
+					)
+				]
+			);
+
+			wp_safe_redirect($sold_url);
+			die;
+		}
 	}
 
 	/**
@@ -77,159 +157,34 @@ class ConnectionForm extends Form
 			return false;
 		}
 
-		/**
-		 * All form fields validate
-		 */
-		foreach($this->get_fields() as $key => $field)
+		if($this->status)
 		{
-			if('title' === $this->get_field_type($field))
-			{
-				continue;
-			}
-
 			try
 			{
-				$this->saved_data[$key] = $this->get_field_value($key, $field, $post_data);
+				$this->settings->save(['login' => '', 'token' => '']);
 			}
 			catch(Exception $e)
 			{
-				wc1c()->admin()->notices()->create
-				(
-					[
-						'type' => 'error',
-						'data' => $e->getMessage()
-					]
-				);
-			}
-		}
-
-		$saved_data = $this->get_saved_data();
-
-		/**
-		 * Создание пароля приложений по логину и паролю
-		 */
-		if(!isset($saved_data['token']))
-		{
-			if(empty($saved_data['login']))
-			{
-				wc1c()->admin()->notices()->create
-				(
-					[
-						'type' => 'error',
-						'data' => __('Connection error. Login is required.', 'wc1c')
-					]
-				);
-
-				return false;
+				wc1c()->log()->addNotice('Settings is not successful save.', ['exception' => $e]);
 			}
 
-			if(empty($saved_data['password']))
-			{
-				wc1c()->admin()->notices()->create
-				(
-					[
-						'type' => 'error',
-						'data' => __('Connection error. Password is required.', 'wc1c')
-					]
-				);
-
-				return false;
-			}
-
-			/**
-			 * Подключение по API
-			 */
-			try
-			{
-				$credentials['login'] = $saved_data['login'];
-				$credentials['password'] = $saved_data['password'];
-
-				$this->connection->setCredentials($credentials);
-			}
-			catch(\Exception $e)
-			{
-				wc1c()->admin()->notices()->create
-				(
-					[
-						'type' => 'error',
-						'data' => $e->getMessage()
-					]
-				);
-
-				return false;
-			}
-
-			/**
-			 * Создание пароля приложений
-			 */
-			try
-			{
-				$token = $this->connection->createToken();
-			}
-			catch(Exception $e)
-			{
-				wc1c()->admin()->notices()->create
-				(
-					[
-						'type' => 'error',
-						'data' => $e->getMessage()
-					]
-				);
-
-				return false;
-			}
-
-			if(!$token)
-			{
-				wc1c()->admin()->notices()->create
-				(
-					[
-						'type' => 'error',
-						'data' => __('Connection error. Password or Login is invalid.', 'wc1c')
-					]
-				);
-
-				return false;
-			}
-
-			unset($saved_data['password']);
-			$saved_data['token'] = $token;
-		}
-		else
-		{
-			/**
-			 * Удаление пароля приложений
-			 */
-
-		}
-
-		try
-		{
-			$this->getSettings()->set($saved_data);
-			$this->getSettings()->save();
-		}
-		catch(Exception $e)
-		{
 			wc1c()->admin()->notices()->create
 			(
 				[
-					'type' => 'error',
-					'data' => $e->getMessage()
+					'type' => 'update',
+					'data' => __('Disconnect successful. Reconnect is available', 'wc1c')
 				]
 			);
 
-			return false;
+			$sold_url =  get_site_url() . add_query_arg('do_settings', 'connection');
+		}
+		else
+		{
+			$sold_url = $this->connection->buildUrl(get_site_url() . add_query_arg('do_settings', 'connection'));
 		}
 
-		wc1c()->admin()->notices()->create
-		(
-			[
-				'type' => 'update',
-				'data' => __('Connection success.', 'wc1c')
-			]
-		);
-
-		return true;
+		wp_redirect($sold_url);
+		die;
 	}
 
 	/**
@@ -262,46 +217,9 @@ class ConnectionForm extends Form
 		[
 			'title' => __('App token', 'wc1c'),
 			'type' => 'text',
-			'description' => __('The current application token for the user. This token can be revoked in your personal account on the WC1C website, as well as by clicking the Disconnect from WC1C button.', 'wc1c'),
+			'description' => __('The current application token for the user. This token can be revoked in your personal account on the WC1C website, as well as by clicking the Disconnect button.', 'wc1c'),
 			'default' => '',
 			'disabled' => true,
-			'css' => 'min-width: 300px;',
-		];
-
-		return $fields;
-	}
-
-	/**
-	 * Main fields
-	 *
-	 * @param $fields
-	 *
-	 * @return array
-	 */
-	public function init_fields_main($fields)
-	{
-		$fields['main_title'] =
-		[
-			'title' => __('Site is not connected to WC1C', 'wc1c'),
-			'type' => 'title',
-			'description' => __('To create a new connection, need to enter a username and password from the WC1C website, or follow the link and authorize the application on the WC1C website.', 'wc1c'),
-		];
-
-		$fields['login'] =
-		[
-			'title' => __('Login', 'wc1c'),
-			'type' => 'text',
-			'description' => __('The login when registering on the WC1C website.', 'wc1c'),
-			'default' => '',
-			'css' => 'min-width: 300px;',
-		];
-
-		$fields['password'] =
-		[
-			'title' => __('Password', 'wc1c'),
-			'type' => 'text',
-			'description' => __('The current password on the WC1C site for the user. This password is not saved on site. A token for the application will be generated instead.', 'wc1c'),
-			'default' => '',
 			'css' => 'min-width: 300px;',
 		];
 
@@ -319,5 +237,15 @@ class ConnectionForm extends Form
 		];
 
 		wc1c()->templates()->getTemplate('connection/form.php', $args);
+	}
+
+	/**
+	 * Output
+	 *
+	 * @return void
+	 */
+	public function output()
+	{
+		wc1c()->templates()->getTemplate('connection/init.php');
 	}
 }
