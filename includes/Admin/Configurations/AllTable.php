@@ -425,11 +425,11 @@ class AllTable extends TableAbstract
 		{
 			$this->views();
 
-			$connection_settings = new ConnectionSettings();
+			$settings = wc1c()->settings('connection');
 
-			if($connection_settings->isConnected())
+			if($settings->get('login', false))
 			{
-				$this->connect_box(__($connection_settings->get('login', 'Undefined'), 'wc1c'), true);
+				$this->connect_box(__($settings->get('login', 'Undefined'), 'wc1c'), true);
 			}
 			else
 			{
