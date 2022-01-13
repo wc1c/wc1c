@@ -314,6 +314,8 @@ class Client
 			return $api;
 		}
 
+		$this->header('Referer', $this->host . '/wp-admin/');
+
 		if($api->getToken())
 		{
 			return $this->header('Authorization', 'Basic ' . base64_encode($api->getLogin() . ':' . $api->getToken()));
