@@ -59,7 +59,7 @@ class Client
 	protected $headers =
 	[
 		'Content-Type' => 'application/json',
-		'Accept' => 'text/html;charset=utf-8',
+		'Accept' => 'application/json;charset=utf-8',
 	];
 
 	/**
