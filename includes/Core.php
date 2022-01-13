@@ -2,6 +2,7 @@
 
 defined('ABSPATH') || exit;
 
+use Wc1c\Settings\ConnectionSettings;
 use wpdb;
 use Wc1c\Log\Formatter;
 use Wc1c\Log\Handler;
@@ -40,7 +41,7 @@ final class Core
 	/**
 	 * @var SettingsInterface
 	 */
-	private $settings;
+	private $settings = [];
 
 	/**
 	 * @var Receiver
@@ -285,22 +286,29 @@ final class Core
 	 */
 	public function settings($context = 'main')
 	{
-		if(!$this->settings instanceof SettingsInterface)
+		if(!isset($this->settings[$context]))
 		{
+			$class = MainSettings::class;
+
+			if($context === 'connection')
+			{
+				$class = ConnectionSettings::class;
+			}
+
 			try
 			{
-				$settings = new MainSettings();
+				$settings = new $class();
 				$settings->init();
 			}
 			catch(Exception $e)
 			{
-				throw new RuntimeException('exception - ' . $e->getMessage());
+				throw new RuntimeException($e->getMessage());
 			}
 
-			$this->settings = $settings;
+			$this->settings[$context] = $settings;
 		}
 
-		return $this->settings;
+		return $this->settings[$context];
 	}
 
 	/**
