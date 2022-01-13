@@ -128,6 +128,12 @@ class CreateForm extends FormAbstract
 
 					<div class="mb-3 border-1 border-light p-2" style="border: solid;">
 
+                        <div>
+
+	                        <?php _e('Identifier:', 'wc1c'); ?> <b><?php echo esc_attr($option_key); ?></b>
+                            <hr>
+                        </div>
+
 						<input name="<?php echo esc_attr( $field_key ); ?>" id="<?php echo esc_attr( $option_key ); ?>" <?php disabled( $data['disabled'], true ); ?> class="<?php echo esc_attr( $data['class'] ); ?>" type="radio" value="<?php echo esc_attr($option_key); ?>" <?php checked( (string) $option_key, esc_attr( $this->get_field_data( $key ) ) ); ?> />
 
 						<label class="<?php echo esc_attr( $data['class_label'] ); ?>" for="<?php echo esc_attr( $option_key ); ?>">
@@ -139,8 +145,6 @@ class CreateForm extends FormAbstract
 								$schema = wc1c()->schemas()->get($option_key);
 								echo wp_kses_post($schema->getDescription());
 							?>
-							<hr>
-							<?php _e('Identifier:', 'wc1c'); ?> <b><?php echo esc_attr($option_key); ?></b>
 						</div>
 
 					</div>
