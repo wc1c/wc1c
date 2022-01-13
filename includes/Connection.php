@@ -14,5 +14,5 @@ final class Connection extends Client
 	/**
 	 * @var string
 	 */
-	private $host = 'https://wc1c.info';
+	protected $host = 'https://wc1c.info';
 }
