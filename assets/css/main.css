@@ -8206,9 +8206,8 @@
   padding-left: 5px;
 }
 .woocommerce_page_wc1c .tablenav.top {
-  min-height: 40px;
   height: auto;
-  padding-top: 10px;
+  padding: 0;
 }
 .woocommerce_page_wc1c .tablenav.top .tablenav-pages {
   display: none;
