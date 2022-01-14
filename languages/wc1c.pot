@@ -4,7 +4,7 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: WC1C > integration of WooCommerce with 1C products "
 "(different configurations)\n"
-"POT-Creation-Date: 2022-01-04 22:41+0300\n"
+"POT-Creation-Date: 2022-01-14 09:44+0300\n"
 "PO-Revision-Date: 2019-03-19 20:30+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
@@ -221,35 +221,35 @@ msgid ""
 "your tasks."
 msgstr ""
 
-#: includes/Admin/Configurations/CreateForm.php:143
+#: includes/Admin/Configurations/CreateForm.php:133
 msgid "Identifier:"
 msgstr ""
 
-#: includes/Admin/Configurations/CreateForm.php:179
+#: includes/Admin/Configurations/CreateForm.php:183
 msgid "Configuration create error. Please retry."
 msgstr ""
 
-#: includes/Admin/Configurations/CreateForm.php:219
+#: includes/Admin/Configurations/CreateForm.php:223
 msgid "Configuration create error. Name is required."
 msgstr ""
 
-#: includes/Admin/Configurations/CreateForm.php:232
+#: includes/Admin/Configurations/CreateForm.php:236
 msgid "Configuration create error. Schema is required."
 msgstr ""
 
-#: includes/Admin/Configurations/CreateForm.php:249
+#: includes/Admin/Configurations/CreateForm.php:253
 msgid "Configuration create error. Name is exists."
 msgstr ""
 
-#: includes/Admin/Configurations/CreateForm.php:266
+#: includes/Admin/Configurations/CreateForm.php:270
 msgid "Configuration create success. Configuration id: "
 msgstr ""
 
-#: includes/Admin/Configurations/CreateForm.php:267
+#: includes/Admin/Configurations/CreateForm.php:271
 msgid "edit configuration"
 msgstr ""
 
-#: includes/Admin/Configurations/CreateForm.php:279
+#: includes/Admin/Configurations/CreateForm.php:283
 msgid "Configuration create error. Please retry saving or change fields."
 msgstr ""
 
@@ -370,76 +370,53 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: includes/Admin/Settings/ConnectionForm.php:73
+#: includes/Admin/Settings/ConnectionForm.php:106
+#, php-format
+msgid ""
+"The user with the login %s on the site %s successfully connected to the current "
+"site."
+msgstr ""
+
+#: includes/Admin/Settings/ConnectionForm.php:128
+#, php-format
+msgid ""
+"Error connecting user with login %s on site %s to the current site. Please try "
+"again later."
+msgstr ""
+
+#: includes/Admin/Settings/ConnectionForm.php:160
 msgid "Connection error. Please retry."
 msgstr ""
 
-#: includes/Admin/Settings/ConnectionForm.php:119
-msgid "Connection error. Login is required."
+#: includes/Admin/Settings/ConnectionForm.php:182
+msgid "Disconnect successful. Reconnect is available"
 msgstr ""
 
-#: includes/Admin/Settings/ConnectionForm.php:132
-msgid "Connection error. Password is required."
-msgstr ""
-
-#: includes/Admin/Settings/ConnectionForm.php:188
-msgid "Connection error. Password or Login is invalid."
-msgstr ""
-
-#: includes/Admin/Settings/ConnectionForm.php:228
-msgid "Connection success."
-msgstr ""
-
-#: includes/Admin/Settings/ConnectionForm.php:246
+#: includes/Admin/Settings/ConnectionForm.php:208
 msgid "Site is connected to WC1C"
 msgstr ""
 
-#: includes/Admin/Settings/ConnectionForm.php:248
+#: includes/Admin/Settings/ConnectionForm.php:210
 msgid "To create a new connection, need to disconnect the current connection."
 msgstr ""
 
-#: includes/Admin/Settings/ConnectionForm.php:253
-#: includes/Admin/Settings/ConnectionForm.php:292
+#: includes/Admin/Settings/ConnectionForm.php:215
 msgid "Login"
 msgstr ""
 
-#: includes/Admin/Settings/ConnectionForm.php:255
+#: includes/Admin/Settings/ConnectionForm.php:217
 msgid "Connected login from the WC1C website."
 msgstr ""
 
-#: includes/Admin/Settings/ConnectionForm.php:263
+#: includes/Admin/Settings/ConnectionForm.php:225
 msgid "App token"
 msgstr ""
 
-#: includes/Admin/Settings/ConnectionForm.php:265
+#: includes/Admin/Settings/ConnectionForm.php:227
 msgid ""
 "The current application token for the user. This token can be revoked in your "
 "personal account on the WC1C website, as well as by clicking the Disconnect "
-"from WC1C button."
-msgstr ""
-
-#: includes/Admin/Settings/ConnectionForm.php:285
-msgid "Site is not connected to WC1C"
-msgstr ""
-
-#: includes/Admin/Settings/ConnectionForm.php:287
-msgid ""
-"To create a new connection, need to enter a username and password from the WC1C "
-"website, or follow the link and authorize the application on the WC1C website."
-msgstr ""
-
-#: includes/Admin/Settings/ConnectionForm.php:294
-msgid "The login when registering on the WC1C website."
-msgstr ""
-
-#: includes/Admin/Settings/ConnectionForm.php:301
-msgid "Password"
-msgstr ""
-
-#: includes/Admin/Settings/ConnectionForm.php:303
-msgid ""
-"The current password on the WC1C site for the user. This password is not saved "
-"on site. A token for the application will be generated instead."
+"button."
 msgstr ""
 
 #: includes/Admin/Settings/Form.php:85
@@ -451,11 +428,11 @@ msgid "Save success."
 msgstr ""
 
 #: includes/Admin/Settings/MainForm.php:47
-msgid "Settings for the Configurations."
+msgid "Some settings for the configurations."
 msgstr ""
 
 #: includes/Admin/Settings/MainForm.php:52
-msgid "Unique configuration names"
+msgid "Unique names"
 msgstr ""
 
 #: includes/Admin/Settings/MainForm.php:54
@@ -463,7 +440,7 @@ msgid "Require unique names for configurations?"
 msgstr ""
 
 #: includes/Admin/Settings/MainForm.php:55
-msgid "If enabled, you will need to provide unique names when configurations."
+msgid "If enabled, will need to provide unique names for the configurations."
 msgstr ""
 
 #: includes/Admin/Settings/MainForm.php:61
@@ -497,224 +474,232 @@ msgid "Used to set up the environment."
 msgstr ""
 
 #: includes/Admin/Settings/MainForm.php:98
+msgid "Maximum time for execution PHP"
+msgstr ""
+
+#: includes/Admin/Settings/MainForm.php:103
+msgid "Value is seconds. WC1C will run until a time limit is set."
+msgstr ""
+
+#: includes/Admin/Settings/MainForm.php:104
+msgid "Server value:"
+msgstr ""
+
+#: includes/Admin/Settings/MainForm.php:106
+msgid ""
+"If specify 0, the time limit will be disabled. Specifying 0 is not recommended, "
+"it is recommended not to exceed the server limit."
+msgstr ""
+
+#: includes/Admin/Settings/MainForm.php:114
 #: includes/Schemas/DefaultCML/Admin.php:146
 msgid "Maximum request size"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:100
+#: includes/Admin/Settings/MainForm.php:116
 #: includes/Schemas/DefaultCML/Admin.php:148
 msgid ""
 "The setting must not take a size larger than specified in the server settings."
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:107
-msgid "Maximum time for execution PHP"
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:109
-msgid ""
-"Value is seconds. The setting must not take a execution time larger than "
-"specified in the PHP and web server settings (Apache, Nginx, etc)."
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:128
+#: includes/Admin/Settings/MainForm.php:135
 msgid "Receiver"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:130
+#: includes/Admin/Settings/MainForm.php:137
 msgid "Enable data Receiver: background requests?"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:131
+#: includes/Admin/Settings/MainForm.php:138
 msgid ""
 "It is used to receive background requests from 1C in exchange schemes. Do not "
 "disable this option if you do not know what it is for."
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:149
+#: includes/Admin/Settings/MainForm.php:156
 msgid "Interface"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:151
+#: includes/Admin/Settings/MainForm.php:158
 msgid "Settings for the user interface."
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:156
+#: includes/Admin/Settings/MainForm.php:163
 msgid "Changing the interface"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:158
+#: includes/Admin/Settings/MainForm.php:165
 msgid "Allow changes to WordPress and WooCommerce dashboard interface?"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:159
+#: includes/Admin/Settings/MainForm.php:166
 msgid ""
 "If enabled, new features will appear in the WordPress and WooCommerce interface "
 "according to the interface change settings."
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:165
+#: includes/Admin/Settings/MainForm.php:172
 msgid "Column in products list"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:167
-#: includes/Admin/Settings/MainForm.php:176
-#: includes/Admin/Settings/MainForm.php:185
-#: includes/Admin/Settings/MainForm.php:194
-#: includes/Admin/Settings/MainForm.php:203
+#: includes/Admin/Settings/MainForm.php:174
+#: includes/Admin/Settings/MainForm.php:183
+#: includes/Admin/Settings/MainForm.php:192
+#: includes/Admin/Settings/MainForm.php:201
+#: includes/Admin/Settings/MainForm.php:210
 msgid "Enable"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:168
+#: includes/Admin/Settings/MainForm.php:175
 msgid "Output of a column with information from 1C to the list of products."
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:174
+#: includes/Admin/Settings/MainForm.php:181
 msgid "Metabox in edit products"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:177
+#: includes/Admin/Settings/MainForm.php:184
 msgid "Output of a Metabox with information from 1C in edit products."
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:183
+#: includes/Admin/Settings/MainForm.php:190
 msgid "Column in orders list"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:186
+#: includes/Admin/Settings/MainForm.php:193
 msgid "Output of a column with information from 1C to the list of orders."
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:192
+#: includes/Admin/Settings/MainForm.php:199
 msgid "Metabox in edit orders"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:195
+#: includes/Admin/Settings/MainForm.php:202
 msgid "Output of a Metabox with information from 1C in edit orders."
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:201
+#: includes/Admin/Settings/MainForm.php:208
 msgid "Column in categories list"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:204
+#: includes/Admin/Settings/MainForm.php:211
 msgid "Output of a column with information from 1C to the list of categories."
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:222
+#: includes/Admin/Settings/MainForm.php:229
 msgid "Event logs"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:224
+#: includes/Admin/Settings/MainForm.php:231
 msgid "Global settings for technical event logging."
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:229
+#: includes/Admin/Settings/MainForm.php:236
 msgid "Level for main events"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:231
+#: includes/Admin/Settings/MainForm.php:238
 msgid ""
 "All events of the selected level will be recorded in the log file. The higher "
 "the level, the less data is recorded."
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:235
-#: includes/Admin/Settings/MainForm.php:252
-#: includes/Admin/Settings/MainForm.php:269
-#: includes/Admin/Settings/MainForm.php:286
-#: includes/Admin/Settings/MainForm.php:303
+#: includes/Admin/Settings/MainForm.php:242
+#: includes/Admin/Settings/MainForm.php:259
+#: includes/Admin/Settings/MainForm.php:276
+#: includes/Admin/Settings/MainForm.php:293
+#: includes/Admin/Settings/MainForm.php:310
 msgid "DEBUG (100)"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:236
-#: includes/Admin/Settings/MainForm.php:253
-#: includes/Admin/Settings/MainForm.php:270
-#: includes/Admin/Settings/MainForm.php:287
-#: includes/Admin/Settings/MainForm.php:304
+#: includes/Admin/Settings/MainForm.php:243
+#: includes/Admin/Settings/MainForm.php:260
+#: includes/Admin/Settings/MainForm.php:277
+#: includes/Admin/Settings/MainForm.php:294
+#: includes/Admin/Settings/MainForm.php:311
 msgid "INFO (200)"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:237
-#: includes/Admin/Settings/MainForm.php:254
-#: includes/Admin/Settings/MainForm.php:271
-#: includes/Admin/Settings/MainForm.php:288
-#: includes/Admin/Settings/MainForm.php:305
+#: includes/Admin/Settings/MainForm.php:244
+#: includes/Admin/Settings/MainForm.php:261
+#: includes/Admin/Settings/MainForm.php:278
+#: includes/Admin/Settings/MainForm.php:295
+#: includes/Admin/Settings/MainForm.php:312
 msgid "NOTICE (250)"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:238
-#: includes/Admin/Settings/MainForm.php:255
-#: includes/Admin/Settings/MainForm.php:272
-#: includes/Admin/Settings/MainForm.php:289
-#: includes/Admin/Settings/MainForm.php:306
+#: includes/Admin/Settings/MainForm.php:245
+#: includes/Admin/Settings/MainForm.php:262
+#: includes/Admin/Settings/MainForm.php:279
+#: includes/Admin/Settings/MainForm.php:296
+#: includes/Admin/Settings/MainForm.php:313
 msgid "WARNING (300)"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:239
-#: includes/Admin/Settings/MainForm.php:256
-#: includes/Admin/Settings/MainForm.php:273
-#: includes/Admin/Settings/MainForm.php:290
-#: includes/Admin/Settings/MainForm.php:307
+#: includes/Admin/Settings/MainForm.php:246
+#: includes/Admin/Settings/MainForm.php:263
+#: includes/Admin/Settings/MainForm.php:280
+#: includes/Admin/Settings/MainForm.php:297
+#: includes/Admin/Settings/MainForm.php:314
 msgid "ERROR (400)"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:245
+#: includes/Admin/Settings/MainForm.php:252
 msgid "Level for receiver"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:247
+#: includes/Admin/Settings/MainForm.php:254
 msgid ""
 "All events of the selected level will be recorded the Receiver events in the "
 "log file. The higher the level, the less data is recorded."
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:251
-#: includes/Admin/Settings/MainForm.php:268
-#: includes/Admin/Settings/MainForm.php:285
-#: includes/Admin/Settings/MainForm.php:302
+#: includes/Admin/Settings/MainForm.php:258
+#: includes/Admin/Settings/MainForm.php:275
+#: includes/Admin/Settings/MainForm.php:292
+#: includes/Admin/Settings/MainForm.php:309
 msgid "Use level for main events"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:262
+#: includes/Admin/Settings/MainForm.php:269
 msgid "Level for tools"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:264
+#: includes/Admin/Settings/MainForm.php:271
 msgid ""
 "All events of the selected level will be recorded the tools events in the log "
 "file. The higher the level, the less data is recorded."
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:279
+#: includes/Admin/Settings/MainForm.php:286
 msgid "Level for schemas"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:281
+#: includes/Admin/Settings/MainForm.php:288
 msgid ""
 "All events of the selected level will be recorded the schemas events in the log "
 "file. The higher the level, the less data is recorded."
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:296
+#: includes/Admin/Settings/MainForm.php:303
 msgid "Level for configurations"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:298
+#: includes/Admin/Settings/MainForm.php:305
 msgid ""
 "All events of the selected level will be recorded the configurations events in "
 "the log file. The higher the level, the less data is recorded."
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:313
+#: includes/Admin/Settings/MainForm.php:320
 msgid "Access to technical events"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:315
+#: includes/Admin/Settings/MainForm.php:322
 msgid "Allow the WC1C team to access technical events?"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:316
+#: includes/Admin/Settings/MainForm.php:323
 msgid ""
 "If allowed, the WC1C team will be able to access technical events and release "
 "the necessary updates based on them."
@@ -1310,36 +1295,48 @@ msgstr ""
 msgid "Update is not available."
 msgstr ""
 
-#: templates/connection/form.php:13
-msgid "Connect by Login & Password"
+#: templates/connection/form.php:21
+msgid "Connect by WC1C site"
 msgstr ""
 
-#: templates/connection/form.php:16
+#: templates/connection/form.php:24
 msgid "Disconnect"
 msgstr ""
 
-#: templates/connection/form.php:28
-msgid "Connect by WC1C site"
+#: templates/connection/init.php:4
+msgid "Connection"
+msgstr ""
+
+#: templates/connection/init.php:10
+msgid ""
+"To receive support and official services, need to go through the authorization "
+"of external applications."
+msgstr ""
+
+#: templates/connection/init.php:11
+msgid ""
+"Authorization of an external app occurs by going to the official WC1C and "
+"returning to the current site."
 msgstr ""
 
 #: templates/error.php:3
 msgid "Error. Page not found."
 msgstr ""
 
-#: templates/extensions/empty.php:3
+#: templates/extensions/empty.php:4
 msgid "Extensions not found."
 msgstr ""
 
-#: templates/extensions/item.php:15
-msgid "Author:"
+#: templates/extensions/empty.php:5
+msgid "As soon as the extensions are installed, they will appear in this section."
 msgstr ""
 
-#: templates/extensions/item.php:19
-msgid "Version:"
-msgstr ""
-
-#: templates/extensions/item.php:23
+#: templates/extensions/item.php:6
 msgid "Extension ID:"
+msgstr ""
+
+#: templates/extensions/item.php:9
+msgid "Version:"
 msgstr ""
 
 #: templates/helps/bugs.php:24

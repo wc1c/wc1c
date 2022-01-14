@@ -1,7 +1,7 @@
 <?php defined('ABSPATH') || exit; ?>
 
 <div class="row">
-    <div class="col pt-2 pb-2">
+    <div class="col">
 	    <?php
             $label = __('Back to all configurations', 'wc1c');
             wc1c()->templates()->adminBackLink($label, $args['back_url']);
