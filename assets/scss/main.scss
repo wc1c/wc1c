@@ -1,7 +1,12 @@
 /**
 *** Bootstrap
  */
-@import "bootsrap";
+@import "external/bootsrap";
+
+/**
+*** Toc bot
+ */
+@import "tocbot/tocbot";
 
 /**
 *** Tables
