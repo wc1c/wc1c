@@ -8222,9 +8222,11 @@
 }
 .woocommerce_page_wc1c .date_create {
   width: 130px;
+  max-width: 130px;
 }
 .woocommerce_page_wc1c .date_activity {
   width: 130px;
+  max-width: 130px;
 }
 .woocommerce_page_wc1c .column-name .name {
   font-size: 16px !important;
@@ -8236,6 +8238,7 @@
 .woocommerce_page_wc1c .column-configuration_id {
   width: 75px;
   border-right: 1px solid #ccd0d4;
+  max-width: 75px;
 }
 .woocommerce_page_wc1c .remove a {
   color: #c4161c;
@@ -8254,6 +8257,7 @@
   min-width: 120px;
   width: 120px;
   border-left: 1px solid #ccd0d4;
+  border-right: 1px solid #ccd0d4;
 }
 .woocommerce_page_wc1c .column-status span {
   font-size: 14px;
@@ -8293,10 +8297,12 @@
 .woocommerce_page_wc1c .column-date_create {
   line-height: 1.3em;
   width: 130px;
+  max-width: 130px;
 }
 .woocommerce_page_wc1c .column-date_activity {
   line-height: 1.3em;
   width: 130px;
+  max-width: 130px;
 }
 .woocommerce_page_wc1c .column-schema {
   border-left: 1px solid #ccd0d4;

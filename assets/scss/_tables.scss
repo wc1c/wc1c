@@ -44,11 +44,13 @@
   .date_create
   {
     width: 130px;
+    max-width: 130px;
   }
 
   .date_activity
   {
     width: 130px;
+    max-width: 130px;
   }
 
   .column-name .name
@@ -64,6 +66,7 @@
   {
     width: 75px;
     border-right: 1px solid #ccd0d4;
+    max-width: 75px;
   }
 
   .remove
@@ -96,6 +99,7 @@
     min-width: 120px;
     width: 120px;
     border-left: 1px solid #ccd0d4;
+    border-right: 1px solid #ccd0d4;
 
     span
     {
@@ -156,12 +160,14 @@
   {
     line-height: 1.3em;
     width: 130px;
+    max-width: 130px;
   }
 
   .column-date_activity
   {
     line-height: 1.3em;
     width: 130px;
+    max-width: 130px;
   }
 
   .column-schema
