@@ -49,6 +49,7 @@ final class Admin
 		{
 			add_action('init', [$this, 'init'], 10);
 			add_action('admin_enqueue_scripts', [$this, 'initStyles']);
+			add_action('admin_enqueue_scripts', [$this, 'initScripts']);
 
 			Admin\Helps\Init::instance();
 			Admin\Wizards\Init::instance();
@@ -148,6 +149,15 @@ final class Admin
 	public function initStyles()
 	{
 		wp_enqueue_style(WC1C_ADMIN_PREFIX . 'main', WC1C_PLUGIN_URL . 'assets/css/main.min.css');
+	}
+
+	/**
+	 * Scripts
+	 */
+	public function initScripts()
+	{
+		wp_enqueue_script(WC1C_ADMIN_PREFIX . 'tocbot', WC1C_PLUGIN_URL . 'assets/js/tocbot/tocbot.min.js');
+		wp_enqueue_script(WC1C_ADMIN_PREFIX . 'main', WC1C_PLUGIN_URL . 'assets/js/admin.js');
 	}
 
 	/**

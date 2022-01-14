@@ -148,7 +148,7 @@ class UpdateForm extends FormAbstract
             'object' => $this
         ];
 
-		$body = '<div class="list-group m-0">';
+		$body = '<div class="wc1c-toc m-0">';
 
 		$form_fields = $this->get_fields();
 
@@ -174,7 +174,7 @@ class UpdateForm extends FormAbstract
         {
 	        $args['body'] = $body;
 
-	        wc1c()->templates()->getTemplate('configurations/update_sidebar_item.php', $args);
+	        wc1c()->templates()->getTemplate('configurations/update_sidebar_toc.php', $args);
         }
 	}
 
