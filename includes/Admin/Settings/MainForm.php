@@ -23,8 +23,8 @@ class MainForm extends Form
 		$this->setSettings(new MainSettings());
 
 		add_filter(WC1C_PREFIX . $this->get_id() . '_form_load_fields', [$this, 'init_fields_main'], 10);
-		add_filter(WC1C_PREFIX . $this->get_id() . '_form_load_fields', [$this, 'init_fields_technical'], 10);
 		add_filter(WC1C_PREFIX . $this->get_id() . '_form_load_fields', [$this, 'init_fields_configurations'], 10);
+		add_filter(WC1C_PREFIX . $this->get_id() . '_form_load_fields', [$this, 'init_fields_technical'], 10);
 		add_filter(WC1C_PREFIX . $this->get_id() . '_form_load_fields', [$this, 'init_fields_interface'], 10);
 		add_filter(WC1C_PREFIX . $this->get_id() . '_form_load_fields', [$this, 'init_fields_logger'], 10);
 
@@ -44,15 +44,15 @@ class MainForm extends Form
 		[
 			'title' => __('Configurations', 'wc1c'),
 			'type' => 'title',
-			'description' => __('Settings for the Configurations.', 'wc1c'),
+			'description' => __('Some settings for the configurations.', 'wc1c'),
 		];
 
 		$fields['configurations_unique_name'] =
 		[
-			'title' => __('Unique configuration names', 'wc1c'),
+			'title' => __('Unique names', 'wc1c'),
 			'type' => 'checkbox',
 			'label' => __('Require unique names for configurations?', 'wc1c'),
-			'description' => __('If enabled, you will need to provide unique names when configurations.', 'wc1c'),
+			'description' => __('If enabled, will need to provide unique names for the configurations.', 'wc1c'),
 			'default' => 'yes'
 		];
 
@@ -93,21 +93,28 @@ class MainForm extends Form
 			'description' => __('Used to set up the environment.', 'wc1c'),
 		];
 
+		$fields['php_max_execution_time'] =
+		[
+			'title' => __('Maximum time for execution PHP', 'wc1c'),
+			'type' => 'text',
+			'description' => sprintf
+			(
+				'%s <br /> %s <b>%s</b> <br /> %s',
+				__('Value is seconds. WC1C will run until a time limit is set.', 'wc1c'),
+				__('Server value:', 'wc1c'),
+				wc1c()->environment()->get('php_max_execution_time'),
+				__('If specify 0, the time limit will be disabled. Specifying 0 is not recommended, it is recommended not to exceed the server limit.', 'wc1c')
+			),
+			'default' => wc1c()->environment()->get('php_max_execution_time'),
+			'css' => 'min-width: 100px;',
+		];
+
 		$fields['php_post_max_size'] =
 		[
 			'title' => __('Maximum request size', 'wc1c'),
 			'type' => 'text',
 			'description' => __('The setting must not take a size larger than specified in the server settings.', 'wc1c'),
 			'default' => wc1c()->environment()->get('php_post_max_size'),
-			'css' => 'min-width: 100px;',
-		];
-
-		$fields['php_max_execution_time'] =
-		[
-			'title' => __('Maximum time for execution PHP', 'wc1c'),
-			'type' => 'text',
-			'description' => __('Value is seconds. The setting must not take a execution time larger than specified in the PHP and web server settings (Apache, Nginx, etc).', 'wc1c'),
-			'default' => wc1c()->environment()->get('php_max_execution_time'),
 			'css' => 'min-width: 100px;',
 		];
 
