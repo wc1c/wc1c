@@ -39,23 +39,21 @@ final class Environment
 		{
 			return $this->data[$key];
 		}
-		else
+
+		$key_getter = str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
+
+		$getter = "init$key_getter";
+
+		if(is_callable([$this, $getter]))
 		{
-			$key_getter = str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
-
-			$getter = "init$key_getter";
-
-			if(is_callable([$this, $getter]))
+			try
 			{
-				try
-				{
-					$getter_value = $this->{$getter}($default);
-					$this->set($key, $getter_value);
-				}
-				catch(Exception $e){}
-
-				return $this->get($key);
+				$getter_value = $this->{$getter}($default);
+				$this->set($key, $getter_value);
 			}
+			catch(Exception $e){}
+
+			return $this->get($key);
 		}
 
 		if(false === is_null($default))
