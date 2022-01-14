@@ -58,13 +58,18 @@ a.toc-link {
     padding-left: 10px;
     border-radius: 0;
 
+    &.active
+    {
+      background-color: #f0f0f1;
+    }
+
     a
     {
       text-decoration: none;
 
       &.is-active-link
       {
-        color: #FFFFFF;
+        //color: #FFFFFF;
       }
     }
   }

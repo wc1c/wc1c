@@ -8246,13 +8246,12 @@ a.toc-link {
   padding-left: 10px;
   border-radius: 0;
 }
+.wc1c-toc .list-group-item.active {
+  background-color: #f0f0f1;
+}
 .wc1c-toc .list-group-item a {
   text-decoration: none;
 }
-.wc1c-toc .list-group-item a.is-active-link {
-  color: #FFFFFF;
-}
-
 /* Default Theme Styles */
 /**
 *** Tables
