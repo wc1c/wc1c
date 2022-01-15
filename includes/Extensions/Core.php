@@ -20,14 +20,6 @@ final class Core
 	private $extensions = [];
 
 	/**
-	 * Core constructor.
-	 */
-	public function __construct()
-	{
-
-	}
-
-	/**
 	 * Set
 	 *
 	 * @param array $extensions
@@ -121,7 +113,7 @@ final class Core
 			}
 			catch(Exception $e)
 			{
-				wc1c()->log()->error($e->getMessage(), $e);
+				wc1c()->log()->error($e->getMessage(), ['exception' => $e]);
 				continue;
 			}
 		}
