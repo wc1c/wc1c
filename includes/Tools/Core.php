@@ -1,17 +1,8 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Tools;
+<?php namespace Wc1c\Tools;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
+use Wc1c\Abstracts\ToolAbstract;
 use Wc1c\Exceptions\Exception;
 use Wc1c\Traits\SingletonTrait;
 
@@ -28,15 +19,6 @@ final class Core
 	 * @var array All loaded tools
 	 */
 	private $tools = [];
-
-	/**
-	 * Core constructor.
-	 * @throws Exception
-	 */
-	public function __construct()
-	{
-		$this->load();
-	}
 
 	/**
 	 * Loading tools
@@ -115,26 +97,85 @@ final class Core
 	}
 
 	/**
-	 * @param string $tool_id
+	 * Initializing tools
 	 *
+	 * @param string $tool_id If a tool ID is specified, only the specified tool is loaded
+	 *
+	 * @return boolean|ToolAbstract
 	 * @throws Exception
 	 */
 	public function init($tool_id = '')
 	{
 		try
 		{
-			$tool_data = $this->get($tool_id);
-			$tool_example = new $tool_data();
+			$tools = $this->get();
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('exception - ' . $e->getMessage());
+			throw new Exception('Get tools exception - ' . $e->getMessage());
 		}
 
-		$tool_example->set_id('example');
-		$tool_example->set_name(__('Example tool', 'wc1c'));
-		$tool_example->set_description(__('A demo tool that does not carry any functional load.', 'wc1c'));
+		if(!is_array($tools))
+		{
+			throw new Exception('$tools is not array');
+		}
 
-		$tools[$tool_example->get_id()] = $tool_example;
+		/**
+		 * Init specified tool
+		 */
+		if('' !== $tool_id)
+		{
+			if(!array_key_exists($tool_id, $tools))
+			{
+				throw new Exception('Tool not found by id');
+			}
+
+			$init_tool = $tools[$tool_id];
+
+			if(is_object($init_tool))
+			{
+				return $init_tool;
+			}
+
+			$init_tool = new $init_tool();
+
+			if(!method_exists($init_tool, 'init'))
+			{
+				throw new Exception('Method init is not found');
+			}
+
+			try
+			{
+				$init_tool->init();
+			}
+			catch(Exception $e)
+			{
+				throw new Exception('Init tool exception - ' . $e->getMessage());
+			}
+
+			$tools[$tool_id] = $init_tool;
+
+			$this->set($tools);
+
+			return $init_tool;
+		}
+
+		/**
+		 * Init all tools
+		 */
+		foreach($tools as $tool)
+		{
+			try
+			{
+				$this->init($tool);
+			}
+			catch(Exception $e)
+			{
+				wc1c()->log()->error($e->getMessage(), ['exception' => $e]);
+				continue;
+			}
+		}
+
+		return true;
 	}
 }

@@ -2,7 +2,6 @@
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Settings\ConnectionSettings;
 use wpdb;
 use Wc1c\Log\Formatter;
 use Wc1c\Log\Handler;
@@ -13,6 +12,7 @@ use Wc1c\Interfaces\SettingsInterface;
 use Wc1c\Log\Logger;
 use Wc1c\Traits\SingletonTrait;
 use Wc1c\Settings\MainSettings;
+use Wc1c\Settings\ConnectionSettings;
 
 /**
  * Core
@@ -65,6 +65,7 @@ final class Core
 
 	/**
 	 * @param $context
+	 * @param $loader
 	 *
 	 * @return void
 	 */
@@ -129,15 +130,24 @@ final class Core
 			wc1c()->log()->alert('Schemas exception - ' . $e->getMessage());
 		}
 
+		try
+		{
+			$this->tools()->load();
+		}
+		catch(Exception $e)
+		{
+			wc1c()->log()->alert('Tools exception - ' . $e->getMessage());
+		}
+
 		if(false !== wc1c()->context()->isReceiver() || false !== wc1c()->context()->isWc1cAdmin())
 		{
 			try
 			{
-				$this->tools();
+				$this->tools()->init();
 			}
 			catch(Exception $e)
 			{
-				wc1c()->log()->alert('Tools exception - ' . $e->getMessage());
+				wc1c()->log()->alert('Tools init exception - ' . $e->getMessage());
 			}
 		}
 
