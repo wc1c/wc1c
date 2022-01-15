@@ -40,7 +40,6 @@ class Init extends ToolAbstract
 	 */
 	public function __construct()
 	{
-		parent::__construct();
 		$this->init();
 	}
 

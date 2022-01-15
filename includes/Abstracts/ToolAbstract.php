@@ -32,11 +32,6 @@ abstract class ToolAbstract
 	private $author = 'WC1C team';
 
 	/**
-	 * ToolAbstract constructor.
-	 */
-	public function __construct(){}
-
-	/**
 	 * @throws Exception
 	 *
 	 * @return mixed
