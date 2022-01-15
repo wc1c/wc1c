@@ -129,7 +129,6 @@ final class Core
 		return true;
 	}
 
-
 	/**
 	 * Get initialized extensions
 	 *
