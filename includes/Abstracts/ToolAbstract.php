@@ -1,17 +1,7 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Abstracts;
+<?php namespace Wc1c\Abstracts;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use Wc1c\Exceptions\Exception;
 
 /**
@@ -21,11 +11,6 @@ use Wc1c\Exceptions\Exception;
  */
 abstract class ToolAbstract
 {
-	/**
-	 * @var bool Initialized flag
-	 */
-	private $initialized = false;
-
 	/**
 	 * @var string Unique tool id
 	 */
@@ -57,22 +42,6 @@ abstract class ToolAbstract
 	 * @return mixed
 	 */
 	abstract public function init();
-
-	/**
-	 * @return bool
-	 */
-	public function isInitialized()
-	{
-		return $this->initialized;
-	}
-
-	/**
-	 * @param bool $initialized
-	 */
-	public function setInitialized($initialized)
-	{
-		$this->initialized = $initialized;
-	}
 
 	/**
 	 * Set tool id
