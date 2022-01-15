@@ -178,6 +178,16 @@ final class Core
 	}
 
 	/**
+	 * Filesystem
+	 *
+	 * @return Filesystem
+	 */
+	public function filesystem()
+	{
+		return Filesystem::instance();
+	}
+
+	/**
 	 * Schemas
 	 *
 	 * @return Schemas\Core
