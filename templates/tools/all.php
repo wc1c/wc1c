@@ -7,21 +7,26 @@
 
         foreach($args['object']->tools as $tool_id => $tool_object)
         {
-            if(!class_exists($tool_object))
+            if(!is_object($tool_object))
             {
-                continue;
+	            try
+	            {
+		            $tool_object = wc1c()->tools()->init($tool_id);
+	            }
+	            catch(\Wc1c\Exceptions\Exception $e)
+	            {
+                    continue;
+	            }
             }
 
-            $tool = new $tool_object();
-
-            $args =
-                [
-                    'id' => $tool_id,
-                    'name' => $tool->getName(),
-                    'description' => $tool->getDescription(),
-                    'url' => $args['object']->utilityAdminToolsGetUrl($tool_id),
-                    'object' => $tool,
-                ];
+	        $args =
+            [
+                'id' => $tool_id,
+                'name' => $tool_object->getName(),
+                'description' => $tool_object->getDescription(),
+                'url' => $args['object']->utilityAdminToolsGetUrl($tool_id),
+                'object' => $tool_object,
+            ];
 
             wc1c()->templates()->getTemplate('tools/item.php', $args);
         }
