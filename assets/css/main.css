@@ -8393,6 +8393,14 @@ a.toc-link {
 /**
 *** Tools
  */
+.wc1c-tools-alert {
+  padding: 20px;
+  padding-left: 40px;
+  background-color: white;
+  border-left: 7px solid #7f54b3;
+  border-radius: 7px;
+}
+
 /**
 *** Other
  */
