@@ -41,7 +41,7 @@ final class Loader
 		register_deactivation_hook(WC1C_PLUGIN_FILE, [Deactivation::class, 'instance']);
 		register_uninstall_hook(WC1C_PLUGIN_FILE, [Uninstall::class, 'instance']);
 
-		wc1c()->register(new Context());
+		wc1c()->register(new Context(), $this);
 
 		add_action('plugins_loaded', 'wc1c', 10);
 	}

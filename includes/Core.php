@@ -24,6 +24,11 @@ final class Core
 	use SingletonTrait;
 
 	/**
+	 * @var Loader
+	 */
+	private $loader;
+
+	/**
 	 * @var array
 	 */
 	private $log = [];
@@ -63,9 +68,10 @@ final class Core
 	 *
 	 * @return void
 	 */
-	public function register($context)
+	public function register($context, $loader)
 	{
 		$this->context = apply_filters(WC1C_PREFIX . 'context_loading', $context);
+		$this->loader = apply_filters(WC1C_PREFIX . 'loader_loading', $loader);
 
 		// init
 		add_action('init', [$this, 'init'], 3);
@@ -199,6 +205,16 @@ final class Core
 	public function context()
 	{
 		return $this->context;
+	}
+
+	/**
+	 * Loader
+	 *
+	 * @return Loader
+	 */
+	public function loader()
+	{
+		return $this->loader;
 	}
 
 	/**
