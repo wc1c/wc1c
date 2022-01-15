@@ -23,13 +23,6 @@ final class Core
 	private $schemas = [];
 
 	/**
-	 * Core constructor.
-	 */
-	public function __construct()
-	{
-	}
-
-	/**
 	 * Set
 	 *
 	 * @param array $schemas
