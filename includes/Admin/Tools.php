@@ -21,7 +21,7 @@ final class Tools extends ScreenAbstract
 	/**
 	 * @var array All available tools
 	 */
-	private $tools = [];
+	public $tools = [];
 
 	/**
 	 * @var string Current tool id
@@ -113,31 +113,12 @@ final class Tools extends ScreenAbstract
 			];
 
 			wc1c()->templates()->getTemplate('tools/single.php', $args);
-		}
-		else
-		{
-			foreach($this->tools as $tool_id => $tool_object)
-			{
-				if(!class_exists($tool_object))
-				{
-					continue;
-				}
 
-				$tool = new $tool_object();
-
-				$args =
-				[
-					'id' => $tool_id,
-					'name' => $tool->getName(),
-					'description' => $tool->getDescription(),
-					'url' => $this->utilityAdminToolsGetUrl($tool_id),
-					'object' => $tool,
-				];
-
-				wc1c()->templates()->getTemplate('tools/item.php', $args);
-			}
+			return;
 		}
 
-		wc1c()->templates()->getTemplate('tools/all.php');
+		$args['object'] = $this;
+
+		wc1c()->templates()->getTemplate('tools/all.php', $args);
 	}
 }
