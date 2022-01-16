@@ -266,12 +266,13 @@ final class Core
 				$name = $channel;
 			}
 
+			$path = '';
+
 			$logger = new Logger($channel);
 
 			switch($channel)
 			{
 				case 'receiver':
-					$path = $this->environment()->get('wc1c_logs_directory') . '/' . $name . '.log';
 					$level = $this->settings()->get('logger_receiver_level', 'logger_level');
 					break;
 				case 'tools':
@@ -287,13 +288,17 @@ final class Core
 					$level = $this->settings()->get('logger_configurations_level', 'logger_level');
 					break;
 				default:
-					$path = $this->environment()->get('wc1c_logs_directory') . '/main.log';
 					$level = $this->settings()->get('logger_level', 300);
 			}
 
 			if('logger_level' === $level)
 			{
 				$level = $this->settings()->get('logger_level', 300);
+			}
+
+			if('' === $path)
+			{
+				$path = $this->environment()->get('wc1c_logs_directory') . '/main.log';
 			}
 
 			try
