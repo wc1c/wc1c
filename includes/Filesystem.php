@@ -604,7 +604,7 @@ class Filesystem
 	 */
 	public function files($directory)
 	{
-		return $this->glob($directory . '/*.*');
+		return array_filter($this->glob($directory . '/*'),'is_file');
 	}
 
 	/**
