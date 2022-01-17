@@ -53,20 +53,28 @@
     max-width: 130px;
   }
 
-  .column-name .name
+  .configurations
   {
-    font-size: 16px!important;
-    display: block;
-    margin-bottom: 7px;
-    padding-bottom: 7px;
-    border-bottom: 1px solid #ccd0d4;
-  }
+    .column-name .name
+    {
+      font-size: 16px!important;
+      display: block;
+      margin-bottom: 7px;
+      padding-bottom: 7px;
+      border-bottom: 1px solid #ccd0d4;
+    }
 
-  .column-configuration_id
-  {
-    width: 75px;
-    border-right: 1px solid #ccd0d4;
-    max-width: 75px;
+    .column-configuration_id
+    {
+      width: 75px;
+      border-right: 1px solid #ccd0d4;
+      max-width: 75px;
+    }
+
+    td
+    {
+      vertical-align: middle!important;
+    }
   }
 
   .remove
@@ -145,14 +153,6 @@
         background-color: #b8151a;
         color: white;
       }
-    }
-  }
-
-  .configurations
-  {
-    td
-    {
-      vertical-align: middle!important;
     }
   }
 

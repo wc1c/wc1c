@@ -8285,17 +8285,20 @@ a.toc-link {
   width: 130px;
   max-width: 130px;
 }
-.woocommerce_page_wc1c .column-name .name {
+.woocommerce_page_wc1c .configurations .column-name .name {
   font-size: 16px !important;
   display: block;
   margin-bottom: 7px;
   padding-bottom: 7px;
   border-bottom: 1px solid #ccd0d4;
 }
-.woocommerce_page_wc1c .column-configuration_id {
+.woocommerce_page_wc1c .configurations .column-configuration_id {
   width: 75px;
   border-right: 1px solid #ccd0d4;
   max-width: 75px;
+}
+.woocommerce_page_wc1c .configurations td {
+  vertical-align: middle !important;
 }
 .woocommerce_page_wc1c .remove a {
   color: #c4161c;
@@ -8347,9 +8350,6 @@ a.toc-link {
 .woocommerce_page_wc1c .column-status span.error {
   background-color: #b8151a;
   color: white;
-}
-.woocommerce_page_wc1c .configurations td {
-  vertical-align: middle !important;
 }
 .woocommerce_page_wc1c .column-date_create {
   line-height: 1.3em;
