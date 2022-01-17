@@ -10,35 +10,33 @@
     }
   }
 
-  .tablenav
+  .configurations-all
   {
-    &.top
+    .tablenav
     {
-      height: auto;
-      padding: 0;
-
-      .tablenav-pages
+      &.top
       {
-        display: none;
+        height: auto;
+        padding: 0;
+
+        .tablenav-pages
+        {
+          display: none;
+        }
+      }
+
+      .subsubsub
+      {
+        margin: 0;
+        font-size: 14px;
+        line-height: 28px;
+
+        a
+        {
+          text-decoration: none;
+        }
       }
     }
-
-    .subsubsub
-    {
-      margin: 0;
-      font-size: 14px;
-      line-height: 28px;
-
-      a
-      {
-        text-decoration: none;
-      }
-    }
-  }
-
-  .column-name
-  {
-    //width: 200px!important;
   }
 
   .date_create

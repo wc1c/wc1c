@@ -20,7 +20,9 @@ class All extends ScreenAbstract
 	public function output()
 	{
 		$list_table = new AllTable();
-		$list_table->prepareItems();
-		$list_table->display();
+
+		$args['object'] = $list_table;
+
+		wc1c()->templates()->getTemplate('configurations/all.php', $args);
 	}
 }

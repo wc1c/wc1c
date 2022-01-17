@@ -8262,19 +8262,19 @@ a.toc-link {
 .woocommerce_page_wc1c .wc1c-admin-form-table .titledesc {
   padding-left: 5px;
 }
-.woocommerce_page_wc1c .tablenav.top {
+.woocommerce_page_wc1c .configurations-all .tablenav.top {
   height: auto;
   padding: 0;
 }
-.woocommerce_page_wc1c .tablenav.top .tablenav-pages {
+.woocommerce_page_wc1c .configurations-all .tablenav.top .tablenav-pages {
   display: none;
 }
-.woocommerce_page_wc1c .tablenav .subsubsub {
+.woocommerce_page_wc1c .configurations-all .tablenav .subsubsub {
   margin: 0;
   font-size: 14px;
   line-height: 28px;
 }
-.woocommerce_page_wc1c .tablenav .subsubsub a {
+.woocommerce_page_wc1c .configurations-all .tablenav .subsubsub a {
   text-decoration: none;
 }
 .woocommerce_page_wc1c .date_create {
