@@ -1,6 +1,6 @@
 <?php defined('ABSPATH') || exit; ?>
 
-<div class="bg-white p-2 rounded-3 mt-2">
+<div class="bg-white p-1 px-2 rounded-3 mt-2">
 	<?php do_action('wc1c_admin_tools_all_before_show'); ?>
 
 	<?php
