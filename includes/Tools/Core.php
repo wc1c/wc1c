@@ -127,7 +127,7 @@ final class Core
 		{
 			if(!array_key_exists($tool_id, $tools))
 			{
-				throw new Exception('Tool not found by id');
+				throw new Exception('Tool not found by id: ' . $tool_id);
 			}
 
 			$init_tool = $tools[$tool_id];
