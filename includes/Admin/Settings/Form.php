@@ -1,24 +1,14 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Admin\Settings;
+<?php namespace Wc1c\Admin\Settings;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use Wc1c\Exceptions\Exception;
 use Wc1c\Abstracts\FormAbstract;
 use Wc1c\Interfaces\SettingsInterface;
 use Wc1c\Traits\SingletonTrait;
 
 /**
- * Class Form
+ * Form
  *
  * @package Wc1c\Admin\Settings
  */
