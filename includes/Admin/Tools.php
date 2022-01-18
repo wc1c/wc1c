@@ -101,7 +101,7 @@ final class Tools extends ScreenAbstract
 
 		if($this->getCurrentToolId() !== '' && $this->utilityIsWc1cAdminToolsRequest())
 		{
-			$tool = new $this->tools[$this->getCurrentToolId()];
+			$tool = $this->tools[$this->getCurrentToolId()];
 
 			$args =
 			[

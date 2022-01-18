@@ -163,11 +163,11 @@ final class Core
 		/**
 		 * Init all tools
 		 */
-		foreach($tools as $tool)
+		foreach($tools as $tool_unique_id => $tool_class)
 		{
 			try
 			{
-				$this->init($tool);
+				$this->init($tool_unique_id);
 			}
 			catch(Exception $e)
 			{
