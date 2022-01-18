@@ -100,7 +100,8 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			wc1c()->log()->alert('Timer exception - ' . $e->getMessage());
+			wc1c()->log()->alert('Timer not loaded.', ['exception' => $e]);
+			return;
 		}
 
 		try
@@ -109,7 +110,7 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			wc1c()->log()->alert('Extensions exception - ' . $e->getMessage());
+			wc1c()->log()->alert('Extensions not loaded.', ['exception' => $e]);
 		}
 
 		try
@@ -118,7 +119,7 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			wc1c()->log()->alert('Extensions init exception - ' . $e->getMessage());
+			wc1c()->log()->alert('Extensions not initialized.', ['exception' => $e]);
 		}
 
 		try
@@ -127,7 +128,7 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			wc1c()->log()->alert('Schemas exception - ' . $e->getMessage());
+			wc1c()->log()->alert('Schemas not loaded.', ['exception' => $e]);
 		}
 
 		try
@@ -136,7 +137,7 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			wc1c()->log()->alert('Tools exception - ' . $e->getMessage());
+			wc1c()->log()->alert('Tools not loaded.', ['exception' => $e]);
 		}
 
 		if(false !== wc1c()->context()->isReceiver() || false !== wc1c()->context()->isWc1cAdmin())
@@ -147,7 +148,7 @@ final class Core
 			}
 			catch(Exception $e)
 			{
-				wc1c()->log()->alert('Tools init exception - ' . $e->getMessage());
+				wc1c()->log()->alert('Tools not initialized.', ['exception' => $e]);
 			}
 		}
 
@@ -159,7 +160,7 @@ final class Core
 			}
 			catch(Exception $e)
 			{
-				wc1c()->log()->alert('Receiver exception - ' . $e->getMessage());
+				wc1c()->log()->alert('Receiver not loaded.', ['exception' => $e]);
 			}
 		}
 
@@ -450,7 +451,11 @@ final class Core
 			$locale = is_admin() && function_exists('get_user_locale') ? get_user_locale() : get_locale();
 		}
 
+		wc1c()->log()->debug('Detect locale', ['locale' => $locale]);
+
 		$locale = apply_filters('plugin_locale', $locale, 'wc1c');
+
+		wc1c()->log()->debug('Locale for load', ['locale' => $locale]);
 
 		unload_textdomain('wc1c');
 		load_textdomain('wc1c', WP_LANG_DIR . '/plugins/wc1c-' . $locale . '.mo');
