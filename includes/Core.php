@@ -430,16 +430,18 @@ final class Core
 
 		try
 		{
-			$api = new $use_class_name();
+			$receiver = new $use_class_name();
 		}
 		catch(Exception $e)
 		{
 			throw new Exception('Receiver is not loaded.');
 		}
 
+		$receiver->register();
+
 		try
 		{
-			$this->setReceiver($api);
+			$this->setReceiver($receiver);
 		}
 		catch(Exception $e)
 		{
