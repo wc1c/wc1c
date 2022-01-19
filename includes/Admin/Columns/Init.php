@@ -1,17 +1,7 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Admin\Columns;
+<?php namespace Wc1c\Admin\Columns;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use Wc1c\Admin\Columns\WooCommerce\Categories;
 use Wc1c\Admin\Columns\WooCommerce\Orders;
 use Wc1c\Admin\Columns\WooCommerce\Products;
@@ -31,17 +21,17 @@ final class Init
 	 */
 	public function __construct()
 	{
-		if('yes' === wc1c()->settings()->get('admin_interface_products_column', 'yes'))
+		if('yes' === wc1c()->settings('interface')->get('admin_interface_products_column', 'yes'))
 		{
 			Products::instance();
 		}
 
-		if('yes' === wc1c()->settings()->get('admin_interface_orders_column', 'yes'))
+		if('yes' === wc1c()->settings('interface')->get('admin_interface_orders_column', 'yes'))
 		{
 			Orders::instance();
 		}
 
-		if('yes' === wc1c()->settings()->get('admin_interface_categories_column', 'yes'))
+		if('yes' === wc1c()->settings('interface')->get('admin_interface_categories_column', 'yes'))
 		{
 			Categories::instance();
 		}

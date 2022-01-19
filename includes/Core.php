@@ -2,6 +2,8 @@
 
 defined('ABSPATH') || exit;
 
+use Wc1c\Settings\InterfaceSettings;
+use Wc1c\Settings\LogsSettings;
 use wpdb;
 use Wc1c\Log\Formatter;
 use Wc1c\Log\Handler;
@@ -274,27 +276,27 @@ final class Core
 			switch($channel)
 			{
 				case 'receiver':
-					$level = $this->settings()->get('logger_receiver_level', 'logger_level');
+					$level = $this->settings('logs')->get('logger_receiver_level', 'logger_level');
 					break;
 				case 'tools':
 					$path = $this->environment()->get('wc1c_tools_logs_directory') . '/' . $name . '.log';
-					$level = $this->settings()->get('logger_tools_level', 'logger_level');
+					$level = $this->settings('logs')->get('logger_tools_level', 'logger_level');
 					break;
 				case 'schemas':
 					$path = $this->environment()->get('wc1c_schemas_logs_directory') . '/' . $name . '.log';
-					$level = $this->settings()->get('logger_schemas_level', 'logger_level');
+					$level = $this->settings('logs')->get('logger_schemas_level', 'logger_level');
 					break;
 				case 'configurations':
 					$path = $name . '.log';
-					$level = $this->settings()->get('logger_configurations_level', 'logger_level');
+					$level = $this->settings('logs')->get('logger_configurations_level', 'logger_level');
 					break;
 				default:
-					$level = $this->settings()->get('logger_level', 300);
+					$level = $this->settings('logs')->get('logger_level', 300);
 			}
 
 			if('logger_level' === $level)
 			{
-				$level = $this->settings()->get('logger_level', 300);
+				$level = $this->settings('logs')->get('logger_level', 300);
 			}
 
 			if('' === $path)
@@ -330,11 +332,19 @@ final class Core
 	{
 		if(!isset($this->settings[$context]))
 		{
-			$class = MainSettings::class;
-
-			if($context === 'connection')
+			switch($context)
 			{
-				$class = ConnectionSettings::class;
+				case 'connection':
+					$class = ConnectionSettings::class;
+					break;
+				case 'logs':
+					$class = LogsSettings::class;
+					break;
+				case 'interface':
+					$class = InterfaceSettings::class;
+					break;
+				default:
+					$class = MainSettings::class;
 			}
 
 			try
@@ -344,6 +354,7 @@ final class Core
 			}
 			catch(Exception $e)
 			{
+				wc1c()->log()->error($e->getMessage(), ['exception' => $e->getMessage()]);
 				throw new RuntimeException($e->getMessage());
 			}
 

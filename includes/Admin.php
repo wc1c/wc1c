@@ -38,7 +38,7 @@ final class Admin
 
 		$this->notices();
 
-		if('yes' === wc1c()->settings()->get('admin_interface', 'yes'))
+		if('yes' === wc1c()->settings('interface')->get('admin_interface', 'yes'))
 		{
 			Admin\Columns\Init::instance();
 		}

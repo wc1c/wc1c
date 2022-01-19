@@ -1,20 +1,11 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Admin;
+<?php namespace Wc1c\Admin;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use Wc1c\Admin\Settings\ConnectionForm;
+use Wc1c\Admin\Settings\LogsForm;
 use Wc1c\Admin\Settings\MainForm;
-use Wc1c\Admin\Settings\OtherForm;
+use Wc1c\Admin\Settings\InterfaceForm;
 use Wc1c\Traits\SectionsTrait;
 use Wc1c\Traits\SingletonTrait;
 
@@ -58,18 +49,25 @@ class Settings
 			'callback' => [MainForm::class, 'instance']
 		];
 
+		$default_sections['logs'] =
+		[
+			'title' => __('Event logs', 'wc1c'),
+			'visible' => true,
+			'callback' => [LogsForm::class, 'instance']
+		];
+
+		$default_sections['interface'] =
+		[
+			'title' => __('Interface', 'wc1c'),
+			'visible' => true,
+			'callback' => [InterfaceForm::class, 'instance']
+		];
+
 		$default_sections['connection'] =
 		[
 			'title' => __('Connection to the WC1C', 'wc1c'),
 			'visible' => true,
 			'callback' => [ConnectionForm::class, 'instance']
-		];
-
-		$default_sections['other'] =
-		[
-			'title' => __('Other', 'wc1c'),
-			'visible' => true,
-			'callback' => [OtherForm::class, 'instance']
 		];
 
 		$this->initSections($default_sections);
