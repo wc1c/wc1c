@@ -36,7 +36,7 @@ final class Receiver
 	{
 		$wc1c_receiver = wc1c()->getVar($_GET['wc1c-receiver'], false);
 
-		wc1c()->log('receiver')->info(__('Receiver request start.', 'wc1c'));
+		wc1c()->log('receiver')->info(__('Received new request for Receiver.', 'wc1c'));
 		wc1c()->log('receiver')->debug(__('Receiver request params.', 'wc1c'), ['GET' => $_GET, 'POST' => $_POST, 'SERVER' => $_SERVER]);
 
 		if(false !== $wc1c_receiver)
