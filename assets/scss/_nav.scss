@@ -1,0 +1,15 @@
+.nav
+{
+  &.nav-tabs
+  {
+    border-bottom: 0;
+
+    .nav-item
+    {
+      .nav-link
+      {
+        padding: 0.5rem 0.7rem;
+      }
+    }
+  }
+}
