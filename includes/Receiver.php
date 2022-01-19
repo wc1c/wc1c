@@ -55,16 +55,16 @@ final class Receiver
 			}
 			catch(Exception $e)
 			{
-				wc1c()->log('receiver')->warning(__('Input unavailable', 'wc1c'), ['exception' => $e]);
-				die(__('Receiver is unavailable.', 'wc1c'));
+				wc1c()->log('receiver')->warning(__('Selected configuration for Receiver is unavailable.', 'wc1c'), ['exception' => $e]);
+				die(__('Configuration for Receiver is unavailable.', 'wc1c'));
 			}
 
 			wc1c()->environment()->set('current_configuration_id', $wc1c_receiver);
 
 			if($configuration->getStatus() !== 'active' && $configuration->getStatus() !==  'processing')
 			{
-				wc1c()->log('receiver')->warning(__('Configuration offline.', 'wc1c'));
-				die(__('Configuration offline.', 'wc1c'));
+				wc1c()->log('receiver')->warning(__('Selected configuration is offline.', 'wc1c'));
+				die(__('Selected configuration is offline.', 'wc1c'));
 			}
 
 			try
@@ -74,8 +74,8 @@ final class Receiver
 			}
 			catch(Exception $e)
 			{
-				wc1c()->log('receiver')->error('Configuration save error.', ['exception' => $e]);
-				die(__('Configuration offline.', 'wc1c'));
+				wc1c()->log('receiver')->error('Error saving configuration.', ['exception' => $e]);
+				die(__('Error saving configuration.', 'wc1c'));
 			}
 
 			try
@@ -84,8 +84,8 @@ final class Receiver
 			}
 			catch(Exception $e)
 			{
-				wc1c()->log('receiver')->error('Schema is not initialized.', ['exception' => $e]);
-				die(__('Schema offline.', 'wc1c'));
+				wc1c()->log('receiver')->error('Schema for configuration is not initialized.', ['exception' => $e]);
+				die(__('Schema for configuration is not initialized.', 'wc1c'));
 			}
 
 			$action = false;
@@ -98,6 +98,7 @@ final class Receiver
 				ob_start();
 				nocache_headers();
 
+				wc1c()->log('receiver')->info(__('The request was successfully submitted for processing in the schema for the selected configuration.', 'wc1c'), ['action' => $wc1c_receiver_action]);
 				do_action($wc1c_receiver_action);
 
 				ob_end_clean();
@@ -105,7 +106,7 @@ final class Receiver
 
 			if(false === $action)
 			{
-				wc1c()->log('receiver')->warning(__('Receiver request is very bad! Action not found.', 'wc1c'), ['action' => $wc1c_receiver_action]);
+				wc1c()->log('receiver')->warning(__('Receiver request is very bad! Action not found in selected configuration.', 'wc1c'), ['action' => $wc1c_receiver_action]);
 				die(__('Receiver request is very bad! Action not found.', 'wc1c'));
 			}
 			die();
