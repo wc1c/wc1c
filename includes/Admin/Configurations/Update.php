@@ -72,6 +72,20 @@ class Update
 	}
 
 	/**
+	 * @param $text
+	 *
+	 * @return string
+	 */
+	public function outputSchemaErrorText($text)
+	{
+		$new_text = __('The exchange scheme on the basis of which created configuration is unavailable .', 'wc1c');
+
+		$new_text .= '<br />' . __('Install the missing schema to work this configuration, change the status and name, or delete the configuration.', 'wc1c');
+
+		return $new_text;
+	}
+
+	/**
 	 *  Routing
 	 */
 	public function route()
