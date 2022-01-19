@@ -16,14 +16,17 @@ final class Receiver
 	 */
 	public function __construct()
 	{
-		// hook
-		do_action(WC1C_PREFIX . 'receiver_before_loading');
+		do_action(WC1C_PREFIX . 'receiver_loaded');
+	}
 
-		// run
+	/**
+	 * Receiver register.
+	 *
+	 * @return void
+	 */
+	public function register()
+	{
 		add_filter('parse_request', [$this, 'handleRequests']);
-
-		// hook
-		do_action(WC1C_PREFIX . 'receiver_after_loading');
 	}
 
 	/**
