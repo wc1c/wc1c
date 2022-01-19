@@ -9092,7 +9092,17 @@ textarea.form-control-lg {
   border-bottom: 0;
 }
 .nav.nav-tabs .nav-item .nav-link {
+  background: #f7f7f7;
+  border: 1px solid #f7f7f7;
   padding: 0.5rem 0.7rem;
+  border-bottom: 0;
+  margin-bottom: 0;
+}
+.nav.nav-tabs .nav-item .nav-link.active {
+  background: #ffffff;
+  font-weight: 600;
+  border-color: #dee2e6 #dee2e6 #fff;
+  border-bottom: 0;
 }
 
 /**
