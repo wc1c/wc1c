@@ -43,18 +43,34 @@ class LogsForm extends Form
 			'description' => __('All events of the selected level will be recorded in the log file. The higher the level, the less data is recorded.', 'wc1c'),
 			'default' => '300',
 			'options' =>
-			[
-				'100' => __('DEBUG (100)', 'wc1c'),
-				'200' => __('INFO (200)', 'wc1c'),
-				'250' => __('NOTICE (250)', 'wc1c'),
-				'300' => __('WARNING (300)', 'wc1c'),
-				'400' => __('ERROR (400)', 'wc1c'),
-			],
+				[
+					'100' => __('DEBUG (100)', 'wc1c'),
+					'200' => __('INFO (200)', 'wc1c'),
+					'250' => __('NOTICE (250)', 'wc1c'),
+					'300' => __('WARNING (300)', 'wc1c'),
+					'400' => __('ERROR (400)', 'wc1c'),
+				],
+		];
+
+		$fields['logger_wc1c'] =
+		[
+			'title' => __('Access to technical events', 'wc1c'),
+			'type' => 'checkbox',
+			'label' => __('Allow the WC1C team to access technical events?', 'wc1c'),
+			'description' => __('If allowed, the WC1C team will be able to access technical events and release the necessary updates based on them.', 'wc1c'),
+			'default' => 'no'
+		];
+
+		$fields['interface_title'] =
+		[
+			'title' => __('Levels by context', 'wc1c'),
+			'type' => 'title',
+			'description' => __('Event log settings based on context.', 'wc1c'),
 		];
 
 		$fields['logger_receiver_level'] =
 		[
-			'title' => __('Level for receiver', 'wc1c'),
+			'title' => __('Receiver', 'wc1c'),
 			'type' => 'select',
 			'description' => __('All events of the selected level will be recorded the Receiver events in the log file. The higher the level, the less data is recorded.', 'wc1c'),
 			'default' => 'logger_level',
@@ -71,7 +87,7 @@ class LogsForm extends Form
 
 		$fields['logger_tools_level'] =
 		[
-			'title' => __('Level for tools', 'wc1c'),
+			'title' => __('Tools', 'wc1c'),
 			'type' => 'select',
 			'description' => __('All events of the selected level will be recorded the tools events in the log file. The higher the level, the less data is recorded.', 'wc1c'),
 			'default' => 'logger_level',
@@ -88,7 +104,7 @@ class LogsForm extends Form
 
 		$fields['logger_schemas_level'] =
 		[
-			'title' => __('Level for schemas', 'wc1c'),
+			'title' => __('Schemas', 'wc1c'),
 			'type' => 'select',
 			'description' => __('All events of the selected level will be recorded the schemas events in the log file. The higher the level, the less data is recorded.', 'wc1c'),
 			'default' => 'logger_level',
@@ -105,7 +121,7 @@ class LogsForm extends Form
 
 		$fields['logger_configurations_level'] =
 		[
-			'title' => __('Level for configurations', 'wc1c'),
+			'title' => __('Configurations', 'wc1c'),
 			'type' => 'select',
 			'description' => __('All events of the selected level will be recorded the configurations events in the log file. The higher the level, the less data is recorded.', 'wc1c'),
 			'default' => 'logger_level',
@@ -118,15 +134,6 @@ class LogsForm extends Form
 				'300' => __('WARNING (300)', 'wc1c'),
 				'400' => __('ERROR (400)', 'wc1c'),
 			],
-		];
-
-		$fields['logger_wc1c'] =
-		[
-			'title' => __('Access to technical events', 'wc1c'),
-			'type' => 'checkbox',
-			'label' => __('Allow the WC1C team to access technical events?', 'wc1c'),
-			'description' => __('If allowed, the WC1C team will be able to access technical events and release the necessary updates based on them.', 'wc1c'),
-			'default' => 'no'
 		];
 
 		return $fields;
