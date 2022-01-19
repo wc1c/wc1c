@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WC1C > integration of WooCommerce with 1C products "
 "(different configurations)\n"
-"POT-Creation-Date: 2022-01-19 13:35+0300\n"
-"PO-Revision-Date: 2022-01-19 13:41+0300\n"
+"POT-Creation-Date: 2022-01-19 18:31+0300\n"
+"PO-Revision-Date: 2022-01-19 18:36+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
 "Language: ru_RU\n"
@@ -23,11 +23,11 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: includes/Abstracts/FormAbstract.php:756
+#: includes/Abstracts/FormAbstract.php:739
 msgid "Select all"
 msgstr "Выбрать все"
 
-#: includes/Abstracts/FormAbstract.php:756
+#: includes/Abstracts/FormAbstract.php:739
 msgid "Select none"
 msgstr "Выбрать ничего"
 
@@ -135,7 +135,7 @@ msgid "not found"
 msgstr "не найдена"
 
 #: includes/Admin/Columns/WooCommerce/Products.php:70
-#: includes/Admin/Configurations/Update.php:160
+#: includes/Admin/Configurations/Update.php:217
 msgid "Schema ID: "
 msgstr "Схема (ID): "
 
@@ -199,12 +199,11 @@ msgid "Connection to the WC1C"
 msgstr "Подключение к WC1C"
 
 #: includes/Admin/Configurations/CreateForm.php:42
-#: includes/Admin/Configurations/UpdateForm.php:42
+#: includes/Admin/Configurations/Update.php:74
 msgid "Configuration name"
 msgstr "Название конфигурации"
 
 #: includes/Admin/Configurations/CreateForm.php:44
-#: includes/Admin/Configurations/UpdateForm.php:44
 msgid ""
 "Name of the configuration for easy use. You can enter any data up to 255 "
 "characters."
@@ -213,7 +212,7 @@ msgstr ""
 "длиной до 255 символов."
 
 #: includes/Admin/Configurations/CreateForm.php:45
-#: includes/Admin/Configurations/UpdateForm.php:45
+#: includes/Admin/Configurations/Update.php:76
 msgid "Used for convenient distribution of multiple configurations."
 msgstr "Используется для удобного распределения нескольких конфигураций."
 
@@ -300,51 +299,65 @@ msgstr "Ошибка при удалении. Пожалуйста повтор�
 msgid "Delete error. Confirmation of final deletion is required."
 msgstr "Ошибка удаления. Требуется подтверждение окончательного удаления."
 
-#: includes/Admin/Configurations/Update.php:93
+#: includes/Admin/Configurations/Update.php:79
+msgid "Rename"
+msgstr "Переименовать"
+
+#: includes/Admin/Configurations/Update.php:110
+msgid "Configuration name update success."
+msgstr "Название конфигурации успешно обновлено."
+
+#: includes/Admin/Configurations/Update.php:120
+msgid "Configuration name update error. Please retry saving or change fields."
+msgstr ""
+"Ошибка обновления названия конфигурации. Повторите попытку сохранения или "
+"изменения полей."
+
+#: includes/Admin/Configurations/Update.php:147
 msgid "Configuration update success."
 msgstr "Конфигурация успешно обновлена."
 
-#: includes/Admin/Configurations/Update.php:103
+#: includes/Admin/Configurations/Update.php:157
 msgid "Configuration update error. Please retry saving or change fields."
 msgstr ""
 "Ошибка обновления конфигурации. Повторите попытку сохранения или изменения "
 "полей."
 
-#: includes/Admin/Configurations/Update.php:151
+#: includes/Admin/Configurations/Update.php:208
 msgid "About configuration"
 msgstr "О конфигурации"
 
-#: includes/Admin/Configurations/Update.php:157
+#: includes/Admin/Configurations/Update.php:214
 msgid "ID: "
 msgstr "ИД: "
 
-#: includes/Admin/Configurations/Update.php:163
+#: includes/Admin/Configurations/Update.php:220
 msgid "Date create: "
 msgstr "Дата создания: "
 
-#: includes/Admin/Configurations/Update.php:166
+#: includes/Admin/Configurations/Update.php:223
 msgid "Date modify: "
 msgstr "Дата изменения: "
 
-#: includes/Admin/Configurations/Update.php:169
+#: includes/Admin/Configurations/Update.php:226
 msgid "Date active: "
 msgstr "Последняя активность: "
 
-#: includes/Admin/Configurations/Update.php:172
+#: includes/Admin/Configurations/Update.php:229
 msgid "Upload directory: "
 msgstr "Каталог загрузки: "
 
-#: includes/Admin/Configurations/Update.php:186
+#: includes/Admin/Configurations/Update.php:243
 msgid "About schema"
 msgstr "О схеме"
 
-#: includes/Admin/Configurations/Update.php:211
+#: includes/Admin/Configurations/Update.php:268
 msgid ""
 "The exchange scheme on the basis of which created configuration is "
 "unavailable ."
 msgstr "Схема обмена на основании которой создана конфигурация, недоступна."
 
-#: includes/Admin/Configurations/Update.php:213
+#: includes/Admin/Configurations/Update.php:270
 msgid ""
 "Install the missing schema to work this configuration, change the status and "
 "name, or delete the configuration."
@@ -352,19 +365,20 @@ msgstr ""
 "Установите отсутствующую схему для работы с этой конфигурацией, измените "
 "статус и имя или удалите конфигурацию."
 
-#: includes/Admin/Configurations/UpdateForm.php:58
+#: includes/Admin/Configurations/UpdateForm.php:48
 msgid "Configuration status"
 msgstr "Состояние"
 
-#: includes/Admin/Configurations/UpdateForm.php:60
+#: includes/Admin/Configurations/UpdateForm.php:50
 msgid "Current configuration status."
 msgstr "Текущее состояние конфигурации."
 
-#: includes/Admin/Configurations/UpdateForm.php:101
+#: includes/Admin/Configurations/UpdateForm.php:91
+#: includes/Admin/InlineForm.php:59
 msgid "Update error. Please retry."
 msgstr "Ошибка при обновлении. Пожалуйста повторите."
 
-#: includes/Admin/Configurations/UpdateForm.php:147
+#: includes/Admin/Configurations/UpdateForm.php:137
 msgid "Fast navigation"
 msgstr "Быстрая навигация"
 
