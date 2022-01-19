@@ -111,7 +111,7 @@ class Update
 			'type' => 'text',
 			'description' => __('Used for convenient distribution of multiple configurations.', 'wc1c'),
 			'default' => '',
-			'class' => 'form-control',
+			'class' => 'form-control form-control-sm',
 			'button' => __('Rename', 'wc1c'),
 		];
 
