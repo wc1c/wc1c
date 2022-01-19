@@ -44,6 +44,13 @@ class InterfaceForm extends Form
 			'default' => 'yes'
 		];
 
+		$fields['interface_title'] =
+		[
+			'title' => __('WooCommerce', 'wc1c'),
+			'type' => 'title',
+			'description' => __('Some interface settings for the WooCommerce.', 'wc1c'),
+		];
+
 		$fields['admin_interface_products_column'] =
 		[
 			'title' => __('Column in products list', 'wc1c'),
