@@ -1,25 +1,16 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Abstracts;
+<?php namespace Wc1c\Abstracts;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
 /**
- * Class FormAbstract
+ * FormAbstract
  *
  * @package Wc1c\Abstracts
  */
 abstract class FormAbstract
 {
 	/**
-	 * Form id
-	 *
-	 * @var string
+	 * @var string Form id
 	 */
 	protected $id = '';
 
@@ -29,30 +20,22 @@ abstract class FormAbstract
 	public $title_numeric = false;
 
 	/**
-	 * Form validation messages
-	 *
-	 * @var array of strings
+	 * @var array Form validation messages
 	 */
 	protected $messages = [];
 
 	/**
-	 * Form fields
-	 *
-	 * @var array
+	 * @var array Form fields
 	 */
 	protected $fields = [];
 
 	/**
-	 * The posted data
-	 *
-	 * @var array
+	 * @var array The posted data
 	 */
 	protected $posted_data = [];
 
 	/**
-	 * Saved form data
-	 *
-	 * @var array
+	 * @var array Saved form data
 	 */
 	protected $saved_data = [];
 
@@ -217,7 +200,7 @@ abstract class FormAbstract
 	 * @param array $form_fields (default: array()) Array of form fields
 	 * @param bool $echo - echo or return
 	 *
-	 * @return string the html for the form
+	 * @return string|void The html for the form
 	 */
 	public function generate_html($form_fields = [], $echo = true)
 	{
@@ -921,7 +904,7 @@ abstract class FormAbstract
 	 * Validate multiselect field
 	 *
 	 * @param string $key - field key
-	 * @param string $value - posted Value
+	 * @param string|array $value - posted Value
 	 *
 	 * @return string|array
 	 */
@@ -931,7 +914,7 @@ abstract class FormAbstract
 	}
 
 	/**
-	 * Add an message for display in admin on save
+	 * Add a message for display in admin on save
 	 *
 	 * @param $type
 	 * @param $message - message
