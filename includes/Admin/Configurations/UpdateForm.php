@@ -37,16 +37,6 @@ class UpdateForm extends FormAbstract
 	 */
 	public function init_fields_main($fields)
 	{
-		$fields['name'] =
-		[
-			'title' => __('Configuration name', 'wc1c'),
-			'type' => 'text',
-			'label' => __('Name of the configuration for easy use. You can enter any data up to 255 characters.', 'wc1c'),
-			'description' => __('Used for convenient distribution of multiple configurations.', 'wc1c'),
-			'default' => '',
-			'css' => 'min-width: 200px;width:100%;',
-		];
-
 		$options =
 		[
 			'active' => $this->utilityConfigurationsGetStatusesLabel('active'),

@@ -2,10 +2,11 @@
 
 defined('ABSPATH') || exit;
 
+use Wc1c\Admin\InlineForm;
 use Wc1c\Admin\Traits\ProcessConfigurationTrait;
 use Wc1c\Exceptions\Exception;
-use Wc1c\Exceptions\RuntimeException;
 use Wc1c\Traits\DatetimeUtilityTrait;
+use Wc1c\Traits\SectionsTrait;
 use Wc1c\Traits\SingletonTrait;
 use Wc1c\Traits\UtilityTrait;
 
@@ -20,12 +21,27 @@ class Update
 	use ProcessConfigurationTrait;
 	use DatetimeUtilityTrait;
 	use UtilityTrait;
+	use SectionsTrait;
 
 	/**
 	 * Update constructor.
 	 */
 	public function __construct()
 	{
+		$this->setSectionKey('update_section');
+
+		$default_sections['main'] =
+		[
+			'title' => __('Main settings', 'wc1c'),
+			'visible' => true,
+			'callback' => [MainUpdate::class, 'instance']
+		];
+
+		$default_sections = apply_filters(WC1C_ADMIN_PREFIX . 'configurations_update_sections', $default_sections);
+
+		$this->initSections($default_sections);
+		$this->setCurrentSection('main');
+
 		$configuration_id = wc1c()->getVar($_GET['configuration_id'], 0);
 
 		if(false === $this->setConfiguration($configuration_id))
@@ -38,8 +54,7 @@ class Update
 			{
 				add_action(WC1C_ADMIN_PREFIX . 'configurations_update_show', [$this, 'outputSchemaError'], 10);
 				add_filter(WC1C_ADMIN_PREFIX . 'configurations_update_schema_error_text', [$this, 'outputSchemaErrorText'], 10, 1);
-
-				wc1c()->log()->notice('Schema is not initialize', ['exception' => $e]);
+				wc1c()->log()->notice('Schema is not initialized.', ['exception' => $e]);
 			}
 
 			$this->process();
@@ -47,12 +62,40 @@ class Update
 		else
 		{
 			add_action(WC1C_ADMIN_PREFIX . 'show', [$this, 'outputError'], 10);
-
-			wc1c()->log()->notice('Configuration update is not available', ['configuration_id' => $configuration_id]);
+			wc1c()->log()->notice('Configuration update is not available.', ['configuration_id' => $configuration_id]);
 			return;
 		}
 
+		$this->route();
+
 		add_action(WC1C_ADMIN_PREFIX . 'show', [$this, 'output'], 10);
+	}
+
+	/**
+	 *  Routing
+	 */
+	public function route()
+	{
+		$sections = $this->getSections();
+		$current_section = $this->initCurrentSection();
+
+		if(!array_key_exists($current_section, $sections) || !isset($sections[$current_section]['callback']))
+		{
+			add_action(WC1C_ADMIN_PREFIX . 'configurations_update_show', [$this, 'wrapError']);
+		}
+		else
+		{
+			add_action(WC1C_ADMIN_PREFIX . 'before_configurations_update_show', [$this, 'wrapSections'], 5);
+
+			$callback = $sections[$current_section]['callback'];
+
+			if(is_callable($callback, false, $callback_name))
+			{
+				$callback_obj = $callback_name();
+				$callback_obj->setConfiguration($this->getConfiguration());
+				$callback_obj->process();
+			}
+		}
 	}
 
 	/**
@@ -61,53 +104,69 @@ class Update
 	public function process()
 	{
 		$configuration = $this->getConfiguration();
-		$form = new UpdateForm();
 
-		$form_data = $configuration->getOptions();
-		$form_data['name'] = $configuration->getName();
-		$form_data['status'] = $configuration->getStatus();
+		$fields['name'] =
+		[
+			'title' => __('Configuration name', 'wc1c'),
+			'type' => 'text',
+			'description' => __('Used for convenient distribution of multiple configurations.', 'wc1c'),
+			'default' => '',
+			'class' => 'form-control',
+			'button' => __('Rename', 'wc1c'),
+		];
 
-		$form->load_saved_data($form_data);
+		$inline_args =
+		[
+			'id' => 'configurations-name',
+			'fields' => $fields
+		];
 
-		$data = $form->save();
+		$inline_form = new InlineForm($inline_args);
+		$inline_form->load_saved_data(['name' => $configuration->getName()]);
 
-		if($data)
+		if(isset($_GET['form']) && $_GET['form'] === $inline_form->get_id())
 		{
-			$configuration->setStatus($data['status']);
-			unset($data['status']);
+			$configuration_name = $inline_form->save();
 
-			$configuration->setName($data['name']);
-			unset($data['name']);
-
-			$configuration->setDateModify(time());
-			$configuration->setOptions($data);
-
-			$saved = $configuration->save();
-
-			if($saved)
+			if(isset($configuration_name['name']))
 			{
-				wc1c()->admin()->notices()->create
-				(
-					[
-						'type' => 'update',
-						'data' => __('Configuration update success.', 'wc1c')
-					]
-				);
-			}
-			else
-			{
-				wc1c()->admin()->notices()->create
-				(
-					[
-						'type' => 'error',
-						'data' => __('Configuration update error. Please retry saving or change fields.', 'wc1c')
-					]
-				);
+				$configuration->setDateModify(time());
+				$configuration->setName($configuration_name['name']);
+
+				$saved = $configuration->save();
+
+				if($saved)
+				{
+					wc1c()->admin()->notices()->create
+					(
+						[
+							'type' => 'update',
+							'data' => __('Configuration name update success.', 'wc1c')
+						]
+					);
+				}
+				else
+				{
+					wc1c()->admin()->notices()->create
+					(
+						[
+							'type' => 'error',
+							'data' => __('Configuration name update error. Please retry saving or change fields.', 'wc1c')
+						]
+					);
+				}
 			}
 		}
 
-		add_action(WC1C_ADMIN_PREFIX . 'configurations_update_sidebar_show', [$this, 'outputSidebar'], 10);
-		add_action(WC1C_ADMIN_PREFIX . 'configurations_update_show', [$form, 'outputForm'], 10);
+		add_action(WC1C_ADMIN_PREFIX . 'configurations_update_header_show', [$inline_form, 'outputForm'], 10);
+	}
+
+	/**
+	 * Error
+	 */
+	public function wrapError()
+	{
+		wc1c()->templates()->getTemplate('error.php');
 	}
 
 	/**
@@ -129,6 +188,18 @@ class Update
 	}
 
 	/**
+	 * Sections
+	 *
+	 * @return void
+	 */
+	public function wrapSections()
+	{
+		$args['object'] = $this;
+
+		wc1c()->templates()->getTemplate('configurations/update_sections.php', $args);
+	}
+
+	/**
 	 * Output
 	 *
 	 * @return void
@@ -138,80 +209,5 @@ class Update
 		$args['back_url'] = $this->utilityAdminConfigurationsGetUrl('all');
 
 		wc1c()->templates()->getTemplate('configurations/update.php', $args);
-	}
-
-	/**
-	 * Sidebar show
-	 */
-	public function outputSidebar()
-	{
-		$configuration = $this->getConfiguration();
-
-		$args = [
-			'header' => '<h3 class="p-0 m-0">' . __('About configuration', 'wc1c') . '</h3>',
-			'object' => $this
-		];
-
-		$body = '<ul class="list-group m-0 list-group-flush">';
-		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('ID: ', 'wc1c') . $configuration->getId();
-		$body .= '</li>';
-		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Schema ID: ', 'wc1c') . $configuration->getSchema();
-		$body .= '</li>';
-		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Date create: ', 'wc1c') . $this->utilityPrettyDate($configuration->getDateCreate());
-		$body .= '</li>';
-		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Date modify: ', 'wc1c') . $this->utilityPrettyDate($configuration->getDateModify());
-		$body .= '</li>';
-		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Date active: ', 'wc1c') . $this->utilityPrettyDate($configuration->getDateActivity());
-		$body .= '</li>';
-		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Upload directory: ', 'wc1c') . '<div class="p-1 mt-1 bg-light">' . $configuration->getUploadDirectory() . '</div>';
-		$body .= '</li>';
-
-		$body .= '</ul>';
-
-		$args['body'] = $body;
-
-		wc1c()->templates()->getTemplate('configurations/update_sidebar_item.php', $args);
-
-		try
-		{
-			$schema = wc1c()->schemas()->get($configuration->getSchema());
-
-			$args = [
-				'header' => '<h3 class="p-0 m-0">' . __('About schema', 'wc1c') . '</h3>',
-				'object' => $this
-			];
-
-			$body = '<ul class="list-group m-0 list-group-flush">';
-			$body .= '<li class="list-group-item p-2 m-0">';
-			$body .= $schema->getDescription();
-			$body .= '</li>';
-
-			$body .= '</ul>';
-
-			$args['body'] = $body;
-
-			wc1c()->templates()->getTemplate('configurations/update_sidebar_item.php', $args);
-		}
-		catch(RuntimeException $e){}
-	}
-
-	/**
-	 * @param $text
-	 *
-	 * @return string
-	 */
-	public function outputSchemaErrorText($text)
-	{
-		$new_text = __('The exchange scheme on the basis of which created configuration is unavailable .', 'wc1c');
-
-		$new_text .= '<br />' . __('Install the missing schema to work this configuration, change the status and name, or delete the configuration.', 'wc1c');
-
-		return $new_text;
 	}
 }

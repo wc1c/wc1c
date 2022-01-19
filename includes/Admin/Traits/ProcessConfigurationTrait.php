@@ -34,6 +34,13 @@ trait ProcessConfigurationTrait
 	 */
 	public function setConfiguration($configuration_id)
 	{
+		if($configuration_id instanceof Configuration)
+		{
+			$this->configuration = $configuration_id;
+
+			return false;
+		}
+
 		$error = false;
 
 		try

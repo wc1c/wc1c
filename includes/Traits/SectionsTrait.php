@@ -10,6 +10,11 @@ defined('ABSPATH') || exit;
 trait SectionsTrait
 {
 	/**
+	 * @var string
+	 */
+	private $section_key = 'section';
+
+	/**
 	 * @var array Sections
 	 */
 	private $sections = [];
@@ -48,7 +53,7 @@ trait SectionsTrait
 	 */
 	public function initCurrentSection()
 	{
-		$current_section = !empty($_GET['section']) ? sanitize_title($_GET['section']) : '';
+		$current_section = !empty($_GET[$this->getSectionKey()]) ? sanitize_title($_GET[$this->getSectionKey()]) : '';
 
 		if($current_section !== '')
 		{
@@ -98,5 +103,21 @@ trait SectionsTrait
 		$sections = apply_filters(WC1C_ADMIN_PREFIX . 'set_sections', $sections);
 
 		$this->sections = $sections;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getSectionKey()
+	{
+		return $this->section_key;
+	}
+
+	/**
+	 * @param string $section_key
+	 */
+	public function setSectionKey($section_key)
+	{
+		$this->section_key = $section_key;
 	}
 }
