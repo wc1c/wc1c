@@ -29,7 +29,7 @@ final class Loader
 	{
 		spl_autoload_register([$this, 'loadClass']);
 
-		$this->addNamespace('Wc1c', WC1C_PLUGIN_PATH . '/includes');
+		$this->addNamespace('Wc1c', WC1C_PLUGIN_PATH . '/src');
 		$this->addNamespace('Digiom\WordPress\Notices', WC1C_PLUGIN_PATH . '/vendor/digiom/notices-wp/src');
 		$this->addNamespace('Digiom\Wap', WC1C_PLUGIN_PATH . '/vendor/digiom/wap/src');
 		$this->addNamespace('Digiom\Psr7wp', WC1C_PLUGIN_PATH . '/vendor/digiom/psr7wp/src');
