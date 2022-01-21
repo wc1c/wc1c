@@ -4,7 +4,7 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: WC1C > integration of WooCommerce with 1C products "
 "(different configurations)\n"
-"POT-Creation-Date: 2022-01-14 09:44+0300\n"
+"POT-Creation-Date: 2022-01-19 18:31+0300\n"
 "PO-Revision-Date: 2019-03-19 20:30+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
@@ -22,11 +22,11 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: includes/Abstracts/FormAbstract.php:756
+#: includes/Abstracts/FormAbstract.php:739
 msgid "Select all"
 msgstr ""
 
-#: includes/Abstracts/FormAbstract.php:756
+#: includes/Abstracts/FormAbstract.php:739
 msgid "Select none"
 msgstr ""
 
@@ -101,23 +101,24 @@ msgstr ""
 msgid "Select All"
 msgstr ""
 
-#: includes/Admin.php:94 includes/Admin.php:95 templates/header.php:3
+#: includes/Admin.php:95 includes/Admin.php:96 templates/header.php:3
 msgid "Integration with 1C"
 msgstr ""
 
-#: includes/Admin.php:112 includes/Admin/Settings/MainForm.php:45
+#: includes/Admin.php:113 includes/Admin/Settings/LogsForm.php:124
+#: includes/Admin/Settings/MainForm.php:43
 msgid "Configurations"
 msgstr ""
 
-#: includes/Admin.php:119
+#: includes/Admin.php:120 includes/Admin/Settings/LogsForm.php:90
 msgid "Tools"
 msgstr ""
 
-#: includes/Admin.php:126 includes/Admin.php:220
+#: includes/Admin.php:127 includes/Admin.php:230
 msgid "Settings"
 msgstr ""
 
-#: includes/Admin.php:133 templates/helps/features.php:36
+#: includes/Admin.php:134 templates/helps/features.php:36
 msgid "Extensions"
 msgstr ""
 
@@ -132,7 +133,7 @@ msgid "not found"
 msgstr ""
 
 #: includes/Admin/Columns/WooCommerce/Products.php:70
-#: includes/Admin/Configurations/Update.php:160
+#: includes/Admin/Configurations/Update.php:217
 msgid "Schema ID: "
 msgstr ""
 
@@ -190,24 +191,23 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-#: includes/Admin/Configurations/AllTable.php:436 includes/Admin/Settings.php:63
+#: includes/Admin/Configurations/AllTable.php:436 includes/Admin/Settings.php:68
 msgid "Connection to the WC1C"
 msgstr ""
 
 #: includes/Admin/Configurations/CreateForm.php:42
-#: includes/Admin/Configurations/UpdateForm.php:42
+#: includes/Admin/Configurations/Update.php:74
 msgid "Configuration name"
 msgstr ""
 
 #: includes/Admin/Configurations/CreateForm.php:44
-#: includes/Admin/Configurations/UpdateForm.php:44
 msgid ""
 "Name of the configuration for easy use. You can enter any data up to 255 "
 "characters."
 msgstr ""
 
 #: includes/Admin/Configurations/CreateForm.php:45
-#: includes/Admin/Configurations/UpdateForm.php:45
+#: includes/Admin/Configurations/Update.php:76
 msgid "Used for convenient distribution of multiple configurations."
 msgstr ""
 
@@ -287,66 +287,79 @@ msgstr ""
 msgid "Delete error. Confirmation of final deletion is required."
 msgstr ""
 
-#: includes/Admin/Configurations/Update.php:93
+#: includes/Admin/Configurations/Update.php:79
+msgid "Rename"
+msgstr ""
+
+#: includes/Admin/Configurations/Update.php:110
+msgid "Configuration name update success."
+msgstr ""
+
+#: includes/Admin/Configurations/Update.php:120
+msgid "Configuration name update error. Please retry saving or change fields."
+msgstr ""
+
+#: includes/Admin/Configurations/Update.php:147
 msgid "Configuration update success."
 msgstr ""
 
-#: includes/Admin/Configurations/Update.php:103
+#: includes/Admin/Configurations/Update.php:157
 msgid "Configuration update error. Please retry saving or change fields."
 msgstr ""
 
-#: includes/Admin/Configurations/Update.php:151
+#: includes/Admin/Configurations/Update.php:208
 msgid "About configuration"
 msgstr ""
 
-#: includes/Admin/Configurations/Update.php:157
+#: includes/Admin/Configurations/Update.php:214
 msgid "ID: "
 msgstr ""
 
-#: includes/Admin/Configurations/Update.php:163
+#: includes/Admin/Configurations/Update.php:220
 msgid "Date create: "
 msgstr ""
 
-#: includes/Admin/Configurations/Update.php:166
+#: includes/Admin/Configurations/Update.php:223
 msgid "Date modify: "
 msgstr ""
 
-#: includes/Admin/Configurations/Update.php:169
+#: includes/Admin/Configurations/Update.php:226
 msgid "Date active: "
 msgstr ""
 
-#: includes/Admin/Configurations/Update.php:172
+#: includes/Admin/Configurations/Update.php:229
 msgid "Upload directory: "
 msgstr ""
 
-#: includes/Admin/Configurations/Update.php:186
+#: includes/Admin/Configurations/Update.php:243
 msgid "About schema"
 msgstr ""
 
-#: includes/Admin/Configurations/Update.php:211
+#: includes/Admin/Configurations/Update.php:268
 msgid ""
 "The exchange scheme on the basis of which created configuration is unavailable ."
 msgstr ""
 
-#: includes/Admin/Configurations/Update.php:213
+#: includes/Admin/Configurations/Update.php:270
 msgid ""
 "Install the missing schema to work this configuration, change the status and "
 "name, or delete the configuration."
 msgstr ""
 
-#: includes/Admin/Configurations/UpdateForm.php:58
+#: includes/Admin/Configurations/UpdateForm.php:48
 msgid "Configuration status"
 msgstr ""
 
-#: includes/Admin/Configurations/UpdateForm.php:60
+#: includes/Admin/Configurations/UpdateForm.php:50
 msgid "Current configuration status."
 msgstr ""
 
-#: includes/Admin/Configurations/UpdateForm.php:101
+#: includes/Admin/Configurations/UpdateForm.php:91
+#: includes/Admin/InlineForm.php:59
 msgid "Update error. Please retry."
 msgstr ""
 
-#: includes/Admin/Configurations/UpdateForm.php:147
+#: includes/Admin/Configurations/UpdateForm.php:137
 msgid "Fast navigation"
 msgstr ""
 
@@ -362,12 +375,16 @@ msgstr ""
 msgid "Not a feature?"
 msgstr ""
 
-#: includes/Admin/Settings.php:56
+#: includes/Admin/Settings.php:47
 msgid "Main settings"
 msgstr ""
 
-#: includes/Admin/Settings.php:70
-msgid "Other"
+#: includes/Admin/Settings.php:54
+msgid "Event logs"
+msgstr ""
+
+#: includes/Admin/Settings.php:61
+msgid "Interface"
 msgstr ""
 
 #: includes/Admin/Settings/ConnectionForm.php:106
@@ -419,304 +436,273 @@ msgid ""
 "button."
 msgstr ""
 
-#: includes/Admin/Settings/Form.php:85
+#: includes/Admin/Settings/Form.php:75
 msgid "Save error. Please retry."
 msgstr ""
 
-#: includes/Admin/Settings/Form.php:140
+#: includes/Admin/Settings/Form.php:130
 msgid "Save success."
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:47
+#: includes/Admin/Settings/InterfaceForm.php:40
+msgid "Changing the interface"
+msgstr ""
+
+#: includes/Admin/Settings/InterfaceForm.php:42
+msgid "Allow changes to WordPress and WooCommerce dashboard interface?"
+msgstr ""
+
+#: includes/Admin/Settings/InterfaceForm.php:43
+msgid ""
+"If enabled, new features will appear in the WordPress and WooCommerce interface "
+"according to the interface change settings."
+msgstr ""
+
+#: includes/Admin/Settings/InterfaceForm.php:49
+msgid "WooCommerce"
+msgstr ""
+
+#: includes/Admin/Settings/InterfaceForm.php:51
+msgid "Some interface settings for the WooCommerce."
+msgstr ""
+
+#: includes/Admin/Settings/InterfaceForm.php:56
+msgid "Column in products list"
+msgstr ""
+
+#: includes/Admin/Settings/InterfaceForm.php:58
+#: includes/Admin/Settings/InterfaceForm.php:67
+#: includes/Admin/Settings/InterfaceForm.php:76
+#: includes/Admin/Settings/InterfaceForm.php:85
+#: includes/Admin/Settings/InterfaceForm.php:94
+msgid "Enable"
+msgstr ""
+
+#: includes/Admin/Settings/InterfaceForm.php:59
+msgid "Output of a column with information from 1C to the list of products."
+msgstr ""
+
+#: includes/Admin/Settings/InterfaceForm.php:65
+msgid "Metabox in edit products"
+msgstr ""
+
+#: includes/Admin/Settings/InterfaceForm.php:68
+msgid "Output of a Metabox with information from 1C in edit products."
+msgstr ""
+
+#: includes/Admin/Settings/InterfaceForm.php:74
+msgid "Column in orders list"
+msgstr ""
+
+#: includes/Admin/Settings/InterfaceForm.php:77
+msgid "Output of a column with information from 1C to the list of orders."
+msgstr ""
+
+#: includes/Admin/Settings/InterfaceForm.php:83
+msgid "Metabox in edit orders"
+msgstr ""
+
+#: includes/Admin/Settings/InterfaceForm.php:86
+msgid "Output of a Metabox with information from 1C in edit orders."
+msgstr ""
+
+#: includes/Admin/Settings/InterfaceForm.php:92
+msgid "Column in categories list"
+msgstr ""
+
+#: includes/Admin/Settings/InterfaceForm.php:95
+msgid "Output of a column with information from 1C to the list of categories."
+msgstr ""
+
+#: includes/Admin/Settings/LogsForm.php:41
+msgid "Level for main events"
+msgstr ""
+
+#: includes/Admin/Settings/LogsForm.php:43
+msgid ""
+"All events of the selected level will be recorded in the log file. The higher "
+"the level, the less data is recorded."
+msgstr ""
+
+#: includes/Admin/Settings/LogsForm.php:47 includes/Admin/Settings/LogsForm.php:80
+#: includes/Admin/Settings/LogsForm.php:97
+#: includes/Admin/Settings/LogsForm.php:114
+#: includes/Admin/Settings/LogsForm.php:131
+msgid "DEBUG (100)"
+msgstr ""
+
+#: includes/Admin/Settings/LogsForm.php:48 includes/Admin/Settings/LogsForm.php:81
+#: includes/Admin/Settings/LogsForm.php:98
+#: includes/Admin/Settings/LogsForm.php:115
+#: includes/Admin/Settings/LogsForm.php:132
+msgid "INFO (200)"
+msgstr ""
+
+#: includes/Admin/Settings/LogsForm.php:49 includes/Admin/Settings/LogsForm.php:82
+#: includes/Admin/Settings/LogsForm.php:99
+#: includes/Admin/Settings/LogsForm.php:116
+#: includes/Admin/Settings/LogsForm.php:133
+msgid "NOTICE (250)"
+msgstr ""
+
+#: includes/Admin/Settings/LogsForm.php:50 includes/Admin/Settings/LogsForm.php:83
+#: includes/Admin/Settings/LogsForm.php:100
+#: includes/Admin/Settings/LogsForm.php:117
+#: includes/Admin/Settings/LogsForm.php:134
+msgid "WARNING (300)"
+msgstr ""
+
+#: includes/Admin/Settings/LogsForm.php:51 includes/Admin/Settings/LogsForm.php:84
+#: includes/Admin/Settings/LogsForm.php:101
+#: includes/Admin/Settings/LogsForm.php:118
+#: includes/Admin/Settings/LogsForm.php:135
+msgid "ERROR (400)"
+msgstr ""
+
+#: includes/Admin/Settings/LogsForm.php:57
+msgid "Access to technical events"
+msgstr ""
+
+#: includes/Admin/Settings/LogsForm.php:59
+msgid "Allow the WC1C team to access technical events?"
+msgstr ""
+
+#: includes/Admin/Settings/LogsForm.php:60
+msgid ""
+"If allowed, the WC1C team will be able to access technical events and release "
+"the necessary updates based on them."
+msgstr ""
+
+#: includes/Admin/Settings/LogsForm.php:66
+msgid "Levels by context"
+msgstr ""
+
+#: includes/Admin/Settings/LogsForm.php:68
+msgid "Event log settings based on context."
+msgstr ""
+
+#: includes/Admin/Settings/LogsForm.php:73
+#: includes/Admin/Settings/MainForm.php:133
+msgid "Receiver"
+msgstr ""
+
+#: includes/Admin/Settings/LogsForm.php:75
+msgid ""
+"All events of the selected level will be recorded the Receiver events in the "
+"log file. The higher the level, the less data is recorded."
+msgstr ""
+
+#: includes/Admin/Settings/LogsForm.php:79 includes/Admin/Settings/LogsForm.php:96
+#: includes/Admin/Settings/LogsForm.php:113
+#: includes/Admin/Settings/LogsForm.php:130
+msgid "Use level for main events"
+msgstr ""
+
+#: includes/Admin/Settings/LogsForm.php:92
+msgid ""
+"All events of the selected level will be recorded the tools events in the log "
+"file. The higher the level, the less data is recorded."
+msgstr ""
+
+#: includes/Admin/Settings/LogsForm.php:107
+msgid "Schemas"
+msgstr ""
+
+#: includes/Admin/Settings/LogsForm.php:109
+msgid ""
+"All events of the selected level will be recorded the schemas events in the log "
+"file. The higher the level, the less data is recorded."
+msgstr ""
+
+#: includes/Admin/Settings/LogsForm.php:126
+msgid ""
+"All events of the selected level will be recorded the configurations events in "
+"the log file. The higher the level, the less data is recorded."
+msgstr ""
+
+#: includes/Admin/Settings/MainForm.php:45
 msgid "Some settings for the configurations."
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:52
+#: includes/Admin/Settings/MainForm.php:50
 msgid "Unique names"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:54
+#: includes/Admin/Settings/MainForm.php:52
 msgid "Require unique names for configurations?"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:55
+#: includes/Admin/Settings/MainForm.php:53
 msgid "If enabled, will need to provide unique names for the configurations."
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:61
+#: includes/Admin/Settings/MainForm.php:59
 msgid "Number in the list"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:63
+#: includes/Admin/Settings/MainForm.php:61
 msgid "The number of displayed configurations on one page."
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:70
+#: includes/Admin/Settings/MainForm.php:68
 msgid "Deleting drafts without trash"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:72
+#: includes/Admin/Settings/MainForm.php:70
 msgid "Enable deleting drafts without placing them in the trash?"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:73
+#: includes/Admin/Settings/MainForm.php:71
 msgid ""
 "If enabled, configurations for connections in the draft status will be deleted "
 "without being added to the basket."
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:91
+#: includes/Admin/Settings/MainForm.php:89
 msgid "Technical settings"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:93
+#: includes/Admin/Settings/MainForm.php:91
 msgid "Used to set up the environment."
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:98
+#: includes/Admin/Settings/MainForm.php:96
 msgid "Maximum time for execution PHP"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:103
+#: includes/Admin/Settings/MainForm.php:101
 msgid "Value is seconds. WC1C will run until a time limit is set."
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:104
+#: includes/Admin/Settings/MainForm.php:102
 msgid "Server value:"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:106
+#: includes/Admin/Settings/MainForm.php:104
 msgid ""
 "If specify 0, the time limit will be disabled. Specifying 0 is not recommended, "
 "it is recommended not to exceed the server limit."
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:114
+#: includes/Admin/Settings/MainForm.php:112
 #: includes/Schemas/DefaultCML/Admin.php:146
 msgid "Maximum request size"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:116
+#: includes/Admin/Settings/MainForm.php:114
 #: includes/Schemas/DefaultCML/Admin.php:148
 msgid ""
 "The setting must not take a size larger than specified in the server settings."
 msgstr ""
 
 #: includes/Admin/Settings/MainForm.php:135
-msgid "Receiver"
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:137
 msgid "Enable data Receiver: background requests?"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:138
+#: includes/Admin/Settings/MainForm.php:136
 msgid ""
 "It is used to receive background requests from 1C in exchange schemes. Do not "
 "disable this option if you do not know what it is for."
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:156
-msgid "Interface"
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:158
-msgid "Settings for the user interface."
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:163
-msgid "Changing the interface"
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:165
-msgid "Allow changes to WordPress and WooCommerce dashboard interface?"
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:166
-msgid ""
-"If enabled, new features will appear in the WordPress and WooCommerce interface "
-"according to the interface change settings."
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:172
-msgid "Column in products list"
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:174
-#: includes/Admin/Settings/MainForm.php:183
-#: includes/Admin/Settings/MainForm.php:192
-#: includes/Admin/Settings/MainForm.php:201
-#: includes/Admin/Settings/MainForm.php:210
-msgid "Enable"
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:175
-msgid "Output of a column with information from 1C to the list of products."
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:181
-msgid "Metabox in edit products"
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:184
-msgid "Output of a Metabox with information from 1C in edit products."
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:190
-msgid "Column in orders list"
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:193
-msgid "Output of a column with information from 1C to the list of orders."
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:199
-msgid "Metabox in edit orders"
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:202
-msgid "Output of a Metabox with information from 1C in edit orders."
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:208
-msgid "Column in categories list"
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:211
-msgid "Output of a column with information from 1C to the list of categories."
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:229
-msgid "Event logs"
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:231
-msgid "Global settings for technical event logging."
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:236
-msgid "Level for main events"
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:238
-msgid ""
-"All events of the selected level will be recorded in the log file. The higher "
-"the level, the less data is recorded."
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:242
-#: includes/Admin/Settings/MainForm.php:259
-#: includes/Admin/Settings/MainForm.php:276
-#: includes/Admin/Settings/MainForm.php:293
-#: includes/Admin/Settings/MainForm.php:310
-msgid "DEBUG (100)"
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:243
-#: includes/Admin/Settings/MainForm.php:260
-#: includes/Admin/Settings/MainForm.php:277
-#: includes/Admin/Settings/MainForm.php:294
-#: includes/Admin/Settings/MainForm.php:311
-msgid "INFO (200)"
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:244
-#: includes/Admin/Settings/MainForm.php:261
-#: includes/Admin/Settings/MainForm.php:278
-#: includes/Admin/Settings/MainForm.php:295
-#: includes/Admin/Settings/MainForm.php:312
-msgid "NOTICE (250)"
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:245
-#: includes/Admin/Settings/MainForm.php:262
-#: includes/Admin/Settings/MainForm.php:279
-#: includes/Admin/Settings/MainForm.php:296
-#: includes/Admin/Settings/MainForm.php:313
-msgid "WARNING (300)"
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:246
-#: includes/Admin/Settings/MainForm.php:263
-#: includes/Admin/Settings/MainForm.php:280
-#: includes/Admin/Settings/MainForm.php:297
-#: includes/Admin/Settings/MainForm.php:314
-msgid "ERROR (400)"
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:252
-msgid "Level for receiver"
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:254
-msgid ""
-"All events of the selected level will be recorded the Receiver events in the "
-"log file. The higher the level, the less data is recorded."
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:258
-#: includes/Admin/Settings/MainForm.php:275
-#: includes/Admin/Settings/MainForm.php:292
-#: includes/Admin/Settings/MainForm.php:309
-msgid "Use level for main events"
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:269
-msgid "Level for tools"
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:271
-msgid ""
-"All events of the selected level will be recorded the tools events in the log "
-"file. The higher the level, the less data is recorded."
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:286
-msgid "Level for schemas"
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:288
-msgid ""
-"All events of the selected level will be recorded the schemas events in the log "
-"file. The higher the level, the less data is recorded."
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:303
-msgid "Level for configurations"
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:305
-msgid ""
-"All events of the selected level will be recorded the configurations events in "
-"the log file. The higher the level, the less data is recorded."
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:320
-msgid "Access to technical events"
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:322
-msgid "Allow the WC1C team to access technical events?"
-msgstr ""
-
-#: includes/Admin/Settings/MainForm.php:323
-msgid ""
-"If allowed, the WC1C team will be able to access technical events and release "
-"the necessary updates based on them."
-msgstr ""
-
-#: includes/Admin/Settings/OtherForm.php:51
-msgid "Usage data"
-msgstr ""
-
-#: includes/Admin/Settings/OtherForm.php:53
-msgid "Allow sending usage data to WC1C servers?"
-msgstr ""
-
-#: includes/Admin/Settings/OtherForm.php:54
-msgid ""
-"If enabled, the site will send anonymous data about plugin usage to WC1C "
-"servers once a week in the background."
 msgstr ""
 
 #: includes/Admin/Wizards/Setup/Database.php:43
@@ -743,35 +729,49 @@ msgstr ""
 msgid "Could not insert into the database"
 msgstr ""
 
-#: includes/Receiver.php:36
-msgid "Receiver request start."
+#: includes/Receiver.php:39
+msgid "Received new request for Receiver."
 msgstr ""
 
-#: includes/Receiver.php:37
+#: includes/Receiver.php:40
 msgid "Receiver request params."
 msgstr ""
 
-#: includes/Receiver.php:45 includes/Receiver.php:46
+#: includes/Receiver.php:48 includes/Receiver.php:49
 msgid "Receiver is offline. Request reject."
 msgstr ""
 
-#: includes/Receiver.php:55
-msgid "Input unavailable"
+#: includes/Receiver.php:58
+msgid "Selected configuration for Receiver is unavailable."
 msgstr ""
 
-#: includes/Receiver.php:56
-msgid "Receiver is unavailable."
+#: includes/Receiver.php:59
+msgid "Configuration for Receiver is unavailable."
 msgstr ""
 
-#: includes/Receiver.php:63 includes/Receiver.php:64 includes/Receiver.php:75
-msgid "Configuration offline."
+#: includes/Receiver.php:66 includes/Receiver.php:67
+msgid "Selected configuration is offline."
 msgstr ""
 
-#: includes/Receiver.php:85
-msgid "Schema offline."
+#: includes/Receiver.php:78
+msgid "Error saving configuration."
 msgstr ""
 
-#: includes/Receiver.php:105 includes/Receiver.php:106
+#: includes/Receiver.php:88
+msgid "Schema for configuration is not initialized."
+msgstr ""
+
+#: includes/Receiver.php:101
+msgid ""
+"The request was successfully submitted for processing in the schema for the "
+"selected configuration."
+msgstr ""
+
+#: includes/Receiver.php:109
+msgid "Receiver request is very bad! Action not found in selected configuration."
+msgstr ""
+
+#: includes/Receiver.php:110
 msgid "Receiver request is very bad! Action not found."
 msgstr ""
 
@@ -1014,172 +1014,164 @@ msgstr ""
 msgid "Import filename is empty."
 msgstr ""
 
-#: includes/Tools/Core.php:135
-msgid "Example tool"
-msgstr ""
-
-#: includes/Tools/Core.php:136
-msgid "A demo tool that does not carry any functional load."
-msgstr ""
-
-#: includes/Tools/Environments/Init.php:53 templates/helps/bugs.php:27
+#: includes/Tools/Environments/Init.php:52 templates/helps/bugs.php:27
 msgid "Environments"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:54
+#: includes/Tools/Environments/Init.php:53
 msgid "Data about all current environments."
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:113
+#: includes/Tools/Environments/Init.php:112
 msgid "yes"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:117
+#: includes/Tools/Environments/Init.php:116
 #: includes/Traits/DatetimeUtilityTrait.php:114
 msgid "not"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:141
+#: includes/Tools/Environments/Init.php:140
 msgid "WordPress environment"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:155
+#: includes/Tools/Environments/Init.php:154
 msgid "WC1C environment"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:169
+#: includes/Tools/Environments/Init.php:168
 msgid "WooCommerce environment"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:183
+#: includes/Tools/Environments/Init.php:182
 msgid "Server environment"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:209
+#: includes/Tools/Environments/Init.php:208
 msgid "Home URL"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:219
+#: includes/Tools/Environments/Init.php:218
 msgid "Site URL"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:229
+#: includes/Tools/Environments/Init.php:228
 msgid "WordPress version"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:239
+#: includes/Tools/Environments/Init.php:238
 msgid "WordPress multisite"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:249
+#: includes/Tools/Environments/Init.php:248
 msgid "WordPress debug"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:259
+#: includes/Tools/Environments/Init.php:258
 msgid "WordPress cron"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:269
+#: includes/Tools/Environments/Init.php:268
 msgid "WordPress language"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:279
+#: includes/Tools/Environments/Init.php:278
 msgid "WordPress memory limit"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:314
+#: includes/Tools/Environments/Init.php:313
 msgid "Server info"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:324
+#: includes/Tools/Environments/Init.php:323
 msgid "PHP version"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:334
+#: includes/Tools/Environments/Init.php:333
 msgid "Database version"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:344
+#: includes/Tools/Environments/Init.php:343
 msgid "Suhosin"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:354
+#: includes/Tools/Environments/Init.php:353
 msgid "Fsockopen or curl enabled"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:368
+#: includes/Tools/Environments/Init.php:367
 msgid "CURL info"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:379
+#: includes/Tools/Environments/Init.php:378
 msgid "Default timezone"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:389
+#: includes/Tools/Environments/Init.php:388
 msgid "PHP post max size"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:399
+#: includes/Tools/Environments/Init.php:398
 msgid "PHP max upload size"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:409
+#: includes/Tools/Environments/Init.php:408
 msgid "PHP max execution time"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:419
+#: includes/Tools/Environments/Init.php:418
 msgid "PHP max input vars"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:429
+#: includes/Tools/Environments/Init.php:428
 msgid "PHP soapclient enabled"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:439
+#: includes/Tools/Environments/Init.php:438
 msgid "PHP domdocument enabled"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:449
+#: includes/Tools/Environments/Init.php:448
 msgid "PHP gzip enabled"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:459
+#: includes/Tools/Environments/Init.php:458
 msgid "PHP mbstring enabled"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:490
+#: includes/Tools/Environments/Init.php:489
 msgid "WC1C version"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:500
+#: includes/Tools/Environments/Init.php:499
 msgid "Upload directory"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:513
+#: includes/Tools/Environments/Init.php:512
 msgid "Count extensions"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:528
+#: includes/Tools/Environments/Init.php:527
 msgid "Count schemas"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:544
+#: includes/Tools/Environments/Init.php:543
 msgid "Count tools"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:572
+#: includes/Tools/Environments/Init.php:571
 msgid "WooCommerce version"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:589
+#: includes/Tools/Environments/Init.php:588
 msgid "WooCommerce product types"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:599
+#: includes/Tools/Environments/Init.php:598
 msgid "WooCommerce currency"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:609
+#: includes/Tools/Environments/Init.php:608
 msgid "WooCommerce currency symbol"
 msgstr ""
 
@@ -1359,15 +1351,19 @@ msgstr ""
 msgid "Save settings"
 msgstr ""
 
-#: templates/tools/empty.php:3
-msgid "Tools not found or unavailable."
+#: templates/tools/empty.php:4
+msgid "Tools not found."
+msgstr ""
+
+#: templates/tools/empty.php:5
+msgid "As soon as the tools are installed, they will appear in this section."
 msgstr ""
 
 #: templates/tools/item.php:14
 msgid "Open"
 msgstr ""
 
-#: templates/tools/single.php:8
+#: templates/tools/single.php:9
 msgid "Back to all tools"
 msgstr ""
 

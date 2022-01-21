@@ -1,6 +1,6 @@
 <?php defined('ABSPATH') || exit; ?>
 
-<div class="mb-2 mt-2" style="border-radius: 0!important; border: 1px solid white; width: 100%;">
+<div class="mb-2 mt-2 w-100" style="border-radius: 0!important; border: 1px solid #f7f7f7;">
     <div class="card-body p-3">
         <h2 class="card-title mt-0">
             <?php echo $args['name']; ?>

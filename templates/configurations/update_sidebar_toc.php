@@ -2,7 +2,7 @@
 
 <?php do_action(WC1C_ADMIN_PREFIX . 'configurations_update_before_sidebar_toc_show'); ?>
 
-<div class="card wc1c-sidebar-toc mb-2 p-0">
+<div class="card wc1c-sidebar-toc mb-2 p-0" style="max-width: 100%;">
     <?php if(isset($args['header'])): ?>
     <div class="card-header p-2">
         <?php echo $args['header']; ?>
