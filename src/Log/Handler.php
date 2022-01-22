@@ -2,13 +2,13 @@
 
 defined('ABSPATH') || exit;
 
-use Monolog\Handler\StreamHandler;
+use Monolog\Handler\RotatingFileHandler;
 
 /**
  * Handler
  *
  * @package Wc1c
  */
-final class Handler extends StreamHandler
+final class Handler extends RotatingFileHandler
 {
 }
