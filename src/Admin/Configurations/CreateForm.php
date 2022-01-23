@@ -57,8 +57,14 @@ class CreateForm extends FormAbstract
 		}
 
 		$options = [];
+        $default_id = false;
 		foreach($schemas as $schema_id => $schema_object)
 		{
+            if(false === $default_id)
+            {
+	            $default_id = $schema_id;
+            }
+
 			$options[$schema_id] = $schema_object->getName();
 		}
 
@@ -67,7 +73,7 @@ class CreateForm extends FormAbstract
 			'title' => __('Configuration schema', 'wc1c'),
 			'type' => 'radio',
 			'description' => __('Each scheme has its own algorithms and settings. Use the appropriate scheme for your tasks.', 'wc1c'),
-			'default' => 'defaultcml',
+			'default' => $default_id,
 			'options' => $options,
 			'class' => 'form-check-input',
 			'class_label' => 'form-check-label',
