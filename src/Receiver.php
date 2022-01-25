@@ -61,10 +61,16 @@ final class Receiver
 
 			wc1c()->environment()->set('current_configuration_id', $wc1c_receiver);
 
-			if($configuration->getStatus() !== 'active' && $configuration->getStatus() !==  'processing')
+			if($configuration->isInactive())
 			{
 				wc1c()->log('receiver')->warning(__('Selected configuration is offline.', 'wc1c'));
 				die(__('Selected configuration is offline.', 'wc1c'));
+			}
+
+			if($configuration->isDraft())
+			{
+				wc1c()->log('receiver')->warning(__('Selected configuration is draft.', 'wc1c'));
+				die(__('Selected configuration is draft.', 'wc1c'));
 			}
 
 			try

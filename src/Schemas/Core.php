@@ -185,18 +185,15 @@ final class Core
 
 		try
 		{
-			$schema_default = new DefaultCML\Core();
+			$schema_productscml = new Productscml\Core();
 		}
 		catch(Exception $e)
 		{
 			throw new RuntimeException('Schema init exception - ' . $e->getMessage());
 		}
 
-		$schemas[strtolower($schema_default->getId())] = $schema_default;
+		$schemas[strtolower($schema_productscml->getId())] = $schema_productscml;
 
-		/**
-		 * External schemas
-		 */
 		if('yes' === wc1c()->settings()->get('extensions_schemas', 'yes'))
 		{
 			$schemas = apply_filters(WC1C_PREFIX . 'schemas_loading', $schemas);

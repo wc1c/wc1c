@@ -52,6 +52,15 @@ class LogsForm extends Form
 				],
 		];
 
+		$fields['logger_files_max'] =
+		[
+			'title' => __('Maximum files', 'wc1c'),
+			'type' => 'text',
+			'description' => __('Log files created daily. This option on the maximum number of stored files. By default saved of the logs are for the last 30 days.', 'wc1c'),
+			'default' => 30,
+			'css' => 'min-width: 20px;',
+		];
+
 		$fields['logger_wc1c'] =
 		[
 			'title' => __('Access to technical events', 'wc1c'),

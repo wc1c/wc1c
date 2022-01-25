@@ -269,6 +269,16 @@ class Configuration extends DataConfigurations
 	}
 
 	/**
+	 * Returns if configuration is draft.
+	 *
+	 * @return bool True if validation passes.
+	 */
+	public function isDraft()
+	{
+		return $this->isStatus('draft');
+	}
+
+	/**
 	 * Returns if configuration is status.
 	 *
 	 * @param string $status

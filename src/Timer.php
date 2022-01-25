@@ -1,17 +1,7 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c;
+<?php namespace Wc1c;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use Wc1c\Traits\SingletonTrait;
 
 /**
@@ -137,7 +127,6 @@ final class Timer
 		if(function_exists('set_time_limit') && false === strpos(ini_get('disable_functions'), 'set_time_limit'))
 		{
 			set_time_limit($limit);
-
 			return true;
 		}
 

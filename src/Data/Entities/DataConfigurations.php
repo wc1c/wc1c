@@ -1,24 +1,14 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Data\Entities;
+<?php namespace Wc1c\Data\Entities;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use Wc1c\Exceptions\Exception;
 use WP_Error;
 use Wc1c\Data\Meta;
 use Wc1c\Abstracts\DataAbstract;
 
 /**
- * Class DataConfigurations
+ * DataConfigurations
  *
  * @package Wc1c\Data\Entities
  */
@@ -125,7 +115,7 @@ abstract class DataConfigurations extends DataAbstract
 	 */
 	protected function isInternalMetaKey($key)
 	{
-		$internal_meta_key = !empty($key) && $this->storage && in_array($key, $this->storage->get_internal_meta_keys(), true);
+		$internal_meta_key = !empty($key) && $this->storage && in_array($key, $this->storage->getInternalMetaKeys(), true);
 
 		if(!$internal_meta_key)
 		{
@@ -299,7 +289,7 @@ abstract class DataConfigurations extends DataAbstract
 		if($meta_id)
 		{
 			$array_keys = array_keys(wp_list_pluck($this->meta_data, 'id'), $meta_id, true);
-			$array_key  = $array_keys ? current($array_keys) : false;
+			$array_key = $array_keys ? current($array_keys) : false;
 		}
 		else
 		{

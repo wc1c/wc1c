@@ -270,6 +270,7 @@ final class Core
 			}
 
 			$path = '';
+			$max_files = $this->settings('logs')->get('logger_files_max', 30);
 
 			$logger = new Logger($channel);
 
@@ -307,7 +308,7 @@ final class Core
 			try
 			{
 				$formatter = new Formatter();
-				$handler = new Handler($path, $level);
+				$handler = new Handler($path, $max_files, $level);
 				$handler->setFormatter($formatter);
 
 				$logger->pushHandler($handler);

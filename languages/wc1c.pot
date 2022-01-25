@@ -4,7 +4,7 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: WC1C > integration of WooCommerce with 1C products "
 "(different configurations)\n"
-"POT-Creation-Date: 2022-01-19 18:31+0300\n"
+"POT-Creation-Date: 2022-01-22 09:53+0300\n"
 "PO-Revision-Date: 2019-03-19 20:30+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
@@ -22,823 +22,815 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: includes/Abstracts/FormAbstract.php:739
+#: src/Abstracts/FormAbstract.php:739
 msgid "Select all"
 msgstr ""
 
-#: includes/Abstracts/FormAbstract.php:739
+#: src/Abstracts/FormAbstract.php:739
 msgid "Select none"
 msgstr ""
 
-#: includes/Abstracts/TableAbstract.php:118
+#: src/Abstracts/TableAbstract.php:118
 msgid "List View"
 msgstr ""
 
-#: includes/Abstracts/TableAbstract.php:119
+#: src/Abstracts/TableAbstract.php:119
 msgid "Excerpt View"
 msgstr ""
 
-#: includes/Abstracts/TableAbstract.php:205
+#: src/Abstracts/TableAbstract.php:205
 msgid "No items found."
 msgstr ""
 
-#: includes/Abstracts/TableAbstract.php:338
+#: src/Abstracts/TableAbstract.php:338
 msgid "Select bulk action"
 msgstr ""
 
-#: includes/Abstracts/TableAbstract.php:340
+#: src/Abstracts/TableAbstract.php:340
 msgid "Bulk Actions"
 msgstr ""
 
-#: includes/Abstracts/TableAbstract.php:351
+#: src/Abstracts/TableAbstract.php:351
 msgid "Apply"
 msgstr ""
 
-#: includes/Abstracts/TableAbstract.php:409
-#: includes/Abstracts/TableAbstract.php:1116
+#: src/Abstracts/TableAbstract.php:409 src/Abstracts/TableAbstract.php:1116
 msgid "Show more details"
 msgstr ""
 
 #. translators: %s: Number of items.
 #. translators: Number of items.
-#: includes/Abstracts/TableAbstract.php:520
-#: includes/Abstracts/TableAbstract.php:1145
+#: src/Abstracts/TableAbstract.php:520 src/Abstracts/TableAbstract.php:1145
 #, php-format
 msgid "%s item"
 msgid_plural "%s items"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/Abstracts/TableAbstract.php:569
+#: src/Abstracts/TableAbstract.php:569
 msgid "First page"
 msgstr ""
 
-#: includes/Abstracts/TableAbstract.php:583
+#: src/Abstracts/TableAbstract.php:583
 msgid "Previous page"
 msgstr ""
 
-#: includes/Abstracts/TableAbstract.php:591
-#: includes/Abstracts/TableAbstract.php:597
+#: src/Abstracts/TableAbstract.php:591 src/Abstracts/TableAbstract.php:597
 msgid "Current Page"
 msgstr ""
 
 #. translators: 1: Current page, 2: Total pages.
-#: includes/Abstracts/TableAbstract.php:606
+#: src/Abstracts/TableAbstract.php:606
 #, php-format
 msgctxt "paging"
 msgid "%1$s of %2$s"
 msgstr ""
 
-#: includes/Abstracts/TableAbstract.php:620
+#: src/Abstracts/TableAbstract.php:620
 msgid "Next page"
 msgstr ""
 
-#: includes/Abstracts/TableAbstract.php:634
+#: src/Abstracts/TableAbstract.php:634
 msgid "Last page"
 msgstr ""
 
-#: includes/Abstracts/TableAbstract.php:851
+#: src/Abstracts/TableAbstract.php:851
 msgid "Select All"
 msgstr ""
 
-#: includes/Admin.php:95 includes/Admin.php:96 templates/header.php:3
+#: src/Admin.php:95 src/Admin.php:96 templates/header.php:3
 msgid "Integration with 1C"
 msgstr ""
 
-#: includes/Admin.php:113 includes/Admin/Settings/LogsForm.php:124
-#: includes/Admin/Settings/MainForm.php:43
+#: src/Admin.php:113 src/Admin/Settings/LogsForm.php:133
+#: src/Admin/Settings/MainForm.php:43
 msgid "Configurations"
 msgstr ""
 
-#: includes/Admin.php:120 includes/Admin/Settings/LogsForm.php:90
+#: src/Admin.php:120 src/Admin/Settings/LogsForm.php:99
 msgid "Tools"
 msgstr ""
 
-#: includes/Admin.php:127 includes/Admin.php:230
+#: src/Admin.php:127 src/Admin.php:230
 msgid "Settings"
 msgstr ""
 
-#: includes/Admin.php:134 templates/helps/features.php:36
+#: src/Admin.php:134 templates/helps/features.php:37
 msgid "Extensions"
 msgstr ""
 
-#: includes/Admin/Columns/WooCommerce/Categories.php:46
-#: includes/Admin/Columns/WooCommerce/Products.php:46
+#: src/Admin/Columns/WooCommerce/Categories.php:46
+#: src/Admin/Columns/WooCommerce/Products.php:46
 msgid "1C information"
 msgstr ""
 
-#: includes/Admin/Columns/WooCommerce/Categories.php:65
-#: includes/Admin/Columns/WooCommerce/Products.php:80
+#: src/Admin/Columns/WooCommerce/Categories.php:65
+#: src/Admin/Columns/WooCommerce/Products.php:80
 msgid "not found"
 msgstr ""
 
-#: includes/Admin/Columns/WooCommerce/Products.php:70
-#: includes/Admin/Configurations/Update.php:217
+#: src/Admin/Columns/WooCommerce/Products.php:70
+#: src/Admin/Configurations/MainUpdate.php:97
 msgid "Schema ID: "
 msgstr ""
 
-#: includes/Admin/Columns/WooCommerce/Products.php:75
+#: src/Admin/Columns/WooCommerce/Products.php:75
 msgid "Configuration ID: "
 msgstr ""
 
-#: includes/Admin/Configurations/AllTable.php:116
+#: src/Admin/Configurations/AllTable.php:116
 #, php-format
 msgid "%s <br/><span class=\"time\">Time: %s</span>"
 msgstr ""
 
-#: includes/Admin/Configurations/AllTable.php:122
+#: src/Admin/Configurations/AllTable.php:122
 msgid "No activity"
 msgstr ""
 
-#: includes/Admin/Configurations/AllTable.php:176
+#: src/Admin/Configurations/AllTable.php:176
 msgid "Edit"
 msgstr ""
 
-#: includes/Admin/Configurations/AllTable.php:177
+#: src/Admin/Configurations/AllTable.php:177
 msgid "Mark as deleted"
 msgstr ""
 
-#: includes/Admin/Configurations/AllTable.php:183
-#: includes/Admin/Configurations/AllTable.php:188
+#: src/Admin/Configurations/AllTable.php:183
+#: src/Admin/Configurations/AllTable.php:188
 msgid "Remove forever"
 msgstr ""
 
-#: includes/Admin/Configurations/AllTable.php:191
+#: src/Admin/Configurations/AllTable.php:191
 msgid "Schema:"
 msgstr ""
 
-#: includes/Admin/Configurations/AllTable.php:211
+#: src/Admin/Configurations/AllTable.php:211
 msgid "ID"
 msgstr ""
 
-#: includes/Admin/Configurations/AllTable.php:212
+#: src/Admin/Configurations/AllTable.php:212
 msgid "Base information"
 msgstr ""
 
-#: includes/Admin/Configurations/AllTable.php:213
+#: src/Admin/Configurations/AllTable.php:213
 msgid "Status"
 msgstr ""
 
-#: includes/Admin/Configurations/AllTable.php:214
+#: src/Admin/Configurations/AllTable.php:214
 msgid "Create date"
 msgstr ""
 
-#: includes/Admin/Configurations/AllTable.php:215
+#: src/Admin/Configurations/AllTable.php:215
 msgid "Last activity"
 msgstr ""
 
-#: includes/Admin/Configurations/AllTable.php:263
+#: src/Admin/Configurations/AllTable.php:263
 msgid "All"
 msgstr ""
 
-#: includes/Admin/Configurations/AllTable.php:436 includes/Admin/Settings.php:68
+#: src/Admin/Configurations/AllTable.php:436 src/Admin/Settings.php:68
 msgid "Connection to the WC1C"
 msgstr ""
 
-#: includes/Admin/Configurations/CreateForm.php:42
-#: includes/Admin/Configurations/Update.php:74
+#: src/Admin/Configurations/CreateForm.php:42
+#: src/Admin/Configurations/Update.php:124
 msgid "Configuration name"
 msgstr ""
 
-#: includes/Admin/Configurations/CreateForm.php:44
+#: src/Admin/Configurations/CreateForm.php:44
 msgid ""
 "Name of the configuration for easy use. You can enter any data up to 255 "
 "characters."
 msgstr ""
 
-#: includes/Admin/Configurations/CreateForm.php:45
-#: includes/Admin/Configurations/Update.php:76
+#: src/Admin/Configurations/CreateForm.php:45
+#: src/Admin/Configurations/Update.php:126
 msgid "Used for convenient distribution of multiple configurations."
 msgstr ""
 
-#: includes/Admin/Configurations/CreateForm.php:67
+#: src/Admin/Configurations/CreateForm.php:67
 msgid "Configuration schema"
 msgstr ""
 
-#: includes/Admin/Configurations/CreateForm.php:69
+#: src/Admin/Configurations/CreateForm.php:69
 msgid ""
 "Each scheme has its own algorithms and settings. Use the appropriate scheme for "
 "your tasks."
 msgstr ""
 
-#: includes/Admin/Configurations/CreateForm.php:133
+#: src/Admin/Configurations/CreateForm.php:133
 msgid "Identifier:"
 msgstr ""
 
-#: includes/Admin/Configurations/CreateForm.php:183
+#: src/Admin/Configurations/CreateForm.php:183
 msgid "Configuration create error. Please retry."
 msgstr ""
 
-#: includes/Admin/Configurations/CreateForm.php:223
+#: src/Admin/Configurations/CreateForm.php:223
 msgid "Configuration create error. Name is required."
 msgstr ""
 
-#: includes/Admin/Configurations/CreateForm.php:236
+#: src/Admin/Configurations/CreateForm.php:236
 msgid "Configuration create error. Schema is required."
 msgstr ""
 
-#: includes/Admin/Configurations/CreateForm.php:253
+#: src/Admin/Configurations/CreateForm.php:253
 msgid "Configuration create error. Name is exists."
 msgstr ""
 
-#: includes/Admin/Configurations/CreateForm.php:270
+#: src/Admin/Configurations/CreateForm.php:270
 msgid "Configuration create success. Configuration id: "
 msgstr ""
 
-#: includes/Admin/Configurations/CreateForm.php:271
+#: src/Admin/Configurations/CreateForm.php:271
 msgid "edit configuration"
 msgstr ""
 
-#: includes/Admin/Configurations/CreateForm.php:283
+#: src/Admin/Configurations/CreateForm.php:283
 msgid "Configuration create error. Please retry saving or change fields."
 msgstr ""
 
-#: includes/Admin/Configurations/Delete.php:55
+#: src/Admin/Configurations/Delete.php:55
 msgid "Error. The configuration to be deleted is active and cannot be deleted."
 msgstr ""
 
-#: includes/Admin/Configurations/Delete.php:108
+#: src/Admin/Configurations/Delete.php:108
 msgid "The configuration has been marked as deleted."
 msgstr ""
 
-#: includes/Admin/Configurations/Delete.php:116
+#: src/Admin/Configurations/Delete.php:116
 msgid "The configuration has been successfully deleted."
 msgstr ""
 
-#: includes/Admin/Configurations/Delete.php:123
+#: src/Admin/Configurations/Delete.php:123
 msgid "Deleting error. Please retry again."
 msgstr ""
 
-#: includes/Admin/Configurations/DeleteForm.php:38
+#: src/Admin/Configurations/DeleteForm.php:38
 msgid "Delete confirmation"
 msgstr ""
 
-#: includes/Admin/Configurations/DeleteForm.php:40
+#: src/Admin/Configurations/DeleteForm.php:40
 msgid ""
 "I confirm that Configuration will be permanently and irrevocably deleted from "
 "WooCommerce."
 msgstr ""
 
-#: includes/Admin/Configurations/DeleteForm.php:80
+#: src/Admin/Configurations/DeleteForm.php:80
 msgid "Delete error. Please retry."
 msgstr ""
 
-#: includes/Admin/Configurations/DeleteForm.php:122
+#: src/Admin/Configurations/DeleteForm.php:122
 msgid "Delete error. Confirmation of final deletion is required."
 msgstr ""
 
-#: includes/Admin/Configurations/Update.php:79
-msgid "Rename"
-msgstr ""
-
-#: includes/Admin/Configurations/Update.php:110
-msgid "Configuration name update success."
-msgstr ""
-
-#: includes/Admin/Configurations/Update.php:120
-msgid "Configuration name update error. Please retry saving or change fields."
-msgstr ""
-
-#: includes/Admin/Configurations/Update.php:147
+#: src/Admin/Configurations/MainUpdate.php:58
 msgid "Configuration update success."
 msgstr ""
 
-#: includes/Admin/Configurations/Update.php:157
+#: src/Admin/Configurations/MainUpdate.php:68
 msgid "Configuration update error. Please retry saving or change fields."
 msgstr ""
 
-#: includes/Admin/Configurations/Update.php:208
+#: src/Admin/Configurations/MainUpdate.php:88
 msgid "About configuration"
 msgstr ""
 
-#: includes/Admin/Configurations/Update.php:214
+#: src/Admin/Configurations/MainUpdate.php:94
 msgid "ID: "
 msgstr ""
 
-#: includes/Admin/Configurations/Update.php:220
+#: src/Admin/Configurations/MainUpdate.php:100
 msgid "Date create: "
 msgstr ""
 
-#: includes/Admin/Configurations/Update.php:223
+#: src/Admin/Configurations/MainUpdate.php:103
 msgid "Date modify: "
 msgstr ""
 
-#: includes/Admin/Configurations/Update.php:226
+#: src/Admin/Configurations/MainUpdate.php:106
 msgid "Date active: "
 msgstr ""
 
-#: includes/Admin/Configurations/Update.php:229
+#: src/Admin/Configurations/MainUpdate.php:109
 msgid "Upload directory: "
 msgstr ""
 
-#: includes/Admin/Configurations/Update.php:243
+#: src/Admin/Configurations/MainUpdate.php:125
 msgid "About schema"
 msgstr ""
 
-#: includes/Admin/Configurations/Update.php:268
+#: src/Admin/Configurations/Update.php:35 src/Admin/Settings.php:47
+msgid "Main settings"
+msgstr ""
+
+#: src/Admin/Configurations/Update.php:81
 msgid ""
 "The exchange scheme on the basis of which created configuration is unavailable ."
 msgstr ""
 
-#: includes/Admin/Configurations/Update.php:270
+#: src/Admin/Configurations/Update.php:83
 msgid ""
 "Install the missing schema to work this configuration, change the status and "
 "name, or delete the configuration."
 msgstr ""
 
-#: includes/Admin/Configurations/UpdateForm.php:48
+#: src/Admin/Configurations/Update.php:129
+msgid "Rename"
+msgstr ""
+
+#: src/Admin/Configurations/Update.php:158
+msgid "Configuration name update success."
+msgstr ""
+
+#: src/Admin/Configurations/Update.php:168
+msgid "Configuration name update error. Please retry saving or change fields."
+msgstr ""
+
+#: src/Admin/Configurations/UpdateForm.php:48
 msgid "Configuration status"
 msgstr ""
 
-#: includes/Admin/Configurations/UpdateForm.php:50
+#: src/Admin/Configurations/UpdateForm.php:50
 msgid "Current configuration status."
 msgstr ""
 
-#: includes/Admin/Configurations/UpdateForm.php:91
-#: includes/Admin/InlineForm.php:59
+#: src/Admin/Configurations/UpdateForm.php:91 src/Admin/InlineForm.php:59
 msgid "Update error. Please retry."
 msgstr ""
 
-#: includes/Admin/Configurations/UpdateForm.php:137
+#: src/Admin/Configurations/UpdateForm.php:137
 msgid "Fast navigation"
 msgstr ""
 
-#: includes/Admin/Helps/Init.php:50
+#: src/Admin/Helps/Init.php:50
 msgid "Help"
 msgstr ""
 
-#: includes/Admin/Helps/Init.php:59 templates/helps/bugs.php:3
+#: src/Admin/Helps/Init.php:59 templates/helps/bugs.php:3
 msgid "Found a bug?"
 msgstr ""
 
-#: includes/Admin/Helps/Init.php:68 templates/helps/features.php:3
+#: src/Admin/Helps/Init.php:68 templates/helps/features.php:3
 msgid "Not a feature?"
 msgstr ""
 
-#: includes/Admin/Settings.php:47
-msgid "Main settings"
-msgstr ""
-
-#: includes/Admin/Settings.php:54
+#: src/Admin/Settings.php:54
 msgid "Event logs"
 msgstr ""
 
-#: includes/Admin/Settings.php:61
+#: src/Admin/Settings.php:61
 msgid "Interface"
 msgstr ""
 
-#: includes/Admin/Settings/ConnectionForm.php:106
+#: src/Admin/Settings/ConnectionForm.php:106
 #, php-format
 msgid ""
 "The user with the login %s on the site %s successfully connected to the current "
 "site."
 msgstr ""
 
-#: includes/Admin/Settings/ConnectionForm.php:128
+#: src/Admin/Settings/ConnectionForm.php:128
 #, php-format
 msgid ""
 "Error connecting user with login %s on site %s to the current site. Please try "
 "again later."
 msgstr ""
 
-#: includes/Admin/Settings/ConnectionForm.php:160
+#: src/Admin/Settings/ConnectionForm.php:160
 msgid "Connection error. Please retry."
 msgstr ""
 
-#: includes/Admin/Settings/ConnectionForm.php:182
+#: src/Admin/Settings/ConnectionForm.php:182
 msgid "Disconnect successful. Reconnect is available"
 msgstr ""
 
-#: includes/Admin/Settings/ConnectionForm.php:208
+#: src/Admin/Settings/ConnectionForm.php:208
 msgid "Site is connected to WC1C"
 msgstr ""
 
-#: includes/Admin/Settings/ConnectionForm.php:210
+#: src/Admin/Settings/ConnectionForm.php:210
 msgid "To create a new connection, need to disconnect the current connection."
 msgstr ""
 
-#: includes/Admin/Settings/ConnectionForm.php:215
+#: src/Admin/Settings/ConnectionForm.php:215
 msgid "Login"
 msgstr ""
 
-#: includes/Admin/Settings/ConnectionForm.php:217
+#: src/Admin/Settings/ConnectionForm.php:217
 msgid "Connected login from the WC1C website."
 msgstr ""
 
-#: includes/Admin/Settings/ConnectionForm.php:225
+#: src/Admin/Settings/ConnectionForm.php:225
 msgid "App token"
 msgstr ""
 
-#: includes/Admin/Settings/ConnectionForm.php:227
+#: src/Admin/Settings/ConnectionForm.php:227
 msgid ""
 "The current application token for the user. This token can be revoked in your "
 "personal account on the WC1C website, as well as by clicking the Disconnect "
 "button."
 msgstr ""
 
-#: includes/Admin/Settings/Form.php:75
+#: src/Admin/Settings/Form.php:75
 msgid "Save error. Please retry."
 msgstr ""
 
-#: includes/Admin/Settings/Form.php:130
+#: src/Admin/Settings/Form.php:130
 msgid "Save success."
 msgstr ""
 
-#: includes/Admin/Settings/InterfaceForm.php:40
+#: src/Admin/Settings/InterfaceForm.php:40
 msgid "Changing the interface"
 msgstr ""
 
-#: includes/Admin/Settings/InterfaceForm.php:42
+#: src/Admin/Settings/InterfaceForm.php:42
 msgid "Allow changes to WordPress and WooCommerce dashboard interface?"
 msgstr ""
 
-#: includes/Admin/Settings/InterfaceForm.php:43
+#: src/Admin/Settings/InterfaceForm.php:43
 msgid ""
 "If enabled, new features will appear in the WordPress and WooCommerce interface "
 "according to the interface change settings."
 msgstr ""
 
-#: includes/Admin/Settings/InterfaceForm.php:49
+#: src/Admin/Settings/InterfaceForm.php:49
 msgid "WooCommerce"
 msgstr ""
 
-#: includes/Admin/Settings/InterfaceForm.php:51
+#: src/Admin/Settings/InterfaceForm.php:51
 msgid "Some interface settings for the WooCommerce."
 msgstr ""
 
-#: includes/Admin/Settings/InterfaceForm.php:56
+#: src/Admin/Settings/InterfaceForm.php:56
 msgid "Column in products list"
 msgstr ""
 
-#: includes/Admin/Settings/InterfaceForm.php:58
-#: includes/Admin/Settings/InterfaceForm.php:67
-#: includes/Admin/Settings/InterfaceForm.php:76
-#: includes/Admin/Settings/InterfaceForm.php:85
-#: includes/Admin/Settings/InterfaceForm.php:94
+#: src/Admin/Settings/InterfaceForm.php:58 src/Admin/Settings/InterfaceForm.php:67
+#: src/Admin/Settings/InterfaceForm.php:76 src/Admin/Settings/InterfaceForm.php:85
+#: src/Admin/Settings/InterfaceForm.php:94
 msgid "Enable"
 msgstr ""
 
-#: includes/Admin/Settings/InterfaceForm.php:59
+#: src/Admin/Settings/InterfaceForm.php:59
 msgid "Output of a column with information from 1C to the list of products."
 msgstr ""
 
-#: includes/Admin/Settings/InterfaceForm.php:65
+#: src/Admin/Settings/InterfaceForm.php:65
 msgid "Metabox in edit products"
 msgstr ""
 
-#: includes/Admin/Settings/InterfaceForm.php:68
+#: src/Admin/Settings/InterfaceForm.php:68
 msgid "Output of a Metabox with information from 1C in edit products."
 msgstr ""
 
-#: includes/Admin/Settings/InterfaceForm.php:74
+#: src/Admin/Settings/InterfaceForm.php:74
 msgid "Column in orders list"
 msgstr ""
 
-#: includes/Admin/Settings/InterfaceForm.php:77
+#: src/Admin/Settings/InterfaceForm.php:77
 msgid "Output of a column with information from 1C to the list of orders."
 msgstr ""
 
-#: includes/Admin/Settings/InterfaceForm.php:83
+#: src/Admin/Settings/InterfaceForm.php:83
 msgid "Metabox in edit orders"
 msgstr ""
 
-#: includes/Admin/Settings/InterfaceForm.php:86
+#: src/Admin/Settings/InterfaceForm.php:86
 msgid "Output of a Metabox with information from 1C in edit orders."
 msgstr ""
 
-#: includes/Admin/Settings/InterfaceForm.php:92
+#: src/Admin/Settings/InterfaceForm.php:92
 msgid "Column in categories list"
 msgstr ""
 
-#: includes/Admin/Settings/InterfaceForm.php:95
+#: src/Admin/Settings/InterfaceForm.php:95
 msgid "Output of a column with information from 1C to the list of categories."
 msgstr ""
 
-#: includes/Admin/Settings/LogsForm.php:41
+#: src/Admin/Settings/LogsForm.php:41
 msgid "Level for main events"
 msgstr ""
 
-#: includes/Admin/Settings/LogsForm.php:43
+#: src/Admin/Settings/LogsForm.php:43
 msgid ""
 "All events of the selected level will be recorded in the log file. The higher "
 "the level, the less data is recorded."
 msgstr ""
 
-#: includes/Admin/Settings/LogsForm.php:47 includes/Admin/Settings/LogsForm.php:80
-#: includes/Admin/Settings/LogsForm.php:97
-#: includes/Admin/Settings/LogsForm.php:114
-#: includes/Admin/Settings/LogsForm.php:131
+#: src/Admin/Settings/LogsForm.php:47 src/Admin/Settings/LogsForm.php:89
+#: src/Admin/Settings/LogsForm.php:106 src/Admin/Settings/LogsForm.php:123
+#: src/Admin/Settings/LogsForm.php:140
 msgid "DEBUG (100)"
 msgstr ""
 
-#: includes/Admin/Settings/LogsForm.php:48 includes/Admin/Settings/LogsForm.php:81
-#: includes/Admin/Settings/LogsForm.php:98
-#: includes/Admin/Settings/LogsForm.php:115
-#: includes/Admin/Settings/LogsForm.php:132
+#: src/Admin/Settings/LogsForm.php:48 src/Admin/Settings/LogsForm.php:90
+#: src/Admin/Settings/LogsForm.php:107 src/Admin/Settings/LogsForm.php:124
+#: src/Admin/Settings/LogsForm.php:141
 msgid "INFO (200)"
 msgstr ""
 
-#: includes/Admin/Settings/LogsForm.php:49 includes/Admin/Settings/LogsForm.php:82
-#: includes/Admin/Settings/LogsForm.php:99
-#: includes/Admin/Settings/LogsForm.php:116
-#: includes/Admin/Settings/LogsForm.php:133
+#: src/Admin/Settings/LogsForm.php:49 src/Admin/Settings/LogsForm.php:91
+#: src/Admin/Settings/LogsForm.php:108 src/Admin/Settings/LogsForm.php:125
+#: src/Admin/Settings/LogsForm.php:142
 msgid "NOTICE (250)"
 msgstr ""
 
-#: includes/Admin/Settings/LogsForm.php:50 includes/Admin/Settings/LogsForm.php:83
-#: includes/Admin/Settings/LogsForm.php:100
-#: includes/Admin/Settings/LogsForm.php:117
-#: includes/Admin/Settings/LogsForm.php:134
+#: src/Admin/Settings/LogsForm.php:50 src/Admin/Settings/LogsForm.php:92
+#: src/Admin/Settings/LogsForm.php:109 src/Admin/Settings/LogsForm.php:126
+#: src/Admin/Settings/LogsForm.php:143
 msgid "WARNING (300)"
 msgstr ""
 
-#: includes/Admin/Settings/LogsForm.php:51 includes/Admin/Settings/LogsForm.php:84
-#: includes/Admin/Settings/LogsForm.php:101
-#: includes/Admin/Settings/LogsForm.php:118
-#: includes/Admin/Settings/LogsForm.php:135
+#: src/Admin/Settings/LogsForm.php:51 src/Admin/Settings/LogsForm.php:93
+#: src/Admin/Settings/LogsForm.php:110 src/Admin/Settings/LogsForm.php:127
+#: src/Admin/Settings/LogsForm.php:144
 msgid "ERROR (400)"
 msgstr ""
 
-#: includes/Admin/Settings/LogsForm.php:57
+#: src/Admin/Settings/LogsForm.php:57
+msgid "Maximum files"
+msgstr ""
+
+#: src/Admin/Settings/LogsForm.php:59
+msgid ""
+"Log files created daily. This option on the maximum number of stored files. By "
+"default saved of the logs are for the last 30 days."
+msgstr ""
+
+#: src/Admin/Settings/LogsForm.php:66
 msgid "Access to technical events"
 msgstr ""
 
-#: includes/Admin/Settings/LogsForm.php:59
+#: src/Admin/Settings/LogsForm.php:68
 msgid "Allow the WC1C team to access technical events?"
 msgstr ""
 
-#: includes/Admin/Settings/LogsForm.php:60
+#: src/Admin/Settings/LogsForm.php:69
 msgid ""
 "If allowed, the WC1C team will be able to access technical events and release "
 "the necessary updates based on them."
 msgstr ""
 
-#: includes/Admin/Settings/LogsForm.php:66
+#: src/Admin/Settings/LogsForm.php:75
 msgid "Levels by context"
 msgstr ""
 
-#: includes/Admin/Settings/LogsForm.php:68
+#: src/Admin/Settings/LogsForm.php:77
 msgid "Event log settings based on context."
 msgstr ""
 
-#: includes/Admin/Settings/LogsForm.php:73
-#: includes/Admin/Settings/MainForm.php:133
+#: src/Admin/Settings/LogsForm.php:82 src/Admin/Settings/MainForm.php:133
 msgid "Receiver"
 msgstr ""
 
-#: includes/Admin/Settings/LogsForm.php:75
+#: src/Admin/Settings/LogsForm.php:84
 msgid ""
 "All events of the selected level will be recorded the Receiver events in the "
 "log file. The higher the level, the less data is recorded."
 msgstr ""
 
-#: includes/Admin/Settings/LogsForm.php:79 includes/Admin/Settings/LogsForm.php:96
-#: includes/Admin/Settings/LogsForm.php:113
-#: includes/Admin/Settings/LogsForm.php:130
+#: src/Admin/Settings/LogsForm.php:88 src/Admin/Settings/LogsForm.php:105
+#: src/Admin/Settings/LogsForm.php:122 src/Admin/Settings/LogsForm.php:139
 msgid "Use level for main events"
 msgstr ""
 
-#: includes/Admin/Settings/LogsForm.php:92
+#: src/Admin/Settings/LogsForm.php:101
 msgid ""
 "All events of the selected level will be recorded the tools events in the log "
 "file. The higher the level, the less data is recorded."
 msgstr ""
 
-#: includes/Admin/Settings/LogsForm.php:107
+#: src/Admin/Settings/LogsForm.php:116
 msgid "Schemas"
 msgstr ""
 
-#: includes/Admin/Settings/LogsForm.php:109
+#: src/Admin/Settings/LogsForm.php:118
 msgid ""
 "All events of the selected level will be recorded the schemas events in the log "
 "file. The higher the level, the less data is recorded."
 msgstr ""
 
-#: includes/Admin/Settings/LogsForm.php:126
+#: src/Admin/Settings/LogsForm.php:135
 msgid ""
 "All events of the selected level will be recorded the configurations events in "
 "the log file. The higher the level, the less data is recorded."
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:45
+#: src/Admin/Settings/MainForm.php:45
 msgid "Some settings for the configurations."
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:50
+#: src/Admin/Settings/MainForm.php:50
 msgid "Unique names"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:52
+#: src/Admin/Settings/MainForm.php:52
 msgid "Require unique names for configurations?"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:53
+#: src/Admin/Settings/MainForm.php:53
 msgid "If enabled, will need to provide unique names for the configurations."
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:59
+#: src/Admin/Settings/MainForm.php:59
 msgid "Number in the list"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:61
+#: src/Admin/Settings/MainForm.php:61
 msgid "The number of displayed configurations on one page."
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:68
+#: src/Admin/Settings/MainForm.php:68
 msgid "Deleting drafts without trash"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:70
+#: src/Admin/Settings/MainForm.php:70
 msgid "Enable deleting drafts without placing them in the trash?"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:71
+#: src/Admin/Settings/MainForm.php:71
 msgid ""
 "If enabled, configurations for connections in the draft status will be deleted "
 "without being added to the basket."
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:89
+#: src/Admin/Settings/MainForm.php:89
 msgid "Technical settings"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:91
+#: src/Admin/Settings/MainForm.php:91
 msgid "Used to set up the environment."
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:96
+#: src/Admin/Settings/MainForm.php:96
 msgid "Maximum time for execution PHP"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:101
+#: src/Admin/Settings/MainForm.php:101
 msgid "Value is seconds. WC1C will run until a time limit is set."
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:102
+#: src/Admin/Settings/MainForm.php:102
 msgid "Server value:"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:104
+#: src/Admin/Settings/MainForm.php:104
 msgid ""
 "If specify 0, the time limit will be disabled. Specifying 0 is not recommended, "
 "it is recommended not to exceed the server limit."
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:112
-#: includes/Schemas/DefaultCML/Admin.php:146
+#: src/Admin/Settings/MainForm.php:112 src/Schemas/DefaultCML/Admin.php:146
 msgid "Maximum request size"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:114
-#: includes/Schemas/DefaultCML/Admin.php:148
+#: src/Admin/Settings/MainForm.php:114 src/Schemas/DefaultCML/Admin.php:148
 msgid ""
 "The setting must not take a size larger than specified in the server settings."
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:135
+#: src/Admin/Settings/MainForm.php:135
 msgid "Enable data Receiver: background requests?"
 msgstr ""
 
-#: includes/Admin/Settings/MainForm.php:136
+#: src/Admin/Settings/MainForm.php:136
 msgid ""
 "It is used to receive background requests from 1C in exchange schemes. Do not "
 "disable this option if you do not know what it is for."
 msgstr ""
 
-#: includes/Admin/Wizards/Setup/Database.php:43
+#: src/Admin/Wizards/Setup/Database.php:43
 msgid "Create tables error. Please retry."
 msgstr ""
 
-#: includes/Admin/Wizards/SetupWizard.php:54
+#: src/Admin/Wizards/SetupWizard.php:54
 msgid "Setup wizard"
 msgstr ""
 
-#: includes/Admin/Wizards/SetupWizard.php:81
+#: src/Admin/Wizards/SetupWizard.php:81
 msgid "Compatibility"
 msgstr ""
 
-#: includes/Admin/Wizards/SetupWizard.php:86
+#: src/Admin/Wizards/SetupWizard.php:86
 msgid "Database"
 msgstr ""
 
-#: includes/Admin/Wizards/SetupWizard.php:91
+#: src/Admin/Wizards/SetupWizard.php:91
 msgid "Completing"
 msgstr ""
 
-#: includes/Data/Storages/StorageConfigurations.php:96
+#: src/Data/Storages/StorageConfigurations.php:96
 msgid "Could not insert into the database"
 msgstr ""
 
-#: includes/Receiver.php:39
+#: src/Receiver.php:39
 msgid "Received new request for Receiver."
 msgstr ""
 
-#: includes/Receiver.php:40
+#: src/Receiver.php:40
 msgid "Receiver request params."
 msgstr ""
 
-#: includes/Receiver.php:48 includes/Receiver.php:49
+#: src/Receiver.php:48 src/Receiver.php:49
 msgid "Receiver is offline. Request reject."
 msgstr ""
 
-#: includes/Receiver.php:58
+#: src/Receiver.php:58
 msgid "Selected configuration for Receiver is unavailable."
 msgstr ""
 
-#: includes/Receiver.php:59
+#: src/Receiver.php:59
 msgid "Configuration for Receiver is unavailable."
 msgstr ""
 
-#: includes/Receiver.php:66 includes/Receiver.php:67
+#: src/Receiver.php:66 src/Receiver.php:67
 msgid "Selected configuration is offline."
 msgstr ""
 
-#: includes/Receiver.php:78
+#: src/Receiver.php:78
 msgid "Error saving configuration."
 msgstr ""
 
-#: includes/Receiver.php:88
+#: src/Receiver.php:88
 msgid "Schema for configuration is not initialized."
 msgstr ""
 
-#: includes/Receiver.php:101
+#: src/Receiver.php:101
 msgid ""
 "The request was successfully submitted for processing in the schema for the "
 "selected configuration."
 msgstr ""
 
-#: includes/Receiver.php:109
+#: src/Receiver.php:109
 msgid "Receiver request is very bad! Action not found in selected configuration."
 msgstr ""
 
-#: includes/Receiver.php:110
+#: src/Receiver.php:110
 msgid "Receiver request is very bad! Action not found."
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:60
+#: src/Schemas/DefaultCML/Admin.php:60
 msgid "Processing details"
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:62
+#: src/Schemas/DefaultCML/Admin.php:62
 msgid "Changing the behavior of the file processing."
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:67
+#: src/Schemas/DefaultCML/Admin.php:67
 msgid "Skip processing of files"
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:69
-#: includes/Schemas/DefaultCML/Admin.php:78
-#: includes/Schemas/DefaultCML/Admin.php:87
-#: includes/Schemas/DefaultCML/Admin.php:139
-#: includes/Schemas/DefaultCML/Admin.php:157
-#: includes/Schemas/DefaultCML/Admin.php:166
+#: src/Schemas/DefaultCML/Admin.php:69 src/Schemas/DefaultCML/Admin.php:78
+#: src/Schemas/DefaultCML/Admin.php:87 src/Schemas/DefaultCML/Admin.php:139
+#: src/Schemas/DefaultCML/Admin.php:157 src/Schemas/DefaultCML/Admin.php:166
 msgid "Check the checkbox if want to enable this feature. Disabled by default."
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:70
+#: src/Schemas/DefaultCML/Admin.php:70
 msgid ""
 "Disabling the actual processing of CommerceML files. Files will be accepted, "
 "but instead of processing them, they will be skipped with successful completion "
 "of processing."
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:76
+#: src/Schemas/DefaultCML/Admin.php:76
 msgid "Deleting CommerceML files after processing"
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:79
+#: src/Schemas/DefaultCML/Admin.php:79
 msgid ""
 "If deletion is disabled, the exchange files will remain in the directories "
 "until the next exchange. Otherwise, all processed files will be deleted "
 "immediately after error-free processing."
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:85
+#: src/Schemas/DefaultCML/Admin.php:85
 msgid "Deleting ZIP files after extract"
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:88
+#: src/Schemas/DefaultCML/Admin.php:88
 msgid ""
 "If deletion is disabled, the exchange ZIP files will remain in the directories "
 "until the next exchange."
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:106
+#: src/Schemas/DefaultCML/Admin.php:106
 msgid "Technical details"
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:108
+#: src/Schemas/DefaultCML/Admin.php:108
 msgid ""
 "Changing processing behavior for compatibility of the environment and other "
 "systems."
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:115
+#: src/Schemas/DefaultCML/Admin.php:115
 msgid "Logging events"
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:117
+#: src/Schemas/DefaultCML/Admin.php:117
 msgid ""
 "Can enable logging, specify the level of error that to benefit from logging.\n"
 "\t\t\t Can send reports to developer. All sensitive data in the report are "
@@ -846,390 +838,388 @@ msgid ""
 "\t\t\t  By default, the error rate should not be less than ERROR."
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:119
+#: src/Schemas/DefaultCML/Admin.php:119
 msgid "Current path: "
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:123
+#: src/Schemas/DefaultCML/Admin.php:123
 msgid "Off"
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:124
+#: src/Schemas/DefaultCML/Admin.php:124
 msgid "DEBUG"
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:125
+#: src/Schemas/DefaultCML/Admin.php:125
 msgid "INFO"
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:126
+#: src/Schemas/DefaultCML/Admin.php:126
 msgid "NOTICE"
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:127
+#: src/Schemas/DefaultCML/Admin.php:127
 msgid "WARNING"
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:128
+#: src/Schemas/DefaultCML/Admin.php:128
 msgid "ERROR"
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:129
+#: src/Schemas/DefaultCML/Admin.php:129
 msgid "CRITICAL"
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:130
+#: src/Schemas/DefaultCML/Admin.php:130
 msgid "ALERT"
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:131
+#: src/Schemas/DefaultCML/Admin.php:131
 msgid "EMERGENCY"
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:137
+#: src/Schemas/DefaultCML/Admin.php:137
 msgid "Converting to Windows-1251"
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:140
+#: src/Schemas/DefaultCML/Admin.php:140
 msgid ""
 "Data from utf-8 will be converted to Windows-1251 encoding. Use this feature "
 "for compatibility with older versions of 1C."
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:155
+#: src/Schemas/DefaultCML/Admin.php:155
 msgid "Support for data compression"
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:158
+#: src/Schemas/DefaultCML/Admin.php:158
 msgid ""
 "1C can transfer files in archives to reduce the number of HTTP requests and "
 "compress data. In this case, the load may increase when unpacking archives, or "
 "even it may be impossible to unpack due to server restrictions."
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:164
+#: src/Schemas/DefaultCML/Admin.php:164
 msgid "Receiver: disable check auth key"
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:167
+#: src/Schemas/DefaultCML/Admin.php:167
 msgid ""
 "When enabled, verification of authorization data will be completely disabled. "
 "The authenticity of requests from 1C will not be checked."
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:185
+#: src/Schemas/DefaultCML/Admin.php:185
 msgid "Requests authorization"
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:187
+#: src/Schemas/DefaultCML/Admin.php:187
 msgid "Data for authorization of requests. These settings will connect 1C."
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:195
+#: src/Schemas/DefaultCML/Admin.php:195
 msgid "Requests URL"
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:198
+#: src/Schemas/DefaultCML/Admin.php:198
 msgid ""
 "This address is entered in the exchange settings on the 1C side. It will "
 "receive requests from 1C."
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:203
+#: src/Schemas/DefaultCML/Admin.php:203
 msgid "Login to connect"
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:205
+#: src/Schemas/DefaultCML/Admin.php:205
 msgid ""
 "Enter the username to connect from 1C. It should be the same as when setting up "
 "in 1C."
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:212
+#: src/Schemas/DefaultCML/Admin.php:212
 msgid "Password to connect"
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Admin.php:214
+#: src/Schemas/DefaultCML/Admin.php:214
 msgid ""
 "Enter the users password to connect from 1C. It must be the same as when "
 "setting up in 1C."
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Core.php:22
+#: src/Schemas/DefaultCML/Core.php:22
 msgid "Default schema based on CML"
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Core.php:23
+#: src/Schemas/DefaultCML/Core.php:23
 msgid ""
 "Standard data exchange using the standard exchange algorithm from 1C via "
 "CommerceML. Exchanges only contains products data."
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Receiver.php:197
+#: src/Schemas/DefaultCML/Receiver.php:197
 msgid "Schema: action not found"
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Receiver.php:238
+#: src/Schemas/DefaultCML/Receiver.php:238
 msgid "Not specified the user. Check the server settings."
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Receiver.php:249
+#: src/Schemas/DefaultCML/Receiver.php:249
 msgid "Not a valid username."
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Receiver.php:250
+#: src/Schemas/DefaultCML/Receiver.php:250
 msgid "Not a valid username"
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Receiver.php:255
+#: src/Schemas/DefaultCML/Receiver.php:255
 msgid "Not a valid user password."
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Receiver.php:256
+#: src/Schemas/DefaultCML/Receiver.php:256
 msgid "Not a valid user password"
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Receiver.php:262
+#: src/Schemas/DefaultCML/Receiver.php:262
 msgid "Checkauth is success."
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Receiver.php:281
-#: includes/Schemas/DefaultCML/Receiver.php:423
+#: src/Schemas/DefaultCML/Receiver.php:281 src/Schemas/DefaultCML/Receiver.php:423
 msgid "Authorization failed."
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Receiver.php:323
+#: src/Schemas/DefaultCML/Receiver.php:323
 msgid "Authorization failed"
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Receiver.php:332
+#: src/Schemas/DefaultCML/Receiver.php:332
 msgid "Unable to create a directory:"
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Receiver.php:343
+#: src/Schemas/DefaultCML/Receiver.php:343
 msgid "Filename is empty."
 msgstr ""
 
-#: includes/Schemas/DefaultCML/Receiver.php:433
+#: src/Schemas/DefaultCML/Receiver.php:433
 msgid "Import filename is empty."
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:52 templates/helps/bugs.php:27
+#: src/Tools/Environments/Init.php:52 templates/helps/bugs.php:27
 msgid "Environments"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:53
+#: src/Tools/Environments/Init.php:53
 msgid "Data about all current environments."
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:112
+#: src/Tools/Environments/Init.php:112
 msgid "yes"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:116
-#: includes/Traits/DatetimeUtilityTrait.php:114
+#: src/Tools/Environments/Init.php:116 src/Traits/DatetimeUtilityTrait.php:114
 msgid "not"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:140
+#: src/Tools/Environments/Init.php:140
 msgid "WordPress environment"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:154
+#: src/Tools/Environments/Init.php:154
 msgid "WC1C environment"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:168
+#: src/Tools/Environments/Init.php:168
 msgid "WooCommerce environment"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:182
+#: src/Tools/Environments/Init.php:182
 msgid "Server environment"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:208
+#: src/Tools/Environments/Init.php:208
 msgid "Home URL"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:218
+#: src/Tools/Environments/Init.php:218
 msgid "Site URL"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:228
+#: src/Tools/Environments/Init.php:228
 msgid "WordPress version"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:238
+#: src/Tools/Environments/Init.php:238
 msgid "WordPress multisite"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:248
+#: src/Tools/Environments/Init.php:248
 msgid "WordPress debug"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:258
+#: src/Tools/Environments/Init.php:258
 msgid "WordPress cron"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:268
+#: src/Tools/Environments/Init.php:268
 msgid "WordPress language"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:278
+#: src/Tools/Environments/Init.php:278
 msgid "WordPress memory limit"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:313
+#: src/Tools/Environments/Init.php:313
 msgid "Server info"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:323
+#: src/Tools/Environments/Init.php:323
 msgid "PHP version"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:333
+#: src/Tools/Environments/Init.php:333
 msgid "Database version"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:343
+#: src/Tools/Environments/Init.php:343
 msgid "Suhosin"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:353
+#: src/Tools/Environments/Init.php:353
 msgid "Fsockopen or curl enabled"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:367
+#: src/Tools/Environments/Init.php:367
 msgid "CURL info"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:378
+#: src/Tools/Environments/Init.php:378
 msgid "Default timezone"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:388
+#: src/Tools/Environments/Init.php:388
 msgid "PHP post max size"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:398
+#: src/Tools/Environments/Init.php:398
 msgid "PHP max upload size"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:408
+#: src/Tools/Environments/Init.php:408
 msgid "PHP max execution time"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:418
+#: src/Tools/Environments/Init.php:418
 msgid "PHP max input vars"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:428
+#: src/Tools/Environments/Init.php:428
 msgid "PHP soapclient enabled"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:438
+#: src/Tools/Environments/Init.php:438
 msgid "PHP domdocument enabled"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:448
+#: src/Tools/Environments/Init.php:448
 msgid "PHP gzip enabled"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:458
+#: src/Tools/Environments/Init.php:458
 msgid "PHP mbstring enabled"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:489
+#: src/Tools/Environments/Init.php:489
 msgid "WC1C version"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:499
+#: src/Tools/Environments/Init.php:499
 msgid "Upload directory"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:512
+#: src/Tools/Environments/Init.php:512
 msgid "Count extensions"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:527
+#: src/Tools/Environments/Init.php:527
 msgid "Count schemas"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:543
+#: src/Tools/Environments/Init.php:543
 msgid "Count tools"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:571
+#: src/Tools/Environments/Init.php:571
 msgid "WooCommerce version"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:588
+#: src/Tools/Environments/Init.php:588
 msgid "WooCommerce product types"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:598
+#: src/Tools/Environments/Init.php:598
 msgid "WooCommerce currency"
 msgstr ""
 
-#: includes/Tools/Environments/Init.php:608
+#: src/Tools/Environments/Init.php:608
 msgid "WooCommerce currency symbol"
 msgstr ""
 
-#: includes/Traits/ConfigurationsUtilityTrait.php:41
-#: includes/Traits/ConfigurationsUtilityTrait.php:77
+#: src/Traits/ConfigurationsUtilityTrait.php:41
+#: src/Traits/ConfigurationsUtilityTrait.php:77
 msgid "Undefined"
 msgstr ""
 
-#: includes/Traits/ConfigurationsUtilityTrait.php:47
+#: src/Traits/ConfigurationsUtilityTrait.php:47
 msgid "Draft"
 msgstr ""
 
-#: includes/Traits/ConfigurationsUtilityTrait.php:48
+#: src/Traits/ConfigurationsUtilityTrait.php:48
 msgid "Active"
 msgstr ""
 
-#: includes/Traits/ConfigurationsUtilityTrait.php:49
+#: src/Traits/ConfigurationsUtilityTrait.php:49
 msgid "Inactive"
 msgstr ""
 
-#: includes/Traits/ConfigurationsUtilityTrait.php:50
+#: src/Traits/ConfigurationsUtilityTrait.php:50
 #: templates/configurations/update_error.php:8
 msgid "Error"
 msgstr ""
 
-#: includes/Traits/ConfigurationsUtilityTrait.php:51
+#: src/Traits/ConfigurationsUtilityTrait.php:51
 msgid "Processing"
 msgstr ""
 
-#: includes/Traits/ConfigurationsUtilityTrait.php:52
+#: src/Traits/ConfigurationsUtilityTrait.php:52
 msgid "Deleted"
 msgstr ""
 
-#: includes/Traits/ConfigurationsUtilityTrait.php:83
+#: src/Traits/ConfigurationsUtilityTrait.php:83
 msgid "Drafts"
 msgstr ""
 
-#: includes/Traits/ConfigurationsUtilityTrait.php:84
+#: src/Traits/ConfigurationsUtilityTrait.php:84
 msgid "Activated"
 msgstr ""
 
-#: includes/Traits/ConfigurationsUtilityTrait.php:85
+#: src/Traits/ConfigurationsUtilityTrait.php:85
 msgid "Deactivated"
 msgstr ""
 
-#: includes/Traits/ConfigurationsUtilityTrait.php:86
+#: src/Traits/ConfigurationsUtilityTrait.php:86
 msgid "With errors"
 msgstr ""
 
-#: includes/Traits/ConfigurationsUtilityTrait.php:87
+#: src/Traits/ConfigurationsUtilityTrait.php:87
 msgid "In processing"
 msgstr ""
 
-#: includes/Traits/ConfigurationsUtilityTrait.php:88
+#: src/Traits/ConfigurationsUtilityTrait.php:88
 msgid "Trash"
 msgstr ""
 
-#: includes/Traits/DatetimeUtilityTrait.php:121
+#: src/Traits/DatetimeUtilityTrait.php:121
 #, php-format
 msgid "%s <span class=\"time\">in: %s</span>"
 msgstr ""
@@ -1266,7 +1256,7 @@ msgstr ""
 msgid "Error. Page for configurations not found."
 msgstr ""
 
-#: templates/configurations/update.php:8
+#: templates/configurations/update.php:6
 #: templates/configurations/update_error.php:3
 msgid "Back to configurations list"
 msgstr ""
@@ -1275,7 +1265,7 @@ msgstr ""
 msgid "Update is not available. Configuration not found or unavailable."
 msgstr ""
 
-#: templates/configurations/update_form.php:11
+#: templates/configurations/update_form.php:14
 msgid "Save configuration"
 msgstr ""
 
@@ -1335,11 +1325,11 @@ msgstr ""
 msgid "Report a bug"
 msgstr ""
 
-#: templates/helps/features.php:30
+#: templates/helps/features.php:31
 msgid "Request a feature"
 msgstr ""
 
-#: templates/helps/features.php:33
+#: templates/helps/features.php:34
 msgid "Features"
 msgstr ""
 

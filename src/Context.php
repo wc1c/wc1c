@@ -44,9 +44,34 @@ final class Context
 	 */
 	public function isWc1cAdmin()
 	{
-		if(false !== is_admin() && 'wc1c' === wc1c()->getVar($_GET['page'], ''))
+		return $this->isAdmin();
+	}
+
+	/**
+	 * Is admin request?
+	 *
+	 * @return bool
+	 */
+	public function isAdmin($type = 'plugin')
+	{
+		switch($type)
 		{
-			return true;
+			case 'wc1c':
+			case 'plugin':
+				if(false !== is_admin() && 'wc1c' === wc1c()->getVar($_GET['page'], ''))
+				{
+					return true;
+				}
+				break;
+			case 'wp':
+			case 'wordpress':
+				if(false !== is_admin())
+				{
+					return true;
+				}
+				break;
+			default:
+				return false;
 		}
 
 		return false;
