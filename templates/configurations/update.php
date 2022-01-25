@@ -7,7 +7,7 @@
             wc1c()->templates()->adminBackLink($label, $args['back_url']);
         ?>
 
-        <div class="p-2 bg-white rounded-3 mb-3">
+        <div class="p-2 bg-white rounded-0 mb-3">
             <?php do_action(WC1C_ADMIN_PREFIX . 'configurations_update_header_show'); ?>
         </div>
     </div>

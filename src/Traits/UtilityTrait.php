@@ -157,4 +157,22 @@ trait UtilityTrait
 
 		return admin_url($path);
 	}
+
+	/**
+	 * @param $data
+	 * @param bool $die
+	 *
+	 * @return void
+	 */
+	public function dump($data, $die = false)
+	{
+		echo '<pre>';
+		var_dump($data);
+		echo '</pre>';
+
+		if($die)
+		{
+			die;
+		}
+	}
 }
