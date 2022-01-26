@@ -189,7 +189,7 @@ final class Admin
 			}
 		}
 
-		wc1c()->templates()->getTemplate('wrap.php');
+		wc1c()->views()->getView('wrap.php');
 	}
 
 	/**
@@ -197,7 +197,7 @@ final class Admin
 	 */
 	public function wrapError()
 	{
-		wc1c()->templates()->getTemplate('error.php');
+		wc1c()->views()->getView('error.php');
 	}
 
 	/**
@@ -207,7 +207,7 @@ final class Admin
 	{
 		$args['url_create'] = $this->utilityAdminConfigurationsGetUrl('create');
 
-		wc1c()->templates()->getTemplate('header.php', $args);
+		wc1c()->views()->getView('header.php', $args);
 	}
 
 	/**
@@ -215,7 +215,7 @@ final class Admin
 	 */
 	public function wrapSections()
 	{
-		wc1c()->templates()->getTemplate('sections.php');
+		wc1c()->views()->getView('sections.php');
 	}
 
 	/**

@@ -139,7 +139,7 @@ class Init extends ToolAbstract
 
 		$args = ['title' => __('WordPress environment', 'wc1c'), 'data' => $wp_data];
 
-		wc1c()->templates()->getTemplate('tools/environments/item.php', $args);
+		wc1c()->views()->getView('tools/environments/item.php', $args);
 	}
 
 	/**
@@ -153,7 +153,7 @@ class Init extends ToolAbstract
 
 		$args = ['title' => __('WC1C environment', 'wc1c'), 'data' => $wc1c_data];
 
-		wc1c()->templates()->getTemplate('tools/environments/item.php', $args);
+		wc1c()->views()->getView('tools/environments/item.php', $args);
 	}
 
 	/**
@@ -167,7 +167,7 @@ class Init extends ToolAbstract
 
 		$args = ['title' => __('WooCommerce environment', 'wc1c'), 'data' => $wp_data];
 
-		wc1c()->templates()->getTemplate('tools/environments/item.php', $args);
+		wc1c()->views()->getView('tools/environments/item.php', $args);
 	}
 
 	/**
@@ -181,7 +181,7 @@ class Init extends ToolAbstract
 
 		$args = ['title' => __('Server environment', 'wc1c'), 'data' => $server_data];
 
-		wc1c()->templates()->getTemplate('tools/environments/item.php', $args);
+		wc1c()->views()->getView('tools/environments/item.php', $args);
 	}
 
 	/**

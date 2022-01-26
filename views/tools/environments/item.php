@@ -10,7 +10,7 @@
             <?php
                 foreach($args['data'] as $data_key => $data_value)
                 {
-                    wc1c()->templates()->getTemplate('tools/environments/item_row.php', $data_value);
+                    wc1c()->views()->getView('tools/environments/item_row.php', $data_value);
                 }
             ?>
             </tbody>

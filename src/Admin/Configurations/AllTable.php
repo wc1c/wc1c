@@ -55,7 +55,7 @@ class AllTable extends TableAbstract
 	{
 		$args['url_create'] = $this->utilityAdminConfigurationsGetUrl('create');
 
-		wc1c()->templates()->getTemplate('configurations/empty.php', $args);
+		wc1c()->views()->getView('configurations/empty.php', $args);
 	}
 
 	/**

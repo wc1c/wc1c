@@ -31,7 +31,7 @@ class InlineForm extends FormAbstract
 			'object' => $this
 		];
 
-		wc1c()->templates()->getTemplate('inline_form.php', $args);
+		wc1c()->views()->getView('inline_form.php', $args);
 	}
 
 	/**

@@ -123,7 +123,7 @@ class Settings
 	 */
 	public function wrapSections()
 	{
-		wc1c()->templates()->getTemplate('settings/sections.php');
+		wc1c()->views()->getView('settings/sections.php');
 	}
 
 	/**
@@ -131,6 +131,6 @@ class Settings
 	 */
 	public function wrapError()
 	{
-		wc1c()->templates()->getTemplate('settings/error.php');
+		wc1c()->views()->getView('settings/error.php');
 	}
 }

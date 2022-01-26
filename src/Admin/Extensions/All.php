@@ -23,7 +23,7 @@ class All extends ScreenAbstract
 
 		if(empty($extensions))
 		{
-			wc1c()->templates()->getTemplate('extensions/empty.php');
+			wc1c()->views()->getView('extensions/empty.php');
 			return;
 		}
 
@@ -35,7 +35,7 @@ class All extends ScreenAbstract
 				'object' => $extension_object
 			];
 
-			wc1c()->templates()->getTemplate('extensions/item.php', $args);
+			wc1c()->views()->getView('extensions/item.php', $args);
 		}
 	}
 }

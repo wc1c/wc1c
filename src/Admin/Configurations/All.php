@@ -23,6 +23,6 @@ class All extends ScreenAbstract
 
 		$args['object'] = $list_table;
 
-		wc1c()->templates()->getTemplate('configurations/all.php', $args);
+		wc1c()->views()->getView('configurations/all.php', $args);
 	}
 }

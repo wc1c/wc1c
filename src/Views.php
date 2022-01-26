@@ -1,38 +1,25 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c;
+<?php namespace Wc1c;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use Wc1c\Traits\SingletonTrait;
 
 /**
- * Templates
+ * Views
  *
  * @package Wc1c
  */
-final class Templates
+final class Views
 {
 	use SingletonTrait;
 
 	/**
-	 * Templates constructor.
+	 * Views constructor.
 	 */
 	public function __construct()
 	{
 		// hook
-		do_action(WC1C_PREFIX . 'templates_before_loading');
-
-		// hook
-		do_action(WC1C_PREFIX . 'templates_after_loading');
+		do_action(WC1C_PREFIX . 'views_loaded');
 	}
 
 	/**
@@ -47,38 +34,38 @@ final class Templates
 	}
 
 	/**
-	 * Get templates
+	 * Get views
 	 *
 	 * @param string $template_name template name
 	 * @param array $args arguments (default: array)
 	 * @param string $template_path template path (default: '')
 	 * @param string $default_path default path (default: '')
 	 */
-	public function getTemplate($template_name, $args = [], $template_path = '', $default_path = '')
+	public function getView($template_name, $args = [], $template_path = '', $default_path = '')
 	{
-		$located = $this->locateTemplate($template_name, $template_path, $default_path);
+		$located = $this->locateView($template_name, $template_path, $default_path);
 
 		if(!file_exists($located))
 		{
 			return;
 		}
 
-		$located = apply_filters(WC1C_PREFIX . 'get_template', $located, $template_name, $args, $template_path, $default_path);
+		$located = apply_filters(WC1C_PREFIX . 'get_view', $located, $template_name, $args, $template_path, $default_path);
 
-		do_action(WC1C_PREFIX . 'get_template_before', $template_name, $template_path, $located, $args);
+		do_action(WC1C_PREFIX . 'get_view_before', $template_name, $template_path, $located, $args);
 
 		include $located;
 
-		do_action(WC1C_PREFIX . 'get_template_after', $template_name, $template_path, $located, $args);
+		do_action(WC1C_PREFIX . 'get_view_after', $template_name, $template_path, $located, $args);
 	}
 
 	/**
-	 * Get template part
+	 * Get view part
 	 *
 	 * @param mixed $slug Template slug
 	 * @param string $name Template name (default: '')
 	 */
-	public function getTemplatePart($slug, $name = '')
+	public function getViewPart($slug, $name = '')
 	{
 		$template = '';
 
@@ -89,9 +76,9 @@ final class Templates
 		}
 
 		// Get default slug-name.php
-		if(!$template && $name && file_exists(WC1C_PLUGIN_PATH . "templates/{$slug}-{$name}.php"))
+		if(!$template && $name && file_exists(WC1C_PLUGIN_PATH . "views/{$slug}-{$name}.php"))
 		{
-			$template = WC1C_PLUGIN_PATH . "templates/{$slug}-{$name}.php";
+			$template = WC1C_PLUGIN_PATH . "views/{$slug}-{$name}.php";
 		}
 
 		// If template file doesn't exist, look in yourtheme/wc1c/slug.php
@@ -101,7 +88,7 @@ final class Templates
 		}
 
 		// Allow 3rd party plugins to filter template file from their plugin
-		$template = apply_filters(WC1C_PREFIX . 'get_template_part', $template, $slug, $name);
+		$template = apply_filters(WC1C_PREFIX . 'get_view_part', $template, $slug, $name);
 
 		if($template)
 		{
@@ -110,7 +97,7 @@ final class Templates
 	}
 
 	/**
-	 * Like wc1c()->templates()->getTemplate, but returns the HTML instead of outputting
+	 * Like wc1c()->views()->getTemplate, but returns the HTML instead of outputting
 	 *
 	 * @param string $template_name template name
 	 * @param array $args arguments (default: array)
@@ -119,10 +106,10 @@ final class Templates
 	 *
 	 * @return string
 	 */
-	public function getTemplateHtml($template_name, $args = [], $template_path = '', $default_path = '')
+	public function getViewHtml($template_name, $args = [], $template_path = '', $default_path = '')
 	{
 		ob_start();
-		$this->getTemplate($template_name, $args, $template_path, $default_path);
+		$this->getView($template_name, $args, $template_path, $default_path);
 
 		return ob_get_clean();
 	}
@@ -142,7 +129,7 @@ final class Templates
 	 *
 	 * @return string
 	 */
-	public function locateTemplate($template_name, $template_path = '', $default_path = '')
+	public function locateView($template_name, $template_path = '', $default_path = '')
 	{
 		$template = false;
 
@@ -153,7 +140,7 @@ final class Templates
 
 		if(!$default_path)
 		{
-			$default_path = WC1C_PLUGIN_PATH . 'templates/';
+			$default_path = WC1C_PLUGIN_PATH . 'views/';
 		}
 
 		if($template_path && file_exists(trailingslashit($template_path) . $template_name))
@@ -161,13 +148,13 @@ final class Templates
 			$template = trailingslashit($template_path) . $template_name;
 		}
 
-		// Get default template/
+		// Get default views/
 		if(!$template)
 		{
 			$template = $default_path . $template_name;
 		}
 
 		// Return what we found
-		return apply_filters(WC1C_PREFIX . 'locate_template', $template, $template_name, $template_path);
+		return apply_filters(WC1C_PREFIX . 'locate_view', $template, $template_name, $template_path);
 	}
 }
