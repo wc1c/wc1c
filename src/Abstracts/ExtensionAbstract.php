@@ -146,7 +146,7 @@ abstract class ExtensionAbstract
 
 		$plugin_data = get_file_data($file, $default_headers, 'plugin');
 
-		if(isset($plugin_data['Version']))
+		if(!isset($plugin_data['Version']))
 		{
 			return false;
 		}
