@@ -243,7 +243,7 @@ class ConnectionForm extends Form
 			'object' => $this
 		];
 
-		wc1c()->templates()->getTemplate('connection/form.php', $args);
+		wc1c()->views()->getView('connection/form.php', $args);
 	}
 
 	/**
@@ -253,6 +253,6 @@ class ConnectionForm extends Form
 	 */
 	public function output()
 	{
-		wc1c()->templates()->getTemplate('connection/init.php');
+		wc1c()->views()->getView('connection/init.php');
 	}
 }

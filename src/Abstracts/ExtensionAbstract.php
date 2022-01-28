@@ -1,22 +1,12 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Abstracts;
+<?php namespace Wc1c\Abstracts;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use Wc1c\Exceptions\Exception;
 use Wc1c\Exceptions\RuntimeException;
 
 /**
- * Class ExtensionAbstract
+ * ExtensionAbstract
  *
  * @package Wc1c\Abstracts
  */
@@ -123,5 +113,55 @@ abstract class ExtensionAbstract
 		}
 
 		throw new RuntimeException('$name is not available');
+	}
+
+	/**
+	 * Load meta data by plugin file
+	 *
+	 * @param $file
+	 * @param string $locale
+	 *
+	 * @return bool
+	 */
+	public function loadMetaByPlugin($file, $locale = 'wc1c')
+	{
+		$default_headers =
+		[
+			'Name' => 'Plugin Name',
+			'PluginURI' => 'Plugin URI',
+			'Version' => 'Version',
+			'Description' => 'Description',
+			'Author' => 'Author',
+			'AuthorURI' => 'Author URI',
+			'TextDomain' => 'Text Domain',
+			'DomainPath' => 'Domain Path',
+			'Network' => 'Network',
+			'RequiresWP' => 'Requires at least',
+			'RequiresPHP' => 'Requires PHP',
+			'RequiresWC' => 'WC requires at least',
+			'TestedWC' => 'WC tested up to',
+			'RequiresWC1C' => 'Requires WC1C',
+			'TestedWC1C' => 'WC1C tested up to',
+		];
+
+		$plugin_data = get_file_data($file, $default_headers, 'plugin');
+
+		if(!isset($plugin_data['Version']))
+		{
+			return false;
+		}
+
+		$this->setMeta('version', $plugin_data['Version']);
+		$this->setMeta('version_php_min', $plugin_data['RequiresPHP']);
+		$this->setMeta('version_wp_min', $plugin_data['RequiresWP']);
+		$this->setMeta('version_wc_min', $plugin_data['RequiresWC']);
+		$this->setMeta('version_wc_max', $plugin_data['TestedWC']);
+		$this->setMeta('version_wc1c_min', $plugin_data['RequiresWC1C']);
+		$this->setMeta('version_wc1c_max', $plugin_data['TestedWC1C']);
+		$this->setMeta('author', __($plugin_data['Author'], $locale));
+		$this->setMeta('name', __($plugin_data['Name'], $locale));
+		$this->setMeta('description', __($plugin_data['Description'], $locale));
+
+		return true;
 	}
 }

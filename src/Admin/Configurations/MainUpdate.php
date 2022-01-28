@@ -114,7 +114,7 @@ class MainUpdate
 		$args['body'] = $body;
 		//$args['css'] = 'margin-top:-35px!important;';
 
-		wc1c()->templates()->getTemplate('configurations/update_sidebar_item.php', $args);
+		wc1c()->views()->getView('configurations/update_sidebar_item.php', $args);
 
 		try
 		{
@@ -135,7 +135,7 @@ class MainUpdate
 
 			$args['body'] = $body;
 
-			wc1c()->templates()->getTemplate('configurations/update_sidebar_item.php', $args);
+			wc1c()->views()->getView('configurations/update_sidebar_item.php', $args);
 		}
 		catch(RuntimeException $e){}
 	}

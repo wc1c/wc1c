@@ -303,6 +303,6 @@ class CreateForm extends FormAbstract
 			'object' => $this
 		];
 
-		wc1c()->templates()->getTemplate('configurations/create_form.php', $args);
+		wc1c()->views()->getView('configurations/create_form.php', $args);
 	}
 }

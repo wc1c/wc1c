@@ -28,7 +28,7 @@
                 'object' => $tool_object,
             ];
 
-            wc1c()->templates()->getTemplate('tools/item.php', $args);
+            wc1c()->views()->getView('tools/item.php', $args);
         }
 
     ?>

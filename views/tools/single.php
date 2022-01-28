@@ -7,7 +7,7 @@
 
         <?php
             $label = __('Back to all tools', 'wc1c');
-            wc1c()->templates()->adminBackLink($label, $args['back_url']);
+            wc1c()->views()->adminBackLink($label, $args['back_url']);
         ?>
 
         <div class="bg-white p-2 rounded-3">

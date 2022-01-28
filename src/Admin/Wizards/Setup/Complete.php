@@ -48,6 +48,6 @@ class Complete extends StepAbstract
 			'back_url' => $this->utilityAdminConfigurationsGetUrl('all'),
 		];
 
-		wc1c()->templates()->getTemplate('wizards/steps/complete.php', $args);
+		wc1c()->views()->getView('wizards/steps/complete.php', $args);
 	}
 }

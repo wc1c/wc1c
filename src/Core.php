@@ -2,16 +2,16 @@
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Settings\InterfaceSettings;
-use Wc1c\Settings\LogsSettings;
 use wpdb;
+use Psr\Log\LoggerInterface;
 use Wc1c\Log\Formatter;
 use Wc1c\Log\Handler;
-use Psr\Log\LoggerInterface;
+use Wc1c\Log\Logger;
+use Wc1c\Settings\InterfaceSettings;
+use Wc1c\Settings\LogsSettings;
 use Wc1c\Exceptions\Exception;
 use Wc1c\Exceptions\RuntimeException;
 use Wc1c\Interfaces\SettingsInterface;
-use Wc1c\Log\Logger;
 use Wc1c\Traits\SingletonTrait;
 use Wc1c\Settings\MainSettings;
 use Wc1c\Settings\ConnectionSettings;
@@ -211,13 +211,13 @@ final class Core
 	}
 
 	/**
-	 * Templates
+	 * Views
 	 *
-	 * @return Templates
+	 * @return Views
 	 */
-	public function templates()
+	public function views()
 	{
-		return Templates::instance();
+		return Views::instance();
 	}
 
 	/**

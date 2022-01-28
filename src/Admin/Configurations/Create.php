@@ -36,7 +36,7 @@ class Create extends ScreenAbstract
 	 */
 	public function wrapError()
 	{
-		wc1c()->templates()->getTemplate('configurations/error.php');
+		wc1c()->views()->getView('configurations/error.php');
 	}
 
 	/**
@@ -48,6 +48,6 @@ class Create extends ScreenAbstract
 	{
 		$args['back_url'] = $this->utilityAdminConfigurationsGetUrl('all');
 
-		wc1c()->templates()->getTemplate('configurations/create.php', $args);
+		wc1c()->views()->getView('configurations/create.php', $args);
 	}
 }

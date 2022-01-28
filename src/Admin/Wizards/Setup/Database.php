@@ -60,7 +60,7 @@ class Database extends StepAbstract
 			'step' => $this
 		];
 
-		wc1c()->templates()->getTemplate('wizards/steps/database.php', $args);
+		wc1c()->views()->getView('wizards/steps/database.php', $args);
 	}
 
 	/**

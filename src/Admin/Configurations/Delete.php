@@ -138,7 +138,7 @@ class Delete
 	 */
 	public function outputError()
 	{
-		wc1c()->templates()->getTemplate('configurations/delete_error.php');
+		wc1c()->views()->getView('configurations/delete_error.php');
 	}
 
 	/**
@@ -148,6 +148,6 @@ class Delete
 	 */
 	public function output()
 	{
-		wc1c()->templates()->getTemplate('configurations/delete.php');
+		wc1c()->views()->getView('configurations/delete.php');
 	}
 }

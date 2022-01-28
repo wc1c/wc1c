@@ -42,6 +42,6 @@ class Check extends StepAbstract
 			'step' => $this
 		];
 
-		wc1c()->templates()->getTemplate('wizards/steps/check.php', $args);
+		wc1c()->views()->getView('wizards/steps/check.php', $args);
 	}
 }

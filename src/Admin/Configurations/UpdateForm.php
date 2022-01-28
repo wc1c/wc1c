@@ -65,7 +65,7 @@ class UpdateForm extends FormAbstract
 			'object' => $this
 		];
 
-		wc1c()->templates()->getTemplate('configurations/update_form.php', $args);
+		wc1c()->views()->getView('configurations/update_form.php', $args);
 	}
 
 	/**
@@ -164,7 +164,7 @@ class UpdateForm extends FormAbstract
         {
 	        $args['body'] = $body;
 
-	        wc1c()->templates()->getTemplate('configurations/update_sidebar_toc.php', $args);
+	        wc1c()->views()->getView('configurations/update_sidebar_toc.php', $args);
         }
 	}
 

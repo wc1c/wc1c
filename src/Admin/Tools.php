@@ -95,7 +95,7 @@ final class Tools extends ScreenAbstract
 	{
 		if(empty($this->tools))
 		{
-			wc1c()->templates()->getTemplate('tools/empty.php');
+			wc1c()->views()->getView('tools/empty.php');
 			return;
 		}
 
@@ -112,13 +112,13 @@ final class Tools extends ScreenAbstract
 				'object' => $tool,
 			];
 
-			wc1c()->templates()->getTemplate('tools/single.php', $args);
+			wc1c()->views()->getView('tools/single.php', $args);
 
 			return;
 		}
 
 		$args['object'] = $this;
 
-		wc1c()->templates()->getTemplate('tools/all.php', $args);
+		wc1c()->views()->getView('tools/all.php', $args);
 	}
 }

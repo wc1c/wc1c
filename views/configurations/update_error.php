@@ -1,7 +1,7 @@
 <?php defined('ABSPATH') || exit;
 
     $label = __('Back to configurations list', 'wc1c');
-    wc1c()->templates()->adminBackLink($label, $args['back_url']);
+    wc1c()->views()->adminBackLink($label, $args['back_url']);
 ?>
 
 <?php

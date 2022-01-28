@@ -180,7 +180,7 @@ class Update
 	 */
 	public function wrapError()
 	{
-		wc1c()->templates()->getTemplate('error.php');
+		wc1c()->views()->getView('error.php');
 	}
 
 	/**
@@ -190,7 +190,7 @@ class Update
 	{
 		$args['back_url'] = $this->utilityAdminConfigurationsGetUrl('all');
 
-		wc1c()->templates()->getTemplate('configurations/update_error.php', $args);
+		wc1c()->views()->getView('configurations/update_error.php', $args);
 	}
 
 	/**
@@ -198,7 +198,7 @@ class Update
 	 */
 	public function outputSchemaError()
 	{
-		wc1c()->templates()->getTemplate('configurations/update_schema_error.php');
+		wc1c()->views()->getView('configurations/update_schema_error.php');
 	}
 
 	/**
@@ -210,7 +210,7 @@ class Update
 	{
 		$args['object'] = $this;
 
-		wc1c()->templates()->getTemplate('configurations/update_sections.php', $args);
+		wc1c()->views()->getView('configurations/update_sections.php', $args);
 	}
 
 	/**
@@ -222,6 +222,6 @@ class Update
 	{
 		$args['back_url'] = $this->utilityAdminConfigurationsGetUrl('all');
 
-		wc1c()->templates()->getTemplate('configurations/update.php', $args);
+		wc1c()->views()->getView('configurations/update.php', $args);
 	}
 }

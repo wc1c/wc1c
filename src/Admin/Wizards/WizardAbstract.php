@@ -183,7 +183,7 @@ abstract class WizardAbstract
 			'wizard' => $this
 		];
 
-		wc1c()->templates()->getTemplate('wizards/page.php', $args);
+		wc1c()->views()->getView('wizards/page.php', $args);
 	}
 
 	/**
@@ -191,6 +191,6 @@ abstract class WizardAbstract
 	 */
 	public function error()
 	{
-		wc1c()->templates()->getTemplate('wizards/error.php');
+		wc1c()->views()->getView('wizards/error.php');
 	}
 }
