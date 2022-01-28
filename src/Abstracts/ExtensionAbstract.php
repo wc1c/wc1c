@@ -123,7 +123,7 @@ abstract class ExtensionAbstract
 	 *
 	 * @return bool
 	 */
-	public function loadMetaByPlugin($file, $locale = 'wc1c')
+	public function loadMetaByPlugin($file, $locale = '')
 	{
 		$default_headers =
 		[
@@ -149,6 +149,11 @@ abstract class ExtensionAbstract
 		if(!isset($plugin_data['Version']))
 		{
 			return false;
+		}
+
+		if('' === $locale)
+		{
+			$locale = $plugin_data['TextDomain'];
 		}
 
 		$this->setMeta('version', $plugin_data['Version']);
