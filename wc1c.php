@@ -9,7 +9,7 @@
  * Requires at least: 4.7
  * Requires PHP: 5.6
  * Text Domain: wc1c
- * Domain Path: /languages
+ * Domain Path: /assets/languages
  * Copyright: WC1C team © 2018-2022
  * Author: WC1C team
  * Author URI: https://wc1c.info
