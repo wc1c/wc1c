@@ -22,7 +22,7 @@ class Configuration extends DataConfigurations
 		'name' => '',
 		'status' => 'draft',
 		'options' => [],
-		'schema' => 'defaultcml',
+		'schema' => 'productscml',
 		'date_create' => null,
 		'date_modify' => null,
 		'date_activity' => null,
