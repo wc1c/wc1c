@@ -1,17 +1,7 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Admin;
+<?php namespace Wc1c\Admin;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use Wc1c\Traits\SingletonTrait;
 use Wc1c\Admin\Configurations\Create;
 use Wc1c\Admin\Configurations\Update;
@@ -39,9 +29,7 @@ class Configurations
 	];
 
 	/**
-	 * Current action
-	 *
-	 * @var string
+	 * @var string Current action
 	 */
 	private $current_action = 'all';
 
