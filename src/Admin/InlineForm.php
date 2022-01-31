@@ -8,7 +8,7 @@ use Wc1c\Abstracts\FormAbstract;
 /**
  * InlineForm
  *
- * @package Wc1c\Admin\Configurations
+ * @package Wc1c\Admin
  */
 class InlineForm extends FormAbstract
 {
@@ -60,7 +60,7 @@ class InlineForm extends FormAbstract
 				]
 			);
 
-			//return false;
+			return false;
 		}
 
 		foreach($this->get_fields() as $key => $field)
