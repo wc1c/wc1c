@@ -2,6 +2,7 @@
 
 defined('ABSPATH') || exit;
 
+use Wc1c\Log\Processor;
 use wpdb;
 use Psr\Log\LoggerInterface;
 use Wc1c\Log\Formatter;
@@ -307,10 +308,13 @@ final class Core
 
 			try
 			{
+				$uid_processor = new Processor();
 				$formatter = new Formatter();
 				$handler = new Handler($path, $max_files, $level);
+
 				$handler->setFormatter($formatter);
 
+				$logger->pushProcessor($uid_processor);
 				$logger->pushHandler($handler);
 			}
 			catch(\Exception $e){}
