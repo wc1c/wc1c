@@ -2,8 +2,8 @@
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Log\Processor;
 use wpdb;
+use Wc1c\Log\Processor;
 use Psr\Log\LoggerInterface;
 use Wc1c\Log\Formatter;
 use Wc1c\Log\Handler;
@@ -429,7 +429,7 @@ final class Core
 
 		if(false === class_exists($use_class_name))
 		{
-			wc1c()->log()->info('wc1c_receiver_loading_class_name: class is not exists, use is default.', ['context' => $use_class_name]);
+			wc1c()->log()->error(__('Receiver loading: class is not exists, use is default.', 'wc1c'), ['context' => $use_class_name]);
 			$use_class_name = $default_class_name;
 		}
 
@@ -439,7 +439,7 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('Receiver is not loaded.');
+			throw $e;
 		}
 
 		$receiver->register();
@@ -450,7 +450,7 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('Set receiver - ' . $e->getMessage());
+			throw $e;
 		}
 	}
 
