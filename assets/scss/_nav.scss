@@ -8,19 +8,16 @@
     {
       .nav-link
       {
-        background: #f7f7f7;
-        border: 1px solid #f7f7f7;
+        background: #dcdcde;
+        border: 0;
         padding: 0.5rem 0.7rem;
-        border-bottom: 0;
         margin-bottom: 0;
         color: #1d2327;
+        font-weight: 600;
 
         &.active
         {
           background: #ffffff;
-          font-weight: 600;
-          border-color: #dee2e6 #dee2e6 #fff;
-          border-bottom: 0;
         }
       }
     }
