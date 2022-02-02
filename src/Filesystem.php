@@ -249,7 +249,7 @@ class Filesystem
 	 */
 	public function link($target, $link)
 	{
-		if(!$this->windows_os())
+		if(!$this->isOsWindows())
 		{
 			return symlink($target, $link);
 		}
@@ -621,7 +621,7 @@ class Filesystem
 	/**
 	 * @return boolean
 	 */
-	private function windows_os()
+	private function isOsWindows()
 	{
 		return defined('PHP_WINDOWS_VERSION_MAJOR');
 	}

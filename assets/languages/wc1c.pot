@@ -4,7 +4,7 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: WC1C > integration of WooCommerce with 1C products "
 "(different configurations)\n"
-"POT-Creation-Date: 2022-01-22 09:53+0300\n"
+"POT-Creation-Date: 2022-01-31 22:17+0300\n"
 "PO-Revision-Date: 2019-03-19 20:30+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.2\n"
-"X-Poedit-Basepath: ..\n"
+"X-Poedit-Basepath: ../..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: wc1c.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -98,7 +98,7 @@ msgstr ""
 msgid "Select All"
 msgstr ""
 
-#: src/Admin.php:95 src/Admin.php:96 templates/header.php:3
+#: src/Admin.php:95 src/Admin.php:96 views/header.php:3
 msgid "Integration with 1C"
 msgstr ""
 
@@ -115,7 +115,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: src/Admin.php:134 templates/helps/features.php:37
+#: src/Admin.php:134 views/helps/features.php:37
 msgid "Extensions"
 msgstr ""
 
@@ -208,45 +208,45 @@ msgstr ""
 msgid "Used for convenient distribution of multiple configurations."
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:67
+#: src/Admin/Configurations/CreateForm.php:73
 msgid "Configuration schema"
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:69
+#: src/Admin/Configurations/CreateForm.php:75
 msgid ""
 "Each scheme has its own algorithms and settings. Use the appropriate scheme for "
 "your tasks."
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:133
+#: src/Admin/Configurations/CreateForm.php:139
 msgid "Identifier:"
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:183
+#: src/Admin/Configurations/CreateForm.php:189
 msgid "Configuration create error. Please retry."
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:223
+#: src/Admin/Configurations/CreateForm.php:229
 msgid "Configuration create error. Name is required."
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:236
+#: src/Admin/Configurations/CreateForm.php:242
 msgid "Configuration create error. Schema is required."
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:253
+#: src/Admin/Configurations/CreateForm.php:259
 msgid "Configuration create error. Name is exists."
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:270
+#: src/Admin/Configurations/CreateForm.php:276
 msgid "Configuration create success. Configuration id: "
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:271
+#: src/Admin/Configurations/CreateForm.php:277
 msgid "edit configuration"
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:283
+#: src/Admin/Configurations/CreateForm.php:289
 msgid "Configuration create error. Please retry saving or change fields."
 msgstr ""
 
@@ -367,11 +367,11 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
-#: src/Admin/Helps/Init.php:59 templates/helps/bugs.php:3
+#: src/Admin/Helps/Init.php:59 views/helps/bugs.php:3
 msgid "Found a bug?"
 msgstr ""
 
-#: src/Admin/Helps/Init.php:68 templates/helps/features.php:3
+#: src/Admin/Helps/Init.php:68 views/helps/features.php:3
 msgid "Not a feature?"
 msgstr ""
 
@@ -681,11 +681,11 @@ msgid ""
 "it is recommended not to exceed the server limit."
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:112 src/Schemas/DefaultCML/Admin.php:146
+#: src/Admin/Settings/MainForm.php:112
 msgid "Maximum request size"
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:114 src/Schemas/DefaultCML/Admin.php:148
+#: src/Admin/Settings/MainForm.php:114
 msgid ""
 "The setting must not take a size larger than specified in the server settings."
 msgstr ""
@@ -720,6 +720,14 @@ msgstr ""
 msgid "Completing"
 msgstr ""
 
+#: src/Core.php:432
+msgid "Receiver loading: class is not exists, use is default."
+msgstr ""
+
+#: src/Core.php:472
+msgid "Detect locale."
+msgstr ""
+
 #: src/Data/Storages/StorageConfigurations.php:96
 msgid "Could not insert into the database"
 msgstr ""
@@ -748,264 +756,33 @@ msgstr ""
 msgid "Selected configuration is offline."
 msgstr ""
 
-#: src/Receiver.php:78
+#: src/Receiver.php:72 src/Receiver.php:73
+msgid "Selected configuration is draft."
+msgstr ""
+
+#: src/Receiver.php:84
 msgid "Error saving configuration."
 msgstr ""
 
-#: src/Receiver.php:88
+#: src/Receiver.php:94
 msgid "Schema for configuration is not initialized."
 msgstr ""
 
-#: src/Receiver.php:101
+#: src/Receiver.php:107
 msgid ""
 "The request was successfully submitted for processing in the schema for the "
 "selected configuration."
 msgstr ""
 
-#: src/Receiver.php:109
+#: src/Receiver.php:115
 msgid "Receiver request is very bad! Action not found in selected configuration."
 msgstr ""
 
-#: src/Receiver.php:110
+#: src/Receiver.php:116
 msgid "Receiver request is very bad! Action not found."
 msgstr ""
 
-#: src/Schemas/DefaultCML/Admin.php:60
-msgid "Processing details"
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:62
-msgid "Changing the behavior of the file processing."
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:67
-msgid "Skip processing of files"
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:69 src/Schemas/DefaultCML/Admin.php:78
-#: src/Schemas/DefaultCML/Admin.php:87 src/Schemas/DefaultCML/Admin.php:139
-#: src/Schemas/DefaultCML/Admin.php:157 src/Schemas/DefaultCML/Admin.php:166
-msgid "Check the checkbox if want to enable this feature. Disabled by default."
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:70
-msgid ""
-"Disabling the actual processing of CommerceML files. Files will be accepted, "
-"but instead of processing them, they will be skipped with successful completion "
-"of processing."
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:76
-msgid "Deleting CommerceML files after processing"
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:79
-msgid ""
-"If deletion is disabled, the exchange files will remain in the directories "
-"until the next exchange. Otherwise, all processed files will be deleted "
-"immediately after error-free processing."
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:85
-msgid "Deleting ZIP files after extract"
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:88
-msgid ""
-"If deletion is disabled, the exchange ZIP files will remain in the directories "
-"until the next exchange."
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:106
-msgid "Technical details"
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:108
-msgid ""
-"Changing processing behavior for compatibility of the environment and other "
-"systems."
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:115
-msgid "Logging events"
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:117
-msgid ""
-"Can enable logging, specify the level of error that to benefit from logging.\n"
-"\t\t\t Can send reports to developer. All sensitive data in the report are "
-"deleted.\n"
-"\t\t\t  By default, the error rate should not be less than ERROR."
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:119
-msgid "Current path: "
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:123
-msgid "Off"
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:124
-msgid "DEBUG"
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:125
-msgid "INFO"
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:126
-msgid "NOTICE"
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:127
-msgid "WARNING"
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:128
-msgid "ERROR"
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:129
-msgid "CRITICAL"
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:130
-msgid "ALERT"
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:131
-msgid "EMERGENCY"
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:137
-msgid "Converting to Windows-1251"
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:140
-msgid ""
-"Data from utf-8 will be converted to Windows-1251 encoding. Use this feature "
-"for compatibility with older versions of 1C."
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:155
-msgid "Support for data compression"
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:158
-msgid ""
-"1C can transfer files in archives to reduce the number of HTTP requests and "
-"compress data. In this case, the load may increase when unpacking archives, or "
-"even it may be impossible to unpack due to server restrictions."
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:164
-msgid "Receiver: disable check auth key"
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:167
-msgid ""
-"When enabled, verification of authorization data will be completely disabled. "
-"The authenticity of requests from 1C will not be checked."
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:185
-msgid "Requests authorization"
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:187
-msgid "Data for authorization of requests. These settings will connect 1C."
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:195
-msgid "Requests URL"
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:198
-msgid ""
-"This address is entered in the exchange settings on the 1C side. It will "
-"receive requests from 1C."
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:203
-msgid "Login to connect"
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:205
-msgid ""
-"Enter the username to connect from 1C. It should be the same as when setting up "
-"in 1C."
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:212
-msgid "Password to connect"
-msgstr ""
-
-#: src/Schemas/DefaultCML/Admin.php:214
-msgid ""
-"Enter the users password to connect from 1C. It must be the same as when "
-"setting up in 1C."
-msgstr ""
-
-#: src/Schemas/DefaultCML/Core.php:22
-msgid "Default schema based on CML"
-msgstr ""
-
-#: src/Schemas/DefaultCML/Core.php:23
-msgid ""
-"Standard data exchange using the standard exchange algorithm from 1C via "
-"CommerceML. Exchanges only contains products data."
-msgstr ""
-
-#: src/Schemas/DefaultCML/Receiver.php:197
-msgid "Schema: action not found"
-msgstr ""
-
-#: src/Schemas/DefaultCML/Receiver.php:238
-msgid "Not specified the user. Check the server settings."
-msgstr ""
-
-#: src/Schemas/DefaultCML/Receiver.php:249
-msgid "Not a valid username."
-msgstr ""
-
-#: src/Schemas/DefaultCML/Receiver.php:250
-msgid "Not a valid username"
-msgstr ""
-
-#: src/Schemas/DefaultCML/Receiver.php:255
-msgid "Not a valid user password."
-msgstr ""
-
-#: src/Schemas/DefaultCML/Receiver.php:256
-msgid "Not a valid user password"
-msgstr ""
-
-#: src/Schemas/DefaultCML/Receiver.php:262
-msgid "Checkauth is success."
-msgstr ""
-
-#: src/Schemas/DefaultCML/Receiver.php:281 src/Schemas/DefaultCML/Receiver.php:423
-msgid "Authorization failed."
-msgstr ""
-
-#: src/Schemas/DefaultCML/Receiver.php:323
-msgid "Authorization failed"
-msgstr ""
-
-#: src/Schemas/DefaultCML/Receiver.php:332
-msgid "Unable to create a directory:"
-msgstr ""
-
-#: src/Schemas/DefaultCML/Receiver.php:343
-msgid "Filename is empty."
-msgstr ""
-
-#: src/Schemas/DefaultCML/Receiver.php:433
-msgid "Import filename is empty."
-msgstr ""
-
-#: src/Tools/Environments/Init.php:52 templates/helps/bugs.php:27
+#: src/Tools/Environments/Init.php:52 views/helps/bugs.php:27
 msgid "Environments"
 msgstr ""
 
@@ -1183,7 +960,7 @@ msgid "Inactive"
 msgstr ""
 
 #: src/Traits/ConfigurationsUtilityTrait.php:50
-#: templates/configurations/update_error.php:8
+#: views/configurations/update_error.php:8
 msgid "Error"
 msgstr ""
 
@@ -1224,205 +1001,223 @@ msgstr ""
 msgid "%s <span class=\"time\">in: %s</span>"
 msgstr ""
 
-#: templates/configurations/create.php:6
-msgid "Back to all configurations"
-msgstr ""
-
-#: templates/configurations/create_form.php:16
-msgid "Create configuration"
-msgstr ""
-
-#: templates/configurations/delete.php:5
-msgid "Use the form to delete the configuration from WooCommerce."
-msgstr ""
-
-#: templates/configurations/delete_error.php:3
-msgid "Error. Delete is not available"
-msgstr ""
-
-#: templates/configurations/delete_form.php:16
-msgid "Delete"
-msgstr ""
-
-#: templates/configurations/empty.php:3
-msgid "Configurations not found."
-msgstr ""
-
-#: templates/configurations/empty.php:6 templates/header.php:6
-msgid "New configuration"
-msgstr ""
-
-#: templates/configurations/error.php:3
-msgid "Error. Page for configurations not found."
-msgstr ""
-
-#: templates/configurations/update.php:6
-#: templates/configurations/update_error.php:3
-msgid "Back to configurations list"
-msgstr ""
-
-#: templates/configurations/update_error.php:10
-msgid "Update is not available. Configuration not found or unavailable."
-msgstr ""
-
-#: templates/configurations/update_form.php:14
-msgid "Save configuration"
-msgstr ""
-
-#: templates/configurations/update_schema_error.php:4
-msgid "Warning"
-msgstr ""
-
-#: templates/configurations/update_schema_error.php:6
-msgid "Update is not available."
-msgstr ""
-
-#: templates/connection/form.php:21
-msgid "Connect by WC1C site"
-msgstr ""
-
-#: templates/connection/form.php:24
-msgid "Disconnect"
-msgstr ""
-
-#: templates/connection/init.php:4
-msgid "Connection"
-msgstr ""
-
-#: templates/connection/init.php:10
-msgid ""
-"To receive support and official services, need to go through the authorization "
-"of external applications."
-msgstr ""
-
-#: templates/connection/init.php:11
-msgid ""
-"Authorization of an external app occurs by going to the official WC1C and "
-"returning to the current site."
-msgstr ""
-
-#: templates/error.php:3
-msgid "Error. Page not found."
-msgstr ""
-
-#: templates/extensions/empty.php:4
-msgid "Extensions not found."
-msgstr ""
-
-#: templates/extensions/empty.php:5
-msgid "As soon as the extensions are installed, they will appear in this section."
-msgstr ""
-
-#: templates/extensions/item.php:6
-msgid "Extension ID:"
-msgstr ""
-
-#: templates/extensions/item.php:9
-msgid "Version:"
-msgstr ""
-
-#: templates/helps/bugs.php:24
-msgid "Report a bug"
-msgstr ""
-
-#: templates/helps/features.php:31
-msgid "Request a feature"
-msgstr ""
-
-#: templates/helps/features.php:34
-msgid "Features"
-msgstr ""
-
-#: templates/settings/error.php:3
-msgid "Error. Page for settings not found."
-msgstr ""
-
-#: templates/settings/form.php:11
-msgid "Save settings"
-msgstr ""
-
-#: templates/tools/empty.php:4
-msgid "Tools not found."
-msgstr ""
-
-#: templates/tools/empty.php:5
-msgid "As soon as the tools are installed, they will appear in this section."
-msgstr ""
-
-#: templates/tools/item.php:14
-msgid "Open"
-msgstr ""
-
-#: templates/tools/single.php:9
-msgid "Back to all tools"
-msgstr ""
-
-#: templates/wizards/error.php:3
-msgid "Error. Step not found or unavailable."
-msgstr ""
-
-#: templates/wizards/page.php:42
-msgid "Step"
-msgstr ""
-
-#: templates/wizards/steps/check.php:15
-msgid "Welcome to WC1C!"
-msgstr ""
-
-#: templates/wizards/steps/check.php:16
-msgid ""
-"Thank you for choosing WC1C to website! This is only complete solution for "
-"integrating WooCommerce with 1C."
-msgstr ""
-
-#: templates/wizards/steps/check.php:18
-msgid "This quick setup wizard will help you configure the basic settings."
-msgstr ""
-
-#: templates/wizards/steps/check.php:22
-msgid ""
-"PHP scripts execution time is less than 10 seconds. WC1C requires at least 20. "
-"Set php_max_execution_time to more than 20 seconds."
-msgstr ""
-
-#: templates/wizards/steps/check.php:26
-msgid "Its should not take longer than five minutes."
-msgstr ""
-
-#: templates/wizards/steps/check.php:29 templates/wizards/steps/database.php:21
-msgid "Lets Go!"
-msgstr ""
-
-#: templates/wizards/steps/check.php:35
-msgid "Need to fix the compatibility errors and return to the setup wizard."
-msgstr ""
-
-#: templates/wizards/steps/complete.php:15
-msgid "Installation completed!"
-msgstr ""
-
-#: templates/wizards/steps/complete.php:16
-msgid "Now you can proceed to using the WC1C plugin."
-msgstr ""
-
-#: templates/wizards/steps/complete.php:20
-msgid "Go to use"
-msgstr ""
-
-#: templates/wizards/steps/database.php:15
-msgid "Creating tables in the database"
-msgstr ""
-
-#: templates/wizards/steps/database.php:16
-msgid "If continue, the required tables will be created in the database."
-msgstr ""
-
 #: vendor/digiom/notices-wp/src/Types/ErrorNotice.php:49
 #: vendor/digiom/notices-wp/src/Types/InfoNotice.php:47
 #: vendor/digiom/notices-wp/src/Types/SuccessNotice.php:49
 #: vendor/digiom/notices-wp/src/Types/UpdateNotice.php:49
 #: vendor/digiom/notices-wp/src/Types/WarningNotice.php:49
 msgid "Close"
+msgstr ""
+
+#: views/configurations/create.php:6
+msgid "Back to all configurations"
+msgstr ""
+
+#: views/configurations/create_form.php:16
+msgid "Create configuration"
+msgstr ""
+
+#: views/configurations/delete.php:5
+msgid "Use the form to delete the configuration from WooCommerce."
+msgstr ""
+
+#: views/configurations/delete_error.php:3
+msgid "Error. Delete is not available"
+msgstr ""
+
+#: views/configurations/delete_form.php:16
+msgid "Delete"
+msgstr ""
+
+#: views/configurations/empty.php:3
+msgid "Configurations not found."
+msgstr ""
+
+#: views/configurations/empty.php:6 views/header.php:6
+msgid "New configuration"
+msgstr ""
+
+#: views/configurations/error.php:3
+msgid "Error. Page for configurations not found."
+msgstr ""
+
+#: views/configurations/update.php:6 views/configurations/update_error.php:3
+msgid "Back to configurations list"
+msgstr ""
+
+#: views/configurations/update_error.php:10
+msgid "Update is not available. Configuration not found or unavailable."
+msgstr ""
+
+#: views/configurations/update_form.php:14
+msgid "Save configuration"
+msgstr ""
+
+#: views/configurations/update_schema_error.php:4
+msgid "Warning"
+msgstr ""
+
+#: views/configurations/update_schema_error.php:6
+msgid "Update is not available."
+msgstr ""
+
+#: views/connection/form.php:21
+msgid "Connect by WC1C site"
+msgstr ""
+
+#: views/connection/form.php:24
+msgid "Disconnect"
+msgstr ""
+
+#: views/connection/init.php:4
+msgid "Connection"
+msgstr ""
+
+#: views/connection/init.php:10
+msgid ""
+"To receive support and official services, need to go through the authorization "
+"of external applications."
+msgstr ""
+
+#: views/connection/init.php:11
+msgid ""
+"Authorization of an external app occurs by going to the official WC1C and "
+"returning to the current site."
+msgstr ""
+
+#: views/error.php:3
+msgid "Error. Page not found."
+msgstr ""
+
+#: views/extensions/empty.php:4
+msgid "Extensions not found."
+msgstr ""
+
+#: views/extensions/empty.php:5
+msgid "As soon as the extensions are installed, they will appear in this section."
+msgstr ""
+
+#: views/extensions/item.php:6 views/extensions/item.php:14
+#: views/extensions/item.php:26 views/extensions/item.php:33
+#: views/extensions/item.php:37 views/extensions/item.php:44
+#: views/extensions/item.php:48
+msgid "none"
+msgstr ""
+
+#: views/extensions/item.php:20
+msgid "ID:"
+msgstr ""
+
+#: views/extensions/item.php:24
+msgid "Version:"
+msgstr ""
+
+#: views/extensions/item.php:30
+msgid "Versions WC1C:"
+msgstr ""
+
+#: views/extensions/item.php:41
+msgid "Versions PHP:"
+msgstr ""
+
+#: views/extensions/item.php:58
+msgid "Deactivate"
+msgstr ""
+
+#: views/helps/bugs.php:24
+msgid "Report a bug"
+msgstr ""
+
+#: views/helps/features.php:31
+msgid "Request a feature"
+msgstr ""
+
+#: views/helps/features.php:34
+msgid "Features"
+msgstr ""
+
+#: views/settings/error.php:3
+msgid "Error. Page for settings not found."
+msgstr ""
+
+#: views/settings/form.php:11
+msgid "Save settings"
+msgstr ""
+
+#: views/tools/empty.php:4
+msgid "Tools not found."
+msgstr ""
+
+#: views/tools/empty.php:5
+msgid "As soon as the tools are installed, they will appear in this section."
+msgstr ""
+
+#: views/tools/item.php:14
+msgid "Open"
+msgstr ""
+
+#: views/tools/single.php:9
+msgid "Back to all tools"
+msgstr ""
+
+#: views/wizards/error.php:3
+msgid "Error. Step not found or unavailable."
+msgstr ""
+
+#: views/wizards/page.php:42
+msgid "Step"
+msgstr ""
+
+#: views/wizards/steps/check.php:15
+msgid "Welcome to WC1C!"
+msgstr ""
+
+#: views/wizards/steps/check.php:16
+msgid ""
+"Thank you for choosing WC1C to website! This is only complete solution for "
+"integrating WooCommerce with 1C."
+msgstr ""
+
+#: views/wizards/steps/check.php:18
+msgid "This quick setup wizard will help you configure the basic settings."
+msgstr ""
+
+#: views/wizards/steps/check.php:22
+msgid ""
+"PHP scripts execution time is less than 10 seconds. WC1C requires at least 20. "
+"Set php_max_execution_time to more than 20 seconds."
+msgstr ""
+
+#: views/wizards/steps/check.php:26
+msgid "Its should not take longer than five minutes."
+msgstr ""
+
+#: views/wizards/steps/check.php:29 views/wizards/steps/database.php:21
+msgid "Lets Go!"
+msgstr ""
+
+#: views/wizards/steps/check.php:35
+msgid "Need to fix the compatibility errors and return to the setup wizard."
+msgstr ""
+
+#: views/wizards/steps/complete.php:15
+msgid "Installation completed!"
+msgstr ""
+
+#: views/wizards/steps/complete.php:16
+msgid "Now you can proceed to using the WC1C plugin."
+msgstr ""
+
+#: views/wizards/steps/complete.php:20
+msgid "Go to use"
+msgstr ""
+
+#: views/wizards/steps/database.php:15
+msgid "Creating tables in the database"
+msgstr ""
+
+#: views/wizards/steps/database.php:16
+msgid "If continue, the required tables will be created in the database."
 msgstr ""
 
 #. Plugin Name of the plugin/theme

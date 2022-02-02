@@ -27,15 +27,8 @@ class All extends ScreenAbstract
 			return;
 		}
 
-		foreach($extensions as $extension_id => $extension_object)
-		{
-			$args =
-			[
-				'id' => $extension_id,
-				'object' => $extension_object
-			];
+		$args['extensions'] = $extensions;
 
-			wc1c()->views()->getView('extensions/item.php', $args);
-		}
+		wc1c()->views()->getView('extensions/all.php', $args);
 	}
 }

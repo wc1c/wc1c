@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WC1C > integration of WooCommerce with 1C products "
 "(different configurations)\n"
-"POT-Creation-Date: 2022-01-22 09:53+0300\n"
-"PO-Revision-Date: 2022-01-22 09:54+0300\n"
+"POT-Creation-Date: 2022-01-31 22:17+0300\n"
+"PO-Revision-Date: 2022-01-31 22:20+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
 "Language: ru_RU\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 2.2\n"
-"X-Poedit-Basepath: ..\n"
+"X-Poedit-Basepath: ../..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: wc1c.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -100,7 +100,7 @@ msgstr "Последняя страница"
 msgid "Select All"
 msgstr "Выбрать все"
 
-#: src/Admin.php:95 src/Admin.php:96 templates/header.php:3
+#: src/Admin.php:95 src/Admin.php:96 views/header.php:3
 msgid "Integration with 1C"
 msgstr "Интеграция с 1С"
 
@@ -117,7 +117,7 @@ msgstr "Инструменты"
 msgid "Settings"
 msgstr "Настройки"
 
-#: src/Admin.php:134 templates/helps/features.php:37
+#: src/Admin.php:134 views/helps/features.php:37
 msgid "Extensions"
 msgstr "Расширения"
 
@@ -212,11 +212,11 @@ msgstr ""
 msgid "Used for convenient distribution of multiple configurations."
 msgstr "Используется для удобного распределения нескольких конфигураций."
 
-#: src/Admin/Configurations/CreateForm.php:67
+#: src/Admin/Configurations/CreateForm.php:73
 msgid "Configuration schema"
 msgstr "Схема конфигурации"
 
-#: src/Admin/Configurations/CreateForm.php:69
+#: src/Admin/Configurations/CreateForm.php:75
 msgid ""
 "Each scheme has its own algorithms and settings. Use the appropriate scheme "
 "for your tasks."
@@ -224,36 +224,36 @@ msgstr ""
 "Каждая схема имеет свои алгоритмы и настройки. Используйте соответствующую "
 "схему для ваших задач."
 
-#: src/Admin/Configurations/CreateForm.php:133
+#: src/Admin/Configurations/CreateForm.php:139
 msgid "Identifier:"
 msgstr "Идентификатор:"
 
-#: src/Admin/Configurations/CreateForm.php:183
+#: src/Admin/Configurations/CreateForm.php:189
 msgid "Configuration create error. Please retry."
 msgstr "Конфигурация не создана. Пожалуйста повторите."
 
-#: src/Admin/Configurations/CreateForm.php:223
+#: src/Admin/Configurations/CreateForm.php:229
 msgid "Configuration create error. Name is required."
 msgstr "Конфигурация не создана. Название конфигурации не заполнено."
 
-#: src/Admin/Configurations/CreateForm.php:236
+#: src/Admin/Configurations/CreateForm.php:242
 msgid "Configuration create error. Schema is required."
 msgstr "Конфигурация не создана. Не выбрана схема."
 
-#: src/Admin/Configurations/CreateForm.php:253
+#: src/Admin/Configurations/CreateForm.php:259
 msgid "Configuration create error. Name is exists."
 msgstr ""
 "Конфигурация не создана. Конфигурация с таким названием уже существует."
 
-#: src/Admin/Configurations/CreateForm.php:270
+#: src/Admin/Configurations/CreateForm.php:276
 msgid "Configuration create success. Configuration id: "
 msgstr "Конфигурация успешно создана. Идентификатор конфигурации: "
 
-#: src/Admin/Configurations/CreateForm.php:271
+#: src/Admin/Configurations/CreateForm.php:277
 msgid "edit configuration"
 msgstr "редактировать конфигурацию"
 
-#: src/Admin/Configurations/CreateForm.php:283
+#: src/Admin/Configurations/CreateForm.php:289
 msgid "Configuration create error. Please retry saving or change fields."
 msgstr ""
 "Создание конфигурации не удалось. Пожалуйста повторите процедуру или смените "
@@ -385,11 +385,11 @@ msgstr "Быстрая навигация"
 msgid "Help"
 msgstr "Помощь"
 
-#: src/Admin/Helps/Init.php:59 templates/helps/bugs.php:3
+#: src/Admin/Helps/Init.php:59 views/helps/bugs.php:3
 msgid "Found a bug?"
 msgstr "Нашли ошибку?"
 
-#: src/Admin/Helps/Init.php:68 templates/helps/features.php:3
+#: src/Admin/Helps/Init.php:68 views/helps/features.php:3
 msgid "Not a feature?"
 msgstr "Нет возможности?"
 
@@ -731,11 +731,11 @@ msgstr ""
 "Если указать 0, ограничение по времени будет отключено. Указывать 0 не "
 "рекомендуется, рекомендуется не превышать лимит сервера."
 
-#: src/Admin/Settings/MainForm.php:112 src/Schemas/DefaultCML/Admin.php:146
+#: src/Admin/Settings/MainForm.php:112
 msgid "Maximum request size"
 msgstr "Максимальный размер запроса"
 
-#: src/Admin/Settings/MainForm.php:114 src/Schemas/DefaultCML/Admin.php:148
+#: src/Admin/Settings/MainForm.php:114
 msgid ""
 "The setting must not take a size larger than specified in the server "
 "settings."
@@ -773,6 +773,14 @@ msgstr "База данных"
 msgid "Completing"
 msgstr "Завершение"
 
+#: src/Core.php:432
+msgid "Receiver loading: class is not exists, use is default."
+msgstr "Загрузка получателя: класс не найден, используется класс по умолчанию."
+
+#: src/Core.php:472
+msgid "Detect locale."
+msgstr "Найденная локаль."
+
 #: src/Data/Storages/StorageConfigurations.php:96
 msgid "Could not insert into the database"
 msgstr "Не удалось вставить в базу данных"
@@ -801,300 +809,36 @@ msgstr "Конфигурация для Получателя недоступн�
 msgid "Selected configuration is offline."
 msgstr "Выбранная конфигурация выключена."
 
-#: src/Receiver.php:78
+#: src/Receiver.php:72 src/Receiver.php:73
+msgid "Selected configuration is draft."
+msgstr "Выбранная конфигурация является черновиком."
+
+#: src/Receiver.php:84
 msgid "Error saving configuration."
 msgstr "Ошибка сохранения конфигурации."
 
-#: src/Receiver.php:88
+#: src/Receiver.php:94
 msgid "Schema for configuration is not initialized."
 msgstr "Схема для конфигурации не инициализирована."
 
-#: src/Receiver.php:101
+#: src/Receiver.php:107
 msgid ""
 "The request was successfully submitted for processing in the schema for the "
 "selected configuration."
 msgstr ""
 "Запрос успешно отправлен на обработку в схему для выбранной конфигурации."
 
-#: src/Receiver.php:109
+#: src/Receiver.php:115
 msgid ""
 "Receiver request is very bad! Action not found in selected configuration."
 msgstr ""
 "Запрос получателя очень плохой! Действие не найдено в выбранной конфигурации."
 
-#: src/Receiver.php:110
+#: src/Receiver.php:116
 msgid "Receiver request is very bad! Action not found."
 msgstr "Запрос получателя очень плохой! Действие не найдено."
 
-#: src/Schemas/DefaultCML/Admin.php:60
-msgid "Processing details"
-msgstr "Детали обработки"
-
-#: src/Schemas/DefaultCML/Admin.php:62
-msgid "Changing the behavior of the file processing."
-msgstr "Изменение поведения обработки файлов."
-
-#: src/Schemas/DefaultCML/Admin.php:67
-msgid "Skip processing of files"
-msgstr "Пропуск обработки файлов"
-
-#: src/Schemas/DefaultCML/Admin.php:69 src/Schemas/DefaultCML/Admin.php:78
-#: src/Schemas/DefaultCML/Admin.php:87 src/Schemas/DefaultCML/Admin.php:139
-#: src/Schemas/DefaultCML/Admin.php:157 src/Schemas/DefaultCML/Admin.php:166
-msgid "Check the checkbox if want to enable this feature. Disabled by default."
-msgstr ""
-"Установите флажок, если надо включить эту функцию. По умолчанию отключено."
-
-#: src/Schemas/DefaultCML/Admin.php:70
-msgid ""
-"Disabling the actual processing of CommerceML files. Files will be accepted, "
-"but instead of processing them, they will be skipped with successful "
-"completion of processing."
-msgstr ""
-"Отключение фактической обработки файлов CommerceML. Файлы будут приняты, но "
-"вместо того, чтобы обрабатывать их, они будут пропущены при успешном "
-"завершении обработки."
-
-#: src/Schemas/DefaultCML/Admin.php:76
-msgid "Deleting CommerceML files after processing"
-msgstr "Удаление CommerceML файлов после обработки"
-
-#: src/Schemas/DefaultCML/Admin.php:79
-msgid ""
-"If deletion is disabled, the exchange files will remain in the directories "
-"until the next exchange. Otherwise, all processed files will be deleted "
-"immediately after error-free processing."
-msgstr ""
-"Если удаление отключено, файлы обмена останутся в каталогах до следующего "
-"обмена. В противном случае все обработанные файлы будут удалены сразу же "
-"после безошибочной обработки."
-
-#: src/Schemas/DefaultCML/Admin.php:85
-msgid "Deleting ZIP files after extract"
-msgstr "Удаление ZIP файлов после обработки"
-
-#: src/Schemas/DefaultCML/Admin.php:88
-msgid ""
-"If deletion is disabled, the exchange ZIP files will remain in the "
-"directories until the next exchange."
-msgstr ""
-"Если удаление отключено, то ZIP-файлы обмена останутся в каталогах до "
-"следующего обмена."
-
-#: src/Schemas/DefaultCML/Admin.php:106
-msgid "Technical details"
-msgstr "Технические параметры"
-
-#: src/Schemas/DefaultCML/Admin.php:108
-msgid ""
-"Changing processing behavior for compatibility of the environment and other "
-"systems."
-msgstr ""
-"Изменение поведения обработки для обеспечения совместимости среды и других "
-"систем."
-
-#: src/Schemas/DefaultCML/Admin.php:115
-msgid "Logging events"
-msgstr "Журнал событий"
-
-#: src/Schemas/DefaultCML/Admin.php:117
-msgid ""
-"Can enable logging, specify the level of error that to benefit from "
-"logging.\n"
-"\t\t\t Can send reports to developer. All sensitive data in the report are "
-"deleted.\n"
-"\t\t\t  By default, the error rate should not be less than ERROR."
-msgstr ""
-"Вы можете включить ведение журнала, указать уровень ошибки, которые вы "
-"хотите извлечь из ведения журнала. Вы можете отправлять отчеты разработчику "
-"вручную, нажав на кнопку. Все конфиденциальные данные в отчете удаляются. По "
-"умолчанию частота ошибок не должна быть меньше, чем ошибка."
-
-#: src/Schemas/DefaultCML/Admin.php:119
-msgid "Current path: "
-msgstr "Текущий путь: "
-
-#: src/Schemas/DefaultCML/Admin.php:123
-msgid "Off"
-msgstr "Выключен"
-
-#: src/Schemas/DefaultCML/Admin.php:124
-msgid "DEBUG"
-msgstr "Отладка"
-
-#: src/Schemas/DefaultCML/Admin.php:125
-msgid "INFO"
-msgstr "Информация"
-
-#: src/Schemas/DefaultCML/Admin.php:126
-msgid "NOTICE"
-msgstr "Уведомления"
-
-#: src/Schemas/DefaultCML/Admin.php:127
-msgid "WARNING"
-msgstr "Предупреждения"
-
-#: src/Schemas/DefaultCML/Admin.php:128
-msgid "ERROR"
-msgstr "Ошибки"
-
-#: src/Schemas/DefaultCML/Admin.php:129
-msgid "CRITICAL"
-msgstr "Критичные ошибки"
-
-#: src/Schemas/DefaultCML/Admin.php:130
-msgid "ALERT"
-msgstr "Тревога"
-
-#: src/Schemas/DefaultCML/Admin.php:131
-msgid "EMERGENCY"
-msgstr "Чрезвычайная ситуация"
-
-#: src/Schemas/DefaultCML/Admin.php:137
-msgid "Converting to Windows-1251"
-msgstr "Преобразование в Windows-1251"
-
-#: src/Schemas/DefaultCML/Admin.php:140
-msgid ""
-"Data from utf-8 will be converted to Windows-1251 encoding. Use this feature "
-"for compatibility with older versions of 1C."
-msgstr ""
-"Данные из utf-8 будут преобразованы в кодировку Windows-1251. Используйте "
-"эту функцию для обеспечения совместимости с более старыми версиями 1С."
-
-#: src/Schemas/DefaultCML/Admin.php:155
-msgid "Support for data compression"
-msgstr "Поддержка сжатия данных"
-
-#: src/Schemas/DefaultCML/Admin.php:158
-msgid ""
-"1C can transfer files in archives to reduce the number of HTTP requests and "
-"compress data. In this case, the load may increase when unpacking archives, "
-"or even it may be impossible to unpack due to server restrictions."
-msgstr ""
-"1С может передавать файлы в архивах для уменьшения количества HTTP-запросов "
-"и сжатия данных. В этом случае нагрузка может увеличиться при распаковке "
-"архивов, или даже распаковка может оказаться невозможной из-за ограничений "
-"сервера."
-
-#: src/Schemas/DefaultCML/Admin.php:164
-msgid "Receiver: disable check auth key"
-msgstr "Получатель: отключить проверку ключа авторизации"
-
-#: src/Schemas/DefaultCML/Admin.php:167
-msgid ""
-"When enabled, verification of authorization data will be completely "
-"disabled. The authenticity of requests from 1C will not be checked."
-msgstr ""
-"При включении проверка данных авторизации будет полностью отключена. "
-"Подлинность запросов от 1С проверятся не будет."
-
-#: src/Schemas/DefaultCML/Admin.php:185
-msgid "Requests authorization"
-msgstr "Авторизация запросов"
-
-#: src/Schemas/DefaultCML/Admin.php:187
-msgid "Data for authorization of requests. These settings will connect 1C."
-msgstr "Данные для авторизации запросов. По этим настройкам подключится 1С."
-
-#: src/Schemas/DefaultCML/Admin.php:195
-msgid "Requests URL"
-msgstr "Адрес для запросов"
-
-#: src/Schemas/DefaultCML/Admin.php:198
-msgid ""
-"This address is entered in the exchange settings on the 1C side. It will "
-"receive requests from 1C."
-msgstr ""
-"Этот адрес вводится в настройках обмена на стороне 1С. Он будет получать "
-"запросы от 1С."
-
-#: src/Schemas/DefaultCML/Admin.php:203
-msgid "Login to connect"
-msgstr "Имя пользователя"
-
-#: src/Schemas/DefaultCML/Admin.php:205
-msgid ""
-"Enter the username to connect from 1C. It should be the same as when setting "
-"up in 1C."
-msgstr ""
-"Введите логин для подключения из 1С. Он должен быть таким же, как и при "
-"настройке в 1С."
-
-#: src/Schemas/DefaultCML/Admin.php:212
-msgid "Password to connect"
-msgstr "Пароль для подключения"
-
-#: src/Schemas/DefaultCML/Admin.php:214
-msgid ""
-"Enter the users password to connect from 1C. It must be the same as when "
-"setting up in 1C."
-msgstr ""
-"Введите пароль пользователя для подключения из 1С. Он должен быть таким же, "
-"как и при настройке в 1С."
-
-#: src/Schemas/DefaultCML/Core.php:22
-msgid "Default schema based on CML"
-msgstr "Схема по умолчанию на основе CML"
-
-#: src/Schemas/DefaultCML/Core.php:23
-msgid ""
-"Standard data exchange using the standard exchange algorithm from 1C via "
-"CommerceML. Exchanges only contains products data."
-msgstr ""
-"Стандартный обмен данными с использованием стандартного алгоритма обмена от "
-"1С через CommerceML. Обмен содержит только данные о продуктах."
-
-#: src/Schemas/DefaultCML/Receiver.php:197
-msgid "Schema: action not found"
-msgstr "Схема: действие не найдено"
-
-#: src/Schemas/DefaultCML/Receiver.php:238
-msgid "Not specified the user. Check the server settings."
-msgstr "Не указан пользователь. Проверьте настройки сервера."
-
-#: src/Schemas/DefaultCML/Receiver.php:249
-msgid "Not a valid username."
-msgstr "Неверное имя пользователя."
-
-#: src/Schemas/DefaultCML/Receiver.php:250
-msgid "Not a valid username"
-msgstr "Неверное имя пользователя"
-
-#: src/Schemas/DefaultCML/Receiver.php:255
-msgid "Not a valid user password."
-msgstr "Неверный пароль пользователя."
-
-#: src/Schemas/DefaultCML/Receiver.php:256
-msgid "Not a valid user password"
-msgstr "Неверный пароль пользователя"
-
-#: src/Schemas/DefaultCML/Receiver.php:262
-msgid "Checkauth is success."
-msgstr "Checkauth - это успех."
-
-#: src/Schemas/DefaultCML/Receiver.php:281
-#: src/Schemas/DefaultCML/Receiver.php:423
-msgid "Authorization failed."
-msgstr "Не удалось выполнить авторизацию."
-
-#: src/Schemas/DefaultCML/Receiver.php:323
-msgid "Authorization failed"
-msgstr "Не удалось выполнить авторизацию"
-
-#: src/Schemas/DefaultCML/Receiver.php:332
-msgid "Unable to create a directory:"
-msgstr "Невозможно создать каталог:"
-
-#: src/Schemas/DefaultCML/Receiver.php:343
-msgid "Filename is empty."
-msgstr "Имя файла пустое."
-
-#: src/Schemas/DefaultCML/Receiver.php:433
-msgid "Import filename is empty."
-msgstr "Имя файла импорта пустое."
-
-#: src/Tools/Environments/Init.php:52 templates/helps/bugs.php:27
+#: src/Tools/Environments/Init.php:52 views/helps/bugs.php:27
 msgid "Environments"
 msgstr "Окружения"
 
@@ -1272,7 +1016,7 @@ msgid "Inactive"
 msgstr "Отключена"
 
 #: src/Traits/ConfigurationsUtilityTrait.php:50
-#: templates/configurations/update_error.php:8
+#: views/configurations/update_error.php:8
 msgid "Error"
 msgstr "Ошибка"
 
@@ -1313,210 +1057,6 @@ msgstr "Удаленные"
 msgid "%s <span class=\"time\">in: %s</span>"
 msgstr "%s <span class=\"time\">в: %s</span>"
 
-#: templates/configurations/create.php:6
-msgid "Back to all configurations"
-msgstr "Вернуться ко всем конфигурациям"
-
-#: templates/configurations/create_form.php:16
-msgid "Create configuration"
-msgstr "Создать конфигурацию"
-
-#: templates/configurations/delete.php:5
-msgid "Use the form to delete the configuration from WooCommerce."
-msgstr "Используйте форму, чтобы удалить конфигурацию из WooCommerce."
-
-#: templates/configurations/delete_error.php:3
-msgid "Error. Delete is not available"
-msgstr "Ошибка. Удаление недоступно"
-
-#: templates/configurations/delete_form.php:16
-msgid "Delete"
-msgstr "Удалить"
-
-#: templates/configurations/empty.php:3
-msgid "Configurations not found."
-msgstr "Конфигурации не найдены."
-
-#: templates/configurations/empty.php:6 templates/header.php:6
-msgid "New configuration"
-msgstr "Новая конфигурация"
-
-#: templates/configurations/error.php:3
-msgid "Error. Page for configurations not found."
-msgstr "Ошибка. Страница для конфигураций не найдена."
-
-#: templates/configurations/update.php:6
-#: templates/configurations/update_error.php:3
-msgid "Back to configurations list"
-msgstr "Вернуться к списку конфигураций"
-
-#: templates/configurations/update_error.php:10
-msgid "Update is not available. Configuration not found or unavailable."
-msgstr "Обновление недоступно. Конфигурация не найдена или недоступна."
-
-#: templates/configurations/update_form.php:14
-msgid "Save configuration"
-msgstr "Сохранить конфигурацию"
-
-#: templates/configurations/update_schema_error.php:4
-msgid "Warning"
-msgstr "Предупреждение"
-
-#: templates/configurations/update_schema_error.php:6
-msgid "Update is not available."
-msgstr "Обновление не доступно."
-
-#: templates/connection/form.php:21
-msgid "Connect by WC1C site"
-msgstr "Подключение через сайт WC1C"
-
-#: templates/connection/form.php:24
-msgid "Disconnect"
-msgstr "Отключить"
-
-#: templates/connection/init.php:4
-msgid "Connection"
-msgstr "Подключение"
-
-#: templates/connection/init.php:10
-msgid ""
-"To receive support and official services, need to go through the "
-"authorization of external applications."
-msgstr ""
-"Для получения поддержки и официальных услуг необходимо пройти авторизацию "
-"внешних приложений."
-
-#: templates/connection/init.php:11
-msgid ""
-"Authorization of an external app occurs by going to the official WC1C and "
-"returning to the current site."
-msgstr ""
-"Авторизация внешнего приложения происходит путем перехода на официальный "
-"WC1C и возврата на текущий сайт."
-
-#: templates/error.php:3
-msgid "Error. Page not found."
-msgstr "Ошибка. Страница не найдена."
-
-#: templates/extensions/empty.php:4
-msgid "Extensions not found."
-msgstr "Расширения не найдены."
-
-#: templates/extensions/empty.php:5
-msgid ""
-"As soon as the extensions are installed, they will appear in this section."
-msgstr "Как только расширения будут установлены, они появятся в этом разделе."
-
-#: templates/extensions/item.php:6
-msgid "Extension ID:"
-msgstr "Идентификатор:"
-
-#: templates/extensions/item.php:9
-msgid "Version:"
-msgstr "Версия:"
-
-#: templates/helps/bugs.php:24
-msgid "Report a bug"
-msgstr "Отчёт об ошибке"
-
-#: templates/helps/features.php:31
-msgid "Request a feature"
-msgstr "Запрос возможности"
-
-#: templates/helps/features.php:34
-msgid "Features"
-msgstr "Возможности"
-
-#: templates/settings/error.php:3
-msgid "Error. Page for settings not found."
-msgstr "Ошибка. Страница для настроек не найдена."
-
-#: templates/settings/form.php:11
-msgid "Save settings"
-msgstr "Сохранить настройки"
-
-#: templates/tools/empty.php:4
-msgid "Tools not found."
-msgstr "Инструменты не найдены."
-
-#: templates/tools/empty.php:5
-msgid "As soon as the tools are installed, they will appear in this section."
-msgstr "Как только инструменты будут установлены, они появятся в этом разделе."
-
-#: templates/tools/item.php:14
-msgid "Open"
-msgstr "Открыть"
-
-#: templates/tools/single.php:9
-msgid "Back to all tools"
-msgstr "Вернуться ко всем инструментам"
-
-#: templates/wizards/error.php:3
-msgid "Error. Step not found or unavailable."
-msgstr "Ошибка. Шаг не найден или не доступен."
-
-#: templates/wizards/page.php:42
-msgid "Step"
-msgstr "Шаг"
-
-#: templates/wizards/steps/check.php:15
-msgid "Welcome to WC1C!"
-msgstr "Добро пожаловать в WC1C!"
-
-#: templates/wizards/steps/check.php:16
-msgid ""
-"Thank you for choosing WC1C to website! This is only complete solution for "
-"integrating WooCommerce with 1C."
-msgstr ""
-"Спасибо, что выбрали WC1C для сайта! Это единственное полноценное решение "
-"для интеграции WooCommerce с 1С."
-
-#: templates/wizards/steps/check.php:18
-msgid "This quick setup wizard will help you configure the basic settings."
-msgstr ""
-"Этот мастер быстрой настройки поможет вам настроить основные параметры."
-
-#: templates/wizards/steps/check.php:22
-msgid ""
-"PHP scripts execution time is less than 10 seconds. WC1C requires at least "
-"20. Set php_max_execution_time to more than 20 seconds."
-msgstr ""
-"Время выполнения PHP-скриптов менее 10 секунд. WC1C требует как минимум 20. "
-"Установите для php_max_execution_time значение более 20 секунд."
-
-#: templates/wizards/steps/check.php:26
-msgid "Its should not take longer than five minutes."
-msgstr "Это не должно занять больше пяти минут."
-
-#: templates/wizards/steps/check.php:29 templates/wizards/steps/database.php:21
-msgid "Lets Go!"
-msgstr "Погнали!"
-
-#: templates/wizards/steps/check.php:35
-msgid "Need to fix the compatibility errors and return to the setup wizard."
-msgstr ""
-"Необходимо исправить ошибки совместимости и вернуться к мастеру настройки."
-
-#: templates/wizards/steps/complete.php:15
-msgid "Installation completed!"
-msgstr "Установка завершена!"
-
-#: templates/wizards/steps/complete.php:16
-msgid "Now you can proceed to using the WC1C plugin."
-msgstr "Теперь вы можете перейти к использованию плагина WC1C."
-
-#: templates/wizards/steps/complete.php:20
-msgid "Go to use"
-msgstr "Перейти к использованию"
-
-#: templates/wizards/steps/database.php:15
-msgid "Creating tables in the database"
-msgstr "Создание таблиц в базе данных"
-
-#: templates/wizards/steps/database.php:16
-msgid "If continue, the required tables will be created in the database."
-msgstr "Если продолжить, необходимые таблицы будут созданы в базе данных."
-
 #: vendor/digiom/notices-wp/src/Types/ErrorNotice.php:49
 #: vendor/digiom/notices-wp/src/Types/InfoNotice.php:47
 #: vendor/digiom/notices-wp/src/Types/SuccessNotice.php:49
@@ -1524,6 +1064,228 @@ msgstr "Если продолжить, необходимые таблицы б�
 #: vendor/digiom/notices-wp/src/Types/WarningNotice.php:49
 msgid "Close"
 msgstr "Закрыть"
+
+#: views/configurations/create.php:6
+msgid "Back to all configurations"
+msgstr "Вернуться ко всем конфигурациям"
+
+#: views/configurations/create_form.php:16
+msgid "Create configuration"
+msgstr "Создать конфигурацию"
+
+#: views/configurations/delete.php:5
+msgid "Use the form to delete the configuration from WooCommerce."
+msgstr "Используйте форму, чтобы удалить конфигурацию из WooCommerce."
+
+#: views/configurations/delete_error.php:3
+msgid "Error. Delete is not available"
+msgstr "Ошибка. Удаление недоступно"
+
+#: views/configurations/delete_form.php:16
+msgid "Delete"
+msgstr "Удалить"
+
+#: views/configurations/empty.php:3
+msgid "Configurations not found."
+msgstr "Конфигурации не найдены."
+
+#: views/configurations/empty.php:6 views/header.php:6
+msgid "New configuration"
+msgstr "Новая конфигурация"
+
+#: views/configurations/error.php:3
+msgid "Error. Page for configurations not found."
+msgstr "Ошибка. Страница для конфигураций не найдена."
+
+#: views/configurations/update.php:6 views/configurations/update_error.php:3
+msgid "Back to configurations list"
+msgstr "Вернуться к списку конфигураций"
+
+#: views/configurations/update_error.php:10
+msgid "Update is not available. Configuration not found or unavailable."
+msgstr "Обновление недоступно. Конфигурация не найдена или недоступна."
+
+#: views/configurations/update_form.php:14
+msgid "Save configuration"
+msgstr "Сохранить конфигурацию"
+
+#: views/configurations/update_schema_error.php:4
+msgid "Warning"
+msgstr "Предупреждение"
+
+#: views/configurations/update_schema_error.php:6
+msgid "Update is not available."
+msgstr "Обновление не доступно."
+
+#: views/connection/form.php:21
+msgid "Connect by WC1C site"
+msgstr "Подключение через сайт WC1C"
+
+#: views/connection/form.php:24
+msgid "Disconnect"
+msgstr "Отключить"
+
+#: views/connection/init.php:4
+msgid "Connection"
+msgstr "Подключение"
+
+#: views/connection/init.php:10
+msgid ""
+"To receive support and official services, need to go through the "
+"authorization of external applications."
+msgstr ""
+"Для получения поддержки и официальных услуг необходимо пройти авторизацию "
+"внешних приложений."
+
+#: views/connection/init.php:11
+msgid ""
+"Authorization of an external app occurs by going to the official WC1C and "
+"returning to the current site."
+msgstr ""
+"Авторизация внешнего приложения происходит путем перехода на официальный "
+"WC1C и возврата на текущий сайт."
+
+#: views/error.php:3
+msgid "Error. Page not found."
+msgstr "Ошибка. Страница не найдена."
+
+#: views/extensions/empty.php:4
+msgid "Extensions not found."
+msgstr "Расширения не найдены."
+
+#: views/extensions/empty.php:5
+msgid ""
+"As soon as the extensions are installed, they will appear in this section."
+msgstr "Как только расширения будут установлены, они появятся в этом разделе."
+
+#: views/extensions/item.php:6 views/extensions/item.php:14
+#: views/extensions/item.php:26 views/extensions/item.php:33
+#: views/extensions/item.php:37 views/extensions/item.php:44
+#: views/extensions/item.php:48
+msgid "none"
+msgstr "неизвестно"
+
+#: views/extensions/item.php:20
+msgid "ID:"
+msgstr "ИД:"
+
+#: views/extensions/item.php:24
+msgid "Version:"
+msgstr "Версия:"
+
+#: views/extensions/item.php:30
+msgid "Versions WC1C:"
+msgstr "Версии WC1C:"
+
+#: views/extensions/item.php:41
+msgid "Versions PHP:"
+msgstr "Версии PHP:"
+
+#: views/extensions/item.php:58
+msgid "Deactivate"
+msgstr "Деактивировать"
+
+#: views/helps/bugs.php:24
+msgid "Report a bug"
+msgstr "Отчёт об ошибке"
+
+#: views/helps/features.php:31
+msgid "Request a feature"
+msgstr "Запрос возможности"
+
+#: views/helps/features.php:34
+msgid "Features"
+msgstr "Возможности"
+
+#: views/settings/error.php:3
+msgid "Error. Page for settings not found."
+msgstr "Ошибка. Страница для настроек не найдена."
+
+#: views/settings/form.php:11
+msgid "Save settings"
+msgstr "Сохранить настройки"
+
+#: views/tools/empty.php:4
+msgid "Tools not found."
+msgstr "Инструменты не найдены."
+
+#: views/tools/empty.php:5
+msgid "As soon as the tools are installed, they will appear in this section."
+msgstr "Как только инструменты будут установлены, они появятся в этом разделе."
+
+#: views/tools/item.php:14
+msgid "Open"
+msgstr "Открыть"
+
+#: views/tools/single.php:9
+msgid "Back to all tools"
+msgstr "Вернуться ко всем инструментам"
+
+#: views/wizards/error.php:3
+msgid "Error. Step not found or unavailable."
+msgstr "Ошибка. Шаг не найден или не доступен."
+
+#: views/wizards/page.php:42
+msgid "Step"
+msgstr "Шаг"
+
+#: views/wizards/steps/check.php:15
+msgid "Welcome to WC1C!"
+msgstr "Добро пожаловать в WC1C!"
+
+#: views/wizards/steps/check.php:16
+msgid ""
+"Thank you for choosing WC1C to website! This is only complete solution for "
+"integrating WooCommerce with 1C."
+msgstr ""
+"Спасибо, что выбрали WC1C для сайта! Это единственное полноценное решение "
+"для интеграции WooCommerce с 1С."
+
+#: views/wizards/steps/check.php:18
+msgid "This quick setup wizard will help you configure the basic settings."
+msgstr ""
+"Этот мастер быстрой настройки поможет вам настроить основные параметры."
+
+#: views/wizards/steps/check.php:22
+msgid ""
+"PHP scripts execution time is less than 10 seconds. WC1C requires at least "
+"20. Set php_max_execution_time to more than 20 seconds."
+msgstr ""
+"Время выполнения PHP-скриптов менее 10 секунд. WC1C требует как минимум 20. "
+"Установите для php_max_execution_time значение более 20 секунд."
+
+#: views/wizards/steps/check.php:26
+msgid "Its should not take longer than five minutes."
+msgstr "Это не должно занять больше пяти минут."
+
+#: views/wizards/steps/check.php:29 views/wizards/steps/database.php:21
+msgid "Lets Go!"
+msgstr "Погнали!"
+
+#: views/wizards/steps/check.php:35
+msgid "Need to fix the compatibility errors and return to the setup wizard."
+msgstr ""
+"Необходимо исправить ошибки совместимости и вернуться к мастеру настройки."
+
+#: views/wizards/steps/complete.php:15
+msgid "Installation completed!"
+msgstr "Установка завершена!"
+
+#: views/wizards/steps/complete.php:16
+msgid "Now you can proceed to using the WC1C plugin."
+msgstr "Теперь вы можете перейти к использованию плагина WC1C."
+
+#: views/wizards/steps/complete.php:20
+msgid "Go to use"
+msgstr "Перейти к использованию"
+
+#: views/wizards/steps/database.php:15
+msgid "Creating tables in the database"
+msgstr "Создание таблиц в базе данных"
+
+#: views/wizards/steps/database.php:16
+msgid "If continue, the required tables will be created in the database."
+msgstr "Если продолжить, необходимые таблицы будут созданы в базе данных."
 
 #. Plugin Name of the plugin/theme
 msgid "WC1C"
@@ -1545,6 +1307,226 @@ msgstr ""
 #. Author of the plugin/theme
 msgid "WC1C team"
 msgstr "Команда WC1C"
+
+#~ msgid "Processing details"
+#~ msgstr "Детали обработки"
+
+#~ msgid "Changing the behavior of the file processing."
+#~ msgstr "Изменение поведения обработки файлов."
+
+#~ msgid "Skip processing of files"
+#~ msgstr "Пропуск обработки файлов"
+
+#~ msgid ""
+#~ "Check the checkbox if want to enable this feature. Disabled by default."
+#~ msgstr ""
+#~ "Установите флажок, если надо включить эту функцию. По умолчанию отключено."
+
+#~ msgid ""
+#~ "Disabling the actual processing of CommerceML files. Files will be "
+#~ "accepted, but instead of processing them, they will be skipped with "
+#~ "successful completion of processing."
+#~ msgstr ""
+#~ "Отключение фактической обработки файлов CommerceML. Файлы будут приняты, "
+#~ "но вместо того, чтобы обрабатывать их, они будут пропущены при успешном "
+#~ "завершении обработки."
+
+#~ msgid "Deleting CommerceML files after processing"
+#~ msgstr "Удаление CommerceML файлов после обработки"
+
+#~ msgid ""
+#~ "If deletion is disabled, the exchange files will remain in the "
+#~ "directories until the next exchange. Otherwise, all processed files will "
+#~ "be deleted immediately after error-free processing."
+#~ msgstr ""
+#~ "Если удаление отключено, файлы обмена останутся в каталогах до следующего "
+#~ "обмена. В противном случае все обработанные файлы будут удалены сразу же "
+#~ "после безошибочной обработки."
+
+#~ msgid "Deleting ZIP files after extract"
+#~ msgstr "Удаление ZIP файлов после обработки"
+
+#~ msgid ""
+#~ "If deletion is disabled, the exchange ZIP files will remain in the "
+#~ "directories until the next exchange."
+#~ msgstr ""
+#~ "Если удаление отключено, то ZIP-файлы обмена останутся в каталогах до "
+#~ "следующего обмена."
+
+#~ msgid "Technical details"
+#~ msgstr "Технические параметры"
+
+#~ msgid ""
+#~ "Changing processing behavior for compatibility of the environment and "
+#~ "other systems."
+#~ msgstr ""
+#~ "Изменение поведения обработки для обеспечения совместимости среды и "
+#~ "других систем."
+
+#~ msgid "Logging events"
+#~ msgstr "Журнал событий"
+
+#~ msgid ""
+#~ "Can enable logging, specify the level of error that to benefit from "
+#~ "logging.\n"
+#~ "\t\t\t Can send reports to developer. All sensitive data in the report "
+#~ "are deleted.\n"
+#~ "\t\t\t  By default, the error rate should not be less than ERROR."
+#~ msgstr ""
+#~ "Вы можете включить ведение журнала, указать уровень ошибки, которые вы "
+#~ "хотите извлечь из ведения журнала. Вы можете отправлять отчеты "
+#~ "разработчику вручную, нажав на кнопку. Все конфиденциальные данные в "
+#~ "отчете удаляются. По умолчанию частота ошибок не должна быть меньше, чем "
+#~ "ошибка."
+
+#~ msgid "Current path: "
+#~ msgstr "Текущий путь: "
+
+#~ msgid "Off"
+#~ msgstr "Выключен"
+
+#~ msgid "DEBUG"
+#~ msgstr "Отладка"
+
+#~ msgid "INFO"
+#~ msgstr "Информация"
+
+#~ msgid "NOTICE"
+#~ msgstr "Уведомления"
+
+#~ msgid "WARNING"
+#~ msgstr "Предупреждения"
+
+#~ msgid "ERROR"
+#~ msgstr "Ошибки"
+
+#~ msgid "CRITICAL"
+#~ msgstr "Критичные ошибки"
+
+#~ msgid "ALERT"
+#~ msgstr "Тревога"
+
+#~ msgid "EMERGENCY"
+#~ msgstr "Чрезвычайная ситуация"
+
+#~ msgid "Converting to Windows-1251"
+#~ msgstr "Преобразование в Windows-1251"
+
+#~ msgid ""
+#~ "Data from utf-8 will be converted to Windows-1251 encoding. Use this "
+#~ "feature for compatibility with older versions of 1C."
+#~ msgstr ""
+#~ "Данные из utf-8 будут преобразованы в кодировку Windows-1251. Используйте "
+#~ "эту функцию для обеспечения совместимости с более старыми версиями 1С."
+
+#~ msgid "Support for data compression"
+#~ msgstr "Поддержка сжатия данных"
+
+#~ msgid ""
+#~ "1C can transfer files in archives to reduce the number of HTTP requests "
+#~ "and compress data. In this case, the load may increase when unpacking "
+#~ "archives, or even it may be impossible to unpack due to server "
+#~ "restrictions."
+#~ msgstr ""
+#~ "1С может передавать файлы в архивах для уменьшения количества HTTP-"
+#~ "запросов и сжатия данных. В этом случае нагрузка может увеличиться при "
+#~ "распаковке архивов, или даже распаковка может оказаться невозможной из-за "
+#~ "ограничений сервера."
+
+#~ msgid "Receiver: disable check auth key"
+#~ msgstr "Получатель: отключить проверку ключа авторизации"
+
+#~ msgid ""
+#~ "When enabled, verification of authorization data will be completely "
+#~ "disabled. The authenticity of requests from 1C will not be checked."
+#~ msgstr ""
+#~ "При включении проверка данных авторизации будет полностью отключена. "
+#~ "Подлинность запросов от 1С проверятся не будет."
+
+#~ msgid "Requests authorization"
+#~ msgstr "Авторизация запросов"
+
+#~ msgid "Data for authorization of requests. These settings will connect 1C."
+#~ msgstr "Данные для авторизации запросов. По этим настройкам подключится 1С."
+
+#~ msgid "Requests URL"
+#~ msgstr "Адрес для запросов"
+
+#~ msgid ""
+#~ "This address is entered in the exchange settings on the 1C side. It will "
+#~ "receive requests from 1C."
+#~ msgstr ""
+#~ "Этот адрес вводится в настройках обмена на стороне 1С. Он будет получать "
+#~ "запросы от 1С."
+
+#~ msgid "Login to connect"
+#~ msgstr "Имя пользователя"
+
+#~ msgid ""
+#~ "Enter the username to connect from 1C. It should be the same as when "
+#~ "setting up in 1C."
+#~ msgstr ""
+#~ "Введите логин для подключения из 1С. Он должен быть таким же, как и при "
+#~ "настройке в 1С."
+
+#~ msgid "Password to connect"
+#~ msgstr "Пароль для подключения"
+
+#~ msgid ""
+#~ "Enter the users password to connect from 1C. It must be the same as when "
+#~ "setting up in 1C."
+#~ msgstr ""
+#~ "Введите пароль пользователя для подключения из 1С. Он должен быть таким "
+#~ "же, как и при настройке в 1С."
+
+#~ msgid "Default schema based on CML"
+#~ msgstr "Схема по умолчанию на основе CML"
+
+#~ msgid ""
+#~ "Standard data exchange using the standard exchange algorithm from 1C via "
+#~ "CommerceML. Exchanges only contains products data."
+#~ msgstr ""
+#~ "Стандартный обмен данными с использованием стандартного алгоритма обмена "
+#~ "от 1С через CommerceML. Обмен содержит только данные о продуктах."
+
+#~ msgid "Schema: action not found"
+#~ msgstr "Схема: действие не найдено"
+
+#~ msgid "Not specified the user. Check the server settings."
+#~ msgstr "Не указан пользователь. Проверьте настройки сервера."
+
+#~ msgid "Not a valid username."
+#~ msgstr "Неверное имя пользователя."
+
+#~ msgid "Not a valid username"
+#~ msgstr "Неверное имя пользователя"
+
+#~ msgid "Not a valid user password."
+#~ msgstr "Неверный пароль пользователя."
+
+#~ msgid "Not a valid user password"
+#~ msgstr "Неверный пароль пользователя"
+
+#~ msgid "Checkauth is success."
+#~ msgstr "Checkauth - это успех."
+
+#~ msgid "Authorization failed."
+#~ msgstr "Не удалось выполнить авторизацию."
+
+#~ msgid "Authorization failed"
+#~ msgstr "Не удалось выполнить авторизацию"
+
+#~ msgid "Unable to create a directory:"
+#~ msgstr "Невозможно создать каталог:"
+
+#~ msgid "Filename is empty."
+#~ msgstr "Имя файла пустое."
+
+#~ msgid "Import filename is empty."
+#~ msgstr "Имя файла импорта пустое."
+
+#~ msgid "Extension ID:"
+#~ msgstr "Идентификатор:"
 
 #~ msgid "Other"
 #~ msgstr "Прочие"
