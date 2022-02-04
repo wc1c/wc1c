@@ -87,4 +87,17 @@ class Product extends DataAbstract implements ProductDataContract
 
 		return $this->data['description'];
 	}
+
+	/**
+	 * @return false|mixed
+	 */
+	public function getRequisites()
+	{
+		if(!isset($this->data['requisites']))
+		{
+			return false;
+		}
+
+		return $this->data['requisites'];
+	}
 }
