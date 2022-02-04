@@ -28,22 +28,22 @@
                     </li>
                     <li class="list-group-item m-0">
 		                <?php _e('Versions WC1C:', 'wc1c'); ?>
-                        от
+	                    <?php _e('from', 'wc1c'); ?>
                         <span class="badge btn-sm bg-success">
                             <?php echo $args['object']->getMeta('version_wc1c_min', __('none')); ?>
                          </span>
-                        до
+	                    <?php _e('to', 'wc1c'); ?>
                         <span class="badge btn-sm bg-success">
                             <?php echo $args['object']->getMeta('version_wc1c_max', __('none')); ?>
                         </span>
                     </li>
                     <li class="list-group-item m-0">
 		                <?php _e('Versions PHP:', 'wc1c'); ?>
-                        от
+	                    <?php _e('from', 'wc1c'); ?>
                         <span class="badge btn-sm bg-success">
                             <?php echo $args['object']->getMeta('version_php_min', __('none')); ?>
                         </span>
-                        до
+                        <?php _e('to', 'wc1c'); ?>
                         <span class="badge btn-sm bg-success">
                             <?php echo $args['object']->getMeta('version_php_max', __('none')); ?>
                          </span>
@@ -53,9 +53,5 @@
         </div>
         <div class="clearfix"></div>
     </div>
-    <div class="card-footer p-2 border-0">
-        <a class="text-decoration-none button button-secondary" href="#">
-		    <?php _e('Deactivate'); ?>
-        </a>
-    </div>
+    <div class="card-footer p-0 border-0"></div>
 </div>
