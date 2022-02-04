@@ -50,8 +50,8 @@ final class Products
 
 		if('wc1c' === $column)
 		{
-			$schema_id = get_post_meta($post->ID, WC1C_PREFIX . 'schema_id', true);
-			$config_id = get_post_meta($post->ID, WC1C_PREFIX . 'configuration_id', true);
+			$schema_id = get_post_meta($post->ID, '_' . WC1C_PREFIX . 'schema_id', true);
+			$config_id = get_post_meta($post->ID, '_' . WC1C_PREFIX . 'configuration_id', true);
 
 			$content = '';
 
