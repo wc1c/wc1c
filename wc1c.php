@@ -53,5 +53,8 @@ if(false === defined('WC1C_PLUGIN_FILE'))
 	{
 		$loader->register();
 	}
-	catch(Exception $e){}
+	catch(Exception $e)
+	{
+		trigger_error($e->getMessage());
+	}
 }
