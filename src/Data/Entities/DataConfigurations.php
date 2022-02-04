@@ -2,8 +2,8 @@
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Exceptions\Exception;
 use WP_Error;
+use Wc1c\Exceptions\Exception;
 use Wc1c\Data\Meta;
 use Wc1c\Abstracts\DataAbstract;
 

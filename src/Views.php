@@ -30,7 +30,7 @@ final class Views
 	 */
 	public function adminBackLink($label, $url)
 	{
-		echo '<h2 style="margin-bottom: 15px;margin-top: 15px;">' . esc_attr($label) . '<small class="wc-admin-breadcrumb" style="margin-left: 10px;"><a href="' . esc_url($url) . '" aria-label="' . esc_attr($label) . '"> &#x2934;</a></small></h2>';
+		echo '<h2 class="back-link" style="margin-bottom: 15px;margin-top: 15px;">' . esc_attr($label) . '<small class="wc-admin-breadcrumb" style="margin-left: 10px;"><a href="' . esc_url($url) . '" aria-label="' . esc_attr($label) . '"> &#x2934;</a></small></h2>';
 	}
 
 	/**

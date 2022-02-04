@@ -87,4 +87,43 @@ class Product extends DataAbstract implements ProductDataContract
 
 		return $this->data['description'];
 	}
+
+	/**
+	 * @return false|mixed
+	 */
+	public function getRequisites()
+	{
+		if(!isset($this->data['requisites']))
+		{
+			return false;
+		}
+
+		return $this->data['requisites'];
+	}
+
+	/**
+	 * @return false|mixed
+	 */
+	public function getPropertyValues()
+	{
+		if(!isset($this->data['property_values']))
+		{
+			return false;
+		}
+
+		return $this->data['property_values'];
+	}
+
+	/**
+	 * @return false|array
+	 */
+	public function getImages()
+	{
+		if(!isset($this->data['images']))
+		{
+			return false;
+		}
+
+		return $this->data['images'];
+	}
 }
