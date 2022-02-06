@@ -63,7 +63,7 @@ final class Core
 	 */
 	public function __construct()
 	{
-		do_action(WC1C_PREFIX . 'loading');
+		do_action(WC1C_PREFIX . 'core_loaded');
 	}
 
 	/**
