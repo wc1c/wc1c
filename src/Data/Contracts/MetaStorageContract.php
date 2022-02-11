@@ -1,25 +1,15 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Data\Interfaces;
+<?php namespace Wc1c\Data\Contracts;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
-use Wc1c\Abstracts\DataAbstract;
+use Wc1c\Data\Abstracts\DataAbstract;
 
 /**
- * Interface StorageMetaInterface
+ * MetaStorageContract
  *
- * @package Wc1c\Data\Interfaces
+ * @package Wc1c\Data\Contracts
  */
-interface StorageMetaInterface
+interface MetaStorageContract
 {
 	/**
 	 * Returns an array of meta for an object

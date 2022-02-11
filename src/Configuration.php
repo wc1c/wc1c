@@ -4,14 +4,14 @@ defined('ABSPATH') || exit;
 
 use Wc1c\Exceptions\Exception;
 use Wc1c\Data\Storage;
-use Wc1c\Data\Entities\DataConfigurations;
+use Wc1c\Data\Entities\ConfigurationsData;
 
 /**
  * Configuration
  *
  * @package Wc1c\Data
  */
-class Configuration extends DataConfigurations
+class Configuration extends ConfigurationsData
 {
 	/**
 	 * @var array Default data

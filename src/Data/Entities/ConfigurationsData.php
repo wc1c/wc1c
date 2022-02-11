@@ -5,14 +5,14 @@ defined('ABSPATH') || exit;
 use WP_Error;
 use Wc1c\Exceptions\Exception;
 use Wc1c\Data\Meta;
-use Wc1c\Abstracts\DataAbstract;
+use Wc1c\Data\Abstracts\DataAbstract;
 
 /**
- * DataConfigurations
+ * ConfigurationsData
  *
  * @package Wc1c\Data\Entities
  */
-abstract class DataConfigurations extends DataAbstract
+abstract class ConfigurationsData extends DataAbstract
 {
 	/**
 	 * This is the name of this object type

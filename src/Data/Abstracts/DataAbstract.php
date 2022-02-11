@@ -1,17 +1,17 @@
-<?php namespace Wc1c\Abstracts;
+<?php namespace Wc1c\Data\Abstracts;
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Traits\DatetimeUtilityTrait;
 use WP_Error;
 use DateTimeZone;
 use Wc1c\Exceptions\Exception;
 use Wc1c\Datetime;
+use Wc1c\Traits\DatetimeUtilityTrait;
 
 /**
  * DataAbstract - Implemented by classes using the same CRUD(s) pattern
  *
- * @package Wc1c\Abstracts
+ * @package Wc1c\Data\Abstracts
  */
 abstract class DataAbstract
 {
@@ -43,7 +43,7 @@ abstract class DataAbstract
 	protected $data = [];
 
 	/**
-	 * @var array Set to _data on construct so we can track and reset data if needed
+	 * @var array Set to _data on construct, so we can track and reset data if needed
 	 */
 	protected $default_data = [];
 
@@ -119,8 +119,7 @@ abstract class DataAbstract
 	}
 
 	/**
-	 * Save should create or update based
-	 * on object existence
+	 * Save should create or update based on object existence
 	 *
 	 * @return int
 	 */

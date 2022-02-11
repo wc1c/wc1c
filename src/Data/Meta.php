@@ -1,30 +1,18 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Data;
+<?php namespace Wc1c\Data;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use JsonSerializable;
 
 /**
- * Class Meta
+ * Meta
  *
  * @package Wc1c\Data
  */
 class Meta implements JsonSerializable
 {
 	/**
-	 * Metadata data
-	 *
-	 * @var array
+	 * @var array Metadata data
 	 */
 	protected $data;
 

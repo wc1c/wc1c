@@ -3,35 +3,32 @@
 defined('ABSPATH') || exit;
 
 use stdClass;
-use Wc1c\Traits\DatetimeUtilityTrait;
 use WP_Error;
+use Wc1c\Data\Contracts\StorageContract;
+use Wc1c\Traits\DatetimeUtilityTrait;
 use Wc1c\Exceptions\RuntimeException;
 use Wc1c\Exceptions\Exception;
 use Wc1c\Configuration;
-use Wc1c\Data\Interfaces\StorageMetaInterface;
-use Wc1c\Abstracts\DataAbstract;
+use Wc1c\Data\Contracts\MetaStorageContract;
+use Wc1c\Data\Abstracts\DataAbstract;
 use Wc1c\Data\MetaQuery;
 
 /**
- * StorageAccounts
+ * ConfigurationsStorage
  *
  * @package Wc1c\Data\Storages
  */
-class StorageConfigurations implements StorageMetaInterface
+class ConfigurationsStorage implements StorageContract, MetaStorageContract
 {
 	use DatetimeUtilityTrait;
 
 	/**
-	 * Data stored in meta keys, but not considered "meta" for an object.
-	 *
-	 * @var array
+	 * @var array Data stored in meta keys, but not considered "meta" for an object.
 	 */
 	protected $internal_meta_keys = [];
 
 	/**
-	 * Metadata which should exist in the DB, even if empty
-	 *
-	 * @var array
+	 * @var array Metadata which should exist in the DB, even if empty
 	 */
 	protected $must_exist_meta_keys = [];
 
@@ -167,7 +164,9 @@ class StorageConfigurations implements StorageMetaInterface
 		$changes = $data->getChanges();
 
 		// Only changed update data changes
-		if(array_intersect
+		if
+		(
+			array_intersect
 			(
 				[
 					'user_id',

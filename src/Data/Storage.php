@@ -3,16 +3,16 @@
 defined('ABSPATH') || exit;
 
 use Wc1c\Exceptions\Exception;
-use Wc1c\Data\Interfaces\StorageInterface;
-use Wc1c\Abstracts\DataAbstract;
-use Wc1c\Data\Storages\StorageConfigurations;
+use Wc1c\Data\Contracts\StorageContract;
+use Wc1c\Data\Abstracts\DataAbstract;
+use Wc1c\Data\Storages\ConfigurationsStorage;
 
 /**
  * Storage
  *
  * @package Wc1c\Data
  */
-class Storage implements StorageInterface
+class Storage implements StorageContract
 {
 	/**
 	 * Contains an array of default supported data storages
@@ -29,7 +29,7 @@ class Storage implements StorageInterface
 	 */
 	private $storages =
 	[
-		'configuration' => StorageConfigurations::class,
+		'configuration' => ConfigurationsStorage::class,
 	];
 
 	/**
@@ -82,7 +82,7 @@ class Storage implements StorageInterface
 
 		if(is_object($storage))
 		{
-			if(!$storage instanceof StorageInterface)
+			if(!$storage instanceof StorageContract)
 			{
 				throw new Exception('Invalid data storage. Interface error.');
 			}
