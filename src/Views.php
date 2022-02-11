@@ -97,7 +97,7 @@ final class Views
 	}
 
 	/**
-	 * Like wc1c()->views()->getTemplate, but returns the HTML instead of outputting
+	 * Like wc1c()->views()->getView, but returns the HTML instead of outputting
 	 *
 	 * @param string $template_name template name
 	 * @param array $args arguments (default: array)
