@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WC1C > integration of WooCommerce with 1C products "
 "(different configurations)\n"
 "POT-Creation-Date: 2022-02-18 11:31+0300\n"
-"PO-Revision-Date: 2022-02-18 12:02+0300\n"
+"PO-Revision-Date: 2022-02-18 12:12+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
 "Language: ru_RU\n"
@@ -502,7 +502,7 @@ msgstr "Включить"
 
 #: src/Admin/Settings/InterfaceForm.php:59
 msgid "Output of a column with information from 1C to the list of products."
-msgstr "Вывод столбца с информацией из 1С в список товаров."
+msgstr "Вывод столбца с информацией из 1С в список продуктов."
 
 #: src/Admin/Settings/InterfaceForm.php:65
 msgid "Metabox in edit products"
@@ -961,7 +961,9 @@ msgstr "Категории"
 msgid ""
 "Categorization of product positions on the WooCommerce side according to "
 "data from 1C."
-msgstr "Категоризация товарных позиций на стороне WooCommerce по данным от 1С."
+msgstr ""
+"Категоризация продуктовых (товарных) позиций на стороне WooCommerce по "
+"данным от 1С."
 
 #: src/Schemas/Productscml/Admin.php:181
 msgid "Creating categories"
@@ -1133,8 +1135,8 @@ msgid ""
 "General (global) attributes are used for all products. It is possible to "
 "sort products according to them."
 msgstr ""
-"Общие (глобальные) атрибуты используются для всех товаров. По ним можно "
-"сортировать товары."
+"Общие (глобальные) атрибуты используются для всех продуктов (товаров). По "
+"ним можно сортировать продукты (товары)."
 
 #: src/Schemas/Productscml/Admin.php:314
 msgid "Creating attributes"
@@ -1187,7 +1189,7 @@ msgid ""
 "Adding and updating global attributes for products from classifier "
 "properties."
 msgstr ""
-"Добавление и обновление глобальных атрибутов товаров из свойств "
+"Добавление и обновление глобальных атрибутов продуктов (товаров) из свойств "
 "классификатора."
 
 #: src/Schemas/Productscml/Admin.php:362
@@ -1245,8 +1247,8 @@ msgid ""
 "Dispute resolution between existing products (goods) on the 1C side and in "
 "WooCommerce. For extended matching (example by SKU), must use the extension."
 msgstr ""
-"Разрешение споров между существующими товарами (товарами) на стороне 1С и в "
-"WooCommerce. Для расширенного сопоставления (например, по SKU) необходимо "
+"Разрешение споров между существующими продуктами (товарами) на стороне 1С и "
+"в WooCommerce. Для расширенного сопоставления (например, по SKU) необходимо "
 "использовать расширение."
 
 #: src/Schemas/Productscml/Admin.php:406
@@ -1272,17 +1274,18 @@ msgid ""
 "identifier from 1C is filled in for them. Can also fill in global "
 "identifiers manually for manually created products."
 msgstr ""
-"При создании новых товаров на основе данных из 1С для них заполняется "
-"универсальный глобальный идентификатор от 1С. Также можно вручную заполнять "
-"глобальные идентификаторы для созданных вручную продуктов."
+"При создании новых продуктов (товаров) на основе данных из 1С для них "
+"заполняется универсальный глобальный идентификатор от 1С. Также можно "
+"вручную заполнять глобальные идентификаторы для созданных вручную продуктов."
 
 #: src/Schemas/Productscml/Admin.php:419
 msgid ""
 "Enabling the option allows you to use the filled GUID to mark products "
 "(goods) as existing, and thereby run algorithms to update them."
 msgstr ""
-"Включение опции позволяет использовать заполненный GUID для отметки товаров "
-"(товаров) как существующих, и тем самым запускать алгоритмы их обновления."
+"Включение опции позволяет использовать заполненный GUID для отметки "
+"продуктов (товаров) как существующих, и тем самым запускать алгоритмы их "
+"обновления."
 
 #: src/Schemas/Productscml/Admin.php:438
 msgid "Products (goods)"
@@ -1304,16 +1307,16 @@ msgid ""
 "Check the box to enable the creation of new products upon request from 1C. "
 "Disabled by default."
 msgstr ""
-"Установите флажок, чтобы разрешить создание новых товаров по запросу от 1С. "
-"Отключено по умолчанию."
+"Установите флажок, чтобы разрешить создание новых продуктов (товаров) по "
+"запросу от 1С. Отключено по умолчанию."
 
 #: src/Schemas/Productscml/Admin.php:448
 msgid ""
 "The product is only created if it is not found in WooCommerce when searching "
 "by criteria for synchronization."
 msgstr ""
-"Товар создается только в том случае, если он не найден в WooCommerce при "
-"поиске по критериям синхронизации."
+"Продукт (товар) создается только в том случае, если он не найден в "
+"WooCommerce при поиске по критериям синхронизации."
 
 #: src/Schemas/Productscml/Admin.php:454
 msgid "Update of products"
@@ -1402,8 +1405,8 @@ msgid ""
 "It will be allowed to fill in the quantity of product stocks in WooCommerce "
 "based on the quantity received in 1C offers."
 msgstr ""
-"Будет разрешено заполнить количество товарных запасов в WooCommerce исходя "
-"из количества, полученного в 1С предложениях."
+"Будет разрешено заполнить количество продуктовых (товарных) запасов в "
+"WooCommerce исходя из количества, полученного в 1С предложениях."
 
 #: src/Schemas/Productscml/Admin.php:551
 msgid ""
@@ -1419,7 +1422,7 @@ msgstr "Уровень для событий"
 
 #: src/Schemas/Productscml/Core.php:49
 msgid "Products data exchange via CommerceML"
-msgstr "Обмен данными о товарах через CommerceML"
+msgstr "Обмен данными о продуктах через CommerceML"
 
 #: src/Schemas/Productscml/Core.php:50
 msgid ""
