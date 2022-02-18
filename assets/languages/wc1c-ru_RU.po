@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WC1C > integration of WooCommerce with 1C products "
 "(different configurations)\n"
-"POT-Creation-Date: 2022-02-18 11:31+0300\n"
-"PO-Revision-Date: 2022-02-18 12:12+0300\n"
+"POT-Creation-Date: 2022-02-18 12:20+0300\n"
+"PO-Revision-Date: 2022-02-18 12:21+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
 "Language: ru_RU\n"
@@ -1012,7 +1012,7 @@ msgstr "Создание и обновление категорий на осн�
 
 #: src/Schemas/Productscml/Admin.php:218
 msgid "Creating categories from classifier groups"
-msgstr "Создание категорий из групп классификаторов"
+msgstr "Создание категорий из групп классификатора"
 
 #: src/Schemas/Productscml/Admin.php:221
 msgid ""
@@ -1024,7 +1024,7 @@ msgstr ""
 
 #: src/Schemas/Productscml/Admin.php:227
 msgid "Updating categories from classifier groups"
-msgstr "Обновление категорий из групп классификаторов"
+msgstr "Обновление категорий из групп классификатора"
 
 #: src/Schemas/Productscml/Admin.php:236
 msgid "Do not use"
@@ -1344,7 +1344,7 @@ msgstr "Продукты (товары, услуги): цены"
 
 #: src/Schemas/Productscml/Admin.php:477
 msgid "Comparison of WooCommerce and 1C prices and other settings."
-msgstr "Сравнение цен WooCommerce и 1С и другие настроек."
+msgstr "Спосоставление цен WooCommerce и 1С и другие настроек."
 
 #: src/Schemas/Productscml/Admin.php:482
 msgid "Base price - first found"
