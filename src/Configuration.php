@@ -9,7 +9,7 @@ use Wc1c\Data\Entities\ConfigurationsData;
 /**
  * Configuration
  *
- * @package Wc1c\Data
+ * @package Wc1c
  */
 class Configuration extends ConfigurationsData
 {
