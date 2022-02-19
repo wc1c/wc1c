@@ -23,7 +23,7 @@ class Storage implements StorageContract
 	 * You can also pass something like key_<type> for codes storage and
 	 * that type will be used first when available, if a store is requested like
 	 * this and doesn't exist, then the store would fall back to 'key'.
-	 * Ran through PREFIX `_data_storages`.
+	 * Ran through PREFIX `_wc_data_storages`.
 	 *
 	 * @var array
 	 */
