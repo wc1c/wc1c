@@ -1,82 +1,56 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Data;
+<?php namespace Wc1c\Data;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
 /**
- * Class MetaQuery
+ * MetaQuery
  *
  * @package Wc1c\Data
  */
 class MetaQuery
 {
 	/**
-	 * Array of metadata queries.
-	 * See MetaQuery::__construct() for information on meta query arguments
-	 *
-	 * @var array
+	 * @var array Array of metadata queries.
 	 */
 	public $queries = [];
 
 	/**
-	 * The relation between the queries. Can be one of 'AND' or 'OR'
-	 *
-	 * @var string
+	 * @var string The relation between the queries. Can be one of 'AND' or 'OR'
 	 */
 	public $relation;
 
 	/**
-	 * Database table to query for the metadata
-	 *
-	 * @var string
+	 * @var string Database table to query for the metadata
 	 */
 	public $meta_table;
 
 	/**
-	 * Column in meta_table that represents the ID of the object the metadata belongs to
-	 *
-	 * @var string
+	 * @var string Column in meta_table that represents the ID of the object the metadata belongs to
 	 */
 	public $meta_id_column;
 
 	/**
-	 * Database table that where the metadata's objects are stored (eg $wpdb->users).
-	 *
-	 * @var string
+	 * @var string Database table that where the metadata's objects are stored (eg $wpdb->users).
 	 */
 	public $primary_table;
 
 	/**
-	 * Column in primary_table that represents the ID of the object
-	 *
-	 * @var string
+	 * @var string Column in primary_table that represents the ID of the object
 	 */
 	public $primary_id_column;
 
 	/**
-	 * A flat list of table aliases used in JOIN clauses
-	 *
-	 * @var array
+	 * @var array A flat list of table aliases used in JOIN clauses
 	 */
 	protected $table_aliases = [];
 
 	/**
-	 * A flat list of clauses, keyed by clause 'name'
-	 *
-	 * @var array
+	 * @var array A flat list of clauses, keyed by clause 'name'
 	 */
 	protected $clauses = [];
 
 	/**
-	 * Whether the query contains any OR relations
-	 *
-	 * @var bool
+	 * @var bool Whether the query contains any OR relations
 	 */
 	protected $has_or_relation = false;
 

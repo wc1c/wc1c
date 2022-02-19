@@ -9104,7 +9104,7 @@ textarea.form-control-lg {
 }
 
 /**
-*** Toc bot
+*** Toc
  */
 /* Styles */
 /* Core Styles */
@@ -9160,6 +9160,16 @@ a.toc-link {
   text-decoration: none;
 }
 /* Default Theme Styles */
+.wc1c-sidebar-toc .list-group-item {
+  padding: 0.3rem 0.5rem;
+  margin-top: 0 !important;
+  border: 0 !important;
+  transition: all 0.7s;
+}
+.wc1c-sidebar-toc .is-active-link {
+  font-weight: normal;
+}
+
 /**
 *** Tables
  */

@@ -1,25 +1,15 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Interfaces;
+<?php namespace Wc1c\Contracts;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use Wc1c\Exceptions\Exception;
 
 /**
- * SettingsInterface
+ * SettingsContract
  *
- * @package Wc1c\Interfaces
+ * @package Wc1c\Contracts
  */
-interface SettingsInterface
+interface SettingsContract
 {
 	/**
 	 * Initializing

@@ -1,25 +1,15 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Data\Interfaces;
+<?php namespace Wc1c\Wc\Contracts;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
-use Wc1c\Abstracts\DataAbstract;
+use Wc1c\Wc\Abstracts\DataAbstract;
 
 /**
- * Interface StorageInterface
+ * StorageContract
  *
- * @package Wc1c\Data\Interfaces
+ * @package Wc1c\Wc\Contracts
  */
-interface StorageInterface
+interface StorageContract
 {
 	/**
 	 * Method to create a new record of a Data based object

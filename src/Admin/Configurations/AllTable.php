@@ -5,7 +5,7 @@ defined('ABSPATH') || exit;
 use Wc1c\Exceptions\Exception;
 use Wc1c\Abstracts\TableAbstract;
 use Wc1c\Data\Storage;
-use Wc1c\Data\Storages\StorageConfigurations;
+use Wc1c\Data\Storages\ConfigurationsStorage;
 use Wc1c\Settings\ConnectionSettings;
 use Wc1c\Traits\ConfigurationsUtilityTrait;
 use Wc1c\Traits\DatetimeUtilityTrait;
@@ -23,7 +23,7 @@ class AllTable extends TableAbstract
 	use UtilityTrait;
 
 	/**
-	 * @var StorageConfigurations Configurations storage
+	 * @var ConfigurationsStorage Configurations storage
 	 */
 	public $storage_configurations;
 

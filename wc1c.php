@@ -41,8 +41,9 @@ if(false === defined('WC1C_PLUGIN_FILE'))
 	define('WC1C_ADMIN_PREFIX', 'wc1c_admin_');
 
 	define('WC1C_PLUGIN_FILE', __FILE__);
+
+	define('WC1C_PLUGIN_URL', plugin_dir_url(WC1C_PLUGIN_FILE));
 	define('WC1C_PLUGIN_PATH', plugin_dir_path(WC1C_PLUGIN_FILE));
-	define('WC1C_PLUGIN_URL', plugin_dir_url(__FILE__));
 	define('WC1C_PLUGIN_NAME', plugin_basename(WC1C_PLUGIN_FILE));
 
 	include_once __DIR__ . '/src/Loader.php';

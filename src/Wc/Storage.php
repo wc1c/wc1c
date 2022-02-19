@@ -1,16 +1,16 @@
-<?php namespace Wc1c\Data;
+<?php namespace Wc1c\Wc;
 
 defined('ABSPATH') || exit;
 
 use Wc1c\Exceptions\Exception;
-use Wc1c\Data\Contracts\StorageContract;
-use Wc1c\Data\Abstracts\DataAbstract;
-use Wc1c\Data\Storages\ConfigurationsStorage;
+use Wc1c\Wc\Contracts\StorageContract;
+use Wc1c\Wc\Abstracts\DataAbstract;
+use Wc1c\Wc\Storages\CategoriesStorage;
 
 /**
  * Storage
  *
- * @package Wc1c\Data
+ * @package Wc1c\Wc
  */
 class Storage implements StorageContract
 {
@@ -23,33 +23,27 @@ class Storage implements StorageContract
 	 * You can also pass something like key_<type> for codes storage and
 	 * that type will be used first when available, if a store is requested like
 	 * this and doesn't exist, then the store would fall back to 'key'.
-	 * Ran through PREFIX `_data_storages`.
+	 * Ran through PREFIX `_wc_data_storages`.
 	 *
 	 * @var array
 	 */
 	private $storages =
 	[
-		'configuration' => ConfigurationsStorage::class,
+		'category' => CategoriesStorage::class,
 	];
 
 	/**
-	 * Contains an instance of the data store class that we are working with
-	 *
-	 * @var Storage
+	 * @var Storage Contains an instance of the data store class that we are working with
 	 */
 	private $instance = null;
 
 	/**
-	 * Contains the name of the current data store's class name
-	 *
-	 * @var string
+	 * @var string Contains the name of the current data store's class name
 	 */
 	private $current_class_name = '';
 
 	/**
-	 * The object type this store works with
-	 *
-	 * @var string
+	 * @var string The object type this store works with
 	 */
 	private $current_object_type;
 
@@ -70,7 +64,7 @@ class Storage implements StorageContract
 		$this->setCurrentObjectType($object_type);
 
 		// hook
-		$this->setStorages(apply_filters(WC1C_PREFIX . 'data_storages', $this->getStorages()));
+		$this->setStorages(apply_filters(WC1C_PREFIX . 'wc_data_storages', $this->getStorages()));
 
 		if(!array_key_exists($object_type, $this->getStorages()))
 		{
@@ -78,7 +72,7 @@ class Storage implements StorageContract
 		}
 
 		// hook
-		$storage = apply_filters(WC1C_PREFIX . 'data_storages_' . $object_type, $this->storages[$object_type]);
+		$storage = apply_filters(WC1C_PREFIX . 'wc_data_storages_' . $object_type, $this->storages[$object_type]);
 
 		if(is_object($storage))
 		{
@@ -230,10 +224,10 @@ class Storage implements StorageContract
 	 */
 	public function __call($method, $parameters)
 	{
-		if(is_callable(array($this->instance, $method)))
+		if(is_callable([$this->instance, $method]))
 		{
 			$object = array_shift($parameters);
-			$parameters = array_merge(array(&$object), $parameters);
+			$parameters = array_merge([&$object], $parameters);
 
 			return $this->instance->$method(...$parameters);
 		}

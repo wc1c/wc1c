@@ -12,7 +12,7 @@ use Wc1c\Settings\InterfaceSettings;
 use Wc1c\Settings\LogsSettings;
 use Wc1c\Exceptions\Exception;
 use Wc1c\Exceptions\RuntimeException;
-use Wc1c\Interfaces\SettingsInterface;
+use Wc1c\Contracts\SettingsContract;
 use Wc1c\Traits\SingletonTrait;
 use Wc1c\Settings\MainSettings;
 use Wc1c\Settings\ConnectionSettings;
@@ -47,7 +47,7 @@ final class Core
 	private $timer;
 
 	/**
-	 * @var SettingsInterface
+	 * @var SettingsContract
 	 */
 	private $settings = [];
 
@@ -63,7 +63,7 @@ final class Core
 	 */
 	public function __construct()
 	{
-		do_action(WC1C_PREFIX . 'loading');
+		do_action(WC1C_PREFIX . 'core_loaded');
 	}
 
 	/**
@@ -330,7 +330,7 @@ final class Core
 	 *
 	 * @param string $context
 	 *
-	 * @return SettingsInterface
+	 * @return SettingsContract
 	 * @throws RuntimeException
 	 */
 	public function settings($context = 'main')

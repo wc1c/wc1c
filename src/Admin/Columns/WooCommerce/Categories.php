@@ -1,17 +1,7 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Admin\Columns\WooCommerce;
+<?php namespace Wc1c\Admin\Columns\WooCommerce;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use Wc1c\Traits\SingletonTrait;
 
 /**

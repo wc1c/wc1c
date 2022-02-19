@@ -4,14 +4,14 @@ defined('ABSPATH') || exit;
 
 use Wc1c\Exceptions\Exception;
 use Wc1c\Exceptions\RuntimeException;
-use Wc1c\Interfaces\SettingsInterface;
+use Wc1c\Contracts\SettingsContract;
 
 /**
  * SettingsAbstract
  *
  * @package Wc1c\Abstracts
  */
-abstract class SettingsAbstract implements SettingsInterface
+abstract class SettingsAbstract implements SettingsContract
 {
 	/**
 	 * Name option prefix in wp_options

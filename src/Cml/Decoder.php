@@ -274,6 +274,12 @@ class Decoder
 			'version' => $xml_group->НомерВерсии ? (string)$xml_group->НомерВерсии : '',
 		];
 
+		$data['description'] = '';
+		if($xml_group->Описание)
+		{
+			$data['description'] = (string)$xml_group->Описание;
+		}
+
 		$data['image'] = '';
 		if($xml_group->Картинка)
 		{

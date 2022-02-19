@@ -1,4 +1,4 @@
-<?php namespace Wc1c\Data;
+<?php namespace Wc1c\Wc;
 
 defined('ABSPATH') || exit;
 
@@ -7,7 +7,7 @@ use JsonSerializable;
 /**
  * Meta
  *
- * @package Wc1c\Data
+ * @package Wc1c\Wc
  */
 class Meta implements JsonSerializable
 {
@@ -17,14 +17,12 @@ class Meta implements JsonSerializable
 	protected $data;
 
 	/**
-	 * Current data for metadata
-	 *
-	 * @var array
+	 * @var array Current data for metadata
 	 */
 	protected $current_data;
 
 	/**
-	 * Constructor
+	 * Constructor.
 	 *
 	 * @param array $meta Data to wrap behind this function
 	 */

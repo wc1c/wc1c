@@ -235,6 +235,12 @@ class Reader
 		if($this->xml_reader->read())
 		{
 			++$this->position;
+
+			if(!isset($this->elements[$this->xml_reader->name]))
+			{
+				$this->elements[$this->xml_reader->name] = 0;
+			}
+
 			$this->elements[$this->xml_reader->name] = $this->elements[$this->xml_reader->name] ? $this->elements[$this->xml_reader->name] + 1 : 1;
 
 			$this->depth = $this->xml_reader->depth;
