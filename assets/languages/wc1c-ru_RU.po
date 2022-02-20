@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WC1C > integration of WooCommerce with 1C products "
 "(different configurations)\n"
-"POT-Creation-Date: 2022-02-19 22:36+0300\n"
-"PO-Revision-Date: 2022-02-19 22:41+0300\n"
+"POT-Creation-Date: 2022-02-20 11:51+0300\n"
+"PO-Revision-Date: 2022-02-20 11:52+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
 "Language: ru_RU\n"
@@ -393,7 +393,7 @@ msgstr "Нашли ошибку?"
 msgid "Not a feature?"
 msgstr "Нет возможности?"
 
-#: src/Admin/Settings.php:54 src/Schemas/Productscml/Admin.php:562
+#: src/Admin/Settings.php:54 src/Schemas/Productscml/Admin.php:571
 msgid "Event logs"
 msgstr "Журналы событий"
 
@@ -540,7 +540,7 @@ msgstr "Вывод столбца с информацией из 1С в спис
 msgid "Level for main events"
 msgstr "Уровень для основных событий"
 
-#: src/Admin/Settings/LogsForm.php:43 src/Schemas/Productscml/Admin.php:571
+#: src/Admin/Settings/LogsForm.php:43 src/Schemas/Productscml/Admin.php:580
 msgid ""
 "All events of the selected level will be recorded in the log file. The "
 "higher the level, the less data is recorded."
@@ -550,39 +550,39 @@ msgstr ""
 
 #: src/Admin/Settings/LogsForm.php:47 src/Admin/Settings/LogsForm.php:89
 #: src/Admin/Settings/LogsForm.php:106 src/Admin/Settings/LogsForm.php:123
-#: src/Admin/Settings/LogsForm.php:140 src/Schemas/Productscml/Admin.php:576
+#: src/Admin/Settings/LogsForm.php:140 src/Schemas/Productscml/Admin.php:585
 msgid "DEBUG (100)"
 msgstr "Отладка — DEBUG (100)"
 
 #: src/Admin/Settings/LogsForm.php:48 src/Admin/Settings/LogsForm.php:90
 #: src/Admin/Settings/LogsForm.php:107 src/Admin/Settings/LogsForm.php:124
-#: src/Admin/Settings/LogsForm.php:141 src/Schemas/Productscml/Admin.php:577
+#: src/Admin/Settings/LogsForm.php:141 src/Schemas/Productscml/Admin.php:586
 msgid "INFO (200)"
 msgstr "Информация — INFO (200)"
 
 #: src/Admin/Settings/LogsForm.php:49 src/Admin/Settings/LogsForm.php:91
 #: src/Admin/Settings/LogsForm.php:108 src/Admin/Settings/LogsForm.php:125
-#: src/Admin/Settings/LogsForm.php:142 src/Schemas/Productscml/Admin.php:578
+#: src/Admin/Settings/LogsForm.php:142 src/Schemas/Productscml/Admin.php:587
 msgid "NOTICE (250)"
 msgstr "Замечание — NOTICE (250)"
 
 #: src/Admin/Settings/LogsForm.php:50 src/Admin/Settings/LogsForm.php:92
 #: src/Admin/Settings/LogsForm.php:109 src/Admin/Settings/LogsForm.php:126
-#: src/Admin/Settings/LogsForm.php:143 src/Schemas/Productscml/Admin.php:579
+#: src/Admin/Settings/LogsForm.php:143 src/Schemas/Productscml/Admin.php:588
 msgid "WARNING (300)"
 msgstr "Предупреждение — WARNING (300)"
 
 #: src/Admin/Settings/LogsForm.php:51 src/Admin/Settings/LogsForm.php:93
 #: src/Admin/Settings/LogsForm.php:110 src/Admin/Settings/LogsForm.php:127
-#: src/Admin/Settings/LogsForm.php:144 src/Schemas/Productscml/Admin.php:580
+#: src/Admin/Settings/LogsForm.php:144 src/Schemas/Productscml/Admin.php:589
 msgid "ERROR (400)"
 msgstr "Ошибка — ERROR (400)"
 
-#: src/Admin/Settings/LogsForm.php:57 src/Schemas/Productscml/Admin.php:586
+#: src/Admin/Settings/LogsForm.php:57 src/Schemas/Productscml/Admin.php:595
 msgid "Maximum files"
 msgstr "Максимальное количество файлов"
 
-#: src/Admin/Settings/LogsForm.php:59 src/Schemas/Productscml/Admin.php:588
+#: src/Admin/Settings/LogsForm.php:59 src/Schemas/Productscml/Admin.php:597
 msgid ""
 "Log files created daily. This option on the maximum number of stored files. "
 "By default saved of the logs are for the last 30 days."
@@ -629,7 +629,7 @@ msgstr ""
 
 #: src/Admin/Settings/LogsForm.php:88 src/Admin/Settings/LogsForm.php:105
 #: src/Admin/Settings/LogsForm.php:122 src/Admin/Settings/LogsForm.php:139
-#: src/Schemas/Productscml/Admin.php:575
+#: src/Schemas/Productscml/Admin.php:584
 msgid "Use level for main events"
 msgstr "Использовать уровень для основных событий"
 
@@ -971,11 +971,12 @@ msgstr "Создание категорий"
 
 #: src/Schemas/Productscml/Admin.php:183 src/Schemas/Productscml/Admin.php:192
 #: src/Schemas/Productscml/Admin.php:220 src/Schemas/Productscml/Admin.php:229
-#: src/Schemas/Productscml/Admin.php:264 src/Schemas/Productscml/Admin.php:273
+#: src/Schemas/Productscml/Admin.php:238 src/Schemas/Productscml/Admin.php:273
 #: src/Schemas/Productscml/Admin.php:282 src/Schemas/Productscml/Admin.php:291
-#: src/Schemas/Productscml/Admin.php:300 src/Schemas/Productscml/Admin.php:329
+#: src/Schemas/Productscml/Admin.php:300 src/Schemas/Productscml/Admin.php:309
 #: src/Schemas/Productscml/Admin.php:338 src/Schemas/Productscml/Admin.php:347
-#: src/Schemas/Productscml/Admin.php:377 src/Schemas/Productscml/Admin.php:386
+#: src/Schemas/Productscml/Admin.php:356 src/Schemas/Productscml/Admin.php:386
+#: src/Schemas/Productscml/Admin.php:395
 msgid "Check the box if you want to enable this feature. Disabled by default."
 msgstr ""
 "Установите флажок, если хотите включить эту функцию. Отключено по умолчанию."
@@ -1026,27 +1027,39 @@ msgstr ""
 msgid "Updating categories from classifier groups"
 msgstr "Обновление категорий из групп классификатора"
 
-#: src/Schemas/Productscml/Admin.php:236 src/Schemas/Productscml/Admin.php:249
+#: src/Schemas/Productscml/Admin.php:236
+msgid "Consider configuration when updating categories"
+msgstr "Учитывать конфигурацию при обновлении категорий"
+
+#: src/Schemas/Productscml/Admin.php:239
+msgid ""
+"When updating category data, the update will only occur if the category was "
+"created through the current configuration."
+msgstr ""
+"При обновлении данных категории обновление произойдет только в том случае, "
+"если категория была создана с помощью текущей конфигурации."
+
+#: src/Schemas/Productscml/Admin.php:245
 msgid "Do not use"
 msgstr "Не использовать"
 
-#: src/Schemas/Productscml/Admin.php:237
+#: src/Schemas/Productscml/Admin.php:246 src/Schemas/Productscml/Admin.php:258
 msgid "If the names match"
 msgstr "Если имена совпадают"
 
-#: src/Schemas/Productscml/Admin.php:238 src/Schemas/Productscml/Admin.php:251
+#: src/Schemas/Productscml/Admin.php:247 src/Schemas/Productscml/Admin.php:260
 msgid "If the names match, with the match of the parent category "
 msgstr "Если имена совпадают, с совпадением родительской категории"
 
-#: src/Schemas/Productscml/Admin.php:239 src/Schemas/Productscml/Admin.php:253
+#: src/Schemas/Productscml/Admin.php:248 src/Schemas/Productscml/Admin.php:262
 msgid "If the names match, with the match of all parent categories"
 msgstr "Если имена совпадают, с совпадением всех родительских категорий"
 
-#: src/Schemas/Productscml/Admin.php:244
+#: src/Schemas/Productscml/Admin.php:253
 msgid "Merging categories before creating"
 msgstr "Объединение категорий перед созданием"
 
-#: src/Schemas/Productscml/Admin.php:248
+#: src/Schemas/Productscml/Admin.php:257
 msgid ""
 "In the event that the categories were created manually or from another "
 "configuration, you must enable the merge. Merging will avoid duplication of "
@@ -1056,7 +1069,7 @@ msgstr ""
 "конфигурации, необходимо включить слияние. Объединение позволит избежать "
 "дублирования категорий."
 
-#: src/Schemas/Productscml/Admin.php:250
+#: src/Schemas/Productscml/Admin.php:259
 msgid ""
 "The categories will be linked when the names match without any other data "
 "matching."
@@ -1064,7 +1077,7 @@ msgstr ""
 "Категории будут связаны, когда имена совпадают без каких-либо других "
 "совпадений данных."
 
-#: src/Schemas/Productscml/Admin.php:252
+#: src/Schemas/Productscml/Admin.php:261
 msgid ""
 "The categories will be linked only if they have the same name and parent "
 "category."
@@ -1072,7 +1085,7 @@ msgstr ""
 "Категории будут связаны только в том случае, если они имеют одинаковое имя и "
 "родительскую категорию."
 
-#: src/Schemas/Productscml/Admin.php:254
+#: src/Schemas/Productscml/Admin.php:263
 msgid ""
 "The categories will be linked only if they have the same names and the "
 "entire structure of the parent categories."
@@ -1080,11 +1093,11 @@ msgstr ""
 "Категории будут связаны только в том случае, если у них совпадают названия и "
 "вся структура родительских категорий."
 
-#: src/Schemas/Productscml/Admin.php:262
+#: src/Schemas/Productscml/Admin.php:271
 msgid "Assign parent categories on creating"
 msgstr "Назначать родительские категории при создании"
 
-#: src/Schemas/Productscml/Admin.php:265
+#: src/Schemas/Productscml/Admin.php:274
 msgid ""
 "If there is a parent category in 1C, it will also be assigned in "
 "WooCommerce. The setting is triggered when a category is created."
@@ -1092,11 +1105,11 @@ msgstr ""
 "Если в 1С есть родительская категория, она будет присвоена и в WooCommerce. "
 "Настройка срабатывает при создании категории."
 
-#: src/Schemas/Productscml/Admin.php:271
+#: src/Schemas/Productscml/Admin.php:280
 msgid "Assign categories description on creating"
 msgstr "Назначать описание категорий при создании"
 
-#: src/Schemas/Productscml/Admin.php:274
+#: src/Schemas/Productscml/Admin.php:283
 msgid ""
 "When creating categories, descriptions will be filled in if category "
 "descriptions are present in 1C."
@@ -1104,11 +1117,11 @@ msgstr ""
 "При создании категорий описания будут заполнены, если описания категорий "
 "присутствуют в 1С."
 
-#: src/Schemas/Productscml/Admin.php:280
+#: src/Schemas/Productscml/Admin.php:289
 msgid "Update parent categories on updating"
 msgstr "Обновлять родительские категории при обновлении"
 
-#: src/Schemas/Productscml/Admin.php:283
+#: src/Schemas/Productscml/Admin.php:292
 msgid ""
 "When enabled, parent categories will be updated when they are updated in 1C. "
 "The setting is triggered when a category is updated."
@@ -1116,11 +1129,11 @@ msgstr ""
 "При включении родительские категории будут обновляться при их обновлении в "
 "1С. Настройка срабатывает при обновлении категории."
 
-#: src/Schemas/Productscml/Admin.php:289
+#: src/Schemas/Productscml/Admin.php:298
 msgid "Updating categories name"
 msgstr "Обновление названия категорий"
 
-#: src/Schemas/Productscml/Admin.php:292
+#: src/Schemas/Productscml/Admin.php:301
 msgid ""
 "If the category was previously linked to 1C data, then when changing the "
 "name in 1C, the name will also change in WooCommerce."
@@ -1128,11 +1141,11 @@ msgstr ""
 "Если категория ранее была привязана к данным 1С, то при смене названия в 1С "
 "имя изменится и в WooCommerce."
 
-#: src/Schemas/Productscml/Admin.php:298
+#: src/Schemas/Productscml/Admin.php:307
 msgid "Updating categories description"
 msgstr "Обновление описания категорий"
 
-#: src/Schemas/Productscml/Admin.php:301
+#: src/Schemas/Productscml/Admin.php:310
 msgid ""
 "If the category was previously linked to 1C data, then when you change the "
 "description in 1C, the description will also change in WooCommerce. \n"
@@ -1145,11 +1158,11 @@ msgstr ""
 "\t\t\tСледует учитывать, что описания в 1С хранятся не всегда. Поэтому не "
 "стоит включать эту функцию, если описания были заполнены на сайте."
 
-#: src/Schemas/Productscml/Admin.php:320
+#: src/Schemas/Productscml/Admin.php:329
 msgid "Attributes"
 msgstr "Атрибуты"
 
-#: src/Schemas/Productscml/Admin.php:322
+#: src/Schemas/Productscml/Admin.php:331
 msgid ""
 "General (global) attributes are used for all products. It is possible to "
 "sort products according to them."
@@ -1157,11 +1170,11 @@ msgstr ""
 "Общие (глобальные) атрибуты используются для всех продуктов (товаров). По "
 "ним можно сортировать продукты (товары)."
 
-#: src/Schemas/Productscml/Admin.php:327
+#: src/Schemas/Productscml/Admin.php:336
 msgid "Creating attributes"
 msgstr "Создание атрибутов"
 
-#: src/Schemas/Productscml/Admin.php:330
+#: src/Schemas/Productscml/Admin.php:339
 msgid ""
 "It will be allowed to add common attributes for products based on "
 "characteristics, properties and other data according to the settings."
@@ -1169,11 +1182,11 @@ msgstr ""
 "Будет разрешено добавлять общие атрибуты для продуктов на основе "
 "характеристик, свойств и других данных в соответствии с настройками."
 
-#: src/Schemas/Productscml/Admin.php:336
+#: src/Schemas/Productscml/Admin.php:345
 msgid "Updating attributes"
 msgstr "Обновление атрибутов"
 
-#: src/Schemas/Productscml/Admin.php:339
+#: src/Schemas/Productscml/Admin.php:348
 msgid ""
 "It will be allowed to update common attributes for products based on "
 "characteristics, properties and other data according to the settings."
@@ -1181,11 +1194,11 @@ msgstr ""
 "Будет разрешено обновлять общие атрибуты для продуктов на основе "
 "характеристик, свойств и других данных в соответствии с настройками."
 
-#: src/Schemas/Productscml/Admin.php:345
+#: src/Schemas/Productscml/Admin.php:354
 msgid "Adding values for attributes"
 msgstr "Добавление значений для атрибутов"
 
-#: src/Schemas/Productscml/Admin.php:348
+#: src/Schemas/Productscml/Admin.php:357
 msgid ""
 "It will be allowed to add product attribute values based on "
 "characteristics, \n"
@@ -1199,11 +1212,11 @@ msgstr ""
 "работа будет происходить только\n"
 "с существующими значениями атрибутов."
 
-#: src/Schemas/Productscml/Admin.php:368
+#: src/Schemas/Productscml/Admin.php:377
 msgid "Attributes: classifier properties"
 msgstr "Атрибуты: свойства классификатора"
 
-#: src/Schemas/Productscml/Admin.php:370
+#: src/Schemas/Productscml/Admin.php:379
 msgid ""
 "Adding and updating global attributes for products from classifier "
 "properties."
@@ -1211,11 +1224,11 @@ msgstr ""
 "Добавление и обновление глобальных атрибутов продуктов (товаров) из свойств "
 "классификатора."
 
-#: src/Schemas/Productscml/Admin.php:375
+#: src/Schemas/Productscml/Admin.php:384
 msgid "Creating attributes from classifier properties"
 msgstr "Создание атрибутов из свойств классификатора"
 
-#: src/Schemas/Productscml/Admin.php:378
+#: src/Schemas/Productscml/Admin.php:387
 msgid ""
 "The creation will occur when processing the properties of the classifier. "
 "Creation occurs only if there is no attribute with the specified name or "
@@ -1225,11 +1238,11 @@ msgstr ""
 "происходит только при отсутствии атрибута с указанным именем или "
 "ассоциированным идентификатором."
 
-#: src/Schemas/Productscml/Admin.php:384
+#: src/Schemas/Productscml/Admin.php:393
 msgid "Updating attributes from classifier properties"
 msgstr "Обновление атрибутов из свойств классификатора"
 
-#: src/Schemas/Productscml/Admin.php:387
+#: src/Schemas/Productscml/Admin.php:396
 msgid ""
 "The update will occur when the classifier properties are reprocessed. The "
 "update occurs only when the name matches or there is a found relationship "
@@ -1239,16 +1252,16 @@ msgstr ""
 "Обновление происходит только при совпадении имени или наличии найденной "
 "связи между источником создания атрибута."
 
-#: src/Schemas/Productscml/Admin.php:393
+#: src/Schemas/Productscml/Admin.php:402
 msgid "Adding attribute values from classifier properties values"
 msgstr "Добавление значений атрибутов из значений свойств классификатора"
 
-#: src/Schemas/Productscml/Admin.php:395
+#: src/Schemas/Productscml/Admin.php:404
 msgid "Check the box if you want to enable this feature. Enabled by default."
 msgstr ""
 "Установите флажок, если хотите включить эту функцию. Включено по умолчанию."
 
-#: src/Schemas/Productscml/Admin.php:396
+#: src/Schemas/Productscml/Admin.php:405
 msgid ""
 "Adding product attribute values based on classifier property values will be "
 "allowed. The value is added only if it is absent: by name."
@@ -1257,11 +1270,11 @@ msgstr ""
 "классификатора будет разрешено. Значение добавляется только при его "
 "отсутствии: по имени."
 
-#: src/Schemas/Productscml/Admin.php:414
+#: src/Schemas/Productscml/Admin.php:423
 msgid "Products (goods): synchronization"
 msgstr "Продукты (товары): синхронизация"
 
-#: src/Schemas/Productscml/Admin.php:418
+#: src/Schemas/Productscml/Admin.php:427
 msgid ""
 "Dispute resolution between existing products (goods) on the 1C side and in "
 "WooCommerce. For extended matching (example by SKU), must use the extension."
@@ -1270,7 +1283,7 @@ msgstr ""
 "в WooCommerce. Для расширенного сопоставления (например, по SKU) необходимо "
 "использовать расширение."
 
-#: src/Schemas/Productscml/Admin.php:419
+#: src/Schemas/Productscml/Admin.php:428
 msgid ""
 "Products not found by sync keys will be treated as new. Accordingly, the "
 "rules for creating products will apply to them."
@@ -1279,15 +1292,15 @@ msgstr ""
 "новыми. Соответственно, на них будут распространяться правила создания "
 "продуктов."
 
-#: src/Schemas/Productscml/Admin.php:425
+#: src/Schemas/Productscml/Admin.php:434
 msgid "By ID from 1C"
 msgstr "По ID от 1С"
 
-#: src/Schemas/Productscml/Admin.php:427
+#: src/Schemas/Productscml/Admin.php:436
 msgid "Check the box to enable. Enabled by default."
 msgstr "Установите флажок, чтобы включить. Включено по умолчанию."
 
-#: src/Schemas/Productscml/Admin.php:431
+#: src/Schemas/Productscml/Admin.php:440
 msgid ""
 "When creating new products based on data from 1C, a universal global "
 "identifier from 1C is filled in for them. Can also fill in global "
@@ -1297,7 +1310,7 @@ msgstr ""
 "заполняется универсальный глобальный идентификатор от 1С. Также можно "
 "вручную заполнять глобальные идентификаторы для созданных вручную продуктов."
 
-#: src/Schemas/Productscml/Admin.php:432
+#: src/Schemas/Productscml/Admin.php:441
 msgid ""
 "Enabling the option allows you to use the filled GUID to mark products "
 "(goods) as existing, and thereby run algorithms to update them."
@@ -1306,22 +1319,22 @@ msgstr ""
 "продуктов (товаров) как существующих, и тем самым запускать алгоритмы их "
 "обновления."
 
-#: src/Schemas/Productscml/Admin.php:451
+#: src/Schemas/Productscml/Admin.php:460
 msgid "Products (goods)"
 msgstr "Продукты (товары)"
 
-#: src/Schemas/Productscml/Admin.php:453
+#: src/Schemas/Productscml/Admin.php:462
 msgid ""
 "Regulation of algorithms for creating and updating products on requests from "
 "1C."
 msgstr ""
 "Регулирование алгоритмов создания и обновления продуктов по запросам от 1С."
 
-#: src/Schemas/Productscml/Admin.php:458
+#: src/Schemas/Productscml/Admin.php:467
 msgid "Creation of products"
 msgstr "Создание продуктов"
 
-#: src/Schemas/Productscml/Admin.php:460
+#: src/Schemas/Productscml/Admin.php:469
 msgid ""
 "Check the box to enable the creation of new products upon request from 1C. "
 "Disabled by default."
@@ -1329,7 +1342,7 @@ msgstr ""
 "Установите флажок, чтобы разрешить создание новых продуктов (товаров) по "
 "запросу от 1С. Отключено по умолчанию."
 
-#: src/Schemas/Productscml/Admin.php:461
+#: src/Schemas/Productscml/Admin.php:470
 msgid ""
 "The product is only created if it is not found in WooCommerce when searching "
 "by criteria for synchronization."
@@ -1337,11 +1350,11 @@ msgstr ""
 "Продукт (товар) создается только в том случае, если он не найден в "
 "WooCommerce при поиске по критериям синхронизации."
 
-#: src/Schemas/Productscml/Admin.php:467
+#: src/Schemas/Productscml/Admin.php:476
 msgid "Update of products"
 msgstr "Обновление продуктов"
 
-#: src/Schemas/Productscml/Admin.php:469
+#: src/Schemas/Productscml/Admin.php:478
 msgid ""
 "Check the box to enable product updates on demand from 1C. Disabled by "
 "default."
@@ -1349,7 +1362,7 @@ msgstr ""
 "Установите флажок, чтобы включить обновление продуктов по запросу от 1С. "
 "Отключено по умолчанию."
 
-#: src/Schemas/Productscml/Admin.php:470
+#: src/Schemas/Productscml/Admin.php:479
 msgid ""
 "Products are updated only if they were found using the product "
 "synchronization keys."
@@ -1357,23 +1370,23 @@ msgstr ""
 "Продукты обновляются только в том случае, если они были найдены с помощью "
 "ключей синхронизации продуктов."
 
-#: src/Schemas/Productscml/Admin.php:488
-msgid "Products (goods, services): prices"
-msgstr "Продукты (товары, услуги): цены"
+#: src/Schemas/Productscml/Admin.php:497
+msgid "Products (goods): prices"
+msgstr "Продукты (товары): цены"
 
-#: src/Schemas/Productscml/Admin.php:490
+#: src/Schemas/Productscml/Admin.php:499
 msgid "Comparison of WooCommerce and 1C prices and other settings."
 msgstr "Спосоставление цен WooCommerce и 1С и другие настроек."
 
-#: src/Schemas/Productscml/Admin.php:495
+#: src/Schemas/Productscml/Admin.php:504
 msgid "Base price - first found"
 msgstr "Базовая цена - первая найденная"
 
-#: src/Schemas/Productscml/Admin.php:497 src/Schemas/Productscml/Admin.php:543
+#: src/Schemas/Productscml/Admin.php:506 src/Schemas/Productscml/Admin.php:552
 msgid "Check the box to enable this feature. Disabled by default."
 msgstr "Установите флажок, чтобы включить эту функцию. Отключено по умолчанию."
 
-#: src/Schemas/Productscml/Admin.php:498
+#: src/Schemas/Productscml/Admin.php:507
 msgid ""
 "If the name of the base price from 1C is not specified for the WooCommerce "
 "base price, the first found price will be taken into account. It is "
@@ -1383,11 +1396,11 @@ msgstr ""
 "будет учитываться первая найденная цена. Удобно использовать при приеме "
 "только одного вида цены."
 
-#: src/Schemas/Productscml/Admin.php:504
+#: src/Schemas/Productscml/Admin.php:513
 msgid "WooCommerce base price: name in 1C"
 msgstr "Базовая цена WooCommerce: название в 1С"
 
-#: src/Schemas/Productscml/Admin.php:506
+#: src/Schemas/Productscml/Admin.php:515
 msgid ""
 "Specify the name of the base price in 1C, which is used for uploading to "
 "WooCommerce as the base price."
@@ -1395,11 +1408,11 @@ msgstr ""
 "Укажите название базовой цены в 1С, которое используется для выгрузки в "
 "WooCommerce в качестве базовой цены."
 
-#: src/Schemas/Productscml/Admin.php:513
+#: src/Schemas/Productscml/Admin.php:522
 msgid "WooCommerce sale price: name in 1C"
 msgstr "Цена распродажи WooCommerce: название в 1С"
 
-#: src/Schemas/Productscml/Admin.php:515
+#: src/Schemas/Productscml/Admin.php:524
 msgid ""
 "Specify the name of the base price in 1C, which is used for uploading to "
 "WooCommerce as the sale price."
@@ -1407,19 +1420,19 @@ msgstr ""
 "Укажите название базовой цены в 1С, которая используется для выгрузки в "
 "WooCommerce в качестве цены распродажи."
 
-#: src/Schemas/Productscml/Admin.php:534
+#: src/Schemas/Productscml/Admin.php:543
 msgid "Products (goods): inventories"
 msgstr "Продукты (товары): запасы"
 
-#: src/Schemas/Productscml/Admin.php:536
+#: src/Schemas/Productscml/Admin.php:545
 msgid "Matching inventories for 1C and Woocommerce products."
 msgstr "Сопоставление запасов для продуктов 1С и Woocommerce."
 
-#: src/Schemas/Productscml/Admin.php:541
+#: src/Schemas/Productscml/Admin.php:550
 msgid "Filling inventories based on quantity from offers"
 msgstr "Заполнение запасов на основе количества из предложений"
 
-#: src/Schemas/Productscml/Admin.php:544
+#: src/Schemas/Productscml/Admin.php:553
 msgid ""
 "It will be allowed to fill in the quantity of product stocks in WooCommerce "
 "based on the quantity received in 1C offers."
@@ -1427,7 +1440,7 @@ msgstr ""
 "Будет разрешено заполнить количество продуктовых (товарных) запасов в "
 "WooCommerce исходя из количества, полученного в 1С предложениях."
 
-#: src/Schemas/Productscml/Admin.php:564
+#: src/Schemas/Productscml/Admin.php:573
 msgid ""
 "Maintaining event logs for the current configuration. You can view the logs "
 "through the extension or via FTP."
@@ -1435,7 +1448,7 @@ msgstr ""
 "Ведение журналов событий для текущей конфигурации. Вы можете просматривать "
 "журналы через расширение или через FTP."
 
-#: src/Schemas/Productscml/Admin.php:569
+#: src/Schemas/Productscml/Admin.php:578
 msgid "Level for events"
 msgstr "Уровень для событий"
 
@@ -2121,6 +2134,9 @@ msgstr ""
 #. Author of the plugin/theme
 msgid "WC1C team"
 msgstr "Команда WC1C"
+
+#~ msgid "Products (goods, services): prices"
+#~ msgstr "Продукты (товары, услуги): цены"
 
 #~ msgid "Assign 1c data to categories on merge"
 #~ msgstr "Присвоить данные 1с категориям при слиянии"
