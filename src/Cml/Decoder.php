@@ -92,6 +92,7 @@ class Decoder
 				return $this->decodeCounterparty($data);
 			case 'classifier':
 				return $this->decodeClassifier($data);
+			case 'offer':
 			case 'product':
 				return $this->decodeProduct($data);
 			default:
@@ -645,10 +646,9 @@ class Decoder
 		/**
 		 * Цены
 		 */
-		$product_data['prices'] = $xml_product_data->Цены ? $this->parse_xml_product_price($xml_product_data->Цены) : [];
+		$product_data['prices'] = $xml_product_data->Цены ? $this->parseXmlProductPrice($xml_product_data->Цены) : [];
 
 		/**
-		 * Количество
 		 * Количество предлагаемого товара. Например, может быть указан остаток на складе.
 		 */
 		$product_data['quantity'] = 0;
@@ -825,7 +825,7 @@ class Decoder
 	 *
 	 * @param $xml_data
 	 *
-	 * @return array массив GUID (идентификаторов групп)
+	 * @return array Массив GUID (идентификаторов групп)
 	 */
 	private function parseXmlProductGroups($xml_data)
 	{
@@ -890,7 +890,7 @@ class Decoder
 	 *
 	 * @return array
 	 */
-	private function parse_xml_product_price($xml_product_price_data)
+	private function parseXmlProductPrice($xml_product_price_data)
 	{
 		$data_prices = [];
 
@@ -899,12 +899,12 @@ class Decoder
 			/*
 			 * Идентификатор типа цены
 			 *
-			 * cml:ИдентфикаторГлобальныйТип
+			 * cml:ИдентификаторГлобальныйТип
 			 */
 			$price_type_guid = (string) $price_data->ИдТипаЦены;
 
 			/*
-			 * Представление цены так, как оно отбражается в прайс-листе. Например: 10у.е./за 1000 шт
+			 * Представление цены так, как оно отображается в прайс-листе. Например: 10у.е./за 1000 шт
 			 *
 			 * cml:НаименованиеТип
 			 */
@@ -943,6 +943,7 @@ class Decoder
 			 *
 			 * cml:ЕдиницаИзмерения
 			 */
+			$unit = $price_data->Единица ? (string) $price_data->Единица : '';
 
 			/**
 			 * Собираем итог
@@ -954,6 +955,7 @@ class Decoder
 				'price_rate' => $rate,
 				'price_currency' => $currency,
 				'price_presentation' => $price_presentation,
+				'price_unit' => $unit,
 				'min_quantity' => $min_quantity,
 			);
 		}
