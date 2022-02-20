@@ -649,7 +649,6 @@ class Decoder
 		$product_data['prices'] = $xml_product_data->Цены ? $this->parseXmlProductPrice($xml_product_data->Цены) : [];
 
 		/**
-		 * Количество
 		 * Количество предлагаемого товара. Например, может быть указан остаток на складе.
 		 */
 		$product_data['quantity'] = 0;
