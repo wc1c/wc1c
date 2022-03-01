@@ -469,15 +469,13 @@ final class Core
 			$locale = is_admin() && function_exists('get_user_locale') ? get_user_locale() : get_locale();
 		}
 
-		wc1c()->log()->debug(__('Detect locale.', 'wc1c'), ['locale' => $locale]);
-
 		$locale = apply_filters('plugin_locale', $locale, 'wc1c');
-
-		wc1c()->log()->debug('Locale for load', ['locale' => $locale]);
 
 		unload_textdomain('wc1c');
 		load_textdomain('wc1c', WP_LANG_DIR . '/plugins/wc1c-' . $locale . '.mo');
 		load_textdomain('wc1c', WC1C_PLUGIN_PATH . 'assets/languages/wc1c-' . $locale . '.mo');
+
+		wc1c()->log()->debug(__('Localization loaded.', 'wc1c'), ['locale' => $locale]);
 	}
 
 	/**

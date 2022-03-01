@@ -4,6 +4,7 @@ defined('ABSPATH') || exit;
 
 use Wc1c\Configuration;
 use Wc1c\Data\Storage;
+use Wc1c\Data\Storages\ConfigurationsStorage;
 use Wc1c\Exceptions\Exception;
 use Wc1c\Exceptions\RuntimeException;
 use Wc1c\Traits\SingletonTrait;
@@ -59,11 +60,12 @@ final class Core
 		{
 			try
 			{
+				/** @var ConfigurationsStorage $storage_configurations */
 				$storage_configurations = Storage::load('configuration');
 			}
 			catch(Exception $e)
 			{
-				throw new Exception('exception - ' . $e->getMessage());
+				throw $e;
 			}
 
 			if(!$storage_configurations->isExistingById($configuration))
@@ -77,7 +79,7 @@ final class Core
 			}
 			catch(Exception $e)
 			{
-				throw new Exception('exception - ' . $e->getMessage());
+				throw $e;
 			}
 		}
 
@@ -92,7 +94,7 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('exception - ' . $e->getMessage());
+			throw $e;
 		}
 
 		if(!is_array($schemas))
@@ -199,7 +201,7 @@ final class Core
 			$schemas = apply_filters(WC1C_PREFIX . 'schemas_loading', $schemas);
 		}
 
-		wc1c()->log()->debug('Schemas loading', ['schemas' => $schemas]);
+		wc1c()->log()->debug(__('Schemas loaded.', 'wc1c'), ['schemas' => $schemas]);
 
 		try
 		{
