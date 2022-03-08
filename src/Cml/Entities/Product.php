@@ -126,4 +126,64 @@ class Product extends DataAbstract implements ProductDataContract
 
 		return $this->data['images'];
 	}
+
+	/**
+	 * @return false|array
+	 */
+	public function getPrices()
+	{
+		if(!isset($this->data['prices']))
+		{
+			return false;
+		}
+
+		return $this->data['prices'];
+	}
+
+	/**
+	 * @return int|string
+	 */
+	public function getFeatureId()
+	{
+		if(!isset($this->data['feature_id']))
+		{
+			return '';
+		}
+
+		return $this->data['feature_id'];
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function hasFeatureId()
+	{
+		return $this->getFeatureId() !== '';
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function hasClassifierGroups()
+	{
+		if(empty($this->data['classifier_groups']))
+		{
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getClassifierGroups()
+	{
+		if(empty($this->data['classifier_groups']))
+		{
+			return [];
+		}
+
+		return $this->data['classifier_groups'];
+	}
 }

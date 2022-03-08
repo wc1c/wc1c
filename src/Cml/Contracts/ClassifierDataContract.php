@@ -10,37 +10,37 @@ defined('ABSPATH') || exit;
 interface ClassifierDataContract extends DataContract
 {
 	/**
-	 * @return string
+	 * @return string Unique id
 	 */
 	public function getId();
 
 	/**
-	 * @return string
+	 * @return string Classifier name
 	 */
 	public function getName();
 
 	/**
-	 * @return string
+	 * @return string Classifier description
 	 */
 	public function getDescription();
 
 	/**
-	 * @return CounterpartyDataContract
+	 * @return CounterpartyDataContract Classifier owner
 	 */
 	public function getOwner();
 
 	/**
-	 * @return mixed
+	 * @return mixed Classifier groups
 	 */
 	public function getGroups();
 
 	/**
-	 * @return mixed
+	 * @return mixed Classifier properties
 	 */
 	public function getProperties();
 
 	/**
-	 * @return mixed
+	 * @return mixed Classifier price types
 	 */
 	public function getPriceTypes();
 }
