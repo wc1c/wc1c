@@ -28,7 +28,7 @@ if(version_compare(PHP_VERSION, '5.6.0') < 0)
 if(false === defined('WC1C_PLUGIN_FILE'))
 {
 	/**
-	 * Main instance of Wc1c
+	 * Main instance of WC1C
 	 *
 	 * @return Wc1c\Core
 	 */
