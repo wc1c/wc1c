@@ -32,7 +32,7 @@ final class Extensions
 	 */
 	public function __construct()
 	{
-		$actions = apply_filters(WC1C_ADMIN_PREFIX . 'extensions_init_actions', $this->actions);
+		$actions = apply_filters('wc1c_admin_extensions_init_actions', $this->actions);
 
 		$this->setActions($actions);
 
@@ -72,7 +72,7 @@ final class Extensions
 	 */
 	public function getActions()
 	{
-		return apply_filters(WC1C_ADMIN_PREFIX . 'extensions_get_actions', $this->actions);
+		return apply_filters('wc1c_admin_extensions_get_actions', $this->actions);
 	}
 
 	/**
@@ -83,7 +83,7 @@ final class Extensions
 	public function setActions($actions)
 	{
 		// hook
-		$actions = apply_filters(WC1C_ADMIN_PREFIX . 'extensions_set_actions', $actions);
+		$actions = apply_filters('wc1c_admin_extensions_set_actions', $actions);
 
 		$this->actions = $actions;
 	}
@@ -95,7 +95,7 @@ final class Extensions
 	 */
 	public function getCurrentAction()
 	{
-		return apply_filters(WC1C_ADMIN_PREFIX . 'extensions_get_current_action', $this->current_action);
+		return apply_filters('wc1c_admin_extensions_get_current_action', $this->current_action);
 	}
 
 	/**
@@ -106,7 +106,7 @@ final class Extensions
 	public function setCurrentAction($current_action)
 	{
 		// hook
-		$current_action = apply_filters(WC1C_ADMIN_PREFIX . 'extensions_set_current_action', $current_action);
+		$current_action = apply_filters('wc1c_admin_extensions_set_current_action', $current_action);
 
 		$this->current_action = $current_action;
 	}
