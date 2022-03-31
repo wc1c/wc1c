@@ -26,7 +26,7 @@ trait ConfigurationsUtilityTrait
 			'deleted',
 		];
 
-		return apply_filters(WC1C_PREFIX . 'configurations_get_statuses', $statuses);
+		return apply_filters('wc1c_configurations_get_statuses', $statuses);
 	}
 
 	/**
@@ -42,7 +42,7 @@ trait ConfigurationsUtilityTrait
 
 		$statuses_labels = apply_filters
 		(
-			WC1C_PREFIX . 'configurations_get_statuses_labels',
+			'wc1c_configurations_get_statuses_labels',
 			[
 				'draft' => __('Draft', 'wc1c'),
 				'active' => __('Active', 'wc1c'),
@@ -62,7 +62,7 @@ trait ConfigurationsUtilityTrait
 			$status_label = $statuses_labels[$status];
 		}
 
-		return apply_filters(WC1C_PREFIX . 'configurations_get_statuses_label_return', $status_label, $status, $statuses_labels);
+		return apply_filters('wc1c_configurations_get_statuses_label_return', $status_label, $status, $statuses_labels);
 	}
 
 	/**
@@ -78,7 +78,7 @@ trait ConfigurationsUtilityTrait
 
 		$statuses_folders = apply_filters
 		(
-			WC1C_PREFIX . 'configurations_get_statuses_folders',
+			'wc1c_configurations_get_statuses_folders',
 			[
 				'draft' => __('Drafts', 'wc1c'),
 				'active' => __('Activated', 'wc1c'),
@@ -96,6 +96,6 @@ trait ConfigurationsUtilityTrait
 			$status_folder = $statuses_folders[$status];
 		}
 
-		return apply_filters(WC1C_PREFIX . 'configurations_get_statuses_folder_return', $status_folder, $status, $statuses_folders);
+		return apply_filters('wc1c_configurations_get_statuses_folder_return', $status_folder, $status, $statuses_folders);
 	}
 }

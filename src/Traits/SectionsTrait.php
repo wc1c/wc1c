@@ -41,7 +41,7 @@ trait SectionsTrait
 	 */
 	public function setCurrentSection($current_section)
 	{
-		$final = apply_filters(WC1C_ADMIN_PREFIX . 'init_sections_current', $current_section);
+		$final = apply_filters('wc1c_admin_init_sections_current', $current_section);
 
 		$this->current_section = $final;
 	}
@@ -77,7 +77,7 @@ trait SectionsTrait
 			$default_sections = array_merge($default_sections, $sections);
 		}
 
-		$final = apply_filters(WC1C_ADMIN_PREFIX . 'init_sections', $default_sections);
+		$final = apply_filters('wc1c_admin_init_sections', $default_sections);
 
 		$this->setSections($final);
 	}
@@ -89,7 +89,7 @@ trait SectionsTrait
 	 */
 	public function getSections()
 	{
-		return apply_filters(WC1C_ADMIN_PREFIX . 'get_sections', $this->sections);
+		return apply_filters('wc1c_admin_get_sections', $this->sections);
 	}
 
 	/**
@@ -100,7 +100,7 @@ trait SectionsTrait
 	public function setSections($sections)
 	{
 		// hook
-		$sections = apply_filters(WC1C_ADMIN_PREFIX . 'set_sections', $sections);
+		$sections = apply_filters('wc1c_admin_set_sections', $sections);
 
 		$this->sections = $sections;
 	}
