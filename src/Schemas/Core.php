@@ -128,9 +128,9 @@ final class Core
 
 		$current_configuration_id = $configuration->getId();
 
-		$init_schema->setPrefix(WC1C_PREFIX . 'prefix_' . $schema_id . '_' . $current_configuration_id);
+		$init_schema->setPrefix('wc1c_prefix_' . $schema_id . '_' . $current_configuration_id);
 		$init_schema->setConfiguration($configuration);
-		$init_schema->setConfigurationPrefix(WC1C_PREFIX . 'configuration_' . $current_configuration_id);
+		$init_schema->setConfigurationPrefix('wc1c_configuration_' . $current_configuration_id);
 
 		try
 		{
@@ -198,7 +198,7 @@ final class Core
 
 		if('yes' === wc1c()->settings()->get('extensions_schemas', 'yes'))
 		{
-			$schemas = apply_filters(WC1C_PREFIX . 'schemas_loading', $schemas);
+			$schemas = apply_filters('wc1c_schemas_loading', $schemas);
 		}
 
 		wc1c()->log()->debug(__('Schemas loaded.', 'wc1c'), ['schemas' => $schemas]);
