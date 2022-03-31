@@ -260,7 +260,7 @@ abstract class SchemaAbstract
 	 */
 	public function getSchemaPrefix()
 	{
-		return WC1C_PREFIX . 'schema_' . $this->getId();
+		return 'wc1c_schema_' . $this->getId();
 	}
 
 	/**

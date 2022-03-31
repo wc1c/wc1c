@@ -21,7 +21,7 @@ abstract class ScreenAbstract
 	 */
 	public function __construct()
 	{
-		add_action(WC1C_ADMIN_PREFIX . 'show', [$this, 'output'], 10);
+		add_action('wc1c_admin_show', [$this, 'output'], 10);
 	}
 
 	/**

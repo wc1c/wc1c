@@ -106,7 +106,7 @@ abstract class FormAbstract
 	 */
 	public function load_saved_data($saved_data = [])
 	{
-		$saved_data = apply_filters(WC1C_PREFIX . $this->get_id() . '_form_load_saved_data', $saved_data);
+		$saved_data = apply_filters('wc1c_' . $this->get_id() . '_form_load_saved_data', $saved_data);
 		$this->set_saved_data($saved_data);
 	}
 
@@ -117,7 +117,7 @@ abstract class FormAbstract
 	 */
 	public function load_fields($fields = [])
 	{
-		$fields = apply_filters(WC1C_PREFIX . $this->get_id() . '_form_load_fields', $fields);
+		$fields = apply_filters('wc1c_' . $this->get_id() . '_form_load_fields', $fields);
 		$this->set_fields($fields);
 	}
 
@@ -130,7 +130,7 @@ abstract class FormAbstract
 	 */
 	public function get_prefix_field_key($key)
 	{
-		return WC1C_PREFIX . $this->get_id() . '_form_field_' . $key;
+		return 'wc1c_' . $this->get_id() . '_form_field_' . $key;
 	}
 
 	/**
