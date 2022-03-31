@@ -19,7 +19,7 @@ final class Context
 	 */
 	public function __construct()
 	{
-		do_action(WC1C_PREFIX . 'context_loaded');
+		do_action('wc1c_context_loaded');
 	}
 
 	/**
@@ -35,16 +35,6 @@ final class Context
 		}
 
 		return false;
-	}
-
-	/**
-	 * Is WC1C admin request?
-	 *
-	 * @return bool
-	 */
-	public function isWc1cAdmin()
-	{
-		return $this->isAdmin();
 	}
 
 	/**
@@ -123,7 +113,7 @@ final class Context
 				$network_active_plugins = wp_get_active_network_plugins();
 
 				// Consider MU plugins and network-activated plugins as network-active.
-				$this->network_active = strpos(wp_normalize_path(__FILE__), wp_normalize_path(WPMU_PLUGIN_DIR) ) === 0 || in_array(WP_PLUGIN_DIR . '/' . WC1C_PLUGIN_NAME, $network_active_plugins, true);
+				$this->network_active = strpos(wp_normalize_path(__FILE__), wp_normalize_path(WPMU_PLUGIN_DIR) ) === 0 || in_array(WP_PLUGIN_DIR . '/' . wc1c()->environment()->get('plugin_basename'), $network_active_plugins, true);
 			}
 			else
 			{
