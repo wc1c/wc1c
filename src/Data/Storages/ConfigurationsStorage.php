@@ -105,7 +105,7 @@ class ConfigurationsStorage implements StorageContract, MetaStorageContract
 			$data->applyChanges();
 
 			// hook
-			do_action(WC1C_PREFIX . 'data_storage_configuration_create', $object_id, $data);
+			do_action('wc1c_data_storage_configuration_create', $object_id, $data);
 		}
 	}
 
@@ -149,7 +149,7 @@ class ConfigurationsStorage implements StorageContract, MetaStorageContract
 		$this->readExtraData($data);
 		$data->setObjectRead(true);
 
-		do_action(WC1C_PREFIX . 'data_storage_configuration_read', $data->getId());
+		do_action('wc1c_data_storage_configuration_read', $data->getId());
 	}
 
 	/**
@@ -216,7 +216,7 @@ class ConfigurationsStorage implements StorageContract, MetaStorageContract
 
 		$data->applyChanges();
 
-		do_action(WC1C_PREFIX . 'data_storage_configuration_update', $data->getId(), $data);
+		do_action('wc1c_data_storage_configuration_update', $data->getId(), $data);
 	}
 
 	/**
@@ -244,22 +244,22 @@ class ConfigurationsStorage implements StorageContract, MetaStorageContract
 
 		if($args['force_delete'])
 		{
-			do_action(WC1C_PREFIX . 'data_storage_configuration_before_delete', $object_id);
+			do_action('wc1c_data_storage_configuration_before_delete', $object_id);
 
 			wc1c()->database()->delete($this->getTableName(), ['configuration_id' => $data->getId()]);
 
 			$data->setId(0);
 
-			do_action(WC1C_PREFIX . 'data_storage_configuration_after_delete', $object_id);
+			do_action('wc1c_data_storage_configuration_after_delete', $object_id);
 		}
 		else
 		{
-			do_action(WC1C_PREFIX . 'data_storage_configuration_before_trash', $object_id);
+			do_action('wc1c_data_storage_configuration_before_trash', $object_id);
 
 			$data->setStatus('deleted');
 			$data->save();
 
-			do_action(WC1C_PREFIX . 'data_storage_configuration_after_trash', $object_id);
+			do_action('wc1c_data_storage_configuration_after_trash', $object_id);
 		}
 	}
 
@@ -383,7 +383,7 @@ class ConfigurationsStorage implements StorageContract, MetaStorageContract
 		 * @param string $meta_key Meta key.
 		 * @param mixed $meta_value Meta value.
 		 */
-		do_action(WC1C_PREFIX . 'data_storage_configuration_meta_add', $data->getId(), $meta_key, $_meta_value);
+		do_action('wc1c_data_storage_configuration_meta_add', $data->getId(), $meta_key, $_meta_value);
 
 		$result = wc1c()->database()->insert
 		(
@@ -410,7 +410,7 @@ class ConfigurationsStorage implements StorageContract, MetaStorageContract
 		 * @param string $meta_key Meta key.
 		 * @param mixed $meta_value Meta value.
 		 */
-		do_action(WC1C_PREFIX . 'data_storage_configuration_meta_added', $meta_id, $data->getId(), $meta_key, $_meta_value);
+		do_action('wc1c_data_storage_configuration_meta_added', $meta_id, $data->getId(), $meta_key, $_meta_value);
 
 		return $meta_id;
 	}
@@ -449,7 +449,7 @@ class ConfigurationsStorage implements StorageContract, MetaStorageContract
 		}
 
 		// hook
-		do_action(WC1C_PREFIX . 'data_storage_configuration_meta_delete', [$meta_id, $data->getId(), $meta->key, $meta->value]);
+		do_action('wc1c_data_storage_configuration_meta_delete', [$meta_id, $data->getId(), $meta->key, $meta->value]);
 
 		$result = (bool) wc1c()->database()->delete
 		(
@@ -458,7 +458,7 @@ class ConfigurationsStorage implements StorageContract, MetaStorageContract
 		);
 
 		// hook
-		do_action(WC1C_PREFIX . 'data_storage_configuration_meta_deleted', [$meta_id, $data->getId(), $meta->key, $meta->value]);
+		do_action('wc1c_data_storage_configuration_meta_deleted', [$meta_id, $data->getId(), $meta->key, $meta->value]);
 
 		return $result;
 	}
@@ -505,7 +505,7 @@ class ConfigurationsStorage implements StorageContract, MetaStorageContract
 			$where['meta_id'] = $meta_id;
 
 			// hook
-			do_action(WC1C_PREFIX . 'data_storage_configuration_meta_update', $meta_id, $data->getId(), $meta->key, $meta_value);
+			do_action('wc1c_data_storage_configuration_meta_update', $meta_id, $data->getId(), $meta->key, $meta_value);
 
 			$result = wc1c()->database()->update($meta_table, $metadata, $where, '%s', '%d');
 
@@ -515,7 +515,7 @@ class ConfigurationsStorage implements StorageContract, MetaStorageContract
 			}
 
 			// hook
-			do_action(WC1C_PREFIX . 'data_storage_configuration_meta_updated', $meta->meta_id, $data->getId(), $meta->key, $meta_value);
+			do_action('wc1c_data_storage_configuration_meta_updated', $meta->meta_id, $data->getId(), $meta->key, $meta_value);
 
 			return true;
 		}
@@ -587,7 +587,7 @@ class ConfigurationsStorage implements StorageContract, MetaStorageContract
 
 		//$meta_data = array_filter($raw_meta_data, array($this, 'exclude_internal_meta_keys'));
 
-		return apply_filters(WC1C_PREFIX . 'data_storage_configuration_meta_read', $raw_meta_data, $data, $this);
+		return apply_filters('wc1c_data_storage_configuration_meta_read', $raw_meta_data, $data, $this);
 	}
 
 	/**

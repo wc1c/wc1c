@@ -70,7 +70,7 @@ class Storage implements StorageContract
 		$this->setCurrentObjectType($object_type);
 
 		// hook
-		$this->setStorages(apply_filters(WC1C_PREFIX . 'data_storages', $this->getStorages()));
+		$this->setStorages(apply_filters('wc1c_data_storages', $this->getStorages()));
 
 		if(!array_key_exists($object_type, $this->getStorages()))
 		{
@@ -78,7 +78,7 @@ class Storage implements StorageContract
 		}
 
 		// hook
-		$storage = apply_filters(WC1C_PREFIX . 'data_storages_' . $object_type, $this->storages[$object_type]);
+		$storage = apply_filters('wc1c_data_storages_' . $object_type, $this->storages[$object_type]);
 
 		if(is_object($storage))
 		{

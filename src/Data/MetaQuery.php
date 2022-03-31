@@ -319,7 +319,7 @@ class MetaQuery
 		 * @param object $context The main query object
 		 */
 		return apply_filters_ref_array
-		(WC1C_PREFIX . 'data_meta_get_sql',
+		('wc1c_data_meta_get_sql',
 			[
 				$sql,
 				$this->queries,
@@ -853,7 +853,7 @@ class MetaQuery
 		 *
 		 * @param MetaQuery $this MetaQuery object
 		 */
-		return apply_filters(WC1C_PREFIX . 'data_meta_query_find_compatible_table_alias', $alias, $clause, $parent_query, $this);
+		return apply_filters('wc1c_data_meta_query_find_compatible_table_alias', $alias, $clause, $parent_query, $this);
 	}
 
 	/**
