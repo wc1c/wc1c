@@ -8,13 +8,13 @@
         ?>
 
         <div class="p-2 bg-white rounded-0 mb-3">
-            <?php do_action(WC1C_ADMIN_PREFIX . 'configurations_update_header_show'); ?>
+            <?php do_action('wc1c_admin_configurations_update_header_show'); ?>
         </div>
     </div>
 </div>
 
-<?php do_action(WC1C_ADMIN_PREFIX . 'before_configurations_update_show'); ?>
+<?php do_action('wc1c_admin_before_configurations_update_show'); ?>
 
-<?php do_action(WC1C_ADMIN_PREFIX . 'configurations_update_show'); ?>
+<?php do_action('wc1c_admin_configurations_update_show'); ?>
 
-<?php do_action(WC1C_ADMIN_PREFIX . 'after_configurations_update_show'); ?>
+<?php do_action('wc1c_admin_after_configurations_update_show'); ?>

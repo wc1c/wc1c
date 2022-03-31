@@ -10,5 +10,5 @@
 </div>
 
 <div class="">
-	<?php do_action(WC1C_ADMIN_PREFIX . 'configurations_form_create_show'); ?>
+	<?php do_action('wc1c_admin_configurations_form_create_show'); ?>
 </div>

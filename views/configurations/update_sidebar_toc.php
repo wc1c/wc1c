@@ -1,6 +1,6 @@
 <?php defined('ABSPATH') || exit; ?>
 
-<?php do_action(WC1C_ADMIN_PREFIX . 'configurations_update_before_sidebar_toc_show'); ?>
+<?php do_action('wc1c_admin_configurations_update_before_sidebar_toc_show'); ?>
 
 <div class="card wc1c-sidebar-toc mb-2 p-0" style="max-width: 100%;">
     <?php if(isset($args['header'])): ?>
@@ -20,4 +20,4 @@
 	<?php endif; ?>
 </div>
 
-<?php do_action(WC1C_ADMIN_PREFIX . 'configurations_update_after_sidebar_toc_show'); ?>
+<?php do_action('wc1c_admin_configurations_update_after_sidebar_toc_show'); ?>

@@ -54,6 +54,6 @@ $wizard = $args['wizard'];
 	</ul>
 
 	<div class="wizard-content">
-        <?php do_action(WC1C_PREFIX . 'wizard_content_output'); ?>
+        <?php do_action('wc1c_wizard_content_output'); ?>
 	</div>
 </div>
