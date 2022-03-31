@@ -38,7 +38,7 @@ class Configurations
 	 */
 	public function __construct()
 	{
-		$actions = apply_filters(WC1C_ADMIN_PREFIX . 'configurations_init_actions', $this->actions);
+		$actions = apply_filters('wc1c_admin_configurations_init_actions', $this->actions);
 
 		$this->set_actions($actions);
 
@@ -84,7 +84,7 @@ class Configurations
 	 */
 	public function get_actions()
 	{
-		return apply_filters(WC1C_ADMIN_PREFIX . 'configurations_get_actions', $this->actions);
+		return apply_filters('wc1c_admin_configurations_get_actions', $this->actions);
 	}
 
 	/**
@@ -95,7 +95,7 @@ class Configurations
 	public function set_actions($actions)
 	{
 		// hook
-		$actions = apply_filters(WC1C_ADMIN_PREFIX . 'configurations_set_actions', $actions);
+		$actions = apply_filters('wc1c_admin_configurations_set_actions', $actions);
 
 		$this->actions = $actions;
 	}
@@ -107,7 +107,7 @@ class Configurations
 	 */
 	public function get_current_action()
 	{
-		return apply_filters(WC1C_ADMIN_PREFIX . 'configurations_get_current_action', $this->current_action);
+		return apply_filters('wc1c_admin_configurations_get_current_action', $this->current_action);
 	}
 
 	/**
@@ -118,7 +118,7 @@ class Configurations
 	public function set_current_action($current_action)
 	{
 		// hook
-		$current_action = apply_filters(WC1C_ADMIN_PREFIX . 'configurations_set_current_action', $current_action);
+		$current_action = apply_filters('wc1c_admin_configurations_set_current_action', $current_action);
 
 		$this->current_action = $current_action;
 	}
