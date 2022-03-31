@@ -42,7 +42,7 @@ final class Core
 		 */
 		if('yes' === wc1c()->settings()->get('extensions_tools', 'yes'))
 		{
-			$tools = apply_filters(WC1C_PREFIX . 'load_tools', $tools);
+			$tools = apply_filters('wc1c_load_tools', $tools);
 		}
 
 		try
