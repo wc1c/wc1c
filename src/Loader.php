@@ -33,7 +33,7 @@ final class Loader
 		register_deactivation_hook(WC1C_PLUGIN_FILE, [Deactivation::class, 'instance']);
 		register_uninstall_hook(WC1C_PLUGIN_FILE, [Uninstall::class, 'instance']);
 
-		$path = wc1c()->environment()->get('plugin_directory_path');
+		$path = plugin_dir_path(WC1C_PLUGIN_FILE);
 		$vendor_path = $path . 'vendor/';
 
 		$this->addNamespace('Wc1c', $path . 'src');
