@@ -37,7 +37,7 @@ class Update
 			'callback' => [MainUpdate::class, 'instance']
 		];
 
-		$default_sections = apply_filters(WC1C_ADMIN_PREFIX . 'configurations_update_sections', $default_sections);
+		$default_sections = apply_filters('wc1c_admin_configurations_update_sections', $default_sections);
 
 		$this->initSections($default_sections);
 		$this->setCurrentSection('main');
@@ -52,8 +52,8 @@ class Update
 			}
 			catch(Exception $e)
 			{
-				add_action(WC1C_ADMIN_PREFIX . 'configurations_update_show', [$this, 'outputSchemaError'], 10);
-				add_filter(WC1C_ADMIN_PREFIX . 'configurations_update_schema_error_text', [$this, 'outputSchemaErrorText'], 10, 1);
+				add_action('wc1c_admin_configurations_update_show', [$this, 'outputSchemaError'], 10);
+				add_filter('wc1c_admin_configurations_update_schema_error_text', [$this, 'outputSchemaErrorText'], 10, 1);
 				wc1c()->log()->notice('Schema is not initialized.', ['exception' => $e]);
 			}
 
@@ -61,14 +61,14 @@ class Update
 		}
 		else
 		{
-			add_action(WC1C_ADMIN_PREFIX . 'show', [$this, 'outputError'], 10);
+			add_action('wc1c_admin_show', [$this, 'outputError'], 10);
 			wc1c()->log()->notice('Configuration update is not available.', ['configuration_id' => $configuration_id]);
 			return;
 		}
 
 		$this->route();
 
-		add_action(WC1C_ADMIN_PREFIX . 'show', [$this, 'output'], 10);
+		add_action('wc1c_admin_show', [$this, 'output'], 10);
 	}
 
 	/**
@@ -95,11 +95,11 @@ class Update
 
 		if(!array_key_exists($current_section, $sections) || !isset($sections[$current_section]['callback']))
 		{
-			add_action(WC1C_ADMIN_PREFIX . 'configurations_update_show', [$this, 'wrapError']);
+			add_action('wc1c_admin_configurations_update_show', [$this, 'wrapError']);
 		}
 		else
 		{
-			add_action(WC1C_ADMIN_PREFIX . 'before_configurations_update_show', [$this, 'wrapSections'], 5);
+			add_action('wc1c_admin_before_configurations_update_show', [$this, 'wrapSections'], 5);
 
 			$callback = $sections[$current_section]['callback'];
 
@@ -172,7 +172,7 @@ class Update
 			}
 		}
 
-		add_action(WC1C_ADMIN_PREFIX . 'configurations_update_header_show', [$inline_form, 'outputForm'], 10);
+		add_action('wc1c_admin_configurations_update_header_show', [$inline_form, 'outputForm'], 10);
 	}
 
 	/**
