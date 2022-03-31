@@ -55,11 +55,11 @@ class ConnectionForm extends Form
 
 		if($this->status !== false)
 		{
-			add_filter(WC1C_PREFIX . $this->get_id() . '_form_load_fields', [$this, 'init_fields_connected'], 10);
+			add_filter('wc1c_' . $this->get_id() . '_form_load_fields', [$this, 'init_fields_connected'], 10);
 		}
 		else
 		{
-			add_action(WC1C_ADMIN_PREFIX . 'show', [$this, 'output'], 10);
+			add_action('wc1c_admin_show', [$this, 'output'], 10);
 		}
 
 		$this->init();

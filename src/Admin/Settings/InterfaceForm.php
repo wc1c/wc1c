@@ -22,7 +22,7 @@ class InterfaceForm extends Form
 		$this->set_id('settings-interface');
 		$this->setSettings(new InterfaceSettings());
 
-		add_filter(WC1C_PREFIX . $this->get_id() . '_form_load_fields', [$this, 'init_fields_interface'], 10);
+		add_filter('wc1c_' . $this->get_id() . '_form_load_fields', [$this, 'init_fields_interface'], 10);
 
 		$this->init();
 	}
