@@ -151,7 +151,7 @@ abstract class WizardAbstract
 	 */
 	public function setSteps($steps)
 	{
-		$this->steps = apply_filters(WC1C_PREFIX . 'wizards_steps', $steps, $this->getId());
+		$this->steps = apply_filters('wc1c_wizards_steps', $steps, $this->getId());
 	}
 
 	/**
@@ -164,7 +164,7 @@ abstract class WizardAbstract
 
 		if(!array_key_exists($current, $steps) || !isset($steps[$current]['callback']))
 		{
-			add_action(WC1C_PREFIX . 'wizard_content_output', [$this, 'error']);
+			add_action('wc1c_wizard_content_output', [$this, 'error']);
 		}
 		else
 		{

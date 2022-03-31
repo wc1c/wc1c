@@ -27,7 +27,7 @@ class Check extends StepAbstract
 	 */
 	public function process()
 	{
-		add_action(WC1C_PREFIX . 'wizard_content_output', [$this, 'output'], 10);
+		add_action('wc1c_wizard_content_output', [$this, 'output'], 10);
 	}
 
 	/**
