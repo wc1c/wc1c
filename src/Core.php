@@ -11,7 +11,6 @@ use Wc1c\Log\Logger;
 use Wc1c\Settings\InterfaceSettings;
 use Wc1c\Settings\LogsSettings;
 use Wc1c\Exceptions\Exception;
-use Wc1c\Exceptions\RuntimeException;
 use Wc1c\Contracts\SettingsContract;
 use Wc1c\Traits\SingletonTrait;
 use Wc1c\Settings\MainSettings;
@@ -63,7 +62,7 @@ final class Core
 	 */
 	public function __construct()
 	{
-		do_action(WC1C_PREFIX . 'core_loaded');
+		do_action('wc1c_core_loaded');
 	}
 
 	/**
@@ -74,8 +73,8 @@ final class Core
 	 */
 	public function register($context, $loader)
 	{
-		$this->context = apply_filters(WC1C_PREFIX . 'context_loading', $context);
-		$this->loader = apply_filters(WC1C_PREFIX . 'loader_loading', $loader);
+		$this->context = apply_filters('wc1c_context_loading', $context);
+		$this->loader = apply_filters('wc1c_loader_loading', $loader);
 
 		// init
 		add_action('init', [$this, 'init'], 3);
@@ -93,7 +92,7 @@ final class Core
 	public function init()
 	{
 		// hook
-		do_action(WC1C_PREFIX . 'before_init');
+		do_action('wc1c_before_init');
 
 		$this->localization();
 
@@ -103,7 +102,7 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			wc1c()->log()->alert('Timer not loaded.', ['exception' => $e]);
+			wc1c()->log()->alert(__('Timer not loaded.', 'wc1c'), ['exception' => $e]);
 			return;
 		}
 
@@ -113,7 +112,7 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			wc1c()->log()->alert('Extensions not loaded.', ['exception' => $e]);
+			wc1c()->log()->alert(__('Extensions not loaded.', 'wc1c'), ['exception' => $e]);
 		}
 
 		try
@@ -122,7 +121,7 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			wc1c()->log()->alert('Extensions not initialized.', ['exception' => $e]);
+			wc1c()->log()->alert(__('Extensions not initialized.', 'wc1c'), ['exception' => $e]);
 		}
 
 		try
@@ -131,7 +130,7 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			wc1c()->log()->alert('Schemas not loaded.', ['exception' => $e]);
+			wc1c()->log()->alert(__('Schemas not loaded.', 'wc1c'), ['exception' => $e]);
 		}
 
 		try
@@ -140,10 +139,10 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			wc1c()->log()->alert('Tools not loaded.', ['exception' => $e]);
+			wc1c()->log()->alert(__('Tools not loaded.', 'wc1c'), ['exception' => $e]);
 		}
 
-		if(false !== wc1c()->context()->isReceiver() || false !== wc1c()->context()->isWc1cAdmin())
+		if(false !== wc1c()->context()->isReceiver() || false !== wc1c()->context()->isAdmin())
 		{
 			try
 			{
@@ -151,7 +150,7 @@ final class Core
 			}
 			catch(Exception $e)
 			{
-				wc1c()->log()->alert('Tools not initialized.', ['exception' => $e]);
+				wc1c()->log()->alert(__('Tools not initialized.', 'wc1c'), ['exception' => $e]);
 			}
 		}
 
@@ -163,12 +162,12 @@ final class Core
 			}
 			catch(Exception $e)
 			{
-				wc1c()->log()->alert('Receiver not loaded.', ['exception' => $e]);
+				wc1c()->log()->alert(__('Receiver not loaded.', 'wc1c'), ['exception' => $e]);
 			}
 		}
 
 		// hook
-		do_action(WC1C_PREFIX . 'after_init');
+		do_action('wc1c_after_init');
 	}
 
 	/**
@@ -331,7 +330,6 @@ final class Core
 	 * @param string $context
 	 *
 	 * @return SettingsContract
-	 * @throws RuntimeException
 	 */
 	public function settings($context = 'main')
 	{
@@ -352,15 +350,15 @@ final class Core
 					$class = MainSettings::class;
 			}
 
+			$settings = new $class();
+
 			try
 			{
-				$settings = new $class();
 				$settings->init();
 			}
 			catch(Exception $e)
 			{
-				wc1c()->log()->error($e->getMessage(), ['exception' => $e->getMessage()]);
-				throw new RuntimeException($e->getMessage());
+				wc1c()->log()->error($e->getMessage(), ['exception' => $e]);
 			}
 
 			$this->settings[$context] = $settings;
@@ -425,7 +423,7 @@ final class Core
 	{
 		$default_class_name = Receiver::class;
 
-		$use_class_name = apply_filters(WC1C_PREFIX . 'receiver_loading_class_name', $default_class_name);
+		$use_class_name = apply_filters('wc1c_receiver_loading_class_name', $default_class_name);
 
 		if(false === class_exists($use_class_name))
 		{
@@ -473,7 +471,7 @@ final class Core
 
 		unload_textdomain('wc1c');
 		load_textdomain('wc1c', WP_LANG_DIR . '/plugins/wc1c-' . $locale . '.mo');
-		load_textdomain('wc1c', WC1C_PLUGIN_PATH . 'assets/languages/wc1c-' . $locale . '.mo');
+		load_textdomain('wc1c', wc1c()->environment()->get('plugin_directory_path') . 'assets/languages/wc1c-' . $locale . '.mo');
 
 		wc1c()->log()->debug(__('Localization loaded.', 'wc1c'), ['locale' => $locale]);
 	}
