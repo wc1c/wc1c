@@ -12,7 +12,7 @@ use Wc1c\Wc\Contracts\CategoriesStorageContract;
 /**
  * CategoriesStorage
  *
- * @package Wc1c\Wc\Storages
+ * @package Wc1c\Wc
  */
 class CategoriesStorage implements CategoriesStorageContract, MetaStorageContract
 {
@@ -51,7 +51,7 @@ class CategoriesStorage implements CategoriesStorageContract, MetaStorageContrac
 			$category->applyChanges();
 
 			// hook
-			do_action(WC1C_PREFIX . 'wc_data_storage_category_create', $object_id, $category);
+			do_action('wc1c_wc_data_storage_category_create', $object_id, $category);
 		}
 	}
 
@@ -88,7 +88,7 @@ class CategoriesStorage implements CategoriesStorageContract, MetaStorageContrac
 
 		$category->setObjectRead(true);
 
-		do_action(WC1C_PREFIX . 'wc_data_storage_category_read', $category->getId());
+		do_action('wc1c_wc_data_storage_category_read', $category->getId());
 	}
 
 	/**
@@ -134,7 +134,7 @@ class CategoriesStorage implements CategoriesStorageContract, MetaStorageContrac
 
 		$category->applyChanges();
 
-		do_action(WC1C_PREFIX . 'wc_data_storage_category_update', $category->getId(), $category);
+		do_action('wc1c_wc_data_storage_category_update', $category->getId(), $category);
 	}
 
 	/**
@@ -162,22 +162,22 @@ class CategoriesStorage implements CategoriesStorageContract, MetaStorageContrac
 
 		if($args['force_delete'])
 		{
-			do_action(WC1C_PREFIX . 'wc_data_storage_category_before_delete', $object_id);
+			do_action('wc1c_wc_data_storage_category_before_delete', $object_id);
 
 			wp_delete_term($object_id, 'product_cat');
 
 			$category->setId(0);
 
-			do_action(WC1C_PREFIX . 'wc_data_storage_category_after_delete', $object_id);
+			do_action('wc1c_wc_data_storage_category_after_delete', $object_id);
 		}
 		else
 		{
-			do_action(WC1C_PREFIX . 'wc_data_storage_category_before_trash', $object_id);
+			do_action('wc1c_wc_data_storage_category_before_trash', $object_id);
 
 			$category->addMetaData('status', 'deleted');
 			$category->saveMetaData();
 
-			do_action(WC1C_PREFIX . 'wc_data_storage_category_after_trash', $object_id);
+			do_action('wc1c_wc_data_storage_category_after_trash', $object_id);
 		}
 	}
 
@@ -293,7 +293,7 @@ class CategoriesStorage implements CategoriesStorageContract, MetaStorageContrac
 	{
 		$raw_meta_data = get_term_meta($data->getId());
 
-		return apply_filters(WC1C_PREFIX . 'wc_data_storage_category_meta_read', $raw_meta_data, $data, $this);
+		return apply_filters('wc1c_wc_data_storage_category_meta_read', $raw_meta_data, $data, $this);
 	}
 
 	/**
@@ -318,12 +318,12 @@ class CategoriesStorage implements CategoriesStorageContract, MetaStorageContrac
 		}
 
 		// hook
-		do_action(WC1C_PREFIX . 'wc_data_storage_category_meta_delete', [$meta_id, $data->getId(), $meta->key, $meta->value]);
+		do_action('wc1c_wc_data_storage_category_meta_delete', [$meta_id, $data->getId(), $meta->key, $meta->value]);
 
 		$result = delete_term_meta($meta_id, $meta->key);
 
 		// hook
-		do_action(WC1C_PREFIX . 'wc_data_storage_category_meta_deleted', [$meta_id, $data->getId(), $meta->key, $meta->value]);
+		do_action('wc1c_wc_data_storage_category_meta_deleted', [$meta_id, $data->getId(), $meta->key, $meta->value]);
 
 		return $result;
 	}
@@ -356,7 +356,7 @@ class CategoriesStorage implements CategoriesStorageContract, MetaStorageContrac
 		 * @param string $meta_key Meta key.
 		 * @param mixed $meta_value Meta value.
 		 */
-		do_action(WC1C_PREFIX . 'wc_data_storage_category_meta_add', $data->getId(), $meta_key, $_meta_value);
+		do_action('wc1c_wc_data_storage_category_meta_add', $data->getId(), $meta_key, $_meta_value);
 
 		$result = add_term_meta($data->getId(), $meta_key, $meta_value, false);
 
@@ -375,7 +375,7 @@ class CategoriesStorage implements CategoriesStorageContract, MetaStorageContrac
 		 * @param string $meta_key Meta key.
 		 * @param mixed $meta_value Meta value.
 		 */
-		do_action(WC1C_PREFIX . 'wc_data_storage_category_meta_added', $meta_id, $data->getId(), $meta_key, $_meta_value);
+		do_action('wc1c_wc_data_storage_category_meta_added', $meta_id, $data->getId(), $meta_key, $_meta_value);
 
 		return $meta_id;
 	}
@@ -404,7 +404,7 @@ class CategoriesStorage implements CategoriesStorageContract, MetaStorageContrac
 		$meta_value = maybe_serialize($meta->value);
 
 		// hook
-		do_action(WC1C_PREFIX . 'data_storage_configuration_meta_update', $meta_id, $data->getId(), $meta->key, $meta_value);
+		do_action('wc1c_data_storage_configuration_meta_update', $meta_id, $data->getId(), $meta->key, $meta_value);
 
 		$result = update_term_meta($meta_id, $meta->key, $meta_value);
 
@@ -414,7 +414,7 @@ class CategoriesStorage implements CategoriesStorageContract, MetaStorageContrac
 		}
 
 		// hook
-		do_action(WC1C_PREFIX . 'data_storage_configuration_meta_updated', $meta->meta_id, $data->getId(), $meta->key, $meta_value);
+		do_action('wc1c_data_storage_configuration_meta_updated', $meta->meta_id, $data->getId(), $meta->key, $meta_value);
 
 		return true;
 	}
