@@ -50,8 +50,8 @@ final class Products
 
 		if('wc1c' === $column)
 		{
-			$schema_id = get_post_meta($post->ID, '_' . WC1C_PREFIX . 'schema_id', true);
-			$config_id = get_post_meta($post->ID, '_' . WC1C_PREFIX . 'configuration_id', true);
+			$schema_id = get_post_meta($post->ID, '_' . 'wc1c_schema_id', true);
+			$config_id = get_post_meta($post->ID, '_' . 'wc1c_configuration_id', true);
 
 			$content = '';
 
@@ -70,7 +70,7 @@ final class Products
 				$content .= '<span class="na">' . __('not found', 'wc1c') . '</span>';
 			}
 
-			$content = apply_filters(WC1C_ADMIN_PREFIX . 'interface_products_lists_column', $content, $schema_id, $config_id, $post);
+			$content = apply_filters('wc1c_admin_interface_products_lists_column', $content, $schema_id, $config_id, $post);
 
 			echo $content;
 		}
