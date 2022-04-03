@@ -45,7 +45,7 @@ class Database extends StepAbstract
 			);
 		}
 
-		add_action(WC1C_PREFIX . 'wizard_content_output', [$this, 'output'], 10);
+		add_action('wc1c_wizard_content_output', [$this, 'output'], 10);
 	}
 
 	/**

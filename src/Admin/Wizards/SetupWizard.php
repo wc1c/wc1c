@@ -1,6 +1,5 @@
 <?php namespace Wc1c\Admin\Wizards;
 
-use Wc1c\Admin;
 use Wc1c\Admin\Wizards\Setup\Check;
 use Wc1c\Admin\Wizards\Setup\Complete;
 use Wc1c\Admin\Wizards\Setup\Database;
@@ -37,9 +36,9 @@ final class SetupWizard extends WizardAbstract
 	 */
 	public function init()
 	{
-		add_filter(WC1C_ADMIN_PREFIX . 'init_sections', [$this, 'hideSections'], 20, 1);
-		add_filter(WC1C_ADMIN_PREFIX . 'init_sections_current', [$this, 'setSectionsCurrent'], 20, 1);
-		add_action(WC1C_ADMIN_PREFIX . 'show', [$this, 'route']);
+		add_filter('wc1c_admin_init_sections', [$this, 'hideSections'], 20, 1);
+		add_filter('wc1c_admin_init_sections_current', [$this, 'setSectionsCurrent'], 20, 1);
+		add_action('wc1c_admin_show', [$this, 'route']);
 	}
 
 	/**

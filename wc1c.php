@@ -5,7 +5,7 @@
  * Description: Implementation of a mechanism for flexible exchange of various data between 1C products and a site running WordPress using the WooCommerce plugin.
  * Version: 0.7.0
  * WC requires at least: 3.5
- * WC tested up to: 6.2
+ * WC tested up to: 6.3
  * Requires at least: 4.7
  * Requires PHP: 5.6
  * Text Domain: wc1c
@@ -27,8 +27,10 @@ if(version_compare(PHP_VERSION, '5.6.0') < 0)
 
 if(false === defined('WC1C_PLUGIN_FILE'))
 {
+	define('WC1C_PLUGIN_FILE', __FILE__);
+
 	/**
-	 * Main instance of Wc1c
+	 * Main instance of WC1C
 	 *
 	 * @return Wc1c\Core
 	 */
@@ -36,15 +38,6 @@ if(false === defined('WC1C_PLUGIN_FILE'))
 	{
 		return Wc1c\Core::instance();
 	}
-
-	define('WC1C_PREFIX', 'wc1c_');
-	define('WC1C_ADMIN_PREFIX', 'wc1c_admin_');
-
-	define('WC1C_PLUGIN_FILE', __FILE__);
-
-	define('WC1C_PLUGIN_URL', plugin_dir_url(WC1C_PLUGIN_FILE));
-	define('WC1C_PLUGIN_PATH', plugin_dir_path(WC1C_PLUGIN_FILE));
-	define('WC1C_PLUGIN_NAME', plugin_basename(WC1C_PLUGIN_FILE));
 
 	include_once __DIR__ . '/src/Loader.php';
 

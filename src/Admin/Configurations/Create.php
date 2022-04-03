@@ -26,7 +26,7 @@ class Create extends ScreenAbstract
 		$form->load_fields();
 		$form->save();
 
-		add_action(WC1C_ADMIN_PREFIX . 'configurations_form_create_show', [$form, 'outputForm'], 10);
+		add_action('wc1c_admin_configurations_form_create_show', [$form, 'outputForm'], 10);
 
 		parent::__construct();
 	}

@@ -29,21 +29,22 @@ final class Loader
 	{
 		spl_autoload_register([$this, 'loadClass']);
 
-		$this->addNamespace('Wc1c', WC1C_PLUGIN_PATH . 'src');
-		$this->addNamespace('Digiom\WordPress\Notices', WC1C_PLUGIN_PATH . 'vendor/digiom/notices-wp/src');
-		$this->addNamespace('Digiom\Wap', WC1C_PLUGIN_PATH . 'vendor/digiom/wap/src');
-		$this->addNamespace('Digiom\Psr7wp', WC1C_PLUGIN_PATH . 'vendor/digiom/psr7wp/src');
-		$this->addNamespace('Psr\Http\Message', WC1C_PLUGIN_PATH . 'vendor/psr/http-message/src');
-		$this->addNamespace('Psr\Log', WC1C_PLUGIN_PATH . 'vendor/psr/log/src');
-		$this->addNamespace('Monolog', WC1C_PLUGIN_PATH . 'vendor/monolog/src/Monolog');
-
 		register_activation_hook(WC1C_PLUGIN_FILE, [Activation::class, 'instance']);
 		register_deactivation_hook(WC1C_PLUGIN_FILE, [Deactivation::class, 'instance']);
 		register_uninstall_hook(WC1C_PLUGIN_FILE, [Uninstall::class, 'instance']);
 
-		wc1c()->register(new Context(), $this);
+		$path = plugin_dir_path(WC1C_PLUGIN_FILE);
+		$vendor_path = $path . 'vendor/';
 
-		add_action('plugins_loaded', 'wc1c', 10);
+		$this->addNamespace('Wc1c', $path . 'src');
+		$this->addNamespace('Digiom\WordPress\Notices', $vendor_path . 'digiom/notices-wp/src');
+		$this->addNamespace('Digiom\Wap', $vendor_path . 'digiom/wap/src');
+		$this->addNamespace('Digiom\Psr7wp', $vendor_path . 'digiom/psr7wp/src');
+		$this->addNamespace('Psr\Http\Message', $vendor_path . 'psr/http-message/src');
+		$this->addNamespace('Psr\Log', $vendor_path . 'psr/log/src');
+		$this->addNamespace('Monolog', $vendor_path . 'monolog/src/Monolog');
+
+		wc1c()->register(new Context(), $this);
 	}
 
 	/**

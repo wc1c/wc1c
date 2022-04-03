@@ -22,7 +22,7 @@ class LogsForm extends Form
 		$this->set_id('settings-logs');
 		$this->setSettings(new LogsSettings());
 
-		add_filter(WC1C_PREFIX . $this->get_id() . '_form_load_fields', [$this, 'init_fields_logger'], 10);
+		add_filter('wc1c_' . $this->get_id() . '_form_load_fields', [$this, 'init_fields_logger'], 10);
 
 		$this->init();
 	}

@@ -16,7 +16,7 @@ final class Receiver
 	 */
 	public function __construct()
 	{
-		do_action(WC1C_PREFIX . 'receiver_loaded');
+		do_action('wc1c_receiver_loaded');
 	}
 
 	/**

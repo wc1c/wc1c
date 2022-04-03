@@ -86,7 +86,7 @@ final class Environment
 
 		if(0 < $config_id && 99999999 > $config_id)
 		{
-			if(wc1c()->context()->isReceiver() || wc1c()->context()->isWc1cAdmin())
+			if(wc1c()->context()->isReceiver() || wc1c()->context()->isAdmin())
 			{
 				$this->set('current_configuration_id', $config_id);
 
@@ -118,6 +118,57 @@ final class Environment
 	}
 
 	/**
+	 * WordPress plugin directory URL
+	 *
+	 * @return string
+	 */
+	public function initPluginDirectoryUrl()
+	{
+		if(false === function_exists('plugin_dir_url'))
+		{
+			throw new RuntimeException('Function plugin_dir_url is not exists.');
+		}
+
+		$this->set('plugin_directory_url', plugin_dir_url(WC1C_PLUGIN_FILE));
+
+		return $this->get('plugin_directory_url');
+	}
+
+	/**
+	 * WordPress plugin directory path
+	 *
+	 * @return string
+	 */
+	public function initPluginDirectoryPath()
+	{
+		if(false === function_exists('plugin_dir_path'))
+		{
+			throw new RuntimeException('Function plugin_dir_path is not exists.');
+		}
+
+		$this->set('plugin_directory_path', plugin_dir_path(WC1C_PLUGIN_FILE));
+
+		return $this->get('plugin_directory_path');
+	}
+
+	/**
+	 * WordPress plugin basename
+	 *
+	 * @return string
+	 */
+	public function initPluginBasename()
+	{
+		if(false === function_exists('plugin_basename'))
+		{
+			throw new RuntimeException('Function plugin_basename is not exists.');
+		}
+
+		$this->set('plugin_basename', plugin_basename(WC1C_PLUGIN_FILE));
+
+		return $this->get('plugin_basename');
+	}
+
+	/**
 	 * PHP post max size
 	 */
 	public function initPhpPostMaxSize()
@@ -138,7 +189,7 @@ final class Environment
 	}
 
 	/**
-	 * Wc1c upload directory
+	 * WC1C upload directory
 	 *
 	 * @return bool
 	 */
@@ -152,7 +203,7 @@ final class Environment
 	}
 
 	/**
-	 * Wc1c logs directory
+	 * WC1C logs directory
 	 *
 	 * @return bool
 	 */
@@ -166,7 +217,7 @@ final class Environment
 	}
 
 	/**
-	 * Wc1c tools directory
+	 * WC1C tools directory
 	 *
 	 * @return bool
 	 */
@@ -180,7 +231,7 @@ final class Environment
 	}
 
 	/**
-	 * Wc1c tools logs directory
+	 * WC1C tools logs directory
 	 *
 	 * @return bool
 	 */
@@ -194,7 +245,7 @@ final class Environment
 	}
 
 	/**
-	 * Wc1c schemas directory
+	 * WC1C schemas directory
 	 *
 	 * @return bool
 	 */
@@ -208,7 +259,7 @@ final class Environment
 	}
 
 	/**
-	 * Wc1c schemas logs directory
+	 * WC1C schemas logs directory
 	 *
 	 * @return bool
 	 */
@@ -222,7 +273,7 @@ final class Environment
 	}
 
 	/**
-	 * Wc1c configurations directory
+	 * WC1C configurations directory
 	 *
 	 * @return bool
 	 */
@@ -236,7 +287,7 @@ final class Environment
 	}
 
 	/**
-	 * Wc1c configurations logs directory
+	 * WC1C configurations logs directory
 	 *
 	 * @return bool
 	 */
@@ -250,7 +301,7 @@ final class Environment
 	}
 
 	/**
-	 * Wc1c version
+	 * WC1C version
 	 *
 	 * @return bool
 	 */

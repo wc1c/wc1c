@@ -25,13 +25,13 @@ class Settings
 	public function __construct()
 	{
 		// hook
-		do_action(WC1C_ADMIN_PREFIX . 'settings_before_loading');
+		do_action('wc1c_admin_settings_before_loading');
 
 		$this->init();
 		$this->route();
 
 		// hook
-		do_action(WC1C_ADMIN_PREFIX . 'settings_after_loading');
+		do_action('wc1c_admin_settings_after_loading');
 	}
 
 	/**
@@ -40,7 +40,7 @@ class Settings
 	public function init()
 	{
 		// hook
-		do_action(WC1C_ADMIN_PREFIX . 'settings_before_init');
+		do_action('wc1c_admin_settings_before_init');
 
 		$default_sections['main'] =
 		[
@@ -73,7 +73,7 @@ class Settings
 		$this->initSections($default_sections);
 
 		// hook
-		do_action(WC1C_ADMIN_PREFIX . 'settings_after_init');
+		do_action('wc1c_admin_settings_after_init');
 	}
 
 	/**
@@ -103,11 +103,11 @@ class Settings
 
 		if(!array_key_exists($current_section, $sections) || !isset($sections[$current_section]['callback']))
 		{
-			add_action(WC1C_ADMIN_PREFIX . 'show', [$this, 'wrapError']);
+			add_action('wc1c_admin_show', [$this, 'wrapError']);
 		}
 		else
 		{
-			add_action(WC1C_ADMIN_PREFIX . 'show', [$this, 'wrapSections'], 7);
+			add_action('wc1c_admin_show', [$this, 'wrapSections'], 7);
 
 			$callback = $sections[$current_section]['callback'];
 

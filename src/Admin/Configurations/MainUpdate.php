@@ -72,8 +72,8 @@ class MainUpdate
 			}
 		}
 
-		add_action(WC1C_ADMIN_PREFIX . 'configurations_update_sidebar_show', [$this, 'outputSidebar'], 10);
-		add_action(WC1C_ADMIN_PREFIX . 'configurations_update_show', [$form, 'outputForm'], 10);
+		add_action('wc1c_admin_configurations_update_sidebar_show', [$this, 'outputSidebar'], 10);
+		add_action('wc1c_admin_configurations_update_show', [$form, 'outputForm'], 10);
 	}
 
 	/**

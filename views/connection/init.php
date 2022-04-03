@@ -2,7 +2,7 @@
 
 <?php
     $title = __('Connection', 'wc1c');
-    $title = apply_filters(WC1C_ADMIN_PREFIX . 'settings_connect_title', $title);
+    $title = apply_filters('wc1c_admin_settings_connect_title', $title);
 
     $text = sprintf
     (
@@ -11,7 +11,7 @@
             __('Authorization of an external app occurs by going to the official WC1C and returning to the current site.', 'wc1c')
     );
 
-    $text = apply_filters(WC1C_ADMIN_PREFIX . 'settings_connect_text', $text);
+    $text = apply_filters('wc1c_admin_settings_connect_text', $text);
 ?>
 
 <div class="wc1c-configurations-alert mb-2 mt-2">

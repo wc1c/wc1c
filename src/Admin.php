@@ -34,7 +34,7 @@ final class Admin
 	public function __construct()
 	{
 		// hook
-		do_action(WC1C_ADMIN_PREFIX . 'before_loading');
+		do_action('wc1c_admin_before_loading');
 
 		$this->notices();
 
@@ -45,7 +45,7 @@ final class Admin
 
 		add_action('admin_menu', [$this, 'addMenu'], 30);
 
-		if(wc1c()->context()->isWc1cAdmin())
+		if(wc1c()->context()->isAdmin())
 		{
 			add_action('init', [$this, 'init'], 10);
 			add_action('admin_enqueue_scripts', [$this, 'initStyles']);
@@ -55,10 +55,10 @@ final class Admin
 			Admin\Wizards\Init::instance();
 		}
 
-		add_filter('plugin_action_links_' . WC1C_PLUGIN_NAME, [$this, 'linksLeft']);
+		add_filter('plugin_action_links_' . wc1c()->environment()->get('plugin_basename'), [$this, 'linksLeft']);
 
 		// hook
-		do_action(WC1C_ADMIN_PREFIX . 'after_loading');
+		do_action('wc1c_admin_after_loading');
 	}
 
 	/**
@@ -78,7 +78,7 @@ final class Admin
 				'network_admin_notices' => false
 			];
 
-			$this->notices = new Manager(WC1C_ADMIN_PREFIX . 'notices', $args);
+			$this->notices = new Manager('wc1c_admin_notices', $args);
 		}
 
 		return $this->notices;
@@ -106,7 +106,7 @@ final class Admin
 	public function init()
 	{
 		// hook
-		do_action(WC1C_ADMIN_PREFIX . 'before_init');
+		do_action('wc1c_admin_before_init');
 
 		$default_sections['configurations'] =
 		[
@@ -140,7 +140,7 @@ final class Admin
 		$this->setCurrentSection('configurations');
 
 		// hook
-		do_action(WC1C_ADMIN_PREFIX . 'after_init');
+		do_action('wc1c_admin_after_init');
 	}
 
 	/**
@@ -148,7 +148,7 @@ final class Admin
 	 */
 	public function initStyles()
 	{
-		wp_enqueue_style(WC1C_ADMIN_PREFIX . 'main', WC1C_PLUGIN_URL . 'assets/css/main.min.css');
+		wp_enqueue_style('wc1c_admin_main', wc1c()->environment()->get('plugin_directory_url') . 'assets/css/main.min.css');
 	}
 
 	/**
@@ -156,8 +156,8 @@ final class Admin
 	 */
 	public function initScripts()
 	{
-		wp_enqueue_script(WC1C_ADMIN_PREFIX . 'tocbot', WC1C_PLUGIN_URL . 'assets/js/tocbot/tocbot.min.js');
-		wp_enqueue_script(WC1C_ADMIN_PREFIX . 'main', WC1C_PLUGIN_URL . 'assets/js/admin.js');
+		wp_enqueue_script('wc1c_admin_tocbot', wc1c()->environment()->get('plugin_directory_url') . 'assets/js/tocbot/tocbot.min.js');
+		wp_enqueue_script('wc1c_admin_main', wc1c()->environment()->get('plugin_directory_url') . 'assets/js/admin.js');
 	}
 
 	/**
@@ -170,16 +170,16 @@ final class Admin
 
 		if(!array_key_exists($current_section, $sections) || !isset($sections[$current_section]['callback']))
 		{
-			add_action(WC1C_ADMIN_PREFIX . 'show', [$this, 'wrapError']);
+			add_action('wc1c_admin_show', [$this, 'wrapError']);
 		}
 		else
 		{
 			if(false === get_option('wc1c_wizard', false))
 			{
-				add_action(WC1C_ADMIN_PREFIX . 'show', [$this, 'wrapHeader'], 3);
+				add_action('wc1c_admin_show', [$this, 'wrapHeader'], 3);
 			}
 
-			add_action(WC1C_ADMIN_PREFIX . 'show', [$this, 'wrapSections'], 7);
+			add_action('wc1c_admin_show', [$this, 'wrapSections'], 7);
 
 			$callback = $sections[$current_section]['callback'];
 

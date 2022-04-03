@@ -49,7 +49,7 @@ abstract class Form extends FormAbstract
 		$this->load_saved_data($this->getSettings()->get());
 		$this->save();
 
-		add_action(WC1C_ADMIN_PREFIX . 'show', [$this, 'outputForm']);
+		add_action('wc1c_admin_show', [$this, 'outputForm']);
 	}
 
 	/**

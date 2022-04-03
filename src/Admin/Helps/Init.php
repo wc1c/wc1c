@@ -1,17 +1,7 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Admin\Helps;
+<?php namespace Wc1c\Admin\Helps;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use Wc1c\Traits\SingletonTrait;
 
 /**
@@ -46,7 +36,7 @@ final class Init
 		$screen->add_help_tab
 		(
 			[
-				'id' => WC1C_PREFIX . 'help_tab',
+				'id' => 'wc1c_help_tab',
 				'title' => __('Help', 'wc1c'),
 				'content' => wc1c()->views()->getViewHtml('/helps/main.php')
 			]
@@ -55,7 +45,7 @@ final class Init
 		$screen->add_help_tab
 		(
 			[
-				'id' => WC1C_PREFIX . 'bugs_tab',
+				'id' => 'wc1c_bugs_tab',
 				'title' => __('Found a bug?', 'wc1c'),
 				'content' => wc1c()->views()->getViewHtml('/helps/bugs.php')
 			]
@@ -64,7 +54,7 @@ final class Init
 		$screen->add_help_tab
 		(
 			[
-				'id' => WC1C_PREFIX . 'features_tab',
+				'id' => 'wc1c_features_tab',
 				'title' => __('Not a feature?', 'wc1c'),
 				'content' => wc1c()->views()->getViewHtml('/helps/features.php')
 			]

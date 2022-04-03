@@ -54,7 +54,7 @@ final class Categories
 		{
 			$content = '<span class="na">' . __('not found', 'wc1c') . '</span>';
 
-			$content = apply_filters(WC1C_ADMIN_PREFIX . 'interface_categories_column', $content, $columns, $id);
+			$content = apply_filters('wc1c_admin_interface_categories_column', $content, $columns, $id);
 
 			$columns .= $content;
 		}

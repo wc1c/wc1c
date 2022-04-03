@@ -19,7 +19,7 @@ final class Views
 	public function __construct()
 	{
 		// hook
-		do_action(WC1C_PREFIX . 'views_loaded');
+		do_action('wc1c_views_loaded');
 	}
 
 	/**
@@ -50,13 +50,13 @@ final class Views
 			return;
 		}
 
-		$located = apply_filters(WC1C_PREFIX . 'get_view', $located, $template_name, $args, $template_path, $default_path);
+		$located = apply_filters('wc1c_get_view', $located, $template_name, $args, $template_path, $default_path);
 
-		do_action(WC1C_PREFIX . 'get_view_before', $template_name, $template_path, $located, $args);
+		do_action('wc1c_get_view_before', $template_name, $template_path, $located, $args);
 
 		include $located;
 
-		do_action(WC1C_PREFIX . 'get_view_after', $template_name, $template_path, $located, $args);
+		do_action('wc1c_get_view_after', $template_name, $template_path, $located, $args);
 	}
 
 	/**
@@ -76,9 +76,9 @@ final class Views
 		}
 
 		// Get default slug-name.php
-		if(!$template && $name && file_exists(WC1C_PLUGIN_PATH . "views/{$slug}-{$name}.php"))
+		if(!$template && $name && file_exists(wc1c()->environment()->get('plugin_directory_path') . "views/{$slug}-{$name}.php"))
 		{
-			$template = WC1C_PLUGIN_PATH . "views/{$slug}-{$name}.php";
+			$template = wc1c()->environment()->get('plugin_directory_path') . "views/{$slug}-{$name}.php";
 		}
 
 		// If template file doesn't exist, look in yourtheme/wc1c/slug.php
@@ -88,7 +88,7 @@ final class Views
 		}
 
 		// Allow 3rd party plugins to filter template file from their plugin
-		$template = apply_filters(WC1C_PREFIX . 'get_view_part', $template, $slug, $name);
+		$template = apply_filters('wc1c_get_view_part', $template, $slug, $name);
 
 		if($template)
 		{
@@ -140,7 +140,7 @@ final class Views
 
 		if(!$default_path)
 		{
-			$default_path = WC1C_PLUGIN_PATH . 'views/';
+			$default_path = wc1c()->environment()->get('plugin_directory_path') . 'views/';
 		}
 
 		if($template_path && file_exists(trailingslashit($template_path) . $template_name))
@@ -155,6 +155,6 @@ final class Views
 		}
 
 		// Return what we found
-		return apply_filters(WC1C_PREFIX . 'locate_view', $template, $template_name, $template_path);
+		return apply_filters('wc1c_locate_view', $template, $template_name, $template_path);
 	}
 }

@@ -156,7 +156,7 @@ final class Core
 
 		if('yes' === wc1c()->settings('main')->get('extensions', 'yes'))
 		{
-			$extensions = apply_filters(WC1C_PREFIX . 'extensions_loading', $extensions);
+			$extensions = apply_filters('wc1c_extensions_loading', $extensions);
 		}
 
 		try

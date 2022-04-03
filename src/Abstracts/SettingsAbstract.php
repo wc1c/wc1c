@@ -18,7 +18,7 @@ abstract class SettingsAbstract implements SettingsContract
 	 *
 	 * @var string
 	 */
-	protected $option_name_prefix = WC1C_PREFIX . 'settings_';
+	protected $option_name_prefix = 'wc1c_settings_';
 
 	/**
 	 * Name option in wp_options

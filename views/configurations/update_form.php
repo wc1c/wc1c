@@ -17,6 +17,6 @@
         </div>
     </div>
     <div class="col-24 col-lg-7">
-		<?php do_action(WC1C_ADMIN_PREFIX . 'configurations_update_sidebar_show'); ?>
+		<?php do_action('wc1c_admin_configurations_update_sidebar_show'); ?>
     </div>
 </div>

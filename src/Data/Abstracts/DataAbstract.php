@@ -75,7 +75,7 @@ abstract class DataAbstract
 	 */
 	protected function getHookPrefix()
 	{
-		return WC1C_PREFIX . 'data_' . $this->object_type . '_get_';
+		return 'wc1c_data_' . $this->object_type . '_get_';
 	}
 
 	/**
@@ -137,7 +137,7 @@ abstract class DataAbstract
 		 * @param DataAbstract $this The object being saved
 		 * @param DataAbstract $data_store THe data storage persisting the data
 		 */
-		do_action(WC1C_PREFIX . 'data_' . $this->object_type . '_before_object_save', $this, $this->storage);
+		do_action('wc1c_data_' . $this->object_type . '_before_object_save', $this, $this->storage);
 
 		if($this->getId())
 		{
@@ -154,7 +154,7 @@ abstract class DataAbstract
 		 * @param DataAbstract $this The object being saved.
 		 * @param DataAbstract $data_store THe data storage persisting the data.
 		 */
-		do_action(WC1C_PREFIX . 'data_' . $this->object_type . '_after_object_save', $this, $this->storage);
+		do_action('wc1c_data_' . $this->object_type . '_after_object_save', $this, $this->storage);
 
 		return $this->getId();
 	}

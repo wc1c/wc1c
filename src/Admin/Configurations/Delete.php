@@ -30,7 +30,7 @@ class Delete
 
 		if($error)
 		{
-			add_action(WC1C_ADMIN_PREFIX . 'show', [$this, 'outputError'], 10);
+			add_action('wc1c_admin_show', [$this, 'outputError'], 10);
 		}
 		else
 		{
@@ -86,8 +86,8 @@ class Delete
 
 				if(!$delete_form->save())
 				{
-					add_action(WC1C_ADMIN_PREFIX . 'configurations_form_delete_show', [$delete_form, 'outputForm']);
-					add_action(WC1C_ADMIN_PREFIX . 'show', [$this, 'output'], 10);
+					add_action('wc1c_admin_configurations_form_delete_show', [$delete_form, 'outputForm']);
+					add_action('wc1c_admin_show', [$this, 'output'], 10);
 				}
 				else
 				{
