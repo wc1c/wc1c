@@ -12,15 +12,15 @@ trait LoggerAwareTrait
      *
      * @var LoggerInterface|null
      */
-    protected $log;
+    protected $logger;
 
     /**
      * Sets a logger.
      *
-     * @param LoggerInterface $log
+     * @param LoggerInterface $logger
      */
-    public function setLog(LoggerInterface $log)
+    public function setLogger(LoggerInterface $logger)
     {
-        $this->log = $log;
+        $this->logger = $logger;
     }
 }
