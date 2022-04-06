@@ -41,8 +41,8 @@ final class Loader
 		$this->addNamespace('Digiom\Wap', $vendor_path . 'digiom/wap/src');
 		$this->addNamespace('Digiom\Psr7wp', $vendor_path . 'digiom/psr7wp/src');
 		$this->addNamespace('Psr\Http\Message', $vendor_path . 'psr/http-message/src');
-		$this->addNamespace('Psr\Log', $vendor_path . 'psr/log/src');
-		$this->addNamespace('Monolog', $vendor_path . 'monolog/src/Monolog');
+		$this->addNamespace('Psr\Log', $vendor_path . 'psr/log/Psr/Log');
+		$this->addNamespace('Monolog', $vendor_path . 'monolog/monolog/src/Monolog');
 
 		wc1c()->register(new Context(), $this);
 	}
