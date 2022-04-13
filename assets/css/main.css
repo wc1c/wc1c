@@ -9205,12 +9205,16 @@ a.toc-link {
   width: 130px;
   max-width: 130px;
 }
-.woocommerce_page_wc1c .configurations .column-name .name {
+.woocommerce_page_wc1c .configurations .column-name .configuration-name {
   font-size: 16px !important;
-  display: block;
-  margin-bottom: 7px;
-  padding-bottom: 7px;
-  border-bottom: 1px solid #ccd0d4;
+  line-height: 120%;
+}
+.woocommerce_page_wc1c .configurations .column-name .configuration-metas {
+  border: 1px solid #ccd0d4;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  margin-top: 10px;
 }
 .woocommerce_page_wc1c .configurations .column-configuration_id {
   width: 75px;

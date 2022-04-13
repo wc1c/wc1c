@@ -61,13 +61,19 @@
 
   .configurations
   {
-    .column-name .name
+    .column-name .configuration-name
     {
       font-size: 16px!important;
-      display: block;
-      margin-bottom: 7px;
-      padding-bottom: 7px;
-      border-bottom: 1px solid #ccd0d4;
+      line-height: 120%;
+    }
+
+    .column-name .configuration-metas
+    {
+      border: 1px solid #ccd0d4;
+      padding: 5px;
+      border-radius: 5px;
+      margin-bottom: 5px;
+      margin-top: 10px;
     }
 
     .column-configuration_id
