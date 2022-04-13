@@ -188,15 +188,45 @@ class AllTable extends TableAbstract
 			$actions['delete'] = '<a href="' . $this->utilityAdminConfigurationsGetUrl('delete', $item['configuration_id']) . '">' . __('Remove forever', 'wc1c') . '</a>';
 		}
 
-		$connection_schema = __('Schema:', 'wc1c') . ' ' . $item['schema'];
+		$actions = apply_filters('wc1c_admin_configurations_all_row_actions', $actions);
+
+		$metas['schema'] = __('Schema:', 'wc1c') . ' ' . $item['schema'];
+
+		$metas = apply_filters('wc1c_admin_configurations_all_row_metas', $metas);
 
 		return sprintf
 		(
-			'<span class="name">%1$s</span>%2$s<br/>%3$s',
+			'<span class="configuration-name">%1$s</span><div class="configuration-metas">%2$s</div><div class="configuration-actions">%3$s</div>',
 			$item['name'],
-			$connection_schema,
+			$this->rowMetas($metas),
 			$this->rowActions($actions, true)
 		);
+	}
+
+	/**
+	 * @param $data
+	 *
+	 * @return string
+	 */
+	public function rowMetas($data)
+	{
+		$metas_count = count($data);
+
+		if(!$metas_count)
+		{
+			return '';
+		}
+
+		$out = '<div class="row-metas">';
+
+		foreach($data as $meta => $meta_text)
+		{
+			$out .= "<div class='row-metas-line $meta'>$meta_text</div>";
+		}
+
+		$out .= '</div>';
+
+		return $out;
 	}
 
 	/**
