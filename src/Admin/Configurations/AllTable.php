@@ -163,7 +163,7 @@ class AllTable extends TableAbstract
 	}
 
 	/**
-	 * Account name
+	 * Configuration name
 	 *
 	 * @param $item
 	 *
@@ -188,11 +188,11 @@ class AllTable extends TableAbstract
 			$actions['delete'] = '<a href="' . $this->utilityAdminConfigurationsGetUrl('delete', $item['configuration_id']) . '">' . __('Remove forever', 'wc1c') . '</a>';
 		}
 
-		$actions = apply_filters('wc1c_admin_configurations_all_row_actions', $actions);
+		$actions = apply_filters('wc1c_admin_configurations_all_row_actions', $actions, $item);
 
 		$metas['schema'] = __('Schema:', 'wc1c') . ' ' . $item['schema'];
 
-		$metas = apply_filters('wc1c_admin_configurations_all_row_metas', $metas);
+		$metas = apply_filters('wc1c_admin_configurations_all_row_metas', $metas, $item);
 
 		return sprintf
 		(
