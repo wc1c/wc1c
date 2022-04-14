@@ -404,7 +404,7 @@ class CategoriesStorage implements CategoriesStorageContract, MetaStorageContrac
 		$meta_value = maybe_serialize($meta->value);
 
 		// hook
-		do_action('wc1c_data_storage_configuration_meta_update', $meta_id, $data->getId(), $meta->key, $meta_value);
+		do_action('wc1c_wc_data_storage_category_meta_update', $meta_id, $data->getId(), $meta->key, $meta_value);
 
 		$result = update_term_meta($meta_id, $meta->key, $meta_value);
 
@@ -414,7 +414,7 @@ class CategoriesStorage implements CategoriesStorageContract, MetaStorageContrac
 		}
 
 		// hook
-		do_action('wc1c_data_storage_configuration_meta_updated', $meta->meta_id, $data->getId(), $meta->key, $meta_value);
+		do_action('wc1c_wc_data_storage_category_meta_updated', $meta->meta_id, $data->getId(), $meta->key, $meta_value);
 
 		return true;
 	}
