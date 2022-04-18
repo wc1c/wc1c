@@ -4,7 +4,7 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: WC1C > integration of WooCommerce with 1C products "
 "(different configurations)\n"
-"POT-Creation-Date: 2022-04-03 09:20+0300\n"
+"POT-Creation-Date: 2022-04-19 02:40+0300\n"
 "PO-Revision-Date: 2019-03-19 20:30+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
@@ -115,7 +115,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: src/Admin.php:134 views/helps/features.php:37
+#: src/Admin.php:134 views/helps/features.php:34
 msgid "Extensions"
 msgstr ""
 
@@ -124,9 +124,9 @@ msgstr ""
 msgid "1C information"
 msgstr ""
 
-#: src/Admin/Columns/WooCommerce/Categories.php:55
-#: src/Admin/Columns/WooCommerce/Products.php:70
-msgid "not found"
+#: src/Admin/Columns/WooCommerce/Categories.php:60
+#: src/Admin/Columns/WooCommerce/Products.php:72
+msgid "Not found"
 msgstr ""
 
 #: src/Admin/Columns/WooCommerce/Products.php:60
@@ -160,40 +160,40 @@ msgstr ""
 msgid "Remove forever"
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:191
+#: src/Admin/Configurations/AllTable.php:193
 msgid "Schema:"
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:211
+#: src/Admin/Configurations/AllTable.php:241
 msgid "ID"
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:212
+#: src/Admin/Configurations/AllTable.php:242
 msgid "Base information"
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:213
+#: src/Admin/Configurations/AllTable.php:243
 msgid "Status"
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:214
+#: src/Admin/Configurations/AllTable.php:244
 msgid "Create date"
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:215
+#: src/Admin/Configurations/AllTable.php:245
 msgid "Last activity"
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:263
+#: src/Admin/Configurations/AllTable.php:293
 msgid "All"
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:436 src/Admin/Settings.php:68
+#: src/Admin/Configurations/AllTable.php:466 src/Admin/Settings.php:68
 msgid "Connection to the WC1C"
 msgstr ""
 
 #: src/Admin/Configurations/CreateForm.php:42
-#: src/Admin/Configurations/Update.php:124
+#: src/Admin/Configurations/Update.php:125
 msgid "Configuration name"
 msgstr ""
 
@@ -204,7 +204,7 @@ msgid ""
 msgstr ""
 
 #: src/Admin/Configurations/CreateForm.php:45
-#: src/Admin/Configurations/Update.php:126
+#: src/Admin/Configurations/Update.php:127
 msgid "Used for convenient distribution of multiple configurations."
 msgstr ""
 
@@ -324,26 +324,26 @@ msgstr ""
 msgid "Main settings"
 msgstr ""
 
-#: src/Admin/Configurations/Update.php:81
+#: src/Admin/Configurations/Update.php:82
 msgid ""
 "The exchange scheme on the basis of which created configuration is unavailable ."
 msgstr ""
 
-#: src/Admin/Configurations/Update.php:83
+#: src/Admin/Configurations/Update.php:84
 msgid ""
 "Install the missing schema to work this configuration, change the status and "
 "name, or delete the configuration."
 msgstr ""
 
-#: src/Admin/Configurations/Update.php:129
+#: src/Admin/Configurations/Update.php:130
 msgid "Rename"
 msgstr ""
 
-#: src/Admin/Configurations/Update.php:158
+#: src/Admin/Configurations/Update.php:159
 msgid "Configuration name update success."
 msgstr ""
 
-#: src/Admin/Configurations/Update.php:168
+#: src/Admin/Configurations/Update.php:169
 msgid "Configuration name update error. Please retry saving or change fields."
 msgstr ""
 
@@ -749,11 +749,11 @@ msgstr ""
 msgid "Receiver not loaded."
 msgstr ""
 
-#: src/Core.php:430
+#: src/Core.php:436
 msgid "Receiver loading: class is not exists, use is default."
 msgstr ""
 
-#: src/Core.php:476
+#: src/Core.php:482
 msgid "Localization loaded."
 msgstr ""
 
@@ -956,7 +956,7 @@ msgid "Creating categories"
 msgstr ""
 
 #: src/Schemas/Productscml/Admin.php:206 src/Schemas/Productscml/Admin.php:215
-#: src/Schemas/Productscml/Admin.php:243 src/Schemas/Productscml/Admin.php:252
+#: src/Schemas/Productscml/Admin.php:224 src/Schemas/Productscml/Admin.php:252
 #: src/Schemas/Productscml/Admin.php:261 src/Schemas/Productscml/Admin.php:270
 #: src/Schemas/Productscml/Admin.php:279 src/Schemas/Productscml/Admin.php:288
 #: src/Schemas/Productscml/Admin.php:297 src/Schemas/Productscml/Admin.php:306
@@ -977,62 +977,62 @@ msgstr ""
 msgid "Updating categories"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:216 src/Schemas/Productscml/Admin.php:253
+#: src/Schemas/Productscml/Admin.php:216 src/Schemas/Productscml/Admin.php:280
 msgid ""
 "If the category created earlier was linked to 1C data, then when you change any "
 "category data in 1C, the data will also change in WooCommerce."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:234
-msgid "Categories: classifier groups"
-msgstr ""
-
-#: src/Schemas/Productscml/Admin.php:236
-msgid "Create and update categories based on groups from the classifier."
-msgstr ""
-
-#: src/Schemas/Productscml/Admin.php:241
-msgid "Creating categories from classifier groups"
-msgstr ""
-
-#: src/Schemas/Productscml/Admin.php:244
-msgid ""
-"Categories are only created if they have not been created before. Also, if "
-"access to work with categories is allowed from the global settings."
-msgstr ""
-
-#: src/Schemas/Productscml/Admin.php:250
-msgid "Updating categories from classifier groups"
-msgstr ""
-
-#: src/Schemas/Productscml/Admin.php:259
+#: src/Schemas/Productscml/Admin.php:222
 msgid "Consider configuration when updating categories"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:262
+#: src/Schemas/Productscml/Admin.php:225
 msgid ""
 "When updating category data, the update will only occur if the category was "
 "created through the current configuration."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:268
+#: src/Schemas/Productscml/Admin.php:243
+msgid "Categories: classifier groups"
+msgstr ""
+
+#: src/Schemas/Productscml/Admin.php:245
+msgid "Create and update categories based on groups from the classifier."
+msgstr ""
+
+#: src/Schemas/Productscml/Admin.php:250
+msgid "Creating categories from classifier groups"
+msgstr ""
+
+#: src/Schemas/Productscml/Admin.php:253
+msgid ""
+"Categories are only created if they have not been created before. Also, if "
+"access to work with categories is allowed from the global settings."
+msgstr ""
+
+#: src/Schemas/Productscml/Admin.php:259
 msgid "Assign parent categories on creating"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:271
+#: src/Schemas/Productscml/Admin.php:262
 msgid ""
 "If there is a parent category in 1C, it will also be assigned in WooCommerce. "
 "The setting is triggered when a category is created."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:277
+#: src/Schemas/Productscml/Admin.php:268
 msgid "Assign categories description on creating"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:280
+#: src/Schemas/Productscml/Admin.php:271
 msgid ""
 "When creating categories, descriptions will be filled in if category "
 "descriptions are present in 1C."
+msgstr ""
+
+#: src/Schemas/Productscml/Admin.php:277
+msgid "Updating categories from classifier groups"
 msgstr ""
 
 #: src/Schemas/Productscml/Admin.php:286
@@ -1303,49 +1303,91 @@ msgstr ""
 msgid "Level for events"
 msgstr ""
 
-#: src/Schemas/Productscml/Core.php:50
+#: src/Schemas/Productscml/Core.php:49
 msgid "Products data exchange via CommerceML"
 msgstr ""
 
-#: src/Schemas/Productscml/Core.php:51
+#: src/Schemas/Productscml/Core.php:50
 msgid ""
 "Creation and updating of products (goods) in WooCommerce according to data from "
 "1C using the CommerceML protocol of various versions."
 msgstr ""
 
-#: src/Schemas/Productscml/Core.php:122
+#: src/Schemas/Productscml/Core.php:121
 msgid "The file cannot be processed. DecoderCML threw an exception."
 msgstr ""
 
-#: src/Schemas/Productscml/Core.php:134
+#: src/Schemas/Productscml/Core.php:133
 msgid "The file cannot be processed. ReaderCML threw an exception."
 msgstr ""
 
-#: src/Schemas/Productscml/Core.php:138
+#: src/Schemas/Productscml/Core.php:137
 msgid "Filetype:"
 msgstr ""
 
-#: src/Schemas/Productscml/Core.php:150
+#: src/Schemas/Productscml/Core.php:149
 msgid "Import file processing not completed. ReaderCML threw an exception."
 msgstr ""
 
-#: src/Schemas/Productscml/Core.php:168
+#: src/Schemas/Productscml/Core.php:167
 msgid "There was not enough time to load all the data."
 msgstr ""
 
-#: src/Schemas/Productscml/Core.php:196
+#: src/Schemas/Productscml/Core.php:195
 msgid "An exception was thrown while saving the classifier."
 msgstr ""
 
-#: src/Schemas/Productscml/Core.php:432
+#: src/Schemas/Productscml/Core.php:247
+msgid "Classifier group processing."
+msgstr ""
+
+#: src/Schemas/Productscml/Core.php:259
+msgid "More than one category found by ID from 1C. Assigning the first available."
+msgstr ""
+
+#: src/Schemas/Productscml/Core.php:308
+msgid "The category exists. Started updating the data of an existing category."
+msgstr ""
+
+#: src/Schemas/Productscml/Core.php:312
+msgid ""
+"Category update skipped. The category was created from a different "
+"configuration."
+msgstr ""
+
+#: src/Schemas/Productscml/Core.php:344
+msgid "Update of existing category data completed successfully."
+msgstr ""
+
+#: src/Schemas/Productscml/Core.php:353
+msgid "The category does not exist. Category creation started."
+msgstr ""
+
+#: src/Schemas/Productscml/Core.php:382
+msgid "Category creation completed successfully."
+msgstr ""
+
+#: src/Schemas/Productscml/Core.php:385
+msgid "No action was taken for the classifier group."
+msgstr ""
+
+#: src/Schemas/Productscml/Core.php:390
+msgid "Creating, updating and using categories is disabled."
+msgstr ""
+
+#: src/Schemas/Productscml/Core.php:395
+msgid "Classifier groups is empty."
+msgstr ""
+
+#: src/Schemas/Productscml/Core.php:470
 msgid "An exception was thrown while saving the product."
 msgstr ""
 
-#: src/Schemas/Productscml/Core.php:494
+#: src/Schemas/Productscml/Core.php:532
 msgid "Product not found in WooCommerce. Offer update skipped."
 msgstr ""
 
-#: src/Schemas/Productscml/Core.php:631
+#: src/Schemas/Productscml/Core.php:669
 msgid "An exception was thrown while processing the offer."
 msgstr ""
 
@@ -1511,7 +1553,7 @@ msgstr ""
 msgid "Importing data from a file ended with an error."
 msgstr ""
 
-#: src/Tools/Environments/Init.php:52 views/helps/bugs.php:27
+#: src/Tools/Environments/Init.php:52 views/helps/bugs.php:25
 msgid "Environments"
 msgstr ""
 
@@ -1746,16 +1788,12 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
-#: views/configurations/create.php:6
+#: views/configurations/create.php:7 views/configurations/delete.php:7
 msgid "Back to all configurations"
 msgstr ""
 
 #: views/configurations/create_form.php:16
 msgid "Create configuration"
-msgstr ""
-
-#: views/configurations/delete.php:5
-msgid "Use the form to delete the configuration from WooCommerce."
 msgstr ""
 
 #: views/configurations/delete_error.php:3
@@ -1778,7 +1816,7 @@ msgstr ""
 msgid "Error. Page for configurations not found."
 msgstr ""
 
-#: views/configurations/update.php:6 views/configurations/update_error.php:3
+#: views/configurations/update.php:7 views/configurations/update_error.php:3
 msgid "Back to configurations list"
 msgstr ""
 
@@ -1865,16 +1903,109 @@ msgstr ""
 msgid "Versions PHP:"
 msgstr ""
 
-#: views/helps/bugs.php:24
-msgid "Report a bug"
+#: views/helps/bugs.php:6
+msgid ""
+"First of all, you need to make sure that a bug has been found and that it has "
+"not been fixed in updates before."
+msgstr ""
+
+#: views/helps/bugs.php:7
+msgid ""
+"If the bug is fixed in the updates, you just need to install the corrected "
+"version."
+msgstr ""
+
+#: views/helps/bugs.php:10
+msgid "Before reporting an error need to check:"
+msgstr ""
+
+#: views/helps/bugs.php:14
+msgid ""
+"Whether the settings for WordPress, WooCommerce, WC1C and their extensions are "
+"correct."
+msgstr ""
+
+#: views/helps/bugs.php:15
+msgid ""
+"Whether compatible versions of WordPress, WooCommerce, WC1C and their "
+"extensions are used. Compatibility can be found in the Environments section."
+msgstr ""
+
+#: views/helps/bugs.php:19
+msgid ""
+"If all settings are made correctly and compatible products of the latest "
+"versions are used, but the error is still present, you must report it."
+msgstr ""
+
+#: views/helps/bugs.php:20
+msgid ""
+"Report a bug using the methods available to you. When reporting a bug, you must "
+"have a valid technical support code for the project on which the bug occurred."
+msgstr ""
+
+#: views/helps/features.php:6
+msgid ""
+"First of all, you need to make sure - whether the necessary opportunity is "
+"really missing."
+msgstr ""
+
+#: views/helps/features.php:7
+msgid ""
+"It may be worth looking at the available settings or reading the documentation."
+msgstr ""
+
+#: views/helps/features.php:11
+msgid "Also, before requesting an opportunity, you need to make sure that:"
+msgstr ""
+
+#: views/helps/features.php:15
+msgid "Is the required feature added in WC1C updates."
+msgstr ""
+
+#: views/helps/features.php:16
+msgid "Whether the possibility is implemented by an additional extension to WC1C."
+msgstr ""
+
+#: views/helps/features.php:17
+msgid "Whether the desired opportunity is waiting for its implementation."
+msgstr ""
+
+#: views/helps/features.php:21
+msgid ""
+"If the feature is added in WC1C updates, you just need to install the updated "
+"version."
+msgstr ""
+
+#: views/helps/features.php:25
+msgid ""
+"But if the feature is implemented in an extension to WC1C, then this feature "
+"should not be expected as part of WC1C and you need to install the extension."
+msgstr ""
+
+#: views/helps/features.php:26
+msgid ""
+"Because the feature implemented in the extension is so significant that it "
+"needed to create an extension for it."
 msgstr ""
 
 #: views/helps/features.php:31
-msgid "Request a feature"
+msgid "Features"
 msgstr ""
 
-#: views/helps/features.php:34
-msgid "Features"
+#: views/helps/main.php:7
+msgid ""
+"If no understand how Integration with 1C works, how to use and supplement it, "
+"can view the documentation."
+msgstr ""
+
+#: views/helps/main.php:8
+msgid ""
+"Documentation contains all kinds of resources such as code snippets, user "
+"guides and more."
+msgstr ""
+
+#: views/helps/main.php:13
+msgid "Documentation"
 msgstr ""
 
 #: views/settings/error.php:3
@@ -1895,10 +2026,6 @@ msgstr ""
 
 #: views/tools/item.php:14
 msgid "Open"
-msgstr ""
-
-#: views/tools/single.php:9
-msgid "Back to all tools"
 msgstr ""
 
 #: views/wizards/error.php:3
