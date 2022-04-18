@@ -3,7 +3,7 @@
 <?php
     printf
     (
-        '<p>%s</p><p>%s</p>',
+        '<p>%s <br /> %s</p>',
         __('If no understand how Integration with 1C works, how to use and supplement it, can view the documentation.', 'wc1c'),
         __('Documentation contains all kinds of resources such as code snippets, user guides and more.', 'wc1c')
     );
