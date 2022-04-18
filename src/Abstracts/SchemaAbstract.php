@@ -305,6 +305,6 @@ abstract class SchemaAbstract
 			$hard_level = null;
 		}
 
-		return wc1c()->log('configurations', $name, $hard_level);
+		return wc1c()->log($channel, $name, $hard_level);
 	}
 }
