@@ -298,6 +298,13 @@ abstract class SchemaAbstract
 			$name = $this->configuration()->getSchema();
 		}
 
-		return wc1c()->log('configurations', $name);
+		$hard_level = $this->getOptions('logger_level', 'logger_level');
+
+		if('logger_level' === $hard_level)
+		{
+			$hard_level = null;
+		}
+
+		return wc1c()->log('configurations', $name, $hard_level);
 	}
 }
