@@ -255,10 +255,11 @@ final class Core
 	 *
 	 * @param string $channel
 	 * @param string $name
+	 * @param mixed $hard_level
 	 *
 	 * @return LoggerInterface
 	 */
-	public function log($channel = 'main', $name = '')
+	public function log($channel = 'main', $name = '', $hard_level = null)
 	{
 		$channel = strtolower($channel);
 
@@ -298,6 +299,11 @@ final class Core
 			if('logger_level' === $level)
 			{
 				$level = $this->settings('logs')->get('logger_level', 300);
+			}
+
+			if(!is_null($hard_level))
+			{
+				$level = $hard_level;
 			}
 
 			if('' === $path)

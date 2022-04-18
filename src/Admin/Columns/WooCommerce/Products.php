@@ -65,12 +65,12 @@ final class Products
 				$content .= '<br/><span class="na">' . __('Configuration ID: ', 'wc1c')  . $config_id . '</span>';
 			}
 
-			if($config_id === '' && $schema_id === '')
-			{
-				$content .= '<span class="na">' . __('not found', 'wc1c') . '</span>';
-			}
-
 			$content = apply_filters('wc1c_admin_interface_products_lists_column', $content, $schema_id, $config_id, $post);
+
+			if('' === $content)
+			{
+				$content .= '<span class="na">' . __('Not found', 'wc1c') . '</span>';
+			}
 
 			echo $content;
 		}

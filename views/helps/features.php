@@ -3,37 +3,34 @@
 <h2><?php _e( 'Not a feature?', 'wc1c' ); ?></h2>
 
 <p>
-    Прежде всего необходимо убедится - действительно ли необходимая возможность отсутствует.
-    Возможно стоит просмотреть доступные настройки или почитать документацию.
+	<?php _e('First of all, you need to make sure - whether the necessary opportunity is really missing.', 'wc1c'); ?>
+	<?php _e('It may be worth looking at the available settings or reading the documentation.', 'wc1c'); ?>
 </p>
 
 <p>
-    Так же, перед запросом возможности требуется убедиться в том, что:
+	<?php _e('Also, before requesting an opportunity, you need to make sure that:', 'wc1c'); ?>
 </p>
 
 <ul>
-    <li>Не добавлена ли нужная возможность в обновлениях WC1C.</li>
-    <li>Не реализована ли возможность дополнительным расширением к WC1C.</li>
-    <li>Не ожидает ли нужная возможность своей реализации.</li>
+    <li><?php _e('Is the required feature added in WC1C updates.', 'wc1c'); ?></li>
+    <li><?php _e('Whether the possibility is implemented by an additional extension to WC1C.', 'wc1c'); ?></li>
+    <li><?php _e('Whether the desired opportunity is waiting for its implementation.', 'wc1c'); ?></li>
 </ul>
 
 <p>
-    Если возможность добавлена в обновлениях WC1C, нужно просто установить обновленную версию.
+	<?php _e('If the feature is added in WC1C updates, you just need to install the updated version.', 'wc1c'); ?>
 </p>
 
 <p>
-    А вот если же возможность реализована в расширении к WC1C, то данную возможность не стоит ожидать как часть WC1C
-    и нужно устанавливать именно расширение. Потому как реализованная в расширении возможность настолько значительная, что для неё потребовалось создавать расширение.
+	<?php _e('But if the feature is implemented in an extension to WC1C, then this feature should not be expected as part of WC1C and you need to install the extension.', 'wc1c'); ?>
+	<?php _e('Because the feature implemented in the extension is so significant that it needed to create an extension for it.', 'wc1c'); ?>
 </p>
 
 <p>
-	<a href="#" class="button button-primary">
-        <?php _e( 'Request a feature', 'wc1c' ); ?>
-    </a>
 	<a href="https://wc1c.info/features" class="button" target="_blank">
-		<?php _e( 'Features', 'wc1c' ); ?>
+		<?php _e('Features', 'wc1c'); ?>
 	</a>
     <a href="https://wc1c.info/extensions" class="button" target="_blank">
-		<?php _e( 'Extensions', 'wc1c' ); ?>
+		<?php _e('Extensions', 'wc1c'); ?>
     </a>
 </p>
