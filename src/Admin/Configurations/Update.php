@@ -54,6 +54,7 @@ class Update
 			{
 				add_action('wc1c_admin_configurations_update_show', [$this, 'outputSchemaError'], 10);
 				add_filter('wc1c_admin_configurations_update_schema_error_text', [$this, 'outputSchemaErrorText'], 10, 1);
+
 				wc1c()->log()->notice('Schema is not initialized.', ['exception' => $e]);
 			}
 
