@@ -1,8 +1,18 @@
 <?php defined('ABSPATH') || exit; ?>
 
-<p>
-	Если потребуется понять как устроена <b>Интеграция с 1С</b>, как ее использовать и дополнять - можно просмотреть документацию.
-	В ней приведены все виды ресурсов, такие как фрагменты кода, руководства пользователя и многое другое.
-</p>
+<?php
+    printf
+    (
+        '<p>%s</p><p>%s</p>',
+        __('If no understand how Integration with 1C works, how to use and supplement it, can view the documentation.', 'wc1c'),
+        __('Documentation contains all kinds of resources such as code snippets, user guides and more.', 'wc1c')
+    );
+?>
+
+<a href="https://wc1c.info/docs" target="_blank" class="button button-primary">
+    <?php _e('Documentation', 'wc1c'); ?>
+</a>
+
 <hr>
+
 <?php do_action('wc1c_admin_help_main_show'); ?>
