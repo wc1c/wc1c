@@ -2,10 +2,12 @@
 
 <div class="row">
     <div class="col">
-	    <?php
-            $label = __('Back to all configurations', 'wc1c');
-            wc1c()->views()->adminBackLink($label, $args['back_url']);
-	    ?>
+        <div class="px-2">
+            <?php
+                $label = __('Back to all configurations', 'wc1c');
+                wc1c()->views()->adminBackLink($label, $args['back_url']);
+            ?>
+        </div>
     </div>
 </div>
 

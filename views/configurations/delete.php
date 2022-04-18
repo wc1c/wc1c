@@ -1,9 +1,14 @@
 <?php defined('ABSPATH') || exit;?>
 
 <div class="row">
-	<div class="col pt-4 pb-2">
-		<?php _e('Use the form to delete the configuration from WooCommerce.', 'wc1c'); ?>
-	</div>
+    <div class="col">
+        <div class="px-2">
+			<?php
+			$label = __('Back to all configurations', 'wc1c');
+			wc1c()->views()->adminBackLink($label, $args['back_url']);
+			?>
+        </div>
+    </div>
 </div>
 
 <div class="">
