@@ -3,7 +3,6 @@
 defined('ABSPATH') || exit;
 
 use Wc1c\Traits\SingletonTrait;
-use Wc1c\Wc\Category;
 
 /**
  * Categories
@@ -54,12 +53,11 @@ final class Categories
 		if('wc1c' === $column)
 		{
 			$content = '';
-
 			$content = apply_filters('wc1c_admin_interface_categories_column', $content, $columns, $id);
 
-			if($content === '')
+			if('' === $content)
 			{
-				$content = '<span class="na">' . __('not found', 'wc1c') . '</span>';
+				$content = '<span class="na">' . __('Not found', 'wc1c') . '</span>';
 			}
 
 			$columns .= $content;
