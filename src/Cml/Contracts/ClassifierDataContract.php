@@ -30,7 +30,7 @@ interface ClassifierDataContract extends DataContract
 	public function getOwner();
 
 	/**
-	 * @return mixed Classifier groups
+	 * @return array Classifier groups
 	 */
 	public function getGroups();
 
