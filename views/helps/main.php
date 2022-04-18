@@ -3,7 +3,7 @@
 <?php
     printf
     (
-        '<p>%s<br />%s</p>',
+        '<p>%s %s</p>',
         __('If no understand how Integration with 1C works, how to use and supplement it, can view the documentation.', 'wc1c'),
         __('Documentation contains all kinds of resources such as code snippets, user guides and more.', 'wc1c')
     );
@@ -13,6 +13,10 @@
     <?php _e('Documentation', 'wc1c'); ?>
 </a>
 
-<hr>
-
-<?php do_action('wc1c_admin_help_main_show'); ?>
+<?php
+    if(has_action('wc1c_admin_help_main_show'))
+    {
+        echo '<hr>';
+        do_action('wc1c_admin_help_main_show');
+    }
+?>
