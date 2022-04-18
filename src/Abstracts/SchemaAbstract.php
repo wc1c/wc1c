@@ -264,14 +264,6 @@ abstract class SchemaAbstract
 	}
 
 	/**
-	 * @param string $schema_prefix
-	 */
-	public function setSchemaPrefix($schema_prefix)
-	{
-		$this->schema_prefix = $schema_prefix;
-	}
-
-	/**
 	 * @return Configuration
 	 */
 	public function configuration()
@@ -294,19 +286,18 @@ abstract class SchemaAbstract
 	 */
 	public function log($channel = 'configurations')
 	{
+		$name = $this->configuration()->getUploadDirectory('logs') . DIRECTORY_SEPARATOR . $channel;
+
 		if($channel === 'configurations')
 		{
 			$name = $this->configuration()->getUploadDirectory('logs') . DIRECTORY_SEPARATOR . 'main';
-			return wc1c()->log($channel, $name);
 		}
 
 		if($channel === 'schemas')
 		{
 			$name = $this->configuration()->getSchema();
-			return wc1c()->log($channel, $name);
 		}
 
-		$name = $this->configuration()->getUploadDirectory('logs') . DIRECTORY_SEPARATOR . $channel;
 		return wc1c()->log('configurations', $name);
 	}
 }
