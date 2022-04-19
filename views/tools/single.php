@@ -4,12 +4,9 @@
 
 <div class="row g-0">
     <div class="col">
-
-        <?php
-            $label = __('Back to all tools', 'wc1c');
-            wc1c()->views()->adminBackLink($label, $args['back_url']);
-        ?>
-
+        <div class="px-2">
+            <?php wc1c()->views()->adminBackLink($args['name'], $args['back_url']); ?>
+        </div>
         <div class="bg-white p-2 rounded-3">
             <?php do_action('wc1c_admin_tools_single_show'); ?>
         </div>

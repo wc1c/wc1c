@@ -148,6 +148,8 @@ class Delete
 	 */
 	public function output()
 	{
-		wc1c()->views()->getView('configurations/delete.php');
+		$args['back_url'] = $this->utilityAdminConfigurationsGetUrl('all');
+
+		wc1c()->views()->getView('configurations/delete.php', $args);
 	}
 }

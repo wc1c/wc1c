@@ -78,7 +78,7 @@ class Classifier extends DataAbstract implements ClassifierDataContract
 	}
 
 	/**
-	 * @return mixed
+	 * @return array
 	 */
 	public function getGroups()
 	{
@@ -86,7 +86,7 @@ class Classifier extends DataAbstract implements ClassifierDataContract
 	}
 
 	/**
-	 * @param mixed $groups
+	 * @param array $groups
 	 */
 	public function setGroups($groups)
 	{
