@@ -182,6 +182,8 @@ class CategoriesStorage implements CategoriesStorageContract, MetaStorageContrac
 	}
 
 	/**
+	 * Get all categories by 1C id
+	 *
 	 * @param $id
 	 *
 	 * @return false|Category|Category[]
@@ -234,6 +236,8 @@ class CategoriesStorage implements CategoriesStorageContract, MetaStorageContrac
 	}
 
 	/**
+	 * Getting all categories by name
+	 *
 	 * @param $name
 	 *
 	 * @return false|Category|Category[]
@@ -320,7 +324,7 @@ class CategoriesStorage implements CategoriesStorageContract, MetaStorageContrac
 		// hook
 		do_action('wc1c_wc_data_storage_category_meta_delete', [$meta_id, $data->getId(), $meta->key, $meta->value]);
 
-		$result = delete_term_meta($meta_id, $meta->key);
+		$result = delete_term_meta($meta_id, $meta->key, $meta->value);
 
 		// hook
 		do_action('wc1c_wc_data_storage_category_meta_deleted', [$meta_id, $data->getId(), $meta->key, $meta->value]);
