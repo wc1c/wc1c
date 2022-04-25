@@ -136,7 +136,7 @@ class Category extends CategoriesData implements CategoryContract
 	 */
 	public function get1cId($context = 'view')
 	{
-		return $this->getMeta('_wc1c_1c_id', false, $context);
+		return $this->getMeta('_wc1c_1c_id', true, $context);
 	}
 
 	/**
@@ -154,7 +154,7 @@ class Category extends CategoriesData implements CategoryContract
 	 *
 	 * @return int|mixed
 	 */
-	public function getParentId($context)
+	public function getParentId($context = 'view')
 	{
 		return $this->getProp('parent_id', $context);
 	}
@@ -174,9 +174,9 @@ class Category extends CategoriesData implements CategoryContract
 	 *
 	 * @return array|int|mixed|string
 	 */
-	public function get1cParentId($context)
+	public function get1cParentId($context = 'view')
 	{
-		return $this->getMeta('_wc1c_1c_parent_id', false, $context);
+		return $this->getMeta('_wc1c_1c_parent_id', true, $context);
 	}
 
 	/**
