@@ -124,9 +124,9 @@ class Category extends CategoriesData implements CategoryContract
 	 *
 	 * @return void
 	 */
-	public function set1cId($id)
+	public function assign1cId($id)
 	{
-		$this->addMetaData('_wc1c_1c_id', $id, true);
+		$this->addMetaData('_wc1c_1c_id', $id, false);
 	}
 
 	/**
@@ -136,7 +136,7 @@ class Category extends CategoriesData implements CategoryContract
 	 */
 	public function get1cId($context = 'view')
 	{
-		return $this->getMeta('_wc1c_1c_id', true, $context);
+		return $this->getMeta('_wc1c_1c_id', false, $context);
 	}
 
 	/**
@@ -176,7 +176,7 @@ class Category extends CategoriesData implements CategoryContract
 	 */
 	public function get1cParentId($context)
 	{
-		return $this->getMeta('_wc1c_1c_parent_id', true, $context);
+		return $this->getMeta('_wc1c_1c_parent_id', false, $context);
 	}
 
 	/**
@@ -184,9 +184,9 @@ class Category extends CategoriesData implements CategoryContract
 	 *
 	 * @return void
 	 */
-	public function set1cParentId($id)
+	public function assign1cParentId($id)
 	{
-		$this->addMetaData('_wc1c_1c_parent_id', $id, true);
+		$this->addMetaData('_wc1c_1c_parent_id', $id, false);
 	}
 
 	/**
