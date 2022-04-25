@@ -16,7 +16,7 @@ interface CategoriesStorageContract
 	 *
 	 * @param $name
 	 *
-	 * @return mixed
+	 * @return false|Category|Category[]
 	 */
 	public function getByName($name);
 
