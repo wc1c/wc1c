@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WC1C > integration of WooCommerce with 1C products "
 "(different configurations)\n"
-"POT-Creation-Date: 2022-04-26 21:12+0300\n"
-"PO-Revision-Date: 2022-04-26 21:18+0300\n"
+"POT-Creation-Date: 2022-04-26 22:33+0300\n"
+"PO-Revision-Date: 2022-04-26 22:48+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
 "Language: ru_RU\n"
@@ -1011,7 +1011,7 @@ msgstr "При совпадении имен, с совпадением роди
 
 #: src/Schemas/Productscml/Admin.php:188
 msgid "Using existing categories"
-msgstr "Использовать существующие категории"
+msgstr "Использование существующих категорий"
 
 #: src/Schemas/Productscml/Admin.php:192
 msgid ""
@@ -1121,7 +1121,7 @@ msgstr ""
 
 #: src/Schemas/Productscml/Admin.php:260
 msgid "Assign parent categories on creating"
-msgstr "Назначать родительские категории при создании"
+msgstr "Назначение родительской категории при создании"
 
 #: src/Schemas/Productscml/Admin.php:263
 msgid ""
@@ -1133,7 +1133,7 @@ msgstr ""
 
 #: src/Schemas/Productscml/Admin.php:269
 msgid "Assign categories description on creating"
-msgstr "Назначать описание категорий при создании"
+msgstr "Назначение описания категорий при создании"
 
 #: src/Schemas/Productscml/Admin.php:272
 msgid ""
@@ -1149,7 +1149,7 @@ msgstr "Обновление категорий из групп классифи
 
 #: src/Schemas/Productscml/Admin.php:287
 msgid "Update parent categories on updating"
-msgstr "Обновлять родительские категории при обновлении"
+msgstr "Обновление родительской категории при обновлении"
 
 #: src/Schemas/Productscml/Admin.php:290
 msgid ""
