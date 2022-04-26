@@ -13,6 +13,8 @@ use Wc1c\Wc\Entities\CategoriesData;
 class Category extends CategoriesData implements CategoryContract
 {
 	/**
+	 * Текущие данные
+	 *
 	 * @var array
 	 */
 	protected $data =
@@ -26,6 +28,8 @@ class Category extends CategoriesData implements CategoryContract
 	];
 
 	/**
+	 * Установка имени
+	 *
 	 * @param $name
 	 *
 	 * @return void
@@ -36,6 +40,10 @@ class Category extends CategoriesData implements CategoryContract
 	}
 
 	/**
+	 * Получение имени
+	 *
+	 * @param string $context
+	 *
 	 * @return string
 	 */
 	public function getName($context = 'view')
@@ -44,6 +52,10 @@ class Category extends CategoriesData implements CategoryContract
 	}
 
 	/**
+	 * Получение слага
+	 *
+	 * @param string $context
+	 *
 	 * @return string
 	 */
 	public function getSlug($context = 'view')
@@ -52,6 +64,8 @@ class Category extends CategoriesData implements CategoryContract
 	}
 
 	/**
+	 * Установка слага
+	 *
 	 * @param $slug
 	 *
 	 * @return void
@@ -62,6 +76,8 @@ class Category extends CategoriesData implements CategoryContract
 	}
 
 	/**
+	 * Установка описания
+	 *
 	 * @param $description
 	 *
 	 * @return void
@@ -72,6 +88,10 @@ class Category extends CategoriesData implements CategoryContract
 	}
 
 	/**
+	 * Получение описания
+	 *
+	 * @param string $context
+	 *
 	 * @return string
 	 */
 	public function getDescription($context = 'view')
@@ -80,7 +100,9 @@ class Category extends CategoriesData implements CategoryContract
 	}
 
 	/**
-	 * @param $id
+	 * Установка идентификатора схемы через которую была создана категория
+	 *
+	 * @param string|int $id Идентификатор схемы
 	 *
 	 * @return void
 	 */
@@ -90,17 +112,28 @@ class Category extends CategoriesData implements CategoryContract
 	}
 
 	/**
+	 * Получение идентификатора схемы через которую была создана категория
+	 *
 	 * @param $context
 	 *
-	 * @return array|string
+	 * @return string|int|false Идентификатор схемы или false
 	 */
 	public function getSchemaId($context = 'view')
 	{
-		return $this->getMeta('_wc1c_schema_id', true, $context);
+		$data = $this->getMeta('_wc1c_schema_id', true, $context);
+
+		if(isset($data[0]))
+		{
+			return $data[0];
+		}
+
+		return false;
 	}
 
 	/**
-	 * @param $id
+	 * Установка идентификатора конфигурации через которую создана категория
+	 *
+	 * @param string|int $id Идентификатор конфигурации
 	 *
 	 * @return void
 	 */
@@ -110,16 +143,27 @@ class Category extends CategoriesData implements CategoryContract
 	}
 
 	/**
+	 * Получение идентификатора конфигурации через которую была создана категория
+	 *
 	 * @param $context
 	 *
-	 * @return array|string
+	 * @return string|int|false Идентификатор конфигурации или false
 	 */
 	public function getConfigurationId($context = 'view')
 	{
-		return $this->getMeta('_wc1c_configuration_id', true, $context);
+		$data = $this->getMeta('_wc1c_configuration_id', true, $context);
+
+		if(isset($data[0]))
+		{
+			return $data[0];
+		}
+
+		return false;
 	}
 
 	/**
+	 * Назначение идентификатора категории из 1С
+	 *
 	 * @param $id
 	 *
 	 * @return void
@@ -130,6 +174,8 @@ class Category extends CategoriesData implements CategoryContract
 	}
 
 	/**
+	 * Получение идентификаторов категории назначенных из 1С
+	 *
 	 * @param $context
 	 *
 	 * @return array|string
@@ -146,10 +192,12 @@ class Category extends CategoriesData implements CategoryContract
 	 */
 	public function hasParent()
 	{
-		return $this->getProp('parent_id', 'view') !== 0;
+		return $this->getParentId() !== 0;
 	}
 
 	/**
+	 * Получение идентификатора категории родителя
+	 *
 	 * @param $context
 	 *
 	 * @return int|mixed
@@ -160,6 +208,8 @@ class Category extends CategoriesData implements CategoryContract
 	}
 
 	/**
+	 * Установка идентификаторка категории родителя
+	 *
 	 * @param $parent_id
 	 *
 	 * @return void
@@ -180,6 +230,8 @@ class Category extends CategoriesData implements CategoryContract
 	}
 
 	/**
+	 * Назначение идентификатора родительской категории в 1С
+	 *
 	 * @param $id
 	 *
 	 * @return void
@@ -190,6 +242,8 @@ class Category extends CategoriesData implements CategoryContract
 	}
 
 	/**
+	 * Имеет ли категория в 1С родителюскую категорию
+	 *
 	 * @return bool
 	 */
 	public function has1cParent()
