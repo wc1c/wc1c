@@ -4,7 +4,7 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: WC1C > integration of WooCommerce with 1C products "
 "(different configurations)\n"
-"POT-Creation-Date: 2022-04-19 02:40+0300\n"
+"POT-Creation-Date: 2022-04-26 21:12+0300\n"
 "PO-Revision-Date: 2019-03-19 20:30+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
@@ -375,7 +375,7 @@ msgstr ""
 msgid "Not a feature?"
 msgstr ""
 
-#: src/Admin/Settings.php:54 src/Schemas/Productscml/Admin.php:568
+#: src/Admin/Settings.php:54 src/Schemas/Productscml/Admin.php:578
 msgid "Event logs"
 msgstr ""
 
@@ -512,7 +512,7 @@ msgstr ""
 msgid "Level for main events"
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:43 src/Schemas/Productscml/Admin.php:577
+#: src/Admin/Settings/LogsForm.php:43 src/Schemas/Productscml/Admin.php:587
 msgid ""
 "All events of the selected level will be recorded in the log file. The higher "
 "the level, the less data is recorded."
@@ -520,39 +520,39 @@ msgstr ""
 
 #: src/Admin/Settings/LogsForm.php:47 src/Admin/Settings/LogsForm.php:89
 #: src/Admin/Settings/LogsForm.php:106 src/Admin/Settings/LogsForm.php:123
-#: src/Admin/Settings/LogsForm.php:140 src/Schemas/Productscml/Admin.php:582
+#: src/Admin/Settings/LogsForm.php:140 src/Schemas/Productscml/Admin.php:592
 msgid "DEBUG (100)"
 msgstr ""
 
 #: src/Admin/Settings/LogsForm.php:48 src/Admin/Settings/LogsForm.php:90
 #: src/Admin/Settings/LogsForm.php:107 src/Admin/Settings/LogsForm.php:124
-#: src/Admin/Settings/LogsForm.php:141 src/Schemas/Productscml/Admin.php:583
+#: src/Admin/Settings/LogsForm.php:141 src/Schemas/Productscml/Admin.php:593
 msgid "INFO (200)"
 msgstr ""
 
 #: src/Admin/Settings/LogsForm.php:49 src/Admin/Settings/LogsForm.php:91
 #: src/Admin/Settings/LogsForm.php:108 src/Admin/Settings/LogsForm.php:125
-#: src/Admin/Settings/LogsForm.php:142 src/Schemas/Productscml/Admin.php:584
+#: src/Admin/Settings/LogsForm.php:142 src/Schemas/Productscml/Admin.php:594
 msgid "NOTICE (250)"
 msgstr ""
 
 #: src/Admin/Settings/LogsForm.php:50 src/Admin/Settings/LogsForm.php:92
 #: src/Admin/Settings/LogsForm.php:109 src/Admin/Settings/LogsForm.php:126
-#: src/Admin/Settings/LogsForm.php:143 src/Schemas/Productscml/Admin.php:585
+#: src/Admin/Settings/LogsForm.php:143 src/Schemas/Productscml/Admin.php:595
 msgid "WARNING (300)"
 msgstr ""
 
 #: src/Admin/Settings/LogsForm.php:51 src/Admin/Settings/LogsForm.php:93
 #: src/Admin/Settings/LogsForm.php:110 src/Admin/Settings/LogsForm.php:127
-#: src/Admin/Settings/LogsForm.php:144 src/Schemas/Productscml/Admin.php:586
+#: src/Admin/Settings/LogsForm.php:144 src/Schemas/Productscml/Admin.php:596
 msgid "ERROR (400)"
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:57 src/Schemas/Productscml/Admin.php:592
+#: src/Admin/Settings/LogsForm.php:57 src/Schemas/Productscml/Admin.php:602
 msgid "Maximum files"
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:59 src/Schemas/Productscml/Admin.php:594
+#: src/Admin/Settings/LogsForm.php:59 src/Schemas/Productscml/Admin.php:604
 msgid ""
 "Log files created daily. This option on the maximum number of stored files. By "
 "default saved of the logs are for the last 30 days."
@@ -592,7 +592,7 @@ msgstr ""
 
 #: src/Admin/Settings/LogsForm.php:88 src/Admin/Settings/LogsForm.php:105
 #: src/Admin/Settings/LogsForm.php:122 src/Admin/Settings/LogsForm.php:139
-#: src/Schemas/Productscml/Admin.php:581
+#: src/Schemas/Productscml/Admin.php:591
 msgid "Use level for main events"
 msgstr ""
 
@@ -921,11 +921,11 @@ msgid "Do not use"
 msgstr ""
 
 #: src/Schemas/Productscml/Admin.php:182 src/Schemas/Productscml/Admin.php:193
-msgid "If the names match"
+msgid "Name matching"
 msgstr ""
 
 #: src/Schemas/Productscml/Admin.php:183 src/Schemas/Productscml/Admin.php:195
-msgid "If the names match, with the match of the parent category "
+msgid "Name matching, with the match of the parent category"
 msgstr ""
 
 #: src/Schemas/Productscml/Admin.php:188
@@ -951,115 +951,122 @@ msgid ""
 "category."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:204
+#: src/Schemas/Productscml/Admin.php:197
+msgid ""
+"The found categories will be updated according to 1C data according to the "
+"update settings. If not want to refresh the data, must enable refresh based on "
+"the configuration."
+msgstr ""
+
+#: src/Schemas/Productscml/Admin.php:205
 msgid "Creating categories"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:206 src/Schemas/Productscml/Admin.php:215
-#: src/Schemas/Productscml/Admin.php:224 src/Schemas/Productscml/Admin.php:252
-#: src/Schemas/Productscml/Admin.php:261 src/Schemas/Productscml/Admin.php:270
-#: src/Schemas/Productscml/Admin.php:279 src/Schemas/Productscml/Admin.php:288
-#: src/Schemas/Productscml/Admin.php:297 src/Schemas/Productscml/Admin.php:306
-#: src/Schemas/Productscml/Admin.php:335 src/Schemas/Productscml/Admin.php:344
-#: src/Schemas/Productscml/Admin.php:353 src/Schemas/Productscml/Admin.php:383
-#: src/Schemas/Productscml/Admin.php:392
+#: src/Schemas/Productscml/Admin.php:207 src/Schemas/Productscml/Admin.php:216
+#: src/Schemas/Productscml/Admin.php:225 src/Schemas/Productscml/Admin.php:253
+#: src/Schemas/Productscml/Admin.php:262 src/Schemas/Productscml/Admin.php:271
+#: src/Schemas/Productscml/Admin.php:280 src/Schemas/Productscml/Admin.php:289
+#: src/Schemas/Productscml/Admin.php:298 src/Schemas/Productscml/Admin.php:307
+#: src/Schemas/Productscml/Admin.php:336 src/Schemas/Productscml/Admin.php:345
+#: src/Schemas/Productscml/Admin.php:354 src/Schemas/Productscml/Admin.php:384
+#: src/Schemas/Productscml/Admin.php:393 src/Schemas/Productscml/Admin.php:485
 msgid "Check the box if you want to enable this feature. Disabled by default."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:207
+#: src/Schemas/Productscml/Admin.php:208
 msgid ""
 "Categories are only created if they are recognized as new. New categories are "
 "those that are not related according to 1C data and are not in an identical "
 "hierarchy."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:213
+#: src/Schemas/Productscml/Admin.php:214
 msgid "Updating categories"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:216 src/Schemas/Productscml/Admin.php:280
+#: src/Schemas/Productscml/Admin.php:217 src/Schemas/Productscml/Admin.php:281
 msgid ""
 "If the category created earlier was linked to 1C data, then when you change any "
 "category data in 1C, the data will also change in WooCommerce."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:222
+#: src/Schemas/Productscml/Admin.php:223
 msgid "Consider configuration when updating categories"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:225
+#: src/Schemas/Productscml/Admin.php:226
 msgid ""
 "When updating category data, the update will only occur if the category was "
 "created through the current configuration."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:243
+#: src/Schemas/Productscml/Admin.php:244
 msgid "Categories: classifier groups"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:245
+#: src/Schemas/Productscml/Admin.php:246
 msgid "Create and update categories based on groups from the classifier."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:250
+#: src/Schemas/Productscml/Admin.php:251
 msgid "Creating categories from classifier groups"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:253
+#: src/Schemas/Productscml/Admin.php:254
 msgid ""
 "Categories are only created if they have not been created before. Also, if "
 "access to work with categories is allowed from the global settings."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:259
+#: src/Schemas/Productscml/Admin.php:260
 msgid "Assign parent categories on creating"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:262
+#: src/Schemas/Productscml/Admin.php:263
 msgid ""
 "If there is a parent category in 1C, it will also be assigned in WooCommerce. "
 "The setting is triggered when a category is created."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:268
+#: src/Schemas/Productscml/Admin.php:269
 msgid "Assign categories description on creating"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:271
+#: src/Schemas/Productscml/Admin.php:272
 msgid ""
 "When creating categories, descriptions will be filled in if category "
 "descriptions are present in 1C."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:277
+#: src/Schemas/Productscml/Admin.php:278
 msgid "Updating categories from classifier groups"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:286
+#: src/Schemas/Productscml/Admin.php:287
 msgid "Update parent categories on updating"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:289
+#: src/Schemas/Productscml/Admin.php:290
 msgid ""
 "When enabled, parent categories will be updated when they are updated in 1C. "
 "The setting is triggered when a category is updated."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:295
+#: src/Schemas/Productscml/Admin.php:296
 msgid "Updating categories name"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:298
+#: src/Schemas/Productscml/Admin.php:299
 msgid ""
 "If the category was previously linked to 1C data, then when changing the name "
 "in 1C, the name will also change in WooCommerce."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:304
+#: src/Schemas/Productscml/Admin.php:305
 msgid "Updating categories description"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:307
+#: src/Schemas/Productscml/Admin.php:308
 msgid ""
 "If the category was previously linked to 1C data, then when you change the "
 "description in 1C, the description will also change in WooCommerce. \n"
@@ -1068,41 +1075,41 @@ msgid ""
 "out on the site."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:326
+#: src/Schemas/Productscml/Admin.php:327
 msgid "Attributes"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:328
+#: src/Schemas/Productscml/Admin.php:329
 msgid ""
 "General (global) attributes are used for all products. It is possible to sort "
 "products according to them."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:333
+#: src/Schemas/Productscml/Admin.php:334
 msgid "Creating attributes"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:336
+#: src/Schemas/Productscml/Admin.php:337
 msgid ""
 "It will be allowed to add common attributes for products based on "
 "characteristics, properties and other data according to the settings."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:342
+#: src/Schemas/Productscml/Admin.php:343
 msgid "Updating attributes"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:345
+#: src/Schemas/Productscml/Admin.php:346
 msgid ""
 "It will be allowed to update common attributes for products based on "
 "characteristics, properties and other data according to the settings."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:351
+#: src/Schemas/Productscml/Admin.php:352
 msgid "Adding values for attributes"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:354
+#: src/Schemas/Productscml/Admin.php:355
 msgid ""
 "It will be allowed to add product attribute values based on characteristics, \n"
 "\t\t\tproperties and other data specified in the settings. If you disable the "
@@ -1110,196 +1117,206 @@ msgid ""
 "\t\t\twith existing attribute values."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:374
+#: src/Schemas/Productscml/Admin.php:375
 msgid "Attributes: classifier properties"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:376
+#: src/Schemas/Productscml/Admin.php:377
 msgid ""
 "Adding and updating global attributes for products from classifier properties."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:381
+#: src/Schemas/Productscml/Admin.php:382
 msgid "Creating attributes from classifier properties"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:384
+#: src/Schemas/Productscml/Admin.php:385
 msgid ""
 "The creation will occur when processing the properties of the classifier. "
 "Creation occurs only if there is no attribute with the specified name or "
 "associated identifier."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:390
+#: src/Schemas/Productscml/Admin.php:391
 msgid "Updating attributes from classifier properties"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:393
+#: src/Schemas/Productscml/Admin.php:394
 msgid ""
 "The update will occur when the classifier properties are reprocessed. The "
 "update occurs only when the name matches or there is a found relationship "
 "between the source of the attribute creation."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:399
+#: src/Schemas/Productscml/Admin.php:400
 msgid "Adding attribute values from classifier properties values"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:401
+#: src/Schemas/Productscml/Admin.php:402
 msgid "Check the box if you want to enable this feature. Enabled by default."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:402
+#: src/Schemas/Productscml/Admin.php:403
 msgid ""
 "Adding product attribute values based on classifier property values will be "
 "allowed. The value is added only if it is absent: by name."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:420
+#: src/Schemas/Productscml/Admin.php:421
 msgid "Products (goods): synchronization"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:424
+#: src/Schemas/Productscml/Admin.php:425
 msgid ""
 "Dispute resolution between existing products (goods) on the 1C side and in "
 "WooCommerce. For extended matching (example by SKU), must use the extension."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:425
+#: src/Schemas/Productscml/Admin.php:426
 msgid ""
 "Products not found by sync keys will be treated as new. Accordingly, the rules "
 "for creating products will apply to them."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:431
+#: src/Schemas/Productscml/Admin.php:432
 msgid "By ID from 1C"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:433
+#: src/Schemas/Productscml/Admin.php:434
 msgid "Check the box to enable. Enabled by default."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:437
+#: src/Schemas/Productscml/Admin.php:438
 msgid ""
 "When creating new products based on data from 1C, a universal global identifier "
 "from 1C is filled in for them. Can also fill in global identifiers manually for "
 "manually created products."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:438
+#: src/Schemas/Productscml/Admin.php:439
 msgid ""
 "Enabling the option allows you to use the filled GUID to mark products (goods) "
 "as existing, and thereby run algorithms to update them."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:457
+#: src/Schemas/Productscml/Admin.php:458
 msgid "Products (goods)"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:459
+#: src/Schemas/Productscml/Admin.php:460
 msgid ""
 "Regulation of algorithms for creating and updating products on requests from 1C."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:464
+#: src/Schemas/Productscml/Admin.php:465
 msgid "Creation of products"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:466
+#: src/Schemas/Productscml/Admin.php:467
 msgid ""
 "Check the box to enable the creation of new products upon request from 1C. "
 "Disabled by default."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:467
+#: src/Schemas/Productscml/Admin.php:468
 msgid ""
 "The product is only created if it is not found in WooCommerce when searching by "
 "criteria for synchronization."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:473
+#: src/Schemas/Productscml/Admin.php:474
 msgid "Update of products"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:475
+#: src/Schemas/Productscml/Admin.php:476
 msgid ""
 "Check the box to enable product updates on demand from 1C. Disabled by default."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:476
+#: src/Schemas/Productscml/Admin.php:477
 msgid ""
 "Products are updated only if they were found using the product synchronization "
 "keys."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:494
-msgid "Products (goods): prices"
+#: src/Schemas/Productscml/Admin.php:483
+msgid "Consider configuration when updating products"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:496
-msgid "Comparison of WooCommerce and 1C prices and other settings."
-msgstr ""
-
-#: src/Schemas/Productscml/Admin.php:501
-msgid "Base price - first found"
-msgstr ""
-
-#: src/Schemas/Productscml/Admin.php:503 src/Schemas/Productscml/Admin.php:549
-msgid "Check the box to enable this feature. Disabled by default."
+#: src/Schemas/Productscml/Admin.php:486
+msgid ""
+"When updating products data, the update will only occur if the product was "
+"created through the current configuration."
 msgstr ""
 
 #: src/Schemas/Productscml/Admin.php:504
+msgid "Products (goods): prices"
+msgstr ""
+
+#: src/Schemas/Productscml/Admin.php:506
+msgid "Comparison of WooCommerce and 1C prices and other settings."
+msgstr ""
+
+#: src/Schemas/Productscml/Admin.php:511
+msgid "Base price - first found"
+msgstr ""
+
+#: src/Schemas/Productscml/Admin.php:513 src/Schemas/Productscml/Admin.php:559
+msgid "Check the box to enable this feature. Disabled by default."
+msgstr ""
+
+#: src/Schemas/Productscml/Admin.php:514
 msgid ""
 "If the name of the base price from 1C is not specified for the WooCommerce base "
 "price, the first found price will be taken into account. It is convenient to "
 "use when accepting only one type of price."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:510
+#: src/Schemas/Productscml/Admin.php:520
 msgid "WooCommerce base price: name in 1C"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:512
+#: src/Schemas/Productscml/Admin.php:522
 msgid ""
 "Specify the name of the base price in 1C, which is used for uploading to "
 "WooCommerce as the base price."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:519
+#: src/Schemas/Productscml/Admin.php:529
 msgid "WooCommerce sale price: name in 1C"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:521
+#: src/Schemas/Productscml/Admin.php:531
 msgid ""
 "Specify the name of the base price in 1C, which is used for uploading to "
 "WooCommerce as the sale price."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:540
+#: src/Schemas/Productscml/Admin.php:550
 msgid "Products (goods): inventories"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:542
+#: src/Schemas/Productscml/Admin.php:552
 msgid "Matching inventories for 1C and Woocommerce products."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:547
+#: src/Schemas/Productscml/Admin.php:557
 msgid "Filling inventories based on quantity from offers"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:550
+#: src/Schemas/Productscml/Admin.php:560
 msgid ""
 "It will be allowed to fill in the quantity of product stocks in WooCommerce "
 "based on the quantity received in 1C offers."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:570
+#: src/Schemas/Productscml/Admin.php:580
 msgid ""
 "Maintaining event logs for the current configuration. You can view the logs "
 "through the extension or via FTP."
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:575
+#: src/Schemas/Productscml/Admin.php:585
 msgid "Level for events"
 msgstr ""
 
@@ -1313,82 +1330,105 @@ msgid ""
 "1C using the CommerceML protocol of various versions."
 msgstr ""
 
-#: src/Schemas/Productscml/Core.php:121
+#: src/Schemas/Productscml/Core.php:123
 msgid "The file cannot be processed. DecoderCML threw an exception."
 msgstr ""
 
-#: src/Schemas/Productscml/Core.php:133
+#: src/Schemas/Productscml/Core.php:135
 msgid "The file cannot be processed. ReaderCML threw an exception."
 msgstr ""
 
-#: src/Schemas/Productscml/Core.php:137
+#: src/Schemas/Productscml/Core.php:139
 msgid "Filetype:"
 msgstr ""
 
-#: src/Schemas/Productscml/Core.php:149
+#: src/Schemas/Productscml/Core.php:151
 msgid "Import file processing not completed. ReaderCML threw an exception."
 msgstr ""
 
-#: src/Schemas/Productscml/Core.php:167
+#: src/Schemas/Productscml/Core.php:169
 msgid "There was not enough time to load all the data."
 msgstr ""
 
-#: src/Schemas/Productscml/Core.php:195
+#: src/Schemas/Productscml/Core.php:202
 msgid "An exception was thrown while saving the classifier."
 msgstr ""
 
-#: src/Schemas/Productscml/Core.php:247
+#: src/Schemas/Productscml/Core.php:225
+msgid "Classifier groups is empty."
+msgstr ""
+
+#: src/Schemas/Productscml/Core.php:256
 msgid "Classifier group processing."
 msgstr ""
 
-#: src/Schemas/Productscml/Core.php:259
+#: src/Schemas/Productscml/Core.php:268
 msgid "More than one category found by ID from 1C. Assigning the first available."
 msgstr ""
 
-#: src/Schemas/Productscml/Core.php:308
+#: src/Schemas/Productscml/Core.php:295
+msgid ""
+"More than one category found by name from 1C. Assigning the first available."
+msgstr ""
+
+#: src/Schemas/Productscml/Core.php:383
 msgid "The category exists. Started updating the data of an existing category."
 msgstr ""
 
-#: src/Schemas/Productscml/Core.php:312
+#: src/Schemas/Productscml/Core.php:390
 msgid ""
 "Category update skipped. The category was created from a different "
 "configuration."
 msgstr ""
 
-#: src/Schemas/Productscml/Core.php:344
+#: src/Schemas/Productscml/Core.php:428 src/Schemas/Productscml/Core.php:478
+msgid ""
+"More than one parent category found by ID from 1C. Assigning the first "
+"available."
+msgstr ""
+
+#: src/Schemas/Productscml/Core.php:442
 msgid "Update of existing category data completed successfully."
 msgstr ""
 
-#: src/Schemas/Productscml/Core.php:353
+#: src/Schemas/Productscml/Core.php:451
 msgid "The category does not exist. Category creation started."
 msgstr ""
 
-#: src/Schemas/Productscml/Core.php:382
+#: src/Schemas/Productscml/Core.php:504
 msgid "Category creation completed successfully."
 msgstr ""
 
-#: src/Schemas/Productscml/Core.php:385
+#: src/Schemas/Productscml/Core.php:508
 msgid "No action was taken for the classifier group."
 msgstr ""
 
-#: src/Schemas/Productscml/Core.php:390
+#: src/Schemas/Productscml/Core.php:514
 msgid "Creating, updating and using categories is disabled."
 msgstr ""
 
-#: src/Schemas/Productscml/Core.php:395
-msgid "Classifier groups is empty."
-msgstr ""
-
-#: src/Schemas/Productscml/Core.php:470
+#: src/Schemas/Productscml/Core.php:599
 msgid "An exception was thrown while saving the product."
 msgstr ""
 
-#: src/Schemas/Productscml/Core.php:532
+#: src/Schemas/Productscml/Core.php:633
+msgid "Products create is disabled, so the product is not created."
+msgstr ""
+
+#: src/Schemas/Productscml/Core.php:643
+msgid "Products update is disabled, so the found product data is not updated."
+msgstr ""
+
+#: src/Schemas/Productscml/Core.php:671
 msgid "Product not found in WooCommerce. Offer update skipped."
 msgstr ""
 
-#: src/Schemas/Productscml/Core.php:669
+#: src/Schemas/Productscml/Core.php:818
 msgid "An exception was thrown while processing the offer."
+msgstr ""
+
+#: src/Schemas/Productscml/Core.php:852
+msgid "Found duplicates for product by id from 1c."
 msgstr ""
 
 #: src/Schemas/Productscml/Receiver.php:97
@@ -1872,10 +1912,14 @@ msgstr ""
 msgid "As soon as the extensions are installed, they will appear in this section."
 msgstr ""
 
+#: views/extensions/empty.php:11
+msgid ""
+"Information about all available official extensions is available on the website:"
+msgstr ""
+
 #: views/extensions/item.php:6 views/extensions/item.php:14
 #: views/extensions/item.php:26 views/extensions/item.php:33
-#: views/extensions/item.php:37 views/extensions/item.php:44
-#: views/extensions/item.php:48
+#: views/extensions/item.php:37
 msgid "none"
 msgstr ""
 
@@ -1891,16 +1935,12 @@ msgstr ""
 msgid "Versions WC1C:"
 msgstr ""
 
-#: views/extensions/item.php:31 views/extensions/item.php:42
+#: views/extensions/item.php:31
 msgid "from"
 msgstr ""
 
-#: views/extensions/item.php:35 views/extensions/item.php:46
+#: views/extensions/item.php:35
 msgid "to"
-msgstr ""
-
-#: views/extensions/item.php:41
-msgid "Versions PHP:"
 msgstr ""
 
 #: views/helps/bugs.php:6
