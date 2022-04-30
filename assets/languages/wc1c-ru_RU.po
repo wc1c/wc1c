@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WC1C > integration of WooCommerce with 1C products "
 "(different configurations)\n"
 "POT-Creation-Date: 2022-04-30 10:46+0300\n"
-"PO-Revision-Date: 2022-04-30 10:46+0300\n"
+"PO-Revision-Date: 2022-04-30 10:49+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
 "Language: ru_RU\n"
@@ -1635,7 +1635,7 @@ msgstr "Добавлять отсутствующие изображения и 
 
 #: src/Schemas/Productscml/Admin.php:671 src/Schemas/Productscml/Admin.php:686
 msgid "Removing extra images without adding new ones"
-msgstr "Удаление лишних изображений без добавления новых"
+msgstr "Удалять лишние изображения без добавления новых"
 
 #: src/Schemas/Productscml/Admin.php:676
 msgid "Images based on CommerceML files: mode for products update"
