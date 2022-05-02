@@ -9161,7 +9161,7 @@ a.toc-link {
 }
 /* Default Theme Styles */
 .wc1c-sidebar-toc .list-group-item {
-  padding: 0.3rem 0.5rem;
+  padding: 0.2rem 0.5rem;
   margin-top: 0 !important;
   border: 0 !important;
   transition: all 0.7s;
@@ -9303,12 +9303,17 @@ a.toc-link {
 /**
 *** Extensions
  */
-.wc1c-extensions-alert {
+.extensions-alert {
   padding: 20px;
   padding-left: 40px;
   background-color: white;
   border-left: 7px solid #7f54b3;
   border-radius: 7px;
+}
+
+.extensions-all .extensions-all-item .badge {
+  font-size: 0.7rem;
+  padding: 5px 7px;
 }
 
 /**

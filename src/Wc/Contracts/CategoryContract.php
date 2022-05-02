@@ -26,11 +26,11 @@ interface CategoryContract
 	public function getParentId($context);
 
 	/**
-	 * Идентификатор категории в 1C
+	 * Идентификаторы категории в 1C
 	 *
 	 * @param string $context
 	 *
-	 * @return string|integer
+	 * @return string|integer|array
 	 */
 	public function get1cId($context);
 
@@ -39,7 +39,7 @@ interface CategoryContract
 	 *
 	 * @param string $context
 	 *
-	 * @return string|integer
+	 * @return string|integer|array
 	 */
 	public function get1cParentId($context);
 
@@ -78,35 +78,35 @@ interface CategoryContract
 	/**
 	 * Установка идентификатора категории в 1C
 	 *
-	 * @return string|integer|false
+	 * @return string|integer
 	 */
-	public function set1cId($id);
+	public function assign1cId($id);
 
 	/**
 	 * Установка родительского идентификатора категории в 1C
 	 *
-	 * @return string|integer|false
+	 * @return string|integer
 	 */
-	public function set1cParentId($id);
+	public function assign1cParentId($id);
 
 	/**
-	 * Сохранение категории в WooCommerce
+	 * Сохранение данных категории в WooCommerce
 	 *
 	 * @return mixed
 	 */
 	public function save();
 
 	/**
-	 * Удаление категории в WooCommerce
+	 * Удаление категории из WooCommerce
 	 *
-	 * @param boolean $force
+	 * @param boolean $force Окончательное удаление
 	 *
 	 * @return boolean
 	 */
 	public function delete($force);
 
 	/**
-	 * Установка идентификатора схемы
+	 * Установка идентификатора схемы через которую была создана категория в WooCommerce
 	 *
 	 * @param $id
 	 *
@@ -115,14 +115,14 @@ interface CategoryContract
 	public function setSchemaId($id);
 
 	/**
-	 * Получение идентификатора схемы
+	 * Получение идентификатора схемы через которую была создана категория в WooCommerce
 	 *
 	 * @return mixed
 	 */
 	public function getSchemaId($context);
 
 	/**
-	 * Установка идентификатора конфигурации
+	 * Установка идентификатора конфигурации через которую была создана категория в WooCommerce
 	 *
 	 * @param $id
 	 *
@@ -131,7 +131,7 @@ interface CategoryContract
 	public function setConfigurationId($id);
 
 	/**
-	 * Получение идентификатора конфигурации
+	 * Получение идентификатора конфигурации через которую была создана категория в WooCommerce
 	 *
 	 * @param $context
 	 *
@@ -140,7 +140,7 @@ interface CategoryContract
 	public function getConfigurationId($context);
 
 	/**
-	 * Имеет ли категория родителя
+	 * Имеет ли категория родителя в WooCommerce
 	 *
 	 * @return boolean
 	 */

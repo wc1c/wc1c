@@ -1,6 +1,6 @@
 <?php defined('ABSPATH') || exit; ?>
 
-<div class="mb-2 mt-2 rounded-1 border border-3 bg-white">
+<div class="extensions-all-item mb-2 mt-2 rounded-1 border border-3 bg-white">
     <div class="card-header p-2 border-0">
         <h2 class="card-title mt-0 mb-0 float-start">
 	        <?php echo $args['object']->getMeta('name', __('none')); ?>
@@ -18,7 +18,7 @@
                 <ul class="list-group m-0">
                     <li class="list-group-item m-0 list-group-item-light">
                         <?php _e('ID:', 'wc1c'); ?>
-                        <span class="badge bg-info"><?php echo $args['id']; ?></span>
+                        <span class="badge bg-secondary"><?php echo $args['id']; ?></span>
                     </li>
                     <li class="list-group-item m-0">
                             <?php _e('Version:', 'wc1c'); ?>
@@ -36,17 +36,6 @@
                         <span class="badge btn-sm bg-success">
                             <?php echo $args['object']->getMeta('version_wc1c_max', __('none')); ?>
                         </span>
-                    </li>
-                    <li class="list-group-item m-0">
-		                <?php _e('Versions PHP:', 'wc1c'); ?>
-	                    <?php _e('from', 'wc1c'); ?>
-                        <span class="badge btn-sm bg-success">
-                            <?php echo $args['object']->getMeta('version_php_min', __('none')); ?>
-                        </span>
-                        <?php _e('to', 'wc1c'); ?>
-                        <span class="badge btn-sm bg-success">
-                            <?php echo $args['object']->getMeta('version_php_max', __('none')); ?>
-                         </span>
                     </li>
                 </ul>
             </div>

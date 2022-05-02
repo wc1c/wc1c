@@ -231,6 +231,7 @@ abstract class CategoriesData extends DataAbstract
 	public function addMetaData($key, $value, $unique = false)
 	{
 		$this->maybeReadMetaData();
+
 		if($unique)
 		{
 			$this->deleteMetaData($key);
