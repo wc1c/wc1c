@@ -80,7 +80,7 @@ interface CategoryContract
 	 *
 	 * @param string $id Идентификатор категории в 1С
 	 *
-	 * @return string|integer
+	 * @return void
 	 */
 	public function assignExternalId($id);
 
@@ -89,7 +89,7 @@ interface CategoryContract
 	 *
 	 * @param string|int $id Идентификатор родительской категории в 1С
 	 *
-	 * @return string|integer
+	 * @return void
 	 */
 	public function assignExternalParentId($id);
 
@@ -114,7 +114,7 @@ interface CategoryContract
 	 *
 	 * @param string|int $id Идентификатор схемы
 	 *
-	 * @return mixed
+	 * @return void
 	 */
 	public function setSchemaId($id);
 
