@@ -13,7 +13,7 @@ use Wc1c\Wc\Entities\CategoriesData;
 class Category extends CategoriesData implements CategoryContract
 {
 	/**
-	 * Текущие данные
+	 * Текущие данные Категории
 	 *
 	 * @var array
 	 */
@@ -28,9 +28,9 @@ class Category extends CategoriesData implements CategoryContract
 	];
 
 	/**
-	 * Установка имени
+	 * Установка наименования
 	 *
-	 * @param $name
+	 * @param string $name Наименование категории
 	 *
 	 * @return void
 	 */
@@ -40,11 +40,11 @@ class Category extends CategoriesData implements CategoryContract
 	}
 
 	/**
-	 * Получение имени
+	 * Получение наименования категории
 	 *
-	 * @param string $context
+	 * @param string $context Контекст запроса
 	 *
-	 * @return string
+	 * @return string Наименование категории
 	 */
 	public function getName($context = 'view')
 	{
@@ -52,11 +52,11 @@ class Category extends CategoriesData implements CategoryContract
 	}
 
 	/**
-	 * Получение слага
+	 * Получение слага категории
 	 *
-	 * @param string $context
+	 * @param string $context Контекст запроса
 	 *
-	 * @return string
+	 * @return string Слаг категории
 	 */
 	public function getSlug($context = 'view')
 	{
@@ -64,9 +64,9 @@ class Category extends CategoriesData implements CategoryContract
 	}
 
 	/**
-	 * Установка слага
+	 * Установка слага категории
 	 *
-	 * @param $slug
+	 * @param string $slug Слаг категории
 	 *
 	 * @return void
 	 */
@@ -76,9 +76,9 @@ class Category extends CategoriesData implements CategoryContract
 	}
 
 	/**
-	 * Установка описания
+	 * Установка описания категории
 	 *
-	 * @param $description
+	 * @param string $description Описание категории
 	 *
 	 * @return void
 	 */
@@ -88,11 +88,11 @@ class Category extends CategoriesData implements CategoryContract
 	}
 
 	/**
-	 * Получение описания
+	 * Получение описания категории
 	 *
-	 * @param string $context
+	 * @param string $context Контекст запроса
 	 *
-	 * @return string
+	 * @return string Описание категории
 	 */
 	public function getDescription($context = 'view')
 	{
@@ -114,7 +114,7 @@ class Category extends CategoriesData implements CategoryContract
 	/**
 	 * Получение идентификатора схемы через которую была создана категория
 	 *
-	 * @param $context
+	 * @param string $context Контекст запроса
 	 *
 	 * @return string|int|false Идентификатор схемы или false
 	 */
@@ -145,9 +145,9 @@ class Category extends CategoriesData implements CategoryContract
 	/**
 	 * Получение идентификатора конфигурации через которую была создана категория
 	 *
-	 * @param $context
+	 * @param string $context Контекст запроса
 	 *
-	 * @return string|int|false Идентификатор конфигурации или false
+	 * @return string|int|false Идентификатор конфигурации или ложь
 	 */
 	public function getConfigurationId($context = 'view')
 	{
@@ -164,29 +164,41 @@ class Category extends CategoriesData implements CategoryContract
 	/**
 	 * Назначение идентификатора категории из 1С
 	 *
-	 * @param $id
+	 * @param string|int $id Идентификатор категории в 1С
 	 *
 	 * @return void
 	 */
-	public function assign1cId($id)
+	public function assignExternalId($id)
 	{
-		$this->addMetaData('_wc1c_1c_id', $id, false);
+		$this->addMetaData('_wc1c_external_id', $id, false);
 	}
 
 	/**
-	 * Получение идентификаторов категории назначенных из 1С
+	 * Получение идентификации категорий в 1C
 	 *
-	 * @param $context
+	 * @param string $context Контекст запроса
 	 *
-	 * @return array|string
+	 * @return string|array|false Идентификатор категории в 1с, либо массив идентификаторов. Ложь в случае отсутствия любого значения.
 	 */
-	public function get1cId($context = 'view')
+	public function getExternalId($context = 'view')
 	{
-		return $this->getMeta('_wc1c_1c_id', true, $context);
+		$data = $this->getMeta('_wc1c_external_id', true, $context);
+
+		if( is_array($data) && isset($data[0]))
+		{
+			if(count($data) === 1)
+			{
+				return $data[0];
+			}
+
+			return $data;
+		}
+
+		return false;
 	}
 
 	/**
-	 * Имеет ли категория родителя
+	 * Имеет ли категория родителя в WooCommerce
 	 *
 	 * @return boolean
 	 */
@@ -198,9 +210,9 @@ class Category extends CategoriesData implements CategoryContract
 	/**
 	 * Получение идентификатора категории родителя
 	 *
-	 * @param $context
+	 * @param string $context Контекст запроса
 	 *
-	 * @return int|mixed
+	 * @return int|mixed Идентификатор родительской категории в WooCommerce
 	 */
 	public function getParentId($context = 'view')
 	{
@@ -208,9 +220,9 @@ class Category extends CategoriesData implements CategoryContract
 	}
 
 	/**
-	 * Установка идентификаторка категории родителя
+	 * Установка идентификатора категории родителя
 	 *
-	 * @param $parent_id
+	 * @param int|string $parent_id Идентификатор родительской категории
 	 *
 	 * @return void
 	 */
@@ -220,34 +232,48 @@ class Category extends CategoriesData implements CategoryContract
 	}
 
 	/**
-	 * @param $context
+	 * Получение идентификации родительских категорий в 1C
 	 *
-	 * @return array|int|mixed|string
+	 * @param string $context Контекст запроса
+	 *
+	 * @return string|array|false Идентификатор родительской категории в 1с, либо массив идентификаторов. Ложь в случае отсутствия любого значения.
 	 */
-	public function get1cParentId($context = 'view')
+	public function getExternalParentId($context = 'view')
 	{
-		return $this->getMeta('_wc1c_1c_parent_id', true, $context);
+		$data = $this->getMeta('_wc1c_external_parent_id', true, $context);
+
+		if( is_array($data) && isset($data[0]))
+		{
+			if(count($data) === 1)
+			{
+				return $data[0];
+			}
+
+			return $data;
+		}
+
+		return false;
 	}
 
 	/**
-	 * Назначение идентификатора родительской категории в 1С
+	 * Назначение родительского идентификатора категории в 1C
 	 *
-	 * @param $id
+	 * @param string|int $id Идентификатор родительской категории в 1С
 	 *
 	 * @return void
 	 */
-	public function assign1cParentId($id)
+	public function assignExternalParentId($id)
 	{
-		$this->addMetaData('_wc1c_1c_parent_id', $id, false);
+		$this->addMetaData('_wc1c_external_parent_id', $id, false);
 	}
 
 	/**
-	 * Имеет ли категория в 1С родителюскую категорию
+	 * Имеет ли категория родителя в 1С, при этом родителей может быть множество
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
-	public function has1cParent()
+	public function hasExternalParent()
 	{
-		return $this->get1cParentId('view') !== 0;
+		return $this->getExternalParentId('view') !== 0;
 	}
 }
