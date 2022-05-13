@@ -7,7 +7,7 @@ use Wc1c\Wc\Category;
 /**
  * CategoriesStorageContract
  *
- * @package Wc1c\Wc\Contracts
+ * @package Wc1c\Wc
  */
 interface CategoriesStorageContract
 {
@@ -21,7 +21,7 @@ interface CategoriesStorageContract
 	public function getByName($name);
 
 	/**
-	 * Получение категории или категорий по идентификатору категории из WooCommerce
+	 * Получение категории по идентификатору категории из WooCommerce
 	 *
 	 * @param int|string $id Идентификатор категории
 	 *

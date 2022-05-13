@@ -7,7 +7,7 @@ use Wc1c\Wc\Abstracts\DataAbstract;
 /**
  * StorageContract
  *
- * @package Wc1c\Wc\Contracts
+ * @package Wc1c\Wc
  */
 interface StorageContract
 {

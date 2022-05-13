@@ -5,7 +5,7 @@ defined('ABSPATH') || exit;
 /**
  * CategoryContract
  *
- * @package Wc1c\Wc\Contracts
+ * @package Wc1c\Wc
  */
 interface CategoryContract
 {
