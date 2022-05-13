@@ -184,13 +184,12 @@ class CategoriesStorage implements CategoriesStorageContract, MetaStorageContrac
 	/**
 	 * Get all categories by 1C id
 	 *
-	 * @param $id
+	 * @param string|int $id
 	 *
 	 * @return false|Category|Category[]
-	 *
 	 * @throws Exception
 	 */
-	public function getBy1cId($id)
+	public function getByExternalId($id)
 	{
 		if(empty($id))
 		{
@@ -203,7 +202,7 @@ class CategoriesStorage implements CategoriesStorageContract, MetaStorageContrac
 			'meta_query' =>
 			[
 				[
-					'key' => '_wc1c_1c_id',
+					'key' => '_wc1c_external_id',
 					'value' => $id,
 					'compare' => 'LIKE'
 				]
