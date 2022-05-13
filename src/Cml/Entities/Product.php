@@ -8,7 +8,7 @@ use Wc1c\Cml\Contracts\ProductDataContract;
 /**
  * Product
  *
- * @package Wc1c\Cml\Entities
+ * @package Wc1c\Cml
  */
 class Product extends DataAbstract implements ProductDataContract
 {
@@ -76,7 +76,7 @@ class Product extends DataAbstract implements ProductDataContract
 	}
 
 	/**
-	 * @return false|mixed
+	 * @return false|string
 	 */
 	public function getDescription()
 	{
@@ -89,7 +89,7 @@ class Product extends DataAbstract implements ProductDataContract
 	}
 
 	/**
-	 * @return false|mixed
+	 * @return false|array
 	 */
 	public function getRequisites()
 	{
@@ -102,11 +102,11 @@ class Product extends DataAbstract implements ProductDataContract
 	}
 
 	/**
-	 * @return false|mixed
+	 * @return false|array
 	 */
 	public function getPropertyValues()
 	{
-		if(!isset($this->data['property_values']))
+		if(!$this->hasPropertyValues())
 		{
 			return false;
 		}
@@ -119,7 +119,7 @@ class Product extends DataAbstract implements ProductDataContract
 	 */
 	public function getImages()
 	{
-		if(!isset($this->data['images']))
+		if(!$this->hasImages())
 		{
 			return false;
 		}
@@ -141,24 +141,24 @@ class Product extends DataAbstract implements ProductDataContract
 	}
 
 	/**
-	 * @return int|string
+	 * @return string
 	 */
-	public function getFeatureId()
+	public function getCharacteristicId()
 	{
-		if(!isset($this->data['feature_id']))
+		if(!isset($this->data['characteristic_id']))
 		{
 			return '';
 		}
 
-		return $this->data['feature_id'];
+		return $this->data['characteristic_id'];
 	}
 
 	/**
 	 * @return bool
 	 */
-	public function hasFeatureId()
+	public function hasCharacteristicId()
 	{
-		return $this->getFeatureId() !== '';
+		return $this->getCharacteristicId() !== '';
 	}
 
 	/**
@@ -167,6 +167,32 @@ class Product extends DataAbstract implements ProductDataContract
 	public function hasClassifierGroups()
 	{
 		if(empty($this->data['classifier_groups']))
+		{
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function hasPropertyValues()
+	{
+		if(empty($this->data['property_values']))
+		{
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function hasImages()
+	{
+		if(empty($this->data['images']))
 		{
 			return false;
 		}
