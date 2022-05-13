@@ -3,15 +3,15 @@
 defined('ABSPATH') || exit;
 
 use WP_Error;
-use Wc1c\Wc\Storage;
 use Wc1c\Exceptions\Exception;
+use Wc1c\Wc\Storage;
 use Wc1c\Wc\Meta;
 use Wc1c\Wc\Abstracts\DataAbstract;
 
 /**
  * CategoriesData
  *
- * @package Wc1c\Wc\Entities
+ * @package Wc1c\Wc
  */
 abstract class CategoriesData extends DataAbstract
 {

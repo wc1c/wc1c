@@ -7,25 +7,25 @@ use Wc1c\Wc\Category;
 /**
  * CategoriesStorageContract
  *
- * @package Wc1c\Wc\Contracts
+ * @package Wc1c\Wc
  */
 interface CategoriesStorageContract
 {
 	/**
 	 * Получение категории или категорий по наименованию категории из WooCommerce
 	 *
-	 * @param $name
+	 * @param string $name Наименование искомой категории
 	 *
 	 * @return false|Category|Category[]
 	 */
 	public function getByName($name);
 
 	/**
-	 * Получение категории или категорий по идентификатору категории из WooCommerce
+	 * Получение категории по идентификатору категории из WooCommerce
 	 *
-	 * @param $id
+	 * @param int|string $id Идентификатор категории
 	 *
-	 * @return false|Category|Category[]
+	 * @return false|Category
 	 */
 	public function getById($id);
 
@@ -36,5 +36,5 @@ interface CategoriesStorageContract
 	 *
 	 * @return false|Category|Category[]
 	 */
-	public function getBy1cId($id);
+	public function getByExternalId($id);
 }

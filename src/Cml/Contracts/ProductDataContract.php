@@ -5,42 +5,56 @@ defined('ABSPATH') || exit;
 /**
  * ProductDataContract
  *
- * @package Wc1c\Cml\Contracts
+ * @package Wc1c\Cml
  */
 interface ProductDataContract extends DataContract
 {
 	/**
-	 * @return string Unique product id in Catalog
+	 * Получение уникального идентификатора продукта в рамках текущего каталога товаров CommerceML
+	 *
+	 * @return string Product id
 	 */
 	public function getId();
 
 	/**
-	 * @return string Unique product feature id in Catalog
+	 * Получение уникального идентификатора характеристики продукта в рамках текущего каталога товаров CommerceML
+	 *
+	 * @return string Characteristic
 	 */
-	public function getFeatureId();
+	public function getCharacteristicId();
 
 	/**
+	 * Имеется ли у продукта характеристика
+	 *
 	 * @return boolean
 	 */
-	public function hasFeatureId();
+	public function hasCharacteristicId();
 
 	/**
+	 * Получение наименования продукта
+	 *
 	 * @return string Product name
 	 */
 	public function getName();
 
 	/**
+	 * Получение описания продукта
+	 *
 	 * @return string Product description
 	 */
 	public function getDescription();
 
 	/**
+	 * Имеются ли у продукта группы описанные в классификаторе
+	 *
 	 * @return boolean
 	 */
 	public function hasClassifierGroups();
 
 	/**
-	 * @return array Product groups from Classifier
+	 * Получение массива идентификаторов групп для продукта описанных в классификаторе
+	 *
+	 * @return array Product groups
 	 */
 	public function getClassifierGroups();
 }

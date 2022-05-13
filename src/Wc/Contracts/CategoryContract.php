@@ -5,92 +5,96 @@ defined('ABSPATH') || exit;
 /**
  * CategoryContract
  *
- * @package Wc1c\Wc\Contracts
+ * @package Wc1c\Wc
  */
 interface CategoryContract
 {
 	/**
-	 * Идентификатор категории в WooCommerce
+	 * Получение идентификатора категории в WooCommerce
 	 *
-	 * @return string|integer
+	 * @return integer Идентификатор категории в WooCommerce
 	 */
 	public function getId();
 
 	/**
-	 * Идентификатор родительской категории в WooCommerce
+	 * Получение идентификатора родительской категории в WooCommerce
 	 *
-	 * @param string $context
+	 * @param string $context Контекст запроса
 	 *
-	 * @return string|integer
+	 * @return string Идентификатор родительской категории в WooCommerce
 	 */
 	public function getParentId($context);
 
 	/**
-	 * Идентификаторы категории в 1C
+	 * Получение идентификации категорий в 1C
 	 *
-	 * @param string $context
+	 * @param string $context Контекст запроса
 	 *
-	 * @return string|integer|array
+	 * @return string|array|false Идентификатор категории в 1с, либо массив идентификаторов. Ложь в случае отсутствия любого значения.
 	 */
-	public function get1cId($context);
+	public function getExternalId($context);
 
 	/**
-	 * Идентификатор родительской категории в 1C
+	 * Получение идентификации родительских категорий в 1C
 	 *
-	 * @param string $context
+	 * @param string $context Контекст запроса
 	 *
-	 * @return string|integer|array
+	 * @return string|array|false Идентификатор родительской категории в 1с, либо массив идентификаторов. Ложь в случае отсутствия любого значения.
 	 */
-	public function get1cParentId($context);
+	public function getExternalParentId($context);
 
 	/**
-	 * Установка имени категории
+	 * Установка наименования категории в WooCommerce
 	 *
-	 * @param string $name
+	 * @param string $name Наименование категории
 	 */
 	public function setName($name);
 
 	/**
-	 * Получение имени категории
+	 * Получение наименования категории в WooCommerce
 	 *
-	 * @param string $context
+	 * @param string $context Контекст запроса
 	 *
-	 * @return string
+	 * @return string Наименование категории
 	 */
 	public function getName($context);
 
 	/**
-	 * Установка описания категории
+	 * Установка описания категории в WooCommerce
 	 *
-	 * @param string $description
+	 * @param string $description Описание категории
 	 */
 	public function setDescription($description);
 
 	/**
 	 * Получение описания категории
 	 *
-	 * @param string $context
+	 * @param string $context Контекст запроса
 	 *
-	 * @return string
+	 * @return string Описание категории
 	 */
 	public function getDescription($context);
 
 	/**
-	 * Установка идентификатора категории в 1C
+	 * Назначение идентификатора категории в 1C
 	 *
-	 * @return string|integer
+	 * @param string $id Идентификатор категории в 1С
+	 *
+	 * @return void
 	 */
-	public function assign1cId($id);
+	public function assignExternalId($id);
 
 	/**
-	 * Установка родительского идентификатора категории в 1C
+	 * Назначение родительского идентификатора категории в 1C
 	 *
-	 * @return string|integer
+	 * @param string|int $id Идентификатор родительской категории в 1С
+	 *
+	 * @return void
 	 */
-	public function assign1cParentId($id);
+	public function assignExternalParentId($id);
 
 	/**
-	 * Сохранение данных категории в WooCommerce
+	 * Сохранение назначенных данных категории в WooCommerce
 	 *
 	 * @return mixed
 	 */
@@ -108,23 +112,25 @@ interface CategoryContract
 	/**
 	 * Установка идентификатора схемы через которую была создана категория в WooCommerce
 	 *
-	 * @param $id
+	 * @param string|int $id Идентификатор схемы
 	 *
-	 * @return mixed
+	 * @return void
 	 */
 	public function setSchemaId($id);
 
 	/**
 	 * Получение идентификатора схемы через которую была создана категория в WooCommerce
 	 *
-	 * @return mixed
+	 * @param string|int $context Контекст запроса
+	 *
+	 * @return false|string|int Идентификатор схемы, либо ложь
 	 */
 	public function getSchemaId($context);
 
 	/**
 	 * Установка идентификатора конфигурации через которую была создана категория в WooCommerce
 	 *
-	 * @param $id
+	 * @param string|int $id Идентификатор конфигурации
 	 *
 	 * @return mixed
 	 */
@@ -133,9 +139,9 @@ interface CategoryContract
 	/**
 	 * Получение идентификатора конфигурации через которую была создана категория в WooCommerce
 	 *
-	 * @param $context
+	 * @param string $context Контекст запроса
 	 *
-	 * @return mixed
+	 * @return false|string|int Идентификатор конфигурации, либо ложь
 	 */
 	public function getConfigurationId($context);
 
@@ -147,9 +153,9 @@ interface CategoryContract
 	public function hasParent();
 
 	/**
-	 * Имеет ли категория родителя в 1С
+	 * Имеет ли категория родителя в 1С, при этом родителей может быть множество
 	 *
 	 * @return boolean
 	 */
-	public function has1cParent();
+	public function hasExternalParent();
 }

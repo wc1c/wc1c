@@ -7,7 +7,7 @@ use Wc1c\Wc\Abstracts\DataAbstract;
 /**
  * MetaStorageContract
  *
- * @package Wc1c\Wc\Contracts
+ * @package Wc1c\Wc
  */
 interface MetaStorageContract
 {

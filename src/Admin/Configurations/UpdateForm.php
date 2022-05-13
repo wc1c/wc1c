@@ -190,7 +190,7 @@ class UpdateForm extends FormAbstract
 
 		ob_start();
 		?>
-		<a class="list-group-item p-2 m-0 border-0" href="#<?php echo esc_attr($field_key); ?>"><?php echo wp_kses_post($data['title']); ?></a>
+		<a class="list-group-item m-0 border-0" href="#<?php echo esc_attr($field_key); ?>"><?php echo wp_kses_post($data['title']); ?></a>
 		<?php
 
 		return ob_get_clean();
