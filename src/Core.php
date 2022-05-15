@@ -3,18 +3,18 @@
 defined('ABSPATH') || exit;
 
 use wpdb;
-use Wc1c\Log\Processor;
 use Psr\Log\LoggerInterface;
+use Wc1c\Exceptions\Exception;
 use Wc1c\Log\Formatter;
 use Wc1c\Log\Handler;
 use Wc1c\Log\Logger;
+use Wc1c\Log\Processor;
+use Wc1c\Settings\ConnectionSettings;
+use Wc1c\Settings\Contracts\SettingsContract;
 use Wc1c\Settings\InterfaceSettings;
 use Wc1c\Settings\LogsSettings;
-use Wc1c\Exceptions\Exception;
-use Wc1c\Contracts\SettingsContract;
-use Wc1c\Traits\SingletonTrait;
 use Wc1c\Settings\MainSettings;
-use Wc1c\Settings\ConnectionSettings;
+use Wc1c\Traits\SingletonTrait;
 
 /**
  * Core
@@ -73,8 +73,15 @@ final class Core
 	 */
 	public function register($context, $loader)
 	{
-		$this->context = apply_filters('wc1c_context_loading', $context);
-		$this->loader = apply_filters('wc1c_loader_loading', $loader);
+		if(has_filter('wc1c_context_loading'))
+		{
+			$this->context = apply_filters('wc1c_context_loading', $context);
+		}
+
+		if(has_filter('wc1c_loader_loading'))
+		{
+			$this->loader = apply_filters('wc1c_loader_loading', $loader);
+		}
 
 		// init
 		add_action('init', [$this, 'init'], 3);
@@ -473,9 +480,13 @@ final class Core
 			$locale = is_admin() && function_exists('get_user_locale') ? get_user_locale() : get_locale();
 		}
 
-		$locale = apply_filters('plugin_locale', $locale, 'wc1c');
+		if(has_filter('plugin_locale'))
+		{
+			$locale = apply_filters('plugin_locale', $locale, 'wc1c');
+		}
 
 		unload_textdomain('wc1c');
+
 		load_textdomain('wc1c', WP_LANG_DIR . '/plugins/wc1c-' . $locale . '.mo');
 		load_textdomain('wc1c', wc1c()->environment()->get('plugin_directory_path') . 'assets/languages/wc1c-' . $locale . '.mo');
 
