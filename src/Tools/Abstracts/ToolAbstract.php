@@ -7,7 +7,7 @@ use Wc1c\Exceptions\Exception;
 /**
  * ToolAbstract
  *
- * @package Wc1c\Abstracts
+ * @package Wc1c\Tools
  */
 abstract class ToolAbstract
 {

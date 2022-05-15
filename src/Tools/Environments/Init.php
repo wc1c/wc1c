@@ -2,8 +2,8 @@
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Abstracts\ToolAbstract;
 use Wc1c\Exceptions\Exception;
+use Wc1c\Tools\Abstracts\ToolAbstract;
 use Wc1c\Traits\UtilityTrait;
 
 /**
