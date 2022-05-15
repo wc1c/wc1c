@@ -9,17 +9,17 @@ use Wc1c\Extensions\Contracts\ExtensionContract;
 /**
  * ExtensionAbstract
  *
- * @package Wc1c\Abstracts
+ * @package Wc1c\Extensions
  */
 abstract class ExtensionAbstract implements ExtensionContract
 {
 	/**
-	 * @var string Unique id
+	 * @var string Unique extension id
 	 */
 	private $id = '';
 
 	/**
-	 * @var array
+	 * @var array Extension meta
 	 */
 	public $meta = [];
 
@@ -34,13 +34,15 @@ abstract class ExtensionAbstract implements ExtensionContract
 	public function __construct(){}
 
 	/**
-	 * @return mixed
+	 * Initializing extension
+	 *
+	 * @return boolean Initialize or no
 	 * @throws Exception
 	 */
 	abstract public function init();
 
 	/**
-	 * @return bool
+	 * @return boolean
 	 */
 	public function isInitialized()
 	{
@@ -48,7 +50,7 @@ abstract class ExtensionAbstract implements ExtensionContract
 	}
 
 	/**
-	 * @param bool $initialized
+	 * @param boolean $initialized
 	 */
 	public function setInitialized($initialized)
 	{
@@ -56,9 +58,9 @@ abstract class ExtensionAbstract implements ExtensionContract
 	}
 
 	/**
-	 * Set ext id
+	 * Set extension id
 	 *
-	 * @param $id
+	 * @param string|integer $id Extension id
 	 *
 	 * @return $this
 	 */
@@ -70,9 +72,9 @@ abstract class ExtensionAbstract implements ExtensionContract
 	}
 
 	/**
-	 * Get ext id
+	 * Get extension id
 	 *
-	 * @return string
+	 * @return string Extension id
 	 */
 	public function getId()
 	{
@@ -82,12 +84,16 @@ abstract class ExtensionAbstract implements ExtensionContract
 	/**
 	 * Set meta information for extension
 	 *
-	 * @param $name
+	 * @param string $name
 	 * @param string $value
+	 *
+	 * @return $this
 	 */
 	public function setMeta($name, $value = '')
 	{
 		$this->meta[$name] = $value;
+
+		return $this;
 	}
 
 	/**
@@ -103,7 +109,7 @@ abstract class ExtensionAbstract implements ExtensionContract
 	{
 		$data = $this->meta;
 
-		if($name !== '')
+		if('' !== $name)
 		{
 			if(is_array($data) && array_key_exists($name, $data))
 			{
@@ -113,19 +119,24 @@ abstract class ExtensionAbstract implements ExtensionContract
 			return $default_value;
 		}
 
-		throw new RuntimeException('$name is not available');
+		throw new RuntimeException(__('Meta value by name is not available.', 'wc1c'));
 	}
 
 	/**
 	 * Load meta data by plugin file
 	 *
-	 * @param $file
+	 * @param string $file
 	 * @param string $locale
 	 *
-	 * @return bool
+	 * @return boolean
 	 */
 	public function loadMetaByPlugin($file, $locale = '')
 	{
+		if(!function_exists('get_file_data'))
+		{
+			return false;
+		}
+
 		$default_headers =
 		[
 			'Name' => 'Plugin Name',
@@ -160,10 +171,13 @@ abstract class ExtensionAbstract implements ExtensionContract
 		$this->setMeta('version', $plugin_data['Version']);
 		$this->setMeta('version_php_min', $plugin_data['RequiresPHP']);
 		$this->setMeta('version_wp_min', $plugin_data['RequiresWP']);
+
 		$this->setMeta('version_wc_min', $plugin_data['RequiresWC']);
 		$this->setMeta('version_wc_max', $plugin_data['TestedWC']);
+
 		$this->setMeta('version_wc1c_min', $plugin_data['RequiresWC1C']);
 		$this->setMeta('version_wc1c_max', $plugin_data['TestedWC1C']);
+
 		$this->setMeta('author', __($plugin_data['Author'], $locale));
 		$this->setMeta('name', __($plugin_data['Name'], $locale));
 		$this->setMeta('description', __($plugin_data['Description'], $locale));
