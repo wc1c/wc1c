@@ -1,16 +1,17 @@
-<?php namespace Wc1c\Abstracts;
+<?php namespace Wc1c\Extensions\Abstracts;
 
 defined('ABSPATH') || exit;
 
 use Wc1c\Exceptions\Exception;
 use Wc1c\Exceptions\RuntimeException;
+use Wc1c\Extensions\Contracts\ExtensionContract;
 
 /**
  * ExtensionAbstract
  *
  * @package Wc1c\Abstracts
  */
-abstract class ExtensionAbstract
+abstract class ExtensionAbstract implements ExtensionContract
 {
 	/**
 	 * @var string Unique id

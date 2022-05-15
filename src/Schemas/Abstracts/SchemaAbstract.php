@@ -1,4 +1,4 @@
-<?php namespace Wc1c\Abstracts;
+<?php namespace Wc1c\Schemas\Abstracts;
 
 defined('ABSPATH') || exit;
 
