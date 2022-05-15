@@ -31,7 +31,7 @@ final class Core
 	{
 		if(!is_array($extensions))
 		{
-			throw new Exception('$extensions is not valid');
+			throw new Exception(__('Set $extensions is not valid.', 'wc1c'));
 		}
 
 		$this->extensions = $extensions;
@@ -53,12 +53,12 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('Get extensions exception - ' . $e->getMessage());
+			throw $e;
 		}
 
 		if(!is_array($extensions))
 		{
-			throw new Exception('$extensions is not array');
+			throw new Exception(__('Init $extensions is not array.', 'wc1c'));
 		}
 
 		/**
@@ -68,24 +68,24 @@ final class Core
 		{
 			if(!array_key_exists($extension_id, $extensions))
 			{
-				throw new Exception('extension not found by id');
+				throw new Exception(__('Extension not found by id.', 'wc1c'));
 			}
 
 			$init_extension = $extensions[$extension_id];
 
 			if(!is_object($init_extension))
 			{
-				throw new Exception('$extensions[$extension_id] is not object');
+				throw new Exception(__('$extensions[$extension_id] is not object.', 'wc1c'));
 			}
 
 			if($init_extension->isInitialized())
 			{
-				throw new Exception('Old extension initialized.');
+				throw new Exception(__('Old extension initialized.', 'wc1c'));
 			}
 
 			if(!method_exists($init_extension, 'init'))
 			{
-				throw new Exception('Method init is not found');
+				throw new Exception(__('Method init is not found in extension.', 'wc1c'));
 			}
 
 			try
@@ -94,7 +94,7 @@ final class Core
 			}
 			catch(Exception $e)
 			{
-				throw new Exception('Init extension exception - ' . $e->getMessage());
+				throw new Exception(__('Init extension exception:', 'wc1c') . ' ' . $e->getMessage());
 			}
 
 			$init_extension->setInitialized(true);
@@ -138,7 +138,7 @@ final class Core
 				return $this->extensions[$extension_id];
 			}
 
-			throw new Exception('$extension_id is unavailable');
+			throw new Exception(__('$extension_id is unavailable.', 'wc1c'));
 		}
 
 		return $this->extensions;
@@ -154,7 +154,7 @@ final class Core
 	{
 		$extensions = [];
 
-		if('yes' === wc1c()->settings('main')->get('extensions', 'yes'))
+		if(has_filter('wc1c_extensions_loading') && 'yes' === wc1c()->settings('main')->get('extensions', 'yes'))
 		{
 			$extensions = apply_filters('wc1c_extensions_loading', $extensions);
 		}
@@ -165,7 +165,7 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('Extensions set exception - ' . $e->getMessage());
+			throw new Exception(__('Extensions load exception:', 'wc1c') . ' ' . $e->getMessage());
 		}
 	}
 }
