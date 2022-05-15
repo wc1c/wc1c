@@ -9,7 +9,7 @@ use Wc1c\Settings\Contracts\SettingsContract;
 /**
  * SettingsAbstract
  *
- * @package Wc1c\Abstracts
+ * @package Wc1c\Settings
  */
 abstract class SettingsAbstract implements SettingsContract
 {

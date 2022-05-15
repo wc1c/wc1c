@@ -1,18 +1,8 @@
-<?php
-/**
- * Namespace
- */
-namespace Wc1c\Settings;
+<?php namespace Wc1c\Settings;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
-use Wc1c\Abstracts\SettingsAbstract;
+use Wc1c\Settings\Abstracts\SettingsAbstract;
 
 /**
  * Class MainSettings
