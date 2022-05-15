@@ -75,13 +75,17 @@ final class Core
 	{
 		if(has_filter('wc1c_context_loading'))
 		{
-			$this->context = apply_filters('wc1c_context_loading', $context);
+			$context = apply_filters('wc1c_context_loading', $context);
 		}
+
+		$this->context = $context;
 
 		if(has_filter('wc1c_loader_loading'))
 		{
-			$this->loader = apply_filters('wc1c_loader_loading', $loader);
+			$loader = apply_filters('wc1c_loader_loading', $loader);
 		}
+
+		$this->loader = $loader;
 
 		// init
 		add_action('init', [$this, 'init'], 3);
