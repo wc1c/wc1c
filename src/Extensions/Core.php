@@ -3,6 +3,7 @@
 defined('ABSPATH') || exit;
 
 use Wc1c\Exceptions\Exception;
+use Wc1c\Extensions\Contracts\ExtensionContract;
 use Wc1c\Traits\SingletonTrait;
 
 /**
@@ -42,7 +43,7 @@ final class Core
 	 *
 	 * @param string $extension_id If an extension ID is specified, only the specified extension is loaded
 	 *
-	 * @return boolean
+	 * @return void
 	 * @throws Exception
 	 */
 	public function init($extension_id = '')
@@ -56,11 +57,6 @@ final class Core
 			throw $e;
 		}
 
-		if(!is_array($extensions))
-		{
-			throw new Exception(__('Init $extensions is not array.', 'wc1c'));
-		}
-
 		/**
 		 * Init specified extension
 		 */
@@ -71,35 +67,29 @@ final class Core
 				throw new Exception(__('Extension not found by id.', 'wc1c'));
 			}
 
-			$init_extension = $extensions[$extension_id];
-
-			if(!is_object($init_extension))
+			if(!$extensions[$extension_id] instanceof ExtensionContract)
 			{
-				throw new Exception(__('$extensions[$extension_id] is not object.', 'wc1c'));
+				throw new Exception(__('Extension is not implementation ExtensionContract. Skipped init.', 'wc1c'));
 			}
 
-			if($init_extension->isInitialized())
+			if($extensions[$extension_id]->isInitialized())
 			{
-				throw new Exception(__('Old extension initialized.', 'wc1c'));
-			}
-
-			if(!method_exists($init_extension, 'init'))
-			{
-				throw new Exception(__('Method init is not found in extension.', 'wc1c'));
+				return;
 			}
 
 			try
 			{
-				$init_extension->init();
+				$extensions[$extension_id]->init();
+				$extensions[$extension_id]->setInitialized(true);
 			}
 			catch(Exception $e)
 			{
 				throw new Exception(__('Init extension exception:', 'wc1c') . ' ' . $e->getMessage());
 			}
 
-			$init_extension->setInitialized(true);
+			$this->set($extensions);
 
-			return true;
+			return;
 		}
 
 		/**
@@ -113,12 +103,9 @@ final class Core
 			}
 			catch(Exception $e)
 			{
-				wc1c()->log()->error($e->getMessage(), ['exception' => $e]);
-				continue;
+				wc1c()->log()->warning($e->getMessage(), ['exception' => $e]);
 			}
 		}
-
-		return true;
 	}
 
 	/**
@@ -126,7 +113,7 @@ final class Core
 	 *
 	 * @param string $extension_id
 	 *
-	 * @return array|object
+	 * @return array|ExtensionContract
 	 * @throws Exception
 	 */
 	public function get($extension_id = '')
@@ -138,7 +125,7 @@ final class Core
 				return $this->extensions[$extension_id];
 			}
 
-			throw new Exception(__('$extension_id is unavailable.', 'wc1c'));
+			throw new Exception(__('Get extension by id is unavailable.', 'wc1c'));
 		}
 
 		return $this->extensions;
