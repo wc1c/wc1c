@@ -27,7 +27,7 @@ of 1C and sites created on WordPress with the WooCommerce plugin.
 List of major changes from version to version. [Descriptions more](https://wc1c.info/changelogs)
 
 = 0.8.0 =
-* WC tested up to: 6.4
+* WC tested up to: 6.5
 * More changes
 
 = 0.7.0 =
