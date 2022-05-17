@@ -184,7 +184,7 @@ class Category extends CategoriesData implements CategoryContract
 	{
 		$data = $this->getMeta('_wc1c_external_id', true, $context);
 
-		if( is_array($data) && isset($data[0]))
+		if(is_array($data) && isset($data[0]))
 		{
 			if(count($data) === 1)
 			{
