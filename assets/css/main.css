@@ -9182,6 +9182,32 @@ a.toc-link {
 .woocommerce_page_wc1c .wc1c-form-table td {
   padding: 15px 0;
 }
+.woocommerce_page_wc1c .date_create {
+  width: 130px;
+  max-width: 130px;
+}
+.woocommerce_page_wc1c .date_activity {
+  width: 130px;
+  max-width: 130px;
+}
+.woocommerce_page_wc1c .remove a {
+  color: #c4161c;
+}
+.woocommerce_page_wc1c .check-column {
+  padding: 4px 0 0 0 !important;
+  vertical-align: middle !important;
+}
+
+/**
+*** Configurations
+ */
+.wc1c-configurations-alert {
+  padding: 10px;
+  padding-left: 20px;
+  background-color: white;
+  border-left: 4px solid #fd0;
+}
+
 .woocommerce_page_wc1c .configurations-all .tablenav.top {
   height: auto;
   padding: 0;
@@ -9197,53 +9223,65 @@ a.toc-link {
 .woocommerce_page_wc1c .configurations-all .tablenav .subsubsub a {
   text-decoration: none;
 }
-.woocommerce_page_wc1c .date_create {
-  width: 130px;
-  max-width: 130px;
-}
-.woocommerce_page_wc1c .date_activity {
-  width: 130px;
-  max-width: 130px;
-}
-.woocommerce_page_wc1c .configurations .column-name .configuration-name {
+.woocommerce_page_wc1c table.configurations .column-name .configuration-name {
   font-size: 16px !important;
   line-height: 120%;
 }
-.woocommerce_page_wc1c .configurations .column-name .configuration-metas {
+.woocommerce_page_wc1c table.configurations .column-name .configuration-metas {
   border: 1px solid #ccd0d4;
   padding: 5px;
   border-radius: 5px;
   margin-bottom: 5px;
   margin-top: 10px;
 }
-.woocommerce_page_wc1c .configurations .column-configuration_id {
+.woocommerce_page_wc1c table.configurations .column-configuration_id {
   width: 75px;
   border-right: 1px solid #ccd0d4;
   max-width: 75px;
 }
-.woocommerce_page_wc1c .configurations td {
+@media (max-width: 767.98px) {
+  .woocommerce_page_wc1c table.configurations .column-configuration_id {
+    border-right: 0;
+    max-width: 100%;
+  }
+}
+.woocommerce_page_wc1c table.configurations td {
   vertical-align: middle !important;
 }
-.woocommerce_page_wc1c .remove a {
-  color: #c4161c;
+.woocommerce_page_wc1c table.configurations .column-date_create {
+  line-height: 1.3em;
+  width: 130px;
+  max-width: 130px;
 }
-.woocommerce_page_wc1c .check-column {
-  padding: 4px 0 0 0 !important;
-  vertical-align: middle !important;
+.woocommerce_page_wc1c table.configurations .column-date_activity {
+  line-height: 1.3em;
+  width: 130px;
+  max-width: 130px;
 }
-.woocommerce_page_wc1c .no-items .colspanchange {
+.woocommerce_page_wc1c table.configurations .column-schema {
+  border-left: 1px solid #ccd0d4;
+  width: 111px;
+}
+.woocommerce_page_wc1c table.configurations .no-items .colspanchange {
   padding-top: 70px !important;
   padding-bottom: 70px !important;
   text-align: center;
 }
-.woocommerce_page_wc1c .column-status {
+.woocommerce_page_wc1c table.configurations .column-status {
   max-width: 120px;
   min-width: 120px;
   width: 120px;
   border-left: 1px solid #ccd0d4;
   border-right: 1px solid #ccd0d4;
 }
-.woocommerce_page_wc1c .column-status span {
+@media (max-width: 767.98px) {
+  .woocommerce_page_wc1c table.configurations .column-status {
+    border-right: 0;
+    border-left: 0;
+    max-width: 100%;
+  }
+}
+.woocommerce_page_wc1c table.configurations .column-status span {
   font-size: 14px;
   padding: 3px;
   text-align: center;
@@ -9251,53 +9289,29 @@ a.toc-link {
   border-radius: 3px;
   line-height: 1.7em;
 }
-.woocommerce_page_wc1c .column-status span.draft {
+.woocommerce_page_wc1c table.configurations .column-status span.draft {
   background-color: rgba(128, 0, 128, 0.9);
   color: white;
 }
-.woocommerce_page_wc1c .column-status span.deleted {
+.woocommerce_page_wc1c table.configurations .column-status span.deleted {
   background-color: rgba(128, 0, 128, 0.4);
   color: white;
 }
-.woocommerce_page_wc1c .column-status span.active {
+.woocommerce_page_wc1c table.configurations .column-status span.active {
   background-color: rgba(18, 128, 3, 0.6);
   color: white;
 }
-.woocommerce_page_wc1c .column-status span.processing {
+.woocommerce_page_wc1c table.configurations .column-status span.processing {
   background-color: #128003;
   color: white;
 }
-.woocommerce_page_wc1c .column-status span.inactive {
+.woocommerce_page_wc1c table.configurations .column-status span.inactive {
   background-color: rgba(196, 22, 28, 0.6);
   color: white;
 }
-.woocommerce_page_wc1c .column-status span.error {
+.woocommerce_page_wc1c table.configurations .column-status span.error {
   background-color: #b8151a;
   color: white;
-}
-.woocommerce_page_wc1c .column-date_create {
-  line-height: 1.3em;
-  width: 130px;
-  max-width: 130px;
-}
-.woocommerce_page_wc1c .column-date_activity {
-  line-height: 1.3em;
-  width: 130px;
-  max-width: 130px;
-}
-.woocommerce_page_wc1c .column-schema {
-  border-left: 1px solid #ccd0d4;
-  width: 111px;
-}
-
-/**
-*** Configurations
- */
-.wc1c-configurations-alert {
-  padding: 10px;
-  padding-left: 20px;
-  background-color: white;
-  border-left: 4px solid #fd0;
 }
 
 /**
