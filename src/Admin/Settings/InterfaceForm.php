@@ -8,7 +8,7 @@ use Wc1c\Settings\InterfaceSettings;
 /**
  *  InterfaceForm
  *
- * @package Wc1c\Admin\Settings
+ * @package Wc1c\Admin
  */
 class InterfaceForm extends Form
 {
@@ -93,6 +93,15 @@ class InterfaceForm extends Form
 			'type' => 'checkbox',
 			'label' => __('Enable', 'wc1c'),
 			'description' => __('Output of a column with information from 1C to the list of categories.', 'wc1c'),
+			'default' => 'yes'
+		];
+
+		$fields['admin_interface_media_library_column'] =
+		[
+			'title' => __('Column in media library list', 'wc1c'),
+			'type' => 'checkbox',
+			'label' => __('Enable', 'wc1c'),
+			'description' => __('Output of a column with information from 1C to the list of media files.', 'wc1c'),
 			'default' => 'yes'
 		];
 
