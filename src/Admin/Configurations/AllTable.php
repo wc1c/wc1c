@@ -192,6 +192,16 @@ class AllTable extends TableAbstract
 
 		$metas['schema'] = __('Schema:', 'wc1c') . ' ' . $item['schema'];
 
+		$user = get_userdata($item['user_id']);
+		if($user instanceof \WP_User && $user->exists())
+		{
+			$metas['user'] = __('User: ', 'wc1c') . $user->get('nickname') . ' (' . $item['user_id']. ')';
+		}
+		else
+		{
+			$metas['user'] =  __('User is not exists.', 'wc1c');
+		}
+
 		$metas = apply_filters('wc1c_admin_configurations_all_row_metas', $metas, $item);
 
 		return sprintf

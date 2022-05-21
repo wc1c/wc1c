@@ -12,7 +12,7 @@ use Wc1c\Traits\UtilityTrait;
 /**
  * MainUpdate
  *
- * @package Wc1c\Admin\Configurations
+ * @package Wc1c\Admin
  */
 class MainUpdate
 {
@@ -96,6 +96,20 @@ class MainUpdate
 		$body .= '<li class="list-group-item p-2 m-0">';
 		$body .= __('Schema ID: ', 'wc1c') . $configuration->getSchema();
 		$body .= '</li>';
+
+		$body .= '<li class="list-group-item p-2 m-0">';
+		$user_id = $configuration->getUserId();
+		$user = get_userdata($user_id);
+		if($user instanceof \WP_User && $user->exists())
+		{
+			$body .= __('User: ', 'wc1c') . $user->get('nickname') . ' (' . $user_id. ')';
+		}
+		else
+		{
+			$body .= __('User is not exists.', 'wc1c');
+		}
+		$body .= '</li>';
+
 		$body .= '<li class="list-group-item p-2 m-0">';
 		$body .= __('Date create: ', 'wc1c') . $this->utilityPrettyDate($configuration->getDateCreate());
 		$body .= '</li>';
