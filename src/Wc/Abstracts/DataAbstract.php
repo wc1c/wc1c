@@ -8,7 +8,7 @@ use Wc1c\Exceptions\Exception;
 /**
  * DataAbstract - Implemented by classes using the same CRUD(s) pattern
  *
- * @package Wc1c\Wc\Abstracts
+ * @package Wc1c\Wc
  */
 abstract class DataAbstract
 {
