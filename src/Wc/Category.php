@@ -2,8 +2,8 @@
 
 defined('ABSPATH') || exit;
 
+use Wc1c\Wc\Abstracts\CategoriesData;
 use Wc1c\Wc\Contracts\CategoryContract;
-use Wc1c\Wc\Entities\CategoriesData;
 
 /**
  * Category

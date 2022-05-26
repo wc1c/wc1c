@@ -1,12 +1,11 @@
-<?php namespace Wc1c\Wc\Entities;
+<?php namespace Wc1c\Wc\Abstracts;
 
 defined('ABSPATH') || exit;
 
 use WP_Error;
 use Wc1c\Exceptions\Exception;
-use Wc1c\Wc\Storage;
 use Wc1c\Wc\Meta;
-use Wc1c\Wc\Abstracts\DataAbstract;
+use Wc1c\Wc\Storage;
 
 /**
  * CategoriesData
