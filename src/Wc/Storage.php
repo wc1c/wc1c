@@ -6,6 +6,7 @@ use Wc1c\Exceptions\Exception;
 use Wc1c\Wc\Contracts\StorageContract;
 use Wc1c\Wc\Abstracts\DataAbstract;
 use Wc1c\Wc\Storages\CategoriesStorage;
+use Wc1c\Wc\Storages\ImagesStorage;
 
 /**
  * Storage
@@ -30,6 +31,7 @@ class Storage implements StorageContract
 	private $storages =
 	[
 		'category' => CategoriesStorage::class,
+		'image' => ImagesStorage::class,
 	];
 
 	/**
