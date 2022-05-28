@@ -26,4 +26,14 @@ interface ImagesStorageContract
 	 * @return false|ImageContract|ImageContract[]
 	 */
 	public function getByExternalName($name);
+
+	/**
+	 * Загрузка изображения из внешнего источника
+	 *
+	 * @param string $path Путь до изображения
+	 * @param ImageContract $image Добавляемое изображение
+	 *
+	 * @return false|int
+	 */
+	public function uploadByPath($path, $image);
 }
