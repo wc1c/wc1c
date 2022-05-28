@@ -2,6 +2,8 @@
 
 defined('ABSPATH') || exit;
 
+use Wc1c\Exceptions\Exception;
+
 /**
  * ProductContract
  *
@@ -58,4 +60,24 @@ interface ProductContract
 	 * @return int|string Идентификатор конфигурации
 	 */
 	public function getConfigurationId($context);
+
+	/**
+	 * Установка артикула продукта с опциональным учетом уникальности
+	 *
+	 * @param string $sku Артикул продукта
+	 * @param boolean $unique Требовать ли уникальное значение
+	 *
+	 * @return void
+	 * @throws Exception
+	 */
+	public function setSku($sku, $unique = false);
+
+	/**
+	 * Получение текущего артикула продукта
+	 *
+	 * @param string $context Контекст запроса
+	 *
+	 * @return string
+	 */
+	public function getSku($context);
 }
