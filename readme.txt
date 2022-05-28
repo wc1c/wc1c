@@ -2,7 +2,7 @@
 Contributors: WC1C
 Tags: 1c, commerceml, woocommerce, cml, woo, woo 1c, woo commerce, 1s, 1с
 Requires at least: 4.7
-Tested up to: 5.8
+Tested up to: 6.0
 Requires PHP: 5.6
 Stable tag: trunk
 License: GNU General Public License v3.0
@@ -27,6 +27,7 @@ of 1C and sites created on WordPress with the WooCommerce plugin.
 List of major changes from version to version. [Descriptions more](https://wc1c.info/changelogs)
 
 = 0.8.0 =
+* WP tested up to: 6.0
 * WC tested up to: 6.5
 * More changes
 
