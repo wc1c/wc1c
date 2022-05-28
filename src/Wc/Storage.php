@@ -70,7 +70,7 @@ class Storage implements StorageContract
 
 		if(!array_key_exists($object_type, $this->getStorages()))
 		{
-			throw new Exception('Invalid data storage. Storage by key type is not found.');
+			throw new Exception('Invalid data storage. Storage by key type is not found: ' . $object_type);
 		}
 
 		// hook
