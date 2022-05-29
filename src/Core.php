@@ -56,6 +56,11 @@ final class Core
 	private $receiver;
 
 	/**
+	 * @var Tecodes\Client
+	 */
+	private $tecodes;
+
+	/**
 	 * Core constructor.
 	 *
 	 * @return void
@@ -408,6 +413,71 @@ final class Core
 		}
 
 		return $this->timer;
+	}
+
+	/**
+	 * Tecodes
+	 *
+	 * @return Tecodes\Client
+	 */
+	public function tecodes()
+	{
+		if($this->tecodes instanceof Tecodes\Client)
+		{
+			return $this->tecodes;
+		}
+
+		if(!class_exists('Tecodes_Local'))
+		{
+			include_once $this->environment()->get('plugin_directory_path') . '/vendor/tecodes/tecodes-local/bootstrap.php';
+		}
+
+		$options =
+		[
+			'timeout' => 5,
+			'verify_ssl' => false,
+			'version' => 'tecodes/v1'
+		];
+
+		$tecodes_local = new Tecodes\Client('https://wc1c.info/', $options);
+
+		/**
+		 * Languages
+		 */
+		$tecodes_local->status_messages =
+		[
+			'status_1' => __('This activation code is active.', 'wc1c'),
+			'status_2' => __('Error: This activation code has expired.', 'wc1c'),
+			'status_3' => __('Activation code republished. Awaiting reactivation.', 'wc1c'),
+			'status_4' => __('Error: This activation code has been suspended.', 'wc1c'),
+			'code_not_found' => __('This activation code is not found.', 'wc1c'),
+			'localhost' => __('This activation code is active (localhost).', 'wc1c'),
+			'pending' => __('Error: This activation code is pending review.', 'wc1c'),
+			'download_access_expired' => __('Error: This version of the software was released after your download access expired. Please downgrade software or contact support for more information.', 'wc1c'),
+			'missing_activation_key' => __('Error: The activation code variable is empty.', 'wc1c'),
+			'could_not_obtain_local_code' => __('Error: I could not obtain a new local code.', 'wc1c'),
+			'maximum_delay_period_expired' => __('Error: The maximum local code delay period has expired.', 'wc1c'),
+			'local_code_tampering' => __('Error: The local key has been tampered with or is invalid.', 'wc1c'),
+			'local_code_invalid_for_location' => __('Error: The local code is invalid for this location.', 'wc1c'),
+			'missing_license_file' => __('Error: Please create the following file (and directories if they dont exist already): ', 'wc1c'),
+			'license_file_not_writable' => __('Error: Please make the following path writable: ', 'wc1c'),
+			'invalid_local_key_storage' => __('Error: I could not determine the local key storage on clear.', 'wc1c'),
+			'could_not_save_local_key' => __('Error: I could not save the local key.', 'wc1c'),
+			'code_string_mismatch' => __('Error: The local code is invalid for this activation code.', 'wc1c'),
+			'code_status_delete' => __('Error: This activation code has been deleted.', 'wc1c'),
+			'code_status_draft' => __('Error: This activation code has draft.', 'wc1c'),
+			'code_status_available' => __('Error: This activation code has available.', 'wc1c'),
+			'code_status_blocked' => __('Error: This activation code has been blocked.', 'wc1c'),
+		];
+
+		$tecodes_local->set_local_code_storage(new Tecodes\Storage());
+		$tecodes_local->set_instance(new Tecodes\Instance());
+
+		$tecodes_local->validate();
+
+		$this->tecodes = $tecodes_local;
+
+		return $this->tecodes;
 	}
 
 	/**
