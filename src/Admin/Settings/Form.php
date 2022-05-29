@@ -10,7 +10,7 @@ use Wc1c\Traits\SingletonTrait;
 /**
  * Form
  *
- * @package Wc1c\Admin\Settings
+ * @package Wc1c\Admin
  */
 abstract class Form extends FormAbstract
 {
