@@ -188,7 +188,7 @@ class MainForm extends Form
             (
                 '%s <br /> %s <b>%s</b>',
                 __('If enter the correct code, the current environment will be activated. Enter the code only on the actual workstation.', 'wc1c'),
-                __('API status:', 'wc1c'),
+                __('Current license API status:', 'wc1c'),
                 wc1c()->tecodes()->api_get_status()
             ),
             'default' => ''
