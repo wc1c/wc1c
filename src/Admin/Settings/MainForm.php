@@ -224,12 +224,45 @@ class MainForm extends Form
 		$data = wp_parse_args($data, $defaults);
 
 		ob_start();
+
+        $local = wc1c()->tecodes()->get_local_code();
+
+		$local_data = wc1c()->tecodes()->get_local_code_data($local);
+
 		?>
         <tr valign="top">
             <th scope="row" class="titledesc">
                 <label for="<?php echo esc_attr( $field_key ); ?>"><?php echo wp_kses_post( $data['title'] ); ?> <?php echo $this->get_tooltip_html( $data ); ?></label>
             </th>
             <td class="forminp">
+                <div class="wc1c-custom-metas">
+
+		            <?php
+
+                        if($local_data['code_date_expires'] === 'never')
+                        {
+                            $local_data['code_date_expires'] = __('never', 'wc1c');
+                        }
+                        else
+                        {
+	                        $local_data['code_date_expires'] = date_i18n( get_option('date_format'), $local_data['code_date_expires']);
+                        }
+
+                        printf
+                        (
+                                '%s: <b>%s</b> (%s %s)<br />%s: <b>%s</b><br />%s: <b>%s</b>',
+                                __('Code ID', 'wc1c'),
+                                $local_data['code_id'],
+                                __('expires:', 'wc1c'),
+                                $local_data['code_date_expires'] ,
+                                __('Instance ID', 'wc1c'),
+                                $local_data['instance_id'],
+                                __('Domain', 'wc1c'),
+                                $local_data['instance']['domain']
+                        );
+		            ?>
+
+                </div>
 				<?php echo $this->get_description_html($data); // WPCS: XSS ok.?>
             </td>
         </tr>
@@ -303,6 +336,7 @@ class MainForm extends Form
 			return '';
 		}
 
+		wc1c()->tecodes()->delete_local_code();
 		wc1c()->tecodes()->set_code($value);
 		wc1c()->tecodes()->validate();
 
@@ -324,6 +358,16 @@ class MainForm extends Form
 				}
 			}
 		}
+        else
+        {
+	        wc1c()->admin()->notices()->create
+	        (
+		        [
+			        'type' => 'info',
+			        'data' => __('Support code activated successfully. Reload the page to display.', ('wc1c'))
+		        ]
+	        );
+        }
 
 		return '';
 	}
