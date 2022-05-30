@@ -421,7 +421,7 @@ class Tecodes_Local implements Interface_Tecodes_Local
 	 */
 	public function get_local_code()
 	{
-		return $this->code;
+		return $this->local_code_storage->read();
 	}
 
 	/**
