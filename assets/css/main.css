@@ -9394,6 +9394,14 @@ a.toc-link {
   border: 2px dashed #eeeeee;
 }
 
+.wc1c-custom-metas {
+  border: 1px solid #ccd0d4;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
 /**
 *** Wizards
  */
