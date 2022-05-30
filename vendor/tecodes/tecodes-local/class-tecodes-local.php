@@ -279,7 +279,15 @@ class Tecodes_Local implements Interface_Tecodes_Local
 	public function api_get_status()
 	{
 		$status = 'inactive';
-		$data = $this->api_get_status_data();
+
+		try
+		{
+			$data = $this->api_get_status_data();
+		}
+		catch(Exception $e)
+		{
+			$status = $e->getMessage();
+		}
 
 		if(isset($data->code) && $data->code == 'active')
 		{
