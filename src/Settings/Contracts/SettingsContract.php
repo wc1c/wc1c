@@ -1,4 +1,4 @@
-<?php namespace Wc1c\Contracts;
+<?php namespace Wc1c\Settings\Contracts;
 
 defined('ABSPATH') || exit;
 
@@ -7,7 +7,7 @@ use Wc1c\Exceptions\Exception;
 /**
  * SettingsContract
  *
- * @package Wc1c\Contracts
+ * @package Wc1c\Settings
  */
 interface SettingsContract
 {

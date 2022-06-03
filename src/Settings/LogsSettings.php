@@ -2,7 +2,7 @@
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Abstracts\SettingsAbstract;
+use Wc1c\Settings\Abstracts\SettingsAbstract;
 
 /**
  * LogsSettings

@@ -1,17 +1,18 @@
-<?php namespace Wc1c\Abstracts;
+<?php namespace Wc1c\Schemas\Abstracts;
 
 defined('ABSPATH') || exit;
 
 use Wc1c\Configuration;
 use Wc1c\Exceptions\Exception;
 use Wc1c\Log\Logger;
+use Wc1c\Schemas\Contracts\SchemaContract;
 
 /**
  * SchemaAbstract
  *
  * @package Wc1c\Abstracts
  */
-abstract class SchemaAbstract
+abstract class SchemaAbstract implements SchemaContract
 {
 	/**
 	 * @var bool Initialized flag

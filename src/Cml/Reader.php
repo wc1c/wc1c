@@ -3,6 +3,7 @@
 defined('ABSPATH') || exit;
 
 use XMLReader;
+use Wc1c\Cml\Entities\OffersPackage;
 use Wc1c\Exceptions\Exception;
 use Wc1c\Cml\Contracts\CatalogDataContract;
 use Wc1c\Cml\Contracts\ClassifierDataContract;
@@ -89,17 +90,17 @@ class Reader
 	/**
 	 * @var ClassifierDataContract Текущий классификатор
 	 */
-	public $classifier;
+	public $classifier = null;
 
 	/**
 	 * @var CatalogDataContract Каталог
 	 */
-	public $catalog;
+	public $catalog = null;
 
 	/**
-	 * @var array Пакет предложений
+	 * @var OffersPackage Пакет предложений
 	 */
-	public $offers;
+	public $offers_package = null;
 
 	/**
 	 * Reader constructor.

@@ -6,6 +6,7 @@ use Wc1c\Exceptions\Exception;
 use Wc1c\Wc\Contracts\StorageContract;
 use Wc1c\Wc\Abstracts\DataAbstract;
 use Wc1c\Wc\Storages\CategoriesStorage;
+use Wc1c\Wc\Storages\ImagesStorage;
 
 /**
  * Storage
@@ -30,6 +31,7 @@ class Storage implements StorageContract
 	private $storages =
 	[
 		'category' => CategoriesStorage::class,
+		'image' => ImagesStorage::class,
 	];
 
 	/**
@@ -68,7 +70,7 @@ class Storage implements StorageContract
 
 		if(!array_key_exists($object_type, $this->getStorages()))
 		{
-			throw new Exception('Invalid data storage. Storage by key type is not found.');
+			throw new Exception('Invalid data storage. Storage by key type is not found: ' . $object_type);
 		}
 
 		// hook

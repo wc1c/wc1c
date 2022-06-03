@@ -1,15 +1,15 @@
-<?php namespace Wc1c\Abstracts;
+<?php namespace Wc1c\Settings\Abstracts;
 
 defined('ABSPATH') || exit;
 
 use Wc1c\Exceptions\Exception;
 use Wc1c\Exceptions\RuntimeException;
-use Wc1c\Contracts\SettingsContract;
+use Wc1c\Settings\Contracts\SettingsContract;
 
 /**
  * SettingsAbstract
  *
- * @package Wc1c\Abstracts
+ * @package Wc1c\Settings
  */
 abstract class SettingsAbstract implements SettingsContract
 {

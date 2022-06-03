@@ -2,15 +2,15 @@
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Exceptions\Exception;
 use Wc1c\Abstracts\FormAbstract;
-use Wc1c\Contracts\SettingsContract;
+use Wc1c\Exceptions\Exception;
+use Wc1c\Settings\Contracts\SettingsContract;
 use Wc1c\Traits\SingletonTrait;
 
 /**
  * Form
  *
- * @package Wc1c\Admin\Settings
+ * @package Wc1c\Admin
  */
 abstract class Form extends FormAbstract
 {

@@ -8,7 +8,7 @@ use Wc1c\Settings\MainSettings;
 /**
  * MainForm
  *
- * @package Wc1c\Admin\Settings
+ * @package Wc1c\Admin
  */
 class MainForm extends Form
 {
@@ -23,8 +23,10 @@ class MainForm extends Form
 		$this->setSettings(new MainSettings());
 
 		add_filter('wc1c_' . $this->get_id() . '_form_load_fields', [$this, 'init_fields_main'], 10);
-		add_filter('wc1c_' . $this->get_id() . '_form_load_fields', [$this, 'init_fields_configurations'], 10);
-		add_filter('wc1c_' . $this->get_id() . '_form_load_fields', [$this, 'init_fields_technical'], 10);
+		add_filter('wc1c_' . $this->get_id() . '_form_load_fields', [$this, 'init_form_fields_tecodes'], 10);
+
+		add_filter('wc1c_' . $this->get_id() . '_form_load_fields', [$this, 'init_fields_configurations'], 20);
+		add_filter('wc1c_' . $this->get_id() . '_form_load_fields', [$this, 'init_fields_technical'], 30);
 
 		$this->init();
 	}
@@ -138,5 +140,235 @@ class MainForm extends Form
 		];
 
 		return $fields;
+	}
+
+	/**
+	 * Add fields for tecodes
+	 *
+	 * @param $fields
+	 *
+	 * @return array
+	 */
+	public function init_form_fields_tecodes($fields)
+	{
+		$buy_url = esc_url('https://wc1c.info/market/code');
+
+		$fields['tecodes'] =
+		[
+			'title' => __('Support', 'wc1c'),
+			'type' => 'title',
+			'description' => sprintf
+            (
+                '%s <a target="_blank" href="%s">%s</a>. %s',
+                __('The code can be obtained from the plugin website:', 'wc1c'),
+                $buy_url,
+                $buy_url,
+                __('Users with active codes participate in the development of integration with 1C, they have a connection with developers and other additional features.', 'wc1c')
+            ),
+        ];
+
+		if(wc1c()->tecodes()->is_valid())
+		{
+			$fields['tecodes_status'] =
+            [
+                'title' => __('Status', 'wc1c'),
+                'type' => 'tecodes_status',
+                'class' => 'p-2',
+                'description' => __('Support code activated. To activate another code, you can enter it again.', 'wc1c'),
+                'default' => ''
+            ];
+		}
+
+        $fields['tecodes_code'] =
+        [
+            'title' => __('Code for activation', 'wc1c'),
+            'type' => 'tecodes_text',
+            'class' => 'p-2',
+            'description' => sprintf
+            (
+                '%s <br /> %s <b>%s</b>',
+                __('If enter the correct code, the current environment will be activated. Enter the code only on the actual workstation.', 'wc1c'),
+                __('Current license API status:', 'wc1c'),
+                wc1c()->tecodes()->api_get_status()
+            ),
+            'default' => ''
+        ];
+
+		return $fields;
+	}
+
+	/**
+	 * Generate Tecodes data HTML
+	 *
+	 * @param string $key Field key.
+	 * @param array  $data Field data.
+	 *
+	 * @return string
+	 */
+	public function generate_tecodes_status_html($key, $data)
+	{
+		$field_key = $this->get_prefix_field_key($key);
+		$defaults = array
+		(
+			'title' => '',
+			'disabled' => false,
+			'class' => '',
+			'css' => '',
+			'placeholder' => '',
+			'type' => 'text',
+			'desc_tip' => false,
+			'description' => '',
+			'custom_attributes' => [],
+		);
+
+		$data = wp_parse_args($data, $defaults);
+
+		ob_start();
+
+        $local = wc1c()->tecodes()->get_local_code();
+
+		$local_data = wc1c()->tecodes()->get_local_code_data($local);
+
+		?>
+        <tr valign="top">
+            <th scope="row" class="titledesc">
+                <label for="<?php echo esc_attr( $field_key ); ?>"><?php echo wp_kses_post( $data['title'] ); ?> <?php echo $this->get_tooltip_html( $data ); ?></label>
+            </th>
+            <td class="forminp">
+                <div class="wc1c-custom-metas">
+
+		            <?php
+
+                        if($local_data['code_date_expires'] === 'never')
+                        {
+                            $local_data['code_date_expires'] = __('never', 'wc1c');
+                        }
+                        else
+                        {
+	                        $local_data['code_date_expires'] = date_i18n( get_option('date_format'), $local_data['code_date_expires']);
+                        }
+
+                        printf
+                        (
+                                '%s: <b>%s</b> (%s %s)<br />%s: <b>%s</b><br />%s: <b>%s</b>',
+                                __('Code ID', 'wc1c'),
+                                $local_data['code_id'],
+                                __('expires:', 'wc1c'),
+                                $local_data['code_date_expires'] ,
+                                __('Instance ID', 'wc1c'),
+                                $local_data['instance_id'],
+                                __('Domain', 'wc1c'),
+                                $local_data['instance']['domain']
+                        );
+		            ?>
+
+                </div>
+				<?php echo $this->get_description_html($data); // WPCS: XSS ok.?>
+            </td>
+        </tr>
+		<?php
+
+		return ob_get_clean();
+	}
+
+	/**
+	 * Generate Tecodes Text Input HTML
+	 *
+	 * @param string $key Field key.
+	 * @param array  $data Field data.
+	 *
+	 * @return string
+	 */
+	public function generate_tecodes_text_html($key, $data)
+	{
+		$field_key = $this->get_prefix_field_key($key);
+		$defaults = array
+		(
+			'title' => '',
+			'disabled' => false,
+			'class' => '',
+			'css' => '',
+			'placeholder' => '',
+			'type' => 'text',
+			'desc_tip' => false,
+			'description' => '',
+			'custom_attributes' => [],
+		);
+
+		$data = wp_parse_args($data, $defaults);
+
+		ob_start();
+		?>
+		<tr valign="top">
+            <th scope="row" class="titledesc">
+                <label for="<?php echo esc_attr( $field_key ); ?>"><?php echo wp_kses_post( $data['title'] ); ?> <?php echo $this->get_tooltip_html( $data ); ?></label>
+            </th>
+			<td class="forminp">
+                <div class="input-group">
+                    <input class="form-control input-text regular-input <?php echo esc_attr($data['class']); ?>"
+                    type="<?php echo esc_attr($data['type']); ?>" name="<?php echo esc_attr($field_key); ?>"
+                    id="<?php echo esc_attr($field_key); ?>" style="<?php echo esc_attr($data['css']); ?>"
+                    value="<?php echo esc_attr($this->get_field_data($key)); ?>"
+                    placeholder="<?php echo esc_attr($data['placeholder']); ?>" <?php disabled($data['disabled'], true); ?> <?php echo $this->get_custom_attribute_html($data); // WPCS: XSS ok.
+                    ?> />
+                    <button name="save" class="btn btn-primary" type="submit" value="<?php _e('Activate', 'wc1c') ?>"><?php _e('Activate', 'wc1c') ?></button>
+                </div>
+                <?php echo $this->get_description_html($data); // WPCS: XSS ok.?>
+            </td>
+		</tr>
+		<?php
+
+		return ob_get_clean();
+	}
+
+	/**
+	 * Validate tecodes code
+     *
+	 * @param string $key
+	 * @param string $value
+	 *
+	 * @return string
+	 */
+	public function validate_tecodes_code_field($key, $value)
+	{
+		if($value === '')
+		{
+			return '';
+		}
+
+		wc1c()->tecodes()->delete_local_code();
+		wc1c()->tecodes()->set_code($value);
+		wc1c()->tecodes()->validate();
+
+		if(!wc1c()->tecodes()->is_valid())
+		{
+			$errors = wc1c()->tecodes()->get_errors();
+
+			if(is_array($errors))
+			{
+				foreach(wc1c()->tecodes()->get_errors() as $error_key => $error)
+				{
+					wc1c()->admin()->notices()->create
+					(
+						[
+							'type' => 'error',
+							'data' => $error
+						]
+					);
+				}
+			}
+		}
+        else
+        {
+	        wc1c()->admin()->notices()->create
+	        (
+		        [
+			        'type' => 'info',
+			        'data' => __('Support code activated successfully. Reload the page to display.', ('wc1c'))
+		        ]
+	        );
+        }
+
+		return '';
 	}
 }
