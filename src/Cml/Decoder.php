@@ -64,7 +64,7 @@ class Decoder
 	 * @param $type
 	 * @param $data
 	 *
-	 * @return DataAbstract|false
+	 * @return DataAbstract|false|array
 	 * @throws Exception
 	 */
 	public function process($type, $data)
@@ -92,12 +92,24 @@ class Decoder
 				return $this->decodeCounterparty($data);
 			case 'classifier':
 				return $this->decodeClassifier($data);
+			case 'price_types':
+				return $this->decodePriceTypes($data);
 			case 'offer':
 			case 'product':
 				return $this->decodeProduct($data);
 			default:
 				return false;
 		}
+	}
+
+	/**
+	 * @param SimpleXMLElement $xml
+	 *
+	 * @return array
+	 */
+	public function decodePriceTypes($xml)
+	{
+		return $this->parseXmlPriceTypes($xml);
 	}
 
 	/**
@@ -486,7 +498,7 @@ class Decoder
 	{
 		if(!$xml_product_data->Ид)
 		{
-			throw new Exception('$product_xml_data->Ид empty');
+			throw new Exception('$product_xml_data->Ид empty.');
 		}
 
 		$product_data = $this->parseXmlProductId($xml_product_data->Ид);
@@ -607,7 +619,7 @@ class Decoder
 		/*
 		 * Комплектующие
 		 * Для изделий, содержащих комплектующие
-		 * Комлектующее - Элементы типа «Товар» - определяют комплектующие составных товаров - наборов.
+		 * Комплектующее - Элементы типа «Товар» - определяют комплектующие составных товаров - наборов.
 		 */
 		// todo: обработка в отдельном методе с try catch
 
@@ -622,11 +634,11 @@ class Decoder
 		 * Характеристики товара
 		 * Уточняет характеристики поставляемого товара. Товар с разными характеристиками может иметь разную цену.
 		 */
-		$product_data['features'] = $xml_product_data->ХарактеристикиТовара ? $this->parse_xml_product_features($xml_product_data->ХарактеристикиТовара) : [];
+		$product_data['characteristics'] = $xml_product_data->ХарактеристикиТовара ? $this->parse_xml_product_features($xml_product_data->ХарактеристикиТовара) : [];
 
 		/**
 		 * Значения реквизитов товара
-		 * Определяет значение поризвольного реквизита документа
+		 * Определяет значение произвольного реквизита документа
 		 */
 		$requisites_values = false;
 		if($xml_product_data->ЗначениеРеквизита) // cml 2.05-
@@ -654,7 +666,7 @@ class Decoder
 		$product_data['quantity'] = 0;
 		if($xml_product_data->Остатки || $xml_product_data->Количество || $xml_product_data->Склад)
 		{
-			$product_data['quantity'] = $this->parse_xml_product_quantity($xml_product_data);
+			$product_data['quantity'] = $this->parseXmlProductQuantity($xml_product_data);
 		}
 
 		/**
@@ -835,7 +847,7 @@ class Decoder
 		{
 			/**
 			 * Идентификатор группы товаров в классификаторе
-			 * cml:ИдентфикаторГлобальныйТип
+			 * cml:ИдентификаторГлобальныйТип
 			 */
 			$result[] = (string)$category_guid;
 		}
@@ -1019,7 +1031,7 @@ class Decoder
 	 *
 	 * @return float|int
 	 */
-	private function parse_xml_product_quantity($xml_data)
+	private function parseXmlProductQuantity($xml_data)
 	{
 		$quantity = 0;
 
@@ -1270,7 +1282,7 @@ class Decoder
 	 *
 	 * @return array
 	 */
-	private function parseXmlPriceTypes($xml_data)
+	public function parseXmlPriceTypes($xml_data)
 	{
 		$data = [];
 
@@ -1281,14 +1293,24 @@ class Decoder
 			$description = trim((string)$price_type->Описание);
 			$code = $price_type->Код ?: '';
 
+			/*
+			 * Валюта
+			 * Код валюты по международному классификатору валют (ISO 4217).
+			 * Если не указана, то используется валюта установленная для данного типа цен
+			 *
+			 * cml:ВалютаТип
+			 */
+			$currency = $price_type->Валюта ? (string)$price_type->Валюта : 'RUB';
+
 			//todo: cml:Налог
 
 			$data[$guid] = array
 			(
-				'price_guid' => $guid,
-				'price_name' => $name,
-				'price_code' => (string)$code,
-				'price_description' => $description
+				'guid' => $guid,
+				'name' => $name,
+				'currency' => $currency,
+				'code' => (string)$code,
+				'description' => $description
 			);
 		}
 
