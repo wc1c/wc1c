@@ -326,6 +326,7 @@ class ImagesStorage implements ImagesStorageContract, MetaStorageContract
 	 * @param string $name Наименование искомой категории
 	 *
 	 * @return false|ImageContract|ImageContract[]
+	 * @throws Exception
 	 */
 	public function getByName($name)
 	{
@@ -358,6 +359,7 @@ class ImagesStorage implements ImagesStorageContract, MetaStorageContract
 	 * @param string $name Наименование изображения
 	 *
 	 * @return false|ImageContract|ImageContract[]
+	 * @throws Exception
 	 */
 	public function getByExternalName($name)
 	{
