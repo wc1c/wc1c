@@ -19,15 +19,6 @@ interface ProductsStorageContract
 	public function getByName($name);
 
 	/**
-	 * Получение продукта по идентификатору продукта из WooCommerce
-	 *
-	 * @param int|string $id Идентификатор продукта
-	 *
-	 * @return false|ProductContract
-	 */
-	public function getById($id);
-
-	/**
 	 * Получение продукта или продуктов по идентификатору продукта из 1С
 	 *
 	 * @param $id
