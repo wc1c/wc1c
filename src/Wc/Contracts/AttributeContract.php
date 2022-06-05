@@ -74,6 +74,7 @@ interface AttributeContract
 
 	/**
 	 * Установка сортировки атрибута
+	 * Accepts: 'menu_order', 'name', 'name_num' and 'id'. Default to 'menu_order'.
 	 *
 	 * @param string $label Сортировка атрибута
 	 *
@@ -92,6 +93,7 @@ interface AttributeContract
 
 	/**
 	 * Установка типа атрибута
+	 * Core by default accepts: 'select' and 'text'. Default to 'select'.
 	 *
 	 * @param string $type Тип атрибута
 	 *
@@ -110,6 +112,7 @@ interface AttributeContract
 
 	/**
 	 * Установка публичности атрибута
+	 * Enable or disable attribute archives. False by default.
 	 *
 	 * @param string $type Публичность атрибута
 	 *
