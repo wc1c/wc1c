@@ -252,7 +252,7 @@ abstract class AttributesData extends DataAbstract
 	 * @param string|array $value Meta value
 	 * @param int $meta_id Meta ID
 	 *
-	 * @return mixed|void
+	 * @return void
 	 */
 	public function updateMetaData($key, $value, $meta_id = 0)
 	{
