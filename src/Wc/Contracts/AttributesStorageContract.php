@@ -21,11 +21,11 @@ interface AttributesStorageContract
 	/**
 	 * Получение атрибута по этикетке атрибута из WooCommerce
 	 *
-	 * @param string $name Этикетка искомого атрибута
+	 * @param string $label Этикетка искомого атрибута
 	 *
 	 * @return false|AttributeContract
 	 */
-	public function getByLabel($name);
+	public function getByLabel($label);
 
 	/**
 	 * Получение атрибута по идентификатору атрибута из 1С
