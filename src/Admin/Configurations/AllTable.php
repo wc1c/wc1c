@@ -188,6 +188,11 @@ class AllTable extends TableAbstract
 			$actions['delete'] = '<a href="' . $this->utilityAdminConfigurationsGetUrl('delete', $item['configuration_id']) . '">' . __('Remove forever', 'wc1c') . '</a>';
 		}
 
+		if('active' === $item['status'])
+		{
+			unset($actions['delete']);
+		}
+
 		$actions = apply_filters('wc1c_admin_configurations_all_row_actions', $actions, $item);
 
 		$metas['schema'] = __('Schema:', 'wc1c') . ' ' . $item['schema'];
