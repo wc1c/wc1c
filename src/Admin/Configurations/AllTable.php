@@ -451,6 +451,27 @@ class AllTable extends TableAbstract
 			$class .= ' button-green';
 		}
 
+		if(wc1c()->tecodes()->is_valid())
+		{
+			$local = wc1c()->tecodes()->get_local_code();
+			$local_data = wc1c()->tecodes()->get_local_code_data($local);
+
+			if($local_data['code_date_expires'] === 'never')
+			{
+				$local_data['code_date_expires'] = __('never', 'wc1c');
+			}
+			else
+			{
+				$local_data['code_date_expires'] = date_i18n(get_option('date_format'), $local_data['code_date_expires']);
+			}
+
+			$text .= ' (' . __('support expires:', 'wc1c') . ' ' . $local_data['code_date_expires'] . ')';
+		}
+		else
+		{
+			$text .= ' (' . __('no support', 'wc1c') . ')';
+		}
+
 		echo '<a href="' . admin_url('admin.php?page=wc1c&section=settings&do_settings=connection') . '" class="' . $class . '" style="float: right;"> ' . $text . ' </a>';
 	}
 
