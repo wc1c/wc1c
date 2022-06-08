@@ -184,7 +184,7 @@ class Product extends DataAbstract implements ProductDataContract
 	}
 
 	/**
-	 * Имеются ли у продукта цены
+	 * Имеются ли у продукта цены или конкретная цена по идентификатору типа цены
 	 *
 	 * @param string $price_type_id Идентификатор типа цены
 	 *
