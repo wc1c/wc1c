@@ -57,4 +57,31 @@ interface ProductDataContract extends DataContract
 	 * @return array Product groups
 	 */
 	public function getClassifierGroups();
+
+	/**
+	 * Проверка на наличие реквизитов у продукта, возможна проверка конкретного реквизита
+	 *
+	 * @param string $name Наименование реквизита
+	 *
+	 * @return bool Имеются ли реквизиты
+	 */
+	public function hasRequisites($name = '');
+
+	/**
+	 * Получение реквизитов продукта
+	 *
+	 * @param string $name Наименование реквизита для получения значения, опционально
+	 *
+	 * @return false|array|string Ложь, массив всех реквизитов или значение конкретного реквизита
+	 */
+	public function getRequisites($name = '');
+
+	/**
+	 * Имеются ли у продукта цены или конкретная цена по идентификатору типа цены
+	 *
+	 * @param string $price_type_id Идентификатор типа цены
+	 *
+	 * @return bool
+	 */
+	public function hasPrices($price_type_id = '');
 }
