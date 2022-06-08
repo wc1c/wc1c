@@ -241,4 +241,38 @@ class Attribute extends AttributesData implements AttributeContract
 
 		return false;
 	}
+
+	/**
+	 * Get a product attribute ID by name.
+	 *
+	 * @param string $name Attribute name.
+	 *
+	 * @return int
+	 */
+	public function getTaxonomyIdByName($name = '')
+	{
+		if(empty($name))
+		{
+			$name = $this->getName();
+		}
+
+		return wc_attribute_taxonomy_id_by_name($name);
+	}
+
+	/**
+	 * Get a product attribute name.
+	 *
+	 * @param string $attribute_name Attribute name.
+	 *
+	 * @return string
+	 */
+	public function getTaxonomyName($attribute_name = '')
+	{
+		if(empty($attribute_name))
+		{
+			$attribute_name = $this->getName();
+		}
+
+		return $attribute_name ? 'pa_' . wc_sanitize_taxonomy_name($attribute_name) : '';
+	}
 }
