@@ -1002,16 +1002,14 @@ class Decoder
 			$property_values_data['id'] = (string)$xml_property_values_data->Ид;
 
 			/**
-			 * Наименование свойства
-			 * может быть, а может и нет
+			 * Наименование свойства может быть, а может и нет
 			 *
 			 * cml:НаименованиеТип
 			 */
 			$property_values_data['name'] = $xml_property_values_data->Наименование ? (string)$xml_property_values_data->Наименование : '';
 
 			/**
-			 * Значение свойства
-			 * Может быть значением, либо ссылкой на значение справочника классификатора.
+			 * Значение свойства может быть значением, либо ссылкой на значение справочника классификатора.
 			 */
 			$property_values_data['value'] = $xml_property_values_data->Значение ? (string)$xml_property_values_data->Значение : '';
 
