@@ -6,7 +6,6 @@ use Wc1c\Exceptions\Exception;
 use Wc1c\Abstracts\TableAbstract;
 use Wc1c\Data\Storage;
 use Wc1c\Data\Storages\ConfigurationsStorage;
-use Wc1c\Settings\ConnectionSettings;
 use Wc1c\Traits\ConfigurationsUtilityTrait;
 use Wc1c\Traits\DatetimeUtilityTrait;
 use Wc1c\Traits\UtilityTrait;
@@ -436,18 +435,5 @@ class AllTable extends TableAbstract
                 'total_pages' => ceil($total_items / $per_page)
             ]
 		);
-	}
-
-	/**
-	 * Extra controls to be displayed between bulk actions and pagination
-	 *
-	 * @param string $which
-	 */
-	protected function extraTablenav($which)
-	{
-		if('top' === $which)
-		{
-			$this->views();
-		}
 	}
 }
