@@ -245,7 +245,7 @@ class MainForm extends Form
                         }
                         else
                         {
-	                        $local_data['code_date_expires'] = date_i18n( get_option('date_format'), $local_data['code_date_expires']);
+	                        $local_data['code_date_expires'] = date_i18n(get_option('date_format'), $local_data['code_date_expires']);
                         }
 
                         printf

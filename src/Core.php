@@ -2,6 +2,8 @@
 
 defined('ABSPATH') || exit;
 
+use Monolog\Handler\ErrorLogHandler;
+use Monolog\Handler\StreamHandler;
 use wpdb;
 use Psr\Log\LoggerInterface;
 use Wc1c\Exceptions\Exception;
@@ -339,6 +341,18 @@ final class Core
 				$logger->pushHandler($handler);
 			}
 			catch(\Exception $e){}
+
+			/**
+			 * Внешние назначения для логгера
+			 *
+			 * @param LoggerInterface $logger Текущий логгер
+			 *
+			 * @return LoggerInterface
+			 */
+			if(has_filter('wc1c_log_load_before'))
+			{
+				$logger = apply_filters('wc1c_log_load_before', $logger);
+			}
 
 			$this->log[$channel] = $logger;
 		}

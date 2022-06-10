@@ -13,6 +13,21 @@ use Wc1c\Cml\Contracts\ProductDataContract;
 class Product extends DataAbstract implements ProductDataContract
 {
 	/**
+	 * @var array
+	 */
+	protected $data =
+	[
+		'sku' => '',
+		'name' => '',
+		'description' => '',
+		'quantity' => null,
+		'images' => [],
+		'prices' => [],
+		'requisites' => [],
+		'property_values' => [],
+	];
+
+	/**
 	 * @return string|false
 	 */
 	public function getId()
@@ -55,7 +70,7 @@ class Product extends DataAbstract implements ProductDataContract
 	 */
 	public function getName()
 	{
-		if(!isset($this->data['name']))
+		if(empty($this->data['name']))
 		{
 			return false;
 		}
@@ -80,7 +95,7 @@ class Product extends DataAbstract implements ProductDataContract
 	 */
 	public function getDescription()
 	{
-		if(!isset($this->data['description']))
+		if(empty($this->data['description']))
 		{
 			return false;
 		}
@@ -89,16 +104,57 @@ class Product extends DataAbstract implements ProductDataContract
 	}
 
 	/**
-	 * @return false|array
+	 * Получение реквизитов продукта
+	 *
+	 * @param string $name Наименование реквизита для получения значения, опционально
+	 *
+	 * @return false|array|string Ложь, массив всех реквизитов или значение конкретного реквизита
 	 */
-	public function getRequisites()
+	public function getRequisites($name = '')
 	{
-		if(!isset($this->data['requisites']))
+		if(!$this->hasRequisites())
 		{
 			return false;
 		}
 
+		if('' !== $name)
+		{
+			if($this->hasRequisites($name))
+			{
+				return $this->data['requisites'][$name];
+			}
+
+			return false;
+		}
+
 		return $this->data['requisites'];
+	}
+
+	/**
+	 * Проверка на наличие реквизитов у продукта, возможна проверка конкретного реквизита
+	 *
+	 * @param string $name Наименование реквизита
+	 *
+	 * @return bool Имеются ли реквизиты
+	 */
+	public function hasRequisites($name = '')
+	{
+		if(empty($this->data['requisites']))
+		{
+			return false;
+		}
+
+		if('' !== $name)
+		{
+			if(isset($this->data['requisites'][$name]))
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		return true;
 	}
 
 	/**
@@ -128,11 +184,40 @@ class Product extends DataAbstract implements ProductDataContract
 	}
 
 	/**
+	 * Имеются ли у продукта цены или конкретная цена по идентификатору типа цены
+	 *
+	 * @param string $price_type_id Идентификатор типа цены
+	 *
+	 * @return bool
+	 */
+	public function hasPrices($price_type_id = '')
+	{
+		if(empty($this->data['prices']))
+		{
+			return false;
+		}
+
+		if('' === $price_type_id)
+		{
+			return true;
+		}
+
+		if(isset($this->data['prices'][$price_type_id]))
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Получение текущих цен продукта
+	 *
 	 * @return false|array
 	 */
 	public function getPrices()
 	{
-		if(!isset($this->data['prices']))
+		if(!$this->hasPrices())
 		{
 			return false;
 		}
@@ -211,5 +296,18 @@ class Product extends DataAbstract implements ProductDataContract
 		}
 
 		return $this->data['classifier_groups'];
+	}
+
+	/**
+	 * @return int|float
+	 */
+	public function getQuantity()
+	{
+		if(empty($this->data['quantity']) || is_null($this->data['quantity']))
+		{
+			return 0;
+		}
+
+		return $this->data['quantity'];
 	}
 }

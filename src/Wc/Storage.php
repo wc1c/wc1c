@@ -5,6 +5,7 @@ defined('ABSPATH') || exit;
 use Wc1c\Exceptions\Exception;
 use Wc1c\Wc\Contracts\StorageContract;
 use Wc1c\Wc\Abstracts\DataAbstract;
+use Wc1c\Wc\Storages\AttributesStorage;
 use Wc1c\Wc\Storages\CategoriesStorage;
 use Wc1c\Wc\Storages\ImagesStorage;
 
@@ -24,7 +25,7 @@ class Storage implements StorageContract
 	 * You can also pass something like key_<type> for codes storage and
 	 * that type will be used first when available, if a store is requested like
 	 * this and doesn't exist, then the store would fall back to 'key'.
-	 * Ran through PREFIX `_wc_data_storages`.
+	 * Ran through wc1c_wc_data_storages`.
 	 *
 	 * @var array
 	 */
@@ -32,6 +33,7 @@ class Storage implements StorageContract
 	[
 		'category' => CategoriesStorage::class,
 		'image' => ImagesStorage::class,
+		'attribute' => AttributesStorage::class,
 	];
 
 	/**
