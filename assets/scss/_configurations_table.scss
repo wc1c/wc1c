@@ -11,20 +11,21 @@
 
         .tablenav-pages
         {
-          display: none;
+          //display: none;
+          margin: 0;
         }
       }
+    }
 
-      .subsubsub
+    .subsubsub
+    {
+      margin: 0;
+      font-size: 14px;
+      line-height: 28px;
+
+      a
       {
-        margin: 0;
-        font-size: 14px;
-        line-height: 28px;
-
-        a
-        {
-          text-decoration: none;
-        }
+        text-decoration: none;
       }
     }
   }

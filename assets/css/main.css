@@ -9213,14 +9213,14 @@ a.toc-link {
   padding: 0;
 }
 .woocommerce_page_wc1c .configurations-all .tablenav.top .tablenav-pages {
-  display: none;
+  margin: 0;
 }
-.woocommerce_page_wc1c .configurations-all .tablenav .subsubsub {
+.woocommerce_page_wc1c .configurations-all .subsubsub {
   margin: 0;
   font-size: 14px;
   line-height: 28px;
 }
-.woocommerce_page_wc1c .configurations-all .tablenav .subsubsub a {
+.woocommerce_page_wc1c .configurations-all .subsubsub a {
   text-decoration: none;
 }
 .woocommerce_page_wc1c table.configurations .column-name .configuration-name {
