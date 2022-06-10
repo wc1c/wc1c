@@ -439,48 +439,6 @@ class AllTable extends TableAbstract
 	}
 
 	/**
-	 * Connect box
-	 *
-	 * @param string $text Button text
-	 * @param false $status
-	 */
-	public function connect_box($text, $status = false)
-	{
-		$class = 'button';
-		if($status === false)
-		{
-			$class .= ' button-primary';
-		}
-		else
-		{
-			$class .= ' button-green';
-		}
-
-		if(wc1c()->tecodes()->is_valid())
-		{
-			$local = wc1c()->tecodes()->get_local_code();
-			$local_data = wc1c()->tecodes()->get_local_code_data($local);
-
-			if($local_data['code_date_expires'] === 'never')
-			{
-				$local_data['code_date_expires'] = __('never', 'wc1c');
-			}
-			else
-			{
-				$local_data['code_date_expires'] = date_i18n(get_option('date_format'), $local_data['code_date_expires']);
-			}
-
-			$text .= ' (' . __('support expires:', 'wc1c') . ' ' . $local_data['code_date_expires'] . ')';
-		}
-		else
-		{
-			$text .= ' (' . __('no support', 'wc1c') . ')';
-		}
-
-		echo '<a href="' . admin_url('admin.php?page=wc1c&section=settings&do_settings=connection') . '" class="' . $class . '" style="float: right;"> ' . $text . ' </a>';
-	}
-
-	/**
 	 * Extra controls to be displayed between bulk actions and pagination
 	 *
 	 * @param string $which
@@ -490,17 +448,6 @@ class AllTable extends TableAbstract
 		if('top' === $which)
 		{
 			$this->views();
-
-			$settings = wc1c()->settings('connection');
-
-			if($settings->get('login', false))
-			{
-				$this->connect_box(__($settings->get('login', 'Undefined'), 'wc1c'), true);
-			}
-			else
-			{
-				$this->connect_box(__( 'Connection to the WC1C', 'wc1c'));
-			}
 		}
 	}
 }

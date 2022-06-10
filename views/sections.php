@@ -3,7 +3,7 @@ defined('ABSPATH') || exit;
 
 $admin = Admin::instance();
 
-$nav = '<nav class="nav-tab-wrapper woo-nav-tab-wrapper">';
+$nav = '<nav class="nav-tab-wrapper woo-nav-tab-wrapper pt-0">';
 
 foreach($admin->getSections() as $tab_key => $tab_name)
 {
@@ -18,8 +18,19 @@ foreach($admin->getSections() as $tab_key => $tab_name)
     }
     else
     {
-        $nav .= '<a href="' . admin_url('admin.php?page=wc1c&section=' . $tab_key) . '" class="nav-tab ">' . $tab_name['title'] . '</a>';
+        $nav .= '<a href="' . admin_url('admin.php?page=wc1c&section=' . $tab_key) . '" class="nav-tab">' . $tab_name['title'] . '</a>';
     }
+}
+
+$settings = wc1c()->settings('connection');
+
+if($settings->get('login', false))
+{
+	$admin->connectBox(__($settings->get('login', 'Undefined'), 'wc1c'), true);
+}
+else
+{
+	$admin->connectBox(__( 'Connection to the WC1C', 'wc1c'));
 }
 
 $nav .= '</nav>';
