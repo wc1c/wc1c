@@ -28,7 +28,7 @@ List of major changes from version to version. [Descriptions more](https://wc1c.
 
 = 0.8.0 =
 * WP tested up to: 6.0
-* WC tested up to: 6.5
+* WC tested up to: 6.6
 * More changes
 
 = 0.7.0 =
