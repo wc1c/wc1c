@@ -258,14 +258,15 @@ final class Admin
 			if($local_data['code_date_expires'] === 'never')
 			{
 				$local_data['code_date_expires'] = __('never', 'wc1c');
+				$text .= ' (' . __('no deadline', 'wc1c') . ')';
 			}
 			else
 			{
 				$local_data['code_date_expires'] = date_i18n(get_option('date_format'), $local_data['code_date_expires']);
+				$text .= ' (' . __('to:', 'wc1c') . ' ' . $local_data['code_date_expires'] . ')';
 			}
 
 			$class .= ' status-3';
-			$text .= ' (' . __('support expires:', 'wc1c') . ' ' . $local_data['code_date_expires'] . ')';
 		}
 		elseif($status)
 		{
