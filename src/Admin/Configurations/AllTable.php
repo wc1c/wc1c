@@ -406,10 +406,10 @@ class AllTable extends TableAbstract
 		{
 			$search_text = wc_clean(wp_unslash($_REQUEST['s']));
 			$storage_args['name'] =
-				[
-					'value' => $search_text,
-					'compare_key' => 'LIKE'
-				];
+			[
+				'value' => $search_text,
+				'compare_key' => 'LIKE'
+			];
 		}
 
 		/**
