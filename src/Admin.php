@@ -238,17 +238,19 @@ final class Admin
 	 */
 	public function connectBox($text, $status = false)
 	{
-		$class = 'button';
+		$class = 'nav-connect rounded-top';
 		if($status === false)
 		{
-			$class .= ' button-primary';
+			$class .= ' status-0';
+			$class .= ' nav-tab';
 		}
 		else
 		{
-			$class .= ' button-green';
+			$class .= ' status-1';
+			$class .= ' nav-tab';
 		}
 
-		if(wc1c()->tecodes()->is_valid())
+		if(wc1c()->tecodes()->is_valid() && $status)
 		{
 			$local = wc1c()->tecodes()->get_local_code();
 			$local_data = wc1c()->tecodes()->get_local_code_data($local);
@@ -262,13 +264,15 @@ final class Admin
 				$local_data['code_date_expires'] = date_i18n(get_option('date_format'), $local_data['code_date_expires']);
 			}
 
+			$class .= ' status-3';
 			$text .= ' (' . __('support expires:', 'wc1c') . ' ' . $local_data['code_date_expires'] . ')';
 		}
-		else
+		elseif($status)
 		{
 			$text .= ' (' . __('no support', 'wc1c') . ')';
+			$class .= ' status-2';
 		}
 
-		echo '<a href="' . admin_url('admin.php?page=wc1c&section=settings&do_settings=connection') . '" class="' . $class . '" style="float: right;"> ' . $text . ' </a>';
+		echo '<a href="' . admin_url('admin.php?page=wc1c&section=settings&do_settings=connection') . '" class="' . $class . '"> ' . $text . ' </a>';
 	}
 }
