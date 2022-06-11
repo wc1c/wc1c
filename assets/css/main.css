@@ -9088,6 +9088,36 @@ textarea.form-control-lg {
 /**
 *** Nav
  */
+nav .nav-connect {
+  font-weight: normal;
+  padding: 3px 5px;
+  background: transparent;
+  border-top: 4px solid;
+  border-bottom: 2px solid;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+}
+nav .nav-connect.status-0 {
+  padding: 0 5px;
+  margin-top: 2px;
+  border-color: #fd0;
+}
+nav .nav-connect.status-1 {
+  padding: 0 5px;
+  margin-top: 2px;
+  border-color: #c4161c;
+}
+nav .nav-connect.status-2 {
+  padding: 0 5px;
+  margin-top: 2px;
+  border-color: #7f54b3;
+}
+nav .nav-connect.status-3 {
+  padding: 0 5px;
+  margin-top: 2px;
+  border-color: #128003;
+}
+
 .nav.nav-tabs {
   border-bottom: 0;
 }
@@ -9213,6 +9243,7 @@ a.toc-link {
   padding: 0;
 }
 .woocommerce_page_wc1c .configurations-all .tablenav.top .tablenav-pages {
+  display: none;
   margin: 0;
 }
 .woocommerce_page_wc1c .configurations-all .subsubsub {
