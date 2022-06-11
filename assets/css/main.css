@@ -9088,34 +9088,24 @@ textarea.form-control-lg {
 /**
 *** Nav
  */
-nav .nav-connect {
-  font-weight: normal;
-  padding: 3px 5px;
-  background: transparent;
-  border-top: 4px solid;
-  border-bottom: 2px solid;
-  border-top-left-radius: 7px;
-  border-top-right-radius: 7px;
+.nav-connect {
+  font-weight: normal !important;
 }
-nav .nav-connect.status-0 {
-  padding: 0 5px;
-  margin-top: 2px;
+.nav-connect.status-0 {
   border-color: #fd0;
+  color: #fd0;
 }
-nav .nav-connect.status-1 {
-  padding: 0 5px;
-  margin-top: 2px;
+.nav-connect.status-1 {
   border-color: #c4161c;
+  color: #c4161c;
 }
-nav .nav-connect.status-2 {
-  padding: 0 5px;
-  margin-top: 2px;
+.nav-connect.status-2 {
   border-color: #7f54b3;
+  color: #7f54b3;
 }
-nav .nav-connect.status-3 {
-  padding: 0 5px;
-  margin-top: 2px;
+.nav-connect.status-3 {
   border-color: #128003;
+  color: #128003;
 }
 
 .nav.nav-tabs {
