@@ -275,4 +275,43 @@ class Attribute extends AttributesData implements AttributeContract
 
 		return $attribute_name ? 'pa_' . wc_sanitize_taxonomy_name($attribute_name) : '';
 	}
+
+	/**
+	 * Назначение значения для атрибута
+	 *
+	 * @param $name
+	 *
+	 * @return int|mixed
+	 */
+	public function assignValue($name)
+	{
+		register_taxonomy($this->getTaxonomyName(), 'product');
+
+		$value_result = wp_insert_term
+		(
+			$name, $this->getTaxonomyName(),
+			[
+				'description' => '',
+				'parent' => 0,
+				'slug' => '',
+			]
+		);
+
+		if(is_wp_error($value_result))
+		{
+			if(isset($value_result->error_data['term_exists']) && $value_result->error_data['term_exists'])
+			{
+				return $value_result->error_data['term_exists'];
+			}
+
+			return false;
+		}
+
+		if(isset($value_result['term_id']))
+		{
+			return $value_result['term_id'];
+		}
+
+		return false;
+	}
 }
