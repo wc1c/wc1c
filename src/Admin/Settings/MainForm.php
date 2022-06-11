@@ -223,11 +223,10 @@ class MainForm extends Form
 
 		$data = wp_parse_args($data, $defaults);
 
-		ob_start();
-
-        $local = wc1c()->tecodes()->get_local_code();
-
+		$local = wc1c()->tecodes()->get_local_code();
 		$local_data = wc1c()->tecodes()->get_local_code_data($local);
+
+		ob_start();
 
 		?>
         <tr valign="top">
