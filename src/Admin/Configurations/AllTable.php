@@ -194,8 +194,6 @@ class AllTable extends TableAbstract
 
 		$actions = apply_filters('wc1c_admin_configurations_all_row_actions', $actions, $item);
 
-		$metas['schema'] = __('Schema:', 'wc1c') . ' ' . $item['schema'];
-
 		$user = get_userdata($item['user_id']);
 		if($user instanceof \WP_User && $user->exists())
 		{
@@ -205,6 +203,10 @@ class AllTable extends TableAbstract
 		{
 			$metas['user'] =  __('User is not exists.', 'wc1c');
 		}
+
+		$schema = wc1c()->schemas()->get($item['schema']);
+
+		$metas['schema'] = __('Schema:', 'wc1c') . ' ' . $item['schema'] . ' (' . $schema->getName() . ')';
 
 		$metas = apply_filters('wc1c_admin_configurations_all_row_metas', $metas, $item);
 
