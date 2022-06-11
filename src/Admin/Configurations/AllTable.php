@@ -402,6 +402,16 @@ class AllTable extends TableAbstract
 			$storage_args['status'] = $_GET['status'];
 		}
 
+		if(!empty($_REQUEST['s']))
+		{
+			$search_text = wc_clean(wp_unslash($_REQUEST['s']));
+			$storage_args['name'] =
+				[
+					'value' => $search_text,
+					'compare_key' => 'LIKE'
+				];
+		}
+
 		/**
 		 * REQUIRED for pagination. Let's check how many items are in our data array.
 		 * In real-world use, this would be the total number of items in your database,
@@ -435,5 +445,43 @@ class AllTable extends TableAbstract
                 'total_pages' => ceil($total_items / $per_page)
             ]
 		);
+	}
+
+	/**
+	 * Extra controls to be displayed between bulk actions and pagination
+	 *
+	 * @param string $which
+	 */
+	protected function extraTablenav($which)
+	{
+		if('top' === $which)
+		{
+			$this->views();
+
+			$this->searchBox(__('Search', 'wc1c'), 'code');
+		}
+	}
+
+	/**
+	 * Search box
+	 *
+	 * @param string $text Button text
+	 * @param string $input_id Input ID
+	 */
+	public function searchBox($text, $input_id)
+	{
+		if(empty($_REQUEST['s']) && !$this->hasItems())
+		{
+			return;
+		}
+
+		$input_id = $input_id . '-search-input';
+		$searchQuery = isset($_REQUEST['s']) ? sanitize_text_field(wp_unslash($_REQUEST['s'])) : '';
+
+		echo '<p class="search-box">';
+		echo '<label class="screen-reader-text" for="' . esc_attr($input_id) . '">' . esc_html($text) . ':</label>';
+		echo '<input type="search" id="' . esc_attr($input_id) . '" name="s" value="' . esc_attr($searchQuery) . '" />';
+		submit_button($text, '', '', false, array('id' => 'search-submit'));
+		echo '</p>';
 	}
 }
