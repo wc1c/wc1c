@@ -1,12 +1,12 @@
 <?php namespace Wc1c\Admin\Wizards;
 
+defined('ABSPATH') || exit;
+
 use Wc1c\Admin\Wizards\Setup\Check;
 use Wc1c\Admin\Wizards\Setup\Complete;
 use Wc1c\Admin\Wizards\Setup\Database;
 use Wc1c\Exceptions\Exception;
 use Wc1c\Traits\SingletonTrait;
-
-defined('ABSPATH') || exit;
 
 /**
  * SetupWizard

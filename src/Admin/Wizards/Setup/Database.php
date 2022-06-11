@@ -1,9 +1,9 @@
 <?php namespace Wc1c\Admin\Wizards\Setup;
 
+defined('ABSPATH') || exit;
+
 use Wc1c\Admin\Wizards\StepAbstract;
 use Wc1c\Traits\SingletonTrait;
-
-defined('ABSPATH') || exit;
 
 /**
  * Database
