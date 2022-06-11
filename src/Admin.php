@@ -238,16 +238,14 @@ final class Admin
 	 */
 	public function connectBox($text, $status = false)
 	{
-		$class = 'nav-connect rounded-top';
+		$class = 'page-title-action nav-connect';
 		if($status === false)
 		{
 			$class .= ' status-0';
-			$class .= ' nav-tab';
 		}
 		else
 		{
 			$class .= ' status-1';
-			$class .= ' nav-tab';
 		}
 
 		if(wc1c()->tecodes()->is_valid() && $status)
