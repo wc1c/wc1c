@@ -22,6 +22,8 @@ foreach($admin->getSections() as $tab_key => $tab_name)
     }
 }
 
+echo $nav;
+
 $settings = wc1c()->settings('connection');
 
 if($settings->get('login', false))
@@ -33,6 +35,4 @@ else
 	$admin->connectBox(__( 'Connection to the WC1C', 'wc1c'));
 }
 
-$nav .= '</nav>';
-
-echo $nav;
+echo '</nav>';
