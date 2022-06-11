@@ -5,36 +5,36 @@ nav
     font-weight: normal;
     padding: 3px 5px;
     background: transparent;
-    border-top: 5px solid;
-    border-bottom: 0;
+    border-top: 4px solid;
+    border-bottom: 2px solid;
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
 
     &.status-0
     {
       padding: 0 5px;
-      margin-top: 6px;
+      margin-top: 2px;
       border-color: #fd0;
     }
 
     &.status-1
     {
       padding: 0 5px;
-      margin-top: 6px;
+      margin-top: 2px;
       border-color: #c4161c;
     }
 
     &.status-2
     {
       padding: 0 5px;
-      margin-top: 6px;
+      margin-top: 2px;
       border-color: #7f54b3;
     }
 
     &.status-3
     {
       padding: 0 5px;
-      margin-top: 6px;
+      margin-top: 2px;
       border-color: #128003;
     }
   }
