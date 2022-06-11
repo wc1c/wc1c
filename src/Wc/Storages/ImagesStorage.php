@@ -9,13 +9,14 @@ use Wc1c\Exceptions\Exception;
 use Wc1c\Wc\Contracts\ImageContract;
 use Wc1c\Wc\Contracts\ImagesStorageContract;
 use Wc1c\Wc\Contracts\MetaStorageContract;
+use Wc1c\Wc\Contracts\StorageContract;
 
 /**
  * ImagesStorage
  *
  * @package Wc1c\Wc
  */
-class ImagesStorage implements ImagesStorageContract, MetaStorageContract
+class ImagesStorage implements ImagesStorageContract, StorageContract, MetaStorageContract
 {
 	/**
 	 * Method to create a new object in the database
