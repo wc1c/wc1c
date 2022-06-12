@@ -26,13 +26,4 @@ interface AttributesStorageContract
 	 * @return false|AttributeContract
 	 */
 	public function getByLabel($label);
-
-	/**
-	 * Получение атрибута по идентификатору атрибута из 1С
-	 *
-	 * @param string $id Идентификатор атрибута в 1С
-	 *
-	 * @return false|AttributeContract
-	 */
-	public function getByExternalId($id);
 }

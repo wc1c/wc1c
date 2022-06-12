@@ -6,7 +6,7 @@ use Wc1c\Exceptions\Exception;
 use Wc1c\Abstracts\TableAbstract;
 use Wc1c\Data\Storage;
 use Wc1c\Data\Storages\ConfigurationsStorage;
-use Wc1c\Settings\ConnectionSettings;
+use Wc1c\Exceptions\RuntimeException;
 use Wc1c\Traits\ConfigurationsUtilityTrait;
 use Wc1c\Traits\DatetimeUtilityTrait;
 use Wc1c\Traits\UtilityTrait;
@@ -195,8 +195,6 @@ class AllTable extends TableAbstract
 
 		$actions = apply_filters('wc1c_admin_configurations_all_row_actions', $actions, $item);
 
-		$metas['schema'] = __('Schema:', 'wc1c') . ' ' . $item['schema'];
-
 		$user = get_userdata($item['user_id']);
 		if($user instanceof \WP_User && $user->exists())
 		{
@@ -205,6 +203,16 @@ class AllTable extends TableAbstract
 		else
 		{
 			$metas['user'] =  __('User is not exists.', 'wc1c');
+		}
+
+		try
+		{
+			$schema = wc1c()->schemas()->get($item['schema']);
+			$metas['schema'] = __('Schema:', 'wc1c') . ' ' . $item['schema'] . ' (' . $schema->getName() . ')';
+		}
+		catch(RuntimeException $e)
+		{
+			$metas['schema'] = __('Schema:', 'wc1c') . $item['schema'] . ' (' . __('not found, please install the schema', 'wc1c') . ')';
 		}
 
 		$metas = apply_filters('wc1c_admin_configurations_all_row_metas', $metas, $item);
@@ -403,6 +411,16 @@ class AllTable extends TableAbstract
 			$storage_args['status'] = $_GET['status'];
 		}
 
+		if(!empty($_REQUEST['s']))
+		{
+			$search_text = wc_clean(wp_unslash($_REQUEST['s']));
+			$storage_args['name'] =
+			[
+				'value' => $search_text,
+				'compare_key' => 'LIKE'
+			];
+		}
+
 		/**
 		 * REQUIRED for pagination. Let's check how many items are in our data array.
 		 * In real-world use, this would be the total number of items in your database,
@@ -439,48 +457,6 @@ class AllTable extends TableAbstract
 	}
 
 	/**
-	 * Connect box
-	 *
-	 * @param string $text Button text
-	 * @param false $status
-	 */
-	public function connect_box($text, $status = false)
-	{
-		$class = 'button';
-		if($status === false)
-		{
-			$class .= ' button-primary';
-		}
-		else
-		{
-			$class .= ' button-green';
-		}
-
-		if(wc1c()->tecodes()->is_valid())
-		{
-			$local = wc1c()->tecodes()->get_local_code();
-			$local_data = wc1c()->tecodes()->get_local_code_data($local);
-
-			if($local_data['code_date_expires'] === 'never')
-			{
-				$local_data['code_date_expires'] = __('never', 'wc1c');
-			}
-			else
-			{
-				$local_data['code_date_expires'] = date_i18n(get_option('date_format'), $local_data['code_date_expires']);
-			}
-
-			$text .= ' (' . __('support expires:', 'wc1c') . ' ' . $local_data['code_date_expires'] . ')';
-		}
-		else
-		{
-			$text .= ' (' . __('no support', 'wc1c') . ')';
-		}
-
-		echo '<a href="' . admin_url('admin.php?page=wc1c&section=settings&do_settings=connection') . '" class="' . $class . '" style="float: right;"> ' . $text . ' </a>';
-	}
-
-	/**
 	 * Extra controls to be displayed between bulk actions and pagination
 	 *
 	 * @param string $which
@@ -491,16 +467,30 @@ class AllTable extends TableAbstract
 		{
 			$this->views();
 
-			$settings = wc1c()->settings('connection');
-
-			if($settings->get('login', false))
-			{
-				$this->connect_box(__($settings->get('login', 'Undefined'), 'wc1c'), true);
-			}
-			else
-			{
-				$this->connect_box(__( 'Connection to the WC1C', 'wc1c'));
-			}
+			$this->searchBox(__('Search', 'wc1c'), 'code');
 		}
+	}
+
+	/**
+	 * Search box
+	 *
+	 * @param string $text Button text
+	 * @param string $input_id Input ID
+	 */
+	public function searchBox($text, $input_id)
+	{
+		if(empty($_REQUEST['s']) && !$this->hasItems())
+		{
+			return;
+		}
+
+		$input_id = $input_id . '-search-input';
+		$searchQuery = isset($_REQUEST['s']) ? sanitize_text_field(wp_unslash($_REQUEST['s'])) : '';
+
+		echo '<p class="search-box">';
+		echo '<label class="screen-reader-text" for="' . esc_attr($input_id) . '">' . esc_html($text) . ':</label>';
+		echo '<input type="search" id="' . esc_attr($input_id) . '" name="s" value="' . esc_attr($searchQuery) . '" />';
+		submit_button($text, '', '', false, array('id' => 'search-submit'));
+		echo '</p>';
 	}
 }

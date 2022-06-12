@@ -1,17 +1,7 @@
-<?php
-/**
- * Namespace
- */
-namespace Digiom\WordPress\Notices;
+<?php namespace Digiom\WordPress\Notices;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use ArrayIterator;
 use IteratorAggregate;
 use Countable;
@@ -795,6 +785,7 @@ class Manager implements ManagerInterface, Countable, IteratorAggregate
 	/**
 	 * Count number of notices in the queue
 	 */
+	#[\ReturnTypeWillChange]
 	public function count()
 	{
 		return count($this->notices);
@@ -816,6 +807,7 @@ class Manager implements ManagerInterface, Countable, IteratorAggregate
 	 *
 	 * @return ArrayIterator
 	 */
+	#[\ReturnTypeWillChange]
 	public function getIterator()
 	{
 		return new ArrayIterator($this->notices);

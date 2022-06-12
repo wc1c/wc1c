@@ -3,12 +3,10 @@
 <div class="configurations-all">
     <form method="post" action="">
 		<?php
-		$list_table = $args['object'];
-		$list_table->prepareItems();
+		    $list_table = $args['object'];
+		    $list_table->prepareItems();
 		?>
 
-		<?php
-		$list_table->display();
-		?>
+		<?php $list_table->display(); ?>
     </form>
 </div>

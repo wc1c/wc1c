@@ -229,4 +229,49 @@ final class Admin
 	{
 		return array_merge(['site' => '<a href="' . admin_url('admin.php?page=wc1c') . '">' . __('Settings', 'wc1c') . '</a>'], $links);
 	}
+
+	/**
+	 * Connect box
+	 *
+	 * @param string $text Button text
+	 * @param false $status
+	 */
+	public function connectBox($text, $status = false)
+	{
+		$class = 'page-title-action nav-connect';
+		if($status === false)
+		{
+			$class .= ' status-0';
+		}
+		else
+		{
+			$class .= ' status-1';
+		}
+
+		if(wc1c()->tecodes()->is_valid() && $status)
+		{
+			$local = wc1c()->tecodes()->get_local_code();
+			$local_data = wc1c()->tecodes()->get_local_code_data($local);
+
+			if($local_data['code_date_expires'] === 'never')
+			{
+				$local_data['code_date_expires'] = __('never', 'wc1c');
+				$text .= ' (' . __('no deadline', 'wc1c') . ')';
+			}
+			else
+			{
+				$local_data['code_date_expires'] = date_i18n(get_option('date_format'), $local_data['code_date_expires']);
+				$text .= ' (' . __('to:', 'wc1c') . ' ' . $local_data['code_date_expires'] . ')';
+			}
+
+			$class .= ' status-3';
+		}
+		elseif($status)
+		{
+			$text .= ' (' . __('no support', 'wc1c') . ')';
+			$class .= ' status-2';
+		}
+
+		echo '<a href="' . admin_url('admin.php?page=wc1c&section=settings&do_settings=connection') . '" class="' . $class . '"> ' . $text . ' </a>';
+	}
 }

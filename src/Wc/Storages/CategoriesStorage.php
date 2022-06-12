@@ -5,6 +5,7 @@ defined('ABSPATH') || exit;
 use WP_Error;
 use stdClass;
 use Wc1c\Exceptions\Exception;
+use Wc1c\Wc\Contracts\StorageContract;
 use Wc1c\Wc\Category;
 use Wc1c\Wc\Contracts\MetaStorageContract;
 use Wc1c\Wc\Contracts\CategoriesStorageContract;
@@ -14,7 +15,7 @@ use Wc1c\Wc\Contracts\CategoriesStorageContract;
  *
  * @package Wc1c\Wc
  */
-class CategoriesStorage implements CategoriesStorageContract, MetaStorageContract
+class CategoriesStorage implements CategoriesStorageContract, StorageContract, MetaStorageContract
 {
 	/**
 	 * Method to create a new object in the database

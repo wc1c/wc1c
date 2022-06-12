@@ -1,8 +1,8 @@
 <?php namespace Wc1c\Admin\Wizards;
 
-use Wc1c\Exceptions\Exception;
-
 defined('ABSPATH') || exit;
+
+use Wc1c\Exceptions\Exception;
 
 /**
  * WizardAbstract

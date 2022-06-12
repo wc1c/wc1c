@@ -9088,6 +9088,26 @@ textarea.form-control-lg {
 /**
 *** Nav
  */
+.nav-connect {
+  font-weight: normal !important;
+}
+.nav-connect.status-0 {
+  border-color: #fd0;
+  color: #1e1e1e;
+}
+.nav-connect.status-1 {
+  border-color: #c4161c;
+  color: #c4161c;
+}
+.nav-connect.status-2 {
+  border-color: #7f54b3;
+  color: #7f54b3;
+}
+.nav-connect.status-3 {
+  border-color: #128003;
+  color: #128003;
+}
+
 .nav.nav-tabs {
   border-bottom: 0;
 }
@@ -9214,13 +9234,14 @@ a.toc-link {
 }
 .woocommerce_page_wc1c .configurations-all .tablenav.top .tablenav-pages {
   display: none;
+  margin: 0;
 }
-.woocommerce_page_wc1c .configurations-all .tablenav .subsubsub {
+.woocommerce_page_wc1c .configurations-all .subsubsub {
   margin: 0;
   font-size: 14px;
   line-height: 28px;
 }
-.woocommerce_page_wc1c .configurations-all .tablenav .subsubsub a {
+.woocommerce_page_wc1c .configurations-all .subsubsub a {
   text-decoration: none;
 }
 .woocommerce_page_wc1c table.configurations .column-name .configuration-name {
