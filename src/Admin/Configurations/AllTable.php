@@ -212,7 +212,7 @@ class AllTable extends TableAbstract
 		}
 		catch(RuntimeException $e)
 		{
-			$metas['schema'] = __('Schema:', 'wc1c') . $item['schema'] . ' (' . __('not found, please install the schema', 'wc1c') . ')';
+			$metas['schema'] = __('Schema:', 'wc1c') . ' ' . $item['schema'] . ' (' . __('not found, please install the schema', 'wc1c') . ')';
 		}
 
 		$metas = apply_filters('wc1c_admin_configurations_all_row_metas', $metas, $item);

@@ -9088,9 +9088,6 @@ textarea.form-control-lg {
 /**
 *** Nav
  */
-.nav-connect {
-  font-weight: normal !important;
-}
 .nav-connect.status-0 {
   border-color: #fd0;
   color: #1e1e1e;
@@ -9369,7 +9366,7 @@ a.toc-link {
 *** Other
  */
 .woocommerce_page_wc1c .wp-header-end {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 .woocommerce_page_wc1c .add_config {
   text-align: right;

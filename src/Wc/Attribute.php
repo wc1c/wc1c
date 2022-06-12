@@ -285,8 +285,6 @@ class Attribute extends AttributesData implements AttributeContract
 	 */
 	public function assignValue($name)
 	{
-		register_taxonomy($this->getTaxonomyName(), 'product');
-
 		$value_result = wp_insert_term
 		(
 			$name, $this->getTaxonomyName(),
