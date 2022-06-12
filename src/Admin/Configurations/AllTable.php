@@ -6,6 +6,7 @@ use Wc1c\Exceptions\Exception;
 use Wc1c\Abstracts\TableAbstract;
 use Wc1c\Data\Storage;
 use Wc1c\Data\Storages\ConfigurationsStorage;
+use Wc1c\Exceptions\RuntimeException;
 use Wc1c\Traits\ConfigurationsUtilityTrait;
 use Wc1c\Traits\DatetimeUtilityTrait;
 use Wc1c\Traits\UtilityTrait;
@@ -204,9 +205,15 @@ class AllTable extends TableAbstract
 			$metas['user'] =  __('User is not exists.', 'wc1c');
 		}
 
-		$schema = wc1c()->schemas()->get($item['schema']);
-
-		$metas['schema'] = __('Schema:', 'wc1c') . ' ' . $item['schema'] . ' (' . $schema->getName() . ')';
+		try
+		{
+			$schema = wc1c()->schemas()->get($item['schema']);
+			$metas['schema'] = __('Schema:', 'wc1c') . ' ' . $item['schema'] . ' (' . $schema->getName() . ')';
+		}
+		catch(RuntimeException $e)
+		{
+			$metas['schema'] = __('Schema:', 'wc1c') . $item['schema'] . ' (' . __('not found, please install the schema', 'wc1c') . ')';
+		}
 
 		$metas = apply_filters('wc1c_admin_configurations_all_row_metas', $metas, $item);
 
