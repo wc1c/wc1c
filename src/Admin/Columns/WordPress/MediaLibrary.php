@@ -18,7 +18,7 @@ final class MediaLibrary
 	 */
 	public function __construct()
 	{
-		add_filter('manage_media_columns',  [$this, 'manage_media_columns']);
+		add_filter('manage_media_columns', [$this, 'manage_media_columns']);
 		add_action('manage_media_custom_column', [$this, 'manage_media_custom_column']);
 	}
 
