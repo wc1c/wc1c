@@ -9242,8 +9242,9 @@ a.toc-link {
   text-decoration: none;
 }
 .woocommerce_page_wc1c table.configurations .column-name .configuration-name {
-  font-size: 16px !important;
+  font-size: 15px !important;
   line-height: 120%;
+  font-weight: 500;
 }
 .woocommerce_page_wc1c table.configurations .column-name .configuration-metas {
   border: 1px solid #ccd0d4;
