@@ -4,12 +4,12 @@ defined('ABSPATH') || exit;
 
 use stdClass;
 use WP_Query;
-use Wc1c\Wc\Image;
 use Wc1c\Exceptions\Exception;
 use Wc1c\Wc\Contracts\ImageContract;
 use Wc1c\Wc\Contracts\ImagesStorageContract;
 use Wc1c\Wc\Contracts\MetaStorageContract;
 use Wc1c\Wc\Contracts\StorageContract;
+use Wc1c\Wc\Entities\Image;
 
 /**
  * ImagesStorage
@@ -326,7 +326,7 @@ class ImagesStorage implements ImagesStorageContract, StorageContract, MetaStora
 	 *
 	 * @param string $name Наименование искомой категории
 	 *
-	 * @return false|ImageContract|ImageContract[]
+	 * @return false|ImageContract
 	 * @throws Exception
 	 */
 	public function getByName($name)
@@ -359,7 +359,7 @@ class ImagesStorage implements ImagesStorageContract, StorageContract, MetaStora
 	 *
 	 * @param string $name Наименование изображения
 	 *
-	 * @return false|ImageContract|ImageContract[]
+	 * @return false|ImageContract
 	 * @throws Exception
 	 */
 	public function getByExternalName($name)

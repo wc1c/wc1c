@@ -2,13 +2,13 @@
 
 defined('ABSPATH') || exit;
 
-use WP_Error;
 use stdClass;
+use WP_Error;
 use Wc1c\Exceptions\Exception;
-use Wc1c\Wc\Contracts\StorageContract;
-use Wc1c\Wc\Category;
-use Wc1c\Wc\Contracts\MetaStorageContract;
 use Wc1c\Wc\Contracts\CategoriesStorageContract;
+use Wc1c\Wc\Contracts\MetaStorageContract;
+use Wc1c\Wc\Contracts\StorageContract;
+use Wc1c\Wc\Entities\Category;
 
 /**
  * CategoriesStorage
