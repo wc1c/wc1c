@@ -335,11 +335,23 @@ class MainForm extends Form
 			return '';
 		}
 
+		$value_valid = explode('-', $value);
+		if('WPWC1C' !== strtoupper(reset($value_valid)))
+		{
+			wc1c()->admin()->notices()->create
+			(
+				[
+					'type' => 'error',
+					'data' => __('The support code is invalid. Enter the correct code.', 'wc1c')
+				]
+			);
+			return '';
+		}
+
 		wc1c()->tecodes()->delete_local_code();
 		wc1c()->tecodes()->set_code($value);
-		wc1c()->tecodes()->validate();
 
-		if(!wc1c()->tecodes()->is_valid())
+		if(false === wc1c()->tecodes()->validate())
 		{
 			$errors = wc1c()->tecodes()->get_errors();
 
