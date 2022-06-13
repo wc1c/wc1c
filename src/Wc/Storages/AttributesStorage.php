@@ -24,10 +24,12 @@ class AttributesStorage implements AttributesStorageContract, StorageContract
 	 */
 	public function create(&$data)
 	{
+		$name = $data->getName() ? $this->getUniqueName($data->getName()) : $this->getUniqueName($data->getLabel());
+
 		$args =
 		[
 			'name' => $data->getLabel(),
-			'slug' => $data->getName() ? $this->getUniqueName($data->getName()) : $this->getUniqueName($data->getLabel()),
+			'slug' => $name,
 			'type' => $data->getType(),
 			'order_by' => $data->getOrder(),
 			'has_archives' => $data->getPublic(),
@@ -43,6 +45,7 @@ class AttributesStorage implements AttributesStorageContract, StorageContract
 		if($attribute_id && !is_wp_error($attribute_id))
 		{
 			$data->setId($attribute_id);
+			$data->setName($name);
 
 			$data->saveMetaData();
 			$data->applyChanges();
