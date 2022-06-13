@@ -336,19 +336,19 @@ class MainForm extends Form
 		}
 
 		$value_valid = explode('-', $value);
-        if('WPWC1C' !== strtoupper(reset($value_valid)))
-        {
-	        wc1c()->admin()->notices()->create
-	        (
-		        [
-			        'type' => 'error',
-			        'data' => __('The support code is invalid. Enter the correct code.', 'wc1c')
-		        ]
-	        );
-	        return '';
-        }
+		if('WPWC1C' !== strtoupper(reset($value_valid)))
+		{
+			wc1c()->admin()->notices()->create
+			(
+				[
+					'type' => 'error',
+					'data' => __('The support code is invalid. Enter the correct code.', 'wc1c')
+				]
+			);
+			return '';
+		}
 
-        wc1c()->tecodes()->delete_local_code();
+		wc1c()->tecodes()->delete_local_code();
 		wc1c()->tecodes()->set_code($value);
 
 		if(false === wc1c()->tecodes()->validate())
