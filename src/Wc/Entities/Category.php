@@ -1,4 +1,4 @@
-<?php namespace Wc1c\Wc;
+<?php namespace Wc1c\Wc\Entities;
 
 defined('ABSPATH') || exit;
 

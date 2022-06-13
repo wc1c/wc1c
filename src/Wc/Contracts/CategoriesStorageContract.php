@@ -2,8 +2,6 @@
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Wc\Category;
-
 /**
  * CategoriesStorageContract
  *
@@ -16,7 +14,7 @@ interface CategoriesStorageContract
 	 *
 	 * @param string $name Наименование искомой категории
 	 *
-	 * @return false|Category|Category[]
+	 * @return false|CategoryContract|CategoryContract[]
 	 */
 	public function getByName($name);
 
@@ -25,16 +23,16 @@ interface CategoriesStorageContract
 	 *
 	 * @param int|string $id Идентификатор категории
 	 *
-	 * @return false|Category
+	 * @return false|CategoryContract
 	 */
 	public function getById($id);
 
 	/**
 	 * Получение категории или категорий по идентификатору категории из 1С
 	 *
-	 * @param $id
+	 * @param int|string $id
 	 *
-	 * @return false|Category|Category[]
+	 * @return false|CategoryContract|CategoryContract[]
 	 */
 	public function getByExternalId($id);
 }

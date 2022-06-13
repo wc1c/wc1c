@@ -1,4 +1,4 @@
-<?php namespace Wc1c\Wc\Entities\Products;
+<?php namespace Wc1c\Wc\Products;
 
 defined('ABSPATH') || exit;
 
@@ -79,5 +79,51 @@ class Factory extends WC_Product_Factory
 		}
 
 		return $classname;
+	}
+
+	/**
+	 * @param $id
+	 *
+	 * @return bool|ProductContract
+	 */
+	public function getByExternalId($id)
+	{
+		$product_id = $this->findProductIdByExternalId($id);
+
+		if(0 === $product_id)
+		{
+			return false;
+		}
+
+		return $this->getProduct($product_id);
+	}
+
+	/**
+	 * Получение идентификатора товара по идентификатору товара из каталога
+	 * - возвращаются простые товары, а так же вариации
+	 *
+	 * @param $id
+	 *
+	 * @return int
+	 */
+	public function findProductIdByExternalId($id)
+	{
+		$args =
+		[
+			'post_type' => ['product', 'product_variation', 'any'],
+			'post_status' => implode(',', get_post_statuses()),
+			'meta_key' => '_wc1c_external_id',
+			'meta_value' => $id,
+		];
+
+		$posts = get_posts($args);
+		$product_id = 0;
+
+		if(is_array($posts) && isset($posts[0]) && is_object($posts[0]))
+		{
+			$product_id = $posts[0]->ID;
+		}
+
+		return $product_id;
 	}
 }
