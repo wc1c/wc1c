@@ -44,8 +44,8 @@ class CreateForm extends FormAbstract
 			'label' => __('Name of the configuration for easy use. You can enter any data up to 255 characters.', 'wc1c'),
 			'description' => sprintf
 			(
-				'%s<hr>%s',
-				__('Used for convenient distribution of multiple configurations. Can use any convenient fantasy.', 'wc1c'),
+                '%s<hr>%s',
+                __('Used for convenient distribution of multiple configurations. Can use any convenient fantasy.', 'wc1c'),
                 __('For example, the exchange of orders can be called: Exchange of orders. Well, if products are unloaded, and even into a specific category with specific properties - Green tea.', 'wc1c')
 			),
 			'default' => '',
