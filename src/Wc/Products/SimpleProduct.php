@@ -89,6 +89,26 @@ class SimpleProduct extends WC_Product_Simple implements ProductContract
 	}
 
 	/**
+	 * @param $id
+	 *
+	 * @return void
+	 */
+	public function setExternalCharacteristicId($id)
+	{
+		$this->add_meta_data('_wc1c_external_characteristic_id', $id, true);
+	}
+
+	/**
+	 * @param $context
+	 *
+	 * @return array|string
+	 */
+	public function getExternalCharacteristicId($context = 'view')
+	{
+		return $this->get_meta('_wc1c_external_characteristic_id', true, $context);
+	}
+
+	/**
 	 * Save data (either create or update depending on if we are working on an existing product).
 	 *
 	 * @return int
