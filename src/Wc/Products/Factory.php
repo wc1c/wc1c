@@ -82,11 +82,13 @@ class Factory extends WC_Product_Factory
 	}
 
 	/**
-	 * @param $id
+	 * Получение продукта или продуктов по идентификатору продукта из 1С
+	 *
+	 * @param string $id
 	 *
 	 * @return bool|ProductContract
 	 */
-	public function getByExternalId($id)
+	public function getProductByExternalId($id)
 	{
 		$product_id = $this->findProductIdByExternalId($id);
 
@@ -99,10 +101,9 @@ class Factory extends WC_Product_Factory
 	}
 
 	/**
-	 * Получение идентификатора товара по идентификатору товара из каталога
-	 * - возвращаются простые товары, а так же вариации
+	 * Получение идентификатора товара по идентификатору товара из 1C
 	 *
-	 * @param $id
+	 * @param int|string $id
 	 *
 	 * @return int
 	 */
@@ -110,18 +111,121 @@ class Factory extends WC_Product_Factory
 	{
 		$args =
 		[
-			'post_type' => ['product', 'product_variation', 'any'],
+			'post_type' => ['product', 'product_variation'],
 			'post_status' => implode(',', get_post_statuses()),
 			'meta_key' => '_wc1c_external_id',
 			'meta_value' => $id,
+			'posts_per_page' => -1,
+			'fields' => 'ids'
 		];
 
 		$posts = get_posts($args);
 		$product_id = 0;
 
-		if(is_array($posts) && isset($posts[0]) && is_object($posts[0]))
+		if(is_array($posts) && count($posts) === 1)
 		{
-			$product_id = $posts[0]->ID;
+			$product_id = reset($posts);
+		}
+
+		return $product_id;
+	}
+
+	/**
+	 * Получение продукта или продуктов по наименованию продукта из WooCommerce
+	 *
+	 * @param string $name Наименование искомого продукта
+	 *
+	 * @return false|ProductContract
+	 */
+	public function getProductByName($name)
+	{
+		$product_id = $this->findProductIdByName($name);
+
+		if(0 === $product_id)
+		{
+			return false;
+		}
+
+		return $this->getProduct($product_id);
+	}
+
+	/**
+	 * Получение идентификатора товара по наименованию товара из каталога
+	 * - возвращаются простые товары, а так же вариации
+	 *
+	 * @param string $name
+	 *
+	 * @return int
+	 */
+	public function findProductIdByName($name)
+	{
+		$args =
+		[
+			'post_type' => ['product', 'product_variation'],
+			'post_status' => implode(',', get_post_statuses()),
+			'title' => $name,
+			'posts_per_page' => -1,
+			'fields' => 'ids'
+		];
+
+		$posts = get_posts($args);
+		$product_id = 0;
+
+		if(is_array($posts) && count($posts) === 1)
+		{
+			$product_id = reset($posts);
+		}
+
+		return $product_id;
+	}
+
+	/**
+	 * Получение идентификатора(ов) продукта(ов) по идентификатору товара из 1C с возможным указанием характеристики
+	 *
+	 * @param int|string $external_id Внешний идентификатор продукта
+	 * @param int|string $external_characteristic_id Внешний идентификатор характеристики продукта
+	 *
+	 * @return int|array
+	 *
+	 * @since 0.8.0
+	 */
+	public function findIdsByExternalIdAndCharacteristicId($external_id, $external_characteristic_id = '')
+	{
+		$args =
+		[
+			'post_type' => ['product', 'product_variation'],
+			'post_status' => implode(',', get_post_statuses()),
+			'meta_key' => '_wc1c_external_id',
+			'meta_value' => $external_id,
+			'posts_per_page' => -1,
+			'fields' => 'ids',
+			'suppress_filters' => true
+		];
+
+		if(!empty($external_characteristic_id))
+		{
+			unset($args['meta_key'], $args['meta_value']);
+
+			$args['meta_query'] =
+			[
+				'relation' => 'AND',
+				[
+					'key' => '_wc1c_external_id',
+					'value' => $external_id
+				],
+				[
+					'key' => '_wc1c_external_characteristic_id',
+					'value' => $external_characteristic_id
+				]
+			];
+		}
+
+		$posts = get_posts($args);
+		$product_id = 0;
+
+		if(is_array($posts) && count($posts) === 1)
+		{
+			$product_id = reset($posts);
 		}
 
 		return $product_id;
