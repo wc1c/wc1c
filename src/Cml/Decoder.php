@@ -1056,7 +1056,7 @@ class Decoder
 			foreach($xml_data->Остатки->Остаток as $product_quantity)
 			{
 				// Если нет складов или общий остаток предложения
-				if($xml_data->Остаток->Количество)
+				if($product_quantity->Количество)
 				{
 					$quantity = (float)$product_quantity->Количество;
 				}
