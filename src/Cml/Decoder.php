@@ -864,7 +864,7 @@ class Decoder
 	{
 		$product_guid = explode("#", (string)$product_xml_data_id);
 		$product_data_id['id'] = $product_guid[0];
-		$product_data_id['feature_id'] = isset($product_guid[1]) ? $product_guid[1] : '';
+		$product_data_id['characteristic_id'] = isset($product_guid[1]) ? $product_guid[1] : '';
 
 		return $product_data_id;
 	}
