@@ -90,7 +90,7 @@ class Factory extends WC_Product_Factory
 	 */
 	public function getProductByExternalId($id)
 	{
-		$product_id = $this->findProductIdByExternalId($id);
+		$product_id = $this->findProductIdsByExternalId($id);
 
 		if(0 === $product_id)
 		{
@@ -101,33 +101,36 @@ class Factory extends WC_Product_Factory
 	}
 
 	/**
-	 * Получение идентификатора товара по идентификатору товара из 1C
+	 * Получение идентификатора(ов) продуктов по идентификатору продукта из 1C
 	 *
-	 * @param int|string $id
+	 * @param int|string $external_id
 	 *
-	 * @return int
+	 * @return int|array
 	 */
-	public function findProductIdByExternalId($id)
+	public function findProductIdsByExternalId($external_id)
 	{
+		add_filter('woocommerce_product_data_store_cpt_get_products_query', [$this, 'handleCustomQueryVar'], 10, 2);
+
 		$args =
 		[
-			'post_type' => ['product', 'product_variation'],
-			'post_status' => implode(',', get_post_statuses()),
-			'meta_key' => '_wc1c_external_id',
-			'meta_value' => $id,
-			'posts_per_page' => -1,
-			'fields' => 'ids'
+			'_wc1c_external_id' => $external_id,
+			'limit' => -1,
+			'return' => 'ids',
 		];
 
-		$posts = get_posts($args);
-		$product_id = 0;
+		$products = wc_get_products($args);
 
-		if(is_array($posts) && count($posts) === 1)
+		if(empty($products))
 		{
-			$product_id = reset($posts);
+			return 0;
 		}
 
-		return $product_id;
+		if(count($products) === 1)
+		{
+			return reset($products);
+		}
+
+		return $products;
 	}
 
 	/**
@@ -180,7 +183,7 @@ class Factory extends WC_Product_Factory
 	}
 
 	/**
-	 * Получение идентификатора(ов) продукта(ов) по идентификатору товара из 1C с возможным указанием характеристики
+	 * Получение идентификатора(ов) продукта(ов) по внешнему идентификатору с возможным указанием характеристики
 	 *
 	 * @param int|string $external_id Внешний идентификатор продукта
 	 * @param int|string $external_characteristic_id Внешний идентификатор характеристики продукта
@@ -191,43 +194,96 @@ class Factory extends WC_Product_Factory
 	 */
 	public function findIdsByExternalIdAndCharacteristicId($external_id, $external_characteristic_id = '')
 	{
+		add_filter('woocommerce_product_data_store_cpt_get_products_query', [$this, 'handleCustomQueryVar'], 10, 2);
+
 		$args =
 		[
-			'post_type' => ['product', 'product_variation'],
-			'post_status' => implode(',', get_post_statuses()),
-			'meta_key' => '_wc1c_external_id',
-			'meta_value' => $external_id,
-			'posts_per_page' => -1,
-			'fields' => 'ids',
-			'suppress_filters' => true
+			'_wc1c_external_id' => $external_id,
+			'_wc1c_external_characteristic_id' => $external_characteristic_id,
+			'limit' => -1,
+			'return' => 'ids',
+			'type' => array_merge(array_keys(wc_get_product_types()), ['product', 'variation'])
 		];
 
-		if(!empty($external_characteristic_id))
-		{
-			unset($args['meta_key'], $args['meta_value']);
+		$products = wc_get_products($args);
 
-			$args['meta_query'] =
+		if(empty($products))
+		{
+			return 0;
+		}
+
+		if(count($products) === 1)
+		{
+			return reset($products);
+		}
+
+		return $products;
+	}
+
+	/**
+	 * Handle a custom 'customvar' query var to get products with the 'customvar' meta.
+	 *
+	 * @param array $query - Args for WP_Query.
+	 * @param array $query_vars - Query vars from WC_Product_Query.
+	 *
+	 * @return array modified $query
+	 */
+	public function handleCustomQueryVar($query, $query_vars)
+	{
+		/**
+		 * Поиск по внешнему коду и характеристике
+		 */
+		if(!empty($query_vars['_wc1c_external_id']) && !empty($query_vars['_wc1c_external_characteristic_id']))
+		{
+			$query['meta_query'][] =
 			[
-				'relation' => 'AND',
 				[
-					'key' => '_wc1c_external_id',
-					'value' => $external_id
-				],
-				[
-					'key' => '_wc1c_external_characteristic_id',
-					'value' => $external_characteristic_id
+					'relation' => 'AND',
+					[
+						'key' => '_wc1c_external_id',
+						'value' => $query_vars['_wc1c_external_id'],
+						'compare' => '=',
+					],
+					[
+						'key' => '_wc1c_external_characteristic_id',
+						'value' => $query_vars['_wc1c_external_characteristic_id'],
+						'compare' => '=',
+					]
 				]
 			];
 		}
 
-		$posts = get_posts($args);
-		$product_id = 0;
-
-		if(is_array($posts) && count($posts) === 1)
+		/**
+		 * Поиск по внешнему коду с отсутствием характеристики
+		 */
+		if(!empty($query_vars['_wc1c_external_id']) && empty($query_vars['_wc1c_external_characteristic_id']))
 		{
-			$product_id = reset($posts);
+			$query['meta_query'][] =
+			[
+				[
+					'relation' => 'AND',
+					[
+						'key' => '_wc1c_external_id',
+						'value' => $query_vars['_wc1c_external_id'],
+						'compare' => '=',
+					],
+					[
+						'key' => '_wc1c_external_characteristic_id',
+						'value' => '',
+						'compare' => 'NOT EXISTS',
+					]
+				]
+			];
+
+			/*
+			$query['meta_query'][] =
+			[
+				'key' => '_wc1c_external_id',
+				'value' => $query_vars['_wc1c_external_id'],
+				'compare' => '=',
+			];*/
 		}
 
-		return $product_id;
+		return $query;
 	}
 }
