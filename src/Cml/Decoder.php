@@ -631,10 +631,9 @@ class Decoder
 		// todo: обработка в отдельном методе с try catch
 
 		/**
-		 * Характеристики товара
-		 * Уточняет характеристики поставляемого товара. Товар с разными характеристиками может иметь разную цену.
+		 * Характеристики товара. Товар с разными характеристиками может иметь разную цену и остатки.
 		 */
-		$product_data['characteristics'] = $xml_product_data->ХарактеристикиТовара ? $this->parse_xml_product_features($xml_product_data->ХарактеристикиТовара) : [];
+		$product_data['characteristics'] = $xml_product_data->ХарактеристикиТовара ? $this->parseXmlProductCharacteristics($xml_product_data->ХарактеристикиТовара) : [];
 
 		/**
 		 * Значения реквизитов товара
@@ -773,23 +772,23 @@ class Decoder
 	}
 
 	/**
-	 * Разбор характеристики с исключением дублей
+	 * Разбор характеристик с исключением дублей
 	 *
 	 * @param $xml_data
 	 *
 	 * @return array
 	 * @throws Exception
 	 */
-	private function parse_xml_product_features($xml_data)
+	private function parseXmlProductCharacteristics($xml_data)
 	{
 		if(!$xml_data->ХарактеристикаТовара)
 		{
 			throw new Exception('$xml_data->ХарактеристикаТовара is empty.');
 		}
 
-		$features = [];
+		$characteristics = [];
 
-		// Уточняет характеристики поставляемого товара. Товар с разными характеристиками может иметь разную цену
+		// Уточняет характеристики поставляемого товара. Товар с разными характеристиками может иметь разную цену и остатки
 		foreach($xml_data->ХарактеристикаТовара as $product_feature)
 		{
 			/*
@@ -821,15 +820,32 @@ class Decoder
 			/*
 			 * Собираем без дублей в имени
 			 */
-			$features[$name] = array
-			(
-				'feature_id' => $id,
-				'feature_name' => $name,
-				'feature_value' => $value
-			);
+			if(isset($characteristics[$name]))
+			{
+				$old = $characteristics[$name]['value'];
+
+				if(is_array($old))
+				{
+					$old[] = $value;
+				}
+				else
+				{
+					$old[] = $characteristics[$name]['value'];
+					$old[] = $value;
+				}
+
+				continue;
+			}
+
+			$characteristics[$name] =
+			[
+				'id' => $id,
+				'name' => $name,
+				'value' => $value
+			];
 		}
 
-		return $features;
+		return $characteristics;
 	}
 
 	/**
