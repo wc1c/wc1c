@@ -25,6 +25,7 @@ class Product extends DataAbstract implements ProductDataContract
 		'prices' => [],
 		'requisites' => [],
 		'property_values' => [],
+		'characteristic_values' => [],
 	];
 
 	/**
@@ -151,6 +152,32 @@ class Product extends DataAbstract implements ProductDataContract
 				return true;
 			}
 
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * @return false|array
+	 */
+	public function getCharacteristics()
+	{
+		if(!$this->hasCharacteristics())
+		{
+			return false;
+		}
+
+		return $this->data['characteristics'];
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function hasCharacteristics()
+	{
+		if(empty($this->data['characteristics']))
+		{
 			return false;
 		}
 
