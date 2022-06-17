@@ -1105,19 +1105,21 @@ class Decoder
 			$name = (string)$requisite->Наименование;
 			$value = (string)$requisite->Значение;
 
+			if(empty($value))
+			{
+				continue;
+			}
+
 			if(isset($requisites_data[$name]))
 			{
-				$old = $requisites_data[$name]['value'];
+				$old_value = $requisites_data[$name]['value'];
 
-				if(is_array($old))
+				if(!is_array($old_value))
 				{
-					$old[] = $value;
+					$requisites_data[$name]['value'] = [];
+					$requisites_data[$name]['value'][] = $old_value;
 				}
-				else
-				{
-					$old[] = $requisites_data[$name]['value'];
-					$old[] = $value;
-				}
+				$requisites_data[$name]['value'][] = $value;
 
 				continue;
 			}
