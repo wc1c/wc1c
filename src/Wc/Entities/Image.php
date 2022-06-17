@@ -1,4 +1,4 @@
-<?php namespace Wc1c\Wc;
+<?php namespace Wc1c\Wc\Entities;
 
 defined('ABSPATH') || exit;
 
@@ -13,9 +13,7 @@ use Wc1c\Wc\Contracts\ImageContract;
 class Image extends ImagesData implements ImageContract
 {
 	/**
-	 * Текущие данные изображения
-	 *
-	 * @var array
+	 * @var array Текущие данные изображения
 	 */
 	protected $data =
 	[

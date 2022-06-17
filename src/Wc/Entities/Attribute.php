@@ -1,4 +1,4 @@
-<?php namespace Wc1c\Wc;
+<?php namespace Wc1c\Wc\Entities;
 
 defined('ABSPATH') || exit;
 
@@ -285,6 +285,85 @@ class Attribute extends AttributesData implements AttributeContract
 	 */
 	public function assignValue($name)
 	{
+		global $wc_product_attributes;
+
+		if(!taxonomy_exists($this->getTaxonomyName()))
+		{
+			$permalinks = wc_get_permalink_structure();
+			$label = !empty($this->getLabel()) ? $this->getLabel() : $this->getName();
+
+			$tax = new \stdClass();
+			$tax->attribute_public = $this->getPublic();
+			$tax->attribute_label = $label;
+			$tax->attribute_id = $this->getId();
+			$tax->attribute_name = $this->getName();
+			$tax->attribute_type = $this->getType();
+			$tax->attribute_orderby = $this->getOrder();
+
+			$wc_product_attributes[$this->getTaxonomyName()] = $tax;
+
+			$taxonomy_data =
+			[
+				'hierarchical' => false,
+				'update_count_callback' => '_update_post_term_count',
+				'labels' => [
+					/* translators: %s: attribute name */
+					'name' => sprintf(_x('Product %s', 'Product Attribute', 'woocommerce'), $label),
+					'singular_name' => $label,
+					/* translators: %s: attribute name */
+					'search_items' => sprintf(__('Search %s', 'woocommerce'), $label),
+					/* translators: %s: attribute name */
+					'all_items' => sprintf(__('All %s', 'woocommerce'), $label),
+					/* translators: %s: attribute name */
+					'parent_item' => sprintf(__('Parent %s', 'woocommerce'), $label),
+					/* translators: %s: attribute name */
+					'parent_item_colon' => sprintf(__('Parent %s:', 'woocommerce'), $label),
+					/* translators: %s: attribute name */
+					'edit_item' => sprintf(__('Edit %s', 'woocommerce'), $label),
+					/* translators: %s: attribute name */
+					'update_item' => sprintf(__('Update %s', 'woocommerce'), $label),
+					/* translators: %s: attribute name */
+					'add_new_item' => sprintf(__('Add new %s', 'woocommerce'), $label),
+					/* translators: %s: attribute name */
+					'new_item_name' => sprintf(__('New %s', 'woocommerce'), $label),
+					/* translators: %s: attribute name */
+					'not_found' => sprintf(__('No &quot;%s&quot; found', 'woocommerce'), $label),
+					/* translators: %s: attribute name */
+					'back_to_items' => sprintf(__('&larr; Back to "%s" attributes', 'woocommerce'), $label),
+				],
+				'show_ui' => true,
+				'show_in_quick_edit' => false,
+				'show_in_menu' => false,
+				'meta_box_cb' => false,
+				'query_var' => 1 === $this->getPublic(),
+				'rewrite' => false,
+				'sort' => false,
+				'public' => 1 === $this->getPublic(),
+				'show_in_nav_menus' => 1 === $this->getPublic() && apply_filters('woocommerce_attribute_show_in_nav_menus', false, $this->getTaxonomyName()),
+				'capabilities' => [
+					'manage_terms' => 'manage_product_terms',
+					'edit_terms'   => 'edit_product_terms',
+					'delete_terms' => 'delete_product_terms',
+					'assign_terms' => 'assign_product_terms',
+				],
+			];
+
+			if(1 === $this->getPublic() && sanitize_title($this->getName()))
+			{
+				$taxonomy_data['rewrite'] =
+				[
+					'slug' => trailingslashit($permalinks['attribute_rewrite_slug']) . urldecode(sanitize_title($this->getName())),
+					'with_front' => false,
+					'hierarchical' => true,
+				];
+			}
+
+			if(is_wp_error(register_taxonomy($this->getTaxonomyName(), apply_filters("woocommerce_taxonomy_objects_{$this->getTaxonomyName()}", ['product']), apply_filters("woocommerce_taxonomy_args_{$this->getTaxonomyName()}", $taxonomy_data))))
+			{
+				return false;
+			}
+		}
+
 		$value_result = wp_insert_term
 		(
 			$name, $this->getTaxonomyName(),
