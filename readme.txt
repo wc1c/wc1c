@@ -26,6 +26,9 @@ of 1C and sites created on WordPress with the WooCommerce plugin.
 == Changelog ==
 List of major changes from version to version. [Descriptions more](https://wc1c.info/changelogs)
 
+= 0.8.1 =
+* Fix: error decoder in PHP7
+
 = 0.8.0 =
 * WP tested up to: 6.0
 * WC tested up to: 6.6
