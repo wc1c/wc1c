@@ -7,7 +7,7 @@ use Wc1c\Traits\SingletonTrait;
 /**
  * Init
  *
- * @package Wc1c\Admin\Helps
+ * @package Wc1c\Admin
  */
 final class Init
 {
