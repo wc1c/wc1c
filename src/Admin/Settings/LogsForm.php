@@ -8,7 +8,7 @@ use Wc1c\Settings\LogsSettings;
 /**
  * LogsForm
  *
- * @package Wc1c\Admin\Settings
+ * @package Wc1c\Admin
  */
 class LogsForm extends Form
 {
@@ -43,13 +43,13 @@ class LogsForm extends Form
 			'description' => __('All events of the selected level will be recorded in the log file. The higher the level, the less data is recorded.', 'wc1c'),
 			'default' => '300',
 			'options' =>
-				[
-					'100' => __('DEBUG (100)', 'wc1c'),
-					'200' => __('INFO (200)', 'wc1c'),
-					'250' => __('NOTICE (250)', 'wc1c'),
-					'300' => __('WARNING (300)', 'wc1c'),
-					'400' => __('ERROR (400)', 'wc1c'),
-				],
+			[
+				'100' => __('DEBUG (100)', 'wc1c'),
+				'200' => __('INFO (200)', 'wc1c'),
+				'250' => __('NOTICE (250)', 'wc1c'),
+				'300' => __('WARNING (300)', 'wc1c'),
+				'400' => __('ERROR (400)', 'wc1c'),
+			],
 		];
 
 		$fields['logger_files_max'] =
@@ -61,16 +61,7 @@ class LogsForm extends Form
 			'css' => 'min-width: 20px;',
 		];
 
-		$fields['logger_wc1c'] =
-		[
-			'title' => __('Access to technical events', 'wc1c'),
-			'type' => 'checkbox',
-			'label' => __('Allow the WC1C team to access technical events?', 'wc1c'),
-			'description' => __('If allowed, the WC1C team will be able to access technical events and release the necessary updates based on them.', 'wc1c'),
-			'default' => 'no'
-		];
-
-		$fields['interface_title'] =
+		$fields['logger_title_level'] =
 		[
 			'title' => __('Levels by context', 'wc1c'),
 			'type' => 'title',

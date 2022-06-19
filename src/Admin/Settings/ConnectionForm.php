@@ -8,7 +8,7 @@ use Wc1c\Exceptions\Exception;
 /**
  * ConnectionForm
  *
- * @package Wc1c\Admin\Settings
+ * @package Wc1c\Admin
  */
 class ConnectionForm extends Form
 {

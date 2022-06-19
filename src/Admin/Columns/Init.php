@@ -2,16 +2,16 @@
 
 defined('ABSPATH') || exit;
 
+use Wc1c\Traits\SingletonTrait;
 use Wc1c\Admin\Columns\WooCommerce\Categories;
 use Wc1c\Admin\Columns\WooCommerce\Orders;
 use Wc1c\Admin\Columns\WooCommerce\Products;
 use Wc1c\Admin\Columns\WordPress\MediaLibrary;
-use Wc1c\Traits\SingletonTrait;
 
 /**
  * Init
  *
- * @package Wc1c\Admin\Columns
+ * @package Wc1c\Admin
  */
 final class Init
 {

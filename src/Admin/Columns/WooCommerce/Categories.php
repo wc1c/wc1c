@@ -2,12 +2,14 @@
 
 defined('ABSPATH') || exit;
 
+use Wc1c\Exceptions\Exception;
 use Wc1c\Traits\SingletonTrait;
+use Wc1c\Wc\Entities\Category;
 
 /**
  * Categories
  *
- * @package Wc1c\Admin\Columns\WooCommerce
+ * @package Wc1c\Admin
  */
 final class Categories
 {
@@ -53,7 +55,35 @@ final class Categories
 		if('wc1c' === $column)
 		{
 			$content = '';
-			$content = apply_filters('wc1c_admin_interface_categories_column', $content, $columns, $id);
+
+			if(has_filter('wc1c_admin_interface_categories_column'))
+			{
+				$content = apply_filters('wc1c_admin_interface_categories_column', $content, $columns, $id);
+			}
+			else
+			{
+				try
+				{
+					$category = new Category($id);
+				}
+				catch(Exception $e)
+				{
+					return $columns;
+				}
+
+				$schema_id = $category->getSchemaId();
+				$config_id = $category->getConfigurationId();
+
+				if($schema_id)
+				{
+					$content .= '<span class="na">' . __('Schema ID: ', 'wc1c') . $schema_id . '</span>';
+				}
+
+				if($config_id)
+				{
+					$content .= '<br/><span class="na">' . __('Configuration ID: ', 'wc1c')  . $config_id . '</span>';
+				}
+			}
 
 			if('' === $content)
 			{
