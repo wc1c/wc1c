@@ -40,11 +40,16 @@ class InterfaceForm extends Form
 			'title' => __('Changing the interface', 'wc1c'),
 			'type' => 'checkbox',
 			'label' => __('Allow changes to WordPress and WooCommerce dashboard interface?', 'wc1c'),
-			'description' => __('If enabled, new features will appear in the WordPress and WooCommerce interface according to the interface change settings.', 'wc1c'),
+			'description' => sprintf
+			(
+				'%s <hr>%s',
+				__('If enabled, new features will appear in the WordPress and WooCommerce interface according to the interface change settings.', 'wc1c'),
+				__('If interface modification is enabled, it is possible to change settings for individual features, users, and roles. If disabled, features will be disabled globally for everyone and everything.', 'wc1c')
+			),
 			'default' => 'yes'
 		];
 
-		$fields['interface_title'] =
+		$fields['interface_title_woocommerce'] =
 		[
 			'title' => __('WooCommerce', 'wc1c'),
 			'type' => 'title',
@@ -94,6 +99,13 @@ class InterfaceForm extends Form
 			'label' => __('Enable', 'wc1c'),
 			'description' => __('Output of a column with information from 1C to the list of categories.', 'wc1c'),
 			'default' => 'yes'
+		];
+
+		$fields['interface_title_wordpress'] =
+		[
+			'title' => __('WordPress', 'wc1c'),
+			'type' => 'title',
+			'description' => __('Some interface settings for the WordPress.', 'wc1c'),
 		];
 
 		$fields['admin_interface_media_library_column'] =
