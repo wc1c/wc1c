@@ -43,13 +43,13 @@ class LogsForm extends Form
 			'description' => __('All events of the selected level will be recorded in the log file. The higher the level, the less data is recorded.', 'wc1c'),
 			'default' => '300',
 			'options' =>
-				[
-					'100' => __('DEBUG (100)', 'wc1c'),
-					'200' => __('INFO (200)', 'wc1c'),
-					'250' => __('NOTICE (250)', 'wc1c'),
-					'300' => __('WARNING (300)', 'wc1c'),
-					'400' => __('ERROR (400)', 'wc1c'),
-				],
+			[
+				'100' => __('DEBUG (100)', 'wc1c'),
+				'200' => __('INFO (200)', 'wc1c'),
+				'250' => __('NOTICE (250)', 'wc1c'),
+				'300' => __('WARNING (300)', 'wc1c'),
+				'400' => __('ERROR (400)', 'wc1c'),
+			],
 		];
 
 		$fields['logger_files_max'] =
