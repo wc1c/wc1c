@@ -3,7 +3,7 @@
  * Plugin Name: WC1C
  * Plugin URI: https://wc1c.info
  * Description: Implementation of a mechanism for flexible exchange of various data between 1C products and a site running WordPress using the WooCommerce plugin.
- * Version: 0.8.1
+ * Version: 0.8.2
  * WC requires at least: 3.5
  * WC tested up to: 6.6
  * Requires at least: 4.7

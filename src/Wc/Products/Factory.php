@@ -13,6 +13,11 @@ use Wc1c\Wc\Contracts\ProductContract;
 class Factory extends WC_Product_Factory
 {
 	/**
+	 * @var bool
+	 */
+	protected $init = false;
+
+	/**
 	 * Get a product.
 	 *
 	 * @param mixed $product_id int $product Product identifier.
@@ -109,7 +114,7 @@ class Factory extends WC_Product_Factory
 	 */
 	public function findProductIdsByExternalId($external_id)
 	{
-		add_filter('woocommerce_product_data_store_cpt_get_products_query', [$this, 'handleCustomQueryVar'], 10, 2);
+		$this->maybe_init();
 
 		$args =
 		[
@@ -194,7 +199,7 @@ class Factory extends WC_Product_Factory
 	 */
 	public function findIdsByExternalIdAndCharacteristicId($external_id, $external_characteristic_id = '')
 	{
-		add_filter('woocommerce_product_data_store_cpt_get_products_query', [$this, 'handleCustomQueryVar'], 10, 2);
+		$this->maybe_init();
 
 		$args =
 		[
@@ -230,6 +235,8 @@ class Factory extends WC_Product_Factory
 	 */
 	public function handleCustomQueryVar($query, $query_vars)
 	{
+		$query['meta_query'] = [];
+
 		/**
 		 * Поиск по внешнему коду и характеристике
 		 */
@@ -274,16 +281,22 @@ class Factory extends WC_Product_Factory
 					]
 				]
 			];
-
-			/*
-			$query['meta_query'][] =
-			[
-				'key' => '_wc1c_external_id',
-				'value' => $query_vars['_wc1c_external_id'],
-				'compare' => '=',
-			];*/
 		}
 
 		return $query;
+	}
+
+	/**
+	 * @return void
+	 */
+	public function maybe_init()
+	{
+		if($this->init)
+		{
+			return;
+		}
+
+		$this->init = true;
+		add_filter('woocommerce_product_data_store_cpt_get_products_query', [$this, 'handleCustomQueryVar'], 10, 2);
 	}
 }
