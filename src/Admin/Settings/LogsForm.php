@@ -8,7 +8,7 @@ use Wc1c\Settings\LogsSettings;
 /**
  * LogsForm
  *
- * @package Wc1c\Admin\Settings
+ * @package Wc1c\Admin
  */
 class LogsForm extends Form
 {
@@ -61,16 +61,7 @@ class LogsForm extends Form
 			'css' => 'min-width: 20px;',
 		];
 
-		$fields['logger_wc1c'] =
-		[
-			'title' => __('Access to technical events', 'wc1c'),
-			'type' => 'checkbox',
-			'label' => __('Allow the WC1C team to access technical events?', 'wc1c'),
-			'description' => __('If allowed, the WC1C team will be able to access technical events and release the necessary updates based on them.', 'wc1c'),
-			'default' => 'no'
-		];
-
-		$fields['interface_title'] =
+		$fields['logger_title_level'] =
 		[
 			'title' => __('Levels by context', 'wc1c'),
 			'type' => 'title',
