@@ -26,6 +26,9 @@ of 1C and sites created on WordPress with the WooCommerce plugin.
 == Changelog ==
 List of major changes from version to version. [Descriptions more](https://wc1c.info/changelogs)
 
+= 0.8.3 =
+* Fix: more
+
 = 0.8.2 =
 * Fix: error in while
 
