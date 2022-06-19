@@ -4,7 +4,7 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: WC1C > integration of WooCommerce with 1C products "
 "(different configurations)\n"
-"POT-Creation-Date: 2022-06-17 23:02+0300\n"
+"POT-Creation-Date: 2022-06-20 01:57+0300\n"
 "PO-Revision-Date: 2019-03-19 20:30+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
@@ -98,64 +98,70 @@ msgstr ""
 msgid "Select All"
 msgstr ""
 
-#: src/Admin.php:95 src/Admin.php:96 views/header.php:3
+#: src/Admin.php:96 src/Admin.php:97 views/header.php:3
 msgid "Integration with 1C"
 msgstr ""
 
-#: src/Admin.php:113 src/Admin/Settings/LogsForm.php:133
+#: src/Admin.php:114 src/Admin/Settings/LogsForm.php:124
 #: src/Admin/Settings/MainForm.php:45
 msgid "Configurations"
 msgstr ""
 
-#: src/Admin.php:120 src/Admin/Settings/LogsForm.php:99
+#: src/Admin.php:121 src/Admin/Settings/LogsForm.php:90
 msgid "Tools"
 msgstr ""
 
-#: src/Admin.php:127 src/Admin.php:230
+#: src/Admin.php:128 src/Admin.php:231
 msgid "Settings"
 msgstr ""
 
-#: src/Admin.php:134 views/helps/features.php:34
+#: src/Admin.php:135 views/helps/features.php:34
 msgid "Extensions"
 msgstr ""
 
-#: src/Admin.php:258 src/Admin/Settings/MainForm.php:243
+#: src/Admin.php:259 src/Admin/Settings/MainForm.php:243
 msgid "never"
 msgstr ""
 
-#: src/Admin.php:259
+#: src/Admin.php:260
 msgid "no deadline"
 msgstr ""
 
-#: src/Admin.php:264
+#: src/Admin.php:265
 msgid "to:"
 msgstr ""
 
-#: src/Admin.php:271
+#: src/Admin.php:272
 msgid "no support"
 msgstr ""
 
-#: src/Admin/Columns/WooCommerce/Categories.php:36
+#: src/Admin/Columns/WooCommerce/Categories.php:38
+#: src/Admin/Columns/WooCommerce/Orders.php:36
 #: src/Admin/Columns/WooCommerce/Products.php:36
 #: src/Admin/Columns/WordPress/MediaLibrary.php:36
 msgid "1C information"
 msgstr ""
 
-#: src/Admin/Columns/WooCommerce/Categories.php:60
-#: src/Admin/Columns/WooCommerce/Products.php:72
-#: src/Admin/Columns/WordPress/MediaLibrary.php:75
-msgid "Not found"
-msgstr ""
-
-#: src/Admin/Columns/WooCommerce/Products.php:60
-#: src/Admin/Columns/WordPress/MediaLibrary.php:60
+#: src/Admin/Columns/WooCommerce/Categories.php:79
+#: src/Admin/Columns/WooCommerce/Orders.php:65
+#: src/Admin/Columns/WooCommerce/Products.php:65
+#: src/Admin/Columns/WordPress/MediaLibrary.php:65
 #: src/Admin/Configurations/MainUpdate.php:97
 msgid "Schema ID: "
 msgstr ""
 
-#: src/Admin/Columns/WooCommerce/Products.php:65
-#: src/Admin/Columns/WordPress/MediaLibrary.php:65
+#: src/Admin/Columns/WooCommerce/Categories.php:84
+#: src/Admin/Columns/WooCommerce/Orders.php:70
+#: src/Admin/Columns/WooCommerce/Products.php:70
+#: src/Admin/Columns/WordPress/MediaLibrary.php:70
 msgid "Configuration ID: "
+msgstr ""
+
+#: src/Admin/Columns/WooCommerce/Categories.php:90
+#: src/Admin/Columns/WooCommerce/Orders.php:76
+#: src/Admin/Columns/WooCommerce/Products.php:76
+#: src/Admin/Columns/WordPress/MediaLibrary.php:76
+msgid "Not found"
 msgstr ""
 
 #: src/Admin/Configurations/AllTable.php:116
@@ -499,72 +505,87 @@ msgstr ""
 msgid "Allow changes to WordPress and WooCommerce dashboard interface?"
 msgstr ""
 
-#: src/Admin/Settings/InterfaceForm.php:43
+#: src/Admin/Settings/InterfaceForm.php:46
 msgid ""
 "If enabled, new features will appear in the WordPress and WooCommerce interface "
 "according to the interface change settings."
 msgstr ""
 
-#: src/Admin/Settings/InterfaceForm.php:49
+#: src/Admin/Settings/InterfaceForm.php:47
+msgid ""
+"If interface modification is enabled, it is possible to change settings for "
+"individual features, users, and roles. If disabled, features will be disabled "
+"globally for everyone and everything."
+msgstr ""
+
+#: src/Admin/Settings/InterfaceForm.php:54
 msgid "WooCommerce"
 msgstr ""
 
-#: src/Admin/Settings/InterfaceForm.php:51
+#: src/Admin/Settings/InterfaceForm.php:56
 msgid "Some interface settings for the WooCommerce."
 msgstr ""
 
-#: src/Admin/Settings/InterfaceForm.php:56
+#: src/Admin/Settings/InterfaceForm.php:61
 msgid "Column in products list"
 msgstr ""
 
-#: src/Admin/Settings/InterfaceForm.php:58 src/Admin/Settings/InterfaceForm.php:67
-#: src/Admin/Settings/InterfaceForm.php:76 src/Admin/Settings/InterfaceForm.php:85
-#: src/Admin/Settings/InterfaceForm.php:94
-#: src/Admin/Settings/InterfaceForm.php:103
+#: src/Admin/Settings/InterfaceForm.php:63 src/Admin/Settings/InterfaceForm.php:72
+#: src/Admin/Settings/InterfaceForm.php:81 src/Admin/Settings/InterfaceForm.php:90
+#: src/Admin/Settings/InterfaceForm.php:99
+#: src/Admin/Settings/InterfaceForm.php:115
 msgid "Enable"
 msgstr ""
 
-#: src/Admin/Settings/InterfaceForm.php:59
+#: src/Admin/Settings/InterfaceForm.php:64
 msgid "Output of a column with information from 1C to the list of products."
 msgstr ""
 
-#: src/Admin/Settings/InterfaceForm.php:65
+#: src/Admin/Settings/InterfaceForm.php:70
 msgid "Metabox in edit products"
 msgstr ""
 
-#: src/Admin/Settings/InterfaceForm.php:68
+#: src/Admin/Settings/InterfaceForm.php:73
 msgid "Output of a Metabox with information from 1C in edit products."
 msgstr ""
 
-#: src/Admin/Settings/InterfaceForm.php:74
+#: src/Admin/Settings/InterfaceForm.php:79
 msgid "Column in orders list"
 msgstr ""
 
-#: src/Admin/Settings/InterfaceForm.php:77
+#: src/Admin/Settings/InterfaceForm.php:82
 msgid "Output of a column with information from 1C to the list of orders."
 msgstr ""
 
-#: src/Admin/Settings/InterfaceForm.php:83
+#: src/Admin/Settings/InterfaceForm.php:88
 msgid "Metabox in edit orders"
 msgstr ""
 
-#: src/Admin/Settings/InterfaceForm.php:86
+#: src/Admin/Settings/InterfaceForm.php:91
 msgid "Output of a Metabox with information from 1C in edit orders."
 msgstr ""
 
-#: src/Admin/Settings/InterfaceForm.php:92
+#: src/Admin/Settings/InterfaceForm.php:97
 msgid "Column in categories list"
 msgstr ""
 
-#: src/Admin/Settings/InterfaceForm.php:95
+#: src/Admin/Settings/InterfaceForm.php:100
 msgid "Output of a column with information from 1C to the list of categories."
 msgstr ""
 
-#: src/Admin/Settings/InterfaceForm.php:101
+#: src/Admin/Settings/InterfaceForm.php:106
+msgid "WordPress"
+msgstr ""
+
+#: src/Admin/Settings/InterfaceForm.php:108
+msgid "Some interface settings for the WordPress."
+msgstr ""
+
+#: src/Admin/Settings/InterfaceForm.php:113
 msgid "Column in media library list"
 msgstr ""
 
-#: src/Admin/Settings/InterfaceForm.php:104
+#: src/Admin/Settings/InterfaceForm.php:116
 msgid "Output of a column with information from 1C to the list of media files."
 msgstr ""
 
@@ -578,33 +599,33 @@ msgid ""
 "the level, the less data is recorded."
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:47 src/Admin/Settings/LogsForm.php:89
-#: src/Admin/Settings/LogsForm.php:106 src/Admin/Settings/LogsForm.php:123
-#: src/Admin/Settings/LogsForm.php:140 src/Schemas/Productscml/Admin.php:1045
+#: src/Admin/Settings/LogsForm.php:47 src/Admin/Settings/LogsForm.php:80
+#: src/Admin/Settings/LogsForm.php:97 src/Admin/Settings/LogsForm.php:114
+#: src/Admin/Settings/LogsForm.php:131 src/Schemas/Productscml/Admin.php:1045
 msgid "DEBUG (100)"
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:48 src/Admin/Settings/LogsForm.php:90
-#: src/Admin/Settings/LogsForm.php:107 src/Admin/Settings/LogsForm.php:124
-#: src/Admin/Settings/LogsForm.php:141 src/Schemas/Productscml/Admin.php:1046
+#: src/Admin/Settings/LogsForm.php:48 src/Admin/Settings/LogsForm.php:81
+#: src/Admin/Settings/LogsForm.php:98 src/Admin/Settings/LogsForm.php:115
+#: src/Admin/Settings/LogsForm.php:132 src/Schemas/Productscml/Admin.php:1046
 msgid "INFO (200)"
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:49 src/Admin/Settings/LogsForm.php:91
-#: src/Admin/Settings/LogsForm.php:108 src/Admin/Settings/LogsForm.php:125
-#: src/Admin/Settings/LogsForm.php:142 src/Schemas/Productscml/Admin.php:1047
+#: src/Admin/Settings/LogsForm.php:49 src/Admin/Settings/LogsForm.php:82
+#: src/Admin/Settings/LogsForm.php:99 src/Admin/Settings/LogsForm.php:116
+#: src/Admin/Settings/LogsForm.php:133 src/Schemas/Productscml/Admin.php:1047
 msgid "NOTICE (250)"
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:50 src/Admin/Settings/LogsForm.php:92
-#: src/Admin/Settings/LogsForm.php:109 src/Admin/Settings/LogsForm.php:126
-#: src/Admin/Settings/LogsForm.php:143 src/Schemas/Productscml/Admin.php:1048
+#: src/Admin/Settings/LogsForm.php:50 src/Admin/Settings/LogsForm.php:83
+#: src/Admin/Settings/LogsForm.php:100 src/Admin/Settings/LogsForm.php:117
+#: src/Admin/Settings/LogsForm.php:134 src/Schemas/Productscml/Admin.php:1048
 msgid "WARNING (300)"
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:51 src/Admin/Settings/LogsForm.php:93
-#: src/Admin/Settings/LogsForm.php:110 src/Admin/Settings/LogsForm.php:127
-#: src/Admin/Settings/LogsForm.php:144 src/Schemas/Productscml/Admin.php:1049
+#: src/Admin/Settings/LogsForm.php:51 src/Admin/Settings/LogsForm.php:84
+#: src/Admin/Settings/LogsForm.php:101 src/Admin/Settings/LogsForm.php:118
+#: src/Admin/Settings/LogsForm.php:135 src/Schemas/Productscml/Admin.php:1049
 msgid "ERROR (400)"
 msgstr ""
 
@@ -619,60 +640,46 @@ msgid ""
 msgstr ""
 
 #: src/Admin/Settings/LogsForm.php:66
-msgid "Access to technical events"
-msgstr ""
-
-#: src/Admin/Settings/LogsForm.php:68
-msgid "Allow the WC1C team to access technical events?"
-msgstr ""
-
-#: src/Admin/Settings/LogsForm.php:69
-msgid ""
-"If allowed, the WC1C team will be able to access technical events and release "
-"the necessary updates based on them."
-msgstr ""
-
-#: src/Admin/Settings/LogsForm.php:75
 msgid "Levels by context"
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:77
+#: src/Admin/Settings/LogsForm.php:68
 msgid "Event log settings based on context."
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:82 src/Admin/Settings/MainForm.php:135
+#: src/Admin/Settings/LogsForm.php:73 src/Admin/Settings/MainForm.php:135
 msgid "Receiver"
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:84
+#: src/Admin/Settings/LogsForm.php:75
 msgid ""
 "All events of the selected level will be recorded the Receiver events in the "
 "log file. The higher the level, the less data is recorded."
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:88 src/Admin/Settings/LogsForm.php:105
-#: src/Admin/Settings/LogsForm.php:122 src/Admin/Settings/LogsForm.php:139
+#: src/Admin/Settings/LogsForm.php:79 src/Admin/Settings/LogsForm.php:96
+#: src/Admin/Settings/LogsForm.php:113 src/Admin/Settings/LogsForm.php:130
 #: src/Schemas/Productscml/Admin.php:1044
 msgid "Use level for main events"
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:101
+#: src/Admin/Settings/LogsForm.php:92
 msgid ""
 "All events of the selected level will be recorded the tools events in the log "
 "file. The higher the level, the less data is recorded."
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:116
+#: src/Admin/Settings/LogsForm.php:107
 msgid "Schemas"
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:118
+#: src/Admin/Settings/LogsForm.php:109
 msgid ""
 "All events of the selected level will be recorded the schemas events in the log "
 "file. The higher the level, the less data is recorded."
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:135
+#: src/Admin/Settings/LogsForm.php:126
 msgid ""
 "All events of the selected level will be recorded the configurations events in "
 "the log file. The higher the level, the less data is recorded."

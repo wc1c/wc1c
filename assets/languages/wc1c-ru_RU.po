@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WC1C > integration of WooCommerce with 1C products "
 "(different configurations)\n"
-"POT-Creation-Date: 2022-06-17 20:13+0300\n"
-"PO-Revision-Date: 2022-06-17 22:53+0300\n"
+"POT-Creation-Date: 2022-06-20 01:57+0300\n"
+"PO-Revision-Date: 2022-06-20 02:00+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
 "Language: ru_RU\n"
@@ -100,65 +100,71 @@ msgstr "Последняя страница"
 msgid "Select All"
 msgstr "Выбрать все"
 
-#: src/Admin.php:95 src/Admin.php:96 views/header.php:3
+#: src/Admin.php:96 src/Admin.php:97 views/header.php:3
 msgid "Integration with 1C"
 msgstr "Интеграция с 1С"
 
-#: src/Admin.php:113 src/Admin/Settings/LogsForm.php:133
+#: src/Admin.php:114 src/Admin/Settings/LogsForm.php:124
 #: src/Admin/Settings/MainForm.php:45
 msgid "Configurations"
 msgstr "Конфигурации"
 
-#: src/Admin.php:120 src/Admin/Settings/LogsForm.php:99
+#: src/Admin.php:121 src/Admin/Settings/LogsForm.php:90
 msgid "Tools"
 msgstr "Инструменты"
 
-#: src/Admin.php:127 src/Admin.php:230
+#: src/Admin.php:128 src/Admin.php:231
 msgid "Settings"
 msgstr "Настройки"
 
-#: src/Admin.php:134 views/helps/features.php:34
+#: src/Admin.php:135 views/helps/features.php:34
 msgid "Extensions"
 msgstr "Расширения"
 
-#: src/Admin.php:258 src/Admin/Settings/MainForm.php:243
+#: src/Admin.php:259 src/Admin/Settings/MainForm.php:243
 msgid "never"
 msgstr "никогда"
 
-#: src/Admin.php:259
+#: src/Admin.php:260
 msgid "no deadline"
 msgstr "вечный"
 
-#: src/Admin.php:264
+#: src/Admin.php:265
 msgid "to:"
 msgstr "до:"
 
-#: src/Admin.php:271
+#: src/Admin.php:272
 msgid "no support"
 msgstr "без поддержки"
 
-#: src/Admin/Columns/WooCommerce/Categories.php:36
+#: src/Admin/Columns/WooCommerce/Categories.php:38
+#: src/Admin/Columns/WooCommerce/Orders.php:36
 #: src/Admin/Columns/WooCommerce/Products.php:36
 #: src/Admin/Columns/WordPress/MediaLibrary.php:36
 msgid "1C information"
 msgstr "Информация 1С"
 
-#: src/Admin/Columns/WooCommerce/Categories.php:60
-#: src/Admin/Columns/WooCommerce/Products.php:72
-#: src/Admin/Columns/WordPress/MediaLibrary.php:75
-msgid "Not found"
-msgstr "Не найдена"
-
-#: src/Admin/Columns/WooCommerce/Products.php:60
-#: src/Admin/Columns/WordPress/MediaLibrary.php:60
+#: src/Admin/Columns/WooCommerce/Categories.php:79
+#: src/Admin/Columns/WooCommerce/Orders.php:65
+#: src/Admin/Columns/WooCommerce/Products.php:65
+#: src/Admin/Columns/WordPress/MediaLibrary.php:65
 #: src/Admin/Configurations/MainUpdate.php:97
 msgid "Schema ID: "
 msgstr "Схема (ID): "
 
-#: src/Admin/Columns/WooCommerce/Products.php:65
-#: src/Admin/Columns/WordPress/MediaLibrary.php:65
+#: src/Admin/Columns/WooCommerce/Categories.php:84
+#: src/Admin/Columns/WooCommerce/Orders.php:70
+#: src/Admin/Columns/WooCommerce/Products.php:70
+#: src/Admin/Columns/WordPress/MediaLibrary.php:70
 msgid "Configuration ID: "
 msgstr "Конфигурация (ID): "
+
+#: src/Admin/Columns/WooCommerce/Categories.php:90
+#: src/Admin/Columns/WooCommerce/Orders.php:76
+#: src/Admin/Columns/WooCommerce/Products.php:76
+#: src/Admin/Columns/WordPress/MediaLibrary.php:76
+msgid "Not found"
+msgstr "Не найдена"
 
 #: src/Admin/Configurations/AllTable.php:116
 #, php-format
@@ -529,7 +535,7 @@ msgid "Allow changes to WordPress and WooCommerce dashboard interface?"
 msgstr ""
 "Разрешить изменения в интерфейсе панели управления WordPress и WooCommerce?"
 
-#: src/Admin/Settings/InterfaceForm.php:43
+#: src/Admin/Settings/InterfaceForm.php:46
 msgid ""
 "If enabled, new features will appear in the WordPress and WooCommerce "
 "interface according to the interface change settings."
@@ -537,68 +543,86 @@ msgstr ""
 "Если этот параметр включен, новые функции появятся в интерфейсе WordPress и "
 "WooCommerce в соответствии с настройками изменения интерфейса."
 
-#: src/Admin/Settings/InterfaceForm.php:49
+#: src/Admin/Settings/InterfaceForm.php:47
+msgid ""
+"If interface modification is enabled, it is possible to change settings for "
+"individual features, users, and roles. If disabled, features will be "
+"disabled globally for everyone and everything."
+msgstr ""
+"Если модификация интерфейса включена, можно изменить настройки н уровне "
+"отдельных функций, пользователей и ролей. Если модификация отключена, "
+"функции будут отключены глобально для всех и всего."
+
+#: src/Admin/Settings/InterfaceForm.php:54
 msgid "WooCommerce"
 msgstr "WooCommerce"
 
-#: src/Admin/Settings/InterfaceForm.php:51
+#: src/Admin/Settings/InterfaceForm.php:56
 msgid "Some interface settings for the WooCommerce."
 msgstr "Некоторые настройки интерфейса для WooCommerce."
 
-#: src/Admin/Settings/InterfaceForm.php:56
+#: src/Admin/Settings/InterfaceForm.php:61
 msgid "Column in products list"
 msgstr "Колонка в списке продуктов"
 
-#: src/Admin/Settings/InterfaceForm.php:58
-#: src/Admin/Settings/InterfaceForm.php:67
-#: src/Admin/Settings/InterfaceForm.php:76
-#: src/Admin/Settings/InterfaceForm.php:85
-#: src/Admin/Settings/InterfaceForm.php:94
-#: src/Admin/Settings/InterfaceForm.php:103
+#: src/Admin/Settings/InterfaceForm.php:63
+#: src/Admin/Settings/InterfaceForm.php:72
+#: src/Admin/Settings/InterfaceForm.php:81
+#: src/Admin/Settings/InterfaceForm.php:90
+#: src/Admin/Settings/InterfaceForm.php:99
+#: src/Admin/Settings/InterfaceForm.php:115
 msgid "Enable"
 msgstr "Включить"
 
-#: src/Admin/Settings/InterfaceForm.php:59
+#: src/Admin/Settings/InterfaceForm.php:64
 msgid "Output of a column with information from 1C to the list of products."
-msgstr "Вывод столбца с информацией из 1С в список продуктов."
+msgstr "Вывод колонки с информацией из 1С в список продуктов."
 
-#: src/Admin/Settings/InterfaceForm.php:65
+#: src/Admin/Settings/InterfaceForm.php:70
 msgid "Metabox in edit products"
 msgstr "Метабокс в редактировании продуктов"
 
-#: src/Admin/Settings/InterfaceForm.php:68
+#: src/Admin/Settings/InterfaceForm.php:73
 msgid "Output of a Metabox with information from 1C in edit products."
 msgstr "Вывод метабокса с информацией из 1С в редактирование продуктов."
 
-#: src/Admin/Settings/InterfaceForm.php:74
+#: src/Admin/Settings/InterfaceForm.php:79
 msgid "Column in orders list"
 msgstr "Колонка в списке заказов"
 
-#: src/Admin/Settings/InterfaceForm.php:77
+#: src/Admin/Settings/InterfaceForm.php:82
 msgid "Output of a column with information from 1C to the list of orders."
 msgstr "Вывод столбца с информацией из 1С в список заказов."
 
-#: src/Admin/Settings/InterfaceForm.php:83
+#: src/Admin/Settings/InterfaceForm.php:88
 msgid "Metabox in edit orders"
 msgstr "Метабокс при редактировании заказов"
 
-#: src/Admin/Settings/InterfaceForm.php:86
+#: src/Admin/Settings/InterfaceForm.php:91
 msgid "Output of a Metabox with information from 1C in edit orders."
 msgstr "Вывод Метабокса с информацией из 1С при редактировании заказов."
 
-#: src/Admin/Settings/InterfaceForm.php:92
+#: src/Admin/Settings/InterfaceForm.php:97
 msgid "Column in categories list"
 msgstr "Колонка в списке категорий"
 
-#: src/Admin/Settings/InterfaceForm.php:95
+#: src/Admin/Settings/InterfaceForm.php:100
 msgid "Output of a column with information from 1C to the list of categories."
 msgstr "Вывод столбца с информацией из 1С в список категорий."
 
-#: src/Admin/Settings/InterfaceForm.php:101
+#: src/Admin/Settings/InterfaceForm.php:106
+msgid "WordPress"
+msgstr "WordPress"
+
+#: src/Admin/Settings/InterfaceForm.php:108
+msgid "Some interface settings for the WordPress."
+msgstr "Некоторые настройки интерфейса для WordPress."
+
+#: src/Admin/Settings/InterfaceForm.php:113
 msgid "Column in media library list"
 msgstr "Столбец в списке медиатеки"
 
-#: src/Admin/Settings/InterfaceForm.php:104
+#: src/Admin/Settings/InterfaceForm.php:116
 msgid "Output of a column with information from 1C to the list of media files."
 msgstr "Вывод столбца с информацией из 1С в список медиафайлов."
 
@@ -614,33 +638,33 @@ msgstr ""
 "Все события выбранного уровня будут записаны в файл журнала. Чем выше "
 "уровень, тем меньше записывается данных."
 
-#: src/Admin/Settings/LogsForm.php:47 src/Admin/Settings/LogsForm.php:89
-#: src/Admin/Settings/LogsForm.php:106 src/Admin/Settings/LogsForm.php:123
-#: src/Admin/Settings/LogsForm.php:140 src/Schemas/Productscml/Admin.php:1045
+#: src/Admin/Settings/LogsForm.php:47 src/Admin/Settings/LogsForm.php:80
+#: src/Admin/Settings/LogsForm.php:97 src/Admin/Settings/LogsForm.php:114
+#: src/Admin/Settings/LogsForm.php:131 src/Schemas/Productscml/Admin.php:1045
 msgid "DEBUG (100)"
 msgstr "Отладка — DEBUG (100)"
 
-#: src/Admin/Settings/LogsForm.php:48 src/Admin/Settings/LogsForm.php:90
-#: src/Admin/Settings/LogsForm.php:107 src/Admin/Settings/LogsForm.php:124
-#: src/Admin/Settings/LogsForm.php:141 src/Schemas/Productscml/Admin.php:1046
+#: src/Admin/Settings/LogsForm.php:48 src/Admin/Settings/LogsForm.php:81
+#: src/Admin/Settings/LogsForm.php:98 src/Admin/Settings/LogsForm.php:115
+#: src/Admin/Settings/LogsForm.php:132 src/Schemas/Productscml/Admin.php:1046
 msgid "INFO (200)"
 msgstr "Информация — INFO (200)"
 
-#: src/Admin/Settings/LogsForm.php:49 src/Admin/Settings/LogsForm.php:91
-#: src/Admin/Settings/LogsForm.php:108 src/Admin/Settings/LogsForm.php:125
-#: src/Admin/Settings/LogsForm.php:142 src/Schemas/Productscml/Admin.php:1047
+#: src/Admin/Settings/LogsForm.php:49 src/Admin/Settings/LogsForm.php:82
+#: src/Admin/Settings/LogsForm.php:99 src/Admin/Settings/LogsForm.php:116
+#: src/Admin/Settings/LogsForm.php:133 src/Schemas/Productscml/Admin.php:1047
 msgid "NOTICE (250)"
 msgstr "Замечание — NOTICE (250)"
 
-#: src/Admin/Settings/LogsForm.php:50 src/Admin/Settings/LogsForm.php:92
-#: src/Admin/Settings/LogsForm.php:109 src/Admin/Settings/LogsForm.php:126
-#: src/Admin/Settings/LogsForm.php:143 src/Schemas/Productscml/Admin.php:1048
+#: src/Admin/Settings/LogsForm.php:50 src/Admin/Settings/LogsForm.php:83
+#: src/Admin/Settings/LogsForm.php:100 src/Admin/Settings/LogsForm.php:117
+#: src/Admin/Settings/LogsForm.php:134 src/Schemas/Productscml/Admin.php:1048
 msgid "WARNING (300)"
 msgstr "Предупреждение — WARNING (300)"
 
-#: src/Admin/Settings/LogsForm.php:51 src/Admin/Settings/LogsForm.php:93
-#: src/Admin/Settings/LogsForm.php:110 src/Admin/Settings/LogsForm.php:127
-#: src/Admin/Settings/LogsForm.php:144 src/Schemas/Productscml/Admin.php:1049
+#: src/Admin/Settings/LogsForm.php:51 src/Admin/Settings/LogsForm.php:84
+#: src/Admin/Settings/LogsForm.php:101 src/Admin/Settings/LogsForm.php:118
+#: src/Admin/Settings/LogsForm.php:135 src/Schemas/Productscml/Admin.php:1049
 msgid "ERROR (400)"
 msgstr "Ошибка — ERROR (400)"
 
@@ -658,34 +682,18 @@ msgstr ""
 "дней."
 
 #: src/Admin/Settings/LogsForm.php:66
-msgid "Access to technical events"
-msgstr "Доступ к техническим событиям"
-
-#: src/Admin/Settings/LogsForm.php:68
-msgid "Allow the WC1C team to access technical events?"
-msgstr "Разрешить команде WC1C доступ к техническим событиям?"
-
-#: src/Admin/Settings/LogsForm.php:69
-msgid ""
-"If allowed, the WC1C team will be able to access technical events and "
-"release the necessary updates based on them."
-msgstr ""
-"Если разрешено, команда WC1C сможет получить доступ к техническим событиям и "
-"выпустить на их основе необходимые обновления."
-
-#: src/Admin/Settings/LogsForm.php:75
 msgid "Levels by context"
 msgstr "Уровни по контексту"
 
-#: src/Admin/Settings/LogsForm.php:77
+#: src/Admin/Settings/LogsForm.php:68
 msgid "Event log settings based on context."
 msgstr "Настройки журнала событий исходя из контекста."
 
-#: src/Admin/Settings/LogsForm.php:82 src/Admin/Settings/MainForm.php:135
+#: src/Admin/Settings/LogsForm.php:73 src/Admin/Settings/MainForm.php:135
 msgid "Receiver"
 msgstr "Получатель"
 
-#: src/Admin/Settings/LogsForm.php:84
+#: src/Admin/Settings/LogsForm.php:75
 msgid ""
 "All events of the selected level will be recorded the Receiver events in the "
 "log file. The higher the level, the less data is recorded."
@@ -693,13 +701,13 @@ msgstr ""
 "Все события выбранного уровня будут записаны как события приемника в файл "
 "журнала. Чем выше уровень, тем меньше данных записывается."
 
-#: src/Admin/Settings/LogsForm.php:88 src/Admin/Settings/LogsForm.php:105
-#: src/Admin/Settings/LogsForm.php:122 src/Admin/Settings/LogsForm.php:139
+#: src/Admin/Settings/LogsForm.php:79 src/Admin/Settings/LogsForm.php:96
+#: src/Admin/Settings/LogsForm.php:113 src/Admin/Settings/LogsForm.php:130
 #: src/Schemas/Productscml/Admin.php:1044
 msgid "Use level for main events"
 msgstr "Использовать уровень для основных событий"
 
-#: src/Admin/Settings/LogsForm.php:101
+#: src/Admin/Settings/LogsForm.php:92
 msgid ""
 "All events of the selected level will be recorded the tools events in the "
 "log file. The higher the level, the less data is recorded."
@@ -707,11 +715,11 @@ msgstr ""
 "Все события выбранного уровня будут записываться как события инструментов в "
 "файл журнала. Чем выше уровень, тем меньше данных записывается."
 
-#: src/Admin/Settings/LogsForm.php:116
+#: src/Admin/Settings/LogsForm.php:107
 msgid "Schemas"
 msgstr "Схемы"
 
-#: src/Admin/Settings/LogsForm.php:118
+#: src/Admin/Settings/LogsForm.php:109
 msgid ""
 "All events of the selected level will be recorded the schemas events in the "
 "log file. The higher the level, the less data is recorded."
@@ -719,7 +727,7 @@ msgstr ""
 "Все события выбранного уровня будут записаны как события схемам в файл "
 "журнала. Чем выше уровень, тем меньше данных записывается."
 
-#: src/Admin/Settings/LogsForm.php:135
+#: src/Admin/Settings/LogsForm.php:126
 msgid ""
 "All events of the selected level will be recorded the configurations events "
 "in the log file. The higher the level, the less data is recorded."
@@ -3732,6 +3740,19 @@ msgstr ""
 #. Author of the plugin/theme
 msgid "WC1C team"
 msgstr "Команда WC1C"
+
+#~ msgid "Access to technical events"
+#~ msgstr "Доступ к техническим событиям"
+
+#~ msgid "Allow the WC1C team to access technical events?"
+#~ msgstr "Разрешить команде WC1C доступ к техническим событиям?"
+
+#~ msgid ""
+#~ "If allowed, the WC1C team will be able to access technical events and "
+#~ "release the necessary updates based on them."
+#~ msgstr ""
+#~ "Если разрешено, команда WC1C сможет получить доступ к техническим "
+#~ "событиям и выпустить на их основе необходимые обновления."
 
 #~ msgid "Processing of offer characteristics."
 #~ msgstr "Обработка характеристик предложения."
