@@ -41,6 +41,7 @@ final class Admin
 		if('yes' === wc1c()->settings('interface')->get('admin_interface', 'yes'))
 		{
 			Admin\Columns\Init::instance();
+			Admin\Metaboxes\Init::instance();
 		}
 
 		add_action('admin_menu', [$this, 'addMenu'], 30);
