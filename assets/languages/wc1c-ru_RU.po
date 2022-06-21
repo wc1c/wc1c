@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WC1C > integration of WooCommerce with 1C products "
 "(different configurations)\n"
 "POT-Creation-Date: 2022-06-20 01:57+0300\n"
-"PO-Revision-Date: 2022-06-20 02:02+0300\n"
+"PO-Revision-Date: 2022-06-20 02:06+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
 "Language: ru_RU\n"
@@ -592,7 +592,7 @@ msgstr "Колонка в списке заказов"
 
 #: src/Admin/Settings/InterfaceForm.php:82
 msgid "Output of a column with information from 1C to the list of orders."
-msgstr "Вывод столбца с информацией из 1С в список заказов."
+msgstr "Вывод колонки с информацией из 1С в список заказов."
 
 #: src/Admin/Settings/InterfaceForm.php:88
 msgid "Metabox in edit orders"
@@ -608,7 +608,7 @@ msgstr "Колонка в списке категорий"
 
 #: src/Admin/Settings/InterfaceForm.php:100
 msgid "Output of a column with information from 1C to the list of categories."
-msgstr "Вывод столбца с информацией из 1С в список категорий."
+msgstr "Вывод колонки с информацией из 1С в список категорий."
 
 #: src/Admin/Settings/InterfaceForm.php:106
 msgid "WordPress"
@@ -620,11 +620,11 @@ msgstr "Некоторые настройки интерфейса для WordPr
 
 #: src/Admin/Settings/InterfaceForm.php:113
 msgid "Column in media library list"
-msgstr "Столбец в списке медиатеки"
+msgstr "Колонка в списке медиатеки"
 
 #: src/Admin/Settings/InterfaceForm.php:116
 msgid "Output of a column with information from 1C to the list of media files."
-msgstr "Вывод столбца с информацией из 1С в список медиафайлов."
+msgstr "Вывод колонки с информацией из 1С в список медиафайлов."
 
 #: src/Admin/Settings/LogsForm.php:41
 msgid "Level for main events"
