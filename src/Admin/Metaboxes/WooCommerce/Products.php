@@ -7,7 +7,7 @@ use Wc1c\Traits\SingletonTrait;
 /**
  * Products
  *
- * @package Wc1c\Admin\Metaboxes\WooCommerce
+ * @package Wc1c\Admin
  */
 final class Products
 {
