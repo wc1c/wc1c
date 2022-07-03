@@ -28,6 +28,7 @@ List of major changes from version to version. [Descriptions more](https://wc1c.
 
 = 0.9.0 =
 * WC tested up to: 6.7
+* Moving libraries: WC, CML from src to vendor
 * Fix: more
 
 = 0.8.3 =
