@@ -4,7 +4,7 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: WC1C > integration of WooCommerce with 1C products "
 "(different configurations)\n"
-"POT-Creation-Date: 2022-06-20 01:57+0300\n"
+"POT-Creation-Date: 2022-07-03 21:27+0300\n"
 "PO-Revision-Date: 2019-03-19 20:30+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
@@ -98,6 +98,22 @@ msgstr ""
 msgid "Select All"
 msgstr ""
 
+#: src/Activation.php:28
+msgid ""
+"WC1C successfully activated. You have made the right choice to integrate the "
+"site with 1C (plugin number one)!"
+msgstr ""
+
+#: src/Activation.php:32
+msgid ""
+"The basic plugin setup has not been done yet, so you can proceed to the setup, "
+"which takes no more than 5 minutes."
+msgstr ""
+
+#: src/Activation.php:34
+msgid "Go to setting."
+msgstr ""
+
 #: src/Admin.php:96 src/Admin.php:97 views/header.php:3
 msgid "Integration with 1C"
 msgstr ""
@@ -119,7 +135,7 @@ msgstr ""
 msgid "Extensions"
 msgstr ""
 
-#: src/Admin.php:259 src/Admin/Settings/MainForm.php:243
+#: src/Admin.php:259 src/Admin/Settings/MainForm.php:244
 msgid "never"
 msgstr ""
 
@@ -213,7 +229,7 @@ msgstr ""
 msgid "Base information"
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:266 src/Admin/Settings/MainForm.php:174
+#: src/Admin/Configurations/AllTable.php:266 src/Admin/Settings/MainForm.php:175
 msgid "Status"
 msgstr ""
 
@@ -773,58 +789,64 @@ msgid "Support"
 msgstr ""
 
 #: src/Admin/Settings/MainForm.php:163
+msgid ""
+"If there is no code to support, bug fixes and plugin updates with new features "
+"will not be released."
+msgstr ""
+
+#: src/Admin/Settings/MainForm.php:164
 msgid "The code can be obtained from the plugin website:"
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:166
+#: src/Admin/Settings/MainForm.php:167
 msgid ""
 "Users with active codes participate in the development of integration with 1C, "
 "they have a connection with developers and other additional features."
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:177
+#: src/Admin/Settings/MainForm.php:178
 msgid "Support code activated. To activate another code, you can enter it again."
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:184
+#: src/Admin/Settings/MainForm.php:185
 msgid "Code for activation"
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:190
+#: src/Admin/Settings/MainForm.php:191
 msgid ""
 "If enter the correct code, the current environment will be activated. Enter the "
 "code only on the actual workstation."
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:191
+#: src/Admin/Settings/MainForm.php:192
 msgid "Current license API status:"
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:253
+#: src/Admin/Settings/MainForm.php:254
 msgid "Code ID"
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:255
+#: src/Admin/Settings/MainForm.php:256
 msgid "expires:"
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:257
+#: src/Admin/Settings/MainForm.php:258
 msgid "Instance ID"
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:259
+#: src/Admin/Settings/MainForm.php:260
 msgid "Domain"
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:313
+#: src/Admin/Settings/MainForm.php:314
 msgid "Activate"
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:345
+#: src/Admin/Settings/MainForm.php:346
 msgid "The support code is invalid. Enter the correct code."
 msgstr ""
 
-#: src/Admin/Settings/MainForm.php:378
+#: src/Admin/Settings/MainForm.php:379
 msgid "Support code activated successfully. Reload the page to display."
 msgstr ""
 
@@ -2909,100 +2931,100 @@ msgstr ""
 msgid "%s <span class=\"time\">in: %s</span>"
 msgstr ""
 
-#. translators: %s: attribute name
-#: src/Wc/Entities/Attribute.php:311
-#, php-format
-msgctxt "Product Attribute"
-msgid "Product %s"
-msgstr ""
-
-#. translators: %s: attribute name
-#: src/Wc/Entities/Attribute.php:314
-#, php-format
-msgid "Search %s"
-msgstr ""
-
-#. translators: %s: attribute name
-#: src/Wc/Entities/Attribute.php:316
-#, php-format
-msgid "All %s"
-msgstr ""
-
-#. translators: %s: attribute name
-#: src/Wc/Entities/Attribute.php:318
-#, php-format
-msgid "Parent %s"
-msgstr ""
-
-#. translators: %s: attribute name
-#: src/Wc/Entities/Attribute.php:320
-#, php-format
-msgid "Parent %s:"
-msgstr ""
-
-#. translators: %s: attribute name
-#: src/Wc/Entities/Attribute.php:322
-#, php-format
-msgid "Edit %s"
-msgstr ""
-
-#. translators: %s: attribute name
-#: src/Wc/Entities/Attribute.php:324
-#, php-format
-msgid "Update %s"
-msgstr ""
-
-#. translators: %s: attribute name
-#: src/Wc/Entities/Attribute.php:326
-#, php-format
-msgid "Add new %s"
-msgstr ""
-
-#. translators: %s: attribute name
-#: src/Wc/Entities/Attribute.php:328
-#, php-format
-msgid "New %s"
-msgstr ""
-
-#. translators: %s: attribute name
-#: src/Wc/Entities/Attribute.php:330
-#, php-format
-msgid "No &quot;%s&quot; found"
-msgstr ""
-
-#. translators: %s: attribute name
-#: src/Wc/Entities/Attribute.php:332
-#, php-format
-msgid "&larr; Back to \"%s\" attributes"
-msgstr ""
-
-#: src/Wc/Storages/AttributesStorage.php:41
-#: src/Wc/Storages/CategoriesStorage.php:40
-msgid "Could not insert into the database."
-msgstr ""
-
-#: src/Wc/Storages/AttributesStorage.php:70
-msgid "Invalid attribute."
-msgstr ""
-
-#: src/Wc/Storages/AttributesStorage.php:79
-msgid "Invalid taxonomy."
-msgstr ""
-
-#: src/Wc/Storages/CategoriesStorage.php:72
-msgid "Invalid category."
-msgstr ""
-
-#: src/Wc/Storages/ImagesStorage.php:70
-msgid "Invalid image."
-msgstr ""
-
 #: vendor/digiom/notices-wp/src/Types/ErrorNotice.php:49
 #: vendor/digiom/notices-wp/src/Types/InfoNotice.php:47
 #: vendor/digiom/notices-wp/src/Types/SuccessNotice.php:49
 #: vendor/digiom/notices-wp/src/Types/UpdateNotice.php:49
 #: vendor/digiom/notices-wp/src/Types/WarningNotice.php:49
 msgid "Close"
+msgstr ""
+
+#. translators: %s: attribute name
+#: vendor/wc1c/wc/src/Entities/Attribute.php:311
+#, php-format
+msgctxt "Product Attribute"
+msgid "Product %s"
+msgstr ""
+
+#. translators: %s: attribute name
+#: vendor/wc1c/wc/src/Entities/Attribute.php:314
+#, php-format
+msgid "Search %s"
+msgstr ""
+
+#. translators: %s: attribute name
+#: vendor/wc1c/wc/src/Entities/Attribute.php:316
+#, php-format
+msgid "All %s"
+msgstr ""
+
+#. translators: %s: attribute name
+#: vendor/wc1c/wc/src/Entities/Attribute.php:318
+#, php-format
+msgid "Parent %s"
+msgstr ""
+
+#. translators: %s: attribute name
+#: vendor/wc1c/wc/src/Entities/Attribute.php:320
+#, php-format
+msgid "Parent %s:"
+msgstr ""
+
+#. translators: %s: attribute name
+#: vendor/wc1c/wc/src/Entities/Attribute.php:322
+#, php-format
+msgid "Edit %s"
+msgstr ""
+
+#. translators: %s: attribute name
+#: vendor/wc1c/wc/src/Entities/Attribute.php:324
+#, php-format
+msgid "Update %s"
+msgstr ""
+
+#. translators: %s: attribute name
+#: vendor/wc1c/wc/src/Entities/Attribute.php:326
+#, php-format
+msgid "Add new %s"
+msgstr ""
+
+#. translators: %s: attribute name
+#: vendor/wc1c/wc/src/Entities/Attribute.php:328
+#, php-format
+msgid "New %s"
+msgstr ""
+
+#. translators: %s: attribute name
+#: vendor/wc1c/wc/src/Entities/Attribute.php:330
+#, php-format
+msgid "No &quot;%s&quot; found"
+msgstr ""
+
+#. translators: %s: attribute name
+#: vendor/wc1c/wc/src/Entities/Attribute.php:332
+#, php-format
+msgid "&larr; Back to \"%s\" attributes"
+msgstr ""
+
+#: vendor/wc1c/wc/src/Storages/AttributesStorage.php:41
+#: vendor/wc1c/wc/src/Storages/CategoriesStorage.php:40
+msgid "Could not insert into the database."
+msgstr ""
+
+#: vendor/wc1c/wc/src/Storages/AttributesStorage.php:70
+msgid "Invalid attribute."
+msgstr ""
+
+#: vendor/wc1c/wc/src/Storages/AttributesStorage.php:79
+msgid "Invalid taxonomy."
+msgstr ""
+
+#: vendor/wc1c/wc/src/Storages/CategoriesStorage.php:72
+msgid "Invalid category."
+msgstr ""
+
+#: vendor/wc1c/wc/src/Storages/ImagesStorage.php:70
+msgid "Invalid image."
 msgstr ""
 
 #: views/configurations/create.php:7 views/configurations/delete.php:7
