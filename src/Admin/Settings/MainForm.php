@@ -159,7 +159,8 @@ class MainForm extends Form
 			'type' => 'title',
 			'description' => sprintf
             (
-                '%s <a target="_blank" href="%s">%s</a>. %s',
+                '%s %s <a target="_blank" href="%s">%s</a>. %s',
+                __('If there is no code to support, bug fixes and plugin updates with new features will not be released.', 'wc1c'),
                 __('The code can be obtained from the plugin website:', 'wc1c'),
                 $buy_url,
                 $buy_url,
