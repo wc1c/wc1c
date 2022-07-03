@@ -19,5 +19,3 @@
     }
 ?>
 <hr class="wp-header-end">
-
-<?php wc1c()->admin()->notices()->output(); ?>
