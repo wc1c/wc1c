@@ -13,7 +13,7 @@ use Wc1c\Traits\UtilityTrait;
 /**
  * Update
  *
- * @package Wc1c\Admin\Configurations
+ * @package Wc1c\Admin
  */
 class Update
 {
@@ -37,7 +37,10 @@ class Update
 			'callback' => [MainUpdate::class, 'instance']
 		];
 
-		$default_sections = apply_filters('wc1c_admin_configurations_update_sections', $default_sections);
+		if(has_action('wc1c_admin_configurations_update_sections'))
+		{
+			$default_sections = apply_filters('wc1c_admin_configurations_update_sections', $default_sections);
+		}
 
 		$this->initSections($default_sections);
 		$this->setCurrentSection('main');
