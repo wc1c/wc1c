@@ -2,8 +2,6 @@
 
 defined('ABSPATH') || exit;
 
-use Monolog\Handler\ErrorLogHandler;
-use Monolog\Handler\StreamHandler;
 use wpdb;
 use Psr\Log\LoggerInterface;
 use Wc1c\Exceptions\Exception;
