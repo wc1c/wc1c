@@ -29,6 +29,11 @@ final class Context
 	 */
 	public function isReceiver()
 	{
+		if(false === isset($_GET['wc1c-receiver']))
+		{
+			return false;
+		}
+
 		if(wc1c()->getVar($_GET['wc1c-receiver'], false))
 		{
 			return true;
