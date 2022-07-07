@@ -200,7 +200,6 @@ class Core extends SchemaAbstract
 			catch(Exception $e)
 			{
 				$this->log()->error(__('Import file processing not completed. ReaderCML threw an exception.', 'wc1c'), ['exception' => $e]);
-				break;
 			}
 		}
 
@@ -1416,7 +1415,6 @@ class Core extends SchemaAbstract
 			}
 
 			$product->set_attributes($attributes);
-
 			$this->log()->debug(__('Adding attributes to the product is successfully.', 'wc1c'), ['attributes' => $attributes]);
 
 			// Set variable default attributes.
@@ -1672,6 +1670,8 @@ class Core extends SchemaAbstract
 					'taxonomy' => $global ? 1 : 0,
 				];
 			}
+
+			$internal_product->update_meta_data('_wc1c_properties_import', $raw_attributes);
 		}
 
 		/*
@@ -1803,6 +1803,9 @@ class Core extends SchemaAbstract
 			return $internal_product;
 		}
 
+		/** @var AttributesStorageContract $attributes_storage */
+		$attributes_storage = Storage::load('attribute');
+
 		$raw_attributes = [];
 
 		$parent_characteristics = false;
@@ -1811,9 +1814,6 @@ class Core extends SchemaAbstract
 			$parent_characteristics = (new Factory())->getProduct($internal_product->get_parent_id()); // todo: cache
 		}
 
-		/** @var AttributesStorageContract $attributes_storage */
-		$attributes_storage = Storage::load('attribute');
-
 		/*
 		 * Из свойств классификатора
 		 */
@@ -1821,7 +1821,7 @@ class Core extends SchemaAbstract
 		{
 			$this->log()->info(__('Processing of product properties.', 'wc1c'));
 
-			$classifier_properties = maybe_unserialize($this->configuration()->getMeta('classifier-properties:' . $reader->getFiletype() . ':' . $reader->catalog->getClassifierId()));
+			$classifier_properties = maybe_unserialize($this->configuration()->getMeta('classifier-properties:' . $reader->getFiletype() . ':' . $reader->offers_package->getClassifierId()));
 
 			foreach($external_product->getPropertyValues() as $property_id => $property_value)
 			{
@@ -1969,7 +1969,13 @@ class Core extends SchemaAbstract
 
 			if($parent_characteristics instanceof VariableProduct)
 			{
-				$parent_attr = $raw_attributes;
+				$import_characteristics = maybe_unserialize($parent_characteristics->get_meta('_wc1c_properties_import', true));
+				if(!is_array($import_characteristics) )
+				{
+					$import_characteristics = [];
+				}
+
+				$parent_attr = array_merge($import_characteristics, $raw_attributes);
 
 				foreach($old_characteristics as $characteristic_id => $characteristic_value)
 				{
@@ -2273,13 +2279,14 @@ class Core extends SchemaAbstract
 		 *
 		 * @param int $product_id Идентификатор найденного продукта
 		 * @param ProductDataContract $external_product Данные продукта в CML
+		 * @param SchemaAbstract $this
 		 * @param Reader $reader Текущий итератор
 		 *
 		 * @return int|false
 		 */
 		if(has_filter('wc1c_schema_productscml_processing_products_search'))
 		{
-			$product_id = apply_filters('wc1c_schema_productscml_processing_products_search', $product_id, $external_product, $reader);
+			$product_id = apply_filters('wc1c_schema_productscml_processing_products_search', $product_id, $external_product, $this, $reader);
 
 			$this->log()->debug(__('Product search result by external algorithms.', 'wc1c'), ['product_ids' => $product_id]);
 
