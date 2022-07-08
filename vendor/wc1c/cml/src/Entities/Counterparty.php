@@ -8,7 +8,7 @@ use Wc1c\Cml\Contracts\CounterpartyDataContract;
 /**
  * Counterparty
  *
- * @package Wc1c\Cml\Entities
+ * @package Wc1c\Cml
  */
 class Counterparty extends DataAbstract implements CounterpartyDataContract
 {

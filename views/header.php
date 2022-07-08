@@ -20,4 +20,9 @@
 ?>
 <hr class="wp-header-end">
 
-<?php wc1c()->admin()->notices()->output(); ?>
+<?php
+    if(wc1c()->context()->isAdmin())
+    {
+        wc1c()->admin()->notices()->output();
+    }
+?>

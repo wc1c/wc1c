@@ -5,7 +5,7 @@ defined('ABSPATH') || exit;
 /**
  * CatalogDataContract
  *
- * @package Wc1c\Cml\Contracts
+ * @package Wc1c\Cml
  */
 interface CatalogDataContract extends DataContract
 {

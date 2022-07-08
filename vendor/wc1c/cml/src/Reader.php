@@ -114,7 +114,7 @@ class Reader
 	{
 		if(!defined('LIBXML_VERSION'))
 		{
-			throw new Exception('LIBXML_VERSION not defined.');
+			throw new Exception('LIBXML_VERSION is not defined.');
 		}
 
 		if(!function_exists('libxml_use_internal_errors'))

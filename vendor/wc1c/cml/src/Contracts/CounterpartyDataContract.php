@@ -5,7 +5,7 @@ defined('ABSPATH') || exit;
 /**
  * CounterpartyDataContract
  *
- * @package Wc1c\Cml\Contracts
+ * @package Wc1c\Cml
  */
 interface CounterpartyDataContract extends DataContract
 {

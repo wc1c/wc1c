@@ -71,7 +71,7 @@ class Decoder
 	{
 		if(empty($data) || empty($type))
 		{
-			throw new Exception('Data is not valid.');
+			return false;
 		}
 
 		if(!$data instanceof SimpleXMLElement)

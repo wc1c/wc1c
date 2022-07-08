@@ -7,7 +7,7 @@ use Wc1c\Cml\Contracts\DataContract;
 /**
  * DataAbstract
  *
- * @package Wc1c\Cml\Abstracts
+ * @package Wc1c\Cml
  */
 abstract class DataAbstract implements DataContract
 {

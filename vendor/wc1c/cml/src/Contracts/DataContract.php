@@ -5,7 +5,7 @@ defined('ABSPATH') || exit;
 /**
  * DataContract
  *
- * @package Wc1c\Cml\Contracts
+ * @package Wc1c\Cml
  */
 interface DataContract
 {

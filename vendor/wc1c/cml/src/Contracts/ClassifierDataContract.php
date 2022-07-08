@@ -5,7 +5,7 @@ defined('ABSPATH') || exit;
 /**
  * ClassifierDataContract
  *
- * @package Wc1c\Cml\Contracts
+ * @package Wc1c\Cml
  */
 interface ClassifierDataContract extends DataContract
 {
