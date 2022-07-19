@@ -4,8 +4,50 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9120a9f3967db3a9bce8754eba4103ba",
+    "content-hash": "87fa0c6d34c4087b1acb8049828cc6c6",
     "packages": [
+        {
+            "name": "digiom/wotices",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/digiom/wotices.git",
+                "reference": "6513f6804a04dbf3904945499995aa2cb467c835"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/digiom/wotices/zipball/6513f6804a04dbf3904945499995aa2cb467c835",
+                "reference": "6513f6804a04dbf3904945499995aa2cb467c835",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Digiom\\Wotices\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Frescoref",
+                    "email": "frescoref@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Notices for WordPress",
+            "homepage": "https://digiom.ru",
+            "support": {
+                "source": "https://github.com/digiom/wotices/tree/1.0.0"
+            },
+            "time": "2022-07-19T17:39:19+00:00"
+        },
         {
             "name": "monolog/monolog",
             "version": "1.27.1",
@@ -199,7 +241,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "digiom/wotices": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

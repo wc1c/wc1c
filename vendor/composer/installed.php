@@ -5,11 +5,22 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'd64513fbe2614a0502f7793109b77b82f9622af2',
+        'reference' => 'ccaf79687b6a7037e413304a0a93ddf4486508c9',
         'name' => 'wc1c/wc1c',
         'dev' => true,
     ),
     'versions' => array(
+        'digiom/wotices' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../digiom/wotices',
+            'aliases' => array(
+                0 => '9999999-dev',
+            ),
+            'reference' => '6513f6804a04dbf3904945499995aa2cb467c835',
+            'dev_requirement' => false,
+        ),
         'monolog/monolog' => array(
             'pretty_version' => '1.27.1',
             'version' => '1.27.1.0',
@@ -49,7 +60,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'd64513fbe2614a0502f7793109b77b82f9622af2',
+            'reference' => 'ccaf79687b6a7037e413304a0a93ddf4486508c9',
             'dev_requirement' => false,
         ),
     ),
