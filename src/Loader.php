@@ -39,7 +39,7 @@ final class Loader
 		$this->addNamespace('Wc1c', $path . 'src');
 		$this->addNamespace('Wc1c\Cml', $vendor_path . 'wc1c/cml/src');
 		$this->addNamespace('Wc1c\Wc', $vendor_path . 'wc1c/wc/src');
-		$this->addNamespace('Digiom\WordPress\Notices', $vendor_path . 'digiom/notices-wp/src');
+		$this->addNamespace('Digiom\Wotices', $vendor_path . 'digiom/wotices/src');
 		$this->addNamespace('Digiom\Wap', $vendor_path . 'digiom/wap/src');
 		$this->addNamespace('Digiom\Psr7wp', $vendor_path . 'digiom/psr7wp/src');
 		$this->addNamespace('Psr\Http\Message', $vendor_path . 'psr/http-message/src');

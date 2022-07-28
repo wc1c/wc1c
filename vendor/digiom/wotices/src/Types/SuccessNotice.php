@@ -1,23 +1,13 @@
-<?php
-/**
- * Namespace
- */
-namespace Digiom\WordPress\Notices\Types;
+<?php namespace Digiom\Wotices\Types;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
-use Digiom\WordPress\Notices\Abstracts\NoticeAbstract;
+use Digiom\Wotices\Abstracts\NoticeAbstract;
 
 /**
  * Class SuccessNotice
  *
- * @package Digiom\WordPress\Notices\Types
+ * @package Digiom\Wotices\Types
  */
 class SuccessNotice extends NoticeAbstract
 {
@@ -46,7 +36,7 @@ class SuccessNotice extends NoticeAbstract
 		if($this->isDismissible())
 		{
 			$classes[] = 'is-dismissible';
-			$dismiss = '<button id="notice-' . esc_attr($this->getId()) . '" class="notice-dismiss" type="button"><span class="screen-reader-text">' . __('Close', 'wc1c' ) . '</span></button>';
+			$dismiss = '<button id="notice-' . esc_attr($this->getId()) . '" class="notice-dismiss" type="button"><span class="screen-reader-text">' . __('Close', 'wsklad' ) . '</span></button>';
 		}
 
 		$content = sprintf

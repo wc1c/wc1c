@@ -1,18 +1,11 @@
-<?php
-/**
- * Namespace
- */
-namespace Digiom\WordPress\Notices\Abstracts;
+<?php namespace Digiom\Wotices\Abstracts;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
 /**
  * Class NoticeAbstract
  *
- * @package Digiom\WordPress\Notices
+ * @package Digiom\Wotices
  */
 abstract class NoticeAbstract
 {

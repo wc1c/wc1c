@@ -1,4 +1,4 @@
-<?php namespace Digiom\WordPress\Notices;
+<?php namespace Digiom\Wotices;
 
 defined('ABSPATH') || exit;
 
@@ -9,18 +9,18 @@ use Exception;
 use InvalidArgumentException;
 use WP_Screen;
 use WP_User;
-use Digiom\WordPress\Notices\Abstracts\NoticeAbstract;
-use Digiom\WordPress\Notices\Interfaces\ManagerInterface;
-use Digiom\WordPress\Notices\Types\ErrorNotice;
-use Digiom\WordPress\Notices\Types\InfoNotice;
-use Digiom\WordPress\Notices\Types\SuccessNotice;
-use Digiom\WordPress\Notices\Types\UpdateNotice;
-use Digiom\WordPress\Notices\Types\WarningNotice;
+use Digiom\Wotices\Abstracts\NoticeAbstract;
+use Digiom\Wotices\Interfaces\ManagerInterface;
+use Digiom\Wotices\Types\ErrorNotice;
+use Digiom\Wotices\Types\InfoNotice;
+use Digiom\Wotices\Types\SuccessNotice;
+use Digiom\Wotices\Types\UpdateNotice;
+use Digiom\Wotices\Types\WarningNotice;
 
 /**
  * Class Manager
  *
- * @package Digiom\WordPress\Notices
+ * @package Digiom\Wotices
  */
 class Manager implements ManagerInterface, Countable, IteratorAggregate
 {
@@ -785,7 +785,6 @@ class Manager implements ManagerInterface, Countable, IteratorAggregate
 	/**
 	 * Count number of notices in the queue
 	 */
-	#[\ReturnTypeWillChange]
 	public function count()
 	{
 		return count($this->notices);
@@ -807,7 +806,6 @@ class Manager implements ManagerInterface, Countable, IteratorAggregate
 	 *
 	 * @return ArrayIterator
 	 */
-	#[\ReturnTypeWillChange]
 	public function getIterator()
 	{
 		return new ArrayIterator($this->notices);

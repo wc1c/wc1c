@@ -2,8 +2,8 @@
 
 defined('ABSPATH') || exit;
 
-use Digiom\WordPress\Notices\Interfaces\ManagerInterface;
-use Digiom\WordPress\Notices\Manager;
+use Digiom\Wotices\Interfaces\ManagerInterface;
+use Digiom\Wotices\Manager;
 use Wc1c\Admin\Configurations;
 use Wc1c\Admin\Extensions;
 use Wc1c\Admin\Settings;

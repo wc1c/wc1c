@@ -1,6 +1,51 @@
 {
     "packages": [
         {
+            "name": "digiom/wotices",
+            "version": "dev-main",
+            "version_normalized": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/digiom/wotices.git",
+                "reference": "6513f6804a04dbf3904945499995aa2cb467c835"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/digiom/wotices/zipball/6513f6804a04dbf3904945499995aa2cb467c835",
+                "reference": "6513f6804a04dbf3904945499995aa2cb467c835",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "time": "2022-07-19T17:39:19+00:00",
+            "default-branch": true,
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Digiom\\Wotices\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Frescoref",
+                    "email": "frescoref@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Notices for WordPress",
+            "homepage": "https://digiom.ru",
+            "support": {
+                "source": "https://github.com/digiom/wotices/tree/1.0.0"
+            },
+            "install-path": "../digiom/wotices"
+        },
+        {
             "name": "monolog/monolog",
             "version": "1.27.1",
             "version_normalized": "1.27.1.0",

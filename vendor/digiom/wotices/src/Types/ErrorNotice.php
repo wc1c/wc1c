@@ -1,52 +1,42 @@
-<?php
-/**
- * Namespace
- */
-namespace Digiom\WordPress\Notices\Types;
+<?php namespace Digiom\Wotices\Types;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
-use Digiom\WordPress\Notices\Abstracts\NoticeAbstract;
+use Digiom\Wotices\Abstracts\NoticeAbstract;
 
 /**
- * Class WarningNotice
+ * Class ErrorNotice
  *
- * @package Digiom\WordPress\Notices\Types
+ * @package Digiom\Wotices\Types
  */
-class WarningNotice extends NoticeAbstract
+class ErrorNotice extends NoticeAbstract
 {
 	/**
-	 * WarningNotice constructor.
+	 * ErrorNotice constructor.
 	 *
-	 * @param $args
+	 * @param array $args
 	 */
 	public function __construct($args)
 	{
-		$this->setType('warning');
+		$this->setType('error');
 
 		parent::__construct($args);
 	}
 
 	/**
-	 * @param bool $display
+	 * @param boolean $display
 	 *
 	 * @return string|void
 	 */
 	public function output($display)
 	{
-		$classes = ['warning', 'updated', 'notice'];
+		$classes = ['error', 'updated', 'notice'];
 		$dismiss = '';
 
 		if($this->isDismissible())
 		{
 			$classes[] = 'is-dismissible';
-			$dismiss = '<button id="notice-' . esc_attr($this->getId()) . '" class="notice-dismiss" type="button"><span class="screen-reader-text">' . __('Close', 'wc1c' ) . '</span></button>';
+			$dismiss = '<button id="notice-' . esc_attr($this->getId()) . '" class="notice-dismiss" type="button"><span class="screen-reader-text">' . __('Close', 'wsklad' ) . '</span></button>';
 		}
 
 		$content = sprintf

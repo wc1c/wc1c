@@ -1,4 +1,4 @@
-# Notices manager for WordPress
+# Notices for WordPress
 
 Библиотека для работы с уведомлениями в WordPress.
 
@@ -23,7 +23,7 @@ $args =
 ];
 
 // инициализируем
-$notices = new Manager($name, $args);
+$wotices = new Manager($name, $args);
 ```
 
 ### Добавление уведомлений
@@ -48,7 +48,7 @@ $notice->setId('идентификатор уведомления, строка 
 $notice->setData('Наименование уведомления, строка до 255 символов');
 
 // добавляем уведомление
-$notices->add($notice, $args);
+$wotices->add($notice, $args);
 ```
 
 #### Через менеджер
@@ -64,7 +64,7 @@ $args =
     'dismissible' => false // Разрешить ли пользователю удалять уведомление.
 ];
 
-$notices->create($args);
+$wotices->create($args);
 ```
 
 ### Сохранение уведомлений
@@ -87,7 +87,7 @@ $notices->create($args);
 Сделать это возможно с помощью метода registerType():
 
 ```PHP
-$manager->registerType('unique_name', 'Namespace\ClassName');
+$wotices->registerType('unique_name', 'Namespace\ClassName');
 ```
 
 Все, теперь уведомления типа unique_name можно использовать в коде.
