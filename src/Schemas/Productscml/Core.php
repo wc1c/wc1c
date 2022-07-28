@@ -87,7 +87,7 @@ class Core extends SchemaAbstract
 	public function init()
 	{
 		$this->setOptions($this->configuration()->getOptions());
-		$this->setUploadDirectory($this->configuration()->getUploadDirectory() . '/catalog');
+		$this->setUploadDirectory($this->configuration()->getUploadDirectory() . DIRECTORY_SEPARATOR . 'catalog');
 
 		if(true === wc1c()->context()->isAdmin('plugin'))
 		{
@@ -117,6 +117,8 @@ class Core extends SchemaAbstract
 			add_action('wc1c_schema_productscml_processing_products_item', [$this, 'processingProductsItem'], 10, 2);
 			add_action('wc1c_schema_productscml_processing_offers_item', [$this, 'processingOffersItem'], 10, 2);
 
+			add_filter('wc1c_schema_productscml_processing_products_item_before_save', [$this, 'assignProductsItemStatus'], 10, 4);
+			add_filter('wc1c_schema_productscml_processing_products_item_before_save', [$this, 'assignProductsItemStockStatus'], 10, 4);
 			add_filter('wc1c_schema_productscml_processing_products_item_before_save', [$this, 'assignProductsItemSku'], 10, 4);
 			add_filter('wc1c_schema_productscml_processing_products_item_before_save', [$this, 'assignProductsItemName'], 10, 4);
 			add_filter('wc1c_schema_productscml_processing_products_item_before_save', [$this, 'assignProductsItemDescriptions'], 10, 4);
@@ -463,9 +465,9 @@ class Core extends SchemaAbstract
 					$this->log()->info(__('The category exists. Started updating the data of an existing category.', 'wc1c'));
 
 					/**
-					 * Пропуск не созданных категорий под текущей конфигурацией
+					 * Пропуск созданных категорий не под текущей конфигурацией
 					 */
-					if('yes' === $update_categories_only_configuration && $category->getConfigurationId() !== $this->configuration()->getId())
+					if('yes' === $update_categories_only_configuration && (int)$category->getConfigurationId() !== $this->configuration()->getId())
 					{
 						$this->log()->warning(__('Category update skipped. The category was created from a different configuration.', 'wc1c'));
 						continue;
@@ -748,7 +750,7 @@ class Core extends SchemaAbstract
 		$classifier_properties = $classifier->getProperties();
 		if(!empty($classifier_properties))
 		{
-			$this->configuration()->updateMetaData('classifier-properties:' . $reader->getFiletype() . ':'. $classifier->getId(), maybe_serialize($classifier_properties), true);
+			$this->configuration()->updateMetaData('classifier-properties:' . $reader->getFiletype() . ':' . $classifier->getId(), maybe_serialize($classifier_properties));
 			$this->configuration()->saveMetaData();
 		}
 
@@ -892,6 +894,11 @@ class Core extends SchemaAbstract
 			return $internal_product;
 		}
 
+		if('update' === $mode && 'yes' !== $this->getOptions('products_update_name', 'no'))
+		{
+			return $internal_product;
+		}
+
 		$name = '';
 
 		switch($source)
@@ -948,6 +955,64 @@ class Core extends SchemaAbstract
 		catch(Exception $e)
 		{
 			$this->log()->notice(__('Failed to set SKU for product.', 'wc1c'), ['exception' => $e, 'sku' => $product->getSku()]);
+		}
+
+		return $new_product;
+	}
+
+	/**
+	 * Назначение данных продукта исходя из режима: статус
+	 *
+	 * @param ProductContract $new_product Экземпляр продукта - либо существующий, либо новый
+	 * @param ProductDataContract $product Данные продукта из XML
+	 * @param string $mode Режим - create или update
+	 * @param Reader $reader Текущий итератор
+	 *
+	 * @return ProductContract
+	 */
+	public function assignProductsItemStatus($new_product, $product, $mode, $reader)
+	{
+		if($mode === 'create')
+		{
+			$new_product->set_status($this->getOptions('products_create_status', 'draft'));
+
+			return $new_product;
+		}
+
+		$update_status = $this->getOptions('products_update_status', '');
+
+		if($update_status !== '')
+		{
+			$new_product->set_status($update_status);
+		}
+
+		return $new_product;
+	}
+
+	/**
+	 * Назначение данных продукта исходя из режима: статус остатка
+	 *
+	 * @param ProductContract $new_product Экземпляр продукта - либо существующий, либо новый
+	 * @param ProductDataContract $product Данные продукта из XML
+	 * @param string $mode Режим - create или update
+	 * @param Reader $reader Текущий итератор
+	 *
+	 * @return ProductContract
+	 */
+	public function assignProductsItemStockStatus($new_product, $product, $mode, $reader)
+	{
+		if($mode === 'create')
+		{
+			$new_product->set_stock_status($this->getOptions('products_create_stock_status', 'outofstock'));
+
+			return $new_product;
+		}
+
+		$update_status = $this->getOptions('products_update_stock_status', '');
+
+		if($update_status !== '')
+		{
+			$new_product->set_stock_status($update_status);
 		}
 
 		return $new_product;
@@ -1052,6 +1117,16 @@ class Core extends SchemaAbstract
 	 */
 	public function assignProductsItemCategories($new_product, $product, $mode, $reader)
 	{
+		if('create' === $mode && 'yes' !== $this->getOptions('products_create_adding_category', 'yes'))
+		{
+			return $new_product;
+		}
+
+		if('update' === $mode && 'yes' !== $this->getOptions('products_update_categories', 'no'))
+		{
+			return $new_product;
+		}
+
 		if($new_product->isType('variation'))
 		{
 			return $new_product;
@@ -1574,6 +1649,16 @@ class Core extends SchemaAbstract
 	 */
 	public function assignProductsItemAttributes($internal_product, $external_product, $mode, $reader)
 	{
+		if('create' === $mode && 'yes' !== $this->getOptions('products_create_adding_attributes', 'yes'))
+		{
+			return $internal_product;
+		}
+
+		if('update' === $mode && 'yes' !== $this->getOptions('products_update_attributes', 'no'))
+		{
+			return $internal_product;
+		}
+
 		$this->log()->debug(__('Assigning attributes to a product based on the properties of the product catalog.', 'wc1c'), ['mode' => $mode, 'filetype' => $reader->getFiletype(), 'internal_product_id' => $internal_product->getId(), 'external_product_id' => $external_product->getId()]);
 
 		if($reader->getFiletype() !== 'import')
@@ -1677,7 +1762,7 @@ class Core extends SchemaAbstract
 		/*
 		 * Значения характеристик
 		 */
-		if($external_product->hasCharacteristics() && !empty($external_product->getCharacteristicId()))
+		if($external_product->hasCharacteristics())
 		{
 			$this->log()->info(__('Processing of product characteristics.', 'wc1c'));
 
@@ -1685,13 +1770,17 @@ class Core extends SchemaAbstract
 			 * Значения других вариаций
 			 */
 			$old_characteristics = [];
-			$parent_characteristics = (new Factory())->getProduct($internal_product->get_parent_id());
-			if($parent_characteristics instanceof VariableProduct)
+
+			if(!empty($external_product->getCharacteristicId()))
 			{
-				$old_characteristics = maybe_unserialize($parent_characteristics->get_meta('_wc1c_characteristics', true));
-				if(empty($old_characteristics))
+				$parent_characteristics = (new Factory())->getProduct($internal_product->get_parent_id());
+				if($parent_characteristics instanceof VariableProduct)
 				{
-					$old_characteristics = [];
+					$old_characteristics = maybe_unserialize($parent_characteristics->get_meta('_wc1c_characteristics', true));
+					if(empty($old_characteristics))
+					{
+						$old_characteristics = [];
+					}
 				}
 			}
 
@@ -1747,7 +1836,7 @@ class Core extends SchemaAbstract
 				];
 			}
 
-			if($parent_characteristics instanceof VariableProduct)
+			if(!empty($external_product->getCharacteristicId()) && $parent_characteristics instanceof VariableProduct)
 			{
 				$parent_characteristics->update_meta_data('_wc1c_characteristics', $old_characteristics);
 				$parent_characteristics->save();
@@ -1821,6 +1910,12 @@ class Core extends SchemaAbstract
 		{
 			$this->log()->info(__('Processing of product properties.', 'wc1c'));
 
+			$property_values_from_characteristics = [];
+			if($external_product->hasCharacteristics())
+			{
+				$property_values_from_characteristics = $external_product->getCharacteristics();
+			}
+
 			$classifier_properties = maybe_unserialize($this->configuration()->getMeta('classifier-properties:' . $reader->getFiletype() . ':' . $reader->offers_package->getClassifierId()));
 
 			foreach($external_product->getPropertyValues() as $property_id => $property_value)
@@ -1848,6 +1943,13 @@ class Core extends SchemaAbstract
 				if($property_value['value'] === '00000000-0000-0000-0000-000000000000')
 				{
 					$this->log()->info(__('The attribute contains an empty value identifier.', 'wc1c'), ['property_id' => $property_id, 'value' => $property_value]);
+					continue;
+				}
+
+				$found_key = array_search($property_id, array_column($property_values_from_characteristics, 'id'), true);
+				if($found_key)
+				{
+					$this->log()->info(__('The attribute contains in products characteristics.', 'wc1c'), ['property_id' => $property_id, 'found_key' => $found_key]);
 					continue;
 				}
 
@@ -1880,8 +1982,6 @@ class Core extends SchemaAbstract
 
 						$global->assignValue($property_value['value']);
 					}
-
-					$value[] = $property_value['value'];
 				}
 
 				$raw_attributes[$attribute_name] =
@@ -2408,7 +2508,7 @@ class Core extends SchemaAbstract
 		/*
 		 * Пропуск продуктов созданных из других конфигураций
 		 */
-		if('yes' === $this->getOptions('products_update_only_configuration', 'no') && $update_product->getConfigurationId() !== $this->configuration()->getId())
+		if('yes' === $this->getOptions('products_update_only_configuration', 'no') && (int)$update_product->getConfigurationId() !== $this->configuration()->getId())
 		{
 			$this->log()->info(__('The product is created from a different configuration. Update skipped.', 'wc1c'), ['product_id' => $product_id]);
 			return;
@@ -2417,7 +2517,7 @@ class Core extends SchemaAbstract
 		/*
 		 * Пропуск продуктов созданных из других схем
 		 */
-		if('yes' === $this->getOptions('products_update_only_schema', 'no') && $update_product->getSchemaId() !== $this->getId())
+		if('yes' === $this->getOptions('products_update_only_schema', 'no') && (string)$update_product->getSchemaId() !== $this->getId())
 		{
 			$this->log()->info(__('The product is created from a different schema. Update skipped.', 'wc1c'), ['product_id' => $product_id]);
 			return;

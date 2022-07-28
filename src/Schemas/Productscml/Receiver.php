@@ -30,8 +30,12 @@ final class Receiver
 	public function initHandler()
 	{
 		add_action('wc1c_receiver_' . $this->core()->getId(), [$this, 'handler'], 10, 0);
+
 		add_action('wc1c_schema_productscml_catalog_handler_checkauth', [$this, 'handlerCheckauth'], 10, 0);
+
+		add_action('wc1c_schema_productscml_catalog_handler_init', [$this, 'handlerCatalogDirectoryClean'], 10, 0);
 		add_action('wc1c_schema_productscml_catalog_handler_init', [$this, 'handlerCatalogModeInit'], 10, 0);
+
 		add_action('wc1c_schema_productscml_catalog_handler_file', [$this, 'handlerCatalogModeFile'], 10, 0);
 		add_action('wc1c_schema_productscml_catalog_handler_import', [$this, 'handlerCatalogModeImport'], 10, 0);
 		add_action('wc1c_schema_productscml_catalog_handler_deactivate', [$this, 'handlerCatalogModeDeactivate'], 10, 0);
@@ -414,6 +418,32 @@ final class Receiver
 	}
 
 	/**
+	 * Cleaning the directory for temporary files.
+	 *
+	 * @return void
+	 */
+	public function handlerCatalogDirectoryClean()
+	{
+		$directory = $this->core()->getUploadDirectory();
+
+		$this->core()->log()->info(__('Cleaning the directory for temporary files.', 'wc1c'), ['directory' => $directory]);
+
+		wc1c()->filesystem()->ensureDirectoryExists($directory);
+
+		if(wc1c()->filesystem()->cleanDirectory($directory))
+		{
+			$this->core()->log()->info(__('The directory for temporary files was successfully cleared of old files.', 'wc1c'), ['directory' => $this->core()->getUploadDirectory()]);
+		}
+		else
+		{
+			$error = __('Failed to clear the temp directory of old files.', 'wc1c');
+
+			$this->core()->log()->error($error, ['directory' => $directory]);
+			$this->sendResponseByType('failure', $error);
+		}
+	}
+
+	/**
 	 * Init
 	 */
 	public function handlerCatalogModeInit()
@@ -423,19 +453,7 @@ final class Receiver
 		if(has_filter('wc1c_schema_productscml_handler_catalog_mode_init_session'))
 		{
 			$_SESSION = apply_filters('wc1c_schema_productscml_handler_catalog_mode_init_session', $_SESSION, $this);
-		}
-
-		$this->core()->log()->debug(__('Session for receiving requests.', 'wc1c'), ['session'=> $_SESSION]);
-
-		if(wc1c()->filesystem()->cleanDirectory($this->core()->getUploadDirectory()))
-		{
-			$this->core()->log()->info(__('The directory for temporary files was successfully cleared of old files.', 'wc1c'), ['directory' => $this->core()->getUploadDirectory()]);
-		}
-		else
-		{
-			$error = __('Failed to clear the temp directory of old files.', 'wc1c');
-			$this->core()->log()->error($error, ['directory' => $this->core()->getUploadDirectory()]);
-			$this->sendResponseByType('failure', $error);
+			$this->core()->log()->debug(__('Session for receiving requests is changed by external algorithms.', 'wc1c'), ['session'=> $_SESSION]);
 		}
 
 		$data['zip'] = 'zip=no' . PHP_EOL;
