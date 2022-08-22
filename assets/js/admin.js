@@ -1,4 +1,4 @@
-jQuery(document).ready(function()
+document.addEventListener('DOMContentLoaded', function()
 {
     tocbot.init({
         tocSelector: '.wc1c-toc',
