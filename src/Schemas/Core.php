@@ -183,18 +183,10 @@ final class Core
 	 */
 	public function load()
 	{
-		$schemas = [];
+		add_action('wc1c_default_schemas_loading', [$this, 'loadProductscml'], 10);
+		add_action('wc1c_default_schemas_loading', [$this, 'loadFlamixcml'], 100);
 
-		try
-		{
-			$schema_productscml = new Productscml\Core();
-		}
-		catch(Exception $e)
-		{
-			throw new RuntimeException('Schema init exception - ' . $e->getMessage());
-		}
-
-		$schemas[strtolower($schema_productscml->getId())] = $schema_productscml;
+		$schemas = apply_filters('wc1c_default_schemas_loading', []);
 
 		if('yes' === wc1c()->settings()->get('extensions_schemas', 'yes'))
 		{
@@ -211,5 +203,53 @@ final class Core
 		{
 			throw new RuntimeException('Set exception - ' . $e->getMessage());
 		}
+	}
+
+	/**
+	 * Load schema: productscml
+	 *
+	 * @param $schemas
+	 *
+	 * @return void
+	 */
+	public function loadProductscml($schemas)
+	{
+		try
+		{
+			$schema = new Productscml\Core();
+		}
+		catch(Exception $e)
+		{
+			wc1c()->log('schemas')->error(__('Schema is not loaded.', 'wc1c'), ['exception' => $e]);
+			return $schemas;
+		}
+
+		$schemas[$schema->getId()] = $schema;
+
+		return $schemas;
+	}
+
+	/**
+	 * Load schema: flamixcml
+	 *
+	 * @param $schemas
+	 *
+	 * @return void
+	 */
+	public function loadFlamixcml($schemas)
+	{
+		try
+		{
+			$schema = new Flamixcml\Core();
+		}
+		catch(Exception $e)
+		{
+			wc1c()->log('schemas')->error(__('Schema is not loaded.', 'wc1c'), ['exception' => $e]);
+			return $schemas;
+		}
+
+		$schemas[$schema->getId()] = $schema;
+
+		return $schemas;
 	}
 }
