@@ -35,7 +35,7 @@ final class Core
 	{
 		if(!is_array($schemas))
 		{
-			throw new Exception('$schemas is not valid');
+			throw new Exception(__('$schemas is not valid', 'wc1c'));
 		}
 
 		$this->schemas = $schemas;
@@ -53,7 +53,7 @@ final class Core
 	{
 		if(false === $configuration)
 		{
-			throw new Exception('$configuration is false');
+			throw new Exception(__('$configuration is false', 'wc1c'));
 		}
 
 		if(!is_object($configuration))
@@ -70,7 +70,7 @@ final class Core
 
 			if(!$storage_configurations->isExistingById($configuration))
 			{
-				throw new Exception('$configuration is not exists');
+				throw new Exception(__('$configuration is not exists', 'wc1c'));
 			}
 
 			try
@@ -85,7 +85,7 @@ final class Core
 
 		if(!$configuration instanceof Configuration)
 		{
-			throw new Exception('$configuration is not instanceof Configuration');
+			throw new Exception(__('$configuration is not instanceof Configuration', 'wc1c'));
 		}
 
 		try
@@ -99,31 +99,31 @@ final class Core
 
 		if(!is_array($schemas))
 		{
-			throw new Exception('$schemas is not array');
+			throw new Exception(__('$schemas is not array.', 'wc1c'));
 		}
 
 		$schema_id = $configuration->getSchema();
 
 		if(!array_key_exists($schema_id, $schemas))
 		{
-			throw new Exception('schema not found by id: ' . $schema_id);
+			throw new Exception(__('Schema not found by id:', 'wc1c') . ' ' . $schema_id);
 		}
 
 		if(!is_object($schemas[$schema_id]))
 		{
-			throw new Exception('$schemas[$schema_id] is not object');
+			throw new Exception(__('$schemas[$schema_id] is not object', 'wc1c'));
 		}
 
 		$init_schema = $schemas[$schema_id];
 
 		if($init_schema->isInitialized())
 		{
-			throw new Exception('old initialized, $schema_id: ' . $schema_id);
+			throw new Exception(__('Old initialized, $schema_id:', 'wc1c') . ' ' . $schema_id);
 		}
 
 		if(!method_exists($init_schema, 'init'))
 		{
-			throw new Exception('method init not found, $schema_id: ' . $schema_id);
+			throw new Exception(__('Method init not found in schema, $schema_id:', 'wc1c') . ' ' . $schema_id);
 		}
 
 		$current_configuration_id = $configuration->getId();
@@ -138,12 +138,12 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			throw new Exception('Exception by schema - ' . $e->getMessage());
+			throw new Exception($e->getMessage());
 		}
 
 		if(true !== $init_schema_result)
 		{
-			throw new Exception('Schema is not initialized');
+			throw new Exception(__('Schema is not initialized', 'wc1c'));
 		}
 
 		$init_schema->setInitialized(true);
@@ -170,7 +170,7 @@ final class Core
 				return $this->schemas[$schema_id];
 			}
 
-			throw new RuntimeException('Schema by ID is unavailable');
+			throw new RuntimeException(__('Schema by ID is unavailable.', 'wc1c'));
 		}
 
 		return $this->schemas;
@@ -201,7 +201,7 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			throw new RuntimeException('Set exception - ' . $e->getMessage());
+			throw new RuntimeException($e->getMessage());
 		}
 	}
 
