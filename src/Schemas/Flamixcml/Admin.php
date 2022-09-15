@@ -283,7 +283,7 @@ class Admin
 		[
 			'title' => __('Maximum products in one step', 'wc1c'),
 			'type' => 'text',
-			'description' => __('The maximum number of products uploaded per request. Specify 0 to unload all products in one step.', 'wc1c'),
+			'description' => __('The maximum number of products uploaded per request. Specify 0 or empty to unload all products in one step.', 'wc1c'),
 			'default' => 0,
 			'css' => 'min-width: 20px;',
 		];
