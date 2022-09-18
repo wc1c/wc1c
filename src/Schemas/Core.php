@@ -143,7 +143,7 @@ final class Core
 
 		if(true !== $init_schema_result)
 		{
-			throw new Exception(__('Schema is not initialized', 'wc1c'));
+			throw new Exception(__('Schema is not initialized.', 'wc1c'));
 		}
 
 		$init_schema->setInitialized(true);
