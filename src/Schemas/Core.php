@@ -7,6 +7,7 @@ use Wc1c\Data\Storage;
 use Wc1c\Data\Storages\ConfigurationsStorage;
 use Wc1c\Exceptions\Exception;
 use Wc1c\Exceptions\RuntimeException;
+use Wc1c\Schemas\Contracts\SchemaContract;
 use Wc1c\Traits\SingletonTrait;
 
 /**
@@ -156,7 +157,7 @@ final class Core
 	 *
 	 * @param string $schema_id
 	 *
-	 * @return array|mixed
+	 * @return array|SchemaContract
 	 * @throws RuntimeException
 	 */
 	public function get($schema_id = '')
