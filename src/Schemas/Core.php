@@ -224,7 +224,9 @@ final class Core
 			return $schemas;
 		}
 
-		return (array)$schemas[$schema->getId()] = $schema;
+		$schemas[$schema->getId()] = $schema;
+
+		return $schemas;
 	}
 
 	/**
@@ -246,6 +248,8 @@ final class Core
 			return $schemas;
 		}
 
-		return (array)$schemas[$schema->getId()] = $schema;
+		$schemas[$schema->getId()] = $schema;
+
+		return $schemas;
 	}
 }
