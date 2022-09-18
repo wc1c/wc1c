@@ -210,7 +210,7 @@ final class Core
 	 *
 	 * @param $schemas
 	 *
-	 * @return void
+	 * @return array
 	 */
 	public function loadProductscml($schemas)
 	{
@@ -224,9 +224,7 @@ final class Core
 			return $schemas;
 		}
 
-		$schemas[$schema->getId()] = $schema;
-
-		return $schemas;
+		return (array)$schemas[$schema->getId()] = $schema;
 	}
 
 	/**
@@ -234,7 +232,7 @@ final class Core
 	 *
 	 * @param $schemas
 	 *
-	 * @return void
+	 * @return array
 	 */
 	public function loadFlamixcml($schemas)
 	{
@@ -248,8 +246,6 @@ final class Core
 			return $schemas;
 		}
 
-		$schemas[$schema->getId()] = $schema;
-
-		return $schemas;
+		return (array)$schemas[$schema->getId()] = $schema;
 	}
 }
