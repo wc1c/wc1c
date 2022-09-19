@@ -2707,7 +2707,7 @@ class Core extends SchemaAbstract
 		/*
 		 * Пропуск продуктов созданных из других конфигураций
 		 */
-		if('yes' === $this->getOptions('products_update_only_configuration', 'no') && $internal_offer->getConfigurationId() !== $this->configuration()->getId())
+		if('yes' === $this->getOptions('products_update_only_configuration', 'no') && (int)$internal_offer->getConfigurationId() !== $this->configuration()->getId())
 		{
 			$this->log()->info(__('The product is created from a different configuration. Update skipped.', 'wc1c'), ['offer_id' => $internal_offer_id]);
 			return;
@@ -2716,7 +2716,7 @@ class Core extends SchemaAbstract
 		/*
 		 * Пропуск продуктов созданных из других схем
 		 */
-		if('yes' === $this->getOptions('products_update_only_schema', 'no') && $internal_offer->getSchemaId() !== $this->getId())
+		if('yes' === $this->getOptions('products_update_only_schema', 'no') && (string)$internal_offer->getSchemaId() !== $this->getId())
 		{
 			$this->log()->info(__('The product is created from a different schema. Update skipped.', 'wc1c'), ['offer_id' => $internal_offer_id]);
 			return;
