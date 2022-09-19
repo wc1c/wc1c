@@ -220,7 +220,7 @@ final class Core
 		}
 		catch(Exception $e)
 		{
-			wc1c()->log('schemas')->error(__('Schema is not loaded.', 'wc1c'), ['exception' => $e]);
+			wc1c()->log('schemas')->error(__('Schema ProductsCML is not loaded.', 'wc1c'), ['exception' => $e]);
 			return $schemas;
 		}
 
