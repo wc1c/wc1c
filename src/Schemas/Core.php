@@ -185,7 +185,6 @@ final class Core
 	public function load()
 	{
 		add_action('wc1c_default_schemas_loading', [$this, 'loadProductscml'], 10);
-		add_action('wc1c_default_schemas_loading', [$this, 'loadFlamixcml'], 100);
 
 		$schemas = apply_filters('wc1c_default_schemas_loading', []);
 
@@ -218,30 +217,6 @@ final class Core
 		try
 		{
 			$schema = new Productscml\Core();
-		}
-		catch(Exception $e)
-		{
-			wc1c()->log('schemas')->error(__('Schema is not loaded.', 'wc1c'), ['exception' => $e]);
-			return $schemas;
-		}
-
-		$schemas[$schema->getId()] = $schema;
-
-		return $schemas;
-	}
-
-	/**
-	 * Load schema: flamixcml
-	 *
-	 * @param $schemas
-	 *
-	 * @return array
-	 */
-	public function loadFlamixcml($schemas)
-	{
-		try
-		{
-			$schema = new Flamixcml\Core();
 		}
 		catch(Exception $e)
 		{
