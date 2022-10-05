@@ -53,7 +53,7 @@ class Core extends SchemaAbstract
 	public function __construct()
 	{
 		$this->setId('productscml');
-		$this->setVersion('0.1.0');
+		$this->setVersion('0.2.0');
 
 		$this->setName(__('Products data exchange via CommerceML', 'wc1c'));
 		$this->setDescription(__('Creation and updating of products (goods) in WooCommerce according to data from 1C using the CommerceML protocol of various versions.', 'wc1c'));
@@ -1159,29 +1159,29 @@ class Core extends SchemaAbstract
 	/**
 	 * Назначение данных продукта исходя из режима: изображения
 	 *
-	 * @param ProductContract $new_product Экземпляр продукта - либо существующий, либо новый
-	 * @param ProductDataContract $product Данные продукта из XML
+	 * @param ProductContract $internal_product Экземпляр продукта - либо существующий, либо новый
+	 * @param ProductDataContract $external_product Данные продукта из XML
 	 * @param string $mode Режим - create или update
 	 * @param Reader $reader Текущий итератор
 	 *
 	 * @return ProductContract
 	 * @throws Exception
 	 */
-	public function assignProductsItemImages($new_product, $product, $mode, $reader)
+	public function assignProductsItemImages($internal_product, $external_product, $mode, $reader)
 	{
-		if($new_product->isType('variation')) // todo: назначение одного изображения для вариаации
+		if($internal_product->isType('variation')) // todo: назначение одного изображения для вариаации
 		{
-			return $new_product;
+			return $internal_product;
 		}
 
-		if('create' === $mode && false === $product->hasImages())
+		if('create' === $mode && false === $external_product->hasImages())
 		{
-			return $new_product;
+			return $internal_product;
 		}
 
 		if('yes' !== $this->getOptions('products_images_by_cml', 'no'))
 		{
-			return $new_product;
+			return $internal_product;
 		}
 
 		$max_images = $this->getOptions('products_images_by_cml_max', 10);
@@ -1189,7 +1189,7 @@ class Core extends SchemaAbstract
 		/** @var ImagesStorageContract */
 		$images_storage = Storage::load('image');
 
-		$images = $product->getImages();
+		$images = $external_product->getImages();
 		$gallery_image_ids = [];
 
 		if(is_array($images))
@@ -1219,12 +1219,12 @@ class Core extends SchemaAbstract
 					continue;
 				}
 
-				$image_current->setProductId($new_product->getId());
+				$image_current->setProductId($internal_product->getId());
 				$image_current->save();
 
 				if($index === 0)
 				{
-					$new_product->set_image_id($attach_id);
+					$internal_product->set_image_id($attach_id);
 					continue;
 				}
 
@@ -1232,26 +1232,26 @@ class Core extends SchemaAbstract
 			}
 		}
 
-		$new_product->set_gallery_image_ids($gallery_image_ids);
+		$internal_product->set_gallery_image_ids($gallery_image_ids);
 
-		return $new_product;
+		return $internal_product;
 	}
 
 	/**
 	 * Назначение данных продукта исходя из режима: габариты
 	 *
-	 * @param ProductContract $new_product Экземпляр продукта - либо существующий, либо новый
-	 * @param ProductDataContract $product Данные продукта из XML
+	 * @param ProductContract $internal_product Экземпляр продукта - либо существующий, либо новый
+	 * @param ProductDataContract $external_product Данные продукта из XML
 	 * @param string $mode Режим - create или update
 	 * @param Reader $reader Текущий итератор
 	 *
 	 * @return ProductContract
 	 */
-	public function assignProductsItemDimensions($new_product, $product, $mode, $reader)
+	public function assignProductsItemDimensions($internal_product, $external_product, $mode, $reader)
 	{
 		if('yes' !== $this->getOptions('products_dimensions_by_requisites', 'no'))
 		{
-			return $new_product;
+			return $internal_product;
 		}
 
 		/**
@@ -1260,9 +1260,9 @@ class Core extends SchemaAbstract
 		$weight = '';
 		$weight_name = trim($this->getOptions('products_dimensions_by_requisites_weight_from_name', 'Вес'));
 
-		if($weight_name !== '' && $product->hasRequisites($weight_name))
+		if($weight_name !== '' && $external_product->hasRequisites($weight_name))
 		{
-			$requisite_data = $product->getRequisites($weight_name);
+			$requisite_data = $external_product->getRequisites($weight_name);
 			if(!empty($requisite_data['value']))
 			{
 				$weight = $requisite_data['value'];
@@ -1271,10 +1271,10 @@ class Core extends SchemaAbstract
 
 		if(has_filter('wc1c_products_dimensions_by_requisites_weight'))
 		{
-			$weight = apply_filters('wc1c_products_dimensions_by_requisites_weight', $weight, $new_product, $product, $mode, $reader, $this);
+			$weight = apply_filters('wc1c_products_dimensions_by_requisites_weight', $weight, $internal_product, $external_product, $mode, $reader, $this);
 		}
 
-		$new_product->set_weight($weight);
+		$internal_product->set_weight($weight);
 
 		/**
 		 * Длина
@@ -1282,9 +1282,9 @@ class Core extends SchemaAbstract
 		$length = '';
 		$length_name = trim($this->getOptions('products_dimensions_by_requisites_length_from_name', 'Длина'));
 
-		if($length_name !== '' && $product->hasRequisites($length_name))
+		if($length_name !== '' && $external_product->hasRequisites($length_name))
 		{
-			$requisite_data = $product->getRequisites($length_name);
+			$requisite_data = $external_product->getRequisites($length_name);
 			if(!empty($requisite_data['value']))
 			{
 				$length = $requisite_data['value'];
@@ -1293,10 +1293,10 @@ class Core extends SchemaAbstract
 
 		if(has_filter('wc1c_products_dimensions_by_requisites_length'))
 		{
-			$length = apply_filters('wc1c_products_dimensions_by_requisites_length', $length, $new_product, $product, $mode, $reader, $this);
+			$length = apply_filters('wc1c_products_dimensions_by_requisites_length', $length, $internal_product, $external_product, $mode, $reader, $this);
 		}
 
-		$new_product->set_length($length);
+		$internal_product->set_length($length);
 
 		/**
 		 * Ширина
@@ -1304,9 +1304,9 @@ class Core extends SchemaAbstract
 		$width = '';
 		$width_name = trim($this->getOptions('products_dimensions_by_requisites_width_from_name', 'Ширина'));
 
-		if($width_name !== '' && $product->hasRequisites($width_name))
+		if($width_name !== '' && $external_product->hasRequisites($width_name))
 		{
-			$requisite_data = $product->getRequisites($width_name);
+			$requisite_data = $external_product->getRequisites($width_name);
 			if(!empty($requisite_data['value']))
 			{
 				$width = $requisite_data['value'];
@@ -1315,10 +1315,10 @@ class Core extends SchemaAbstract
 
 		if(has_filter('wc1c_products_dimensions_by_requisites_width'))
 		{
-			$width = apply_filters('wc1c_products_dimensions_by_requisites_width', $width, $new_product, $product, $mode, $reader, $this);
+			$width = apply_filters('wc1c_products_dimensions_by_requisites_width', $width, $internal_product, $external_product, $mode, $reader, $this);
 		}
 
-		$new_product->set_width($width);
+		$internal_product->set_width($width);
 
 		/**
 		 * Высота
@@ -1326,9 +1326,9 @@ class Core extends SchemaAbstract
 		$height = '';
 		$height_name = trim($this->getOptions('products_dimensions_by_requisites_height_from_name', 'Высота'));
 
-		if($height_name !== '' && $product->hasRequisites($height_name))
+		if($height_name !== '' && $external_product->hasRequisites($height_name))
 		{
-			$requisite_data = $product->getRequisites($height_name);
+			$requisite_data = $external_product->getRequisites($height_name);
 			if(!empty($requisite_data['value']))
 			{
 				$height = $requisite_data['value'];
@@ -1337,12 +1337,12 @@ class Core extends SchemaAbstract
 
 		if(has_filter('wc1c_products_dimensions_by_requisites_height'))
 		{
-			$height = apply_filters('wc1c_products_dimensions_by_requisites_height', $height, $new_product, $product, $mode, $reader, $this);
+			$height = apply_filters('wc1c_products_dimensions_by_requisites_height', $height, $internal_product, $external_product, $mode, $reader, $this);
 		}
 
-		$new_product->set_height($height);
+		$internal_product->set_height($height);
 
-		return $new_product;
+		return $internal_product;
 	}
 
 	/**
@@ -2384,7 +2384,7 @@ class Core extends SchemaAbstract
 		 *
 		 * @return int|false
 		 */
-		if(has_filter('wc1c_schema_productscml_processing_products_search'))
+		if($product_id === 0 && has_filter('wc1c_schema_productscml_processing_products_search'))
 		{
 			$product_id = apply_filters('wc1c_schema_productscml_processing_products_search', $product_id, $external_product, $this, $reader);
 
@@ -2611,7 +2611,7 @@ class Core extends SchemaAbstract
 		 *
 		 * @return int|false
 		 */
-		if(has_filter('wc1c_schema_productscml_processing_offers_search'))
+		if($internal_offer_id === 0 && has_filter('wc1c_schema_productscml_processing_offers_search'))
 		{
 			$internal_offer_id = apply_filters('wc1c_schema_productscml_processing_offers_search', $internal_offer_id, $external_offer, $reader);
 

@@ -124,15 +124,6 @@ class Admin
 			'css' => 'min-width: 350px;',
 		];
 
-		$fields['receiver_check_auth_key_disabled'] =
-		[
-			'title' => __('Request signature verification', 'wc1c'),
-			'type' => 'checkbox',
-			'label' => __('Check the checkbox to disable request signature verification. By default, validation is performed.', 'wc1c'),
-			'description' => __('The setting disables authentication of requests from 1C. May be required only for very old versions of 1C. Enable only if there are errors in the request signature verification in the logs. If disabled, signature verification will be performed using the lazy signature from the lazysign parameter.', 'wc1c'),
-			'default' => 'no'
-		];
-
 		return $fields;
 	}
 
