@@ -184,7 +184,8 @@ final class Core
 	 */
 	public function load()
 	{
-		add_action('wc1c_default_schemas_loading', [$this, 'loadProductscml'], 10);
+		add_action('wc1c_default_schemas_loading', [$this, 'loadProductsCml'], 10, 1);
+		add_action('wc1c_default_schemas_loading', [$this, 'loadProductsCleanerCml'], 10, 1);
 
 		$schemas = apply_filters('wc1c_default_schemas_loading', []);
 
@@ -212,7 +213,7 @@ final class Core
 	 *
 	 * @return array
 	 */
-	public function loadProductscml($schemas)
+	public function loadProductsCml($schemas)
 	{
 		try
 		{
@@ -221,6 +222,30 @@ final class Core
 		catch(Exception $e)
 		{
 			wc1c()->log('schemas')->error(__('Schema ProductsCML is not loaded.', 'wc1c'), ['exception' => $e]);
+			return $schemas;
+		}
+
+		$schemas[$schema->getId()] = $schema;
+
+		return $schemas;
+	}
+
+	/**
+	 * Load schema: productscleanercml
+	 *
+	 * @param $schemas
+	 *
+	 * @return array
+	 */
+	public function loadProductsCleanerCml($schemas)
+	{
+		try
+		{
+			$schema = new Productscleanercml\Core();
+		}
+		catch(Exception $e)
+		{
+			wc1c()->log('schemas')->error(__('Schema ProductsCleanerCML is not loaded.', 'wc1c'), ['exception' => $e]);
 			return $schemas;
 		}
 
