@@ -40,7 +40,7 @@ class Core extends SchemaAbstract
 	public function __construct()
 	{
 		$this->setId('productscleanercml');
-		$this->setVersion('0.1.0');
+		$this->setVersion('0.1.1');
 
 		$this->setName(__('Cleaning of products via CommerceML', 'wc1c'));
 		$this->setDescription(__('Cleaning of existing products in WooCommerce according to the nomenclature from 1C via the CommerceML protocol.', 'wc1c'));
@@ -386,13 +386,7 @@ class Core extends SchemaAbstract
 		if(has_filter('wc1c_schema_productscleanercml_processing_products_search'))
 		{
 			$product_id = apply_filters('wc1c_schema_productscleanercml_processing_products_search', $product_id, $external_product, $this, $reader);
-
 			$this->log()->debug(__('Product search result by external algorithms.', 'wc1c'), ['product_ids' => $product_id]);
-
-			if(empty($product_id))
-			{
-				$product_id = 0;
-			}
 		}
 
 		/**
