@@ -4,7 +4,7 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: WC1C > integration of WooCommerce with 1C products "
 "(different configurations)\n"
-"POT-Creation-Date: 2022-09-19 17:38+0300\n"
+"POT-Creation-Date: 2022-10-05 14:09+0300\n"
 "PO-Revision-Date: 2019-03-19 20:30+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
@@ -444,7 +444,8 @@ msgstr ""
 msgid "Not a feature?"
 msgstr ""
 
-#: src/Admin/Settings.php:54 src/Schemas/Productscml/Admin.php:1015
+#: src/Admin/Settings.php:54 src/Schemas/Productscleanercml/Admin.php:239
+#: src/Schemas/Productscml/Admin.php:1015
 msgid "Event logs"
 msgstr ""
 
@@ -550,6 +551,7 @@ msgstr ""
 #: src/Admin/Settings/InterfaceForm.php:81 src/Admin/Settings/InterfaceForm.php:90
 #: src/Admin/Settings/InterfaceForm.php:99
 #: src/Admin/Settings/InterfaceForm.php:115
+#: src/Schemas/Productscleanercml/Admin.php:209
 msgid "Enable"
 msgstr ""
 
@@ -609,7 +611,8 @@ msgstr ""
 msgid "Level for main events"
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:43 src/Schemas/Productscml/Admin.php:1024
+#: src/Admin/Settings/LogsForm.php:43 src/Schemas/Productscleanercml/Admin.php:248
+#: src/Schemas/Productscml/Admin.php:1024
 msgid ""
 "All events of the selected level will be recorded in the log file. The higher "
 "the level, the less data is recorded."
@@ -617,39 +620,51 @@ msgstr ""
 
 #: src/Admin/Settings/LogsForm.php:47 src/Admin/Settings/LogsForm.php:80
 #: src/Admin/Settings/LogsForm.php:97 src/Admin/Settings/LogsForm.php:114
-#: src/Admin/Settings/LogsForm.php:131 src/Schemas/Productscml/Admin.php:1029
+#: src/Admin/Settings/LogsForm.php:131
+#: src/Schemas/Productscleanercml/Admin.php:253
+#: src/Schemas/Productscml/Admin.php:1029
 msgid "DEBUG (100)"
 msgstr ""
 
 #: src/Admin/Settings/LogsForm.php:48 src/Admin/Settings/LogsForm.php:81
 #: src/Admin/Settings/LogsForm.php:98 src/Admin/Settings/LogsForm.php:115
-#: src/Admin/Settings/LogsForm.php:132 src/Schemas/Productscml/Admin.php:1030
+#: src/Admin/Settings/LogsForm.php:132
+#: src/Schemas/Productscleanercml/Admin.php:254
+#: src/Schemas/Productscml/Admin.php:1030
 msgid "INFO (200)"
 msgstr ""
 
 #: src/Admin/Settings/LogsForm.php:49 src/Admin/Settings/LogsForm.php:82
 #: src/Admin/Settings/LogsForm.php:99 src/Admin/Settings/LogsForm.php:116
-#: src/Admin/Settings/LogsForm.php:133 src/Schemas/Productscml/Admin.php:1031
+#: src/Admin/Settings/LogsForm.php:133
+#: src/Schemas/Productscleanercml/Admin.php:255
+#: src/Schemas/Productscml/Admin.php:1031
 msgid "NOTICE (250)"
 msgstr ""
 
 #: src/Admin/Settings/LogsForm.php:50 src/Admin/Settings/LogsForm.php:83
 #: src/Admin/Settings/LogsForm.php:100 src/Admin/Settings/LogsForm.php:117
-#: src/Admin/Settings/LogsForm.php:134 src/Schemas/Productscml/Admin.php:1032
+#: src/Admin/Settings/LogsForm.php:134
+#: src/Schemas/Productscleanercml/Admin.php:256
+#: src/Schemas/Productscml/Admin.php:1032
 msgid "WARNING (300)"
 msgstr ""
 
 #: src/Admin/Settings/LogsForm.php:51 src/Admin/Settings/LogsForm.php:84
 #: src/Admin/Settings/LogsForm.php:101 src/Admin/Settings/LogsForm.php:118
-#: src/Admin/Settings/LogsForm.php:135 src/Schemas/Productscml/Admin.php:1033
+#: src/Admin/Settings/LogsForm.php:135
+#: src/Schemas/Productscleanercml/Admin.php:257
+#: src/Schemas/Productscml/Admin.php:1033
 msgid "ERROR (400)"
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:57 src/Schemas/Productscml/Admin.php:1039
+#: src/Admin/Settings/LogsForm.php:57 src/Schemas/Productscleanercml/Admin.php:263
+#: src/Schemas/Productscml/Admin.php:1039
 msgid "Maximum files"
 msgstr ""
 
-#: src/Admin/Settings/LogsForm.php:59 src/Schemas/Productscml/Admin.php:1041
+#: src/Admin/Settings/LogsForm.php:59 src/Schemas/Productscleanercml/Admin.php:265
+#: src/Schemas/Productscml/Admin.php:1041
 msgid ""
 "Log files created daily. This option on the maximum number of stored files. By "
 "default saved of the logs are for the last 30 days."
@@ -675,6 +690,7 @@ msgstr ""
 
 #: src/Admin/Settings/LogsForm.php:79 src/Admin/Settings/LogsForm.php:96
 #: src/Admin/Settings/LogsForm.php:113 src/Admin/Settings/LogsForm.php:130
+#: src/Schemas/Productscleanercml/Admin.php:252
 #: src/Schemas/Productscml/Admin.php:1028
 msgid "Use level for main events"
 msgstr ""
@@ -1030,7 +1046,8 @@ msgstr ""
 msgid "Extensions load exception:"
 msgstr ""
 
-#: src/Receiver.php:44 src/Schemas/Productscml/Receiver.php:66
+#: src/Receiver.php:44 src/Schemas/Productscleanercml/Receiver.php:59
+#: src/Schemas/Productscml/Receiver.php:66
 msgid "Received new request for Receiver."
 msgstr ""
 
@@ -1124,28 +1141,36 @@ msgstr ""
 msgid "Schema by ID is unavailable."
 msgstr ""
 
-#: src/Schemas/Core.php:196
+#: src/Schemas/Core.php:197
 msgid "Schemas loaded."
 msgstr ""
 
-#: src/Schemas/Core.php:223
+#: src/Schemas/Core.php:224
 msgid "Schema ProductsCML is not loaded."
 msgstr ""
 
+#: src/Schemas/Core.php:248
+msgid "Schema ProductsCleanerCML is not loaded."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Admin.php:64
 #: src/Schemas/Productscml/Admin.php:84
 msgid "Receiving requests from 1C"
 msgstr ""
 
+#: src/Schemas/Productscleanercml/Admin.php:66
 #: src/Schemas/Productscml/Admin.php:86
 msgid ""
 "Authorization of requests and regulation of algorithms for receiving requests "
 "for the Receiver from the 1C programs by CommerceML protocol."
 msgstr ""
 
+#: src/Schemas/Productscleanercml/Admin.php:83
 #: src/Schemas/Productscml/Admin.php:103
 msgid "Website address"
 msgstr ""
 
+#: src/Schemas/Productscleanercml/Admin.php:86
 #: src/Schemas/Productscml/Admin.php:106
 msgid ""
 "Specified in the exchange settings on the 1C side. The Recipient is located at "
@@ -1153,10 +1178,12 @@ msgid ""
 "get rid of whitespace characters, if they are present."
 msgstr ""
 
+#: src/Schemas/Productscleanercml/Admin.php:91
 #: src/Schemas/Productscml/Admin.php:111
 msgid "Username"
 msgstr ""
 
+#: src/Schemas/Productscleanercml/Admin.php:93
 #: src/Schemas/Productscml/Admin.php:113
 msgid ""
 "Specified in 1C when setting up an exchange with a site on the 1C side. At the "
@@ -1164,10 +1191,12 @@ msgid ""
 "configuration owner, and not on behalf of the specified username."
 msgstr ""
 
+#: src/Schemas/Productscleanercml/Admin.php:100
 #: src/Schemas/Productscml/Admin.php:120
 msgid "User password"
 msgstr ""
 
+#: src/Schemas/Productscleanercml/Admin.php:102
 #: src/Schemas/Productscml/Admin.php:122
 msgid ""
 "Specified in 1C paired with a username when setting up an exchange with a site "
@@ -1175,16 +1204,19 @@ msgid ""
 "WordPress user."
 msgstr ""
 
+#: src/Schemas/Productscleanercml/Admin.php:109
 #: src/Schemas/Productscml/Admin.php:129
 msgid "Request signature verification"
 msgstr ""
 
+#: src/Schemas/Productscleanercml/Admin.php:111
 #: src/Schemas/Productscml/Admin.php:131
 msgid ""
 "Check the checkbox to disable request signature verification. By default, "
 "validation is performed."
 msgstr ""
 
+#: src/Schemas/Productscleanercml/Admin.php:112
 #: src/Schemas/Productscml/Admin.php:132
 msgid ""
 "The setting disables authentication of requests from 1C. May be required only "
@@ -1193,19 +1225,23 @@ msgid ""
 "performed using the lazy signature from the lazysign parameter."
 msgstr ""
 
+#: src/Schemas/Productscleanercml/Admin.php:130
 #: src/Schemas/Productscml/Admin.php:150
 msgid "Other parameters"
 msgstr ""
 
+#: src/Schemas/Productscleanercml/Admin.php:132
 #: src/Schemas/Productscml/Admin.php:152
 msgid ""
 "Change of data processing behavior for environment compatibility and so on."
 msgstr ""
 
+#: src/Schemas/Productscleanercml/Admin.php:137
 #: src/Schemas/Productscml/Admin.php:157
 msgid "Maximum size of accepted requests"
 msgstr ""
 
+#: src/Schemas/Productscleanercml/Admin.php:142
 #: src/Schemas/Productscml/Admin.php:162
 msgid ""
 "Enter the maximum size of accepted requests from 1C at a time in bytes. May be "
@@ -1213,14 +1249,394 @@ msgid ""
 "kilobyte, G - gigabyte."
 msgstr ""
 
+#: src/Schemas/Productscleanercml/Admin.php:143
 #: src/Schemas/Productscml/Admin.php:163
 msgid "Current WC1C limit:"
 msgstr ""
 
+#: src/Schemas/Productscleanercml/Admin.php:145
 #: src/Schemas/Productscml/Admin.php:165
 msgid ""
 "Can only decrease the value, because it must not exceed the limits from the "
 "WC1C settings."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Admin.php:165
+msgid "Sync"
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Admin.php:169
+#: src/Schemas/Productscml/Admin.php:526
+msgid ""
+"Dispute resolution between existing products (goods) on the 1C side and in "
+"WooCommerce. For extended matching (example by SKU), must use the extension."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Admin.php:170
+msgid "Products will only be deleted for found matching keys."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Admin.php:176
+#: src/Schemas/Productscml/Admin.php:533
+msgid "By external ID from 1C"
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Admin.php:178
+#: src/Schemas/Productscml/Admin.php:535
+msgid "Check the box to enable. Enabled by default."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Admin.php:182
+#: src/Schemas/Productscml/Admin.php:539
+msgid ""
+"When creating new products based on data from 1C, a universal global identifier "
+"from 1C is filled in for them. Can also fill in global identifiers manually for "
+"manually created products."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Admin.php:183
+#: src/Schemas/Productscml/Admin.php:540
+msgid ""
+"Enabling the option allows you to use the filled External ID to mark products "
+"(goods) as existing, and thereby run algorithms to update them."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Admin.php:202
+msgid "Cleaning"
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Admin.php:204
+msgid "Comprehensive settings for cleaning options."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Admin.php:211
+#: src/Schemas/Productscleanercml/Admin.php:220
+#: src/Schemas/Productscml/Admin.php:841 src/Schemas/Productscml/Admin.php:889
+#: src/Schemas/Productscml/Admin.php:932 src/Schemas/Productscml/Admin.php:960
+#: src/Schemas/Productscml/Admin.php:1122 src/Schemas/Productscml/Admin.php:1131
+#: src/Schemas/Productscml/Admin.php:1149 src/Schemas/Productscml/Admin.php:1158
+#: src/Schemas/Productscml/Admin.php:1167 src/Schemas/Productscml/Admin.php:1187
+msgid "Check the box to enable this feature. Disabled by default."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Admin.php:212
+msgid ""
+"All products received via the CommerceML protocol and matching keys for "
+"synchronization will be placed in the Recycle Bin."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Admin.php:218
+msgid "Final removal"
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Admin.php:221
+msgid ""
+"All products received via the CommerceML protocol and matching keys for "
+"synchronization will be permanently deleted from the Recycle Bin."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Admin.php:241
+#: src/Schemas/Productscml/Admin.php:1017
+msgid ""
+"Maintaining event logs for the current configuration. You can view the logs "
+"through the extension or via FTP."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Admin.php:246
+#: src/Schemas/Productscml/Admin.php:1022
+msgid "Level for events"
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Core.php:45
+msgid "Cleaning of products via CommerceML"
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Core.php:46
+msgid ""
+"Cleaning of existing products in WooCommerce according to the nomenclature from "
+"1C via the CommerceML protocol."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Core.php:136
+#: src/Schemas/Productscml/Core.php:170
+msgid "The file cannot be processed. DecoderCML threw an exception."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Core.php:151
+#: src/Schemas/Productscml/Core.php:185
+msgid "The file cannot be processed. ReaderCML threw an exception."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Core.php:155
+#: src/Schemas/Productscml/Core.php:189
+msgid "Filetype:"
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Core.php:170
+#: src/Schemas/Productscml/Core.php:204
+msgid "Import file processing not completed. ReaderCML threw an exception."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Core.php:189
+#: src/Schemas/Productscml/Core.php:223
+msgid "There was not enough time to load all the data."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Core.php:228
+#: src/Schemas/Productscml/Core.php:262
+msgid "Classifier !instanceof ClassifierDataContract. Skip processing."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Core.php:240
+#: src/Schemas/Productscml/Core.php:274
+msgid "An exception was thrown while saving the classifier."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Core.php:321
+#: src/Schemas/Productscml/Core.php:847
+msgid "Product !instanceof ProductDataContract. Skip processing."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Core.php:331
+#: src/Schemas/Productscml/Core.php:866
+msgid "An exception was thrown while saving the product."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Core.php:349
+#: src/Schemas/Productscml/Core.php:2356
+msgid "Processing a product from a catalog of products."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Core.php:353
+msgid "Cleaning of products is disabled. Processing skipped."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Core.php:367
+#: src/Schemas/Productscml/Core.php:2368
+msgid "Product search result by external code from 1C."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Core.php:371
+#: src/Schemas/Productscml/Core.php:2372 src/Schemas/Productscml/Core.php:2600
+msgid "Several identical products were found. The first one is selected."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Core.php:390
+#: src/Schemas/Productscml/Core.php:2391
+msgid "Product search result by external algorithms."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Core.php:403
+#: src/Schemas/Productscml/Core.php:2404
+msgid "Product is not found."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:97
+#: src/Schemas/Productscml/Receiver.php:104
+msgid "Received request params."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:130
+#: src/Schemas/Productscml/Receiver.php:137
+msgid "Catalog: mode not found."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:136
+#: src/Schemas/Productscml/Receiver.php:143
+msgid "Schema: action not found."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:179
+#: src/Schemas/Productscml/Receiver.php:186
+msgid "In 1C was send a response of the type:"
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:189
+#: src/Schemas/Productscml/Receiver.php:196
+msgid "Headers for response."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:241
+#: src/Schemas/Productscml/Receiver.php:248
+msgid ""
+"Server in CGI mode. Not detected the presence of an entry in the root .htaccess "
+"file on the subject of the contents of the lines."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:244
+#: src/Schemas/Productscml/Receiver.php:251
+msgid "Not specified the user. Check the server settings."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:283
+#: src/Schemas/Productscleanercml/Receiver.php:284
+#: src/Schemas/Productscml/Receiver.php:290
+#: src/Schemas/Productscml/Receiver.php:291
+msgid "Not a valid username."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:289
+#: src/Schemas/Productscleanercml/Receiver.php:290
+#: src/Schemas/Productscml/Receiver.php:296
+#: src/Schemas/Productscml/Receiver.php:297
+msgid "Not a valid user password."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:298
+#: src/Schemas/Productscleanercml/Receiver.php:390
+#: src/Schemas/Productscml/Receiver.php:305
+#: src/Schemas/Productscml/Receiver.php:397
+msgid "PHP session none, start new PHP session."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:305
+#: src/Schemas/Productscml/Receiver.php:312
+msgid "Request authorization from 1C successfully completed."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:319
+#: src/Schemas/Productscleanercml/Receiver.php:465
+#: src/Schemas/Productscml/Receiver.php:326
+#: src/Schemas/Productscml/Receiver.php:486
+msgid "Print lines for 1C."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:339
+#: src/Schemas/Productscml/Receiver.php:346
+msgid ""
+"Authorization key verification is disabled. Lazy signature verification "
+"activated."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:343
+#: src/Schemas/Productscml/Receiver.php:350
+msgid ""
+"Authorization key verification failed. 1C did not send the name of the lazy "
+"signature."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:359
+#: src/Schemas/Productscml/Receiver.php:366
+msgid ""
+"Authorization key verification failed. 1C sent an incorrect lazy signature."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:377
+#: src/Schemas/Productscml/Receiver.php:384
+msgid "Authorization key verification failed. 1C sent an empty session name."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:398
+#: src/Schemas/Productscml/Receiver.php:405
+msgid "Authorization check failed - session id differs from the original."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:418
+#: src/Schemas/Productscml/Receiver.php:451
+msgid "Initialization of receiving requests from 1C."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:425
+msgid "Session for receiving requests."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:429
+#: src/Schemas/Productscml/Receiver.php:435
+msgid "The directory for temporary files was successfully cleared of old files."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:433
+#: src/Schemas/Productscml/Receiver.php:439
+msgid "Failed to clear the temp directory of old files."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:444
+#: src/Schemas/Productscml/Receiver.php:465
+msgid "The maximum size of accepted files from 1C is assigned:"
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:449
+#: src/Schemas/Productscml/Receiver.php:470
+msgid ""
+"Based on the global settings of WC1C, the size of received files has been "
+"reduced from 1C to:"
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:455
+#: src/Schemas/Productscml/Receiver.php:476
+msgid ""
+"Based on the configuration settings of WC1C, the size of received files has "
+"been reduced from 1C to:"
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:495
+#: src/Schemas/Productscml/Receiver.php:516
+msgid "Directory is unavailable:"
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:510
+#: src/Schemas/Productscml/Receiver.php:531
+msgid "Filename is empty."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:517
+#: src/Schemas/Productscml/Receiver.php:538
+msgid "Saving data to a file named:"
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:526
+#: src/Schemas/Productscml/Receiver.php:547
+msgid "Directory is unavailable for write."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:544
+#: src/Schemas/Productscml/Receiver.php:565
+msgid "The request contains no data to write to the file. Retry the upload."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:552
+#: src/Schemas/Productscml/Receiver.php:573
+msgid "The file exists. Write a data to the end of an existing file."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:565
+#: src/Schemas/Productscml/Receiver.php:586
+msgid "The data is successfully written to a file. Recorded data size:"
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:572
+#: src/Schemas/Productscml/Receiver.php:651
+msgid "Failed to write data to file."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:583
+#: src/Schemas/Productscml/Receiver.php:662
+msgid "On request from 1C - started importing data from a file."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:589
+#: src/Schemas/Productscml/Receiver.php:668
+msgid "1C sent an empty file name for data import."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:598
+#: src/Schemas/Productscml/Receiver.php:677
+msgid "File for import is not exists."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:609
+#: src/Schemas/Productscml/Receiver.php:688
+msgid "Import of data from file completed successfully."
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:616
+#: src/Schemas/Productscml/Receiver.php:695
+msgid "Importing data from a file ended with an error:"
+msgstr ""
+
+#: src/Schemas/Productscleanercml/Receiver.php:621
+#: src/Schemas/Productscml/Receiver.php:700
+msgid "Importing data from a file ended with an error."
 msgstr ""
 
 #: src/Schemas/Productscml/Admin.php:185
@@ -1603,37 +2019,10 @@ msgstr ""
 msgid "Products (goods): synchronization"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:526
-msgid ""
-"Dispute resolution between existing products (goods) on the 1C side and in "
-"WooCommerce. For extended matching (example by SKU), must use the extension."
-msgstr ""
-
 #: src/Schemas/Productscml/Admin.php:527
 msgid ""
 "Products not found by sync keys will be treated as new. Accordingly, the rules "
 "for creating products will apply to them."
-msgstr ""
-
-#: src/Schemas/Productscml/Admin.php:533
-msgid "By external ID from 1C"
-msgstr ""
-
-#: src/Schemas/Productscml/Admin.php:535
-msgid "Check the box to enable. Enabled by default."
-msgstr ""
-
-#: src/Schemas/Productscml/Admin.php:539
-msgid ""
-"When creating new products based on data from 1C, a universal global identifier "
-"from 1C is filled in for them. Can also fill in global identifiers manually for "
-"manually created products."
-msgstr ""
-
-#: src/Schemas/Productscml/Admin.php:540
-msgid ""
-"Enabling the option allows you to use the filled External ID to mark products "
-"(goods) as existing, and thereby run algorithms to update them."
 msgstr ""
 
 #: src/Schemas/Productscml/Admin.php:559
@@ -1948,14 +2337,6 @@ msgstr ""
 msgid "Images based on CommerceML files"
 msgstr ""
 
-#: src/Schemas/Productscml/Admin.php:841 src/Schemas/Productscml/Admin.php:889
-#: src/Schemas/Productscml/Admin.php:932 src/Schemas/Productscml/Admin.php:960
-#: src/Schemas/Productscml/Admin.php:1122 src/Schemas/Productscml/Admin.php:1131
-#: src/Schemas/Productscml/Admin.php:1149 src/Schemas/Productscml/Admin.php:1158
-#: src/Schemas/Productscml/Admin.php:1167 src/Schemas/Productscml/Admin.php:1187
-msgid "Check the box to enable this feature. Disabled by default."
-msgstr ""
-
 #: src/Schemas/Productscml/Admin.php:845
 msgid "When enabled, work with images based on CommerceML files will be allowed."
 msgstr ""
@@ -2130,16 +2511,6 @@ msgstr ""
 
 #: src/Schemas/Productscml/Admin.php:997
 msgid "Height"
-msgstr ""
-
-#: src/Schemas/Productscml/Admin.php:1017
-msgid ""
-"Maintaining event logs for the current configuration. You can view the logs "
-"through the extension or via FTP."
-msgstr ""
-
-#: src/Schemas/Productscml/Admin.php:1022
-msgid "Level for events"
 msgstr ""
 
 #: src/Schemas/Productscml/Admin.php:1060
@@ -2429,34 +2800,6 @@ msgid ""
 "1C using the CommerceML protocol of various versions."
 msgstr ""
 
-#: src/Schemas/Productscml/Core.php:170
-msgid "The file cannot be processed. DecoderCML threw an exception."
-msgstr ""
-
-#: src/Schemas/Productscml/Core.php:185
-msgid "The file cannot be processed. ReaderCML threw an exception."
-msgstr ""
-
-#: src/Schemas/Productscml/Core.php:189
-msgid "Filetype:"
-msgstr ""
-
-#: src/Schemas/Productscml/Core.php:204
-msgid "Import file processing not completed. ReaderCML threw an exception."
-msgstr ""
-
-#: src/Schemas/Productscml/Core.php:223
-msgid "There was not enough time to load all the data."
-msgstr ""
-
-#: src/Schemas/Productscml/Core.php:262
-msgid "Classifier !instanceof ClassifierDataContract. Skip processing."
-msgstr ""
-
-#: src/Schemas/Productscml/Core.php:274
-msgid "An exception was thrown while saving the classifier."
-msgstr ""
-
 #: src/Schemas/Productscml/Core.php:301
 msgid "Classifier groups is empty."
 msgstr ""
@@ -2577,16 +2920,8 @@ msgid ""
 "Products creation and updating is disabled. The processing of goods was skipped."
 msgstr ""
 
-#: src/Schemas/Productscml/Core.php:847
-msgid "Product !instanceof ProductDataContract. Skip processing."
-msgstr ""
-
 #: src/Schemas/Productscml/Core.php:856 src/Schemas/Productscml/Core.php:2833
 msgid "The use of products with characteristics is disabled. Processing skipped."
-msgstr ""
-
-#: src/Schemas/Productscml/Core.php:866
-msgid "An exception was thrown while saving the product."
 msgstr ""
 
 #: src/Schemas/Productscml/Core.php:957
@@ -2751,26 +3086,6 @@ msgstr ""
 msgid "Set inventories by offers quantity: end."
 msgstr ""
 
-#: src/Schemas/Productscml/Core.php:2356
-msgid "Processing a product from a catalog of products."
-msgstr ""
-
-#: src/Schemas/Productscml/Core.php:2368
-msgid "Product search result by external code from 1C."
-msgstr ""
-
-#: src/Schemas/Productscml/Core.php:2372 src/Schemas/Productscml/Core.php:2600
-msgid "Several identical products were found. The first one is selected."
-msgstr ""
-
-#: src/Schemas/Productscml/Core.php:2391
-msgid "Product search result by external algorithms."
-msgstr ""
-
-#: src/Schemas/Productscml/Core.php:2404
-msgid "Product is not found."
-msgstr ""
-
 #: src/Schemas/Productscml/Core.php:2411
 msgid "Products create is disabled. Product create skipped."
 msgstr ""
@@ -2841,147 +3156,12 @@ msgstr ""
 msgid "An exception was thrown while processing the offer."
 msgstr ""
 
-#: src/Schemas/Productscml/Receiver.php:104
-msgid "Received request params."
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:137
-msgid "Catalog: mode not found."
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:143
-msgid "Schema: action not found."
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:186
-msgid "In 1C was send a response of the type:"
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:196
-msgid "Headers for response."
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:248
-msgid ""
-"Server in CGI mode. Not detected the presence of an entry in the root .htaccess "
-"file on the subject of the contents of the lines."
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:251
-msgid "Not specified the user. Check the server settings."
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:290
-#: src/Schemas/Productscml/Receiver.php:291
-msgid "Not a valid username."
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:296
-#: src/Schemas/Productscml/Receiver.php:297
-msgid "Not a valid user password."
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:305
-#: src/Schemas/Productscml/Receiver.php:397
-msgid "PHP session none, start new PHP session."
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:312
-msgid "Request authorization from 1C successfully completed."
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:326
-#: src/Schemas/Productscml/Receiver.php:486
-msgid "Print lines for 1C."
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:346
-msgid ""
-"Authorization key verification is disabled. Lazy signature verification "
-"activated."
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:350
-msgid ""
-"Authorization key verification failed. 1C did not send the name of the lazy "
-"signature."
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:366
-msgid ""
-"Authorization key verification failed. 1C sent an incorrect lazy signature."
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:384
-msgid "Authorization key verification failed. 1C sent an empty session name."
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:405
-msgid "Authorization check failed - session id differs from the original."
-msgstr ""
-
 #: src/Schemas/Productscml/Receiver.php:429
 msgid "Cleaning the directory for temporary files."
 msgstr ""
 
-#: src/Schemas/Productscml/Receiver.php:435
-msgid "The directory for temporary files was successfully cleared of old files."
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:439
-msgid "Failed to clear the temp directory of old files."
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:451
-msgid "Initialization of receiving requests from 1C."
-msgstr ""
-
 #: src/Schemas/Productscml/Receiver.php:456
 msgid "Session for receiving requests is changed by external algorithms."
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:465
-msgid "The maximum size of accepted files from 1C is assigned:"
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:470
-msgid ""
-"Based on the global settings of WC1C, the size of received files has been "
-"reduced from 1C to:"
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:476
-msgid ""
-"Based on the configuration settings of WC1C, the size of received files has "
-"been reduced from 1C to:"
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:516
-msgid "Directory is unavailable:"
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:531
-msgid "Filename is empty."
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:538
-msgid "Saving data to a file named:"
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:547
-msgid "Directory is unavailable for write."
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:565
-msgid "The request contains no data to write to the file. Retry the upload."
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:573
-msgid "The file exists. Write a data to the end of an existing file."
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:586
-msgid "The data is successfully written to a file. Recorded data size:"
 msgstr ""
 
 #: src/Schemas/Productscml/Receiver.php:595
@@ -3004,34 +3184,6 @@ msgstr ""
 #: src/Schemas/Productscml/Receiver.php:640
 msgid ""
 "The image has not been added to the media library. It was added earlier, id:"
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:651
-msgid "Failed to write data to file."
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:662
-msgid "On request from 1C - started importing data from a file."
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:668
-msgid "1C sent an empty file name for data import."
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:677
-msgid "File for import is not exists."
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:688
-msgid "Import of data from file completed successfully."
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:695
-msgid "Importing data from a file ended with an error:"
-msgstr ""
-
-#: src/Schemas/Productscml/Receiver.php:700
-msgid "Importing data from a file ended with an error."
 msgstr ""
 
 #: src/Tools/Environments/Init.php:52 views/helps/bugs.php:25
