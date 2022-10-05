@@ -1,18 +1,15 @@
-<?php namespace Wc1c\Schemas\Productscml;
+<?php namespace Wc1c\Schemas\Productscleanercml;
 
 defined('ABSPATH') || exit;
 
 use Wc1c\Exceptions\Exception;
 use Wc1c\Traits\SingletonTrait;
 use Wc1c\Traits\UtilityTrait;
-use Wc1c\Wc\Contracts\ImagesStorageContract;
-use Wc1c\Wc\Entities\Image;
-use Wc1c\Wc\Storage;
 
 /**
  * Receiver
  *
- * @package Wc1c\Schemas\Productscml
+ * @package Wc1c\Schemas\Productscleanercml
  */
 final class Receiver
 {
@@ -30,16 +27,12 @@ final class Receiver
 	public function initHandler()
 	{
 		add_action('wc1c_receiver_' . $this->core()->getId(), [$this, 'handler'], 10, 0);
-
-		add_action('wc1c_schema_productscml_catalog_handler_checkauth', [$this, 'handlerCheckauth'], 10, 0);
-
-		add_action('wc1c_schema_productscml_catalog_handler_init', [$this, 'handlerCatalogDirectoryClean'], 10, 0);
-		add_action('wc1c_schema_productscml_catalog_handler_init', [$this, 'handlerCatalogModeInit'], 10, 0);
-
-		add_action('wc1c_schema_productscml_catalog_handler_file', [$this, 'handlerCatalogModeFile'], 10, 0);
-		add_action('wc1c_schema_productscml_catalog_handler_import', [$this, 'handlerCatalogModeImport'], 10, 0);
-		add_action('wc1c_schema_productscml_catalog_handler_deactivate', [$this, 'handlerCatalogModeDeactivate'], 10, 0);
-		add_action('wc1c_schema_productscml_catalog_handler_complete', [$this, 'handlerCatalogModeComplete'], 10, 0);
+		add_action('wc1c_schema_productscleanercml_catalog_handler_checkauth', [$this, 'handlerCheckauth'], 10, 0);
+		add_action('wc1c_schema_productscleanercml_catalog_handler_init', [$this, 'handlerCatalogModeInit'], 10, 0);
+		add_action('wc1c_schema_productscleanercml_catalog_handler_file', [$this, 'handlerCatalogModeFile'], 10, 0);
+		add_action('wc1c_schema_productscleanercml_catalog_handler_import', [$this, 'handlerCatalogModeImport'], 10, 0);
+		add_action('wc1c_schema_productscleanercml_catalog_handler_deactivate', [$this, 'handlerCatalogModeDeactivate'], 10, 0);
+		add_action('wc1c_schema_productscleanercml_catalog_handler_complete', [$this, 'handlerCatalogModeComplete'], 10, 0);
 	}
 
 	/**
@@ -59,15 +52,14 @@ final class Receiver
 	}
 
 	/**
-	 * @return array
+	 * Handler
 	 */
-	public function getModeAndType()
+	public function handler()
 	{
-		$data =
-		[
-			'mode' => '',
-			'type' => ''
-		];
+		$this->core()->log()->info(__('Received new request for Receiver.', 'wc1c'));
+
+		$mode = '';
+		$type = '';
 
 		if(wc1c()->getVar($_GET['get_param'], '') !== '' || wc1c()->getVar($_GET['get_param?type'], '') !== '')
 		{
@@ -80,80 +72,66 @@ final class Receiver
 
 			if(array_key_exists('mode', $output))
 			{
-				$data['mode'] = $output['mode'];
+				$mode = $output['mode'];
 			}
 			elseif(isset($_GET['mode']))
 			{
-				$data['mode'] = $_GET['mode'];
+				$mode = $_GET['mode'];
 			}
 
 			if(array_key_exists('type', $output))
 			{
-				$data['type'] = $output['type'];
+				$type = $output['type'];
 			}
 			elseif(isset($_GET['type']))
 			{
-				$data['type'] = $_GET['type'];
+				$type = $_GET['type'];
 			}
 
-			if($data['type'] === '')
+			if($type === '')
 			{
-				$data['type'] = $_GET['get_param?type'];
+				$type = $_GET['get_param?type'];
 			}
 		}
-
-		return $data;
-	}
-
-	/**
-	 * Handler
-	 */
-	public function handler()
-	{
-		$this->core()->log()->info(__('Received new request for Receiver.', 'wc1c'));
-
-		$mode_and_type = $this->getModeAndType();
-		$mode = $mode_and_type['mode'];
-		$type = $mode_and_type['type'];
 
 		$this->core()->log()->debug(__('Received request params.', 'wc1c'), ['type' => $type, 'mode=' => $mode]);
 
 		if($type === 'catalog' && $mode !== '')
 		{
-			do_action('wc1c_schema_productscml_catalog_handler', $mode, $this);
+			do_action('wc1c_schema_productscleanercml_catalog_handler', $mode, $this);
 
 			switch($mode)
 			{
 				case 'checkauth':
-					do_action('wc1c_schema_productscml_catalog_handler_checkauth', $this);
+					do_action('wc1c_schema_productscleanercml_catalog_handler_checkauth', $this);
 					break;
 				case 'init':
 					$this->handlerCheckauthKey(true);
-					do_action('wc1c_schema_productscml_catalog_handler_init', $this);
+					do_action('wc1c_schema_productscleanercml_catalog_handler_init', $this);
 					break;
 				case 'file':
 					$this->handlerCheckauthKey(true);
-					do_action('wc1c_schema_productscml_catalog_handler_file', $this);
+					do_action('wc1c_schema_productscleanercml_catalog_handler_file', $this);
 					break;
 				case 'import':
 					$this->handlerCheckauthKey(true);
-					do_action('wc1c_schema_productscml_catalog_handler_import', $this);
+					do_action('wc1c_schema_productscleanercml_catalog_handler_import', $this);
 					break;
 				case 'deactivate':
 					$this->handlerCheckauthKey(true);
-					do_action('wc1c_schema_productscml_catalog_handler_deactivate', $this);
+					do_action('wc1c_schema_productscleanercml_catalog_handler_deactivate', $this);
 					break;
 				case 'complete':
 					$this->handlerCheckauthKey(true);
-					do_action('wc1c_schema_productscml_catalog_handler_complete', $this);
+					do_action('wc1c_schema_productscleanercml_catalog_handler_complete', $this);
 					break;
 				default:
-					do_action('wc1c_schema_productscml_catalog_handler_none', $mode, $this);
+					do_action('wc1c_schema_productscleanercml_catalog_handler_none', $mode, $this);
 					$this->sendResponseByType('failure', __('Catalog: mode not found.', 'wc1c'));
 			}
 		}
 
-		do_action('wc1c_schema_productscml_handler_none', $mode, $this);
+		do_action('wc1c_schema_productscleanercml_handler_none', $mode, $this);
 
 		$response_description = __('Schema: action not found.', 'wc1c');
 		$this->core()->log()->warning($response_description);
@@ -188,14 +166,14 @@ final class Receiver
 	 */
 	public function sendResponseByType($type = 'failure', $description = '')
 	{
-		if(has_filter('wc1c_schema_productscml_receiver_send_response_type'))
+		if(has_filter('wc1c_schema_productscleanercml_receiver_send_response_type'))
 		{
-			$type = apply_filters('wc1c_schema_productscml_receiver_send_response_type', $type, $this);
+			$type = apply_filters('wc1c_schema_productscleanercml_receiver_send_response_type', $type, $this);
 		}
 
-		if(has_filter('wc1c_schema_productscml_receiver_send_response_by_type_description'))
+		if(has_filter('wc1c_schema_productscleanercml_receiver_send_response_by_type_description'))
 		{
-			$description = apply_filters('wc1c_schema_productscml_receiver_send_response_by_type_description', $description, $this, $type);
+			$description = apply_filters('wc1c_schema_productscleanercml_receiver_send_response_by_type_description', $description, $this, $type);
 		}
 
 		$this->core()->log()->info(__('In 1C was send a response of the type:', 'wc1c') . ' ' . $type);
@@ -203,9 +181,9 @@ final class Receiver
 		$headers= [];
 		$headers['Content-Type'] = 'Content-Type: text/plain; charset=utf-8';
 
-		if(has_filter('wc1c_schema_productscml_receiver_send_response_by_type_headers'))
+		if(has_filter('wc1c_schema_productscleanercml_receiver_send_response_by_type_headers'))
 		{
-			$headers = apply_filters('wc1c_schema_productscml_receiver_send_response_by_type_headers', $headers, $this, $type);
+			$headers = apply_filters('wc1c_schema_productscleanercml_receiver_send_response_by_type_headers', $headers, $this, $type);
 		}
 
 		$this->core()->log()->debug(__('Headers for response.', 'wc1c'), ['context' => $headers]);
@@ -293,29 +271,27 @@ final class Receiver
 		$credentials = $this->getCredentialsByServer();
 		$validator = false;
 
-		if(has_filter('wc1c_schema_productscml_handler_checkauth_validate'))
+		if(has_filter('wc1c_schema_productscleanercml_handler_checkauth_validate'))
 		{
-			$validator = apply_filters('wc1c_schema_productscml_handler_checkauth_validate', $credentials);
+			$validator = apply_filters('wc1c_schema_productscleanercml_handler_checkauth_validate', $credentials);
 		}
 
 		if(true !== $validator)
 		{
 			if($credentials['login'] !== $this->core()->getOptions('user_login', ''))
 			{
-				$this->core()->log()->notice(__('Not a valid username.', 'productscml'));
+				$this->core()->log()->notice(__('Not a valid username.', 'wc1c'));
 				$this->sendResponseByType('failure', __('Not a valid username.', 'wc1c'));
 			}
 
 			if($credentials['password'] !== $this->core()->getOptions('user_password', ''))
 			{
-				$this->core()->log()->notice(__('Not a valid user password.', 'productscml'));
+				$this->core()->log()->notice(__('Not a valid user password.', 'wc1c'));
 				$this->sendResponseByType('failure', __('Not a valid user password.', 'wc1c'));
 			}
 		}
 
 		$lines = [];
-
-		$session_name = session_name();
 
 		if(session_status() === PHP_SESSION_NONE)
 		{
@@ -323,10 +299,8 @@ final class Receiver
 			session_start();
 		}
 
+		$session_name = session_name();
 		$session_id = session_id();
-
-		$this->core()->configuration()->addMetaData('session_id', maybe_serialize($session_id), true);
-		$this->core()->configuration()->saveMetaData();
 
 		$this->core()->log()->debug(__('Request authorization from 1C successfully completed.', 'wc1c'), ['session_name' => $session_name, 'session_id' => $session_id]);
 
@@ -337,9 +311,9 @@ final class Receiver
 		$lines['bitrix_sessid'] = 'sessid=' . $session_id . PHP_EOL;
 		$lines['timestamp'] = 'timestamp=' . time() . PHP_EOL;
 
-		if(has_filter('wc1c_schema_productscml_handler_checkauth_lines'))
+		if(has_filter('wc1c_schema_productscleanercml_handler_checkauth_lines'))
 		{
-			$lines = apply_filters('wc1c_schema_productscml_handler_checkauth_lines', $lines);
+			$lines = apply_filters('wc1c_schema_productscleanercml_handler_checkauth_lines', $lines);
 		}
 
 		$this->core()->log()->debug(__('Print lines for 1C.', 'wc1c'), ['data' => $lines]);
@@ -360,33 +334,40 @@ final class Receiver
 	 */
 	public function handlerCheckauthKey($send_response = false)
 	{
-		if(!isset($_GET['lazysign']))
+		if($this->core()->getOptions('receiver_check_auth_key_disabled', 'no') === 'yes')
 		{
-			$warning = __('Authorization key verification failed. 1C did not send the name of the lazy signature.', 'wc1c');
-			$this->core()->log()->warning($warning);
+			$this->core()->log()->info(__('Authorization key verification is disabled. Lazy signature verification activated.', 'wc1c'));
 
-			if($send_response)
+			if(!isset($_GET['lazysign']))
 			{
-				$this->sendResponseByType('failure', $warning);
+				$warning = __('Authorization key verification failed. 1C did not send the name of the lazy signature.', 'wc1c');
+				$this->core()->log()->warning($warning);
+
+				if($send_response)
+				{
+					$this->sendResponseByType('failure', $warning);
+				}
+
+				return false;
 			}
 
-			return false;
-		}
+			$lazy_sign = $_GET['lazysign'];
+			$lazy_sign_store = $this->core()->configuration()->getMeta('receiver_lazy_sign');
 
-		$lazy_sign = $_GET['lazysign'];
-		$lazy_sign_store = $this->core()->configuration()->getMeta('receiver_lazy_sign');
-
-		if($lazy_sign_store !== $lazy_sign)
-		{
-			$warning = __('Authorization key verification failed. 1C sent an incorrect lazy signature.', 'wc1c');
-			$this->core()->log()->warning($warning);
-
-			if($send_response)
+			if($lazy_sign_store !== $lazy_sign)
 			{
-				$this->sendResponseByType('failure', $warning);
+				$warning = __('Authorization key verification failed. 1C sent an incorrect lazy signature.', 'wc1c');
+				$this->core()->log()->warning($warning);
+
+				if($send_response)
+				{
+					$this->sendResponseByType('failure', $warning);
+				}
+
+				return false;
 			}
 
-			return false;
+			return true;
 		}
 
 		$session_name = session_name();
@@ -404,7 +385,13 @@ final class Receiver
 			return false;
 		}
 
-		$session_id = $this->core()->configuration()->getMeta('session_id');
+		if(session_status() === PHP_SESSION_NONE)
+		{
+			$this->core()->log()->debug(__('PHP session none, start new PHP session.', 'wc1c'));
+			session_start();
+		}
+
+		$session_id = session_id();
 
 		if($_COOKIE[$session_name] !== $session_id)
 		{
@@ -424,42 +411,28 @@ final class Receiver
 	}
 
 	/**
-	 * Cleaning the directory for temporary files.
-	 *
-	 * @return void
-	 */
-	public function handlerCatalogDirectoryClean()
-	{
-		$directory = $this->core()->getUploadDirectory();
-
-		$this->core()->log()->info(__('Cleaning the directory for temporary files.', 'wc1c'), ['directory' => $directory]);
-
-		wc1c()->filesystem()->ensureDirectoryExists($directory);
-
-		if(wc1c()->filesystem()->cleanDirectory($directory))
-		{
-			$this->core()->log()->info(__('The directory for temporary files was successfully cleared of old files.', 'wc1c'), ['directory' => $this->core()->getUploadDirectory()]);
-		}
-		else
-		{
-			$error = __('Failed to clear the temp directory of old files.', 'wc1c');
-
-			$this->core()->log()->error($error, ['directory' => $directory]);
-			$this->sendResponseByType('failure', $error);
-		}
-	}
-
-	/**
 	 * Init
 	 */
 	public function handlerCatalogModeInit()
 	{
 		$this->core()->log()->info(__('Initialization of receiving requests from 1C.', 'wc1c'));
 
-		if(has_filter('wc1c_schema_productscml_handler_catalog_mode_init_session'))
+		if(has_filter('wc1c_schema_productscleanercml_handler_catalog_mode_init_session'))
 		{
-			$_SESSION = apply_filters('wc1c_schema_productscml_handler_catalog_mode_init_session', $_SESSION, $this);
-			$this->core()->log()->debug(__('Session for receiving requests is changed by external algorithms.', 'wc1c'), ['session'=> $_SESSION]);
+			$_SESSION = apply_filters('wc1c_schema_productscleanercml_handler_catalog_mode_init_session', $_SESSION, $this);
+		}
+
+		$this->core()->log()->debug(__('Session for receiving requests.', 'wc1c'), ['session'=> $_SESSION]);
+
+		if(wc1c()->filesystem()->cleanDirectory($this->core()->getUploadDirectory()))
+		{
+			$this->core()->log()->info(__('The directory for temporary files was successfully cleared of old files.', 'wc1c'), ['directory' => $this->core()->getUploadDirectory()]);
+		}
+		else
+		{
+			$error = __('Failed to clear the temp directory of old files.', 'wc1c');
+			$this->core()->log()->error($error, ['directory' => $this->core()->getUploadDirectory()]);
+			$this->sendResponseByType('failure', $error);
 		}
 
 		$data['zip'] = 'zip=no' . PHP_EOL;
@@ -484,9 +457,9 @@ final class Receiver
 
 		$data['file_limit'] = 'file_limit=' . $max_size . PHP_EOL;
 
-		if(has_filter('wc1c_schema_productscml_handler_catalog_mode_init_data'))
+		if(has_filter('wc1c_schema_productscleanercml_handler_catalog_mode_init_data'))
 		{
-			$data = apply_filters('wc1c_schema_productscml_handler_catalog_mode_init_data', $data, $this);
+			$data = apply_filters('wc1c_schema_productscleanercml_handler_catalog_mode_init_data', $data, $this);
 		}
 
 		$this->core()->log()->debug(__('Print lines for 1C.', 'wc1c'), ['data' => $data]);
@@ -508,9 +481,9 @@ final class Receiver
 	{
 		$upload_directory = $this->core()->getUploadDirectory() . DIRECTORY_SEPARATOR;
 
-		if(has_filter('wc1c_schema_productscml_handler_catalog_mode_file_directory'))
+		if(has_filter('wc1c_schema_productscleanercml_handler_catalog_mode_file_directory'))
 		{
-			$upload_directory = apply_filters('wc1c_schema_productscml_handler_catalog_mode_file_directory', $upload_directory);
+			$upload_directory = apply_filters('wc1c_schema_productscleanercml_handler_catalog_mode_file_directory', $upload_directory);
 		}
 
 		$upload_directory = wp_normalize_path($upload_directory);
@@ -527,9 +500,9 @@ final class Receiver
 
 		$filename = wc1c()->getVar($_GET['filename'], '');
 
-		if(has_filter('wc1c_schema_productscml_handler_catalog_mode_file_filename'))
+		if(has_filter('wc1c_schema_productscleanercml_handler_catalog_mode_file_filename'))
 		{
-			$filename = apply_filters('wc1c_schema_productscml_handler_catalog_mode_file_filename', $filename);
+			$filename = apply_filters('wc1c_schema_productscleanercml_handler_catalog_mode_file_filename', $filename);
 		}
 
 		if(empty($filename))
@@ -590,64 +563,6 @@ final class Receiver
 			wc1c()->filesystem()->chmod($upload_file_path , 0755);
 
 			$response_description = __('The data is successfully written to a file. Recorded data size:', 'wc1c') . ' '. size_format($file_size);
-
-			/*
-			 * Adding to media library
-			 */
-			if(wc1c()->filesystem()->extension($upload_file_path) !== 'xml' && 'yes' === $this->core()->getOptions('media_library_images_by_receiver', 'no'))
-			{
-				if('yes' !== $this->core()->getOptions('media_library', 'no'))
-				{
-					$this->core()->log()->notice(__('The file was not saved to the media library. Adding is disabled in the settings.', 'wc1c'));
-				}
-				else
-				{
-					$image = wp_get_image_mime($upload_file_path);
-					if($image)
-					{
-						/** @var ImagesStorageContract */
-						$images_storage = Storage::load('image');
-
-						$image_file_name = explode('.', basename($upload_file_path));
-
-						$image_current = $images_storage->getByExternalName($image_file_name[0]);
-						if(is_array($image_current))
-						{
-							$image_current = $image_current[0];
-						}
-
-						if(false === $image_current)
-						{
-							$new_image = new Image();
-
-							$new_image->setName(__('No name', 'wc1c'));
-							$new_image->setExternalName($image_file_name[0]);
-							$new_image->setSlug($image_file_name[0]);
-
-							$new_image->setConfigurationId($this->core()->configuration()->getId());
-							$new_image->setSchemaId($this->core()->getId());
-
-							$new_image->setUserId($this->core()->configuration()->getUserId());
-							$new_image->setMimeType($image);
-
-							$image_id = $images_storage->uploadByPath($upload_file_path, $new_image);
-
-							if($image_id === false)
-							{
-								$response_description .= '. ' . __('The image has not been added to the media library.', 'wc1c');
-							}
-							else
-							{
-								$response_description .= '. ' . __('Image added to media library, id:', 'wc1c') . ' ' . $image_id;
-							}
-						}
-						else
-						{
-							$response_description .= '. ' . __('The image has not been added to the media library. It was added earlier, id:', 'wc1c') . ' ' . $image_current->getId();
-						}
-					}
-				}
-			}
 
 			$this->core()->log()->info($response_description, ['file_size' => $file_size]);
 			$this->sendResponseByType('success', $response_description);
