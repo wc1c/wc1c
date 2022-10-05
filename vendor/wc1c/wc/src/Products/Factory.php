@@ -121,6 +121,7 @@ class Factory extends WC_Product_Factory
 			'_wc1c_external_id' => $external_id,
 			'limit' => -1,
 			'return' => 'ids',
+			'post_status' => implode(',', array_merge(array_keys(get_post_statuses()), ['trash'])),
 		];
 
 		$products = wc_get_products($args);
@@ -170,7 +171,7 @@ class Factory extends WC_Product_Factory
 		$args =
 		[
 			'post_type' => ['product', 'product_variation'],
-			'post_status' => implode(',', get_post_statuses()),
+			'post_status' => implode(',', array_merge(array_keys(get_post_statuses()), ['trash'])),
 			'title' => $name,
 			'posts_per_page' => -1,
 			'fields' => 'ids'
@@ -207,7 +208,8 @@ class Factory extends WC_Product_Factory
 			'_wc1c_external_characteristic_id' => $external_characteristic_id,
 			'limit' => -1,
 			'return' => 'ids',
-			'type' => array_merge(array_keys(wc_get_product_types()), ['product', 'variation'])
+			'type' => array_merge(array_keys(wc_get_product_types()), ['product', 'variation']),
+			'post_status' => implode(',', array_merge(array_keys(get_post_statuses()), ['trash'])),
 		];
 
 		$products = wc_get_products($args);
