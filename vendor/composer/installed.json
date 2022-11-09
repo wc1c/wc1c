@@ -242,6 +242,51 @@
                 "source": "https://github.com/php-fig/log/tree/1.1.4"
             },
             "install-path": "../psr/log"
+        },
+        {
+            "name": "wc1c/cml",
+            "version": "dev-main",
+            "version_normalized": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wc1c/cml.git",
+                "reference": "fe86d04db76f8e64fff80e3b6390ea72797e70c2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wc1c/cml/zipball/fe86d04db76f8e64fff80e3b6390ea72797e70c2",
+                "reference": "fe86d04db76f8e64fff80e3b6390ea72797e70c2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "time": "2022-11-09T11:00:11+00:00",
+            "default-branch": true,
+            "type": "library",
+            "installation-source": "source",
+            "autoload": {
+                "psr-4": {
+                    "Wc1c\\Cml\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Frescoref",
+                    "email": "frescoref@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "CML for WC1C",
+            "homepage": "https://wc1c.info",
+            "support": {
+                "source": "https://github.com/wc1c/cml/tree/main"
+            },
+            "install-path": "../wc1c/cml"
         }
     ],
     "dev": true,

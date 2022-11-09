@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "87fa0c6d34c4087b1acb8049828cc6c6",
+    "content-hash": "f0558b046dbaef998a4bfb1562102299",
     "packages": [
         {
             "name": "digiom/wotices",
@@ -236,12 +236,55 @@
                 "source": "https://github.com/php-fig/log/tree/1.1.4"
             },
             "time": "2021-05-03T11:20:27+00:00"
+        },
+        {
+            "name": "wc1c/cml",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wc1c/cml.git",
+                "reference": "fe86d04db76f8e64fff80e3b6390ea72797e70c2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wc1c/cml/zipball/fe86d04db76f8e64fff80e3b6390ea72797e70c2",
+                "reference": "fe86d04db76f8e64fff80e3b6390ea72797e70c2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Wc1c\\Cml\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Frescoref",
+                    "email": "frescoref@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "CML for WC1C",
+            "homepage": "https://wc1c.info",
+            "support": {
+                "source": "https://github.com/wc1c/cml/tree/main"
+            },
+            "time": "2022-11-09T11:00:11+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "wc1c/cml": 20,
         "digiom/wotices": 20
     },
     "prefer-stable": false,
