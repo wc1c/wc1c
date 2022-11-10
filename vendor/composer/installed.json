@@ -287,6 +287,51 @@
                 "source": "https://github.com/wc1c/cml/tree/main"
             },
             "install-path": "../wc1c/cml"
+        },
+        {
+            "name": "wc1c/wc",
+            "version": "dev-main",
+            "version_normalized": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wc1c/wc.git",
+                "reference": "55adad1fabd7d4e11525adf5331feeb5b96b1e3a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wc1c/wc/zipball/55adad1fabd7d4e11525adf5331feeb5b96b1e3a",
+                "reference": "55adad1fabd7d4e11525adf5331feeb5b96b1e3a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "time": "2022-11-10T13:29:46+00:00",
+            "default-branch": true,
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Wc1c\\Wc\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Frescoref",
+                    "email": "frescoref@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Library for WC1C",
+            "homepage": "https://wc1c.info",
+            "support": {
+                "source": "https://github.com/wc1c/wc/tree/main"
+            },
+            "install-path": "../wc1c/wc"
         }
     ],
     "dev": true,

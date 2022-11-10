@@ -9,6 +9,7 @@ class ComposerStaticInit4940c5972a9a9b1004e686a7bc766643
     public static $prefixLengthsPsr4 = array (
         'W' => 
         array (
+            'Wc1c\\Wc\\' => 8,
             'Wc1c\\Cml\\' => 9,
             'Wc1c\\' => 5,
         ),
@@ -28,6 +29,10 @@ class ComposerStaticInit4940c5972a9a9b1004e686a7bc766643
     );
 
     public static $prefixDirsPsr4 = array (
+        'Wc1c\\Wc\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/wc1c/wc/src',
+        ),
         'Wc1c\\Cml\\' => 
         array (
             0 => __DIR__ . '/..' . '/wc1c/cml/src',
