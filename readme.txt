@@ -31,6 +31,7 @@ List of major changes from version to version. [Descriptions more](https://wc1c.
 * WC tested up to: 7.1
 * WC tested up to: 7.0
 * WC tested up to: 6.9
+* Update: CML & WC libraries
 * Fix: more
 
 = 0.10.0 =
