@@ -3,7 +3,7 @@
         'name' => 'wc1c/wc1c',
         'pretty_version' => 'dev-trunk',
         'version' => 'dev-trunk',
-        'reference' => 'bf9a902470e38e6d97ea35b1e9d158c2d0477411',
+        'reference' => '1c315636f119a422dd4422e4aba0c0120c6bab4c',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -16,6 +16,17 @@
             'reference' => '246d91daf23f50666579f17005a66d08733b68ed',
             'type' => 'library',
             'install_path' => __DIR__ . '/../digiom/psr7wp',
+            'aliases' => array(
+                0 => '9999999-dev',
+            ),
+            'dev_requirement' => false,
+        ),
+        'digiom/woap' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => 'aba571d31aa40c41fb18a36f77b2cfa8f86f3b60',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../digiom/woap',
             'aliases' => array(
                 0 => '9999999-dev',
             ),
@@ -90,7 +101,7 @@
         'wc1c/wc1c' => array(
             'pretty_version' => 'dev-trunk',
             'version' => 'dev-trunk',
-            'reference' => 'bf9a902470e38e6d97ea35b1e9d158c2d0477411',
+            'reference' => '1c315636f119a422dd4422e4aba0c0120c6bab4c',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

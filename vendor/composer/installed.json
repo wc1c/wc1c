@@ -47,6 +47,53 @@
             "install-path": "../digiom/psr7wp"
         },
         {
+            "name": "digiom/woap",
+            "version": "dev-main",
+            "version_normalized": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/digiom/woap.git",
+                "reference": "aba571d31aa40c41fb18a36f77b2cfa8f86f3b60"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/digiom/woap/zipball/aba571d31aa40c41fb18a36f77b2cfa8f86f3b60",
+                "reference": "aba571d31aa40c41fb18a36f77b2cfa8f86f3b60",
+                "shasum": ""
+            },
+            "require": {
+                "digiom/psr7wp": "dev-main",
+                "php": ">=5.6"
+            },
+            "time": "2022-11-17T01:26:22+00:00",
+            "default-branch": true,
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Digiom\\Woap\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Frescoref",
+                    "email": "frescoref@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Applications Passwords for WordPress",
+            "homepage": "https://digiom.ru",
+            "support": {
+                "issues": "https://github.com/digiom/woap/issues",
+                "source": "https://github.com/digiom/woap/tree/main"
+            },
+            "install-path": "../digiom/woap"
+        },
+        {
             "name": "digiom/wotices",
             "version": "dev-main",
             "version_normalized": "dev-main",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f412d4fe009013531072126cb0354c2c",
+    "content-hash": "21f641da3db8de0d2501cc721c9ee76b",
     "packages": [
         {
             "name": "digiom/psr7wp",
@@ -48,6 +48,50 @@
                 "source": "https://github.com/digiom/psr7wp/tree/main"
             },
             "time": "2022-11-17T01:03:53+00:00"
+        },
+        {
+            "name": "digiom/woap",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/digiom/woap.git",
+                "reference": "aba571d31aa40c41fb18a36f77b2cfa8f86f3b60"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/digiom/woap/zipball/aba571d31aa40c41fb18a36f77b2cfa8f86f3b60",
+                "reference": "aba571d31aa40c41fb18a36f77b2cfa8f86f3b60",
+                "shasum": ""
+            },
+            "require": {
+                "digiom/psr7wp": "dev-main",
+                "php": ">=5.6"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Digiom\\Woap\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Frescoref",
+                    "email": "frescoref@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Applications Passwords for WordPress",
+            "homepage": "https://digiom.ru",
+            "support": {
+                "issues": "https://github.com/digiom/woap/issues",
+                "source": "https://github.com/digiom/woap/tree/main"
+            },
+            "time": "2022-11-17T01:26:22+00:00"
         },
         {
             "name": "digiom/wotices",
@@ -372,7 +416,8 @@
         "wc1c/cml": 20,
         "wc1c/wc": 20,
         "digiom/wotices": 20,
-        "digiom/psr7wp": 20
+        "digiom/psr7wp": 20,
+        "digiom/woap": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
