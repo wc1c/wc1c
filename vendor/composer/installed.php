@@ -3,13 +3,24 @@
         'name' => 'wc1c/wc1c',
         'pretty_version' => 'dev-trunk',
         'version' => 'dev-trunk',
-        'reference' => '2769891adb8552036e44ed7a4ac2a891b776334d',
+        'reference' => 'bf9a902470e38e6d97ea35b1e9d158c2d0477411',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
+        'digiom/psr7wp' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '246d91daf23f50666579f17005a66d08733b68ed',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../digiom/psr7wp',
+            'aliases' => array(
+                0 => '9999999-dev',
+            ),
+            'dev_requirement' => false,
+        ),
         'digiom/wotices' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
@@ -79,7 +90,7 @@
         'wc1c/wc1c' => array(
             'pretty_version' => 'dev-trunk',
             'version' => 'dev-trunk',
-            'reference' => '2769891adb8552036e44ed7a4ac2a891b776334d',
+            'reference' => 'bf9a902470e38e6d97ea35b1e9d158c2d0477411',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

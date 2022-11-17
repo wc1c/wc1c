@@ -1,6 +1,52 @@
 {
     "packages": [
         {
+            "name": "digiom/psr7wp",
+            "version": "dev-main",
+            "version_normalized": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/digiom/psr7wp.git",
+                "reference": "246d91daf23f50666579f17005a66d08733b68ed"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/digiom/psr7wp/zipball/246d91daf23f50666579f17005a66d08733b68ed",
+                "reference": "246d91daf23f50666579f17005a66d08733b68ed",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "time": "2022-11-17T01:03:53+00:00",
+            "default-branch": true,
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Digiom\\Psr7wp\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Frescoref",
+                    "email": "frescoref@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Psr7 for WordPress",
+            "homepage": "https://digiom.ru",
+            "support": {
+                "issues": "https://github.com/digiom/psr7wp/issues",
+                "source": "https://github.com/digiom/psr7wp/tree/main"
+            },
+            "install-path": "../digiom/psr7wp"
+        },
+        {
             "name": "digiom/wotices",
             "version": "dev-main",
             "version_normalized": "dev-main",

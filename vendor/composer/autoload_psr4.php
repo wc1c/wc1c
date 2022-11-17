@@ -13,4 +13,5 @@ return array(
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'Digiom\\Wotices\\' => array($vendorDir . '/digiom/wotices/src'),
+    'Digiom\\Psr7wp\\' => array($vendorDir . '/digiom/psr7wp/src'),
 );

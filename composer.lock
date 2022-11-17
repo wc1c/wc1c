@@ -4,8 +4,51 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ccf03e3f6756218a365e560dbe763061",
+    "content-hash": "f412d4fe009013531072126cb0354c2c",
     "packages": [
+        {
+            "name": "digiom/psr7wp",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/digiom/psr7wp.git",
+                "reference": "246d91daf23f50666579f17005a66d08733b68ed"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/digiom/psr7wp/zipball/246d91daf23f50666579f17005a66d08733b68ed",
+                "reference": "246d91daf23f50666579f17005a66d08733b68ed",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Digiom\\Psr7wp\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Frescoref",
+                    "email": "frescoref@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Psr7 for WordPress",
+            "homepage": "https://digiom.ru",
+            "support": {
+                "issues": "https://github.com/digiom/psr7wp/issues",
+                "source": "https://github.com/digiom/psr7wp/tree/main"
+            },
+            "time": "2022-11-17T01:03:53+00:00"
+        },
         {
             "name": "digiom/wotices",
             "version": "dev-main",
@@ -328,7 +371,8 @@
     "stability-flags": {
         "wc1c/cml": 20,
         "wc1c/wc": 20,
-        "digiom/wotices": 20
+        "digiom/wotices": 20,
+        "digiom/psr7wp": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

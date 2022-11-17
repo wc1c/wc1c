@@ -29,6 +29,7 @@
     "wc1c/cml": "dev-main",
     "wc1c/wc": "dev-main",
     "digiom/wotices": "dev-main",
+    "digiom/psr7wp": "dev-main",
     "psr/log": "1.*",
     "psr/http-message": "1.*",
     "monolog/monolog": "1.*",

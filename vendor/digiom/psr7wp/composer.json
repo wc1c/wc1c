@@ -1,0 +1,20 @@
+{
+  "name": "digiom/psr7wp",
+  "description": "Psr7 for WordPress",
+  "type": "library",
+  "license": "GPL-3.0-or-later",
+  "homepage": "https://digiom.ru",
+  "authors": [
+    {
+      "name": "Frescoref",
+      "email": "frescoref@gmail.com",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {"Digiom\\Psr7wp\\": "src/"}
+  },
+  "require": {
+    "php": ">=5.6"
+  }
+}

@@ -1,17 +1,7 @@
-<?php
-/**
- * Namespace
- */
-namespace Digiom\Psr7wp;
+<?php namespace Digiom\Psr7wp;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use InvalidArgumentException;
 use Psr\Http\Message\UriInterface;
 use Digiom\Psr7wp\Exceptions\MalformedUriException;
