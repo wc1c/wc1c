@@ -31,6 +31,7 @@
     "digiom/wotices": "dev-main",
     "digiom/psr7wp": "dev-main",
     "digiom/woap": "dev-main",
+    "tecodes/client": "dev-main",
     "psr/log": "1.*",
     "psr/http-message": "1.*",
     "monolog/monolog": "1.*",

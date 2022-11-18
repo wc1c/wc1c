@@ -3,7 +3,7 @@
         'name' => 'wc1c/wc1c',
         'pretty_version' => 'dev-trunk',
         'version' => 'dev-trunk',
-        'reference' => '734d3104f7a4042713337f8171a98123935f32bd',
+        'reference' => 'd8937757c3e1b22958d05ad6a3c13f7fe341ebbf',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'digiom/psr7wp' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '246d91daf23f50666579f17005a66d08733b68ed',
+            'reference' => '04d69b6ea7d0bc20a261ebf76b329114725cb7f2',
             'type' => 'library',
             'install_path' => __DIR__ . '/../digiom/psr7wp',
             'aliases' => array(
@@ -76,6 +76,17 @@
                 0 => '1.0.0',
             ),
         ),
+        'tecodes/client' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '7f3fe81214afa36c467b99a856775b2554f2722e',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../tecodes/client',
+            'aliases' => array(
+                0 => '9999999-dev',
+            ),
+            'dev_requirement' => false,
+        ),
         'wc1c/cml' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
@@ -101,7 +112,7 @@
         'wc1c/wc1c' => array(
             'pretty_version' => 'dev-trunk',
             'version' => 'dev-trunk',
-            'reference' => '734d3104f7a4042713337f8171a98123935f32bd',
+            'reference' => 'd8937757c3e1b22958d05ad6a3c13f7fe341ebbf',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

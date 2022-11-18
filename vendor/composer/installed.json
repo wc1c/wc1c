@@ -7,18 +7,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/digiom/psr7wp.git",
-                "reference": "246d91daf23f50666579f17005a66d08733b68ed"
+                "reference": "04d69b6ea7d0bc20a261ebf76b329114725cb7f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/digiom/psr7wp/zipball/246d91daf23f50666579f17005a66d08733b68ed",
-                "reference": "246d91daf23f50666579f17005a66d08733b68ed",
+                "url": "https://api.github.com/repos/digiom/psr7wp/zipball/04d69b6ea7d0bc20a261ebf76b329114725cb7f2",
+                "reference": "04d69b6ea7d0bc20a261ebf76b329114725cb7f2",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.6"
+                "php": ">=7.0"
             },
-            "time": "2022-11-17T01:03:53+00:00",
+            "time": "2022-11-18T13:32:24+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "dist",
@@ -41,7 +41,6 @@
             "description": "Psr7 for WordPress",
             "homepage": "https://digiom.ru",
             "support": {
-                "issues": "https://github.com/digiom/psr7wp/issues",
                 "source": "https://github.com/digiom/psr7wp/tree/main"
             },
             "install-path": "../digiom/psr7wp"
@@ -335,6 +334,51 @@
                 "source": "https://github.com/php-fig/log/tree/1.1.4"
             },
             "install-path": "../psr/log"
+        },
+        {
+            "name": "tecodes/client",
+            "version": "dev-main",
+            "version_normalized": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tecodes/client.git",
+                "reference": "7f3fe81214afa36c467b99a856775b2554f2722e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tecodes/client/zipball/7f3fe81214afa36c467b99a856775b2554f2722e",
+                "reference": "7f3fe81214afa36c467b99a856775b2554f2722e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "time": "2022-11-18T18:20:11+00:00",
+            "default-branch": true,
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Tecodes\\Client\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Frescoref",
+                    "email": "frescoref@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Client for Tecodes",
+            "homepage": "https://github.com/tecodes",
+            "support": {
+                "source": "https://github.com/tecodes/client/tree/main"
+            },
+            "install-path": "../tecodes/client"
         },
         {
             "name": "wc1c/cml",

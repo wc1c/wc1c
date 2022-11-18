@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ea891886af5be46f2556195adbe2c1e3",
+    "content-hash": "0abbbee1287296c16b59bfc38e59ee46",
     "packages": [
         {
             "name": "digiom/psr7wp",
@@ -12,16 +12,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/digiom/psr7wp.git",
-                "reference": "246d91daf23f50666579f17005a66d08733b68ed"
+                "reference": "04d69b6ea7d0bc20a261ebf76b329114725cb7f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/digiom/psr7wp/zipball/246d91daf23f50666579f17005a66d08733b68ed",
-                "reference": "246d91daf23f50666579f17005a66d08733b68ed",
+                "url": "https://api.github.com/repos/digiom/psr7wp/zipball/04d69b6ea7d0bc20a261ebf76b329114725cb7f2",
+                "reference": "04d69b6ea7d0bc20a261ebf76b329114725cb7f2",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.6"
+                "php": ">=7.0"
             },
             "default-branch": true,
             "type": "library",
@@ -46,7 +46,7 @@
             "support": {
                 "source": "https://github.com/digiom/psr7wp/tree/main"
             },
-            "time": "2022-11-17T01:03:53+00:00"
+            "time": "2022-11-18T13:32:24+00:00"
         },
         {
             "name": "digiom/woap",
@@ -323,6 +323,48 @@
             "time": "2021-05-03T11:20:27+00:00"
         },
         {
+            "name": "tecodes/client",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tecodes/client.git",
+                "reference": "7f3fe81214afa36c467b99a856775b2554f2722e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tecodes/client/zipball/7f3fe81214afa36c467b99a856775b2554f2722e",
+                "reference": "7f3fe81214afa36c467b99a856775b2554f2722e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Tecodes\\Client\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Frescoref",
+                    "email": "frescoref@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Client for Tecodes",
+            "homepage": "https://github.com/tecodes",
+            "support": {
+                "source": "https://github.com/tecodes/client/tree/main"
+            },
+            "time": "2022-11-18T18:20:11+00:00"
+        },
+        {
             "name": "wc1c/cml",
             "version": "dev-main",
             "source": {
@@ -415,7 +457,8 @@
         "wc1c/wc": 20,
         "digiom/wotices": 20,
         "digiom/psr7wp": 20,
-        "digiom/woap": 20
+        "digiom/woap": 20,
+        "tecodes/client": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

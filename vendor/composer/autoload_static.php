@@ -13,6 +13,10 @@ class ComposerStaticInit4940c5972a9a9b1004e686a7bc766643
             'Wc1c\\Cml\\' => 9,
             'Wc1c\\' => 5,
         ),
+        'T' => 
+        array (
+            'Tecodes\\Client\\' => 15,
+        ),
         'P' => 
         array (
             'Psr\\Log\\' => 8,
@@ -42,6 +46,10 @@ class ComposerStaticInit4940c5972a9a9b1004e686a7bc766643
         'Wc1c\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
+        ),
+        'Tecodes\\Client\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tecodes/client/src',
         ),
         'Psr\\Log\\' => 
         array (
