@@ -20,7 +20,7 @@
  **/
 defined('ABSPATH') || exit;
 
-if(version_compare(PHP_VERSION, '5.6.0') < 0)
+if(version_compare(PHP_VERSION, '7.0') < 0)
 {
 	return false;
 }
