@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "21f641da3db8de0d2501cc721c9ee76b",
+    "content-hash": "ea891886af5be46f2556195adbe2c1e3",
     "packages": [
         {
             "name": "digiom/psr7wp",
@@ -44,7 +44,6 @@
             "description": "Psr7 for WordPress",
             "homepage": "https://digiom.ru",
             "support": {
-                "issues": "https://github.com/digiom/psr7wp/issues",
                 "source": "https://github.com/digiom/psr7wp/tree/main"
             },
             "time": "2022-11-17T01:03:53+00:00"
@@ -88,7 +87,6 @@
             "description": "Applications Passwords for WordPress",
             "homepage": "https://digiom.ru",
             "support": {
-                "issues": "https://github.com/digiom/woap/issues",
                 "source": "https://github.com/digiom/woap/tree/main"
             },
             "time": "2022-11-17T01:26:22+00:00"
@@ -422,7 +420,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.6",
+        "php": ">=7.0",
         "ext-simplexml": "*",
         "ext-xmlreader": "*"
     },
