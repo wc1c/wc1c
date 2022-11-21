@@ -1,3 +1,3 @@
 # Client for Tecodes
 
-Библиотека для работы с Tecodes.
+Реализация клиента на PHP для работы с Tecodes.

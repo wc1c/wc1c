@@ -1,11 +1,11 @@
-<?php namespace Digiom\Wap\Utils;
+<?php namespace Digiom\Woap\Utils;
 
 defined('ABSPATH') || exit;
 
 /**
  * StringsTrait
  *
- * @package Digiom\Wap\Utils
+ * @package Digiom\Woap\Utils
  */
 trait StringsTrait
 {

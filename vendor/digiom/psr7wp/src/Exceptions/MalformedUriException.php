@@ -1,17 +1,7 @@
-<?php
-/**
- * Namespace
- */
-namespace Digiom\Psr7wp\Exceptions;
+<?php namespace Digiom\Psr7wp\Exceptions;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
-/**
- * Dependencies
- */
 use InvalidArgumentException;
 
 /**

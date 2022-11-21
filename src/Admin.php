@@ -222,11 +222,11 @@ final class Admin
 	/**
 	 * Setup left links
 	 *
-	 * @param $links
+	 * @param array $links
 	 *
 	 * @return array
 	 */
-	public function linksLeft($links)
+	public function linksLeft(array $links): array
 	{
 		return array_merge(['site' => '<a href="' . admin_url('admin.php?page=wc1c') . '">' . __('Settings', 'wc1c') . '</a>'], $links);
 	}
@@ -235,9 +235,9 @@ final class Admin
 	 * Connect box
 	 *
 	 * @param string $text Button text
-	 * @param false $status
+	 * @param bool $status
 	 */
-	public function connectBox($text, $status = false)
+	public function connectBox(string $text, bool $status = false)
 	{
 		$class = 'page-title-action nav-connect';
 		if($status === false)

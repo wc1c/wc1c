@@ -9,7 +9,13 @@ class ComposerStaticInit4940c5972a9a9b1004e686a7bc766643
     public static $prefixLengthsPsr4 = array (
         'W' => 
         array (
+            'Wc1c\\Wc\\' => 8,
+            'Wc1c\\Cml\\' => 9,
             'Wc1c\\' => 5,
+        ),
+        'T' => 
+        array (
+            'Tecodes\\Client\\' => 15,
         ),
         'P' => 
         array (
@@ -23,13 +29,28 @@ class ComposerStaticInit4940c5972a9a9b1004e686a7bc766643
         'D' => 
         array (
             'Digiom\\Wotices\\' => 15,
+            'Digiom\\Woplucore\\' => 17,
+            'Digiom\\Woap\\' => 12,
+            'Digiom\\Psr7wp\\' => 14,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'Wc1c\\Wc\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/wc1c/wc/src',
+        ),
+        'Wc1c\\Cml\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/wc1c/cml/src',
+        ),
         'Wc1c\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
+        ),
+        'Tecodes\\Client\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tecodes/client/src',
         ),
         'Psr\\Log\\' => 
         array (
@@ -46,6 +67,18 @@ class ComposerStaticInit4940c5972a9a9b1004e686a7bc766643
         'Digiom\\Wotices\\' => 
         array (
             0 => __DIR__ . '/..' . '/digiom/wotices/src',
+        ),
+        'Digiom\\Woplucore\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/digiom/woplucore/src',
+        ),
+        'Digiom\\Woap\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/digiom/woap/src',
+        ),
+        'Digiom\\Psr7wp\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/digiom/psr7wp/src',
         ),
     );
 

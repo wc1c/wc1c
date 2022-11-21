@@ -1,4 +1,4 @@
-<?php namespace Digiom\Wap;
+<?php namespace Digiom\Woap;
 
 defined('ABSPATH') || exit;
 
@@ -7,7 +7,7 @@ use ErrorException;
 /**
  * ErrorResponse
  *
- * @package Digiom\Wap
+ * @package Digiom\Woap
  */
 class ErrorResponse extends ErrorException
 {

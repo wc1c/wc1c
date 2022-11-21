@@ -2,7 +2,7 @@
 
 defined('ABSPATH') || exit;
 
-use Digiom\Wap\Client;
+use Digiom\Woap\Client;
 
 /**
  * Connection

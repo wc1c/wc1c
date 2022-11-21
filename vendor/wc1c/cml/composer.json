@@ -1,0 +1,20 @@
+{
+  "name": "wc1c/cml",
+  "description": "CML for WC1C",
+  "type": "library",
+  "license": "GPL-3.0-or-later",
+  "homepage": "https://wc1c.info",
+  "authors": [
+    {
+      "name": "Frescoref",
+      "email": "frescoref@gmail.com",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {"Wc1c\\Cml\\": "src/"}
+  },
+  "require": {
+    "php": ">=5.6"
+  }
+}

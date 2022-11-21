@@ -4,10 +4,10 @@
  * Plugin URI: https://wc1c.info
  * Description: Implementation of a mechanism for flexible exchange of various data between 1C products and a site running WordPress using the WooCommerce plugin.
  * Version: 0.11.0
- * WC requires at least: 3.5
- * WC tested up to: 6.9
- * Requires at least: 4.7
- * Requires PHP: 5.6
+ * WC requires at least: 4.3
+ * WC tested up to: 7.1
+ * Requires at least: 5.2
+ * Requires PHP: 7.0
  * Text Domain: wc1c
  * Domain Path: /assets/languages
  * Copyright: WC1C team © 2018-2022
@@ -20,7 +20,7 @@
  **/
 defined('ABSPATH') || exit;
 
-if(version_compare(PHP_VERSION, '5.6.0') < 0)
+if(version_compare(PHP_VERSION, '7.0') < 0)
 {
 	return false;
 }
@@ -34,21 +34,29 @@ if(false === defined('WC1C_PLUGIN_FILE'))
 	 *
 	 * @return Wc1c\Core
 	 */
-	function wc1c()
+	function wc1c(): Wc1c\Core
 	{
 		return Wc1c\Core::instance();
 	}
 
-	include_once __DIR__ . '/src/Loader.php';
+	include_once __DIR__ . '/vendor/autoload.php';
 
-	$loader = new Wc1c\Loader();
+	$loader = new \Digiom\Woplucore\Loader();
+
+	$loader->addNamespace('Wc1c', plugin_dir_path(WC1C_PLUGIN_FILE) . 'src');
 
 	try
 	{
-		$loader->register();
+		$loader->register(WC1C_PLUGIN_FILE);
 	}
-	catch(Exception $e)
+	catch(\Exception $e)
 	{
 		trigger_error($e->getMessage());
 	}
+
+	$loader->registerActivation([Wc1c\Activation::class, 'instance']);
+	$loader->registerDeactivation([Wc1c\Deactivation::class, 'instance']);
+	$loader->registerUninstall([Wc1c\Uninstall::class, 'instance']);
+
+	wc1c()->register(new Wc1c\Context(), $loader);
 }

@@ -1,16 +1,23 @@
-<?php namespace Wc1c;
+<?php namespace Digiom\Woplucore;
 
 defined('ABSPATH') || exit;
 
-use Exception;
+use Digiom\Woplucore\Interfaces\Loadable;
 
 /**
  * Loader
  *
- * @package Wc1c
+ * @package Digiom\Woplucore
  */
-final class Loader
+class Loader implements Loadable
 {
+	/**
+	 * Base plugin file
+	 *
+	 * @var string
+	 */
+	protected $file = '';
+
 	/**
 	 * An associative array where the key is a namespace prefix and the value
 	 * is an array of base directories for classes in that namespace.
@@ -22,65 +29,50 @@ final class Loader
 	/**
 	 * Register loader with SPL autoloader stack.
 	 *
+	 * @param string $file
+	 *
 	 * @return void
-	 * @throws Exception
+	 * @throws \Exception
 	 */
-	public function register()
+	public function register(string $file)
 	{
+		$this->file = $file;
+
 		spl_autoload_register([$this, 'loadClass']);
-
-		register_activation_hook(WC1C_PLUGIN_FILE, [Activation::class, 'instance']);
-		register_deactivation_hook(WC1C_PLUGIN_FILE, [Deactivation::class, 'instance']);
-		register_uninstall_hook(WC1C_PLUGIN_FILE, [Uninstall::class, 'instance']);
-
-		$path = plugin_dir_path(WC1C_PLUGIN_FILE);
-		$vendor_path = $path . 'vendor/';
-
-		$this->addNamespace('Wc1c', $path . 'src');
-		$this->addNamespace('Wc1c\Cml', $vendor_path . 'wc1c/cml/src');
-		$this->addNamespace('Wc1c\Wc', $vendor_path . 'wc1c/wc/src');
-		$this->addNamespace('Digiom\Wotices', $vendor_path . 'digiom/wotices/src');
-		$this->addNamespace('Digiom\Wap', $vendor_path . 'digiom/wap/src');
-		$this->addNamespace('Digiom\Psr7wp', $vendor_path . 'digiom/psr7wp/src');
-		$this->addNamespace('Psr\Http\Message', $vendor_path . 'psr/http-message/src');
-		$this->addNamespace('Psr\Log', $vendor_path . 'psr/log/Psr/Log');
-		$this->addNamespace('Monolog', $vendor_path . 'monolog/monolog/src/Monolog');
-
-		wc1c()->register(new Context(), $this);
 	}
 
 	/**
 	 * Adds a base directory for a namespace prefix.
 	 *
-	 * @param string $prefix The namespace prefix.
-	 * @param string $base_dir A base directory for class files in the namespace.
+	 * @param string $namespace The namespace prefix.
+	 * @param string $directory A base directory for class files in the namespace.
 	 * @param bool $prepend If true, prepend the base directory to the stack
 	 * instead of appending it; this causes it to be searched first rather than last.
 	 *
 	 * @return void
 	 */
-	public function addNamespace($prefix, $base_dir, $prepend = false)
+	public function addNamespace(string $namespace, string $directory, bool $prepend = false)
 	{
 		// normalize namespace prefix
-		$prefix = trim($prefix, '\\') . '\\';
+		$namespace = trim($namespace, '\\') . '\\';
 
 		// normalize the base directory with a trailing separator
-		$base_dir = rtrim($base_dir, DIRECTORY_SEPARATOR) . '/';
+		$directory = rtrim($directory, DIRECTORY_SEPARATOR) . '/';
 
 		// initialize the namespace prefix array
-		if(isset($this->prefixes[$prefix]) === false)
+		if(isset($this->prefixes[$namespace]) === false)
 		{
-			$this->prefixes[$prefix] = [];
+			$this->prefixes[$namespace] = [];
 		}
 
 		// retain the base directory for the namespace prefix
 		if($prepend)
 		{
-			array_unshift($this->prefixes[$prefix], $base_dir);
+			array_unshift($this->prefixes[$namespace], $directory);
 		}
 		else
 		{
-			array_push($this->prefixes[$prefix], $base_dir);
+			array_push($this->prefixes[$namespace], $directory);
 		}
 	}
 
@@ -91,7 +83,7 @@ final class Loader
 	 *
 	 * @return false|string The mapped file name on success, or boolean false on failure.
 	 */
-	public function loadClass($class)
+	public function loadClass(string $class)
 	{
 		// the current namespace prefix
 		$prefix = $class;
@@ -129,7 +121,7 @@ final class Loader
 	 *
 	 * @return false|string Boolean false if no mapped file can be loaded, or the name of the mapped file that was loaded.
 	 */
-	protected function loadMappedFile($prefix, $relative_class)
+	protected function loadMappedFile(string $prefix, string $relative_class)
 	{
 		// are there any base directories for this namespace prefix?
 		if(isset($this->prefixes[$prefix]) === false)
@@ -164,7 +156,7 @@ final class Loader
 	 *
 	 * @return bool True if the file exists, false if not.
 	 */
-	protected function requireFile($file)
+	protected function requireFile(string $file): bool
 	{
 		if(file_exists($file))
 		{
@@ -173,5 +165,41 @@ final class Loader
 		}
 
 		return false;
+	}
+
+	/**
+	 * Plugin activation
+	 *
+	 * @param callable $class
+	 *
+	 * @return void
+	 */
+	public function registerActivation($class)
+	{
+		register_activation_hook($this->file, $class);
+	}
+
+	/**
+	 * Plugin deactivation
+	 *
+	 * @param callable $class
+	 *
+	 * @return void
+	 */
+	public function registerDeactivation($class)
+	{
+		register_deactivation_hook($this->file, $class);
+	}
+
+	/**
+	 * Plugin uninstall
+	 *
+	 * @param callable $class
+	 *
+	 * @return void
+	 */
+	public function registerUninstall($class)
+	{
+		register_uninstall_hook($this->file, $class);
 	}
 }

@@ -2,17 +2,13 @@
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Traits\SingletonTrait;
-
 /**
  * Deactivation
  *
  * @package Wc1c
  */
-final class Deactivation
+final class Deactivation extends \Digiom\Woplucore\Deactivation
 {
-	use SingletonTrait;
-
 	public function __construct()
 	{
 	}

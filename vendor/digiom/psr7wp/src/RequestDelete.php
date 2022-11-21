@@ -1,12 +1,5 @@
-<?php
-/**
- * Namespace
- */
-namespace Digiom\Psr7wp;
+<?php namespace Digiom\Psr7wp;
 
-/**
- * Only WordPress
- */
 defined('ABSPATH') || exit;
 
 /**

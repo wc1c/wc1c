@@ -1,0 +1,20 @@
+{
+  "name": "tecodes/client",
+  "description": "Client for Tecodes",
+  "type": "library",
+  "license": "GPL-3.0-or-later",
+  "homepage": "https://github.com/tecodes",
+  "authors": [
+    {
+      "name": "Frescoref",
+      "email": "frescoref@gmail.com",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {"Tecodes\\Client\\": "src/"}
+  },
+  "require": {
+    "php": ">=7.0"
+  }
+}

@@ -1,9 +1,9 @@
 === WC1C > integration of WooCommerce with 1C products (different configurations) ===
 Contributors: WC1C
 Tags: 1c, commerceml, woocommerce, cml, woo, woo 1c, woo commerce, 1s, 1с
-Requires at least: 4.7
-Tested up to: 6.0
-Requires PHP: 5.6
+Requires at least: 5.2
+Tested up to: 6.1
+Requires PHP: 7.0
 Stable tag: trunk
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -27,7 +27,14 @@ of 1C and sites created on WordPress with the WooCommerce plugin.
 List of major changes from version to version. [Descriptions more](https://wc1c.info/changelogs)
 
 = 0.11.0 =
+* Requires PHP: 7.0
+* WC requires at least: 4.3
+* WP Requires at least: 5.2
+* WP tested up to: 6.1
+* WC tested up to: 7.1
+* WC tested up to: 7.0
 * WC tested up to: 6.9
+* Update: CML & WC libraries
 * Fix: more
 
 = 0.10.0 =

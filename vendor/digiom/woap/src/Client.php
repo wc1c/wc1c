@@ -1,18 +1,18 @@
-<?php namespace Digiom\Wap;
+<?php namespace Digiom\Woap;
 
 defined('ABSPATH') || exit;
 
 use Exception;
 use RuntimeException;
-use Digiom\Psr7wp\RequestGet;
 use Psr\Http\Message\RequestInterface;
+use Digiom\Psr7wp\RequestGet;
 use Digiom\Psr7wp\HttpClient;
-use Digiom\Wap\Utils\StringsTrait;
+use Digiom\Woap\Utils\StringsTrait;
 
 /**
  * Client
  *
- * @package Digiom\Wap
+ * @package Digiom\Woap
  */
 class Client
 {

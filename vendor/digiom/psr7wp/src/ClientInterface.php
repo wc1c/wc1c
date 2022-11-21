@@ -1,12 +1,7 @@
-<?php
-/**
- * Namespace
- */
-namespace Digiom\Psr7wp;
+<?php namespace Digiom\Psr7wp;
 
-/**
- * Dependencies
- */
+defined('ABSPATH') || exit;
+
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 

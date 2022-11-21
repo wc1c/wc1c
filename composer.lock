@@ -4,8 +4,135 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "87fa0c6d34c4087b1acb8049828cc6c6",
+    "content-hash": "eda18c9fc64d6760c5f793ed13446532",
     "packages": [
+        {
+            "name": "digiom/psr7wp",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/digiom/psr7wp.git",
+                "reference": "04d69b6ea7d0bc20a261ebf76b329114725cb7f2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/digiom/psr7wp/zipball/04d69b6ea7d0bc20a261ebf76b329114725cb7f2",
+                "reference": "04d69b6ea7d0bc20a261ebf76b329114725cb7f2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Digiom\\Psr7wp\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Frescoref",
+                    "email": "frescoref@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Psr7 for WordPress",
+            "homepage": "https://digiom.ru",
+            "support": {
+                "source": "https://github.com/digiom/psr7wp/tree/main"
+            },
+            "time": "2022-11-18T13:32:24+00:00"
+        },
+        {
+            "name": "digiom/woap",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/digiom/woap.git",
+                "reference": "aba571d31aa40c41fb18a36f77b2cfa8f86f3b60"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/digiom/woap/zipball/aba571d31aa40c41fb18a36f77b2cfa8f86f3b60",
+                "reference": "aba571d31aa40c41fb18a36f77b2cfa8f86f3b60",
+                "shasum": ""
+            },
+            "require": {
+                "digiom/psr7wp": "dev-main",
+                "php": ">=5.6"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Digiom\\Woap\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Frescoref",
+                    "email": "frescoref@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Applications Passwords for WordPress",
+            "homepage": "https://digiom.ru",
+            "support": {
+                "source": "https://github.com/digiom/woap/tree/main"
+            },
+            "time": "2022-11-17T01:26:22+00:00"
+        },
+        {
+            "name": "digiom/woplucore",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/digiom/woplucore.git",
+                "reference": "797fd46011478c2744ad678ad600421a2cf2e4f8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/digiom/woplucore/zipball/797fd46011478c2744ad678ad600421a2cf2e4f8",
+                "reference": "797fd46011478c2744ad678ad600421a2cf2e4f8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Digiom\\Woplucore\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Frescoref",
+                    "email": "frescoref@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Core for WordPress plugins.",
+            "homepage": "https://digiom.ru",
+            "support": {
+                "source": "https://github.com/digiom/woplucore/tree/main"
+            },
+            "time": "2022-11-21T18:04:16+00:00"
+        },
         {
             "name": "digiom/wotices",
             "version": "dev-main",
@@ -236,18 +363,150 @@
                 "source": "https://github.com/php-fig/log/tree/1.1.4"
             },
             "time": "2021-05-03T11:20:27+00:00"
+        },
+        {
+            "name": "tecodes/client",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tecodes/client.git",
+                "reference": "7f3fe81214afa36c467b99a856775b2554f2722e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tecodes/client/zipball/7f3fe81214afa36c467b99a856775b2554f2722e",
+                "reference": "7f3fe81214afa36c467b99a856775b2554f2722e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Tecodes\\Client\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Frescoref",
+                    "email": "frescoref@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Client for Tecodes",
+            "homepage": "https://github.com/tecodes",
+            "support": {
+                "source": "https://github.com/tecodes/client/tree/main"
+            },
+            "time": "2022-11-18T18:20:11+00:00"
+        },
+        {
+            "name": "wc1c/cml",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wc1c/cml.git",
+                "reference": "fe86d04db76f8e64fff80e3b6390ea72797e70c2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wc1c/cml/zipball/fe86d04db76f8e64fff80e3b6390ea72797e70c2",
+                "reference": "fe86d04db76f8e64fff80e3b6390ea72797e70c2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Wc1c\\Cml\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Frescoref",
+                    "email": "frescoref@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "CML for WC1C",
+            "homepage": "https://wc1c.info",
+            "support": {
+                "source": "https://github.com/wc1c/cml/tree/main"
+            },
+            "time": "2022-11-09T11:00:11+00:00"
+        },
+        {
+            "name": "wc1c/wc",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wc1c/wc.git",
+                "reference": "55adad1fabd7d4e11525adf5331feeb5b96b1e3a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wc1c/wc/zipball/55adad1fabd7d4e11525adf5331feeb5b96b1e3a",
+                "reference": "55adad1fabd7d4e11525adf5331feeb5b96b1e3a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Wc1c\\Wc\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Frescoref",
+                    "email": "frescoref@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Library for WC1C",
+            "homepage": "https://wc1c.info",
+            "support": {
+                "source": "https://github.com/wc1c/wc/tree/main"
+            },
+            "time": "2022-11-10T13:29:46+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "digiom/wotices": 20
+        "wc1c/cml": 20,
+        "wc1c/wc": 20,
+        "digiom/woplucore": 20,
+        "digiom/wotices": 20,
+        "digiom/psr7wp": 20,
+        "digiom/woap": 20,
+        "tecodes/client": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.6",
+        "php": ">=7.0",
         "ext-simplexml": "*",
         "ext-xmlreader": "*"
     },
