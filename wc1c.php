@@ -1,4 +1,4 @@
-<?php
+<?php namespace Wc1c;
 /**
  * Plugin Name: WC1C
  * Plugin URI: https://wc1c.info
@@ -32,22 +32,22 @@ if(false === defined('WC1C_PLUGIN_FILE'))
 	/**
 	 * Main instance of WC1C
 	 *
-	 * @return Wc1c\Core
+	 * @return Core
 	 */
-	function wc1c()
+	function wc1c(): Core
 	{
-		return Wc1c\Core::instance();
+		return Core::instance();
 	}
 
 	include_once __DIR__ . '/src/Loader.php';
 
-	$loader = new Wc1c\Loader();
+	$loader = new Loader();
 
 	try
 	{
 		$loader->register();
 	}
-	catch(Exception $e)
+	catch(\Exception $e)
 	{
 		trigger_error($e->getMessage());
 	}
