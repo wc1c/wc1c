@@ -55,8 +55,8 @@ if(false === defined('WC1C_PLUGIN_FILE'))
 	}
 
 	$loader->registerActivation([Wc1c\Activation::class, 'instance']);
-	$loader->registerActivation([Wc1c\Deactivation::class, 'instance']);
-	$loader->registerActivation([Wc1c\Uninstall::class, 'instance']);
+	$loader->registerDeactivation([Wc1c\Deactivation::class, 'instance']);
+	$loader->registerUninstall([Wc1c\Uninstall::class, 'instance']);
 
 	wc1c()->register(new Wc1c\Context(), $loader);
 }
