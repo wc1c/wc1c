@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0abbbee1287296c16b59bfc38e59ee46",
+    "content-hash": "eda18c9fc64d6760c5f793ed13446532",
     "packages": [
         {
             "name": "digiom/psr7wp",
@@ -90,6 +90,48 @@
                 "source": "https://github.com/digiom/woap/tree/main"
             },
             "time": "2022-11-17T01:26:22+00:00"
+        },
+        {
+            "name": "digiom/woplucore",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/digiom/woplucore.git",
+                "reference": "50c6bb4fafdf28aa981d55990fc5956f19c700eb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/digiom/woplucore/zipball/50c6bb4fafdf28aa981d55990fc5956f19c700eb",
+                "reference": "50c6bb4fafdf28aa981d55990fc5956f19c700eb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Digiom\\Woplucore\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Frescoref",
+                    "email": "frescoref@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Core for WordPress plugins.",
+            "homepage": "https://digiom.ru",
+            "support": {
+                "source": "https://github.com/digiom/woplucore/tree/main"
+            },
+            "time": "2022-11-21T15:39:46+00:00"
         },
         {
             "name": "digiom/wotices",
@@ -455,6 +497,7 @@
     "stability-flags": {
         "wc1c/cml": 20,
         "wc1c/wc": 20,
+        "digiom/woplucore": 20,
         "digiom/wotices": 20,
         "digiom/psr7wp": 20,
         "digiom/woap": 20,

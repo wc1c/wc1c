@@ -93,6 +93,51 @@
             "install-path": "../digiom/woap"
         },
         {
+            "name": "digiom/woplucore",
+            "version": "dev-main",
+            "version_normalized": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/digiom/woplucore.git",
+                "reference": "50c6bb4fafdf28aa981d55990fc5956f19c700eb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/digiom/woplucore/zipball/50c6bb4fafdf28aa981d55990fc5956f19c700eb",
+                "reference": "50c6bb4fafdf28aa981d55990fc5956f19c700eb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "time": "2022-11-21T15:39:46+00:00",
+            "default-branch": true,
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Digiom\\Woplucore\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Frescoref",
+                    "email": "frescoref@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Core for WordPress plugins.",
+            "homepage": "https://digiom.ru",
+            "support": {
+                "source": "https://github.com/digiom/woplucore/tree/main"
+            },
+            "install-path": "../digiom/woplucore"
+        },
+        {
             "name": "digiom/wotices",
             "version": "dev-main",
             "version_normalized": "dev-main",

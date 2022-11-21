@@ -28,6 +28,7 @@
     "php": ">=7.0",
     "wc1c/cml": "dev-main",
     "wc1c/wc": "dev-main",
+    "digiom/woplucore": "dev-main",
     "digiom/wotices": "dev-main",
     "digiom/psr7wp": "dev-main",
     "digiom/woap": "dev-main",
