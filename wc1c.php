@@ -1,4 +1,4 @@
-<?php namespace Wc1c;
+<?php
 /**
  * Plugin Name: WC1C
  * Plugin URI: https://wc1c.info
@@ -32,23 +32,31 @@ if(false === defined('WC1C_PLUGIN_FILE'))
 	/**
 	 * Main instance of WC1C
 	 *
-	 * @return Core
+	 * @return Wc1c\Core
 	 */
-	function wc1c(): Core
+	function wc1c(): Wc1c\Core
 	{
-		return Core::instance();
+		return Wc1c\Core::instance();
 	}
 
-	include_once __DIR__ . '/src/Loader.php';
+	include_once __DIR__ . '/vendor/autoload.php';
 
-	$loader = new Loader();
+	$loader = new \Digiom\Woplucore\Loader();
+
+	$loader->addNamespace('Wc1c', plugin_dir_path(WC1C_PLUGIN_FILE) . 'src');
 
 	try
 	{
-		$loader->register();
+		$loader->register(WC1C_PLUGIN_FILE);
 	}
 	catch(\Exception $e)
 	{
 		trigger_error($e->getMessage());
 	}
+
+	$loader->registerActivation([Wc1c\Activation::class, 'instance']);
+	$loader->registerActivation([Wc1c\Deactivation::class, 'instance']);
+	$loader->registerActivation([Wc1c\Uninstall::class, 'instance']);
+
+	wc1c()->register(new Wc1c\Context(), $loader);
 }

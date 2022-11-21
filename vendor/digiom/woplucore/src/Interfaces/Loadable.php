@@ -1,11 +1,9 @@
-<?php namespace Woplucore\Interfaces;
-
-use Exception;
+<?php namespace Digiom\Woplucore\Interfaces;
 
 /**
  * Interface Loadable
  *
- * @package Woplucore\Interfaces
+ * @package Digiom\Woplucore\Interfaces
  */
 interface Loadable
 {
@@ -18,7 +16,7 @@ interface Loadable
 	 *
 	 * @return void
 	 */
-	public function addNamespace(string $namespace, string $directory, bool $prepend = false): void;
+	public function addNamespace(string $namespace, string $directory, bool $prepend = false);
 
 	/**
 	 * Register loader with SPL autoloader stack.
@@ -26,37 +24,37 @@ interface Loadable
 	 * @param string $file
 	 *
 	 * @return void
-	 * @throws Exception
+	 * @throws \Exception
 	 */
-	public function register(string $file): void;
+	public function register(string $file);
 
 	/**
 	 * Register loader with activation stack.
 	 *
-	 * @param Activable $class
+	 * @param callable $class
 	 *
 	 * @return void
-	 * @throws Exception
+	 * @throws \Exception
 	 */
-	public function registerActivation(Activable $class): void;
+	public function registerActivation($class);
 
 	/**
 	 * Register loader with deactivation stack.
 	 *
-	 * @param Deactivable $class
+	 * @param callable $class
 	 *
 	 * @return void
-	 * @throws Exception
+	 * @throws \Exception
 	 */
-	public function registerDeactivation(Deactivable $class): void;
+	public function registerDeactivation($class);
 
 	/**
 	 * Register loader with uninstall stack.
 	 *
-	 * @param Uninstallable $class
+	 * @param callable $class
 	 *
 	 * @return void
-	 * @throws Exception
+	 * @throws \Exception
 	 */
-	public function registerUninstall(Uninstallable $class): void;
+	public function registerUninstall($class);
 }

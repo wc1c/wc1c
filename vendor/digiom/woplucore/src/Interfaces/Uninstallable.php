@@ -1,9 +1,9 @@
-<?php namespace Woplucore\Interfaces;
+<?php namespace Digiom\Woplucore\Interfaces;
 
 /**
  * Interface Uninstallable
  *
- * @package Woplucore\Interfaces
+ * @package Digiom\Woplucore\Interfaces
  */
 interface Uninstallable
 {

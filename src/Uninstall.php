@@ -2,17 +2,13 @@
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Traits\SingletonTrait;
-
 /**
  * Uninstall
  *
  * @package Wc1c
  */
-final class Uninstall
+final class Uninstall extends \Digiom\Woplucore\Uninstall
 {
-	use SingletonTrait;
-
 	public function __construct()
 	{
 	}

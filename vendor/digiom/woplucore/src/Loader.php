@@ -1,19 +1,15 @@
-<?php namespace Woplucore;
+<?php namespace Digiom\Woplucore;
 
 defined('ABSPATH') || exit;
 
-use Exception;
-use Woplucore\Interfaces\Activable;
-use Woplucore\Interfaces\Deactivable;
-use Woplucore\Interfaces\Loadable;
-use Woplucore\Interfaces\Uninstallable;
+use Digiom\Woplucore\Interfaces\Loadable;
 
 /**
  * Loader
  *
- * @package Woplucore
+ * @package Digiom\Woplucore
  */
-final class Loader implements Loadable
+class Loader implements Loadable
 {
 	/**
 	 * Base plugin file
@@ -36,9 +32,9 @@ final class Loader implements Loadable
 	 * @param string $file
 	 *
 	 * @return void
-	 * @throws Exception
+	 * @throws \Exception
 	 */
-	public function register(string $file): void
+	public function register(string $file)
 	{
 		$this->file = $file;
 
@@ -55,7 +51,7 @@ final class Loader implements Loadable
 	 *
 	 * @return void
 	 */
-	public function addNamespace(string $namespace, string $directory, bool $prepend = false): void
+	public function addNamespace(string $namespace, string $directory, bool $prepend = false)
 	{
 		// normalize namespace prefix
 		$namespace = trim($namespace, '\\') . '\\';
@@ -174,11 +170,11 @@ final class Loader implements Loadable
 	/**
 	 * Plugin activation
 	 *
-	 * @param Activable $class
+	 * @param callable $class
 	 *
 	 * @return void
 	 */
-	public function registerActivation(Activable $class): void
+	public function registerActivation($class)
 	{
 		register_activation_hook($this->file, $class);
 	}
@@ -186,11 +182,11 @@ final class Loader implements Loadable
 	/**
 	 * Plugin deactivation
 	 *
-	 * @param Deactivable $class
+	 * @param callable $class
 	 *
 	 * @return void
 	 */
-	public function registerDeactivation(Deactivable $class): void
+	public function registerDeactivation($class)
 	{
 		register_deactivation_hook($this->file, $class);
 	}
@@ -198,11 +194,11 @@ final class Loader implements Loadable
 	/**
 	 * Plugin uninstall
 	 *
-	 * @param Uninstallable $class
+	 * @param callable $class
 	 *
 	 * @return void
 	 */
-	public function registerUninstall(Uninstallable $class): void
+	public function registerUninstall($class)
 	{
 		register_uninstall_hook($this->file, $class);
 	}

@@ -2,17 +2,13 @@
 
 defined('ABSPATH') || exit;
 
-use Wc1c\Traits\SingletonTrait;
-
 /**
  * Activation
  *
  * @package Wc1c
  */
-final class Activation
+final class Activation extends \Digiom\Woplucore\Activation
 {
-	use SingletonTrait;
-
 	public function __construct()
 	{
 		if(false === get_option('wc1c_version', false))

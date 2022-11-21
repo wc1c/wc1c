@@ -1,9 +1,9 @@
-<?php namespace Woplucore\Interfaces;
+<?php namespace Digiom\Woplucore\Interfaces;
 
 /**
  * Interface Activable
  *
- * @package Woplucore\Interfaces
+ * @package Digiom\Woplucore\Interfaces
  */
 interface Activable
 {
