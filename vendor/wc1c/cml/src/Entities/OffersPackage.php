@@ -16,7 +16,7 @@ class OffersPackage extends DataAbstract implements OffersPackageDataContract
 	/**
 	 * @return string
 	 */
-	public function getId()
+	public function getId(): string
 	{
 		return $this->data['id'];
 	}
@@ -24,7 +24,7 @@ class OffersPackage extends DataAbstract implements OffersPackageDataContract
 	/**
 	 * @param string $id
 	 */
-	public function setId($id)
+	public function setId(string $id)
 	{
 		$this->data['id'] = $id;
 	}
@@ -32,7 +32,7 @@ class OffersPackage extends DataAbstract implements OffersPackageDataContract
 	/**
 	 * @return string
 	 */
-	public function getClassifierId()
+	public function getClassifierId(): string
 	{
 		return $this->data['classifier_id'];
 	}
@@ -40,7 +40,7 @@ class OffersPackage extends DataAbstract implements OffersPackageDataContract
 	/**
 	 * @param string $id
 	 */
-	public function setClassifierId($id)
+	public function setClassifierId(string $id)
 	{
 		$this->data['classifier_id'] = $id;
 	}
@@ -48,7 +48,7 @@ class OffersPackage extends DataAbstract implements OffersPackageDataContract
 	/**
 	 * @return string
 	 */
-	public function getName()
+	public function getName(): string
 	{
 		return $this->data['name'];
 	}
@@ -56,7 +56,7 @@ class OffersPackage extends DataAbstract implements OffersPackageDataContract
 	/**
 	 * @param string $name
 	 */
-	public function setName($name)
+	public function setName(string $name)
 	{
 		$this->data['name'] = $name;
 	}
@@ -64,7 +64,7 @@ class OffersPackage extends DataAbstract implements OffersPackageDataContract
 	/**
 	 * @return string
 	 */
-	public function getDescription()
+	public function getDescription(): string
 	{
 		return $this->data['description'];
 	}
@@ -72,7 +72,7 @@ class OffersPackage extends DataAbstract implements OffersPackageDataContract
 	/**
 	 * @param string $description
 	 */
-	public function setDescription($description)
+	public function setDescription(string $description)
 	{
 		$this->data['description'] = $description;
 	}
@@ -80,7 +80,7 @@ class OffersPackage extends DataAbstract implements OffersPackageDataContract
 	/**
 	 * @return CounterpartyDataContract
 	 */
-	public function getOwner()
+	public function getOwner(): CounterpartyDataContract
 	{
 		return $this->data['owner'];
 	}
@@ -88,7 +88,7 @@ class OffersPackage extends DataAbstract implements OffersPackageDataContract
 	/**
 	 * @param CounterpartyDataContract $owner
 	 */
-	public function setOwner($owner)
+	public function setOwner(CounterpartyDataContract $owner)
 	{
 		$this->data['owner'] = $owner;
 	}
@@ -96,7 +96,7 @@ class OffersPackage extends DataAbstract implements OffersPackageDataContract
 	/**
 	 * @return bool
 	 */
-	public function isOnlyChanges()
+	public function isOnlyChanges(): bool
 	{
 		return $this->data['only_changes'];
 	}
@@ -120,7 +120,7 @@ class OffersPackage extends DataAbstract implements OffersPackageDataContract
 	/**
 	 * @param string $id
 	 */
-	public function setCatalogId($id)
+	public function setCatalogId(string $id)
 	{
 		$this->data['catalog_id'] = $id;
 	}
@@ -130,7 +130,7 @@ class OffersPackage extends DataAbstract implements OffersPackageDataContract
 	 *
 	 * @return void
 	 */
-	public function setPriceTypes($data)
+	public function setPriceTypes(array $data)
 	{
 		$this->data['price_types'] = $data;
 	}
@@ -138,7 +138,7 @@ class OffersPackage extends DataAbstract implements OffersPackageDataContract
 	/**
 	 * @return array
 	 */
-	public function getPriceTypes()
+	public function getPriceTypes(): array
 	{
 		return $this->data['price_types'];
 	}

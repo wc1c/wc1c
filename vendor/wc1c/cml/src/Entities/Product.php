@@ -84,7 +84,7 @@ class Product extends DataAbstract implements ProductDataContract
 	 *
 	 * @return string
 	 */
-	public function setName($name)
+	public function setName($name): string
 	{
 		$this->data['name'] = $name;
 
@@ -138,7 +138,7 @@ class Product extends DataAbstract implements ProductDataContract
 	 *
 	 * @return bool Имеются ли реквизиты
 	 */
-	public function hasRequisites($name = '')
+	public function hasRequisites($name = ''): bool
 	{
 		if(empty($this->data['requisites']))
 		{
@@ -174,7 +174,7 @@ class Product extends DataAbstract implements ProductDataContract
 	/**
 	 * @return bool
 	 */
-	public function hasCharacteristics()
+	public function hasCharacteristics(): bool
 	{
 		if(empty($this->data['characteristics']))
 		{
@@ -217,7 +217,7 @@ class Product extends DataAbstract implements ProductDataContract
 	 *
 	 * @return bool
 	 */
-	public function hasPrices($price_type_id = '')
+	public function hasPrices($price_type_id = ''): bool
 	{
 		if(empty($this->data['prices']))
 		{
@@ -255,7 +255,7 @@ class Product extends DataAbstract implements ProductDataContract
 	/**
 	 * @return string
 	 */
-	public function getCharacteristicId()
+	public function getCharacteristicId(): string
 	{
 		if(!isset($this->data['characteristic_id']))
 		{
@@ -268,7 +268,7 @@ class Product extends DataAbstract implements ProductDataContract
 	/**
 	 * @return bool
 	 */
-	public function hasCharacteristicId()
+	public function hasCharacteristicId(): bool
 	{
 		return $this->getCharacteristicId() !== '';
 	}
@@ -276,7 +276,7 @@ class Product extends DataAbstract implements ProductDataContract
 	/**
 	 * @return bool
 	 */
-	public function hasClassifierGroups()
+	public function hasClassifierGroups(): bool
 	{
 		if(empty($this->data['classifier_groups']))
 		{
@@ -289,7 +289,7 @@ class Product extends DataAbstract implements ProductDataContract
 	/**
 	 * @return bool
 	 */
-	public function hasPropertyValues()
+	public function hasPropertyValues(): bool
 	{
 		if(empty($this->data['property_values']))
 		{
@@ -302,7 +302,7 @@ class Product extends DataAbstract implements ProductDataContract
 	/**
 	 * @return bool
 	 */
-	public function hasImages()
+	public function hasImages(): bool
 	{
 		if(empty($this->data['images']))
 		{
@@ -315,7 +315,7 @@ class Product extends DataAbstract implements ProductDataContract
 	/**
 	 * @return array
 	 */
-	public function getClassifierGroups()
+	public function getClassifierGroups(): array
 	{
 		if(empty($this->data['classifier_groups']))
 		{

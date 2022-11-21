@@ -16,7 +16,7 @@ trait Utility
 	 *
 	 * @return string|false
 	 */
-	private function cmlDetectFileType($file)
+	private function cmlDetectFileType(string $file)
 	{
 		$types =
 		[

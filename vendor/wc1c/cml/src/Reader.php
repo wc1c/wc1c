@@ -23,12 +23,12 @@ class Reader
 	public $xml_reader = null;
 
 	/**
-	 * @var Decoder
+	 * @var null|Decoder
 	 */
-	public $decoder;
+	public $decoder = null;
 
 	/**
-	 * @var string Filetype to import
+	 * @var string Filetype
 	 */
 	public $filetype;
 
@@ -38,7 +38,7 @@ class Reader
 	protected $file;
 
 	/**
-	 * @var integer Position
+	 * @var integer Current position
 	 */
 	public $position = 0;
 
@@ -53,12 +53,12 @@ class Reader
 	public $ready = false;
 
 	/**
-	 * @var int
+	 * @var int Current depth
 	 */
 	public $depth = 0;
 
 	/**
-	 * @var int
+	 * @var int Previous depth
 	 */
 	public $prevDepth = 0;
 
@@ -88,17 +88,17 @@ class Reader
 	public $formation_date = '';
 
 	/**
-	 * @var ClassifierDataContract Текущий классификатор
+	 * @var ClassifierDataContract Текущий классификатор, если присутствует в файле
 	 */
 	public $classifier = null;
 
 	/**
-	 * @var CatalogDataContract Каталог
+	 * @var CatalogDataContract Текущий каталог товаров, если присутствует в файле
 	 */
 	public $catalog = null;
 
 	/**
-	 * @var OffersPackage Пакет предложений
+	 * @var OffersPackage Текущий пакет предложений, если присутствует в файле
 	 */
 	public $offers_package = null;
 
@@ -110,7 +110,7 @@ class Reader
 	 *
 	 * @throws Exception
 	 */
-	public function __construct($file_path = '', $decoder = null)
+	public function __construct(string $file_path = '', Decoder $decoder = null)
 	{
 		if(!defined('LIBXML_VERSION'))
 		{
@@ -160,7 +160,7 @@ class Reader
 	 *
 	 * @throws Exception
 	 */
-	public function open($file_path)
+	public function open(string $file_path)
 	{
 		$reader_result = false;
 
@@ -187,7 +187,7 @@ class Reader
 	/**
 	 * @return bool
 	 */
-	public function close()
+	public function close(): bool
 	{
 		if($this->xml_reader instanceof XMLReader)
 		{
@@ -204,7 +204,7 @@ class Reader
 	/**
 	 * @return string
 	 */
-	public function getFiletype()
+	public function getFiletype(): string
 	{
 		return $this->filetype;
 	}
@@ -212,7 +212,7 @@ class Reader
 	/**
 	 * @param string $filetype
 	 */
-	public function setFiletype($filetype)
+	public function setFiletype(string $filetype)
 	{
 		$this->filetype = $filetype;
 	}
@@ -220,7 +220,7 @@ class Reader
 	/**
 	 * @return bool
 	 */
-	public function read()
+	public function read(): bool
 	{
 		if($this->xml_reader->nodeType === XMLReader::ELEMENT)
 		{
@@ -276,7 +276,7 @@ class Reader
 	 *
 	 * @return bool
 	 */
-	public function next($name = null)
+	public function next($name = null): bool
 	{
 		if(is_null($name))
 		{
@@ -289,11 +289,11 @@ class Reader
 	/**
 	 * Return node-type as human-readable string
 	 *
-	 * @param null|string $node_type
+	 * @param string|null $node_type
 	 *
 	 * @return string
 	 */
-	public function getNodeTypeName($node_type = null)
+	public function getNodeTypeName(string $node_type = null): string
 	{
 		$types_map =
 		[

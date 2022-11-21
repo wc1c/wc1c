@@ -432,18 +432,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wc1c/cml.git",
-                "reference": "fe86d04db76f8e64fff80e3b6390ea72797e70c2"
+                "reference": "fd3cb4ba92d011e4df130c0dc0169b4823ac175b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wc1c/cml/zipball/fe86d04db76f8e64fff80e3b6390ea72797e70c2",
-                "reference": "fe86d04db76f8e64fff80e3b6390ea72797e70c2",
+                "url": "https://api.github.com/repos/wc1c/cml/zipball/fd3cb4ba92d011e4df130c0dc0169b4823ac175b",
+                "reference": "fd3cb4ba92d011e4df130c0dc0169b4823ac175b",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.6"
+                "ext-xmlreader": "*",
+                "php": ">=7.0"
             },
-            "time": "2022-11-09T11:00:11+00:00",
+            "time": "2022-11-21T20:15:07+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "source",
@@ -460,6 +461,11 @@
                 {
                     "name": "Frescoref",
                     "email": "frescoref@gmail.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "WC1C team",
+                    "email": "support@wc1c.info",
                     "role": "Developer"
                 }
             ],
