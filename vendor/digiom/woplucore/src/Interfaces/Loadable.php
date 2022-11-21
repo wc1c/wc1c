@@ -23,8 +23,40 @@ interface Loadable
 	/**
 	 * Register loader with SPL autoloader stack.
 	 *
+	 * @param string $file
+	 *
 	 * @return void
 	 * @throws Exception
 	 */
-	public function register(): void;
+	public function register(string $file): void;
+
+	/**
+	 * Register loader with activation stack.
+	 *
+	 * @param Activable $class
+	 *
+	 * @return void
+	 * @throws Exception
+	 */
+	public function registerActivation(Activable $class): void;
+
+	/**
+	 * Register loader with deactivation stack.
+	 *
+	 * @param Deactivable $class
+	 *
+	 * @return void
+	 * @throws Exception
+	 */
+	public function registerDeactivation(Deactivable $class): void;
+
+	/**
+	 * Register loader with uninstall stack.
+	 *
+	 * @param Uninstallable $class
+	 *
+	 * @return void
+	 * @throws Exception
+	 */
+	public function registerUninstall(Uninstallable $class): void;
 }
