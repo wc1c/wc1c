@@ -45,7 +45,7 @@ final class Receiver
 	/**
 	 * @return Core
 	 */
-	public function core()
+	public function core(): Core
 	{
 		return $this->core;
 	}
@@ -53,7 +53,7 @@ final class Receiver
 	/**
 	 * @param Core $core
 	 */
-	public function setCore($core)
+	public function setCore(Core $core)
 	{
 		$this->core = $core;
 	}
@@ -61,7 +61,7 @@ final class Receiver
 	/**
 	 * @return array
 	 */
-	public function getModeAndType()
+	public function getModeAndType(): array
 	{
 		$data =
 		[
@@ -186,7 +186,7 @@ final class Receiver
 	 * @param string $type
 	 * @param string $description
 	 */
-	public function sendResponseByType($type = 'failure', $description = '')
+	public function sendResponseByType(string $type = 'failure', string $description = '')
 	{
 		if(has_filter('wc1c_schema_productscml_receiver_send_response_type'))
 		{
@@ -237,7 +237,7 @@ final class Receiver
 	/**
 	 * @return array
 	 */
-	public function getCredentialsByServer()
+	public function getCredentialsByServer(): array
 	{
 		$credentials = [];
 
@@ -358,7 +358,7 @@ final class Receiver
 	 *
 	 * @return bool
 	 */
-	public function handlerCheckauthKey($send_response = false)
+	public function handlerCheckauthKey(bool $send_response = false): bool
 	{
 		if(!isset($_GET['lazysign']))
 		{

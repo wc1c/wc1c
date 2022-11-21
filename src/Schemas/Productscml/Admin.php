@@ -23,7 +23,7 @@ class Admin
 	/**
 	 * @return Core
 	 */
-	public function core()
+	public function core(): Core
 	{
 		return $this->core;
 	}
@@ -31,7 +31,7 @@ class Admin
 	/**
 	 * @param Core $core
 	 */
-	public function setCore($core)
+	public function setCore(Core $core)
 	{
 		$this->core = $core;
 	}
@@ -73,11 +73,11 @@ class Admin
 	/**
 	 * Configurations fields: receiver
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsReceiver($fields)
+	public function configurationsFieldsReceiver(array $fields): array
 	{
 		$fields['title_receiver'] =
 		[
@@ -130,11 +130,11 @@ class Admin
 	/**
 	 * Configuration fields: other
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsOther($fields)
+	public function configurationsFieldsOther(array $fields): array
 	{
 		$fields['title_other'] =
 		[
@@ -165,11 +165,11 @@ class Admin
 	/**
 	 * Configuration fields: categories
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsCategories($fields)
+	public function configurationsFieldsCategories(array $fields): array
 	{
 		$fields['categories'] =
 		[
@@ -244,11 +244,11 @@ class Admin
 	/**
 	 * Configuration fields: categories from classifier groups
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsCategoriesClassifierGroups($fields)
+	public function configurationsFieldsCategoriesClassifierGroups(array $fields): array
 	{
 		$fields['categories_classifier_groups'] =
 		[
@@ -331,7 +331,7 @@ class Admin
 	 *
 	 * @return array Новый массив настроек
 	 */
-	public function configurationsFieldsProductsWithCharacteristics($fields)
+	public function configurationsFieldsProductsWithCharacteristics(array $fields): array
 	{
 		$fields['title_products_with_characteristics'] =
 		[
@@ -382,11 +382,11 @@ class Admin
 	/**
 	 * Configuration fields: attributes
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsAttributes($fields)
+	public function configurationsFieldsAttributes(array $fields): array
 	{
 		$fields['attributes'] =
 		[
@@ -435,11 +435,11 @@ class Admin
 	/**
 	 * Configuration fields: attributes
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsAttributesClassifierProperties($fields)
+	public function configurationsFieldsAttributesClassifierProperties(array $fields): array
 	{
 		$fields['attributes_classifier_properties'] =
 		[
@@ -502,11 +502,11 @@ class Admin
 	/**
 	 * Configuration fields: products sync
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsProductsSync($fields)
+	public function configurationsFieldsProductsSync(array $fields): array
 	{
 		$fields['product_sync'] =
 		[
@@ -539,11 +539,11 @@ class Admin
 	/**
 	 * Configuration fields: products
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsProducts($fields)
+	public function configurationsFieldsProducts(array $fields): array
 	{
 		$fields['title_products'] =
 		[
@@ -586,11 +586,11 @@ class Admin
 	/**
 	 * Configuration fields: products prices
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsProductsPrices($fields)
+	public function configurationsFieldsProductsPrices(array $fields): array
 	{
 		$fields['title_products_prices'] =
 		[
@@ -668,11 +668,11 @@ class Admin
 	/**
 	 * Configuration fields: products names
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsProductsNames($fields)
+	public function configurationsFieldsProductsNames(array $fields): array
 	{
 		$fields['title_products_names'] =
 		[
@@ -725,11 +725,11 @@ class Admin
 	/**
 	 * Configuration fields: products descriptions
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsProductsDescriptions($fields)
+	public function configurationsFieldsProductsDescriptions(array $fields): array
 	{
 		$fields['title_products_descriptions'] =
 		[
@@ -812,11 +812,11 @@ class Admin
 	/**
 	 * Configuration fields: products images
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsProductsImages($fields)
+	public function configurationsFieldsProductsImages(array $fields): array
 	{
 		$fields['title_products_images'] =
 		[
@@ -860,11 +860,11 @@ class Admin
 	/**
 	 * Configuration fields: media library
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsMediaLibrary($fields)
+	public function configurationsFieldsMediaLibrary(array $fields): array
 	{
 		$fields['title_media_library'] =
 		[
@@ -903,11 +903,11 @@ class Admin
 	/**
 	 * Configuration fields: products inventories
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsProductsInventories($fields)
+	public function configurationsFieldsProductsInventories(array $fields): array
 	{
 		$fields['title_products_inventories'] =
 		[
@@ -931,11 +931,11 @@ class Admin
 	/**
 	 * Configuration fields: products dimensions
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsProductsDimensions($fields)
+	public function configurationsFieldsProductsDimensions(array $fields): array
 	{
 		$fields['title_products_dimensions'] =
 		[
@@ -995,11 +995,11 @@ class Admin
 	/**
 	 * Configuration fields: logs
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsLogs($fields)
+	public function configurationsFieldsLogs(array $fields): array
 	{
 		$fields['title_logger'] =
 		[
@@ -1040,11 +1040,11 @@ class Admin
 	/**
 	 * Configuration fields: products create
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsProductsCreate($fields)
+	public function configurationsFieldsProductsCreate(array $fields): array
 	{
 		$fields['title_products_create'] =
 		[
@@ -1186,11 +1186,11 @@ class Admin
 	/**
 	 * Configuration fields: products update
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsProductsUpdate($fields)
+	public function configurationsFieldsProductsUpdate(array $fields): array
 	{
 		$fields['title_products_update'] =
 		[
