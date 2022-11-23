@@ -81,7 +81,7 @@ class CreateForm extends FormAbstract
 			'default' => $default_id,
 			'options' => $options,
 			'class' => 'form-check-input',
-			'class_label' => 'form-check-label',
+			'class_label' => 'form-check-label fs-6 text-success',
 		];
 
 		return $fields;
