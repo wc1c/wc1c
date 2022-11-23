@@ -1109,13 +1109,6 @@ class Core extends SchemaAbstract
 	 */
 	public function assignProductsItemStatus(ProductContract $internal_product, ProductDataContract $external_product, string $mode, Reader $reader): ProductContract
 	{
-		$raw = $external_product->getData();
-		if(isset($raw['delete_mark']) && $raw['delete_mark'] === 'yes')
-		{
-			$internal_product->delete();
-			return $internal_product;
-		}
-
 		if($mode === 'create')
 		{
 			$create_status = $this->getOptions('products_create_status', 'draft');
