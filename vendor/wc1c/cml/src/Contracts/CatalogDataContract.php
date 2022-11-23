@@ -12,20 +12,20 @@ interface CatalogDataContract extends DataContract
 	/**
 	 * @return string Unique identifier
 	 */
-	public function getId();
+	public function getId(): string;
 
 	/**
 	 * @return string Classifier identifier
 	 */
-	public function getClassifierId();
+	public function getClassifierId(): string;
 
 	/**
 	 * @return string Catalog name
 	 */
-	public function getName();
+	public function getName(): string;
 
 	/**
 	 * @return CounterpartyDataContract Catalog owner
 	 */
-	public function getOwner();
+	public function getOwner(): CounterpartyDataContract;
 }

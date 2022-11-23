@@ -16,7 +16,7 @@ class Classifier extends DataAbstract implements ClassifierDataContract
 	/**
 	 * @return string
 	 */
-	public function getId()
+	public function getId(): string
 	{
 		return $this->data['id'];
 	}
@@ -24,7 +24,7 @@ class Classifier extends DataAbstract implements ClassifierDataContract
 	/**
 	 * @param string $id
 	 */
-	public function setId($id)
+	public function setId(string $id)
 	{
 		$this->data['id'] = $id;
 	}
@@ -32,7 +32,7 @@ class Classifier extends DataAbstract implements ClassifierDataContract
 	/**
 	 * @return string
 	 */
-	public function getName()
+	public function getName(): string
 	{
 		return $this->data['name'];
 	}
@@ -40,7 +40,7 @@ class Classifier extends DataAbstract implements ClassifierDataContract
 	/**
 	 * @param string $name
 	 */
-	public function setName($name)
+	public function setName(string $name)
 	{
 		$this->data['name'] = $name;
 	}
@@ -48,7 +48,7 @@ class Classifier extends DataAbstract implements ClassifierDataContract
 	/**
 	 * @return string
 	 */
-	public function getDescription()
+	public function getDescription(): string
 	{
 		return $this->data['description'];
 	}
@@ -56,7 +56,7 @@ class Classifier extends DataAbstract implements ClassifierDataContract
 	/**
 	 * @param string $description
 	 */
-	public function setDescription($description)
+	public function setDescription(string $description)
 	{
 		$this->data['description'] = $description;
 	}
@@ -64,7 +64,7 @@ class Classifier extends DataAbstract implements ClassifierDataContract
 	/**
 	 * @return CounterpartyDataContract
 	 */
-	public function getOwner()
+	public function getOwner(): CounterpartyDataContract
 	{
 		return $this->data['owner'];
 	}
@@ -72,7 +72,7 @@ class Classifier extends DataAbstract implements ClassifierDataContract
 	/**
 	 * @param CounterpartyDataContract $owner
 	 */
-	public function setOwner($owner)
+	public function setOwner(CounterpartyDataContract $owner)
 	{
 		$this->data['owner'] = $owner;
 	}
@@ -80,7 +80,7 @@ class Classifier extends DataAbstract implements ClassifierDataContract
 	/**
 	 * @return array
 	 */
-	public function getGroups()
+	public function getGroups(): array
 	{
 		return $this->data['groups'];
 	}
@@ -88,7 +88,7 @@ class Classifier extends DataAbstract implements ClassifierDataContract
 	/**
 	 * @param array $groups
 	 */
-	public function setGroups($groups)
+	public function setGroups(array $groups)
 	{
 		$this->data['groups'] = $groups;
 	}

@@ -15,7 +15,7 @@ class Counterparty extends DataAbstract implements CounterpartyDataContract
 	/**
 	 * @return string
 	 */
-	public function getId()
+	public function getId(): string
 	{
 		return $this->data['id'];
 	}
@@ -23,7 +23,7 @@ class Counterparty extends DataAbstract implements CounterpartyDataContract
 	/**
 	 * @param string $id
 	 */
-	public function setId($id)
+	public function setId(string $id)
 	{
 		$this->data['id'] = $id;
 	}
@@ -31,7 +31,7 @@ class Counterparty extends DataAbstract implements CounterpartyDataContract
 	/**
 	 * @return string
 	 */
-	public function getName()
+	public function getName(): string
 	{
 		return $this->data['name'];
 	}
@@ -39,7 +39,7 @@ class Counterparty extends DataAbstract implements CounterpartyDataContract
 	/**
 	 * @param string $name
 	 */
-	public function setName($name)
+	public function setName(string $name)
 	{
 		$this->data['name'] = $name;
 	}

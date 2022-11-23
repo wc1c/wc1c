@@ -2,9 +2,9 @@
 
 defined('ABSPATH') || exit;
 
+use RuntimeException;
 use XMLReader;
 use Wc1c\Cml\Entities\OffersPackage;
-use Wc1c\Exceptions\Exception;
 use Wc1c\Cml\Contracts\CatalogDataContract;
 use Wc1c\Cml\Contracts\ClassifierDataContract;
 
@@ -18,17 +18,17 @@ class Reader
 	use Utility;
 
 	/**
-	 * @var null|XMLReader
+	 * @var XMLReader
 	 */
 	public $xml_reader = null;
 
 	/**
 	 * @var Decoder
 	 */
-	public $decoder;
+	public $decoder = null;
 
 	/**
-	 * @var string Filetype to import
+	 * @var string Filetype
 	 */
 	public $filetype;
 
@@ -38,7 +38,7 @@ class Reader
 	protected $file;
 
 	/**
-	 * @var integer Position
+	 * @var integer Current position
 	 */
 	public $position = 0;
 
@@ -53,12 +53,12 @@ class Reader
 	public $ready = false;
 
 	/**
-	 * @var int
+	 * @var int Current depth
 	 */
 	public $depth = 0;
 
 	/**
-	 * @var int
+	 * @var int Previous depth
 	 */
 	public $prevDepth = 0;
 
@@ -88,17 +88,17 @@ class Reader
 	public $formation_date = '';
 
 	/**
-	 * @var ClassifierDataContract Текущий классификатор
+	 * @var ClassifierDataContract Текущий классификатор, если присутствует в файле
 	 */
 	public $classifier = null;
 
 	/**
-	 * @var CatalogDataContract Каталог
+	 * @var CatalogDataContract Текущий каталог товаров, если присутствует в файле
 	 */
 	public $catalog = null;
 
 	/**
-	 * @var OffersPackage Пакет предложений
+	 * @var OffersPackage Текущий пакет предложений, если присутствует в файле
 	 */
 	public $offers_package = null;
 
@@ -108,18 +108,18 @@ class Reader
 	 * @param string $file_path
 	 * @param Decoder|null $decoder
 	 *
-	 * @throws Exception
+	 * @throws RuntimeException
 	 */
-	public function __construct($file_path = '', $decoder = null)
+	public function __construct(string $file_path, Decoder $decoder)
 	{
 		if(!defined('LIBXML_VERSION'))
 		{
-			throw new Exception('LIBXML_VERSION is not defined.');
+			throw new RuntimeException('LIBXML_VERSION is not defined.');
 		}
 
 		if(!function_exists('libxml_use_internal_errors'))
 		{
-			throw new Exception('libxml_use_internal_errors is not exists.');
+			throw new RuntimeException('libxml_use_internal_errors is not exists.');
 		}
 
 		libxml_use_internal_errors(true);
@@ -145,7 +145,7 @@ class Reader
 	/**
 	 * @return Decoder
 	 */
-	public function decoder()
+	public function decoder(): Decoder
 	{
 		if(!$this->decoder instanceof Decoder)
 		{
@@ -158,9 +158,9 @@ class Reader
 	/**
 	 * @param string $file_path Path to CML file
 	 *
-	 * @throws Exception
+	 * @throws RuntimeException
 	 */
-	public function open($file_path)
+	public function open(string $file_path)
 	{
 		$reader_result = false;
 
@@ -171,7 +171,7 @@ class Reader
 
 		if(false === $reader_result)
 		{
-			throw new Exception('File is not open.');
+			throw new RuntimeException('File is not open.');
 		}
 
 		$this->file = $file_path;
@@ -180,14 +180,14 @@ class Reader
 
 		if($this->getFiletype() === '')
 		{
-			throw new Exception('CommerceML filetype is not valid.');
+			throw new RuntimeException('CommerceML filetype is not valid.');
 		}
 	}
 
 	/**
 	 * @return bool
 	 */
-	public function close()
+	public function close(): bool
 	{
 		if($this->xml_reader instanceof XMLReader)
 		{
@@ -204,7 +204,7 @@ class Reader
 	/**
 	 * @return string
 	 */
-	public function getFiletype()
+	public function getFiletype(): string
 	{
 		return $this->filetype;
 	}
@@ -212,7 +212,7 @@ class Reader
 	/**
 	 * @param string $filetype
 	 */
-	public function setFiletype($filetype)
+	public function setFiletype(string $filetype)
 	{
 		$this->filetype = $filetype;
 	}
@@ -220,7 +220,7 @@ class Reader
 	/**
 	 * @return bool
 	 */
-	public function read()
+	public function read(): bool
 	{
 		if($this->xml_reader->nodeType === XMLReader::ELEMENT)
 		{
@@ -276,7 +276,7 @@ class Reader
 	 *
 	 * @return bool
 	 */
-	public function next($name = null)
+	public function next($name = null): bool
 	{
 		if(is_null($name))
 		{
@@ -289,11 +289,11 @@ class Reader
 	/**
 	 * Return node-type as human-readable string
 	 *
-	 * @param null|string $node_type
+	 * @param string|null $node_type
 	 *
 	 * @return string
 	 */
-	public function getNodeTypeName($node_type = null)
+	public function getNodeTypeName(string $node_type = null): string
 	{
 		$types_map =
 		[

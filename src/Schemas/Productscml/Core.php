@@ -82,9 +82,9 @@ class Core extends SchemaAbstract
 	/**
 	 * Initialize
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
-	public function init()
+	public function init(): bool
 	{
 		$this->setOptions($this->configuration()->getOptions());
 		$this->setUploadDirectory($this->configuration()->getUploadDirectory() . DIRECTORY_SEPARATOR . 'catalog');
@@ -117,11 +117,16 @@ class Core extends SchemaAbstract
 			add_action('wc1c_schema_productscml_processing_products_item', [$this, 'processingProductsItem'], 10, 2);
 			add_action('wc1c_schema_productscml_processing_offers_item', [$this, 'processingOffersItem'], 10, 2);
 
+			add_filter('wc1c_schema_productscml_processing_products_item_before_save', [$this, 'assignProductsItemCatalogVisibility'], 10, 4);
+			add_filter('wc1c_schema_productscml_processing_products_item_before_save', [$this, 'assignProductsItemReviews'], 10, 4);
+			add_filter('wc1c_schema_productscml_processing_products_item_before_save', [$this, 'assignProductsItemSoldIndividually'], 10, 4);
+			add_filter('wc1c_schema_productscml_processing_products_item_before_save', [$this, 'assignProductsItemFeatured'], 10, 4);
 			add_filter('wc1c_schema_productscml_processing_products_item_before_save', [$this, 'assignProductsItemStatus'], 10, 4);
 			add_filter('wc1c_schema_productscml_processing_products_item_before_save', [$this, 'assignProductsItemStockStatus'], 10, 4);
 			add_filter('wc1c_schema_productscml_processing_products_item_before_save', [$this, 'assignProductsItemSku'], 10, 4);
 			add_filter('wc1c_schema_productscml_processing_products_item_before_save', [$this, 'assignProductsItemName'], 10, 4);
 			add_filter('wc1c_schema_productscml_processing_products_item_before_save', [$this, 'assignProductsItemDescriptions'], 10, 4);
+			add_filter('wc1c_schema_productscml_processing_products_item_before_save', [$this, 'assignProductsItemDescriptionsFull'], 10, 4);
 			add_filter('wc1c_schema_productscml_processing_products_item_before_save', [$this, 'assignProductsItemCategories'], 15, 4);
 			add_filter('wc1c_schema_productscml_processing_products_item_before_save', [$this, 'assignProductsItemAttributes'], 15, 4);
 			add_filter('wc1c_schema_productscml_processing_products_item_before_save', [$this, 'assignProductsItemDimensions'], 15, 4);
@@ -139,7 +144,7 @@ class Core extends SchemaAbstract
 	/**
 	 * @return string
 	 */
-	public function getUploadDirectory()
+	public function getUploadDirectory(): string
 	{
 		return $this->upload_directory;
 	}
@@ -159,7 +164,7 @@ class Core extends SchemaAbstract
 	 *
 	 * @return boolean true - success, false - error
 	 */
-	public function fileProcessing($file_path)
+	public function fileProcessing(string $file_path): bool
 	{
 		try
 		{
@@ -174,6 +179,7 @@ class Core extends SchemaAbstract
 		if(has_filter('wc1c_schema_productscml_file_processing_decoder'))
 		{
 			$decoder = apply_filters('wc1c_schema_productscml_file_processing_decoder', $decoder, $this);
+			$this->log()->info(__('DecoderCML has been overridden by external algorithms.', 'wc1c'));
 		}
 
 		try
@@ -191,6 +197,7 @@ class Core extends SchemaAbstract
 		if(has_filter('wc1c_schema_productscml_file_processing_reader'))
 		{
 			$reader = apply_filters('wc1c_schema_productscml_file_processing_reader', $reader, $this);
+			$this->log()->info(__('ReaderCML has been overridden by external algorithms.', 'wc1c'));
 		}
 
 		while($reader->read())
@@ -202,6 +209,7 @@ class Core extends SchemaAbstract
 			catch(Exception $e)
 			{
 				$this->log()->error(__('Import file processing not completed. ReaderCML threw an exception.', 'wc1c'), ['exception' => $e]);
+				break;
 			}
 		}
 
@@ -216,9 +224,9 @@ class Core extends SchemaAbstract
 	 * @return void
 	 * @throws Exception
 	 */
-	public function processingTimer($reader)
+	public function processingTimer(Reader $reader)
 	{
-		if(!wc1c()->timer()->isRemainingBiggerThan(5))
+		if(wc1c()->timer()->getMaximum() !== 0 && !wc1c()->timer()->isRemainingBiggerThan(5))
 		{
 			throw new Exception(__('There was not enough time to load all the data.', 'wc1c'));
 		}
@@ -232,7 +240,7 @@ class Core extends SchemaAbstract
 	 * @return void
 	 * @throws \Exception
 	 */
-	public function processingClassifier($reader)
+	public function processingClassifier(Reader $reader)
 	{
 		if($reader->filetype !== 'import' && $reader->filetype !== 'offers')
 		{
@@ -287,7 +295,7 @@ class Core extends SchemaAbstract
 	 * @return void
 	 * @throws Exception
 	 */
-	public function processingClassifierGroups($classifier, $reader)
+	public function processingClassifierGroups(ClassifierDataContract $classifier, Reader $reader)
 	{
 		if($reader->filetype !== 'import')
 		{
@@ -605,7 +613,7 @@ class Core extends SchemaAbstract
 	 * @return void
 	 * @throws Exception
 	 */
-	public function processingClassifierProperties($classifier, $reader)
+	public function processingClassifierProperties(ClassifierDataContract $classifier, Reader $reader)
 	{
 		if($reader->getFiletype() !== 'import' && $reader->getFiletype() !== 'offers')
 		{
@@ -733,11 +741,11 @@ class Core extends SchemaAbstract
 	 * Save classifier
 	 *
 	 * @param ClassifierDataContract $classifier
-	 * @param $reader
+	 * @param Reader $reader
 	 *
 	 * @return void
 	 */
-	public function processingClassifierItem($classifier, $reader)
+	public function processingClassifierItem(ClassifierDataContract $classifier, $reader)
 	{
 		if($reader->getFiletype() !== 'import' && $reader->getFiletype() !== 'offers')
 		{
@@ -765,7 +773,7 @@ class Core extends SchemaAbstract
 	 * @return void
 	 * @throws \Exception
 	 */
-	public function processingCatalog($reader)
+	public function processingCatalog(Reader $reader)
 	{
 		if($reader->getFiletype() !== 'import')
 		{
@@ -880,7 +888,7 @@ class Core extends SchemaAbstract
 	 *
 	 * @return ProductContract
 	 */
-	public function assignProductsItemName($internal_product, $external_product, $mode, $reader)
+	public function assignProductsItemName(ProductContract $internal_product, ProductDataContract $external_product, string $mode, Reader $reader): ProductContract
 	{
 		if($internal_product->isType('variation'))
 		{
@@ -946,7 +954,7 @@ class Core extends SchemaAbstract
 	 *
 	 * @return ProductContract
 	 */
-	public function assignProductsItemSku($new_product, $product, $mode, $reader)
+	public function assignProductsItemSku(ProductContract $new_product, ProductDataContract $product, string $mode, Reader $reader): ProductContract
 	{
 		try
 		{
@@ -961,77 +969,224 @@ class Core extends SchemaAbstract
 	}
 
 	/**
-	 * Назначение данных продукта исходя из режима: статус
+	 * Назначение данных продукта исходя из режима: видимост ьв каталоге
 	 *
-	 * @param ProductContract $new_product Экземпляр продукта - либо существующий, либо новый
-	 * @param ProductDataContract $product Данные продукта из XML
+	 * @param ProductContract $internal_product Экземпляр продукта - либо существующий, либо новый
+	 * @param ProductDataContract $external_product Данные продукта из XML
 	 * @param string $mode Режим - create или update
 	 * @param Reader $reader Текущий итератор
 	 *
 	 * @return ProductContract
 	 */
-	public function assignProductsItemStatus($new_product, $product, $mode, $reader)
+	public function assignProductsItemCatalogVisibility(ProductContract $internal_product, ProductDataContract $external_product, string $mode, Reader $reader): ProductContract
+	{
+		if($internal_product->isType('variation'))
+		{
+			return $internal_product;
+		}
+
+		if($mode === 'create')
+		{
+			$internal_product->set_catalog_visibility($this->getOptions('products_create_set_catalog_visibility', 'visible'));
+			return $internal_product;
+		}
+
+		$internal_product->set_catalog_visibility($this->getOptions('products_update_set_catalog_visibility', 'visible'));
+
+		return $internal_product;
+	}
+
+	/**
+	 * Назначение данных продукта исходя из режима: отзывы
+	 *
+	 * @param ProductContract $internal_product Экземпляр продукта - либо существующий, либо новый
+	 * @param ProductDataContract $external_product Данные продукта из XML
+	 * @param string $mode Режим - create или update
+	 * @param Reader $reader Текущий итератор
+	 *
+	 * @return ProductContract
+	 */
+	public function assignProductsItemReviews(ProductContract $internal_product, ProductDataContract $external_product, string $mode, Reader $reader): ProductContract
+	{
+		if($internal_product->isType('variation'))
+		{
+			return $internal_product;
+		}
+
+		if($mode === 'create')
+		{
+			$internal_product->set_reviews_allowed(false);
+			if('yes' === $this->getOptions('products_create_set_reviews_allowed', 'no'))
+			{
+				$internal_product->set_reviews_allowed(true);
+			}
+
+			return $internal_product;
+		}
+
+		if('yes' === $this->getOptions('products_update_set_reviews_allowed', 'no'))
+		{
+			$internal_product->set_reviews_allowed(true);
+		}
+
+		return $internal_product;
+	}
+
+	/**
+	 * Назначение данных продукта исходя из режима: индивидуальная продажа
+	 *
+	 * @param ProductContract $internal_product Экземпляр продукта - либо существующий, либо новый
+	 * @param ProductDataContract $external_product Данные продукта из XML
+	 * @param string $mode Режим - create или update
+	 * @param Reader $reader Текущий итератор
+	 *
+	 * @return ProductContract
+	 */
+	public function assignProductsItemSoldIndividually(ProductContract $internal_product, ProductDataContract $external_product, string $mode, Reader $reader): ProductContract
 	{
 		if($mode === 'create')
 		{
-			$new_product->set_status($this->getOptions('products_create_status', 'draft'));
+			if('yes' === $this->getOptions('products_create_set_sold_individually', 'no'))
+			{
+				$internal_product->set_sold_individually(true);
+			}
 
-			return $new_product;
+			return $internal_product;
+		}
+
+		if('yes' === $this->getOptions('products_update_set_sold_individually', 'no'))
+		{
+			$internal_product->set_sold_individually(true);
+		}
+
+		return $internal_product;
+	}
+
+	/**
+	 * Назначение данных продукта исходя из режима: рекомендуемый
+	 *
+	 * @param ProductContract $internal_product Экземпляр продукта - либо существующий, либо новый
+	 * @param ProductDataContract $external_product Данные продукта из XML
+	 * @param string $mode Режим - create или update
+	 * @param Reader $reader Текущий итератор
+	 *
+	 * @return ProductContract
+	 */
+	public function assignProductsItemFeatured(ProductContract $internal_product, ProductDataContract $external_product, string $mode, Reader $reader): ProductContract
+	{
+		if($internal_product->isType('variation'))
+		{
+			return $internal_product;
+		}
+
+		if($mode === 'create')
+		{
+			if('yes' === $this->getOptions('products_create_set_featured', 'no'))
+			{
+				$internal_product->set_featured(true);
+			}
+
+			return $internal_product;
+		}
+
+		if('yes' === $this->getOptions('products_update_set_featured', 'no'))
+		{
+			$internal_product->set_featured(true);
+		}
+
+		return $internal_product;
+	}
+
+	/**
+	 * Назначение данных продукта исходя из режима: статус
+	 *
+	 * @param ProductContract $internal_product Экземпляр продукта - либо существующий, либо новый
+	 * @param ProductDataContract $external_product Данные продукта из XML
+	 * @param string $mode Режим - create или update
+	 * @param Reader $reader Текущий итератор
+	 *
+	 * @return ProductContract
+	 */
+	public function assignProductsItemStatus(ProductContract $internal_product, ProductDataContract $external_product, string $mode, Reader $reader): ProductContract
+	{
+		$raw = $external_product->getData();
+		if(isset($raw['delete_mark']) && $raw['delete_mark'] === 'yes')
+		{
+			$internal_product->delete();
+			return $internal_product;
+		}
+
+		if($mode === 'create')
+		{
+			$create_status = $this->getOptions('products_create_status', 'draft');
+
+			$internal_product->set_status($create_status);
+
+			return $internal_product;
 		}
 
 		$update_status = $this->getOptions('products_update_status', '');
 
-		if($update_status !== '')
+		if(!empty($update_status))
 		{
-			$new_product->set_status($update_status);
+			$internal_product->set_status($update_status);
 		}
 
-		return $new_product;
+		return $internal_product;
 	}
 
 	/**
 	 * Назначение данных продукта исходя из режима: статус остатка
 	 *
-	 * @param ProductContract $new_product Экземпляр продукта - либо существующий, либо новый
-	 * @param ProductDataContract $product Данные продукта из XML
+	 * @param ProductContract $internal_product Экземпляр продукта - либо существующий, либо новый
+	 * @param ProductDataContract $external_product Данные продукта из XML
 	 * @param string $mode Режим - create или update
 	 * @param Reader $reader Текущий итератор
 	 *
 	 * @return ProductContract
 	 */
-	public function assignProductsItemStockStatus($new_product, $product, $mode, $reader)
+	public function assignProductsItemStockStatus(ProductContract $internal_product, ProductDataContract $external_product, string $mode, Reader $reader): ProductContract
 	{
 		if($mode === 'create')
 		{
-			$new_product->set_stock_status($this->getOptions('products_create_stock_status', 'outofstock'));
+			$internal_product->set_stock_status($this->getOptions('products_create_stock_status', 'outofstock'));
 
-			return $new_product;
+			return $internal_product;
 		}
 
 		$update_status = $this->getOptions('products_update_stock_status', '');
 
-		if($update_status !== '')
+		if(!empty($update_status))
 		{
-			$new_product->set_stock_status($update_status);
+			$internal_product->set_stock_status($update_status);
 		}
 
-		return $new_product;
+		return $internal_product;
 	}
 
 	/**
 	 * Назначение данных продукта исходя из режима: описания
 	 *
-	 * @param ProductContract $new_product Экземпляр продукта - либо существующий, либо новый
-	 * @param ProductDataContract $product Данные продукта из XML
+	 * @param ProductContract $internal_product Экземпляр продукта - либо существующий, либо новый
+	 * @param ProductDataContract $external_product Данные продукта из XML
 	 * @param string $mode Режим - create или update
 	 * @param Reader $reader Текущий итератор
 	 *
 	 * @return ProductContract
 	 */
-	public function assignProductsItemDescriptions($new_product, $product, $mode, $reader)
+	public function assignProductsItemDescriptions(ProductContract $internal_product, ProductDataContract $external_product, string $mode, Reader $reader): ProductContract
 	{
+		if('create' === $mode && 'yes' !== $this->getOptions('products_create_adding_description', 'yes'))
+		{
+			return $internal_product;
+		}
+
+		if('update' === $mode && 'yes' !== $this->getOptions('products_update_description', 'no'))
+		{
+			return $internal_product;
+		}
+
 		$short = $this->getOptions('products_descriptions_short_by_cml', 'no');
-		$full = $this->getOptions('products_descriptions_by_cml', 'no');
 
 		if('no' !== $short)
 		{
@@ -1040,9 +1195,9 @@ class Core extends SchemaAbstract
 			{
 				case 'yes_html':
 					$requisite = 'ОписаниеВФорматеHTML';
-					if($product->hasRequisites($requisite))
+					if($external_product->hasRequisites($requisite))
 					{
-						$requisite_data = $product->getRequisites($requisite);
+						$requisite_data = $external_product->getRequisites($requisite);
 						if(!empty($requisite_data['value']))
 						{
 							$short_description = html_entity_decode($requisite_data['value']);
@@ -1051,9 +1206,9 @@ class Core extends SchemaAbstract
 					break;
 				case 'yes_requisites':
 					$requisite = $this->getOptions('products_descriptions_short_from_requisites_name', '');
-					if($product->hasRequisites($requisite))
+					if($external_product->hasRequisites($requisite))
 					{
-						$requisite_data = $product->getRequisites($requisite);
+						$requisite_data = $external_product->getRequisites($requisite);
 						if(!empty($requisite_data['value']))
 						{
 							$short_description = html_entity_decode($requisite_data['value']);
@@ -1061,11 +1216,38 @@ class Core extends SchemaAbstract
 					}
 					break;
 				default:
-					$short_description = $product->getDescription();
+					$short_description = $external_product->getDescription();
 			}
 
-			$new_product->set_short_description($short_description);
+			$internal_product->set_short_description($short_description);
 		}
+
+		return $internal_product;
+	}
+
+	/**
+	 * Назначение данных продукта исходя из режима: описания
+	 *
+	 * @param ProductContract $internal_product Экземпляр продукта - либо существующий, либо новый
+	 * @param ProductDataContract $external_product Данные продукта из XML
+	 * @param string $mode Режим - create или update
+	 * @param Reader $reader Текущий итератор
+	 *
+	 * @return ProductContract
+	 */
+	public function assignProductsItemDescriptionsFull(ProductContract $internal_product, ProductDataContract $external_product, string $mode, Reader $reader): ProductContract
+	{
+		if('create' === $mode && 'yes' !== $this->getOptions('products_create_adding_description_full', 'no'))
+		{
+			return $internal_product;
+		}
+
+		if('update' === $mode && 'yes' !== $this->getOptions('products_update_description_full', 'no'))
+		{
+			return $internal_product;
+		}
+
+		$full = $this->getOptions('products_descriptions_by_cml', 'no');
 
 		if('no' !== $full)
 		{
@@ -1074,9 +1256,9 @@ class Core extends SchemaAbstract
 			{
 				case 'yes_html':
 					$requisite = 'ОписаниеВФорматеHTML';
-					if($product->hasRequisites($requisite))
+					if($external_product->hasRequisites($requisite))
 					{
-						$requisite_data = $product->getRequisites($requisite);
+						$requisite_data = $external_product->getRequisites($requisite);
 						if(!empty($requisite_data['value']))
 						{
 							$full_description = html_entity_decode($requisite_data['value']);
@@ -1085,9 +1267,9 @@ class Core extends SchemaAbstract
 					break;
 				case 'yes_requisites':
 					$requisite = $this->getOptions('products_descriptions_from_requisites_name', '');
-					if($product->hasRequisites($requisite))
+					if($external_product->hasRequisites($requisite))
 					{
-						$requisite_data = $product->getRequisites($requisite);
+						$requisite_data = $external_product->getRequisites($requisite);
 						if(!empty($requisite_data['value']))
 						{
 							$full_description = html_entity_decode($requisite_data['value']);
@@ -1095,53 +1277,53 @@ class Core extends SchemaAbstract
 					}
 					break;
 				default:
-					$full_description = $product->getDescription();
+					$full_description = $external_product->getDescription();
 			}
 
-			$new_product->set_description($full_description);
+			$internal_product->set_description($full_description);
 		}
 
-		return $new_product;
+		return $internal_product;
 	}
 
 	/**
 	 * Назначение данных продукта исходя из режима: категории
 	 *
-	 * @param ProductContract $new_product Экземпляр продукта - либо существующий, либо новый
-	 * @param ProductDataContract $product Данные продукта из XML
+	 * @param ProductContract $internal_product Экземпляр продукта - либо существующий, либо новый
+	 * @param ProductDataContract $external_product Данные продукта из XML
 	 * @param string $mode Режим - create или update
 	 * @param Reader $reader Текущий итератор
 	 *
 	 * @return ProductContract
 	 * @throws Exception
 	 */
-	public function assignProductsItemCategories($new_product, $product, $mode, $reader)
+	public function assignProductsItemCategories(ProductContract $internal_product, ProductDataContract $external_product, string $mode, Reader $reader): ProductContract
 	{
 		if('create' === $mode && 'yes' !== $this->getOptions('products_create_adding_category', 'yes'))
 		{
-			return $new_product;
+			return $internal_product;
 		}
 
 		if('update' === $mode && 'yes' !== $this->getOptions('products_update_categories', 'no'))
 		{
-			return $new_product;
+			return $internal_product;
 		}
 
-		if($new_product->isType('variation'))
+		if($internal_product->isType('variation'))
 		{
-			return $new_product;
+			return $internal_product;
 		}
 
-		if('create' === $mode && false === $product->hasClassifierGroups())
+		if('create' === $mode && false === $external_product->hasClassifierGroups())
 		{
-			return $new_product;
+			return $internal_product;
 		}
 
 		/** @var CategoriesStorageContract $categories_storage */
 		$categories_storage = Storage::load('category');
 
 		$cats = [];
-		foreach($product->getClassifierGroups() as $classifier_group)
+		foreach($external_product->getClassifierGroups() as $classifier_group)
 		{
 			$cat = $categories_storage->getByExternalId($classifier_group);
 
@@ -1151,9 +1333,9 @@ class Core extends SchemaAbstract
 			}
 		}
 
-		$new_product->set_category_ids($cats);
+		$internal_product->set_category_ids($cats);
 
-		return $new_product;
+		return $internal_product;
 	}
 
 	/**
@@ -1167,14 +1349,24 @@ class Core extends SchemaAbstract
 	 * @return ProductContract
 	 * @throws Exception
 	 */
-	public function assignProductsItemImages($internal_product, $external_product, $mode, $reader)
+	public function assignProductsItemImages(ProductContract $internal_product, ProductDataContract $external_product, string $mode, Reader $reader): ProductContract
 	{
-		if($internal_product->isType('variation')) // todo: назначение одного изображения для вариаации
+		if('create' === $mode && false === $external_product->hasImages())
 		{
 			return $internal_product;
 		}
 
-		if('create' === $mode && false === $external_product->hasImages())
+		if($internal_product->isType('variation')) // todo: назначение одного изображения для вариации
+		{
+			return $internal_product;
+		}
+
+		if('create' === $mode && 'yes' !== $this->getOptions('products_create_adding_images', 'no'))
+		{
+			return $internal_product;
+		}
+
+		if('update' === $mode && 'yes' !== $this->getOptions('products_update_images', 'no'))
 		{
 			return $internal_product;
 		}
@@ -1247,7 +1439,7 @@ class Core extends SchemaAbstract
 	 *
 	 * @return ProductContract
 	 */
-	public function assignProductsItemDimensions($internal_product, $external_product, $mode, $reader)
+	public function assignProductsItemDimensions(ProductContract $internal_product, ProductDataContract $external_product, string $mode, Reader $reader): ProductContract
 	{
 		if('yes' !== $this->getOptions('products_dimensions_by_requisites', 'no'))
 		{
@@ -1354,7 +1546,7 @@ class Core extends SchemaAbstract
 	 * @return ProductContract
 	 * @throws Exception If data cannot be set.
 	 */
-	protected function setProductAttributes(&$product, $raw_attributes)
+	protected function setProductAttributes(&$product, array $raw_attributes): ProductContract
 	{
 		$this->log()->debug(__('Assigning attributes for product.', 'wc1c'), ['product_id' => $product->getId(), 'product_type' => $product->get_type(), 'raw_attributes' => $raw_attributes]);
 
@@ -1512,7 +1704,7 @@ class Core extends SchemaAbstract
 	 * @return ProductContract
 	 * @throws Exception If data cannot be set.
 	 */
-	protected function setVariationAttributes(&$variation, $raw_attributes)
+	protected function setVariationAttributes(ProductContract $variation, array $raw_attributes): ProductContract
 	{
 		$this->log()->debug(__('Assigning attributes for variation.', 'wc1c'), ['variation_id' => $variation->getId(), 'raw_attributes' => $raw_attributes]);
 
@@ -1521,7 +1713,7 @@ class Core extends SchemaAbstract
 
 		$parent = (new Factory)->getProduct($variation->get_parent_id()); // todo: cache
 
-		// Stop if parent does not exists.
+		// Stop if parent does not exist.
 		if(!$parent)
 		{
 			$this->log()->warning(__('The parent product was not found. Skipped.', 'wc1c'), ['parent_id' => $variation->get_parent_id()]);
@@ -1594,7 +1786,7 @@ class Core extends SchemaAbstract
 	 * @return array
 	 * @throws Exception
 	 */
-	protected function getVariationParentAttributes($attributes, $parent)
+	protected function getVariationParentAttributes(array $attributes, ProductContract $parent): array
 	{
 		/** @var AttributesStorageContract $attributes_storage */
 		$attributes_storage = Storage::load('attribute');
@@ -1647,7 +1839,7 @@ class Core extends SchemaAbstract
 	 * @return ProductContract
 	 * @throws Exception
 	 */
-	public function assignProductsItemAttributes($internal_product, $external_product, $mode, $reader)
+	public function assignProductsItemAttributes(ProductContract $internal_product, ProductDataContract $external_product, string $mode, Reader $reader): ProductContract
 	{
 		if('create' === $mode && 'yes' !== $this->getOptions('products_create_adding_attributes', 'yes'))
 		{
@@ -1883,7 +2075,7 @@ class Core extends SchemaAbstract
 	 * @return ProductContract
 	 * @throws Exception
 	 */
-	public function assignOffersItemAttributes($internal_product, $external_product, $reader)
+	public function assignOffersItemAttributes(ProductContract $internal_product, ProductDataContract $external_product, Reader $reader): ProductContract
 	{
 		$this->log()->debug(__('Assigning attributes to a product based on the properties of the offers package.', 'wc1c'), ['filetype' => $reader->getFiletype(), 'internal_product_id' => $internal_product->getId()]);
 
@@ -2182,7 +2374,7 @@ class Core extends SchemaAbstract
 	 *
 	 * @return ProductContract
 	 */
-	public function assignOffersItemPrices($internal_product, $external_product, $reader)
+	public function assignOffersItemPrices(ProductContract $internal_product, ProductDataContract $external_product, Reader $reader): ProductContract
 	{
 		$this->log()->debug(__('Prices processing.', 'wc1c'), ['filetype' => $reader->getFiletype(), 'product_id' => $internal_product->getId(), 'offer_id' => $external_product->getId(), 'offer_characteristic_id' => $external_product->getCharacteristicId()]);
 
@@ -2231,10 +2423,10 @@ class Core extends SchemaAbstract
 					$regular_value = $first_value['price'];
 					unset($prices[$first_value['price_type_id']]);
 			}
-		}
 
-		$this->log()->debug(__('Assign the regular price.', 'wc1c'), ['regular_value' => $regular_value]);
-		$internal_product->set_regular_price($regular_value);
+			$this->log()->debug(__('Assign the regular price.', 'wc1c'), ['regular_value' => $regular_value]);
+			$internal_product->set_regular_price($regular_value);
+		}
 
 		if('no' !== $sale)
 		{
@@ -2264,20 +2456,32 @@ class Core extends SchemaAbstract
 					$first_value = reset($prices);
 					$sale_value = $first_value['price'];
 			}
+
+			$this->log()->debug(__('Assign the sale price.', 'wc1c'), ['sale_value' => $sale_value]);
+			$internal_product->set_sale_price($sale_value);
 		}
 
-		$this->log()->debug(__('Assign the sale price.', 'wc1c'), ['sale_value' => $sale_value]);
-		$internal_product->set_sale_price($sale_value);
-
-		if(!empty($sale_value) && $sale_value < $regular_value)
+		if($regular !== 'no' || $sale !== 'no')
 		{
-			$this->log()->debug(__('Assign the current price from sale price.', 'wc1c'), ['sale_value' => $sale_value]);
-			$internal_product->set_price($sale_value);
+			if(!empty($sale_value) && $sale_value < $regular_value)
+			{
+				$this->log()->debug(__('Assign the current price from sale price.', 'wc1c'), ['sale_value' => $sale_value]);
+				$internal_product->set_price($sale_value);
+			}
+			else
+			{
+				$this->log()->debug(__('Assign the current price from regular price.', 'wc1c'), ['regular_value' => $regular_value]);
+				$internal_product->set_price($regular_value);
+			}
+		}
+
+		if($regular === 'no' && $sale === 'no')
+		{
+			$this->log()->info(__('Prices processing is off. Assigning is skip.', 'wc1c'));
 		}
 		else
 		{
-			$this->log()->debug(__('Assign the current price from regular price.', 'wc1c'), ['regular_value' => $regular_value]);
-			$internal_product->set_price($regular_value);
+			$this->log()->debug(__('Prices processing is successful.', 'wc1c'), ['regular_value' => $regular_value, 'sale_value' => $sale_value]);
 		}
 
 		return $internal_product;
@@ -2292,7 +2496,7 @@ class Core extends SchemaAbstract
 	 *
 	 * @return ProductContract
 	 */
-	public function assignOffersItemInventories($internal_product, $external_product, $reader)
+	public function assignOffersItemInventories(ProductContract $internal_product, ProductDataContract $external_product, Reader $reader): ProductContract
 	{
 		$this->log()->debug(__('Inventories processing.', 'wc1c'), ['filetype' => $reader->getFiletype(), 'product_id' => $internal_product->getId(), 'offer_id' => $external_product->getId(), 'offer_characteristic_id' => $external_product->getCharacteristicId()]);
 
@@ -2351,7 +2555,7 @@ class Core extends SchemaAbstract
 	 * @return void
 	 * @throws Exception
 	 */
-	public function processingProductsItem($external_product, $reader)
+	public function processingProductsItem(ProductDataContract $external_product, Reader $reader)
 	{
 		$this->log()->info(__('Processing a product from a catalog of products.', 'wc1c'), ['product_id' => $external_product->getId(), 'product_characteristic_id' => $external_product->getCharacteristicId()]);
 
@@ -2384,22 +2588,17 @@ class Core extends SchemaAbstract
 		 *
 		 * @return int|false
 		 */
-		if($product_id === 0 && has_filter('wc1c_schema_productscml_processing_products_search'))
+		if(empty($product_id) && has_filter('wc1c_schema_productscml_processing_products_search'))
 		{
 			$product_id = apply_filters('wc1c_schema_productscml_processing_products_search', $product_id, $external_product, $this, $reader);
 
 			$this->log()->debug(__('Product search result by external algorithms.', 'wc1c'), ['product_ids' => $product_id]);
-
-			if(empty($product_id))
-			{
-				$product_id = 0;
-			}
 		}
 
 		/**
 		 * Ни один продукт не найден
 		 */
-		if(0 === $product_id)
+		if(empty($product_id))
 		{
 			$this->log()->info(__('Product is not found.', 'wc1c'));
 
@@ -2581,7 +2780,7 @@ class Core extends SchemaAbstract
 	 * @return void
 	 * @throws Exception
 	 */
-	public function processingOffersItem($external_offer, $reader)
+	public function processingOffersItem(ProductDataContract $external_offer, Reader $reader)
 	{
 		$this->log()->info(__('Processing an offer from a package of offers.', 'wc1c'), ['offer_id' => $external_offer->getId(), 'offer_characteristic_id' => $external_offer->getCharacteristicId()]);
 
@@ -2611,14 +2810,9 @@ class Core extends SchemaAbstract
 		 *
 		 * @return int|false
 		 */
-		if($internal_offer_id === 0 && has_filter('wc1c_schema_productscml_processing_offers_search'))
+		if(empty($internal_offer_id) && has_filter('wc1c_schema_productscml_processing_offers_search'))
 		{
 			$internal_offer_id = apply_filters('wc1c_schema_productscml_processing_offers_search', $internal_offer_id, $external_offer, $reader);
-
-			if(empty($internal_offer_id))
-			{
-				$internal_offer_id = 0;
-			}
 		}
 
 		/*
@@ -2632,7 +2826,7 @@ class Core extends SchemaAbstract
 		 * -- если не найден, и включено создание на основе первой характеристики - создаем
 		 */
 
-		if(0 === $internal_offer_id && empty($external_offer->getCharacteristicId()))
+		if(empty($internal_offer_id) && empty($external_offer->getCharacteristicId()))
 		{
 			$this->log()->notice(__('Product not found. Offer update skipped.', 'wc1c'), ['offer' => $external_offer]);
 			return;
@@ -2684,7 +2878,7 @@ class Core extends SchemaAbstract
 		}
 		else
 		{
-			if(0 === $internal_parent_offer_id)
+			if(empty($internal_parent_offer_id))
 			{
 				$this->log()->warning(__('The parent product was not found. The creation of the variation is skipped.', 'wc1c'), ['offer_id' => $internal_offer_id]);
 				return;
@@ -2754,7 +2948,7 @@ class Core extends SchemaAbstract
 	 * @return void
 	 * @throws Exception
 	 */
-	public function processingOffers($reader)
+	public function processingOffers(Reader $reader)
 	{
 		$types =
 		[

@@ -23,7 +23,7 @@ class Admin
 	/**
 	 * @return Core
 	 */
-	public function core()
+	public function core(): Core
 	{
 		return $this->core;
 	}
@@ -31,7 +31,7 @@ class Admin
 	/**
 	 * @param Core $core
 	 */
-	public function setCore($core)
+	public function setCore(Core $core)
 	{
 		$this->core = $core;
 	}
@@ -73,11 +73,11 @@ class Admin
 	/**
 	 * Configurations fields: receiver
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsReceiver($fields)
+	public function configurationsFieldsReceiver(array $fields): array
 	{
 		$fields['title_receiver'] =
 		[
@@ -130,11 +130,11 @@ class Admin
 	/**
 	 * Configuration fields: other
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsOther($fields)
+	public function configurationsFieldsOther(array $fields): array
 	{
 		$fields['title_other'] =
 		[
@@ -165,11 +165,11 @@ class Admin
 	/**
 	 * Configuration fields: categories
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsCategories($fields)
+	public function configurationsFieldsCategories(array $fields): array
 	{
 		$fields['categories'] =
 		[
@@ -244,11 +244,11 @@ class Admin
 	/**
 	 * Configuration fields: categories from classifier groups
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsCategoriesClassifierGroups($fields)
+	public function configurationsFieldsCategoriesClassifierGroups(array $fields): array
 	{
 		$fields['categories_classifier_groups'] =
 		[
@@ -331,7 +331,7 @@ class Admin
 	 *
 	 * @return array Новый массив настроек
 	 */
-	public function configurationsFieldsProductsWithCharacteristics($fields)
+	public function configurationsFieldsProductsWithCharacteristics(array $fields): array
 	{
 		$fields['title_products_with_characteristics'] =
 		[
@@ -382,11 +382,11 @@ class Admin
 	/**
 	 * Configuration fields: attributes
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsAttributes($fields)
+	public function configurationsFieldsAttributes(array $fields): array
 	{
 		$fields['attributes'] =
 		[
@@ -435,11 +435,11 @@ class Admin
 	/**
 	 * Configuration fields: attributes
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsAttributesClassifierProperties($fields)
+	public function configurationsFieldsAttributesClassifierProperties(array $fields): array
 	{
 		$fields['attributes_classifier_properties'] =
 		[
@@ -502,11 +502,11 @@ class Admin
 	/**
 	 * Configuration fields: products sync
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsProductsSync($fields)
+	public function configurationsFieldsProductsSync(array $fields): array
 	{
 		$fields['product_sync'] =
 		[
@@ -539,11 +539,11 @@ class Admin
 	/**
 	 * Configuration fields: products
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsProducts($fields)
+	public function configurationsFieldsProducts(array $fields): array
 	{
 		$fields['title_products'] =
 		[
@@ -586,11 +586,11 @@ class Admin
 	/**
 	 * Configuration fields: products prices
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsProductsPrices($fields)
+	public function configurationsFieldsProductsPrices(array $fields): array
 	{
 		$fields['title_products_prices'] =
 		[
@@ -668,11 +668,11 @@ class Admin
 	/**
 	 * Configuration fields: products names
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsProductsNames($fields)
+	public function configurationsFieldsProductsNames(array $fields): array
 	{
 		$fields['title_products_names'] =
 		[
@@ -725,11 +725,11 @@ class Admin
 	/**
 	 * Configuration fields: products descriptions
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsProductsDescriptions($fields)
+	public function configurationsFieldsProductsDescriptions(array $fields): array
 	{
 		$fields['title_products_descriptions'] =
 		[
@@ -812,11 +812,11 @@ class Admin
 	/**
 	 * Configuration fields: products images
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsProductsImages($fields)
+	public function configurationsFieldsProductsImages(array $fields): array
 	{
 		$fields['title_products_images'] =
 		[
@@ -860,11 +860,11 @@ class Admin
 	/**
 	 * Configuration fields: media library
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsMediaLibrary($fields)
+	public function configurationsFieldsMediaLibrary(array $fields): array
 	{
 		$fields['title_media_library'] =
 		[
@@ -903,11 +903,11 @@ class Admin
 	/**
 	 * Configuration fields: products inventories
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsProductsInventories($fields)
+	public function configurationsFieldsProductsInventories(array $fields): array
 	{
 		$fields['title_products_inventories'] =
 		[
@@ -931,11 +931,11 @@ class Admin
 	/**
 	 * Configuration fields: products dimensions
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsProductsDimensions($fields)
+	public function configurationsFieldsProductsDimensions(array $fields): array
 	{
 		$fields['title_products_dimensions'] =
 		[
@@ -995,11 +995,11 @@ class Admin
 	/**
 	 * Configuration fields: logs
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsLogs($fields)
+	public function configurationsFieldsLogs(array $fields): array
 	{
 		$fields['title_logger'] =
 		[
@@ -1040,11 +1040,11 @@ class Admin
 	/**
 	 * Configuration fields: products create
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsProductsCreate($fields)
+	public function configurationsFieldsProductsCreate(array $fields): array
 	{
 		$fields['title_products_create'] =
 		[
@@ -1065,7 +1065,13 @@ class Admin
 		[
 			'title' => __('Status of the created product', 'wc1c'),
 			'type' => 'select',
-			'description' => __('Newly created products will have selected status. It is recommended to select the status: Draft.', 'wc1c'),
+			'description' => sprintf
+			(
+				'%s<hr>%s %s',
+				__('Newly created products will have selected status. It is recommended to select the status: Draft.', 'wc1c'),
+				__('The product catalog comes without prices and balances. Publication is best done at the stage of filling in this data.', 'wc1c'),
+				__('If a product is marked for deletion in 1C, it will be placed in the trash, regardless of the current setting.', 'wc1c')
+			),
 			'default' => 'draft',
 			'options' => $product_statuses
 		];
@@ -1074,7 +1080,12 @@ class Admin
 		[
 			'title' => __('The stock status of product created', 'wc1c'),
 			'type' => 'select',
-			'description' => __('Newly created products will have the selected stock status. It is recommended to select the status: Out of stock.', 'wc1c'),
+			'description' => sprintf
+			(
+				'%s<hr>%s',
+				__('Newly created products will have the selected stock status. It is recommended to select the status: Out of stock.', 'wc1c'),
+				__('The product catalog comes without quantities. When creating new products, it is better not to expose their availability.', 'wc1c')
+			),
 			'default' => 'outofstock',
 			'options' => wc_get_product_stock_status_options()
 		];
@@ -1084,7 +1095,26 @@ class Admin
 			'title' => __('Assigning categories of the created product', 'wc1c'),
 			'type' => 'checkbox',
 			'label' => __('Check the box to enable this feature. Enabled by default.', 'wc1c'),
-			'description' => __('When this setting is enabled, the processing of categories based on classifier groups must be enabled and configured.', 'wc1c'),
+			'description' => sprintf
+			(
+				'%s<hr>%s',
+				__('Products in 1C have their own hierarchy. Thanks to this hierarchy, it is possible to automatically assign categories to products on the site.', 'wc1c'),
+				__('For the correct operation of filling in categories, you must first configure them in a separate settings block.', 'wc1c')
+			),
+			'default' => 'yes'
+		];
+
+		$fields['products_create_adding_category_fill_parent'] =
+		[
+			'title' => __('Filling the parent categories of the created product', 'wc1c'),
+			'type' => 'checkbox',
+			'label' => __('Check the box to enable this feature. Disabled by default.', 'wc1c'),
+			'description' => sprintf
+			(
+				'%s<hr>%s',
+				__('If the category assigned to a product is a child category of other categories, then the parent categories will also be assigned to the product being created.', 'wc1c'),
+				__('It is recommended to enable this setting.', 'wc1c')
+			),
 			'default' => 'yes'
 		];
 
@@ -1111,7 +1141,13 @@ class Admin
 			'title' => __('Filling the description of the created product', 'wc1c'),
 			'type' => 'checkbox',
 			'label' => __('Check the box to enable this feature. Disabled by default.', 'wc1c'),
-			'description' => __('In the data that came from 1C, there may be descriptions of products that will be placed in a short description.', 'wc1c'),
+			'description' => sprintf
+			(
+				'%s<hr>%s %s',
+				__('In the data that came from 1C, there may be descriptions of products that will be placed in a short description.', 'wc1c'),
+				__('If there are no brief descriptions in 1C, you can turn off the filling and edit the data directly on the site.', 'wc1c'),
+				__('The choice of a source for a brief description in 1C is in a separate settings block - Products (goods): descriptions.', 'wc1c')
+			),
 			'default' => 'yes'
 		];
 
@@ -1120,7 +1156,13 @@ class Admin
 			'title' => __('Filling a full description of the created product', 'wc1c'),
 			'type' => 'checkbox',
 			'label' => __('Check the box to enable this feature. Disabled by default.', 'wc1c'),
-			'description' => __('The data received from 1C may contain full descriptions of products that will be placed in the full description.', 'wc1c'),
+			'description' => sprintf
+			(
+				'%s<hr>%s %s',
+				__('The data received from 1C may contain full descriptions of products that will be placed in the full description.', 'wc1c'),
+				__('If there are no brief full descriptions in 1C, you can turn off the filling and edit the data directly on the site.', 'wc1c'),
+				__('The choice of a source for a brief full description in 1C is in a separate settings block - Products (goods): descriptions.', 'wc1c')
+			),
 			'default' => 'no'
 		];
 
@@ -1129,16 +1171,12 @@ class Admin
 			'title' => __('Adding the images of the created product', 'wc1c'),
 			'type' => 'checkbox',
 			'label' => __('Check the box to enable this feature. Enabled by default.', 'wc1c'),
-			'description' => __('If the setting is disabled, new products will not be assigned images that come from 1C.', 'wc1c'),
-			'default' => 'yes'
-		];
-
-		$fields['products_create_adding_category_fill_parent'] =
-		[
-			'title' => __('Filling the parent categories of the created product', 'wc1c'),
-			'type' => 'checkbox',
-			'label' => __('Check the box to enable this feature. Disabled by default.', 'wc1c'),
-			'description' => __('Fill in the categories that are higher in level for the product? It is recommended to enable this setting.', 'wc1c'),
+			'description' => sprintf
+			(
+				'%s<hr>%s',
+				__('Products in 1C can have images. When this setting is enabled, they will be added to newly created products on the site.', 'wc1c'),
+				__('The choice of a source for a brief images from 1C is in a separate settings block - Products (goods): images.', 'wc1c')
+			),
 			'default' => 'yes'
 		];
 
@@ -1186,11 +1224,11 @@ class Admin
 	/**
 	 * Configuration fields: products update
 	 *
-	 * @param $fields
+	 * @param array $fields
 	 *
 	 * @return array
 	 */
-	public function configurationsFieldsProductsUpdate($fields)
+	public function configurationsFieldsProductsUpdate(array $fields): array
 	{
 		$fields['title_products_update'] =
 		[
@@ -1316,7 +1354,12 @@ class Admin
 			'title' => __('Product images update when requesting product updates', 'wc1c'),
 			'type' => 'checkbox',
 			'label' => __('Check the box if you want to enable this feature. Disabled by default.', 'wc1c'),
-			'description' => __('If the setting is disabled, new images will not be assigned to old products and the old ones will not be deleted either. In this case, you can edit images from WooCommerce.', 'wc1c'),
+			'description' => sprintf
+			(
+				'%s<hr>%s',
+				__('If the setting is disabled, new images will not be assigned to old products and the old ones will not be deleted either. In this case, you can edit images from WooCommerce.', 'wc1c'),
+				__('The choice of a source for a brief images from 1C is in a separate settings block - Products (goods): images.', 'wc1c')
+			),
 			'default' => 'no'
 		];
 
@@ -1327,6 +1370,44 @@ class Admin
 			'label' => __('Check the box if you want to enable this feature. Enabled by default.', 'wc1c'),
 			'description' => __('Fill in the categories that are higher in level for the product? It is recommended to enable this setting.', 'wc1c'),
 			'default' => 'yes'
+		];
+
+		$fields['products_update_set_featured'] =
+		[
+			'title' => __('Featured product', 'wc1c'),
+			'type' => 'checkbox',
+			'label' => __('Check the box to enable this feature. Disabled by default.', 'wc1c'),
+			'description' => __('The updated product will be marked as recommended.', 'wc1c'),
+			'default' => 'no'
+		];
+
+		$fields['products_update_set_sold_individually'] =
+		[
+			'title' => __('Individual sale', 'wc1c'),
+			'type' => 'checkbox',
+			'label' => __('Check the box to enable this feature. Disabled by default.', 'wc1c'),
+			'description' => __('Enable to have the product sold individually in one order. Two units of a product in one order will be impossible to order.', 'wc1c'),
+			'default' => 'no'
+		];
+
+		$options = wc_get_product_visibility_options();
+
+		$fields['products_update_set_catalog_visibility'] =
+		[
+			'title' => __('Product visibility', 'wc1c'),
+			'type' => 'select',
+			'description' => __('This setting determines which pages products will be displayed on.', 'wc1c'),
+			'default' => 'visible',
+			'options' => $options
+		];
+
+		$fields['products_update_set_reviews_allowed'] =
+		[
+			'title' => __('Allow reviews', 'wc1c'),
+			'type' => 'checkbox',
+			'label' => __('Check the box to enable this feature. Disabled by default.', 'wc1c'),
+			'description' => __('It will be allowed to leave reviews for updated products.', 'wc1c'),
+			'default' => 'no'
 		];
 
 		return $fields;
