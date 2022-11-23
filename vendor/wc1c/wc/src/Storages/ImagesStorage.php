@@ -191,7 +191,7 @@ class ImagesStorage implements ImagesStorageContract, StorageContract, MetaStora
 	 *
 	 * @return array
 	 */
-	public function readMeta(&$data)
+	public function readMeta(&$data): array
 	{
 		$raw_meta_data = get_post_meta($data->getId());
 
@@ -206,7 +206,7 @@ class ImagesStorage implements ImagesStorageContract, StorageContract, MetaStora
 	 *
 	 * @return bool
 	 */
-	public function deleteMeta(&$data, $meta)
+	public function deleteMeta(&$data, $meta): bool
 	{
 		if(!$meta->key || !is_numeric($data->getId()))
 		{
@@ -290,7 +290,7 @@ class ImagesStorage implements ImagesStorageContract, StorageContract, MetaStora
 	 *
 	 * @return bool
 	 */
-	public function updateMeta(&$data, $meta)
+	public function updateMeta(&$data, $meta): bool
 	{
 		if(!$meta->key || !is_numeric($data->getId()))
 		{

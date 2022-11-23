@@ -54,13 +54,10 @@ class Factory extends WC_Product_Factory
 		{
 			case 'simple':
 				return SimpleProduct::class;
-				break;
 			case 'variation':
 				return VariationVariableProduct::class;
-				break;
 			case 'variable':
 				return VariableProduct::class;
-				break;
 			default:
 				return $product_type ? 'WC_Product_' . implode( '_', array_map( 'ucfirst', explode( '-', $product_type ) ) ) : false;
 		}

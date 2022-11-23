@@ -412,15 +412,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wc1c/cml.git",
-                "reference": "fd3cb4ba92d011e4df130c0dc0169b4823ac175b"
+                "reference": "21384460ec756f6dd01adbae3b7db98156de314a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wc1c/cml/zipball/fd3cb4ba92d011e4df130c0dc0169b4823ac175b",
-                "reference": "fd3cb4ba92d011e4df130c0dc0169b4823ac175b",
+                "url": "https://api.github.com/repos/wc1c/cml/zipball/21384460ec756f6dd01adbae3b7db98156de314a",
+                "reference": "21384460ec756f6dd01adbae3b7db98156de314a",
                 "shasum": ""
             },
             "require": {
+                "ext-simplexml": "*",
                 "ext-xmlreader": "*",
                 "php": ">=7.0"
             },
@@ -452,7 +453,7 @@
             "support": {
                 "source": "https://github.com/wc1c/cml/tree/main"
             },
-            "time": "2022-11-21T20:15:07+00:00"
+            "time": "2022-11-23T14:41:38+00:00"
         },
         {
             "name": "wc1c/wc",
@@ -460,16 +461,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wc1c/wc.git",
-                "reference": "55adad1fabd7d4e11525adf5331feeb5b96b1e3a"
+                "reference": "2453d121786f330d88505fd8d5499484749052ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wc1c/wc/zipball/55adad1fabd7d4e11525adf5331feeb5b96b1e3a",
-                "reference": "55adad1fabd7d4e11525adf5331feeb5b96b1e3a",
+                "url": "https://api.github.com/repos/wc1c/wc/zipball/2453d121786f330d88505fd8d5499484749052ed",
+                "reference": "2453d121786f330d88505fd8d5499484749052ed",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.6"
+                "php": ">=7.0"
             },
             "default-branch": true,
             "type": "library",
@@ -487,6 +488,11 @@
                     "name": "Frescoref",
                     "email": "frescoref@gmail.com",
                     "role": "Developer"
+                },
+                {
+                    "name": "WC1C team",
+                    "email": "support@wc1c.info",
+                    "role": "Developer"
                 }
             ],
             "description": "Library for WC1C",
@@ -494,7 +500,7 @@
             "support": {
                 "source": "https://github.com/wc1c/wc/tree/main"
             },
-            "time": "2022-11-10T13:29:46+00:00"
+            "time": "2022-11-23T15:03:30+00:00"
         }
     ],
     "packages-dev": [],

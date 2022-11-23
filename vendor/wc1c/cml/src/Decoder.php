@@ -19,9 +19,9 @@ use Wc1c\Cml\Entities\Product;
 class Decoder
 {
 	/**
-	 * @var null
+	 * @var string
 	 */
-	protected $schema_version = null;
+	protected $schema_version;
 
 	/**
 	 * @var array
@@ -42,11 +42,11 @@ class Decoder
 	/**
 	 * Decoder constructor.
 	 *
-	 * @param string|null $schema_version
+	 * @param string $schema_version
 	 */
-	public function __construct($schema_version = null)
+	public function __construct(string $schema_version)
 	{
-		if($schema_version)
+		if(!empty($schema_version))
 		{
 			$this->schema_version = $schema_version;
 		}
@@ -55,7 +55,7 @@ class Decoder
 	/**
 	 * @return array
 	 */
-	public function getData()
+	public function getData(): array
 	{
 		return $this->data;
 	}
@@ -107,7 +107,7 @@ class Decoder
 	 *
 	 * @return array
 	 */
-	public function decodePriceTypes($xml)
+	public function decodePriceTypes(SimpleXMLElement $xml): array
 	{
 		return $this->parseXmlPriceTypes($xml);
 	}
@@ -118,20 +118,12 @@ class Decoder
 	 * @return Classifier|false
 	 * @throws Exception
 	 */
-	public function decodeClassifier($xml)
+	public function decodeClassifier(SimpleXMLElement $xml)
 	{
 		$data['id'] = (string)$xml->Ид;
 		$data['name'] = (string)$xml->Наименование;
 		$data['description'] = $xml->Описание ? (string)$xml->Описание : '';
-
-		try
-		{
-			$data['owner'] = $this->decodeCounterparty($xml->Владелец);
-		}
-		catch(Exception $exception)
-		{
-			throw $exception;
-		}
+		$data['owner'] = $this->decodeCounterparty($xml->Владелец);
 
 		/**
 		 * Группы
@@ -180,7 +172,7 @@ class Decoder
 	 *
 	 * @return false|Counterparty
 	 */
-	public function decodeCounterparty($xml)
+	public function decodeCounterparty(SimpleXMLElement $xml)
 	{
 		$data['id'] = (string)$xml->Ид;
 		$data['name'] = (string)$xml->Наименование;
@@ -238,7 +230,7 @@ class Decoder
 	 *
 	 * @return array Все найденные в классификаторе группы
 	 */
-	private function parseXmlClassifierGroups($xml_data, $parent_id = false, &$groups = [])
+	private function parseXmlClassifierGroups($xml_data, $parent_id = false, &$groups = []): array
 	{
 		foreach($xml_data->Группа as $xml_group)
 		{
@@ -267,9 +259,8 @@ class Decoder
 	 * @param string|false $parent_guid
 	 *
 	 * @return array
-	 * @throws Exception
 	 */
-	private function parseXmlClassifierGroupsItem($xml_group, $parent_guid = false)
+	private function parseXmlClassifierGroupsItem($xml_group, $parent_guid = false): array
 	{
 		$group_guid = (string)$xml_group->Ид;
 		$group_name = (string)$xml_group->Наименование;
@@ -315,7 +306,7 @@ class Decoder
 	 *
 	 * @return array
 	 */
-	private function parseXmlClassifierProperties($xml_data)
+	private function parseXmlClassifierProperties($xml_data): array
 	{
 		if($xml_data->Свойство)
 		{
@@ -351,7 +342,7 @@ class Decoder
 	 *
 	 * @return array
 	 */
-	private function parseXmlClassifierPropertiesItem($xml_property)
+	private function parseXmlClassifierPropertiesItem($xml_property): array
 	{
 		/**
 		 * Наименование свойства в классификаторе
@@ -494,7 +485,7 @@ class Decoder
 	 * @return array
 	 * @throws Exception
 	 */
-	private function parseXmlProduct($xml_product_data)
+	private function parseXmlProduct($xml_product_data): array
 	{
 		if(!$xml_product_data->Ид)
 		{
@@ -675,7 +666,7 @@ class Decoder
 		$product_data['warehouses'] = [];
 		if($xml_product_data->Склад || $xml_product_data->Остатки)
 		{
-			$product_data['warehouses'] = $this->parse_xml_product_warehouses($xml_product_data);
+			$product_data['warehouses'] = $this->parseXmlProductWarehouses($xml_product_data);
 		}
 
 		/***************************************************************************************************************************************
@@ -779,7 +770,7 @@ class Decoder
 	 * @return array
 	 * @throws Exception
 	 */
-	private function parseXmlProductCharacteristics($xml_data)
+	private function parseXmlProductCharacteristics($xml_data): array
 	{
 		if(!$xml_data->ХарактеристикаТовара)
 		{
@@ -855,7 +846,7 @@ class Decoder
 	 *
 	 * @return array Массив GUID (идентификаторов групп)
 	 */
-	private function parseXmlProductGroups($xml_data)
+	private function parseXmlProductGroups($xml_data): array
 	{
 		$result = [];
 
@@ -876,11 +867,11 @@ class Decoder
 	 *
 	 * @return array
 	 */
-	private function parseXmlProductId($product_xml_data_id)
+	private function parseXmlProductId($product_xml_data_id): array
 	{
 		$product_guid = explode("#", (string)$product_xml_data_id);
 		$product_data_id['id'] = $product_guid[0];
-		$product_data_id['characteristic_id'] = isset($product_guid[1]) ? $product_guid[1] : '';
+		$product_data_id['characteristic_id'] = $product_guid[1] ?? '';
 
 		return $product_data_id;
 	}
@@ -892,7 +883,7 @@ class Decoder
 	 *
 	 * @return array
 	 */
-	private function parseXmlProductImages($xml_data)
+	private function parseXmlProductImages($xml_data): array
 	{
 		$images = [];
 
@@ -918,7 +909,7 @@ class Decoder
 	 *
 	 * @return array
 	 */
-	private function parseXmlProductPrice($xml_product_price_data)
+	private function parseXmlProductPrice($xml_product_price_data): array
 	{
 		$data_prices = [];
 
@@ -1001,7 +992,7 @@ class Decoder
 	 *
 	 * @return array
 	 */
-	private function parseXmlProductPropertyValues($xml)
+	private function parseXmlProductPropertyValues($xml): array
 	{
 		$product_properties_values_data = [];
 
@@ -1096,7 +1087,7 @@ class Decoder
 	 *
 	 * @return array
 	 */
-	private function parseXmlProductRequisites($xml_data)
+	private function parseXmlProductRequisites($xml_data): array
 	{
 		$requisites_data = [];
 
@@ -1141,7 +1132,7 @@ class Decoder
 	 *
 	 * @return array
 	 */
-	private function parseXmlProductTaxes($xml_data)
+	private function parseXmlProductTaxes($xml_data): array
 	{
 		$taxes = [];
 
@@ -1233,7 +1224,7 @@ class Decoder
 	 *
 	 * @return array
 	 */
-	private function parse_xml_product_warehouses($xml_data)
+	private function parseXmlProductWarehouses($xml_data): array
 	{
 		$warehouses = [];
 
@@ -1283,7 +1274,7 @@ class Decoder
 	 *
 	 * @return array
 	 */
-	private function parse_xml_warehouses($xml_data)
+	private function parseXmlWarehouses($xml_data): array
 	{
 		$data = [];
 
@@ -1315,7 +1306,7 @@ class Decoder
 	 *
 	 * @return array
 	 */
-	public function parseXmlPriceTypes($xml_data)
+	public function parseXmlPriceTypes($xml_data): array
 	{
 		$data = [];
 
@@ -1357,7 +1348,7 @@ class Decoder
 	 *
 	 * @return array
 	 */
-	private function parseXmlUnits($xml_data)
+	private function parseXmlUnits($xml_data): array
 	{
 		return [];
 	}

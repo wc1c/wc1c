@@ -46,7 +46,7 @@ class Category extends CategoriesData implements CategoryContract
 	 *
 	 * @return string Наименование категории
 	 */
-	public function getName($context = 'view')
+	public function getName($context = 'view'): string
 	{
 		return $this->getProp('name', $context);
 	}
@@ -58,7 +58,7 @@ class Category extends CategoriesData implements CategoryContract
 	 *
 	 * @return string Слаг категории
 	 */
-	public function getSlug($context = 'view')
+	public function getSlug(string $context = 'view'): string
 	{
 		return $this->getProp('slug', $context);
 	}
@@ -70,7 +70,7 @@ class Category extends CategoriesData implements CategoryContract
 	 *
 	 * @return void
 	 */
-	public function setSlug($slug)
+	public function setSlug(string $slug)
 	{
 		$this->setProp('slug', $slug);
 	}
@@ -94,7 +94,7 @@ class Category extends CategoriesData implements CategoryContract
 	 *
 	 * @return string Описание категории
 	 */
-	public function getDescription($context = 'view')
+	public function getDescription($context = 'view'): string
 	{
 		return $this->getProp('description', $context);
 	}
@@ -202,7 +202,7 @@ class Category extends CategoriesData implements CategoryContract
 	 *
 	 * @return boolean
 	 */
-	public function hasParent()
+	public function hasParent(): bool
 	{
 		return $this->getParentId() !== 0;
 	}
@@ -272,7 +272,7 @@ class Category extends CategoriesData implements CategoryContract
 	 *
 	 * @return boolean
 	 */
-	public function hasExternalParent()
+	public function hasExternalParent(): bool
 	{
 		return $this->getExternalParentId('view') !== 0;
 	}

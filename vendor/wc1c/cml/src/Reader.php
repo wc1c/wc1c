@@ -2,9 +2,9 @@
 
 defined('ABSPATH') || exit;
 
+use RuntimeException;
 use XMLReader;
 use Wc1c\Cml\Entities\OffersPackage;
-use Wc1c\Exceptions\Exception;
 use Wc1c\Cml\Contracts\CatalogDataContract;
 use Wc1c\Cml\Contracts\ClassifierDataContract;
 
@@ -18,12 +18,12 @@ class Reader
 	use Utility;
 
 	/**
-	 * @var null|XMLReader
+	 * @var XMLReader
 	 */
 	public $xml_reader = null;
 
 	/**
-	 * @var null|Decoder
+	 * @var Decoder
 	 */
 	public $decoder = null;
 
@@ -108,18 +108,18 @@ class Reader
 	 * @param string $file_path
 	 * @param Decoder|null $decoder
 	 *
-	 * @throws Exception
+	 * @throws RuntimeException
 	 */
-	public function __construct(string $file_path = '', Decoder $decoder = null)
+	public function __construct(string $file_path, Decoder $decoder)
 	{
 		if(!defined('LIBXML_VERSION'))
 		{
-			throw new Exception('LIBXML_VERSION is not defined.');
+			throw new RuntimeException('LIBXML_VERSION is not defined.');
 		}
 
 		if(!function_exists('libxml_use_internal_errors'))
 		{
-			throw new Exception('libxml_use_internal_errors is not exists.');
+			throw new RuntimeException('libxml_use_internal_errors is not exists.');
 		}
 
 		libxml_use_internal_errors(true);
@@ -145,7 +145,7 @@ class Reader
 	/**
 	 * @return Decoder
 	 */
-	public function decoder()
+	public function decoder(): Decoder
 	{
 		if(!$this->decoder instanceof Decoder)
 		{
@@ -158,7 +158,7 @@ class Reader
 	/**
 	 * @param string $file_path Path to CML file
 	 *
-	 * @throws Exception
+	 * @throws RuntimeException
 	 */
 	public function open(string $file_path)
 	{
@@ -171,7 +171,7 @@ class Reader
 
 		if(false === $reader_result)
 		{
-			throw new Exception('File is not open.');
+			throw new RuntimeException('File is not open.');
 		}
 
 		$this->file = $file_path;
@@ -180,7 +180,7 @@ class Reader
 
 		if($this->getFiletype() === '')
 		{
-			throw new Exception('CommerceML filetype is not valid.');
+			throw new RuntimeException('CommerceML filetype is not valid.');
 		}
 	}
 

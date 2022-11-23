@@ -20,18 +20,18 @@ class CategoriesStorage implements CategoriesStorageContract, StorageContract, M
 	/**
 	 * Method to create a new object in the database
 	 *
-	 * @param Category $category Data object
+	 * @param Category $data Data object
 	 */
-	public function create(&$category)
+	public function create(&$data)
 	{
 		$category_result = wp_insert_term
 		(
-			$category->getName(),
+			$data->getName(),
 			'product_cat',
 			[
-				'description' => $category->getDescription(),
-				'slug' => $category->getSlug(),
-				'parent' => (int)$category->getParentId('view')
+				'description' => $data->getDescription(),
+				'slug' => $data->getSlug(),
+				'parent' => (int)$data->getParentId('view')
 			]
 		);
 
@@ -41,42 +41,42 @@ class CategoriesStorage implements CategoriesStorageContract, StorageContract, M
 		}
 		else
 		{
-			$object_id = isset($category_result['term_id']) ? $category_result['term_id'] : false;
+			$object_id = $category_result['term_id'] ?? false;
 		}
 
 		if($object_id && !is_wp_error($object_id))
 		{
-			$category->setId($object_id);
+			$data->setId($object_id);
 
-			$category->saveMetaData();
-			$category->applyChanges();
+			$data->saveMetaData();
+			$data->applyChanges();
 
 			// hook
-			do_action('wc1c_wc_data_storage_category_create', $object_id, $category);
+			do_action('wc1c_wc_data_storage_category_create', $object_id, $data);
 		}
 	}
 
 	/**
 	 * Method to read an object from the database
 	 *
-	 * @param Category $category Data object
+	 * @param Category $data Data object
 	 *
 	 * @throws Exception If invalid category
 	 */
-	public function read(&$category)
+	public function read(&$data)
 	{
-		$category->setDefaults();
+		$data->setDefaults();
 
-		if(!$category->getId())
+		if(!$data->getId())
 		{
 			throw new Exception(__('Invalid category.', 'wc1c'));
 		}
 
-		$current_categories_query = get_term_by( 'id', $category->getId(), 'product_cat', ARRAY_A);
+		$current_categories_query = get_term_by('id', $data->getId(), 'product_cat', ARRAY_A);
 
 		if(!is_wp_error($current_categories_query) && isset($current_categories_query['name']))
 		{
-			$category->setProps
+			$data->setProps
 			(
 				[
 					'name' => $current_categories_query['name'],
@@ -87,21 +87,21 @@ class CategoriesStorage implements CategoriesStorageContract, StorageContract, M
 			);
 		}
 
-		$category->setObjectRead(true);
+		$data->setObjectRead(true);
 
-		do_action('wc1c_wc_data_storage_category_read', $category->getId());
+		do_action('wc1c_wc_data_storage_category_read', $data->getId());
 	}
 
 	/**
 	 * Method to update a data in the database
 	 *
-	 * @param Category $category Data object
+	 * @param Category $data Data object
 	 */
-	public function update(&$category)
+	public function update(&$data)
 	{
-		$category->saveMetaData();
+		$data->saveMetaData();
 
-		$changes = $category->getChanges();
+		$changes = $data->getChanges();
 
 		// Only changed update data changes
 		if
@@ -122,31 +122,31 @@ class CategoriesStorage implements CategoriesStorageContract, StorageContract, M
 		{
 			$args =
 			[
-				'name' => $category->getName(),
-				'description' => $category->getDescription(),
-				'parent' => $category->getParentId('edit'),
-				'slug' => $category->getSlug(),
+				'name' => $data->getName(),
+				'description' => $data->getDescription(),
+				'parent' => $data->getParentId('edit'),
+				'slug' => $data->getSlug(),
 			];
 
-			wp_update_term($category->getId(), 'product_cat', $args);
+			wp_update_term($data->getId(), 'product_cat', $args);
 
-			$category->readMetaData();
+			$data->readMetaData();
 		}
 
-		$category->applyChanges();
+		$data->applyChanges();
 
-		do_action('wc1c_wc_data_storage_category_update', $category->getId(), $category);
+		do_action('wc1c_wc_data_storage_category_update', $data->getId(), $data);
 	}
 
 	/**
 	 * Method to delete an object from the database
 	 *
-	 * @param Category $category Data object
+	 * @param Category $data Data object
 	 * @param array $args Array of args to pass to the delete method
 	 */
-	public function delete(&$category, $args = [])
+	public function delete(&$data, $args = [])
 	{
-		$object_id = $category->getId();
+		$object_id = $data->getId();
 
 		if(!$object_id)
 		{
@@ -167,7 +167,7 @@ class CategoriesStorage implements CategoriesStorageContract, StorageContract, M
 
 			wp_delete_term($object_id, 'product_cat');
 
-			$category->setId(0);
+			$data->setId(0);
 
 			do_action('wc1c_wc_data_storage_category_after_delete', $object_id);
 		}
@@ -175,8 +175,8 @@ class CategoriesStorage implements CategoriesStorageContract, StorageContract, M
 		{
 			do_action('wc1c_wc_data_storage_category_before_trash', $object_id);
 
-			$category->addMetaData('status', 'deleted');
-			$category->saveMetaData();
+			$data->addMetaData('status', 'deleted');
+			$data->saveMetaData();
 
 			do_action('wc1c_wc_data_storage_category_after_trash', $object_id);
 		}
@@ -293,7 +293,7 @@ class CategoriesStorage implements CategoriesStorageContract, StorageContract, M
 	 *
 	 * @return array
 	 */
-	public function readMeta(&$data)
+	public function readMeta(&$data): array
 	{
 		$raw_meta_data = get_term_meta($data->getId());
 
@@ -308,7 +308,7 @@ class CategoriesStorage implements CategoriesStorageContract, StorageContract, M
 	 *
 	 * @return bool
 	 */
-	public function deleteMeta(&$data, $meta)
+	public function deleteMeta(&$data, $meta): bool
 	{
 		if(!$meta->key || !is_numeric($data->getId()))
 		{
@@ -392,7 +392,7 @@ class CategoriesStorage implements CategoriesStorageContract, StorageContract, M
 	 *
 	 * @return bool
 	 */
-	public function updateMeta(&$data, $meta)
+	public function updateMeta(&$data, $meta): bool
 	{
 		if(!$meta->key || !is_numeric($data->getId()))
 		{

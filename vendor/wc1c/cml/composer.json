@@ -21,6 +21,7 @@
   },
   "require": {
     "php": ">=7.0",
-    "ext-xmlreader": "*"
+    "ext-xmlreader": "*",
+    "ext-simplexml": "*"
   }
 }

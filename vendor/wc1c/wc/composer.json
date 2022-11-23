@@ -9,12 +9,17 @@
       "name": "Frescoref",
       "email": "frescoref@gmail.com",
       "role": "Developer"
+    },
+    {
+      "name": "WC1C team",
+      "email": "support@wc1c.info",
+      "role": "Developer"
     }
   ],
   "autoload": {
     "psr-4": {"Wc1c\\Wc\\": "src/"}
   },
   "require": {
-    "php": ">=5.6"
+    "php": ">=7.0"
   }
 }
