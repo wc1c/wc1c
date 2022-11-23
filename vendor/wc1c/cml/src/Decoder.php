@@ -44,7 +44,7 @@ class Decoder
 	 *
 	 * @param string $schema_version
 	 */
-	public function __construct(string $schema_version)
+	public function __construct(string $schema_version = '')
 	{
 		if(!empty($schema_version))
 		{
