@@ -26,6 +26,11 @@ of 1C and sites created on WordPress with the WooCommerce plugin.
 == Changelog ==
 List of major changes from version to version. [Descriptions more](https://wc1c.info/changelogs)
 
+= 0.12.0 =
+* Up: ProductsCML to 0.3.0
+* Up: language files
+* Fix: more
+
 = 0.11.1 =
 * Fix: more
 
