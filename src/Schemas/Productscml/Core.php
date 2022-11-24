@@ -53,7 +53,7 @@ class Core extends SchemaAbstract
 	public function __construct()
 	{
 		$this->setId('productscml');
-		$this->setVersion('0.2.0');
+		$this->setVersion('0.3.0');
 
 		$this->setName(__('Products data exchange via CommerceML', 'wc1c'));
 		$this->setDescription(__('Creation and updating of products (goods) in WooCommerce according to data from 1C using the CommerceML protocol of various versions.', 'wc1c'));
@@ -130,6 +130,7 @@ class Core extends SchemaAbstract
 			add_filter('wc1c_schema_productscml_processing_products_item_before_save', [$this, 'assignProductsItemCategories'], 15, 4);
 			add_filter('wc1c_schema_productscml_processing_products_item_before_save', [$this, 'assignProductsItemAttributes'], 15, 4);
 			add_filter('wc1c_schema_productscml_processing_products_item_before_save', [$this, 'assignProductsItemDimensions'], 15, 4);
+			add_filter('wc1c_schema_productscml_processing_products_item_before_save', [$this, 'assignProductsItemStatusTrash'], 100, 4);
 
 			add_filter('wc1c_schema_productscml_processing_products_item_after_save', [$this, 'assignProductsItemImages'], 10, 4);
 
@@ -1123,6 +1124,50 @@ class Core extends SchemaAbstract
 		if(!empty($update_status))
 		{
 			$internal_product->set_status($update_status);
+		}
+
+		return $internal_product;
+	}
+
+	/**
+	 * Назначение данных продукта исходя из режима: статус корзины
+	 *
+	 * @param ProductContract $internal_product Экземпляр продукта - либо существующий, либо новый
+	 * @param ProductDataContract $external_product Данные продукта из XML
+	 * @param string $mode Режим - create или update
+	 * @param Reader $reader Текущий итератор
+	 *
+	 * @return ProductContract
+	 */
+	public function assignProductsItemStatusTrash(ProductContract $internal_product, ProductDataContract $external_product, string $mode, Reader $reader): ProductContract
+	{
+		if($internal_product->isType('variation'))
+		{
+			return $internal_product;
+		}
+
+		$raw = $external_product->getData(); // todo: вынести в метод
+
+		if($mode === 'create'&& isset($raw['delete_mark']) && $raw['delete_mark'] === 'yes' && 'yes' === $this->getOptions('products_create_delete_mark_trash', 'no'))
+		{
+			$internal_product->set_status('trash');
+		}
+
+		if($mode === 'update'&& 'yes' === $this->getOptions('products_update_delete_mark_trash', 'no'))
+		{
+			if(isset($raw['delete_mark']) && $raw['delete_mark'] === 'yes')
+			{
+				$internal_product->set_status('trash');
+			}
+			else
+			{
+				$update_status = $this->getOptions('products_update_status', '');
+
+				if(!empty($update_status))
+				{
+					$internal_product->set_status($update_status);
+				}
+			}
 		}
 
 		return $internal_product;
@@ -2596,6 +2641,17 @@ class Core extends SchemaAbstract
 			$this->log()->info(__('Product is not found.', 'wc1c'));
 
 			/*
+			 * Пропуск создания продуктов помеченных к удалению в 1С
+			 */
+			$raw = $external_product->getData(); // todo: вынести в метод
+			if(isset($raw['delete_mark']) && $raw['delete_mark'] === 'yes' && 'yes' !== $this->getOptions('products_create_delete_mark', 'no'))
+			{
+				$this->log()->info(__('The use of products delete mark is disabled. Processing skipped.', 'wc1c'));
+				return;
+			}
+			unset($raw);
+
+			/*
 			 * Создание продуктов отключено
 			 */
 			if('yes' !== $this->getOptions('products_create', 'no'))
@@ -2714,6 +2770,22 @@ class Core extends SchemaAbstract
 			$this->log()->info(__('The product is created from a different schema. Update skipped.', 'wc1c'), ['product_id' => $product_id]);
 			return;
 		}
+
+		/*
+		 * Пропуск обновления продуктов из корзины, не помеченных к удалению в 1С
+		 */
+		$raw = $external_product->getData(); // todo: вынести в метод
+		if
+		(
+			'trash' === $update_product->get_status() &&
+			isset($raw['delete_mark']) && $raw['delete_mark'] === 'no'
+		   && 'yes' !== $this->getOptions('products_update_use_delete_mark', 'no')
+		)
+		{
+			$this->log()->info(__('The use of products from trash is disabled. Processing skipped.', 'wc1c'));
+			return;
+		}
+		unset($raw);
 
 		/**
 		 * Назначение данных обновляемого продукта по внешним алгоритмам перед сохранением

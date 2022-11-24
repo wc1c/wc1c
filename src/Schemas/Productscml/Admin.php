@@ -1218,6 +1218,34 @@ class Admin
 			'default' => 'no'
 		];
 
+		$fields['products_create_delete_mark'] =
+		[
+			'title' => __('Creating products from 1C marked for deletion', 'wc1c'),
+			'type' => 'checkbox',
+			'label' => __('Check the box to enable this feature. Enabled by default.', 'wc1c'),
+			'description' => sprintf
+			(
+				'%s<hr>%s',
+				__('If the product is marked in 1C for deletion, then when you enable the setting, it will still be created on the site and filled with data.', 'wc1c'),
+				__('At the same time, it is possible to place such products directly in the trash. There is a separate setting for this.', 'wc1c')
+			),
+			'default' => 'no'
+		];
+
+		$fields['products_create_delete_mark_trash'] =
+		[
+			'title' => __('Placement of products from 1C marked for deletion to the trash', 'wc1c'),
+			'type' => 'checkbox',
+			'label' => __('Check the box to enable this feature. Enabled by default.', 'wc1c'),
+			'description' => sprintf
+			(
+				'%s<hr>%s',
+				__('If the product is marked in 1C for deletion, then when the setting is enabled, it will be placed in the trash.', 'wc1c'),
+				__('It is possible to restore the products placed in the basket both manually and using the settings for updating products.', 'wc1c')
+			),
+			'default' => 'no'
+		];
+
 		return $fields;
 	}
 
@@ -1407,6 +1435,34 @@ class Admin
 			'type' => 'checkbox',
 			'label' => __('Check the box to enable this feature. Disabled by default.', 'wc1c'),
 			'description' => __('It will be allowed to leave reviews for updated products.', 'wc1c'),
+			'default' => 'no'
+		];
+
+		$fields['products_update_use_delete_mark'] =
+		[
+			'title' => __('Restoring products from the trash removed from deletion in 1C', 'wc1c'),
+			'type' => 'checkbox',
+			'label' => __('Check the box to enable this feature. Enabled by default.', 'wc1c'),
+			'description' => sprintf
+			(
+				'%s<hr>%s',
+				__('If the product is not marked in 1C for deletion, and it is in the basket on the site, then when the setting is enabled, it will be returned from the basket and filled with data according to the update settings.', 'wc1c'),
+				__('If the setting is disabled, all products placed in the basket will be there permanently. It will be impossible to create new products of the same kind.', 'wc1c')
+			),
+			'default' => 'no'
+		];
+
+		$fields['products_update_delete_mark_trash'] =
+		[
+			'title' => __('Placement of products from 1C marked for deletion to the trash', 'wc1c'),
+			'type' => 'checkbox',
+			'label' => __('Check the box to enable this feature. Enabled by default.', 'wc1c'),
+			'description' => sprintf
+			(
+				'%s<hr>%s',
+				__('If the product is marked in 1C for deletion, then when the setting is enabled, it will be placed in the trash.', 'wc1c'),
+				__('It is possible to restore the products placed in the trash both manually and using the settings for updating products.', 'wc1c')
+			),
 			'default' => 'no'
 		];
 
