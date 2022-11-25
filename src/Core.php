@@ -556,22 +556,12 @@ final class Core
 	 */
 	public function localization()
 	{
-		/** WP 5.x or later */
-		if(function_exists('determine_locale'))
-		{
-			$locale = determine_locale();
-		}
-		else
-		{
-			$locale = is_admin() && function_exists('get_user_locale') ? get_user_locale() : get_locale();
-		}
+		$locale = determine_locale();
 
 		if(has_filter('plugin_locale'))
 		{
 			$locale = apply_filters('plugin_locale', $locale, 'wc1c');
 		}
-
-		unload_textdomain('wc1c');
 
 		load_textdomain('wc1c', WP_LANG_DIR . '/plugins/wc1c-' . $locale . '.mo');
 		load_textdomain('wc1c', wc1c()->environment()->get('plugin_directory_path') . 'assets/languages/wc1c-' . $locale . '.mo');
