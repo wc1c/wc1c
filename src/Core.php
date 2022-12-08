@@ -3,6 +3,8 @@
 defined('ABSPATH') || exit;
 
 use wpdb;
+use Digiom\Woplucore\Loader;
+use Digiom\Woplucore\Traits\SingletonTrait;
 use Psr\Log\LoggerInterface;
 use Wc1c\Exceptions\Exception;
 use Wc1c\Log\Formatter;
@@ -14,7 +16,6 @@ use Wc1c\Settings\Contracts\SettingsContract;
 use Wc1c\Settings\InterfaceSettings;
 use Wc1c\Settings\LogsSettings;
 use Wc1c\Settings\MainSettings;
-use Wc1c\Traits\SingletonTrait;
 
 /**
  * Core
