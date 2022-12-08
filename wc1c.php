@@ -5,7 +5,7 @@
  * Description: Implementation of a mechanism for flexible exchange of various data between 1C products and a site running WordPress using the WooCommerce plugin.
  * Version: 0.13.0
  * WC requires at least: 4.3
- * WC tested up to: 7.1
+ * WC tested up to: 7.2
  * Requires at least: 5.2
  * Requires PHP: 7.0
  * Text Domain: wc1c
