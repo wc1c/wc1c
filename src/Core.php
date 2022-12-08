@@ -192,7 +192,7 @@ final class Core
 	 *
 	 * @return Extensions\Core
 	 */
-	public function extensions()
+	public function extensions(): Extensions\Core
 	{
 		return Extensions\Core::instance();
 	}
@@ -202,7 +202,7 @@ final class Core
 	 *
 	 * @return Filesystem
 	 */
-	public function filesystem()
+	public function filesystem(): Filesystem
 	{
 		return Filesystem::instance();
 	}
@@ -212,7 +212,7 @@ final class Core
 	 *
 	 * @return Schemas\Core
 	 */
-	public function schemas()
+	public function schemas(): Schemas\Core
 	{
 		return Schemas\Core::instance();
 	}
@@ -222,7 +222,7 @@ final class Core
 	 *
 	 * @return Environment
 	 */
-	public function environment()
+	public function environment(): Environment
 	{
 		return Environment::instance();
 	}
@@ -232,7 +232,7 @@ final class Core
 	 *
 	 * @return Views
 	 */
-	public function views()
+	public function views(): Views
 	{
 		return Views::instance();
 	}
@@ -242,7 +242,7 @@ final class Core
 	 *
 	 * @return Context
 	 */
-	public function context()
+	public function context(): Context
 	{
 		return $this->context;
 	}
@@ -252,7 +252,7 @@ final class Core
 	 *
 	 * @return Loader
 	 */
-	public function loader()
+	public function loader(): Loader
 	{
 		return $this->loader;
 	}
@@ -262,7 +262,7 @@ final class Core
 	 *
 	 * @return Tools\Core
 	 */
-	public function tools()
+	public function tools(): Tools\Core
 	{
 		return Tools\Core::instance();
 	}
@@ -276,7 +276,7 @@ final class Core
 	 *
 	 * @return LoggerInterface
 	 */
-	public function log($channel = 'main', $name = '', $hard_level = null)
+	public function log(string $channel = 'main', string $name = '', $hard_level = null)
 	{
 		$channel = strtolower($channel);
 
@@ -407,7 +407,7 @@ final class Core
 	 *
 	 * @return Timer
 	 */
-	public function timer()
+	public function timer(): Timer
 	{
 		if(is_null($this->timer))
 		{
@@ -433,7 +433,7 @@ final class Core
 	 *
 	 * @return Tecodes\Client
 	 */
-	public function tecodes()
+	public function tecodes(): Tecodes\Client
 	{
 		if($this->tecodes instanceof Tecodes\Client)
 		{
@@ -498,7 +498,7 @@ final class Core
 	 *
 	 * @return Receiver
 	 */
-	public function receiver()
+	public function receiver(): Receiver
 	{
 		return $this->receiver;
 	}
@@ -508,7 +508,7 @@ final class Core
 	 *
 	 * @param Receiver $receiver
 	 */
-	public function setReceiver($receiver)
+	public function setReceiver(Receiver $receiver)
 	{
 		$this->receiver = $receiver;
 	}
@@ -575,7 +575,7 @@ final class Core
 	 *
 	 * @return wpdb
 	 */
-	public function database()
+	public function database(): wpdb
 	{
 		global $wpdb;
 		return $wpdb;
@@ -586,7 +586,7 @@ final class Core
 	 *
 	 * @return Admin
 	 */
-	public function admin()
+	public function admin(): Admin
 	{
 		return Admin::instance();
 	}
@@ -611,7 +611,7 @@ final class Core
 	 * @param string $name constant name
 	 * @param string|bool $value constant value
 	 */
-	public function define($name, $value)
+	public function define(string $name, $value)
 	{
 		if(!defined($name))
 		{
