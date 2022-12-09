@@ -3,7 +3,7 @@
         'name' => 'wc1c/wc1c',
         'pretty_version' => 'dev-trunk',
         'version' => 'dev-trunk',
-        'reference' => '8f6c06dedb16fdd95276ef6dfd1a435c6664f411',
+        'reference' => '6506beaaa84a02d9f9b12ebb74c67c80aea6bc4c',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -35,7 +35,7 @@
         'digiom/woplucore' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '9f7610410d21eb279ad36cd3183a58285e7fd681',
+            'reference' => '713d547fc41df710207ce9c5c6643ac58f93fc42',
             'type' => 'library',
             'install_path' => __DIR__ . '/../digiom/woplucore',
             'aliases' => array(
@@ -123,7 +123,7 @@
         'wc1c/wc1c' => array(
             'pretty_version' => 'dev-trunk',
             'version' => 'dev-trunk',
-            'reference' => '8f6c06dedb16fdd95276ef6dfd1a435c6664f411',
+            'reference' => '6506beaaa84a02d9f9b12ebb74c67c80aea6bc4c',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

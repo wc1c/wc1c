@@ -9,7 +9,7 @@ use Digiom\Woplucore\Traits\SingletonTrait;
  *
  * @package Digiom\Woplucore
  */
-final class Timer
+class Timer
 {
 	use SingletonTrait;
 
