@@ -42,7 +42,7 @@ if(false === defined('WC1C_PLUGIN_FILE'))
 
 	include_once __DIR__ . '/vendor/autoload.php';
 
-	$loader = new \Digiom\Woplucore\Loader();
+	$loader = new Digiom\Woplucore\Loader();
 
 	$loader->addNamespace('Wc1c', plugin_dir_path(WC1C_PLUGIN_FILE) . 'src');
 
