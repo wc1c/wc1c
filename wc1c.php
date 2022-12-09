@@ -8,6 +8,7 @@
  * WC tested up to: 7.2
  * Requires at least: 5.2
  * Requires PHP: 7.0
+ * Requires Plugins: woocommerce
  * Text Domain: wc1c
  * Domain Path: /assets/languages
  * Copyright: WC1C team © 2018-2022
