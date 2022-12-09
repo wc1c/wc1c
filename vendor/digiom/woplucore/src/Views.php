@@ -48,10 +48,14 @@ class Views implements Viewable
 
 	/**
 	 * @param string $slug
+	 *
+	 * @return Views
 	 */
-	public function setSlug(string $slug)
+	public function setSlug(string $slug): Views
 	{
 		$this->slug = $slug;
+
+		return $this;
 	}
 
 	/**
@@ -64,10 +68,14 @@ class Views implements Viewable
 
 	/**
 	 * @param string $plugin_dir
+	 *
+	 * @return Views
 	 */
-	public function setPluginDir(string $plugin_dir)
+	public function setPluginDir(string $plugin_dir): Views
 	{
 		$this->plugin_dir = $plugin_dir;
+
+		return $this;
 	}
 
 	/**

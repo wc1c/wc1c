@@ -234,7 +234,7 @@ final class Core
 	 */
 	public function views(): Views
 	{
-		return Views::instance();
+		return Views::instance()->setSlug('wc1c')->setPluginDir($this->environment()->get('plugin_directory_path'));
 	}
 
 	/**
