@@ -177,14 +177,9 @@ class AllTable extends TableAbstract
 			'delete' => '<a href="' . $this->utilityAdminConfigurationsGetUrl('delete', $item['configuration_id']) . '">' . __('Mark as deleted', 'wc1c') . '</a>',
 		];
 
-		if('deleted' === $item['status'])
+		if('deleted' === $item['status'] || ('draft' === $item['status'] && 'yes' === wc1c()->settings()->get('configurations_draft_delete', 'yes')))
 		{
 			unset($actions['update']);
-			$actions['delete'] = '<a href="' . $this->utilityAdminConfigurationsGetUrl('delete', $item['configuration_id']) . '">' . __('Remove forever', 'wc1c') . '</a>';
-		}
-
-		if('draft' === $item['status'] && 'yes' === wc1c()->settings()->get('configurations_draft_delete', 'yes'))
-		{
 			$actions['delete'] = '<a href="' . $this->utilityAdminConfigurationsGetUrl('delete', $item['configuration_id']) . '">' . __('Remove forever', 'wc1c') . '</a>';
 		}
 
