@@ -226,7 +226,7 @@ class AllTable extends TableAbstract
 	 *
 	 * @return string
 	 */
-	public function rowMetas($data)
+	public function rowMetas($data): string
 	{
 		$metas_count = count($data);
 
@@ -252,7 +252,7 @@ class AllTable extends TableAbstract
 	 *
 	 * @return array
 	 */
-	public function getColumns()
+	public function getColumns(): array
 	{
 		$columns = [];
 
@@ -270,7 +270,7 @@ class AllTable extends TableAbstract
 	 *
 	 * @return array
 	 */
-	public function getSortableColumns()
+	public function getSortableColumns(): array
 	{
 		$sortable_columns['configuration_id'] = ['configuration_id', false];
 		$sortable_columns['status'] = ['status', false];
@@ -283,7 +283,7 @@ class AllTable extends TableAbstract
 	 *
 	 * @return string The name of the primary column
 	 */
-	protected function getDefaultPrimaryColumnName()
+	protected function getDefaultPrimaryColumnName(): string
 	{
 		return 'configuration_id';
 	}
@@ -294,7 +294,7 @@ class AllTable extends TableAbstract
 	 * @return array
 	 * @throws Exception
 	 */
-	protected function getViews()
+	protected function getViews(): array
 	{
 		$status_links = [];
 		$current = !empty($_REQUEST['status']) ? $_REQUEST['status'] : 'all';
