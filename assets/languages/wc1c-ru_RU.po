@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WC1C > integration of WooCommerce with 1C products "
 "(different configurations)\n"
-"POT-Creation-Date: 2022-11-24 12:42+0300\n"
-"PO-Revision-Date: 2022-11-24 12:47+0300\n"
+"POT-Creation-Date: 2022-12-14 23:13+0300\n"
+"PO-Revision-Date: 2022-12-14 23:17+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
 "Language: ru_RU\n"
@@ -133,27 +133,27 @@ msgstr "Конфигурации"
 msgid "Tools"
 msgstr "Инструменты"
 
-#: src/Admin.php:128 src/Admin.php:231
+#: src/Admin.php:130 src/Admin.php:237
 msgid "Settings"
 msgstr "Настройки"
 
-#: src/Admin.php:135 views/helps/features.php:34
+#: src/Admin.php:140 views/helps/features.php:34
 msgid "Extensions"
 msgstr "Расширения"
 
-#: src/Admin.php:259 src/Admin/Settings/MainForm.php:244
+#: src/Admin.php:265 src/Admin/Settings/MainForm.php:244
 msgid "never"
 msgstr "никогда"
 
-#: src/Admin.php:260
+#: src/Admin.php:266
 msgid "no deadline"
 msgstr "вечный"
 
-#: src/Admin.php:265
+#: src/Admin.php:271
 msgid "to:"
 msgstr "до:"
 
-#: src/Admin.php:272
+#: src/Admin.php:278
 msgid "no support"
 msgstr "без поддержки"
 
@@ -204,55 +204,54 @@ msgid "Mark as deleted"
 msgstr "Пометить на удаление"
 
 #: src/Admin/Configurations/AllTable.php:183
-#: src/Admin/Configurations/AllTable.php:188
 msgid "Remove forever"
 msgstr "Удалить окончательно"
 
-#: src/Admin/Configurations/AllTable.php:201
+#: src/Admin/Configurations/AllTable.php:196
 #: src/Admin/Configurations/MainUpdate.php:105
 msgid "User: "
 msgstr "Пользователь: "
 
-#: src/Admin/Configurations/AllTable.php:205
+#: src/Admin/Configurations/AllTable.php:200
 #: src/Admin/Configurations/MainUpdate.php:109
 msgid "User is not exists."
 msgstr "Пользователь не существует."
 
-#: src/Admin/Configurations/AllTable.php:211
-#: src/Admin/Configurations/AllTable.php:215
+#: src/Admin/Configurations/AllTable.php:206
+#: src/Admin/Configurations/AllTable.php:210
 msgid "Schema:"
 msgstr "Схема:"
 
-#: src/Admin/Configurations/AllTable.php:215
+#: src/Admin/Configurations/AllTable.php:210
 msgid "not found, please install the schema"
 msgstr "не найдена, пожалуйста установите схему"
 
-#: src/Admin/Configurations/AllTable.php:264
+#: src/Admin/Configurations/AllTable.php:259
 msgid "ID"
 msgstr "ID"
 
-#: src/Admin/Configurations/AllTable.php:265
+#: src/Admin/Configurations/AllTable.php:260
 msgid "Base information"
 msgstr "Базовая информация"
 
-#: src/Admin/Configurations/AllTable.php:266
+#: src/Admin/Configurations/AllTable.php:261
 #: src/Admin/Settings/MainForm.php:175
 msgid "Status"
 msgstr "Статус"
 
-#: src/Admin/Configurations/AllTable.php:267
+#: src/Admin/Configurations/AllTable.php:262
 msgid "Create date"
 msgstr "Создана"
 
-#: src/Admin/Configurations/AllTable.php:268
+#: src/Admin/Configurations/AllTable.php:263
 msgid "Last activity"
 msgstr "Активность"
 
-#: src/Admin/Configurations/AllTable.php:316
+#: src/Admin/Configurations/AllTable.php:311
 msgid "All"
 msgstr "Все"
 
-#: src/Admin/Configurations/AllTable.php:470
+#: src/Admin/Configurations/AllTable.php:465
 msgid "Search"
 msgstr "Найти"
 
@@ -262,73 +261,43 @@ msgid "Configuration name"
 msgstr "Название конфигурации"
 
 #: src/Admin/Configurations/CreateForm.php:44
-msgid ""
-"Name of the configuration for easy use. You can enter any data up to 255 "
-"characters."
-msgstr ""
-"Имя конфигурации для удобства использования. Вы можете ввести любые данные "
-"длиной до 255 символов."
+msgid "Enter any data up to 255 characters."
+msgstr "Введите любые данные до 255 символов."
 
-#: src/Admin/Configurations/CreateForm.php:48
-msgid ""
-"Used for convenient distribution of multiple configurations. Can use any "
-"convenient fantasy."
-msgstr ""
-"Используется для удобного распределения нескольких конфигураций. Можете "
-"использовать любую удобную фантазию."
-
-#: src/Admin/Configurations/CreateForm.php:49
-msgid ""
-"For example, the exchange of orders can be called: Exchange of orders. Well, "
-"if products are unloaded, and even into a specific category with specific "
-"properties - Green tea."
-msgstr ""
-"К примеру обмен заказами можно назвать: Обмен заказами. Ну а если "
-"выгружаются продукты, да еще и в конкретную категорию с конкретными "
-"свойствами - Чай зеленый."
-
-#: src/Admin/Configurations/CreateForm.php:78
+#: src/Admin/Configurations/CreateForm.php:72
 msgid "Configuration schema"
 msgstr "Схема конфигурации"
 
-#: src/Admin/Configurations/CreateForm.php:80
-msgid ""
-"Each scheme has its own algorithms and settings. Use the appropriate scheme "
-"for your tasks."
-msgstr ""
-"Каждая схема имеет свои алгоритмы и настройки. Используйте соответствующую "
-"схему для ваших задач."
-
-#: src/Admin/Configurations/CreateForm.php:144
+#: src/Admin/Configurations/CreateForm.php:138
 msgid "Identifier:"
 msgstr "Идентификатор:"
 
-#: src/Admin/Configurations/CreateForm.php:194
+#: src/Admin/Configurations/CreateForm.php:188
 msgid "Configuration create error. Please retry."
 msgstr "Конфигурация не создана. Пожалуйста повторите."
 
-#: src/Admin/Configurations/CreateForm.php:234
+#: src/Admin/Configurations/CreateForm.php:228
 msgid "Configuration create error. Name is required."
 msgstr "Конфигурация не создана. Название конфигурации не заполнено."
 
-#: src/Admin/Configurations/CreateForm.php:247
+#: src/Admin/Configurations/CreateForm.php:241
 msgid "Configuration create error. Schema is required."
 msgstr "Конфигурация не создана. Не выбрана схема."
 
-#: src/Admin/Configurations/CreateForm.php:264
+#: src/Admin/Configurations/CreateForm.php:258
 msgid "Configuration create error. Name is exists."
 msgstr ""
 "Конфигурация не создана. Конфигурация с таким названием уже существует."
 
-#: src/Admin/Configurations/CreateForm.php:281
+#: src/Admin/Configurations/CreateForm.php:275
 msgid "Configuration create success. Configuration id: "
 msgstr "Конфигурация успешно создана. Идентификатор конфигурации: "
 
-#: src/Admin/Configurations/CreateForm.php:282
+#: src/Admin/Configurations/CreateForm.php:276
 msgid "edit configuration"
 msgstr "редактировать конфигурацию"
 
-#: src/Admin/Configurations/CreateForm.php:294
+#: src/Admin/Configurations/CreateForm.php:288
 msgid "Configuration create error. Please retry saving or change fields."
 msgstr ""
 "Создание конфигурации не удалось. Пожалуйста повторите процедуру или смените "
@@ -342,11 +311,11 @@ msgstr "Ошибка. Удаляемая конфигурация активна
 msgid "The configuration has been marked as deleted."
 msgstr "Конфигурация помечена как удаленная."
 
-#: src/Admin/Configurations/Delete.php:116
+#: src/Admin/Configurations/Delete.php:118
 msgid "The configuration has been successfully deleted."
 msgstr "Конфигурация успешно удалена."
 
-#: src/Admin/Configurations/Delete.php:123
+#: src/Admin/Configurations/Delete.php:125
 msgid "Deleting error. Please retry again."
 msgstr "Ошибка при удалении. Пожалуйста, попробуйте еще раз."
 
@@ -354,7 +323,7 @@ msgstr "Ошибка при удалении. Пожалуйста, попроб
 msgid "Delete confirmation"
 msgstr "Подтверждение удаления"
 
-#: src/Admin/Configurations/DeleteForm.php:40
+#: src/Admin/Configurations/DeleteForm.php:42
 msgid ""
 "I confirm that Configuration will be permanently and irrevocably deleted "
 "from WooCommerce."
@@ -362,11 +331,19 @@ msgstr ""
 "Я подтверждаю, что Конфигурация будет окончательно и безвозвратно удалена из "
 "WooCommerce."
 
-#: src/Admin/Configurations/DeleteForm.php:80
+#: src/Admin/Configurations/DeleteForm.php:43
+msgid ""
+"The directory with files for configuration from the FILE system will be "
+"completely removed."
+msgstr ""
+"Каталог с файлами для конфигурации из ФАЙЛОВОЙ системы будет полностью "
+"удален."
+
+#: src/Admin/Configurations/DeleteForm.php:84
 msgid "Delete error. Please retry."
 msgstr "Ошибка при удалении. Пожалуйста повторите."
 
-#: src/Admin/Configurations/DeleteForm.php:122
+#: src/Admin/Configurations/DeleteForm.php:126
 msgid "Delete error. Confirmation of final deletion is required."
 msgstr "Ошибка удаления. Требуется подтверждение окончательного удаления."
 
@@ -963,63 +940,63 @@ msgstr "База данных"
 msgid "Completing"
 msgstr "Завершение"
 
-#: src/Core.php:121
+#: src/Core.php:122
 msgid "Timer not loaded."
 msgstr "Таймер не загружен."
 
-#: src/Core.php:131
+#: src/Core.php:132
 msgid "Extensions not loaded."
 msgstr "Расширения не загружены."
 
-#: src/Core.php:140
+#: src/Core.php:141
 msgid "Extensions not initialized."
 msgstr "Расширения не инициализированы."
 
-#: src/Core.php:149
+#: src/Core.php:150
 msgid "Schemas not loaded."
 msgstr "Схемы не загружены."
 
-#: src/Core.php:158
+#: src/Core.php:159
 msgid "Tools not loaded."
 msgstr "Инструменты не загружены."
 
-#: src/Core.php:169
+#: src/Core.php:170
 msgid "Tools not initialized."
 msgstr "Инструменты не инициализированы."
 
-#: src/Core.php:181
+#: src/Core.php:182
 msgid "Receiver not loaded."
 msgstr "Получатель не загружен."
 
-#: src/Core.php:461
+#: src/Core.php:462
 msgid "This activation code is active."
 msgstr "Этот код активации активен."
 
-#: src/Core.php:462
+#: src/Core.php:463
 msgid "Error: This activation code has expired."
 msgstr "Ошибка: Срок действия этого кода активации истек."
 
-#: src/Core.php:463
+#: src/Core.php:464
 msgid "Activation code republished. Awaiting reactivation."
 msgstr "Код активации опубликован повторно. Ожидание повторной активации."
 
-#: src/Core.php:464
+#: src/Core.php:465
 msgid "Error: This activation code has been suspended."
 msgstr "Ошибка: Этот код активации был приостановлен."
 
-#: src/Core.php:465
+#: src/Core.php:466
 msgid "This activation code is not found."
 msgstr "Указанный код активации не найден."
 
-#: src/Core.php:466
+#: src/Core.php:467
 msgid "This activation code is active (localhost)."
 msgstr "Этот код активации активен (localhost)."
 
-#: src/Core.php:467
+#: src/Core.php:468
 msgid "Error: This activation code is pending review."
 msgstr "Ошибка: этот код активации ожидает рассмотрения."
 
-#: src/Core.php:468
+#: src/Core.php:469
 msgid ""
 "Error: This version of the software was released after your download access "
 "expired. Please downgrade software or contact support for more information."
@@ -1029,27 +1006,27 @@ msgstr ""
 "обеспечения или обратитесь в службу поддержки для получения дополнительной "
 "информации."
 
-#: src/Core.php:469
+#: src/Core.php:470
 msgid "Error: The activation code variable is empty."
 msgstr "Ошибка: переменная кода активации пуста."
 
-#: src/Core.php:470
+#: src/Core.php:471
 msgid "Error: I could not obtain a new local code."
 msgstr "Ошибка: не удалось получить новый локальный код."
 
-#: src/Core.php:471
+#: src/Core.php:472
 msgid "Error: The maximum local code delay period has expired."
 msgstr "Ошибка: Максимальный период задержки локального кода истек."
 
-#: src/Core.php:472
+#: src/Core.php:473
 msgid "Error: The local key has been tampered with or is invalid."
 msgstr "Ошибка: локальный код был изменен или недействителен."
 
-#: src/Core.php:473
+#: src/Core.php:474
 msgid "Error: The local code is invalid for this location."
 msgstr "Ошибка: локальный код недействителен для этого местоположения."
 
-#: src/Core.php:474
+#: src/Core.php:475
 msgid ""
 "Error: Please create the following file (and directories if they dont exist "
 "already): "
@@ -1057,43 +1034,43 @@ msgstr ""
 "Ошибка: Пожалуйста, создайте следующий файл (и каталоги, если они еще не "
 "существуют): "
 
-#: src/Core.php:475
+#: src/Core.php:476
 msgid "Error: Please make the following path writable: "
 msgstr "Ошибка: сделайте следующий путь доступным для записи: "
 
-#: src/Core.php:476
+#: src/Core.php:477
 msgid "Error: I could not determine the local key storage on clear."
 msgstr "Ошибка: не удалось определить локальное хранилище ключей при очистке."
 
-#: src/Core.php:477
+#: src/Core.php:478
 msgid "Error: I could not save the local key."
 msgstr "Ошибка: не удалось сохранить локальный ключ."
 
-#: src/Core.php:478
+#: src/Core.php:479
 msgid "Error: The local code is invalid for this activation code."
 msgstr "Ошибка: локальный код недействителен для этого кода активации."
 
-#: src/Core.php:479
+#: src/Core.php:480
 msgid "Error: This activation code has been deleted."
 msgstr "Ошибка: Указанный код активации был удален."
 
-#: src/Core.php:480
+#: src/Core.php:481
 msgid "Error: This activation code has draft."
 msgstr "Ошибка: код активации в статусе черновик."
 
-#: src/Core.php:481
+#: src/Core.php:482
 msgid "Error: This activation code has available."
 msgstr "Ошибка: код активации в статусе доступный."
 
-#: src/Core.php:482
+#: src/Core.php:483
 msgid "Error: This activation code has been blocked."
 msgstr "Ошибка: код активации в статусе заблокирован."
 
-#: src/Core.php:529
+#: src/Core.php:530
 msgid "Receiver loading: class is not exists, use is default."
 msgstr "Загрузка получателя: класс не найден, используется класс по умолчанию."
 
-#: src/Core.php:579
+#: src/Core.php:570
 msgid "Localization loaded."
 msgstr "Локализация загружена."
 
@@ -1485,8 +1462,8 @@ msgid ""
 "Cleaning of existing products in WooCommerce according to the nomenclature "
 "from 1C via the CommerceML protocol."
 msgstr ""
-"Чистка существующих товаров в WooCommerce по номенклатуре от 1С по протоколу "
-"CommerceML."
+"Чистка существующих товаров в WooCommerce по номенклатуре от 1С с "
+"использованием протокола CommerceML."
 
 #: src/Schemas/Productscleanercml/Core.php:136
 #: src/Schemas/Productscml/Core.php:176
@@ -4140,9 +4117,37 @@ msgstr "Недопустимое изображение."
 msgid "Back to all configurations"
 msgstr "Вернуться ко всем конфигурациям"
 
-#: views/configurations/create_form.php:16
+#: views/configurations/create_form.php:25
+msgid ""
+"Enter a name for the new configuration, select a scheme, and click the "
+"create configuration button."
+msgstr ""
+"Введите наименование новой конфигурации, выберите схему и нажмите кнопку "
+"создания конфигурации."
+
+#: views/configurations/create_form.php:27
+msgid ""
+"Each exchange scheme has a unique algorithm of operation and purpose. You "
+"need to choose only the scheme you need."
+msgstr ""
+"Каждая схема обмена имеет уникальный алгоритм работы и назначение. Вам нужно "
+"выбрать только ту схему, которая вам нужна."
+
+#: views/configurations/create_form.php:31
 msgid "Create configuration"
 msgstr "Создать конфигурацию"
+
+#: views/configurations/delete.php:16
+msgid "ID of the configuration to be deleted:"
+msgstr "ID удаляемой конфигурации:"
+
+#: views/configurations/delete.php:20
+msgid "Name of the configuration to be deleted:"
+msgstr "Наименование удаляемой конфигурации:"
+
+#: views/configurations/delete.php:24
+msgid "Path of the configuration directory to be deleted:"
+msgstr "Путь к удаляемому каталогу конфигурации:"
 
 #: views/configurations/delete_error.php:3
 msgid "Error. Delete is not available"
@@ -4503,6 +4508,36 @@ msgstr ""
 #. Author of the plugin/theme
 msgid "WC1C team"
 msgstr "Команда WC1C"
+
+#~ msgid ""
+#~ "Name of the configuration for easy use. You can enter any data up to 255 "
+#~ "characters."
+#~ msgstr ""
+#~ "Имя конфигурации для удобства использования. Вы можете ввести любые "
+#~ "данные длиной до 255 символов."
+
+#~ msgid ""
+#~ "Used for convenient distribution of multiple configurations. Can use any "
+#~ "convenient fantasy."
+#~ msgstr ""
+#~ "Используется для удобного распределения нескольких конфигураций. Можете "
+#~ "использовать любую удобную фантазию."
+
+#~ msgid ""
+#~ "For example, the exchange of orders can be called: Exchange of orders. "
+#~ "Well, if products are unloaded, and even into a specific category with "
+#~ "specific properties - Green tea."
+#~ msgstr ""
+#~ "К примеру обмен заказами можно назвать: Обмен заказами. Ну а если "
+#~ "выгружаются продукты, да еще и в конкретную категорию с конкретными "
+#~ "свойствами - Чай зеленый."
+
+#~ msgid ""
+#~ "Each scheme has its own algorithms and settings. Use the appropriate "
+#~ "scheme for your tasks."
+#~ msgstr ""
+#~ "Каждая схема имеет свои алгоритмы и настройки. Используйте "
+#~ "соответствующую схему для ваших задач."
 
 #~ msgid ""
 #~ "When this setting is enabled, the processing of categories based on "

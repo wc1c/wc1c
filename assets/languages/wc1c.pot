@@ -4,7 +4,7 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: WC1C > integration of WooCommerce with 1C products "
 "(different configurations)\n"
-"POT-Creation-Date: 2022-11-24 12:42+0300\n"
+"POT-Creation-Date: 2022-12-14 23:13+0300\n"
 "PO-Revision-Date: 2019-03-19 20:30+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
@@ -127,27 +127,27 @@ msgstr ""
 msgid "Tools"
 msgstr ""
 
-#: src/Admin.php:128 src/Admin.php:231
+#: src/Admin.php:130 src/Admin.php:237
 msgid "Settings"
 msgstr ""
 
-#: src/Admin.php:135 views/helps/features.php:34
+#: src/Admin.php:140 views/helps/features.php:34
 msgid "Extensions"
 msgstr ""
 
-#: src/Admin.php:259 src/Admin/Settings/MainForm.php:244
+#: src/Admin.php:265 src/Admin/Settings/MainForm.php:244
 msgid "never"
 msgstr ""
 
-#: src/Admin.php:260
+#: src/Admin.php:266
 msgid "no deadline"
 msgstr ""
 
-#: src/Admin.php:265
+#: src/Admin.php:271
 msgid "to:"
 msgstr ""
 
-#: src/Admin.php:272
+#: src/Admin.php:278
 msgid "no support"
 msgstr ""
 
@@ -198,54 +198,53 @@ msgid "Mark as deleted"
 msgstr ""
 
 #: src/Admin/Configurations/AllTable.php:183
-#: src/Admin/Configurations/AllTable.php:188
 msgid "Remove forever"
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:201
+#: src/Admin/Configurations/AllTable.php:196
 #: src/Admin/Configurations/MainUpdate.php:105
 msgid "User: "
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:205
+#: src/Admin/Configurations/AllTable.php:200
 #: src/Admin/Configurations/MainUpdate.php:109
 msgid "User is not exists."
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:211
-#: src/Admin/Configurations/AllTable.php:215
+#: src/Admin/Configurations/AllTable.php:206
+#: src/Admin/Configurations/AllTable.php:210
 msgid "Schema:"
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:215
+#: src/Admin/Configurations/AllTable.php:210
 msgid "not found, please install the schema"
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:264
+#: src/Admin/Configurations/AllTable.php:259
 msgid "ID"
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:265
+#: src/Admin/Configurations/AllTable.php:260
 msgid "Base information"
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:266 src/Admin/Settings/MainForm.php:175
+#: src/Admin/Configurations/AllTable.php:261 src/Admin/Settings/MainForm.php:175
 msgid "Status"
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:267
+#: src/Admin/Configurations/AllTable.php:262
 msgid "Create date"
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:268
+#: src/Admin/Configurations/AllTable.php:263
 msgid "Last activity"
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:316
+#: src/Admin/Configurations/AllTable.php:311
 msgid "All"
 msgstr ""
 
-#: src/Admin/Configurations/AllTable.php:470
+#: src/Admin/Configurations/AllTable.php:465
 msgid "Search"
 msgstr ""
 
@@ -255,63 +254,42 @@ msgid "Configuration name"
 msgstr ""
 
 #: src/Admin/Configurations/CreateForm.php:44
-msgid ""
-"Name of the configuration for easy use. You can enter any data up to 255 "
-"characters."
+msgid "Enter any data up to 255 characters."
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:48
-msgid ""
-"Used for convenient distribution of multiple configurations. Can use any "
-"convenient fantasy."
-msgstr ""
-
-#: src/Admin/Configurations/CreateForm.php:49
-msgid ""
-"For example, the exchange of orders can be called: Exchange of orders. Well, if "
-"products are unloaded, and even into a specific category with specific "
-"properties - Green tea."
-msgstr ""
-
-#: src/Admin/Configurations/CreateForm.php:78
+#: src/Admin/Configurations/CreateForm.php:72
 msgid "Configuration schema"
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:80
-msgid ""
-"Each scheme has its own algorithms and settings. Use the appropriate scheme for "
-"your tasks."
-msgstr ""
-
-#: src/Admin/Configurations/CreateForm.php:144
+#: src/Admin/Configurations/CreateForm.php:138
 msgid "Identifier:"
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:194
+#: src/Admin/Configurations/CreateForm.php:188
 msgid "Configuration create error. Please retry."
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:234
+#: src/Admin/Configurations/CreateForm.php:228
 msgid "Configuration create error. Name is required."
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:247
+#: src/Admin/Configurations/CreateForm.php:241
 msgid "Configuration create error. Schema is required."
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:264
+#: src/Admin/Configurations/CreateForm.php:258
 msgid "Configuration create error. Name is exists."
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:281
+#: src/Admin/Configurations/CreateForm.php:275
 msgid "Configuration create success. Configuration id: "
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:282
+#: src/Admin/Configurations/CreateForm.php:276
 msgid "edit configuration"
 msgstr ""
 
-#: src/Admin/Configurations/CreateForm.php:294
+#: src/Admin/Configurations/CreateForm.php:288
 msgid "Configuration create error. Please retry saving or change fields."
 msgstr ""
 
@@ -323,11 +301,11 @@ msgstr ""
 msgid "The configuration has been marked as deleted."
 msgstr ""
 
-#: src/Admin/Configurations/Delete.php:116
+#: src/Admin/Configurations/Delete.php:118
 msgid "The configuration has been successfully deleted."
 msgstr ""
 
-#: src/Admin/Configurations/Delete.php:123
+#: src/Admin/Configurations/Delete.php:125
 msgid "Deleting error. Please retry again."
 msgstr ""
 
@@ -335,17 +313,23 @@ msgstr ""
 msgid "Delete confirmation"
 msgstr ""
 
-#: src/Admin/Configurations/DeleteForm.php:40
+#: src/Admin/Configurations/DeleteForm.php:42
 msgid ""
 "I confirm that Configuration will be permanently and irrevocably deleted from "
 "WooCommerce."
 msgstr ""
 
-#: src/Admin/Configurations/DeleteForm.php:80
+#: src/Admin/Configurations/DeleteForm.php:43
+msgid ""
+"The directory with files for configuration from the FILE system will be "
+"completely removed."
+msgstr ""
+
+#: src/Admin/Configurations/DeleteForm.php:84
 msgid "Delete error. Please retry."
 msgstr ""
 
-#: src/Admin/Configurations/DeleteForm.php:122
+#: src/Admin/Configurations/DeleteForm.php:126
 msgid "Delete error. Confirmation of final deletion is required."
 msgstr ""
 
@@ -886,131 +870,131 @@ msgstr ""
 msgid "Completing"
 msgstr ""
 
-#: src/Core.php:121
+#: src/Core.php:122
 msgid "Timer not loaded."
 msgstr ""
 
-#: src/Core.php:131
+#: src/Core.php:132
 msgid "Extensions not loaded."
 msgstr ""
 
-#: src/Core.php:140
+#: src/Core.php:141
 msgid "Extensions not initialized."
 msgstr ""
 
-#: src/Core.php:149
+#: src/Core.php:150
 msgid "Schemas not loaded."
 msgstr ""
 
-#: src/Core.php:158
+#: src/Core.php:159
 msgid "Tools not loaded."
 msgstr ""
 
-#: src/Core.php:169
+#: src/Core.php:170
 msgid "Tools not initialized."
 msgstr ""
 
-#: src/Core.php:181
+#: src/Core.php:182
 msgid "Receiver not loaded."
 msgstr ""
 
-#: src/Core.php:461
+#: src/Core.php:462
 msgid "This activation code is active."
 msgstr ""
 
-#: src/Core.php:462
+#: src/Core.php:463
 msgid "Error: This activation code has expired."
 msgstr ""
 
-#: src/Core.php:463
+#: src/Core.php:464
 msgid "Activation code republished. Awaiting reactivation."
 msgstr ""
 
-#: src/Core.php:464
+#: src/Core.php:465
 msgid "Error: This activation code has been suspended."
 msgstr ""
 
-#: src/Core.php:465
+#: src/Core.php:466
 msgid "This activation code is not found."
 msgstr ""
 
-#: src/Core.php:466
+#: src/Core.php:467
 msgid "This activation code is active (localhost)."
 msgstr ""
 
-#: src/Core.php:467
+#: src/Core.php:468
 msgid "Error: This activation code is pending review."
 msgstr ""
 
-#: src/Core.php:468
+#: src/Core.php:469
 msgid ""
 "Error: This version of the software was released after your download access "
 "expired. Please downgrade software or contact support for more information."
 msgstr ""
 
-#: src/Core.php:469
+#: src/Core.php:470
 msgid "Error: The activation code variable is empty."
 msgstr ""
 
-#: src/Core.php:470
+#: src/Core.php:471
 msgid "Error: I could not obtain a new local code."
 msgstr ""
 
-#: src/Core.php:471
+#: src/Core.php:472
 msgid "Error: The maximum local code delay period has expired."
 msgstr ""
 
-#: src/Core.php:472
+#: src/Core.php:473
 msgid "Error: The local key has been tampered with or is invalid."
 msgstr ""
 
-#: src/Core.php:473
+#: src/Core.php:474
 msgid "Error: The local code is invalid for this location."
 msgstr ""
 
-#: src/Core.php:474
+#: src/Core.php:475
 msgid ""
 "Error: Please create the following file (and directories if they dont exist "
 "already): "
 msgstr ""
 
-#: src/Core.php:475
+#: src/Core.php:476
 msgid "Error: Please make the following path writable: "
 msgstr ""
 
-#: src/Core.php:476
+#: src/Core.php:477
 msgid "Error: I could not determine the local key storage on clear."
 msgstr ""
 
-#: src/Core.php:477
+#: src/Core.php:478
 msgid "Error: I could not save the local key."
 msgstr ""
 
-#: src/Core.php:478
+#: src/Core.php:479
 msgid "Error: The local code is invalid for this activation code."
 msgstr ""
 
-#: src/Core.php:479
+#: src/Core.php:480
 msgid "Error: This activation code has been deleted."
 msgstr ""
 
-#: src/Core.php:480
+#: src/Core.php:481
 msgid "Error: This activation code has draft."
 msgstr ""
 
-#: src/Core.php:481
+#: src/Core.php:482
 msgid "Error: This activation code has available."
 msgstr ""
 
-#: src/Core.php:482
+#: src/Core.php:483
 msgid "Error: This activation code has been blocked."
 msgstr ""
 
-#: src/Core.php:529
+#: src/Core.php:530
 msgid "Receiver loading: class is not exists, use is default."
 msgstr ""
 
-#: src/Core.php:579
+#: src/Core.php:570
 msgid "Localization loaded."
 msgstr ""
 
@@ -3655,8 +3639,32 @@ msgstr ""
 msgid "Back to all configurations"
 msgstr ""
 
-#: views/configurations/create_form.php:16
+#: views/configurations/create_form.php:25
+msgid ""
+"Enter a name for the new configuration, select a scheme, and click the create "
+"configuration button."
+msgstr ""
+
+#: views/configurations/create_form.php:27
+msgid ""
+"Each exchange scheme has a unique algorithm of operation and purpose. You need "
+"to choose only the scheme you need."
+msgstr ""
+
+#: views/configurations/create_form.php:31
 msgid "Create configuration"
+msgstr ""
+
+#: views/configurations/delete.php:16
+msgid "ID of the configuration to be deleted:"
+msgstr ""
+
+#: views/configurations/delete.php:20
+msgid "Name of the configuration to be deleted:"
+msgstr ""
+
+#: views/configurations/delete.php:24
+msgid "Path of the configuration directory to be deleted:"
 msgstr ""
 
 #: views/configurations/delete_error.php:3
