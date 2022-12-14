@@ -77,7 +77,7 @@ class CreateForm extends FormAbstract
 		[
 			'title' => __('Configuration schema', 'wc1c'),
 			'type' => 'radio',
-			'description' => __('', 'wc1c'),
+			'description' => '',
 			'default' => $default_id,
 			'options' => $options,
 			'class' => 'form-check-input',
