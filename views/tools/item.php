@@ -9,7 +9,7 @@
             <?php echo $args['description']; ?>
         </p>
     </div>
-    <div class="card-footer p-3">
+    <div class="card-footer bg-light p-3">
        <a class="text-decoration-none button button-primary" href="<?php echo $args['url']; ?>">
 	       <?php _e('Open', 'wc1c'); ?>
        </a>
