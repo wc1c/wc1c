@@ -123,19 +123,25 @@ final class Admin
 			'callback' => [Tools::class, 'instance']
 		];
 
-		$default_sections['settings'] =
-		[
-			'title' => __('Settings', 'wc1c'),
-			'visible' => true,
-			'callback' => [Settings::class, 'instance']
-		];
+		if(current_user_can('manage_options'))
+		{
+			$default_sections['settings'] =
+			[
+				'title' => __('Settings', 'wc1c'),
+				'visible' => true,
+				'callback' => [Settings::class, 'instance']
+			];
+		}
 
-		$default_sections['extensions'] =
-		[
-			'title' => __('Extensions', 'wc1c'),
-			'visible' => true,
-			'callback' => [Extensions::class, 'instance']
-		];
+		if(current_user_can('edit_plugins') || current_user_can('install_plugins') || current_user_can('update_plugins'))
+		{
+			$default_sections['extensions'] =
+			[
+				'title' => __('Extensions', 'wc1c'),
+				'visible' => true,
+				'callback' => [Extensions::class, 'instance']
+			];
+		}
 
 		$this->initSections($default_sections);
 		$this->setCurrentSection('configurations');
