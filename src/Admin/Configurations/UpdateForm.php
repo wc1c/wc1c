@@ -35,7 +35,7 @@ class UpdateForm extends FormAbstract
 	 *
 	 * @return array
 	 */
-	public function init_fields_main($fields)
+	public function init_fields_main($fields): array
 	{
 		$options =
 		[
