@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WC1C > integration of WooCommerce with 1C products "
 "(different configurations)\n"
-"POT-Creation-Date: 2022-12-14 23:13+0300\n"
-"PO-Revision-Date: 2022-12-14 23:17+0300\n"
+"POT-Creation-Date: 2022-12-15 00:27+0300\n"
+"PO-Revision-Date: 2022-12-15 00:28+0300\n"
 "Last-Translator: \n"
 "Language-Team: https://wc1c.info\n"
 "Language: ru_RU\n"
@@ -423,7 +423,7 @@ msgstr ""
 
 #: src/Admin/Configurations/UpdateForm.php:48
 msgid "Configuration status"
-msgstr "Статус"
+msgstr "Состояние конфигурации"
 
 #: src/Admin/Configurations/UpdateForm.php:50
 msgid "Current configuration status."
