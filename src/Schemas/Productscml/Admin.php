@@ -95,33 +95,41 @@ class Admin
 			$this->core()->configuration()->saveMetaData();
 		}
 
-		$url_raw = get_site_url(null, '/?wc1c-receiver=' . $this->core()->configuration()->getId() . '&lazysign=' . $lazy_sign . '&get_param');
-		$url_raw = '<p class="input-text p-2 bg-light regular-input wc1c_urls">' . esc_html($url_raw) . '</p>';
+		$url_raw = trim(get_site_url(null, '/?wc1c-receiver=' . $this->core()->configuration()->getId() . '&lazysign=' . $lazy_sign . '&get_param'));
+		$url_raw = '<span class="d-block input-text mt-0 p-2 bg-light regular-input wc1c_urls">' . esc_url($url_raw) . '</span>';
 
 		$fields['url_requests'] =
 		[
 			'title' => __('Website address', 'wc1c'),
 			'type' => 'raw',
 			'raw' => $url_raw,
-			'description' => __('Specified in the exchange settings on the 1C side. The Recipient is located at this address, which will receive requests from 1C. When copying, you need to get rid of whitespace characters, if they are present.', 'wc1c'),
+			'description' => sprintf(
+				'%s<hr>%s',
+				__('Specified in the exchange settings on the 1C side. The Recipient is located at this address, which will receive requests from 1C.', 'wc1c'),
+				__('When copying, you need to get rid of whitespace characters, if they are present.', 'wc1c')
+			)
 		];
 
 		$fields['user_login'] =
 		[
 			'title' => __('Username', 'wc1c'),
 			'type' => 'text',
-			'description' => __('Specified in 1C when setting up an exchange with a site on the 1C side. At the same time, work with data on the site is performed on behalf of the configuration owner, and not on behalf of the specified username.', 'wc1c'),
+			'description' => sprintf(
+				'%s<hr>%s',
+				__('Specified when setting up an exchange with a site on the 1C side. Any name can be specified, except for an empty value.', 'wc1c'),
+				__('Work with data on the site is performed on behalf of the configuration owner, and not on behalf of the specified username.', 'wc1c')
+			),
 			'default' => '',
-			'css' => 'min-width: 350px;',
+			'css' => 'min-width: 377px;',
 		];
 
 		$fields['user_password'] =
 		[
 			'title' => __('User password', 'wc1c'),
 			'type' => 'password',
-			'description' => __('Specified in 1C paired with a username when setting up an exchange with a site on the 1C side. It is advisable not to specify the password for the current WordPress user.', 'wc1c'),
+			'description' => __('Specified in pair with the username when setting up on the 1C side. It is advisable not to specify a password for the current WordPress user.', 'wc1c'),
 			'default' => '',
-			'css' => 'min-width: 350px;',
+			'css' => 'min-width: 377px;',
 		];
 
 		return $fields;
@@ -149,7 +157,7 @@ class Admin
 			'type' => 'text',
 			'description' => sprintf
 			(
-				'%s<br />%s <b>%s</b><br />%s',
+				'%s<br />%s <b>%s</b><hr>%s',
 				__('Enter the maximum size of accepted requests from 1C at a time in bytes. May be specified with a dimension suffix, such as 7M, where M = megabyte, K = kilobyte, G - gigabyte.', 'wc1c'),
 				__('Current WC1C limit:', 'wc1c'),
 				wc1c()->settings()->get('php_post_max_size', wc1c()->environment()->get('php_post_max_size')),
@@ -559,11 +567,40 @@ class Admin
 			'label' => __('Check the box to enable the creation of new products upon request from 1C. Disabled by default.', 'wc1c'),
 			'description' => sprintf
 			(
-				'%s<br /><hr>%s',
+				'%s<br />%s<br /><hr>%s',
 				__('The products is only created if it is not found in WooCommerce when searching by criteria for synchronization.', 'wc1c'),
+				__('To create, the products parameters from the current configuration are used.', 'wc1c'),
 				__('The option works only with automatic creation of products. When disabled, it is still possible to manually create products through ManualCML and similar extensions.', 'wc1c')
 			),
 			'default' => 'no'
+		];
+
+		$fields['products_create_delete_mark'] =
+		[
+			'title' => __('Creation of products: marked for deletion in 1C', 'wc1c'),
+			'type' => 'checkbox',
+			'label' => __('Check the box to enable this feature. Enabled by default.', 'wc1c'),
+			'description' => sprintf
+			(
+				'%s<hr>%s',
+				__('If the product is marked in 1C for deletion, then when you enable the setting, it will still be created on the site and filled with data.', 'wc1c'),
+				__('At the same time, it is possible to place such products directly in the trash. There is a separate setting for this.', 'wc1c')
+			),
+			'default' => 'no'
+		];
+
+		$fields['products_create_delete_mark_trash'] =
+		[
+			'title' => __('Creation of products: placement of products from 1C marked for deletion to the trash', 'wc1c'),
+			'type' => 'checkbox',
+			'label' => __('Check the box to enable this feature. Enabled by default.', 'wc1c'),
+			'description' => sprintf
+			(
+				'%s<hr>%s',
+				__('If the product is marked in 1C for deletion, then when the setting is enabled, it will be placed in the trash.', 'wc1c'),
+				__('It is possible to restore the products placed in the basket both manually and using the settings for updating products.', 'wc1c')
+			),
+			'default' => 'yes'
 		];
 
 		$fields['products_update'] =
@@ -573,9 +610,38 @@ class Admin
 			'label' => __('Check the box to enable product updates on demand from 1C. Disabled by default.', 'wc1c'),
 			'description' => sprintf
 			(
-				'%s<br /><hr>%s',
+				'%s<br />%s<br /><hr>%s',
 				__('Products are updated only if they were found using the product synchronization keys.', 'wc1c'),
+				__('To update, the products parameters from the current configuration are used.', 'wc1c'),
 				__('The option works only with automatic updating of products. When disabled, it is still possible to manually update products through ManualCML and similar extensions.', 'wc1c')
+			),
+			'default' => 'no'
+		];
+
+		$fields['products_update_use_delete_mark'] =
+		[
+			'title' => __('Update of products: restoring from the trash removed from deletion in 1C', 'wc1c'),
+			'type' => 'checkbox',
+			'label' => __('Check the box to enable this feature. Enabled by default.', 'wc1c'),
+			'description' => sprintf
+			(
+				'%s<hr>%s',
+				__('If the product is not marked in 1C for deletion, and it is in the basket on the site, then when the setting is enabled, it will be returned from the basket and filled with data according to the update settings.', 'wc1c'),
+				__('If the setting is disabled, all products placed in the basket will be there permanently. It will be impossible to create new products of the same kind.', 'wc1c')
+			),
+			'default' => 'no'
+		];
+
+		$fields['products_update_delete_mark_trash'] =
+		[
+			'title' => __('Update of products: placement of products marked for deletion in 1C to the trash', 'wc1c'),
+			'type' => 'checkbox',
+			'label' => __('Check the box to enable this feature. Enabled by default.', 'wc1c'),
+			'description' => sprintf
+			(
+				'%s<hr>%s',
+				__('If the product is marked in 1C for deletion, then when the setting is enabled, it will be placed in the trash.', 'wc1c'),
+				__('It is possible to restore the products placed in the trash both manually and using the settings for updating products.', 'wc1c')
 			),
 			'default' => 'no'
 		];
@@ -1218,34 +1284,6 @@ class Admin
 			'default' => 'no'
 		];
 
-		$fields['products_create_delete_mark'] =
-		[
-			'title' => __('Creating products from 1C marked for deletion', 'wc1c'),
-			'type' => 'checkbox',
-			'label' => __('Check the box to enable this feature. Enabled by default.', 'wc1c'),
-			'description' => sprintf
-			(
-				'%s<hr>%s',
-				__('If the product is marked in 1C for deletion, then when you enable the setting, it will still be created on the site and filled with data.', 'wc1c'),
-				__('At the same time, it is possible to place such products directly in the trash. There is a separate setting for this.', 'wc1c')
-			),
-			'default' => 'no'
-		];
-
-		$fields['products_create_delete_mark_trash'] =
-		[
-			'title' => __('Placement of products from 1C marked for deletion to the trash', 'wc1c'),
-			'type' => 'checkbox',
-			'label' => __('Check the box to enable this feature. Enabled by default.', 'wc1c'),
-			'description' => sprintf
-			(
-				'%s<hr>%s',
-				__('If the product is marked in 1C for deletion, then when the setting is enabled, it will be placed in the trash.', 'wc1c'),
-				__('It is possible to restore the products placed in the basket both manually and using the settings for updating products.', 'wc1c')
-			),
-			'default' => 'no'
-		];
-
 		return $fields;
 	}
 
@@ -1435,34 +1473,6 @@ class Admin
 			'type' => 'checkbox',
 			'label' => __('Check the box to enable this feature. Disabled by default.', 'wc1c'),
 			'description' => __('It will be allowed to leave reviews for updated products.', 'wc1c'),
-			'default' => 'no'
-		];
-
-		$fields['products_update_use_delete_mark'] =
-		[
-			'title' => __('Restoring products from the trash removed from deletion in 1C', 'wc1c'),
-			'type' => 'checkbox',
-			'label' => __('Check the box to enable this feature. Enabled by default.', 'wc1c'),
-			'description' => sprintf
-			(
-				'%s<hr>%s',
-				__('If the product is not marked in 1C for deletion, and it is in the basket on the site, then when the setting is enabled, it will be returned from the basket and filled with data according to the update settings.', 'wc1c'),
-				__('If the setting is disabled, all products placed in the basket will be there permanently. It will be impossible to create new products of the same kind.', 'wc1c')
-			),
-			'default' => 'no'
-		];
-
-		$fields['products_update_delete_mark_trash'] =
-		[
-			'title' => __('Placement of products from 1C marked for deletion to the trash', 'wc1c'),
-			'type' => 'checkbox',
-			'label' => __('Check the box to enable this feature. Enabled by default.', 'wc1c'),
-			'description' => sprintf
-			(
-				'%s<hr>%s',
-				__('If the product is marked in 1C for deletion, then when the setting is enabled, it will be placed in the trash.', 'wc1c'),
-				__('It is possible to restore the products placed in the trash both manually and using the settings for updating products.', 'wc1c')
-			),
 			'default' => 'no'
 		];
 
