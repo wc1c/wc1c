@@ -99,18 +99,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/digiom/woplucore.git",
-                "reference": "2d148c514a9bb693946c07eef0e28fe6c8a5114d"
+                "reference": "74a0d5586e7270329fb3b6046ba0de89b1fcb631"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/digiom/woplucore/zipball/2d148c514a9bb693946c07eef0e28fe6c8a5114d",
-                "reference": "2d148c514a9bb693946c07eef0e28fe6c8a5114d",
+                "url": "https://api.github.com/repos/digiom/woplucore/zipball/74a0d5586e7270329fb3b6046ba0de89b1fcb631",
+                "reference": "74a0d5586e7270329fb3b6046ba0de89b1fcb631",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.0"
             },
-            "time": "2022-12-09T20:15:45+00:00",
+            "time": "2022-12-10T11:32:13+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "dist",
@@ -432,12 +432,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wc1c/cml.git",
-                "reference": "b6c8600409fd83718b021a2408f549811b910e9f"
+                "reference": "1bf4ef6170009ba90d3cb47d91ce437f61c5dd08"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wc1c/cml/zipball/b6c8600409fd83718b021a2408f549811b910e9f",
-                "reference": "b6c8600409fd83718b021a2408f549811b910e9f",
+                "url": "https://api.github.com/repos/wc1c/cml/zipball/1bf4ef6170009ba90d3cb47d91ce437f61c5dd08",
+                "reference": "1bf4ef6170009ba90d3cb47d91ce437f61c5dd08",
                 "shasum": ""
             },
             "require": {
@@ -445,7 +445,7 @@
                 "ext-xmlreader": "*",
                 "php": ">=7.0"
             },
-            "time": "2022-11-23T20:31:06+00:00",
+            "time": "2022-12-15T22:08:51+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "source",
