@@ -8,7 +8,7 @@
                 wc1c()->views()->adminBackLink($label, $args['back_url']);
             ?>
         </div>
-        <div class="p-2 bg-white rounded-0 mb-3">
+        <div class="p-1 bg-white rounded-1 mb-3">
             <?php do_action('wc1c_admin_configurations_update_header_show'); ?>
         </div>
     </div>

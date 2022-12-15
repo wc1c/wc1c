@@ -53,7 +53,7 @@ class Core extends SchemaAbstract
 	public function __construct()
 	{
 		$this->setId('productscml');
-		$this->setVersion('0.3.0');
+		$this->setVersion('0.4.0');
 
 		$this->setName(__('Products data exchange via CommerceML', 'wc1c'));
 		$this->setDescription(__('Creation and updating of products (goods) in WooCommerce according to data from 1C using the CommerceML protocol of various versions.', 'wc1c'));
@@ -86,6 +86,11 @@ class Core extends SchemaAbstract
 	 */
 	public function init(): bool
 	{
+		if($this->isInitialized())
+		{
+			return true;
+		}
+
 		$this->setOptions($this->configuration()->getOptions());
 		$this->setUploadDirectory($this->configuration()->getUploadDirectory() . DIRECTORY_SEPARATOR . 'catalog');
 
@@ -298,7 +303,7 @@ class Core extends SchemaAbstract
 	 */
 	public function processingClassifierGroups(ClassifierDataContract $classifier, Reader $reader)
 	{
-		if($reader->filetype !== 'import')
+		if($reader->getFiletype() !== 'import')
 		{
 			return;
 		}
@@ -746,14 +751,14 @@ class Core extends SchemaAbstract
 	 *
 	 * @return void
 	 */
-	public function processingClassifierItem(ClassifierDataContract $classifier, $reader)
+	public function processingClassifierItem(ClassifierDataContract $classifier, Reader $reader)
 	{
 		if($reader->getFiletype() !== 'import' && $reader->getFiletype() !== 'offers')
 		{
 			return;
 		}
 
-		$this->configuration()->addMetaData('classifier:' . $classifier->getId(), maybe_serialize($classifier), true);
+		$this->configuration()->updateMetaData('classifier:' . $reader->getFiletype() . ':' . $classifier->getId(), maybe_serialize($classifier));
 		$this->configuration()->saveMetaData();
 
 		$classifier_properties = $classifier->getProperties();
@@ -948,29 +953,29 @@ class Core extends SchemaAbstract
 	/**
 	 * Назначение данных продукта исходя из режима: артикул
 	 *
-	 * @param ProductContract $new_product Экземпляр продукта - либо существующий, либо новый
-	 * @param ProductDataContract $product Данные продукта из XML
+	 * @param ProductContract $internal_product Экземпляр продукта - либо существующий, либо новый
+	 * @param ProductDataContract $external_product Данные продукта из XML
 	 * @param string $mode Режим - create или update
 	 * @param Reader $reader Текущий итератор
 	 *
 	 * @return ProductContract
 	 */
-	public function assignProductsItemSku(ProductContract $new_product, ProductDataContract $product, string $mode, Reader $reader): ProductContract
+	public function assignProductsItemSku(ProductContract $internal_product, ProductDataContract $external_product, string $mode, Reader $reader): ProductContract
 	{
 		try
 		{
-			$new_product->setSku($product->getSku());
+			$internal_product->setSku($external_product->getSku());
 		}
 		catch(Exception $e)
 		{
-			$this->log()->notice(__('Failed to set SKU for product.', 'wc1c'), ['exception' => $e, 'sku' => $product->getSku()]);
+			$this->log()->notice(__('Failed to set SKU for product.', 'wc1c'), ['exception' => $e, 'sku' => $external_product->getSku()]);
 		}
 
-		return $new_product;
+		return $internal_product;
 	}
 
 	/**
-	 * Назначение данных продукта исходя из режима: видимост ьв каталоге
+	 * Назначение данных продукта исходя из режима: видимость в каталоге
 	 *
 	 * @param ProductContract $internal_product Экземпляр продукта - либо существующий, либо новый
 	 * @param ProductDataContract $external_product Данные продукта из XML
@@ -1416,7 +1421,7 @@ class Core extends SchemaAbstract
 
 		$max_images = $this->getOptions('products_images_by_cml_max', 10);
 
-		/** @var ImagesStorageContract */
+		/** @var ImagesStorageContract $images_storage */
 		$images_storage = Storage::load('image');
 
 		$images = $external_product->getImages();
@@ -1611,34 +1616,16 @@ class Core extends SchemaAbstract
 				}
 
 				// Set attribute visibility.
-				if(isset($attribute['visible']))
-				{
-					$is_visible = $attribute['visible'];
-				}
-				else
-				{
-					$is_visible = 1;
-				}
+				$is_visible = $attribute['visible'] ?? 1;
 
 				// Set attribute position.
-				if(isset($attribute['position']))
-				{
-					$position = $attribute['position'];
-				}
-				else
-				{
-					$position = $raw_attributes_counter;
-				}
+				$position = $attribute['position'] ?? $raw_attributes_counter;
 
 				// Get name.
 				$attribute_name = $attribute_id ? $attribute_exist->getTaxonomyName() : $attribute['name'];
 
 				// Set if is a variation attribute based on existing attributes if possible so updates via CSV do not change this.
-				$is_variation = 0;
-				if(isset($attribute['variation']))
-				{
-					$is_variation = $attribute['variation'];
-				}
+				$is_variation = $attribute['variation'] ?? 0;
 
 				if($existing_attributes)
 				{
@@ -1948,11 +1935,7 @@ class Core extends SchemaAbstract
 				$global = $attributes_storage->getByLabel($property['name']);
 				$attribute_name = $global ? $global->getName() : $property['name'];
 
-				$value = [];
-				if(isset($raw_attributes[$attribute_name]['value']))
-				{
-					$value = $raw_attributes[$attribute_name]['value'];
-				}
+				$value = $raw_attributes[$attribute_name]['value'] ?? [];
 
 				if(isset($property['values_variants'][$property_value['value']]))
 				{
@@ -2027,13 +2010,7 @@ class Core extends SchemaAbstract
 				$global = $attributes_storage->getByLabel($characteristic_value['name']);
 				$attribute_name = $global ? $global->getName() : $characteristic_value['name'];
 
-				$value = [];
-
-				// атрибут уже имеется, надо добавлять к существующим значениям
-				if(isset($raw_attributes[$attribute_name]['value']))
-				{
-					$value = $raw_attributes[$attribute_name]['value'];
-				}
+				$value = $raw_attributes[$attribute_name]['value'] ?? [];
 
 				// значение отсутствует в атрибутах
 				if(!in_array($characteristic_value['value'], $value, true))
@@ -2187,11 +2164,7 @@ class Core extends SchemaAbstract
 				$global = $attributes_storage->getByLabel($property['name']);
 				$attribute_name = $global ? $global->getName() : $property['name'];
 
-				$value = [];
-				if(isset($raw_attributes[$attribute_name]['value']))
-				{
-					$value = $raw_attributes[$attribute_name]['value'];
-				}
+				$value = $raw_attributes[$attribute_name]['value'] ?? [];
 
 				if(isset($property['values_variants'][$property_value['value']]))
 				{
@@ -2258,13 +2231,7 @@ class Core extends SchemaAbstract
 				$global = $attributes_storage->getByLabel($characteristic_value['name']);
 				$attribute_name = $global ? $global->getName() : $characteristic_value['name'];
 
-				$value = [];
-
-				// атрибут уже имеется, надо добавлять к существующим значениям
-				if(isset($raw_attributes[$attribute_name]['value']))
-				{
-					$value = $raw_attributes[$attribute_name]['value'];
-				}
+				$value = $raw_attributes[$attribute_name]['value'] ?? [];
 
 				// значение отсутствует в атрибутах
 				if(!in_array($characteristic_value['value'], $value, true))
@@ -2318,13 +2285,7 @@ class Core extends SchemaAbstract
 					$global = $attributes_storage->getByLabel($characteristic_value['name']);
 					$attribute_name = $global ? $global->getName() : $characteristic_value['name'];
 
-					$value = [];
-
-					// атрибут уже имеется, надо добавлять к существующим значениям
-					if(isset($parent_attr[$attribute_name]['value']))
-					{
-						$value = $parent_attr[$attribute_name]['value'];
-					}
+					$value = $parent_attr[$attribute_name]['value'] ?? [];
 
 					// значение отсутствует в атрибутах
 					if(!in_array($characteristic_value['value'], $value, true))
@@ -2641,6 +2602,15 @@ class Core extends SchemaAbstract
 			$this->log()->info(__('Product is not found.', 'wc1c'));
 
 			/*
+			 * Создание продуктов отключено
+			 */
+			if('yes' !== $this->getOptions('products_create', 'no'))
+			{
+				$this->log()->info(__('Products create is disabled. Product create skipped.', 'wc1c'));
+				return;
+			}
+
+			/*
 			 * Пропуск создания продуктов помеченных к удалению в 1С
 			 */
 			$raw = $external_product->getData(); // todo: вынести в метод
@@ -2650,15 +2620,6 @@ class Core extends SchemaAbstract
 				return;
 			}
 			unset($raw);
-
-			/*
-			 * Создание продуктов отключено
-			 */
-			if('yes' !== $this->getOptions('products_create', 'no'))
-			{
-				$this->log()->info(__('Products create is disabled. Product create skipped.', 'wc1c'));
-				return;
-			}
 
 			/*
 			 * Продукт с характеристикой
@@ -2849,21 +2810,14 @@ class Core extends SchemaAbstract
 	{
 		$this->log()->info(__('Processing an offer from a package of offers.', 'wc1c'), ['offer_id' => $external_offer->getId(), 'offer_characteristic_id' => $external_offer->getCharacteristicId()]);
 
-		$internal_offer_id = 0;
 		$product_factory = new Factory();
 
-		/*
-		 * Поиск продукта по идентификатору 1С
-		 */
-		if('yes' === $this->getOptions('product_sync_by_id', 'yes'))
-		{
-			$internal_offer_id = $product_factory->findIdsByExternalIdAndCharacteristicId($external_offer->getId(), $external_offer->getCharacteristicId());
+		$internal_offer_id = $product_factory->findIdsByExternalIdAndCharacteristicId($external_offer->getId(), $external_offer->getCharacteristicId());
 
-			if(is_array($internal_offer_id)) // todo: обработка нескольких?
-			{
-				$this->log()->notice(__('Several identical products were found. The first one is selected.', 'wc1c'), ['product_ids' => $internal_offer_id]);
-				$internal_offer_id = reset($internal_offer_id);
-			}
+		if(is_array($internal_offer_id)) // todo: обработка нескольких?
+		{
+			$this->log()->notice(__('Several identical products were found. The first one is selected.', 'wc1c'), ['product_ids' => $internal_offer_id]);
+			$internal_offer_id = reset($internal_offer_id);
 		}
 
 		/**

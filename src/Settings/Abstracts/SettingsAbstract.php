@@ -39,7 +39,7 @@ abstract class SettingsAbstract implements SettingsContract
 	 *
 	 * @param string $name Option name without prefix
 	 */
-	public function setOptionName($name)
+	public function setOptionName(string $name)
 	{
 		$this->option_name = $this->option_name_prefix . $name;
 	}
@@ -47,7 +47,7 @@ abstract class SettingsAbstract implements SettingsContract
 	/**
 	 * @return string
 	 */
-	public function getOptionName()
+	public function getOptionName(): string
 	{
 		return $this->option_name;
 	}
@@ -96,7 +96,7 @@ abstract class SettingsAbstract implements SettingsContract
 	 * @return boolean
 	 * @throws RuntimeException
 	 */
-	public function set($setting_data = '', $setting_key = '')
+	public function set($setting_data = '', $setting_key = ''): bool
 	{
 		if(empty($setting_key) && !is_array($setting_data))
 		{
@@ -138,7 +138,7 @@ abstract class SettingsAbstract implements SettingsContract
 	 * @return bool
 	 * @throws RuntimeException
 	 */
-	public function save($settings_data = null)
+	public function save($settings_data = null): bool
 	{
 		$current_data = $this->getData();
 
@@ -207,7 +207,7 @@ abstract class SettingsAbstract implements SettingsContract
 	 * @return array
 	 * @throws RuntimeException
 	 */
-	private function getData()
+	private function getData(): array
 	{
 		if(!is_array($this->data))
 		{
@@ -220,12 +220,12 @@ abstract class SettingsAbstract implements SettingsContract
 	/**
 	 * Set all data
 	 *
-	 * @param $data
+	 * @param array $data
 	 *
 	 * @return void
 	 * @throws RuntimeException
 	 */
-	private function setData($data = [])
+	private function setData(array $data = [])
 	{
 		if(!is_array($data))
 		{

@@ -110,6 +110,8 @@ class Delete
 
 				if($force_delete)
 				{
+					wc1c()->filesystem()->deleteDirectory($configuration->getUploadDirectory());
+
 					$notice_args =
 					[
 						'type' => 'update',
@@ -149,6 +151,7 @@ class Delete
 	public function output()
 	{
 		$args['back_url'] = $this->utilityAdminConfigurationsGetUrl('all');
+		$args['configuration'] = $this->getConfiguration();
 
 		wc1c()->views()->getView('configurations/delete.php', $args);
 	}

@@ -37,7 +37,11 @@ class DeleteForm extends FormAbstract
 		[
 			'title' => __('Delete confirmation', 'wc1c'),
 			'type' => 'checkbox',
-			'label' => __('I confirm that Configuration will be permanently and irrevocably deleted from WooCommerce.', 'wc1c'),
+			'label' => sprintf(
+				"%s<hr>%s",
+				__('I confirm that Configuration will be permanently and irrevocably deleted from WooCommerce.', 'wc1c'),
+				__('The directory with files for configuration from the FILE system will be completely removed.', 'wc1c')
+			),
 			'default' => 'no',
 		];
 

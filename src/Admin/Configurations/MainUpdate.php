@@ -120,13 +120,36 @@ class MainUpdate
 		$body .= __('Date active: ', 'wc1c') . $this->utilityPrettyDate($configuration->getDateActivity());
 		$body .= '</li>';
 		$body .= '<li class="list-group-item p-2 m-0">';
-		$body .= __('Upload directory: ', 'wc1c') . '<div class="p-1 mt-1 bg-light">' . wp_normalize_path($configuration->getUploadDirectory()) . '</div>';
+		$body .= __('Directory: ', 'wc1c') . '<div class="p-1 mt-1 bg-light">' . wp_normalize_path($configuration->getUploadDirectory()) . '</div>';
+		$body .= '</li>';
+
+		$size = 0;
+		$files = wc1c()->filesystem()->files($configuration->getUploadDirectory() . '/catalog');
+
+		foreach($files as $file)
+		{
+			$size += wc1c()->filesystem()->size($file);
+		}
+
+		$body .= '<li class="list-group-item p-2 m-0">';
+		$body .= __('Directory size:', 'wc1c') . ' <b>' . size_format($size) . '</b>';
+		$body .= '</li>';
+
+		$size = 0;
+		$files = wc1c()->filesystem()->files($configuration->getUploadDirectory() . '/logs');
+
+		foreach($files as $file)
+		{
+			$size += wc1c()->filesystem()->size($file);
+		}
+
+		$body .= '<li class="list-group-item p-2 m-0">';
+		$body .= __('Logs directory size:', 'wc1c') . ' <b>' . size_format($size) . '</b>';
 		$body .= '</li>';
 
 		$body .= '</ul>';
 
 		$args['body'] = $body;
-		//$args['css'] = 'margin-top:-35px!important;';
 
 		wc1c()->views()->getView('configurations/update_sidebar_item.php', $args);
 

@@ -605,7 +605,7 @@ final class Receiver
 					$image = wp_get_image_mime($upload_file_path);
 					if($image)
 					{
-						/** @var ImagesStorageContract */
+						/** @var ImagesStorageContract $images_storage */
 						$images_storage = Storage::load('image');
 
 						$image_file_name = explode('.', basename($upload_file_path));

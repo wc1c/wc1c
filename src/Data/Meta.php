@@ -2,14 +2,12 @@
 
 defined('ABSPATH') || exit;
 
-use JsonSerializable;
-
 /**
  * Meta
  *
  * @package Wc1c\Data
  */
-class Meta implements JsonSerializable
+class Meta implements \JsonSerializable
 {
 	/**
 	 * @var array Metadata data
@@ -28,7 +26,7 @@ class Meta implements JsonSerializable
 	 *
 	 * @param array $meta Data to wrap behind this function
 	 */
-	public function __construct($meta = [])
+	public function __construct(array $meta = [])
 	{
 		$this->current_data = $meta;
 
@@ -40,7 +38,7 @@ class Meta implements JsonSerializable
 	 *
 	 * @return array
 	 */
-	public function jsonSerialize()
+	public function jsonSerialize(): array
 	{
 		return $this->getData();
 	}
@@ -99,7 +97,7 @@ class Meta implements JsonSerializable
 	 *
 	 * @return array
 	 */
-	public function getChanges()
+	public function getChanges(): array
 	{
 		$changes = [];
 		foreach($this->current_data as $id => $value)
@@ -118,7 +116,7 @@ class Meta implements JsonSerializable
 	 *
 	 * @return array
 	 */
-	public function getData()
+	public function getData(): array
 	{
 		return $this->data;
 	}

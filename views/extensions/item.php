@@ -1,7 +1,7 @@
 <?php defined('ABSPATH') || exit; ?>
 
 <div class="extensions-all-item mb-2 mt-2 rounded-1 border border-3 bg-white">
-    <div class="card-header p-2 border-0">
+    <div class="card-header bg-light p-2 border-0">
         <h2 class="card-title mt-0 mb-0 float-start">
 	        <?php echo $args['object']->getMeta('name', __('none')); ?>
         </h2>

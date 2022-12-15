@@ -3,11 +3,12 @@
  * Plugin Name: WC1C
  * Plugin URI: https://wc1c.info
  * Description: Implementation of a mechanism for flexible exchange of various data between 1C products and a site running WordPress using the WooCommerce plugin.
- * Version: 0.12.0
+ * Version: 0.13.0
  * WC requires at least: 4.3
- * WC tested up to: 7.1
+ * WC tested up to: 7.2
  * Requires at least: 5.2
  * Requires PHP: 7.0
+ * Requires Plugins: woocommerce
  * Text Domain: wc1c
  * Domain Path: /assets/languages
  * Copyright: WC1C team © 2018-2022
@@ -41,7 +42,7 @@ if(false === defined('WC1C_PLUGIN_FILE'))
 
 	include_once __DIR__ . '/vendor/autoload.php';
 
-	$loader = new \Digiom\Woplucore\Loader();
+	$loader = new Digiom\Woplucore\Loader();
 
 	$loader->addNamespace('Wc1c', plugin_dir_path(WC1C_PLUGIN_FILE) . 'src');
 

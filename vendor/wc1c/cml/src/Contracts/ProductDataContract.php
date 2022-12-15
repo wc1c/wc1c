@@ -1,7 +1,5 @@
 <?php namespace Wc1c\Cml\Contracts;
 
-defined('ABSPATH') || exit;
-
 /**
  * ProductDataContract
  *
@@ -14,49 +12,49 @@ interface ProductDataContract extends DataContract
 	 *
 	 * @return string Product id
 	 */
-	public function getId();
+	public function getId(): string;
 
 	/**
 	 * Получение уникального идентификатора характеристики продукта в рамках текущего каталога товаров CommerceML
 	 *
 	 * @return string Characteristic
 	 */
-	public function getCharacteristicId();
+	public function getCharacteristicId(): string;
 
 	/**
 	 * Имеется ли у продукта характеристика
 	 *
 	 * @return boolean
 	 */
-	public function hasCharacteristicId();
+	public function hasCharacteristicId(): bool;
 
 	/**
 	 * Получение наименования продукта
 	 *
 	 * @return string Product name
 	 */
-	public function getName();
+	public function getName(): string;
 
 	/**
 	 * Получение описания продукта
 	 *
 	 * @return string Product description
 	 */
-	public function getDescription();
+	public function getDescription(): string;
 
 	/**
 	 * Имеются ли у продукта группы описанные в классификаторе
 	 *
 	 * @return boolean
 	 */
-	public function hasClassifierGroups();
+	public function hasClassifierGroups(): bool;
 
 	/**
 	 * Получение массива идентификаторов групп для продукта описанных в классификаторе
 	 *
 	 * @return array Product groups
 	 */
-	public function getClassifierGroups();
+	public function getClassifierGroups(): array;
 
 	/**
 	 * Проверка на наличие реквизитов у продукта, возможна проверка конкретного реквизита
@@ -65,7 +63,7 @@ interface ProductDataContract extends DataContract
 	 *
 	 * @return bool Имеются ли реквизиты
 	 */
-	public function hasRequisites($name = '');
+	public function hasRequisites($name = ''): bool;
 
 	/**
 	 * Получение реквизитов продукта

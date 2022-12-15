@@ -177,14 +177,9 @@ class AllTable extends TableAbstract
 			'delete' => '<a href="' . $this->utilityAdminConfigurationsGetUrl('delete', $item['configuration_id']) . '">' . __('Mark as deleted', 'wc1c') . '</a>',
 		];
 
-		if('deleted' === $item['status'])
+		if('deleted' === $item['status'] || ('draft' === $item['status'] && 'yes' === wc1c()->settings()->get('configurations_draft_delete', 'yes')))
 		{
 			unset($actions['update']);
-			$actions['delete'] = '<a href="' . $this->utilityAdminConfigurationsGetUrl('delete', $item['configuration_id']) . '">' . __('Remove forever', 'wc1c') . '</a>';
-		}
-
-		if('draft' === $item['status'] && 'yes' === wc1c()->settings()->get('configurations_draft_delete', 'yes'))
-		{
 			$actions['delete'] = '<a href="' . $this->utilityAdminConfigurationsGetUrl('delete', $item['configuration_id']) . '">' . __('Remove forever', 'wc1c') . '</a>';
 		}
 
@@ -231,7 +226,7 @@ class AllTable extends TableAbstract
 	 *
 	 * @return string
 	 */
-	public function rowMetas($data)
+	public function rowMetas($data): string
 	{
 		$metas_count = count($data);
 
@@ -257,7 +252,7 @@ class AllTable extends TableAbstract
 	 *
 	 * @return array
 	 */
-	public function getColumns()
+	public function getColumns(): array
 	{
 		$columns = [];
 
@@ -275,7 +270,7 @@ class AllTable extends TableAbstract
 	 *
 	 * @return array
 	 */
-	public function getSortableColumns()
+	public function getSortableColumns(): array
 	{
 		$sortable_columns['configuration_id'] = ['configuration_id', false];
 		$sortable_columns['status'] = ['status', false];
@@ -288,7 +283,7 @@ class AllTable extends TableAbstract
 	 *
 	 * @return string The name of the primary column
 	 */
-	protected function getDefaultPrimaryColumnName()
+	protected function getDefaultPrimaryColumnName(): string
 	{
 		return 'configuration_id';
 	}
@@ -299,7 +294,7 @@ class AllTable extends TableAbstract
 	 * @return array
 	 * @throws Exception
 	 */
-	protected function getViews()
+	protected function getViews(): array
 	{
 		$status_links = [];
 		$current = !empty($_REQUEST['status']) ? $_REQUEST['status'] : 'all';
