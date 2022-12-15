@@ -67,13 +67,13 @@ class Product extends DataAbstract implements ProductDataContract
 	}
 
 	/**
-	 * @return false|string
+	 * @return string
 	 */
-	public function getName()
+	public function getName(): string
 	{
 		if(empty($this->data['name']))
 		{
-			return false;
+			return '';
 		}
 
 		return $this->data['name'];

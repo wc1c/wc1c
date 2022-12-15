@@ -10,9 +10,9 @@ interface ProductDataContract extends DataContract
 	/**
 	 * Получение уникального идентификатора продукта в рамках текущего каталога товаров CommerceML
 	 *
-	 * @return string Product id
+	 * @return false|string Product id
 	 */
-	public function getId(): string;
+	public function getId();
 
 	/**
 	 * Получение уникального идентификатора характеристики продукта в рамках текущего каталога товаров CommerceML
@@ -38,9 +38,9 @@ interface ProductDataContract extends DataContract
 	/**
 	 * Получение описания продукта
 	 *
-	 * @return string Product description
+	 * @return false|string Product description
 	 */
-	public function getDescription(): string;
+	public function getDescription();
 
 	/**
 	 * Имеются ли у продукта группы описанные в классификаторе
